@@ -1,0 +1,211 @@
+14:19:22 INFO  : Launching XSDB server: xsdb -n /opt/Xilinx/SDK/2015.3/scripts/xsdb/xsdb/xsdb-server.tcl
+14:19:32 INFO  : XSDB server has started successfully.
+14:19:33 INFO  : Processing command line option -hwspec /home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/design_1_wrapper.hdf.
+14:21:26 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent Zybo 210279575286A" && level==0} -index 1' command is executed.
+14:21:27 INFO  : 'fpga -state' command is executed.
+14:21:27 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:21:27 INFO  : Sourcing of '/home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/design_1_wrapper_hw_platform_0/ps7_init.tcl' is done.
+14:21:27 INFO  : 'targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent Zybo 210279575286A"} -index 0' command is executed.
+14:21:27 INFO  : Hardware design information is loaded from '/home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/design_1_wrapper_hw_platform_0/system.hdf'.
+14:21:27 INFO  : 'targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent Zybo 210279575286A"} -index 0' command is executed.
+14:21:29 INFO  : 'ps7_init' command is executed.
+14:21:29 INFO  : 'ps7_post_config' command is executed.
+14:21:30 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:21:30 INFO  : Processor reset is completed for 'ps7_cortexa9_0'.
+14:21:30 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:21:30 INFO  : The application '/home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/IndoorLoc/Debug/IndoorLoc.elf' is downloaded to processor 'ps7_cortexa9_0'.
+14:21:30 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+source /home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/design_1_wrapper_hw_platform_0/ps7_init.tcl
+targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent Zybo 210279575286A"} -index 0
+loadhw /home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/design_1_wrapper_hw_platform_0/system.hdf
+targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent Zybo 210279575286A"} -index 0
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent Zybo 210279575286A"} -index 0
+rst -processor
+targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent Zybo 210279575286A"} -index 0
+dow /home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/IndoorLoc/Debug/IndoorLoc.elf
+----------------End of Script----------------
+
+14:21:30 INFO  : Memory regions updated for context APU
+14:21:31 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:21:31 INFO  : 'con' command is executed.
+14:21:31 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent Zybo 210279575286A"} -index 0
+con
+----------------End of Script----------------
+
+14:22:15 INFO  : SDK has detected change in the last modified timestamps for source hardware specification file Source:1445865038000,  Project:1445865541000
+14:22:15 INFO  : Project design_1_wrapper_hw_platform_0's source hardware specification located at /home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/design_1_wrapper.hdf is now different from the local copy.
+		 The local copy will be replaced with the source specification and your workspace will be updated.
+14:22:19 INFO  : Copied contents of /home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/design_1_wrapper.hdf into /design_1_wrapper_hw_platform_0/system.hdf.
+14:22:25 INFO  : Synchronizing projects in the workspace with the hardware platform specification changes.
+14:22:26 INFO  : 
+14:22:27 INFO  : Updating hardware inferred compiler options for IndoorLoc.
+14:22:27 INFO  : Clearing existing target manager status.
+14:22:30 INFO  : Closing and re-opening the MSS file of ther project IndoorLoc_bsp
+14:22:32 INFO  : Workspace synchronized with the new hardware specification file. Cleaning dependent projects...
+14:22:32 WARN  : Linker script will not be updated automatically. Users need to update it manually.
+14:22:51 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:22:52 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent Zybo 210279575286A" && level==0} -index 1' command is executed.
+14:22:53 INFO  : FPGA configured successfully with bitstream "/home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/design_1_wrapper_hw_platform_0/design_1_wrapper.bit"
+14:23:12 INFO  : Disconnected from the channel tcfchan#1.
+14:23:23 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent Zybo 210279575286A" && level==0} -index 1' command is executed.
+14:23:23 INFO  : 'fpga -state' command is executed.
+14:23:23 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:23:23 INFO  : Sourcing of '/home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/design_1_wrapper_hw_platform_0/ps7_init.tcl' is done.
+14:23:24 INFO  : 'targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent Zybo 210279575286A"} -index 0' command is executed.
+14:23:24 INFO  : Hardware design information is loaded from '/home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/design_1_wrapper_hw_platform_0/system.hdf'.
+14:23:24 INFO  : 'targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent Zybo 210279575286A"} -index 0' command is executed.
+14:23:26 INFO  : 'ps7_init' command is executed.
+14:23:26 INFO  : 'ps7_post_config' command is executed.
+14:23:26 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:23:27 INFO  : Processor reset is completed for 'ps7_cortexa9_0'.
+14:23:27 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:23:27 INFO  : The application '/home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/IndoorLoc/Debug/IndoorLoc.elf' is downloaded to processor 'ps7_cortexa9_0'.
+14:23:27 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+source /home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/design_1_wrapper_hw_platform_0/ps7_init.tcl
+targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent Zybo 210279575286A"} -index 0
+loadhw /home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/design_1_wrapper_hw_platform_0/system.hdf
+targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent Zybo 210279575286A"} -index 0
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent Zybo 210279575286A"} -index 0
+rst -processor
+targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent Zybo 210279575286A"} -index 0
+dow /home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/IndoorLoc/Debug/IndoorLoc.elf
+----------------End of Script----------------
+
+14:23:27 INFO  : Memory regions updated for context APU
+14:23:27 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:23:27 INFO  : 'con' command is executed.
+14:23:27 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent Zybo 210279575286A"} -index 0
+con
+----------------End of Script----------------
+
+14:25:47 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent Zybo 210279575286A" && level==0} -index 1' command is executed.
+14:25:47 INFO  : 'fpga -state' command is executed.
+14:25:47 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:25:47 INFO  : Sourcing of '/home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/design_1_wrapper_hw_platform_0/ps7_init.tcl' is done.
+14:25:48 INFO  : 'targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent Zybo 210279575286A"} -index 0' command is executed.
+14:25:48 INFO  : Hardware design information is loaded from '/home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/design_1_wrapper_hw_platform_0/system.hdf'.
+14:25:48 INFO  : 'targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent Zybo 210279575286A"} -index 0' command is executed.
+14:25:50 INFO  : 'ps7_init' command is executed.
+14:25:50 INFO  : 'ps7_post_config' command is executed.
+14:25:50 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:25:50 INFO  : Processor reset is completed for 'ps7_cortexa9_0'.
+14:25:51 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:25:51 INFO  : The application '/home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/HelloWorld/Debug/HelloWorld.elf' is downloaded to processor 'ps7_cortexa9_0'.
+14:25:51 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+source /home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/design_1_wrapper_hw_platform_0/ps7_init.tcl
+targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent Zybo 210279575286A"} -index 0
+loadhw /home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/design_1_wrapper_hw_platform_0/system.hdf
+targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent Zybo 210279575286A"} -index 0
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent Zybo 210279575286A"} -index 0
+rst -processor
+targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent Zybo 210279575286A"} -index 0
+dow /home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/HelloWorld/Debug/HelloWorld.elf
+----------------End of Script----------------
+
+14:25:51 INFO  : Memory regions updated for context APU
+14:25:51 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:25:51 INFO  : 'con' command is executed.
+14:25:51 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent Zybo 210279575286A"} -index 0
+con
+----------------End of Script----------------
+
+14:27:51 INFO  : Disconnected from the channel tcfchan#2.
+14:27:55 INFO  : ps7_init is completed.
+14:27:55 INFO  : ps7_post_config is completed.
+14:27:55 INFO  : Processor reset is completed for ps7_cortexa9_0
+14:32:46 INFO  : System reset is completed.
+14:32:48 INFO  : FPGA configured successfully with bitstream "/home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/design_1_wrapper_hw_platform_0/design_1_wrapper.bit"
+14:32:48 INFO  : ps7_init is completed.
+14:32:48 INFO  : ps7_post_config is completed.
+14:32:48 ERROR : Unexpected error while opening JTAG UART: 
+java.lang.RuntimeException: Error while opening JTAG UART server: MDM Uart NOT Present in the System
+Could not detect MDM peripheral on hardware. Please check:
+    1. If FPGA is configured correctly
+    2. MDM Core is instantiated in the design
+    3. If the correct FPGA is referred, in case of multiple FPGAs
+    4. If the correct MDM is referred, in case of a multiple MDM system
+    
+
+	at com.xilinx.sdk.targetmanager.internal.TM.startJTAGUARTServer(TM.java:951)
+	at com.xilinx.sdk.debug.core.internal.comm.JTAGUARTStreamsProxy.<init>(JTAGUARTStreamsProxy.java:32)
+	at com.xilinx.sdk.debug.core.internal.RemoteProcess.createStreamsProxy(RemoteProcess.java:164)
+	at com.xilinx.sdk.debug.core.internal.RemoteProcess.<init>(RemoteProcess.java:65)
+	at com.xilinx.sdk.debug.core.internal.AppRunner.run(AppRunner.java:91)
+	at com.xilinx.sdk.debug.core.XilinxAppLaunchConfigurationDelegate.runApplication(XilinxAppLaunchConfigurationDelegate.java:609)
+	at com.xilinx.sdk.debug.core.XilinxAppLaunchConfigurationDelegate.launch(XilinxAppLaunchConfigurationDelegate.java:296)
+	at com.xilinx.sdk.debug.ui.XilinxAppLaunchDelegateWrapper.launch(XilinxAppLaunchDelegateWrapper.java:31)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:858)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:707)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1018)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1222)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+14:33:07 INFO  : System reset is completed.
+14:33:09 INFO  : FPGA configured successfully with bitstream "/home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/design_1_wrapper_hw_platform_0/design_1_wrapper.bit"
+14:33:09 INFO  : ps7_init is completed.
+14:33:09 INFO  : ps7_post_config is completed.
+14:33:10 ERROR : Unexpected error while opening JTAG UART: 
+java.lang.RuntimeException: Error while opening JTAG UART server: MDM Uart NOT Present in the System
+Could not detect MDM peripheral on hardware. Please check:
+    1. If FPGA is configured correctly
+    2. MDM Core is instantiated in the design
+    3. If the correct FPGA is referred, in case of multiple FPGAs
+    4. If the correct MDM is referred, in case of a multiple MDM system
+    
+
+	at com.xilinx.sdk.targetmanager.internal.TM.startJTAGUARTServer(TM.java:951)
+	at com.xilinx.sdk.debug.core.internal.comm.JTAGUARTStreamsProxy.<init>(JTAGUARTStreamsProxy.java:32)
+	at com.xilinx.sdk.debug.core.internal.RemoteProcess.createStreamsProxy(RemoteProcess.java:164)
+	at com.xilinx.sdk.debug.core.internal.RemoteProcess.<init>(RemoteProcess.java:65)
+	at com.xilinx.sdk.debug.core.internal.AppRunner.run(AppRunner.java:91)
+	at com.xilinx.sdk.debug.core.XilinxAppLaunchConfigurationDelegate.runApplication(XilinxAppLaunchConfigurationDelegate.java:609)
+	at com.xilinx.sdk.debug.core.XilinxAppLaunchConfigurationDelegate.launch(XilinxAppLaunchConfigurationDelegate.java:296)
+	at com.xilinx.sdk.debug.ui.XilinxAppLaunchDelegateWrapper.launch(XilinxAppLaunchDelegateWrapper.java:31)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:858)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:707)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1018)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1222)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+14:33:28 INFO  : System reset is completed.
+14:33:30 INFO  : FPGA configured successfully with bitstream "/home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/design_1_wrapper_hw_platform_0/design_1_wrapper.bit"
+14:33:30 INFO  : ps7_init is completed.
+14:33:31 INFO  : ps7_post_config is completed.
+14:33:31 ERROR : Unexpected error while opening JTAG UART: 
+java.lang.RuntimeException: Error while opening JTAG UART server: MDM Uart NOT Present in the System
+Could not detect MDM peripheral on hardware. Please check:
+    1. If FPGA is configured correctly
+    2. MDM Core is instantiated in the design
+    3. If the correct FPGA is referred, in case of multiple FPGAs
+    4. If the correct MDM is referred, in case of a multiple MDM system
+    
+
+	at com.xilinx.sdk.targetmanager.internal.TM.startJTAGUARTServer(TM.java:951)
+	at com.xilinx.sdk.debug.core.internal.comm.JTAGUARTStreamsProxy.<init>(JTAGUARTStreamsProxy.java:32)
+	at com.xilinx.sdk.debug.core.internal.RemoteProcess.createStreamsProxy(RemoteProcess.java:164)
+	at com.xilinx.sdk.debug.core.internal.RemoteProcess.<init>(RemoteProcess.java:65)
+	at com.xilinx.sdk.debug.core.internal.AppRunner.run(AppRunner.java:91)
+	at com.xilinx.sdk.debug.core.XilinxAppLaunchConfigurationDelegate.runApplication(XilinxAppLaunchConfigurationDelegate.java:609)
+	at com.xilinx.sdk.debug.core.XilinxAppLaunchConfigurationDelegate.launch(XilinxAppLaunchConfigurationDelegate.java:296)
+	at com.xilinx.sdk.debug.ui.XilinxAppLaunchDelegateWrapper.launch(XilinxAppLaunchDelegateWrapper.java:31)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:858)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:707)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1018)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1222)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+14:33:44 INFO  : ps7_cortexa9_0 Processor is in use. Please stop existing Run or Debug sessions before launching.
+14:33:47 INFO  : System reset is completed.
+14:33:48 INFO  : FPGA configured successfully with bitstream "/home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/design_1_wrapper_hw_platform_0/design_1_wrapper.bit"
+14:33:49 INFO  : ps7_init is completed.
+14:33:49 INFO  : ps7_post_config is completed.
+14:55:16 INFO  : Launching XSDB server: xsdb -n /opt/Xilinx/SDK/2015.3/scripts/xsdb/xsdb/xsdb-server.tcl
