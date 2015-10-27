@@ -1,7 +1,7 @@
 --Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2015.3 (lin64) Build 1368829 Mon Sep 28 20:06:39 MDT 2015
---Date        : Mon Oct 26 12:58:46 2015
+--Date        : Mon Oct 26 15:27:22 2015
 --Host        : mp-akulapd.ziti.uni-heidelberg.de running 64-bit unknown
 --Command     : generate_target design_1_wrapper.bd
 --Design      : design_1_wrapper
@@ -34,10 +34,7 @@ entity design_1_wrapper is
     FIXED_IO_ps_clk : inout STD_LOGIC;
     FIXED_IO_ps_porb : inout STD_LOGIC;
     FIXED_IO_ps_srstb : inout STD_LOGIC;
-    btns_4bits_tri_i : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    leds_4bits_tri_o : out STD_LOGIC_VECTOR ( 3 downto 0 );
-    pwmPulse : out STD_LOGIC_VECTOR ( 5 downto 0 );
-    sws_4bits_tri_i : in STD_LOGIC_VECTOR ( 3 downto 0 )
+    pwmPulse : out STD_LOGIC_VECTOR ( 5 downto 0 )
   );
 end design_1_wrapper;
 
@@ -65,9 +62,6 @@ architecture STRUCTURE of design_1_wrapper is
     FIXED_IO_ps_srstb : inout STD_LOGIC;
     FIXED_IO_ps_clk : inout STD_LOGIC;
     FIXED_IO_ps_porb : inout STD_LOGIC;
-    btns_4bits_tri_i : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    leds_4bits_tri_o : out STD_LOGIC_VECTOR ( 3 downto 0 );
-    sws_4bits_tri_i : in STD_LOGIC_VECTOR ( 3 downto 0 );
     pwmPulse : out STD_LOGIC_VECTOR ( 5 downto 0 )
   );
   end component design_1;
@@ -95,9 +89,6 @@ design_1_i: component design_1
       FIXED_IO_ps_clk => FIXED_IO_ps_clk,
       FIXED_IO_ps_porb => FIXED_IO_ps_porb,
       FIXED_IO_ps_srstb => FIXED_IO_ps_srstb,
-      btns_4bits_tri_i(3 downto 0) => btns_4bits_tri_i(3 downto 0),
-      leds_4bits_tri_o(3 downto 0) => leds_4bits_tri_o(3 downto 0),
-      pwmPulse(5 downto 0) => pwmPulse(5 downto 0),
-      sws_4bits_tri_i(3 downto 0) => sws_4bits_tri_i(3 downto 0)
+      pwmPulse(5 downto 0) => pwmPulse(5 downto 0)
     );
 end STRUCTURE;
