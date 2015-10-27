@@ -1,0 +1,49 @@
+/*
+ * Includes
+ */
+#include <stdio.h>
+#include "xparameters.h"
+#include "xiicps.h"
+#include "iic_utils.h"
+
+/*
+ * IIC Init
+ */
+int iic_init(XIicPs *IicPs, u16 DeviceId, u32 ClkRate) {
+	int Status;
+	XIicPs_Config *IicPs_Config;
+
+	XIicPs_DisableAllInterrupts(IicPs->Config.BaseAddress);
+
+	/*
+	 * Initialize the IIC driver.
+	 */
+	IicPs_Config = XIicPs_LookupConfig(DeviceId);
+	if (IicPs_Config == NULL) {
+		//printf("No XIicPs instance found for ID %d\n\r", DeviceId);
+		xil_printf("No XIicPs instance found for ID %d\n\r", DeviceId);
+		return XST_FAILURE;
+	}
+
+	Status = XIicPs_CfgInitialize(IicPs, IicPs_Config,
+			IicPs_Config->BaseAddress);
+	if (Status != XST_SUCCESS) {
+		//printf("XIicPs Initialization failed for ID %d\n\r", DeviceId);
+		xil_printf("XIicPs Initialization failed for ID %d\n\r", DeviceId);
+		return XST_FAILURE;
+	}
+
+	/*
+	 * Set the IIC serial clock rate.
+	 */
+	//Status = XIicPs_SetSClk(IicPs, ClkRate);
+	Status = SetIiCSClk(IicPs, ClkRate);
+	if (Status != XST_SUCCESS) {
+		//printf("Setting XIicPs clock rate failed for ID %d\n\r", DeviceId);
+		xil_printf("Setting XIicPs clock rate failed for ID %d, Status: %d\n\r",
+				DeviceId, Status);
+		return XST_FAILURE;
+	}
+
+	return XST_SUCCESS;
+}

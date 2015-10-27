@@ -452,3 +452,331 @@ Finished building: IndoorLocZybo.elf.size
 10:14:56 **** Auto Build of configuration Debug for project IndoorLocZybo ****
 make all 
 make: Nothing to be done for `all'.
+10:23:42 **** Auto Build of configuration Debug for project IndoorLocZybo ****
+make all 
+make: Nothing to be done for `all'.
+10:24:49 **** Auto Build of configuration Debug for project IndoorLocZybo ****
+make all 
+make: Nothing to be done for `all'.
+10:26:45 **** Auto Build of configuration Debug for project IndoorLocZybo ****
+make all 
+Building file: ../src/iic_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/iic_utils.o" -I../../IndoorLocZybo_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/iic_utils.d" -MT"src/iic_utils.d" -o "src/iic_utils.o" "../src/iic_utils.c"
+../src/iic_utils.c: In function 'iic_init':
+../src/iic_utils.c:14:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../src/iic_utils.c
+ 
+Building target: IndoorLocZybo.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLocZybo_bsp/ps7_cortexa9_0/lib -o "IndoorLocZybo.elf"  ./src/iic_utils.o ./src/platform.o ./src/pwmTest.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLocZybo.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLocZybo.elf  |tee "IndoorLocZybo.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  22880	   1152	   8228	  32260	   7e04	IndoorLocZybo.elf
+Finished building: IndoorLocZybo.elf.size
+ 
+10:27:37 **** Auto Build of configuration Debug for project IndoorLocZybo ****
+make all 
+Building file: ../src/iic_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/iic_utils.o" -I../../IndoorLocZybo_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/iic_utils.d" -MT"src/iic_utils.d" -o "src/iic_utils.o" "../src/iic_utils.c"
+Finished building: ../src/iic_utils.c
+ 
+Building target: IndoorLocZybo.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLocZybo_bsp/ps7_cortexa9_0/lib -o "IndoorLocZybo.elf"  ./src/iic_utils.o ./src/platform.o ./src/pwmTest.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLocZybo.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLocZybo.elf  |tee "IndoorLocZybo.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  22884	   1152	   8228	  32264	   7e08	IndoorLocZybo.elf
+Finished building: IndoorLocZybo.elf.size
+ 
+10:28:55 **** Auto Build of configuration Debug for project IndoorLocZybo ****
+make all 
+Building file: ../src/iic_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/iic_utils.o" -I../../IndoorLocZybo_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/iic_utils.d" -MT"src/iic_utils.d" -o "src/iic_utils.o" "../src/iic_utils.c"
+../src/iic_utils.c: In function 'iic_init':
+../src/iic_utils.c:40:2: warning: implicit declaration of function 'SetIiCSClk' [-Wimplicit-function-declaration]
+  Status = SetIiCSClk(IicPs, ClkRate);
+  ^
+Finished building: ../src/iic_utils.c
+ 
+Building target: IndoorLocZybo.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLocZybo_bsp/ps7_cortexa9_0/lib -o "IndoorLocZybo.elf"  ./src/iic_utils.o ./src/platform.o ./src/pwmTest.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+./src/iic_utils.o: In function `iic_init':
+/home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/IndoorLocZybo/Debug/../src/iic_utils.c:40: undefined reference to `SetIiCSClk'
+collect2: error: ld returned 1 exit status
+make: *** [IndoorLocZybo.elf] Error 1
+10:30:37 **** Auto Build of configuration Debug for project IndoorLocZybo ****
+make all 
+Building file: ../src/iic_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/iic_utils.o" -I../../IndoorLocZybo_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/iic_utils.d" -MT"src/iic_utils.d" -o "src/iic_utils.o" "../src/iic_utils.c"
+Finished building: ../src/iic_utils.c
+ 
+Building target: IndoorLocZybo.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLocZybo_bsp/ps7_cortexa9_0/lib -o "IndoorLocZybo.elf"  ./src/iic_utils.o ./src/platform.o ./src/pwmTest.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLocZybo.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLocZybo.elf  |tee "IndoorLocZybo.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  29164	   1168	   8244	  38576	   96b0	IndoorLocZybo.elf
+Finished building: IndoorLocZybo.elf.size
+ 
+10:31:10 **** Auto Build of configuration Debug for project IndoorLocZybo ****
+make all 
+Building file: ../src/iic_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/iic_utils.o" -I../../IndoorLocZybo_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/iic_utils.d" -MT"src/iic_utils.d" -o "src/iic_utils.o" "../src/iic_utils.c"
+Finished building: ../src/iic_utils.c
+ 
+Building target: IndoorLocZybo.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLocZybo_bsp/ps7_cortexa9_0/lib -o "IndoorLocZybo.elf"  ./src/iic_utils.o ./src/platform.o ./src/pwmTest.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLocZybo.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLocZybo.elf  |tee "IndoorLocZybo.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  29164	   1168	   8244	  38576	   96b0	IndoorLocZybo.elf
+Finished building: IndoorLocZybo.elf.size
+ 
+10:31:19 **** Auto Build of configuration Debug for project IndoorLocZybo ****
+make all 
+Building file: ../src/iic_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/iic_utils.o" -I../../IndoorLocZybo_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/iic_utils.d" -MT"src/iic_utils.d" -o "src/iic_utils.o" "../src/iic_utils.c"
+Finished building: ../src/iic_utils.c
+ 
+Building target: IndoorLocZybo.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLocZybo_bsp/ps7_cortexa9_0/lib -o "IndoorLocZybo.elf"  ./src/iic_utils.o ./src/platform.o ./src/pwmTest.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLocZybo.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLocZybo.elf  |tee "IndoorLocZybo.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  29164	   1168	   8244	  38576	   96b0	IndoorLocZybo.elf
+Finished building: IndoorLocZybo.elf.size
+ 
+10:38:00 **** Auto Build of configuration Debug for project IndoorLocZybo ****
+make all 
+Building file: ../src/iicTest.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/iicTest.o" -I../../IndoorLocZybo_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/iicTest.d" -MT"src/iicTest.d" -o "src/iicTest.o" "../src/iicTest.c"
+Finished building: ../src/iicTest.c
+ 
+Building target: IndoorLocZybo.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLocZybo_bsp/ps7_cortexa9_0/lib -o "IndoorLocZybo.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/platform.o ./src/pwmTest.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLocZybo.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLocZybo.elf  |tee "IndoorLocZybo.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  29164	   1168	   8244	  38576	   96b0	IndoorLocZybo.elf
+Finished building: IndoorLocZybo.elf.size
+ 
+10:39:14 **** Auto Build of configuration Debug for project IndoorLocZybo ****
+make all 
+Building file: ../src/iicTest.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/iicTest.o" -I../../IndoorLocZybo_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/iicTest.d" -MT"src/iicTest.d" -o "src/iicTest.o" "../src/iicTest.c"
+../src/iicTest.c:12:1: error: unknown type name 'in'
+ in main(){
+ ^
+../src/iicTest.c: In function 'main':
+../src/iicTest.c:15:18: warning: unused variable 'IicPs' [-Wunused-variable]
+  volatile XIicPs IicPs;
+                  ^
+../src/iicTest.c:14:6: warning: unused variable 'Status' [-Wunused-variable]
+  int Status;
+      ^
+../src/iicTest.c:16:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/iicTest.o] Error 1
+10:39:18 **** Auto Build of configuration Debug for project IndoorLocZybo ****
+make all 
+Building file: ../src/iicTest.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/iicTest.o" -I../../IndoorLocZybo_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/iicTest.d" -MT"src/iicTest.d" -o "src/iicTest.o" "../src/iicTest.c"
+../src/iicTest.c: In function 'main':
+../src/iicTest.c:15:18: warning: unused variable 'IicPs' [-Wunused-variable]
+  volatile XIicPs IicPs;
+                  ^
+../src/iicTest.c:14:6: warning: unused variable 'Status' [-Wunused-variable]
+  int Status;
+      ^
+../src/iicTest.c:16:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../src/iicTest.c
+ 
+Building target: IndoorLocZybo.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLocZybo_bsp/ps7_cortexa9_0/lib -o "IndoorLocZybo.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/platform.o ./src/pwmTest.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+./src/pwmTest.o: In function `main':
+/home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/IndoorLocZybo/Debug/../src/pwmTest.c:59: multiple definition of `main'
+./src/iicTest.o:/home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/IndoorLocZybo/Debug/../src/iicTest.c:12: first defined here
+collect2: error: ld returned 1 exit status
+make: *** [IndoorLocZybo.elf] Error 1
+10:39:32 **** Auto Build of configuration Debug for project IndoorLocZybo ****
+make all 
+Building file: ../src/iicTest.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/iicTest.o" -I../../IndoorLocZybo_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/iicTest.d" -MT"src/iicTest.d" -o "src/iicTest.o" "../src/iicTest.c"
+../src/iicTest.c: In function 'main':
+../src/iicTest.c:15:18: warning: unused variable 'IicPs' [-Wunused-variable]
+  volatile XIicPs IicPs;
+                  ^
+../src/iicTest.c:14:6: warning: unused variable 'Status' [-Wunused-variable]
+  int Status;
+      ^
+Finished building: ../src/iicTest.c
+ 
+Building target: IndoorLocZybo.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLocZybo_bsp/ps7_cortexa9_0/lib -o "IndoorLocZybo.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/platform.o ./src/pwmTest.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+./src/pwmTest.o: In function `main':
+/home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/IndoorLocZybo/Debug/../src/pwmTest.c:59: multiple definition of `main'
+./src/iicTest.o:/home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/IndoorLocZybo/Debug/../src/iicTest.c:12: first defined here
+collect2: error: ld returned 1 exit status
+make: *** [IndoorLocZybo.elf] Error 1
+10:40:18 **** Auto Build of configuration Debug for project IndoorLocZybo ****
+make all 
+Building file: ../src/iicTest.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/iicTest.o" -I../../IndoorLocZybo_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/iicTest.d" -MT"src/iicTest.d" -o "src/iicTest.o" "../src/iicTest.c"
+../src/iicTest.c: In function 'main':
+../src/iicTest.c:18:2: warning: implicit declaration of function 'Xil_ICacheEnable' [-Wimplicit-function-declaration]
+  Xil_ICacheEnable();
+  ^
+../src/iicTest.c:19:2: warning: implicit declaration of function 'Xil_DCacheEnable' [-Wimplicit-function-declaration]
+  Xil_DCacheEnable();
+  ^
+../src/iicTest.c:23:20: warning: passing argument 1 of 'iic_init' discards 'volatile' qualifier from pointer target type
+  Status = iic_init(&IicPs, IIC_DEVICE_ID, IIC_SCLK_RATE);
+                    ^
+In file included from ../src/iicTest.c:7:0:
+../src/iic_utils.h:13:5: note: expected 'struct XIicPs *' but argument is of type 'volatile struct XIicPs *'
+ int iic_init( XIicPs *IicPs, u16 DeviceId, u32 ClkRate );
+     ^
+Finished building: ../src/iicTest.c
+ 
+Building target: IndoorLocZybo.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLocZybo_bsp/ps7_cortexa9_0/lib -o "IndoorLocZybo.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/platform.o ./src/pwmTest.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+./src/pwmTest.o: In function `main':
+/home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/IndoorLocZybo/Debug/../src/pwmTest.c:59: multiple definition of `main'
+./src/iicTest.o:/home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/IndoorLocZybo/Debug/../src/iicTest.c:12: first defined here
+collect2: error: ld returned 1 exit status
+make: *** [IndoorLocZybo.elf] Error 1
+10:40:42 **** Auto Build of configuration Debug for project IndoorLocZybo ****
+make all 
+Building file: ../src/iicTest.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/iicTest.o" -I../../IndoorLocZybo_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/iicTest.d" -MT"src/iicTest.d" -o "src/iicTest.o" "../src/iicTest.c"
+../src/iicTest.c: In function 'main':
+../src/iicTest.c:24:20: warning: passing argument 1 of 'iic_init' discards 'volatile' qualifier from pointer target type
+  Status = iic_init(&IicPs, IIC_DEVICE_ID, IIC_SCLK_RATE);
+                    ^
+In file included from ../src/iicTest.c:8:0:
+../src/iic_utils.h:13:5: note: expected 'struct XIicPs *' but argument is of type 'volatile struct XIicPs *'
+ int iic_init( XIicPs *IicPs, u16 DeviceId, u32 ClkRate );
+     ^
+Finished building: ../src/iicTest.c
+ 
+Building target: IndoorLocZybo.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLocZybo_bsp/ps7_cortexa9_0/lib -o "IndoorLocZybo.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/platform.o ./src/pwmTest.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+./src/pwmTest.o: In function `main':
+/home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/IndoorLocZybo/Debug/../src/pwmTest.c:59: multiple definition of `main'
+./src/iicTest.o:/home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/IndoorLocZybo/Debug/../src/iicTest.c:13: first defined here
+collect2: error: ld returned 1 exit status
+make: *** [IndoorLocZybo.elf] Error 1
+10:44:28 **** Auto Build of configuration Debug for project IndoorLocZybo ****
+make all 
+Building file: ../src/iic_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/iic_utils.o" -I../../IndoorLocZybo_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/iic_utils.d" -MT"src/iic_utils.d" -o "src/iic_utils.o" "../src/iic_utils.c"
+../src/iic_utils.c:12:5: error: conflicting types for 'SetIiCSClk'
+ int SetIiCSClk(volatile XIicPs *InstancePtr, u32 FsclHz) {
+     ^
+In file included from ../src/iic_utils.c:7:0:
+../src/iic_utils.h:12:5: note: previous declaration of 'SetIiCSClk' was here
+ int SetIiCSClk(XIicPs *InstancePtr, u32 FsclHz);
+     ^
+../src/iic_utils.c:130:5: error: conflicting types for 'iic_init'
+ int iic_init(volatile XIicPs *IicPs, u16 DeviceId, u32 ClkRate) {
+     ^
+In file included from ../src/iic_utils.c:7:0:
+../src/iic_utils.h:13:5: note: previous declaration of 'iic_init' was here
+ int iic_init( XIicPs *IicPs, u16 DeviceId, u32 ClkRate );
+     ^
+../src/iic_utils.c: In function 'iic_init':
+../src/iic_utils.c:146:32: warning: passing argument 1 of 'XIicPs_CfgInitialize' discards 'volatile' qualifier from pointer target type
+  Status = XIicPs_CfgInitialize(IicPs, IicPs_Config,
+                                ^
+In file included from ../src/iic_utils.c:6:0:
+../../IndoorLocZybo_bsp/ps7_cortexa9_0/include/xiicps.h:360:5: note: expected 'struct XIicPs *' but argument is of type 'volatile struct XIicPs *'
+ s32 XIicPs_CfgInitialize(XIicPs *InstancePtr, XIicPs_Config * ConfigPtr,
+     ^
+make: *** [src/iic_utils.o] Error 1
+10:44:48 **** Auto Build of configuration Debug for project IndoorLocZybo ****
+make all 
+Building file: ../src/iicTest.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/iicTest.o" -I../../IndoorLocZybo_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/iicTest.d" -MT"src/iicTest.d" -o "src/iicTest.o" "../src/iicTest.c"
+Finished building: ../src/iicTest.c
+ 
+Building file: ../src/iic_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/iic_utils.o" -I../../IndoorLocZybo_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/iic_utils.d" -MT"src/iic_utils.d" -o "src/iic_utils.o" "../src/iic_utils.c"
+../src/iic_utils.c: In function 'iic_init':
+../src/iic_utils.c:146:32: warning: passing argument 1 of 'XIicPs_CfgInitialize' discards 'volatile' qualifier from pointer target type
+  Status = XIicPs_CfgInitialize(IicPs, IicPs_Config,
+                                ^
+In file included from ../src/iic_utils.c:6:0:
+../../IndoorLocZybo_bsp/ps7_cortexa9_0/include/xiicps.h:360:5: note: expected 'struct XIicPs *' but argument is of type 'volatile struct XIicPs *'
+ s32 XIicPs_CfgInitialize(XIicPs *InstancePtr, XIicPs_Config * ConfigPtr,
+     ^
+Finished building: ../src/iic_utils.c
+ 
+Building target: IndoorLocZybo.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLocZybo_bsp/ps7_cortexa9_0/lib -o "IndoorLocZybo.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/platform.o ./src/pwmTest.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+./src/pwmTest.o: In function `main':
+/home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/IndoorLocZybo/Debug/../src/pwmTest.c:59: multiple definition of `main'
+./src/iicTest.o:/home/rupprich/Zynq/indoor-loc-zybo/indoor-loc-zybo.sdk/IndoorLocZybo/Debug/../src/iicTest.c:13: first defined here
+collect2: error: ld returned 1 exit status
+make: *** [IndoorLocZybo.elf] Error 1
+10:45:36 **** Auto Build of configuration Debug for project IndoorLocZybo ****
+make all 
+Building file: ../src/pwmTest.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/pwmTest.o" -I../../IndoorLocZybo_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/pwmTest.d" -MT"src/pwmTest.d" -o "src/pwmTest.o" "../src/pwmTest.c"
+Finished building: ../src/pwmTest.c
+ 
+Building target: IndoorLocZybo.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLocZybo_bsp/ps7_cortexa9_0/lib -o "IndoorLocZybo.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/platform.o ./src/pwmTest.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLocZybo.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLocZybo.elf  |tee "IndoorLocZybo.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  29384	   1168	   8244	  38796	   978c	IndoorLocZybo.elf
+Finished building: IndoorLocZybo.elf.size
+ 
