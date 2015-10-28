@@ -1,0 +1,115 @@
+/*
+ * imu.c
+ *
+ *  Created on: Oct 28, 2015
+ *      Author: rupprich
+ */
+
+//Includes
+#include "imu.h"
+#include "iic_utils.h"
+
+//Global Variables
+XGpioPs Gpio; /* The driver instance for GPIO Device. */
+XIicPs IicPs; /* The driver instance for IIC Device. */
+static u8 imuAddr;
+static char *imuAddr_cp;
+
+//Function Prototypes
+static int writeAD0(u32 *data);
+static int readInt(u32 *DataRead);
+int setAddr(u8* addr, char* addr_c);
+
+/*
+ * IIC Write
+ */
+int imuI2cWrite(unsigned char slave_addr, unsigned char reg_addr, unsigned char length, unsigned char *data){
+	return XST_SUCCESS;
+}
+
+/*
+ * IIC Read
+ */
+int imuI2cRead(unsigned char slave_addr, unsigned char reg_addr, unsigned char length, unsigned char *data){
+	return XST_SUCCESS;
+}
+
+int imuInit(){
+	//Variables
+	int status;
+	imuAddr_cp = (char *) malloc(8);
+
+
+	//Init IIC
+	status = iic_init(&IicPs, IIC_DEVICE_ID, IIC_SCLK_RATE);
+
+	//Set IMU Address
+	status = setAddr(&imuAddr, &imuAddr);
+}
+
+/*
+ * Set IMU Address
+ */
+int setAddr(u8* addr, char* addr_c) {
+	//1. Initialize GPIO
+	int status;
+	u32 addr_last_bit = IMU_LAST_ADDR_BIT;
+	XGpioPs_Config *ConfigPtr;
+
+	/* Initialize the GPIO driver. */
+	ConfigPtr = XGpioPs_LookupConfig(GPIO_DEVICE_ID);
+	status = XGpioPs_CfgInitialize(&Gpio, ConfigPtr, ConfigPtr->BaseAddr);
+
+	//2. Set adm0
+	if (status == XST_SUCCESS) {
+		status = writeAD0(&addr_last_bit);
+	} else {
+		xil_printf("IMU.c: Error initializing GPIO Config.\r\n");
+		return XST_FAILURE;
+	}
+
+	//3. Set IMU address
+	if (status == XST_SUCCESS) {
+		*addr = IMU_ADDR_MASK & IMU_LAST_ADDR_BIT;
+		*addr_c =
+	} else {
+		xil_printf("IMU.c: Error setting AD0 for IMU.\r\n");
+		return XST_FAILURE;
+	}
+
+	//Return
+	return XST_SUCCESS;
+
+}
+
+/*
+ * Write to Pin
+ */
+static int writeAD0(u32 *data) {
+
+	/*
+	 * Set the direction for the pin to be output and
+	 * Enable the Output enable for the LED Pin.
+	 */
+	XGpioPs_SetDirectionPin(&Gpio, PS_IMU_AD0_PIN, 1);
+	XGpioPs_SetOutputEnablePin(&Gpio, PS_IMU_AD0_PIN, 1);
+
+	/* Set the GPIO output to be low. */
+	XGpioPs_WritePin(&Gpio, PS_IMU_AD0_PIN, *data);
+
+	return XST_SUCCESS;
+}
+
+/*
+ * Get Interrupt
+ */
+static int readInt(u32 *DataRead) {
+
+	/* Set the direction for the specified pin to be input. */
+	XGpioPs_SetDirectionPin(&Gpio, PS_IMU_INT_PIN, 0x0);
+
+	/* Read the state of the data so that it can be  verified. */
+	*DataRead = XGpioPs_ReadPin(&Gpio, PS_IMU_INT_PIN);
+
+	return XST_SUCCESS;
+}

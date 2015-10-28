@@ -9,7 +9,7 @@
 /*
  * Set IIC Clock
  */
-int SetIiCSClk(volatile XIicPs *InstancePtr, u32 FsclHz) {
+int SetIiCSClk(XIicPs *InstancePtr, u32 FsclHz) {
 	u32 Div_a;
 	u32 Div_b;
 	u32 ActualFscl;
@@ -127,7 +127,7 @@ int SetIiCSClk(volatile XIicPs *InstancePtr, u32 FsclHz) {
 /*
  * IIC Init
  */
-int iic_init(volatile XIicPs *IicPs, u16 DeviceId, u32 ClkRate) {
+int iic_init(XIicPs *IicPs, u16 DeviceId, u32 ClkRate) {
 	int Status;
 	XIicPs_Config *IicPs_Config;
 
@@ -164,4 +164,223 @@ int iic_init(volatile XIicPs *IicPs, u16 DeviceId, u32 ClkRate) {
 	}
 
 	return XST_SUCCESS;
+}
+
+/*
+ * IIC Busy?
+ */
+int isIicBusBusy(XIicPs* IicPs) {
+	u32 StatusReg = 0;
+
+
+	StatusReg = XIicPs_ReadReg(IicPs->Config.BaseAddress,
+			XIICPS_SR_OFFSET);
+	if (StatusReg & XIICPS_SR_BA_MASK) {
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}
+
+/*
+ * I2C Write Functions
+ */
+/*
+ * IIC Write 1
+ */
+int iic_write1(XIicPs *IicPs, u8 Address, u8 Data) {
+	int Status;
+
+	/*
+	 * Wait until bus is idle to start another transfer.
+	 */
+	while (XIicPs_BusIsBusy(IicPs)) {
+		/* NOP */
+	}
+
+	/*
+	 * Send the buffer using the IIC and check for errors.
+	 */
+	Status = XIicPs_MasterSendPolled(IicPs, &Data, 1, Address);
+	if (Status != XST_SUCCESS) {
+		xil_printf("XIicPs_MasterSendPolled error!\n\r");
+		return XST_FAILURE;
+	}
+
+	return XST_SUCCESS;
+}
+
+/*
+ * IIC Write 2
+ */
+int iic_write2(XIicPs *IicPs, u8 Address, u8 Register, u8 Data) {
+	u8 WriteBuffer[2];
+	int Status;
+
+	/*
+	 * A temporary write buffer must be used which contains both the address
+	 * and the data to be written, put the address in first
+	 */
+	WriteBuffer[0] = Register;
+	WriteBuffer[1] = Data;
+
+	/*
+	 * Wait until bus is idle to start another transfer.
+	 */
+	while (XIicPs_BusIsBusy(IicPs)) {
+		/* NOP */
+		//sleep(1);
+	}
+
+	/*
+	 * Send the buffer using the IIC and check for errors.
+	 */
+	Status = XIicPs_MasterSendPolled(IicPs, WriteBuffer, 2, Address);
+	if (Status != XST_SUCCESS) {
+		xil_printf("XIicPs_MasterSendPolled error!\n\r");
+		return XST_FAILURE;
+	}
+
+	return XST_SUCCESS;
+}
+
+///*
+// * IIC Write X
+// */
+//static void iic_writex(XIicPs *IicPs, u8 Address, ZED_I2C_CONFIG Config[],
+//		u32 Length) {
+//	int i;
+//
+//	for (i = 0; i < Length; i++) {
+//		iic_write2(IicPs, Address, Config[i].Reg, Config[i].Init);
+//	}
+//}
+//
+///*
+// * IIC Write X 2
+// */
+//static void iic_writex2(XIicPs *IicPs, ZED_I2C_CONFIG2 Config[], u32 Length) {
+//	int i;
+//
+//	for (i = 0; i < Length; i++) {
+//		iic_write2(IicPs, Config[i].Addr, Config[i].Reg, Config[i].Init);
+//	}
+//}
+
+/*
+ * I2C Read Functions
+ */
+/*
+ * IIC Read 1
+ */
+int iic_read1(XIicPs *IicPs, u8 Address, u8 *Data) {
+	int Status;
+
+	/*
+	 * Wait until bus is idle to start another transfer.
+	 */
+	while (XIicPs_BusIsBusy(IicPs)) {
+		/* NOP */
+	}
+
+	/*
+	 * Receive the data.
+	 */
+	Status = XIicPs_MasterRecvPolled(IicPs, Data, 1, Address);
+	if (Status != XST_SUCCESS) {
+		xil_printf("XIicPs_MasterRecvPolled error!\n\r");
+		return XST_FAILURE;
+	}
+
+	xil_printf("[iic_read1] 0x%02X=0x%02X\n\r", Address, *Data);
+
+	return XST_SUCCESS;
+}
+
+/*
+ * IIC Read 2
+ */
+int iic_read2(XIicPs *IicPs, u8 Address, u8 Register, u8 *Data,
+		int ByteCount) {
+	int Status;
+
+	/*
+	 * Wait until bus is idle to start another transfer.
+	 */
+	while (XIicPs_BusIsBusy(IicPs)) {
+		/* NOP */
+		//sleep(1);
+	}
+
+	/*
+	 * Set the IIC Repeated Start option.
+	 */
+	Status = XIicPs_SetOptions(IicPs, XIICPS_REP_START_OPTION);
+	if (Status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+
+	/*
+	 * Send the buffer using the IIC and check for errors.
+	 */
+	Status = XIicPs_MasterSendPolled(IicPs, &Register, 1, Address);
+	if (Status != XST_SUCCESS) {
+		xil_printf("XIicPs_MasterSendPolled error!\n\r");
+		return XST_FAILURE;
+	}
+
+	/*
+	 * Receive the data.
+	 */
+	Status = XIicPs_MasterRecvPolled(IicPs, Data, ByteCount, Address);
+	if (Status != XST_SUCCESS) {
+		xil_printf("XIicPs_MasterRecvPolled error!\n\r");
+		return XST_FAILURE;
+	}
+
+	/*
+	 * Clear the IIC Repeated Start option.
+	 */
+	Status = XIicPs_ClearOptions(IicPs, XIICPS_REP_START_OPTION);
+	if (Status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+//	xil_printf("%d\n\r", __LINE__);
+
+	xil_printf("[iic_read2] 0x%02X(0x%02X)=0x%02X\n\r", Address, Register,
+			*Data);
+
+	return XST_SUCCESS;
+}
+
+///*
+// * IIC Read X
+// */
+//static void iic_readx(XIicPs *IicPs, u8 Address, ZED_I2C_CONFIG Config[],
+//		u32 Length) {
+//	int i;
+//
+//	for (i = 0; i < Length; i++) {
+//		iic_read2(IicPs, Address, Config[i].Reg, &Config[i].Data, 1);
+//	}
+//}
+//
+///*
+// * IIC Read X 2
+// */
+//static void iic_readx2(XIicPs *IicPs, ZED_I2C_CONFIG2 Config[], u32 Length) {
+//	int i;
+//
+//	for (i = 0; i < Length; i++) {
+//		iic_read2(IicPs, Config[i].Addr, Config[i].Reg, &Config[i].Data, 1);
+//	}
+//}
+
+/*
+ * Read from Register
+ */
+int read_Reg(XIicPs *IicPs, u8 iic_addr, u8 reg) {
+	u8 data;
+	iic_read2(IicPs, iic_addr, reg, &data, 1);
+	return data;
 }

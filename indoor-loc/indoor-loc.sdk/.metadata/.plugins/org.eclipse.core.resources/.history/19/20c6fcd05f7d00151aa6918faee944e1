@@ -1,0 +1,26 @@
+/*
+ * imu.h
+ *
+ *  Created on: Oct 28, 2015
+ *      Author: rupprich
+ */
+
+#ifndef IMU_H_
+#define IMU_H_
+
+//Includes
+#include "xil_types.h"
+#include "xparameters.h"
+
+//Zynq Parameters
+#define GPIO_DEVICE_ID  	XPAR_XGPIOPS_0_DEVICE_ID //from xparameters.h
+#define PS_IMU_AD0_PIN 	12 //MIO12
+#define PS_IMU_INT_PIN 	13 //MIO13
+
+
+//IMU Parameters
+#define IMU_ADDR_MASK	0b1101000 	//b110100X - X determined by logic level on AD0
+#define NUMBER_OF_IMU	1			//one IMU
+
+
+#endif /* IMU_H_ */

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_2" LaunchPart="xc7z020clg484-1" LaunchTime="1445942478">
+<GenRun Id="impl_2" LaunchPart="xc7z020clg484-1" LaunchTime="1446027075">
   <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
   <File Type="RDI-RDI" Name="design_1_wrapper.vdi"/>
   <File Type="BG-DRC" Name="design_1_wrapper.drc"/>
@@ -51,7 +51,6 @@
   <File Type="INIT-TIMING" Name="design_1_wrapper_timing_summary_init.rpt"/>
   <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="design_1_wrapper_timing_summary_postroute_physopted.pb"/>
   <File Type="PA-TCL" Name="design_1_wrapper.tcl"/>
-  <File Type="PA-DCP" Name="design_1_wrapper.dcp"/>
   <File Type="RUN-STRAT" Name="$PDATADIR/runs/impl_2/impl_2.psg"/>
   <File Type="RUN-SRCS" Name="$PDATADIR/runs/impl_2/sources.xml"/>
   <File Type="RUN-CONSTRS" Name="$PDATADIR/runs/impl_2/constrs_in.xml"/>
@@ -93,9 +92,7 @@
     </Config>
   </FileSet>
   <Strategy Version="1" Minor="2">
-    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2015">
-      <Desc>Vivado Implementation Defaults</Desc>
-    </StratHandle>
+    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2015"/>
     <Step Id="init_design"/>
     <Step Id="opt_design"/>
     <Step Id="power_opt_design"/>

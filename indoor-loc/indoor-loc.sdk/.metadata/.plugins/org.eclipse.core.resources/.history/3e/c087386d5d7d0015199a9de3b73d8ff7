@@ -1,0 +1,18 @@
+/*
+ * imu.h
+ *
+ *  Created on: Oct 28, 2015
+ *      Author: rupprich
+ */
+
+#ifndef IMU_H_
+#define IMU_H_
+
+//Includes
+#include "xil_types.h"
+
+//IMU Parameters
+#define IMU_ADDR_MASK	0b1101000 //b110100X - X determined by logic level on AD0
+#define NUMBER_OF_IMU	1
+
+#endif /* IMU_H_ */

@@ -262,15 +262,15 @@ set_property src_info {type:SCOPED_XDC file:1 line:650 export:INPUT save:INPUT r
 set_property PACKAGE_PIN "C9" [get_ports "PS_SRSTB"]
 set_property src_info {type:SCOPED_XDC file:1 line:654 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN "F7" [get_ports "PS_CLK"]
-set_property src_info {type:XDC file:2 line:19 export:INPUT save:INPUT read:READ} [current_design]
-set_property PACKAGE_PIN T22 [get_ports {pwmPulse[0]}];  # "LD0"
-set_property src_info {type:XDC file:2 line:21 export:INPUT save:INPUT read:READ} [current_design]
-set_property PACKAGE_PIN T21 [get_ports {pwmPulse[1]}];  # "LD1"
-set_property src_info {type:XDC file:2 line:23 export:INPUT save:INPUT read:READ} [current_design]
-set_property PACKAGE_PIN U22 [get_ports {pwmPulse[2]}];  # "LD2"
-set_property src_info {type:XDC file:2 line:25 export:INPUT save:INPUT read:READ} [current_design]
-set_property PACKAGE_PIN U21 [get_ports {pwmPulse[3]}];  # "LD3"
-set_property src_info {type:XDC file:2 line:27 export:INPUT save:INPUT read:READ} [current_design]
-set_property PACKAGE_PIN V22 [get_ports {pwmPulse[4]}];  # "LD4"
-set_property src_info {type:XDC file:2 line:29 export:INPUT save:INPUT read:READ} [current_design]
-set_property PACKAGE_PIN W22 [get_ports {pwmPulse[5]}];  # "LD5"
+set_property src_info {type:XDC file:2 line:18 export:INPUT save:INPUT read:READ} [current_design]
+set_property PACKAGE_PIN T22 [get_ports {pwmPulse[0]}]
+set_property src_info {type:XDC file:2 line:20 export:INPUT save:INPUT read:READ} [current_design]
+set_property PACKAGE_PIN T21 [get_ports {pwmPulse[1]}]
+set_property src_info {type:XDC file:2 line:22 export:INPUT save:INPUT read:READ} [current_design]
+set_property PACKAGE_PIN U22 [get_ports {pwmPulse[2]}]
+set_property src_info {type:XDC file:2 line:24 export:INPUT save:INPUT read:READ} [current_design]
+set_property PACKAGE_PIN U21 [get_ports {pwmPulse[3]}]
+set_property src_info {type:XDC file:2 line:26 export:INPUT save:INPUT read:READ} [current_design]
+set_property PACKAGE_PIN V22 [get_ports {pwmPulse[4]}]
+set_property src_info {type:XDC file:2 line:28 export:INPUT save:INPUT read:READ} [current_design]
+set_property PACKAGE_PIN W22 [get_ports {pwmPulse[5]}]

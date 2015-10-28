@@ -200,12 +200,12 @@ preplace inst processing_system7_0_axi_periph -pg 1 -lvl 2 -y 150 -defaultsOSRD
 preplace netloc processing_system7_0_DDR 1 1 3 NJ 320 NJ 320 NJ
 preplace netloc pwm_0_pwmPulse 1 3 1 NJ
 preplace netloc processing_system7_0_M_AXI_GP0 1 1 1 440
-preplace netloc processing_system7_0_FCLK_RESET0_N 1 0 2 20 80 430
+preplace netloc processing_system7_0_FCLK_RESET0_N 1 0 2 30 270 430
 preplace netloc processing_system7_0_axi_periph_M02_AXI 1 2 1 N
 preplace netloc rst_processing_system7_0_100M_peripheral_aresetn 1 1 2 470 310 NJ
 preplace netloc processing_system7_0_FIXED_IO 1 1 3 NJ 340 NJ 340 NJ
 preplace netloc rst_processing_system7_0_100M_interconnect_aresetn 1 1 1 450
-preplace netloc processing_system7_0_FCLK_CLK0 1 0 3 30 270 460 330 770
+preplace netloc processing_system7_0_FCLK_CLK0 1 0 3 20 260 460 350 770
 levelinfo -pg 1 0 230 620 910 1060 -top 0 -bot 530
 ",
 }
