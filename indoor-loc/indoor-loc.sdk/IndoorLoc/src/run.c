@@ -50,6 +50,7 @@
 #include "platform.h"
 #include "pwmsw.h"
 #include "imu.h"
+#include <unistd.h>
 
 int main() {
 	//Variables
@@ -60,8 +61,9 @@ int main() {
 
 	//IMU
 	u8 imuAddr;
-	unsigned char* p_data = (unsigned char*) malloc(8);
-	*p_data = '0';
+	unsigned char* data = (unsigned char*) malloc(8);
+	*data = '0';
+	u16 data_16;
 
 	//1. Init (Set Address, etc.)
 	status = imuInit(&imuAddr);
@@ -71,30 +73,57 @@ int main() {
 	}
 
 	//2. Power up
-	status = imuI2cWrite(imuAddr, MPU9150_PWR_MGMT_1, sizeof(p_data), p_data);
+	status = imuI2cWrite(imuAddr, MPU9150_PWR_MGMT_1, sizeof(data), data);
 	if (status != XST_SUCCESS) {
 		xil_printf("run.c: Error in IMU Power Up.\n\r");
 		return 0;
 	}
 
 	//3. Read Device ID
-	status = imuI2cRead(imuAddr, MPU9150_WHO_AM_I, 8, p_data);
-	if (status != XST_SUCCESS) {
-		xil_printf("run.c: Error in reading IMU device ID.\n\r");
-		return 0;
-	} else {
-		xil_printf("IMU Device ID: 0x%x\r\n", *p_data);
+//	status = imuI2cRead(imuAddr, MPU9150_WHO_AM_I, 8, data);
+//	if (status != XST_SUCCESS) {
+//		xil_printf("run.c: Error in reading IMU device ID.\n\r");
+//		return 0;
+//	} else {
+//		xil_printf("IMU Device ID: 0x%x\r\n", *data);
+//	}
+
+//4. Read Data
+	int i;
+	for (i = 0; i <= 50; i++) {
+		//Gyro
+		status = readDoubleReg(MPU9150_GYRO_XOUT_H, MPU9150_GYRO_XOUT_L,
+				&data_16);
+		if (status != XST_SUCCESS) {
+			xil_printf("run.c: Error in reading IMU device ID.\n\r");
+			return 0;
+		} else {
+			xil_printf("IMU Gyro X: 0x%x\r\n", data_16);
+		}
+
+		//Acc
+		status = readDoubleReg(MPU9150_ACCEL_XOUT_H, MPU9150_ACCEL_XOUT_L,
+				&data_16);
+		if (status != XST_SUCCESS) {
+			xil_printf("run.c: Error in reading IMU device ID.\n\r");
+			return 0;
+		} else {
+			xil_printf("IMU Acc X: 0x%x\r\n", data_16);
+		}
+
+		//Temp
+		status = readDoubleReg(MPU9150_TEMP_OUT_H, MPU9150_TEMP_OUT_L,
+				&data_16);
+		if (status != XST_SUCCESS) {
+			xil_printf("run.c: Error in reading IMU device ID.\n\r");
+			return 0;
+		} else {
+			xil_printf("IMU Temp: 0x%x\r\n", data_16);
+		}
+		sleep(1);
 	}
 
-	//4. Read Gyro Data
-	status = imuI2cRead(imuAddr, MPU9150_GYRO_XOUT_H, 8, p_data);
-	if (status != XST_SUCCESS) {
-		xil_printf("run.c: Error in reading Gyro Data.\n\r");
-		return 0;
-	} else {
-		xil_printf("IMU Gyro X: 0x%x\r\n", *p_data);
-	}
-
+	//PWM
 	pwm();
 
 	/*while (1){

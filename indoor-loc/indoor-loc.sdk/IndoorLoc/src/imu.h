@@ -125,6 +125,10 @@
 #define MPU9150_CMPS_ZOUT_H        0x4F   // R
 
 //Functions
+int writeDoubleReg(u8 reg_l, u8 reg_h, u16* data);
+int writeSingleReg(u8 reg, u8* data);
+int readDoubleReg(u8 reg_l, u8 reg_h, u16* data);
+int readSingleReg(u8 reg, u8* data);
 int imuI2cRead(unsigned char slave_addr, unsigned char reg_addr, unsigned char length, unsigned char *data);
 int imuI2cWrite(unsigned char slave_addr, unsigned char reg_addr, unsigned char length, unsigned char *data);
 void imuDelay(unsigned long ms);

@@ -4780,3 +4780,34 @@ Binding(ALT+CTRL+I,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.cdt.ui.cViewScope,,,system)
+!SESSION 2015-10-30 13:55:16.728 -----------------------------------------------
+eclipse.buildId=2015.3
+java.version=1.8.0_45
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -data /home/rupprich/Zynq/indoor-loc/indoor-loc.sdk
+
+!ENTRY org.eclipse.core.resources 2 10035 2015-10-30 13:55:18.257
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.tcf 4 0 2015-10-30 13:56:46.693
+!MESSAGE TCF channel terminated
+!STACK 0
+java.io.IOException: Communication channel is closed by remote peer
+	at org.eclipse.tcf.core.AbstractChannel$1$2.run(AbstractChannel.java:305)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.lang.Thread.run(Thread.java:745)
+!SESSION 2015-10-30 13:57:06.725 -----------------------------------------------
+eclipse.buildId=2015.3
+java.version=1.8.0_45
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -data /home/rupprich/Zynq/indoor-loc/indoor-loc.sdk
+
+!ENTRY org.eclipse.tcf 4 0 2015-10-30 14:36:04.431
+!MESSAGE TCF channel terminated
+!STACK 0
+java.io.IOException: Communication channel is closed by remote peer
+	at org.eclipse.tcf.core.AbstractChannel$1$2.run(AbstractChannel.java:305)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.lang.Thread.run(Thread.java:745)

@@ -15,12 +15,93 @@
 //Global Variables
 XGpioPs Gpio; /* The driver instance for GPIO Device. */
 XIicPs IicPs; /* The driver instance for IIC Device. */
+static u8 imuAddr; //IMU addr
 static char *imuAddr_cp;
 
 //Function Prototypes
 static int writeAD0(u32 *data);
 static int readInt(u32 *DataRead);
 static int setAddr(u8* addr, char* addr_c);
+
+/*
+ * Write Two Registers --> 16 Bit Data
+ */
+int writeDoubleReg(u8 reg_h, u8 reg_l, u16* data) {
+	int status;
+	u8 data8;
+
+	//write high bits
+	data8 = (*data & 0xFF00) >> 8; //get high bites
+	status = imuI2cWrite(imuAddr, reg_h, sizeof(data8), &data8);
+	if (status != XST_SUCCESS) {
+		xil_printf("imu.c: Error during reading double register (high bits of 0x%x).\r\n", reg_h);
+		return XST_FAILURE;
+	}
+
+	//write low bits
+	data8 = *data & 0x00FF; //get low bites
+	status = imuI2cWrite(imuAddr, reg_l, sizeof(data8), &data8);
+	if (status != XST_SUCCESS) {
+		xil_printf("imu.c: Error during reading double register (low bits of 0x%x).\r\n", reg_l);
+		return XST_FAILURE;
+	}
+
+	return 0;
+}
+
+/*
+ * Write to Single Register
+ */
+int writeSingleReg(u8 reg, u8* data) {
+	int status;
+	status = imuI2cWrite(imuAddr, reg, sizeof(*data), data);
+	if (status != XST_SUCCESS) {
+		xil_printf("imu.c: Error during writing single register (0x%x).\r\n", reg);
+		return XST_FAILURE;
+	}
+	return 0;
+}
+
+/*
+ * Read Two Registers --> 16 Bit Data
+ */
+int readDoubleReg(u8 reg_h, u8 reg_l, u16* data) {
+	int status;
+	u8 data8;
+
+	//get high bits
+	status = imuI2cRead(imuAddr, reg_h, sizeof(data8), &data8);
+	if (status != XST_SUCCESS) {
+		xil_printf("imu.c: Error during reading double register (high bits of 0x%x).\r\n", reg_h);
+		return XST_FAILURE;
+	}
+
+	*data = data8 << 8;
+
+	//get low bits
+	status = imuI2cRead(imuAddr, reg_l, sizeof(data8), &data8);
+	if (status != XST_SUCCESS) {
+		xil_printf("imu.c: Error during reading double register (low bits of 0x%x).\r\n", reg_l);
+		return XST_FAILURE;
+	}
+
+	*data = *data | data8;
+
+	return 0;
+}
+
+/*
+ * Read from Single Register
+ */
+int readSingleReg(u8 reg, u8* data) {
+	int status;
+	status = imuI2cRead(imuAddr, reg, sizeof(*data), data);
+	if (status != XST_SUCCESS) {
+		xil_printf("imu.c: Error during reading single register (0x%x).\r\n", reg);
+		return XST_FAILURE;
+	}
+	return 0;
+}
 
 /*
  * IIC Write
@@ -34,7 +115,7 @@ int imuI2cWrite(unsigned char slave_addr, unsigned char reg_addr,
 	status = iic_write2(&IicPs, slave_addr, reg_addr, *data);
 
 	if (status != XST_SUCCESS) {
-		xil_printf("imu.c: Error on IIC Write.\r\n");
+		xil_printf("imu.c: Error on IIC Write (0x%x).\r\n", reg_addr);
 		return XST_FAILURE;
 	}
 
@@ -54,7 +135,7 @@ int imuI2cRead(unsigned char slave_addr, unsigned char reg_addr,
 	status = iic_read2(&IicPs, slave_addr, reg_addr, data, length);
 
 	if (status != XST_SUCCESS) {
-		xil_printf("imu.c: Error on IIC Read.\r\n");
+		xil_printf("imu.c: Error on IIC Read (0x%x).\r\n", reg_addr);
 		return XST_FAILURE;
 	}
 
@@ -65,14 +146,14 @@ int imuI2cRead(unsigned char slave_addr, unsigned char reg_addr,
 /*
  * Delay
  */
-void imuDelay(unsigned long ms){
-	usleep(ms*1000);
+void imuDelay(unsigned long ms) {
+	usleep(ms * 1000);
 }
 
 /*
  * Get Timestamp
  */
-unsigned long imuGet_ms(){
+unsigned long imuGet_ms() {
 	XTime time; //use global timer in Zynq SOC --> increases every 2 cycles
 	XTime_GetTime(&time);
 	return time;
@@ -81,14 +162,14 @@ unsigned long imuGet_ms(){
 /*
  * Log I
  */
-void imuLog_i(){
+void imuLog_i() {
 	//TODO
 }
 
 /*
  * Log I
  */
-void imuLog_e(){
+void imuLog_e() {
 	//TODO
 }
 
@@ -143,7 +224,8 @@ int setAddr(u8* addr, char* addr_c) {
 	}
 
 	//3. Set IMU address
-	*addr = IMU_ADDR_MASK | IMU_LAST_ADDR_BIT;
+	imuAddr = IMU_ADDR_MASK | IMU_LAST_ADDR_BIT;
+	*addr = imuAddr;
 	*imuAddr_cp = (char) *addr;
 	//sprintf(imuAddr_cp, "%d", *addr);
 

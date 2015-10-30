@@ -2669,3 +2669,1069 @@ Finished building: IndoorLoc.elf.size
 12:27:18 **** Incremental Build of configuration Debug for project IndoorLoc ****
 make all 
 make: Nothing to be done for `all'.
+13:24:41 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+In file included from ../src/run.c:52:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  45632	   2216	  22740	  70588	  113bc	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+13:24:57 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+In file included from ../src/run.c:52:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  45696	   2216	  22740	  70652	  113fc	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+13:27:57 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+In file included from ../src/run.c:52:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+../src/run.c: In function 'main':
+../src/run.c:107:26: error: invalid operands to binary & (have 'int' and 'unsigned char *')
+  *p_data_16 = *p_data_16 & p_data_8;
+                          ^
+make: *** [src/run.o] Error 1
+13:28:01 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+In file included from ../src/run.c:52:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+../src/run.c: In function 'main':
+../src/run.c:107:26: error: invalid operands to binary & (have 'int' and 'unsigned char *')
+  *p_data_16 = *p_data_16 & p_data_8;
+                          ^
+make: *** [src/run.o] Error 1
+13:29:06 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+In file included from ../src/run.c:52:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+../src/run.c: In function 'main':
+../src/run.c:98:3: error: 'p_data_16' undeclared (first use in this function)
+  *p_data_16 = *p_data_8 < 8;
+   ^
+../src/run.c:98:3: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [src/run.o] Error 1
+13:29:11 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+In file included from ../src/run.c:52:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+../src/run.c: In function 'main':
+../src/run.c:106:2: warning: 'data_16' may be used uninitialized in this function [-Wmaybe-uninitialized]
+  xil_printf("IMU Gyro X: 0x%x\r\n", data_16);
+  ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  45696	   2216	  22740	  70652	  113fc	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+13:29:25 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+In file included from ../src/run.c:52:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+../src/run.c: In function 'main':
+../src/run.c:106:2: warning: 'data_16' may be used uninitialized in this function [-Wmaybe-uninitialized]
+  xil_printf("IMU Gyro X: 0x%x\r\n", data_16);
+  ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  45696	   2216	  22740	  70652	  113fc	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+13:31:28 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+In file included from ../src/run.c:52:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+../src/run.c: In function 'main':
+../src/run.c:65:5: warning: unused variable 'data_8' [-Wunused-variable]
+  u8 data_8;
+     ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  45760	   2216	  22740	  70716	  1143c	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+13:31:32 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+In file included from ../src/run.c:52:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  45760	   2216	  22740	  70716	  1143c	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+13:31:35 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+13:37:01 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/imu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu.d" -MT"src/imu.d" -o "src/imu.o" "../src/imu.c"
+In file included from ../src/imu.c:9:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+../src/imu.c: In function 'readSingleReg':
+../src/imu.c:37:47: error: expected ';' before ':' token
+  imuI2cRead(imuAddr, reg, sizeof(*data), data):
+                                               ^
+../src/imu.c: At top level:
+../src/imu.c:191:5: warning: 'readInt' defined but not used [-Wunused-function]
+ int readInt(u32 *DataRead) {
+     ^
+../src/imu.c: In function 'readDoubleReg':
+../src/imu.c:31:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../src/imu.c: In function 'readSingleReg':
+../src/imu.c:38:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/imu.o] Error 1
+13:37:05 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/imu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu.d" -MT"src/imu.d" -o "src/imu.o" "../src/imu.c"
+In file included from ../src/imu.c:9:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+../src/imu.c:191:5: warning: 'readInt' defined but not used [-Wunused-function]
+ int readInt(u32 *DataRead) {
+     ^
+../src/imu.c: In function 'readDoubleReg':
+../src/imu.c:31:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../src/imu.c: In function 'readSingleReg':
+../src/imu.c:38:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../src/imu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  45888	   2216	  22740	  70844	  114bc	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+13:37:52 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/imu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu.d" -MT"src/imu.d" -o "src/imu.o" "../src/imu.c"
+In file included from ../src/imu.c:9:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+../src/imu.c:197:5: warning: 'readInt' defined but not used [-Wunused-function]
+ int readInt(u32 *DataRead) {
+     ^
+../src/imu.c: In function 'readDoubleReg':
+../src/imu.c:31:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../src/imu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  46000	   2216	  22740	  70956	  1152c	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+13:41:55 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/imu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu.d" -MT"src/imu.d" -o "src/imu.o" "../src/imu.c"
+In file included from ../src/imu.c:9:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+../src/imu.c: In function 'readDoubleReg':
+../src/imu.c:34:53: warning: passing argument 4 of 'imuI2cRead' makes pointer from integer without a cast
+  status = imuI2cRead(imuAddr, reg_h, sizeof(data8), data8);
+                                                     ^
+In file included from ../src/imu.c:9:0:
+../src/imu.h:128:5: note: expected 'unsigned char *' but argument is of type 'u8'
+ int imuI2cRead(unsigned char slave_addr, unsigned char reg_addr, unsigned char length, unsigned char *data);
+     ^
+../src/imu.c:43:53: warning: passing argument 4 of 'imuI2cRead' makes pointer from integer without a cast
+  status = imuI2cRead(imuAddr, reg_l, sizeof(data8), data8);
+                                                     ^
+In file included from ../src/imu.c:9:0:
+../src/imu.h:128:5: note: expected 'unsigned char *' but argument is of type 'u8'
+ int imuI2cRead(unsigned char slave_addr, unsigned char reg_addr, unsigned char length, unsigned char *data);
+     ^
+../src/imu.c: At top level:
+../src/imu.c:216:5: warning: 'readInt' defined but not used [-Wunused-function]
+ int readInt(u32 *DataRead) {
+     ^
+../src/imu.c: In function 'readDoubleReg':
+../src/imu.c:34:11: warning: 'data8' is used uninitialized in this function [-Wuninitialized]
+  status = imuI2cRead(imuAddr, reg_h, sizeof(data8), data8);
+           ^
+Finished building: ../src/imu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  46348	   2216	  22740	  71304	  11688	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+13:42:15 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/imu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu.d" -MT"src/imu.d" -o "src/imu.o" "../src/imu.c"
+In file included from ../src/imu.c:9:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+../src/imu.c:216:5: warning: 'readInt' defined but not used [-Wunused-function]
+ int readInt(u32 *DataRead) {
+     ^
+Finished building: ../src/imu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  46348	   2216	  22740	  71304	  11688	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+13:42:42 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/imu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu.d" -MT"src/imu.d" -o "src/imu.o" "../src/imu.c"
+In file included from ../src/imu.c:9:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+../src/imu.c:218:5: warning: 'readInt' defined but not used [-Wunused-function]
+ int readInt(u32 *DataRead) {
+     ^
+Finished building: ../src/imu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  46412	   2216	  22740	  71368	  116c8	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+13:45:21 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/imu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu.d" -MT"src/imu.d" -o "src/imu.o" "../src/imu.c"
+In file included from ../src/imu.c:9:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+../src/imu.c: In function 'writeDoubleReg':
+../src/imu.c:34:10: warning: overflow in implicit constant conversion [-Woverflow]
+  data8 = *data & 0xFF00; //get high bites
+          ^
+../src/imu.c:35:54: warning: passing argument 4 of 'imuI2cWrite' from incompatible pointer type
+  status = imuI2cWrite(imuAddr, reg_h, sizeof(data8), data);
+                                                      ^
+In file included from ../src/imu.c:9:0:
+../src/imu.h:129:5: note: expected 'unsigned char *' but argument is of type 'u16 *'
+ int imuI2cWrite(unsigned char slave_addr, unsigned char reg_addr, unsigned char length, unsigned char *data);
+     ^
+../src/imu.c: At top level:
+../src/imu.c:257:5: warning: 'readInt' defined but not used [-Wunused-function]
+ int readInt(u32 *DataRead) {
+     ^
+Finished building: ../src/imu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  46788	   2216	  22740	  71744	  11840	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+13:45:44 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/imu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu.d" -MT"src/imu.d" -o "src/imu.o" "../src/imu.c"
+In file included from ../src/imu.c:9:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+../src/imu.c: In function 'writeDoubleReg':
+../src/imu.c:34:10: warning: overflow in implicit constant conversion [-Woverflow]
+  data8 = *data & 0xFF00; //get high bites
+          ^
+../src/imu.c: At top level:
+../src/imu.c:257:5: warning: 'readInt' defined but not used [-Wunused-function]
+ int readInt(u32 *DataRead) {
+     ^
+Finished building: ../src/imu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  46788	   2216	  22740	  71744	  11840	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+13:46:05 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/imu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu.d" -MT"src/imu.d" -o "src/imu.o" "../src/imu.c"
+In file included from ../src/imu.c:9:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+../src/imu.c:257:5: warning: 'readInt' defined but not used [-Wunused-function]
+ int readInt(u32 *DataRead) {
+     ^
+Finished building: ../src/imu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  46788	   2216	  22740	  71744	  11840	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+13:46:14 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/imu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu.d" -MT"src/imu.d" -o "src/imu.o" "../src/imu.c"
+In file included from ../src/imu.c:9:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+../src/imu.c:257:5: warning: 'readInt' defined but not used [-Wunused-function]
+ int readInt(u32 *DataRead) {
+     ^
+Finished building: ../src/imu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  46788	   2216	  22740	  71744	  11840	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+13:46:23 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+In file included from ../src/run.c:52:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  46788	   2216	  22740	  71744	  11840	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+13:47:55 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+In file included from ../src/run.c:52:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+../src/run.c: In function 'main':
+../src/run.c:92:2: warning: implicit declaration of function 'readDoubleReg' [-Wimplicit-function-declaration]
+  status = readDoubleReg(MPU9150_GYRO_XOUT_L, MPU9150_GYRO_XOUT_L, &data_16);
+  ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  46620	   2216	  22740	  71576	  11798	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+13:48:54 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/imu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu.d" -MT"src/imu.d" -o "src/imu.o" "../src/imu.c"
+In file included from ../src/imu.c:9:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+../src/imu.c:257:5: warning: 'readInt' defined but not used [-Wunused-function]
+ int readInt(u32 *DataRead) {
+     ^
+Finished building: ../src/imu.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+In file included from ../src/run.c:52:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  46620	   2216	  22740	  71576	  11798	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+13:49:07 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+13:49:55 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+In file included from ../src/run.c:52:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  46620	   2216	  22740	  71576	  11798	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+13:50:37 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+In file included from ../src/run.c:52:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  46532	   2216	  22740	  71488	  11740	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+13:50:39 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+13:55:21 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+13:56:09 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+In file included from ../src/run.c:52:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  46608	   2216	  22740	  71564	  1178c	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+13:57:50 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+13:58:08 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+13:59:34 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+14:00:47 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/imu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu.d" -MT"src/imu.d" -o "src/imu.o" "../src/imu.c"
+In file included from ../src/imu.c:9:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+../src/imu.c:257:5: warning: 'readInt' defined but not used [-Wunused-function]
+ int readInt(u32 *DataRead) {
+     ^
+Finished building: ../src/imu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  46608	   2216	  22740	  71564	  1178c	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+14:00:50 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+14:03:10 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/imu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu.d" -MT"src/imu.d" -o "src/imu.o" "../src/imu.c"
+In file included from ../src/imu.c:9:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+../src/imu.c:257:5: warning: 'readInt' defined but not used [-Wunused-function]
+ int readInt(u32 *DataRead) {
+     ^
+Finished building: ../src/imu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  46608	   2216	  22740	  71564	  1178c	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+14:03:16 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+In file included from ../src/run.c:52:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  46608	   2216	  22740	  71564	  1178c	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+14:03:18 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+14:04:58 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+In file included from ../src/run.c:52:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+../src/run.c:53:19: fatal error: conio.h: No such file or directory
+ #include <conio.h>
+                   ^
+compilation terminated.
+make: *** [src/run.o] Error 1
+14:05:54 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+In file included from ../src/run.c:52:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+../src/run.c: In function 'main':
+../src/run.c:100:4: warning: implicit declaration of function 'Xil_DCacheFlush' [-Wimplicit-function-declaration]
+    Xil_DCacheFlush();
+    ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  46596	   2216	  22740	  71552	  11780	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+14:06:24 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+In file included from ../src/run.c:52:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  46596	   2216	  22740	  71552	  11780	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+14:08:23 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+In file included from ../src/run.c:52:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+../src/run.c: In function 'main':
+../src/run.c:104:6: error: redeclaration of 'i' with no linkage
+  int i;
+      ^
+../src/run.c:91:6: note: previous declaration of 'i' was here
+  int i;
+      ^
+../src/run.c:104:6: warning: unused variable 'i' [-Wunused-variable]
+  int i;
+      ^
+make: *** [src/run.o] Error 1
+14:08:27 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+In file included from ../src/run.c:52:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  46680	   2216	  22740	  71636	  117d4	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+14:08:29 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+14:13:46 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+In file included from ../src/run.c:52:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  46764	   2216	  22740	  71720	  11828	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+14:13:50 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+14:14:18 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+14:15:42 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+14:16:27 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+14:24:00 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+In file included from ../src/run.c:52:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+../src/run.c: In function 'main':
+../src/run.c:122:3: warning: implicit declaration of function 'sleep' [-Wimplicit-function-declaration]
+   sleep(10);
+   ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  46828	   2216	  22740	  71784	  11868	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+14:24:07 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+In file included from ../src/run.c:52:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+../src/run.c: In function 'main':
+../src/run.c:122:3: warning: implicit declaration of function 'sleep' [-Wimplicit-function-declaration]
+   sleep(1);
+   ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  46828	   2216	  22740	  71784	  11868	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+14:24:18 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+In file included from ../src/run.c:52:0:
+../src/imu.h:32:0: warning: "MPU9150_SELF_TEST_X" redefined
+ #define MPU9150_SELF_TEST_X        0x0F   // R/W
+ ^
+../src/imu.h:30:0: note: this is the location of the previous definition
+ #define MPU9150_SELF_TEST_X        0x0D   // R/W
+ ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/imu.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  46828	   2216	  22740	  71784	  11868	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+14:24:22 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
