@@ -10,12 +10,11 @@
 #include "iic_utils.h"
 #include <stdlib.h>
 #include <unistd.h>
-#include <time.h>
+#include "xtime_l.h"
 
 //Global Variables
 XGpioPs Gpio; /* The driver instance for GPIO Device. */
 XIicPs IicPs; /* The driver instance for IIC Device. */
-static u8 imuAddr;
 static char *imuAddr_cp;
 
 //Function Prototypes
@@ -35,7 +34,7 @@ int imuI2cWrite(unsigned char slave_addr, unsigned char reg_addr,
 	status = iic_write2(&IicPs, slave_addr, reg_addr, *data);
 
 	if (status != XST_SUCCESS) {
-		xil_printf("IMU.c: Error on IIC Write.\r\n");
+		xil_printf("imu.c: Error on IIC Write.\r\n");
 		return XST_FAILURE;
 	}
 
@@ -55,7 +54,7 @@ int imuI2cRead(unsigned char slave_addr, unsigned char reg_addr,
 	status = iic_read2(&IicPs, slave_addr, reg_addr, data, length);
 
 	if (status != XST_SUCCESS) {
-		xil_printf("IMU.c: Error on IIC Read.\r\n");
+		xil_printf("imu.c: Error on IIC Read.\r\n");
 		return XST_FAILURE;
 	}
 
@@ -74,7 +73,9 @@ void imuDelay(unsigned long ms){
  * Get Timestamp
  */
 unsigned long imuGet_ms(){
-	return time(NULL) * 1000; //TODO
+	XTime time; //use global timer in Zynq SOC --> increases every 2 cycles
+	XTime_GetTime(&time);
+	return time;
 }
 
 /*
@@ -94,7 +95,7 @@ void imuLog_e(){
 /*
  * Initialize IMU
  */
-int imuInit() {
+int imuInit(u8 *imuAddr) {
 	//Variables
 	int status;
 	imuAddr_cp = (char *) malloc(8);
@@ -102,14 +103,14 @@ int imuInit() {
 	//Init IIC
 	status = iic_init(&IicPs, IIC_DEVICE_ID, IIC_SCLK_RATE);
 	if (status != XST_SUCCESS) {
-		xil_printf("IMU.c: Error initializing IIC.\r\n");
+		xil_printf("imu.c: Error initializing IIC.\r\n");
 		return XST_FAILURE;
 	}
 
 	//Set IMU Address
-	status = setAddr(&imuAddr, imuAddr_cp);
+	status = setAddr(imuAddr, imuAddr_cp);
 	if (status != XST_SUCCESS) {
-		xil_printf("IMU.c: Error setting IMU address.\r\n");
+		xil_printf("imu.c: Error setting IMU address.\r\n");
 		return XST_FAILURE;
 	}
 
@@ -130,20 +131,21 @@ int setAddr(u8* addr, char* addr_c) {
 	ConfigPtr = XGpioPs_LookupConfig(GPIO_DEVICE_ID);
 	status = XGpioPs_CfgInitialize(&Gpio, ConfigPtr, ConfigPtr->BaseAddr);
 	if (status != XST_SUCCESS) {
-		xil_printf("IMU.c: Error initializing GPIO Config.\r\n");
+		xil_printf("imu.c: Error initializing GPIO Config.\r\n");
 		return XST_FAILURE;
 	}
 
 	//2. Set ad0
 	status = writeAD0(&addr_last_bit);
 	if (status != XST_SUCCESS) {
-		xil_printf("IMU.c: Error setting AD0 for IMU.\r\n");
+		xil_printf("imu.c: Error setting AD0 for IMU.\r\n");
 		return XST_FAILURE;
 	}
 
 	//3. Set IMU address
-	*addr = IMU_ADDR_MASK & IMU_LAST_ADDR_BIT;
-	sprintf(imuAddr_cp, "%d", *addr);
+	*addr = IMU_ADDR_MASK | IMU_LAST_ADDR_BIT;
+	*imuAddr_cp = (char) *addr;
+	//sprintf(imuAddr_cp, "%d", *addr);
 
 	//Return
 	return XST_SUCCESS;

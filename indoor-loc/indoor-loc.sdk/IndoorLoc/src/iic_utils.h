@@ -6,7 +6,7 @@
 
 // PS I2C0 Init Parameters -> Zybo via MIO
 #define IIC_DEVICE_ID  XPAR_PS7_I2C_0_DEVICE_ID
-#define IIC_SCLK_RATE  XPAR_PS7_I2C_0_I2C_CLK_FREQ_HZ
+#define IIC_SCLK_RATE  100000//XPAR_PS7_I2C_0_I2C_CLK_FREQ_HZ
 
 //Functions
 int SetIiCSClk(XIicPs *InstancePtr, u32 FsclHz );

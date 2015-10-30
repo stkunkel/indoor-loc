@@ -292,7 +292,7 @@ int iic_read1(XIicPs *IicPs, u8 Address, u8 *Data) {
 		return XST_FAILURE;
 	}
 
-	xil_printf("[iic_read1] 0x%02X=0x%02X\n\r", Address, *Data);
+//	xil_printf("[iic_read1] 0x%02X=0x%02X\n\r", Address, *Data);
 
 	return XST_SUCCESS;
 }
@@ -347,8 +347,8 @@ int iic_read2(XIicPs *IicPs, u8 Address, u8 Register, u8 *Data,
 	}
 //	xil_printf("%d\n\r", __LINE__);
 
-	xil_printf("[iic_read2] 0x%02X(0x%02X)=0x%02X\n\r", Address, Register,
-			*Data);
+//	xil_printf("[iic_read2] 0x%02X(0x%02X)=0x%02X\n\r", Address, Register,
+//			*Data);
 
 	return XST_SUCCESS;
 }

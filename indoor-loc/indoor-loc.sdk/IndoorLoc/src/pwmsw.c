@@ -65,8 +65,6 @@ int pwm() {
 		//init
 		init_platform();
 
-		xil_printf("---Entering main---\n\r");
-
 		//set steps to PWMSTEPS
 		PWM_mWriteReg(PWMADDRESS, PWM_S00_AXI_SLV_REG6_OFFSET, PWMSTEPS);
 		PWM_mWriteReg(PWMADDRESS, PWM_S00_AXI_SLV_REG7_OFFSET, PWMSTEPS);
@@ -92,10 +90,10 @@ int pwm() {
 			//LED0
 			for (i = 0; i <= PWMSTEPS; i = i + PWMSTEPS / 5) {
 				PWM_mWriteReg(PWMADDRESS, PWM_S00_AXI_SLV_REG0_OFFSET, i);
-				sleep(1);
-				val = (u32) PWM_mReadReg(PWMADDRESS,
-						PWM_S00_AXI_SLV_REG0_OFFSET);
-				xil_printf("Steps: %d\r\n", val);
+//				sleep(1);
+//				val = (u32) PWM_mReadReg(PWMADDRESS,
+//						PWM_S00_AXI_SLV_REG0_OFFSET);
+//				xil_printf("Steps: %d\r\n", val);
 			}
 		}
 
