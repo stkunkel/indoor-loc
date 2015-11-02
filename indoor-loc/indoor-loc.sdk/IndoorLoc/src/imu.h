@@ -26,10 +26,11 @@
 #define IMU_ADDR_MASK		0b1101000 	//b110100X - X determined by logic level on AD0
 #define IMU_LAST_ADDR_BIT	0			//one IMU
 
+/*
 //IMU Registers (MPU9150)
 #define MPU9150_SELF_TEST_X        0x0D   // R/W
 #define MPU9150_SELF_TEST_Y        0x0E   // R/W
-#define MPU9150_SELF_TEST_X        0x0F   // R/W
+#define MPU9150_SELF_TEST_Z        0x0F   // R/W
 #define MPU9150_SELF_TEST_A        0x10   // R/W
 #define MPU9150_SMPLRT_DIV         0x19   // R/W
 #define MPU9150_CONFIG             0x1A   // R/W
@@ -123,6 +124,7 @@
 #define MPU9150_CMPS_YOUT_H        0x4D   // R
 #define MPU9150_CMPS_ZOUT_L        0x4E   // R
 #define MPU9150_CMPS_ZOUT_H        0x4F   // R
+*/
 
 //Functions
 int writeDoubleReg(u8 reg_l, u8 reg_h, u16* data);

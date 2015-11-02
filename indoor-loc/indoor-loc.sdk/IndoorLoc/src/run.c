@@ -51,10 +51,11 @@
 #include "pwmsw.h"
 #include "imu.h"
 #include <unistd.h>
+#include "inv_mpu.h"
 
 int main() {
 	//Variables
-	int status;
+	int status, i;
 
 	//Init Platform
 	init_platform();
@@ -72,64 +73,146 @@ int main() {
 		return 0;
 	}
 
-	//2. Power up
-	status = imuI2cWrite(imuAddr, MPU9150_PWR_MGMT_1, sizeof(data), data);
-	if (status != XST_SUCCESS) {
-		xil_printf("run.c: Error in IMU Power Up.\n\r");
+	//Use API
+	//2. Init
+	struct int_param_s param;
+	status = mpu_init(&param);
+	if (status != 0) {
+		xil_printf("Error initializing IMU.");
 		return 0;
 	}
 
-	//3. Read Device ID
-//	status = imuI2cRead(imuAddr, MPU9150_WHO_AM_I, 8, data);
-//	if (status != XST_SUCCESS) {
-//		xil_printf("run.c: Error in reading IMU device ID.\n\r");
-//		return 0;
-//	} else {
-//		xil_printf("IMU Device ID: 0x%x\r\n", *data);
-//	}
+	//3. Set Sensors
+	unsigned char sensors = INV_XYZ_GYRO | INV_XYZ_ACCEL | INV_XYZ_COMPASS;
+	mpu_set_sensors(sensors);
 
-//4. Read Data
-	int i;
-	for (i = 0; i <= 50; i++) {
+	//4. Register Dump
+	//mpu_reg_dump();
+
+	//5. Get Data
+	long tempdata;
+	short gyrodata[3], accdata[3], compassdata[3];
+	unsigned long temp_timestamp;
+	unsigned long int timestamp;
+
+	while (1) {
+		sleep(5);
 		//Gyro
-		status = readDoubleReg(MPU9150_GYRO_XOUT_H, MPU9150_GYRO_XOUT_L,
-				&data_16);
-		if (status != XST_SUCCESS) {
-			xil_printf("run.c: Error in reading IMU device ID.\n\r");
+		status = mpu_get_gyro_reg(gyrodata, &timestamp);
+		if (status != 0) {
+			xil_printf("Error getting Gyroscope data.\n\r");
 			return 0;
-		} else {
-			xil_printf("IMU Gyro X: 0x%x\r\n", data_16);
+		}
+
+		printf("Gyro: (");
+		for (i = 0; i < 3; i++) {
+			printf("%d", gyrodata[i]);
+			if (i < 2) {
+				printf(", ");
+			} else {
+				printf(")| ");
+			}
 		}
 
 		//Acc
-		status = readDoubleReg(MPU9150_ACCEL_XOUT_H, MPU9150_ACCEL_XOUT_L,
-				&data_16);
-		if (status != XST_SUCCESS) {
-			xil_printf("run.c: Error in reading IMU device ID.\n\r");
+		status = mpu_get_accel_reg(accdata, &timestamp);
+		if (status != 0) {
+			xil_printf("Error getting Gyroscope data.\n\r");
 			return 0;
-		} else {
-			xil_printf("IMU Acc X: 0x%x\r\n", data_16);
+		}
+		printf("Acc: (");
+		for (i = 0; i < 3; i++) {
+			printf("%d", accdata[i]);
+			if (i < 2) {
+				printf(", ");
+			} else {
+				printf(") | ");
+			}
 		}
 
-		//Temp
-		status = readDoubleReg(MPU9150_TEMP_OUT_H, MPU9150_TEMP_OUT_L,
-				&data_16);
-		if (status != XST_SUCCESS) {
-			xil_printf("run.c: Error in reading IMU device ID.\n\r");
+		//Compass
+		status = mpu_get_compass_reg(compassdata, &timestamp);
+		if (status != 0) {
+			xil_printf("Error getting Compass data.\n\r");
 			return 0;
-		} else {
-			xil_printf("IMU Temp: 0x%x\r\n", data_16);
 		}
-		sleep(1);
-	}
+		printf("Compass: (");
+		for (i = 0; i < 3; i++) {
+			printf("%d", compassdata[i]);
+			if (i < 2) {
+				printf(", ");
+			} else {
+				printf(") | ");
+			}
+		}
 
-	//PWM
-	pwm();
+		//Temperature
+		status = mpu_get_temperature(&tempdata, &temp_timestamp);
+		if (status != 0) {
+			xil_printf("Error getting Temperature data.\r\n");
+			return 0;
+		}
+		printf("Temperature: %fC\r\n", tempdata/65536.0);
+}
 
-	/*while (1){
-	 print("Hello World\n\r");
-	 }*/
+/*//2. Power up
+ status = imuI2cWrite(imuAddr, MPU9150_PWR_MGMT_1, sizeof(data), data);
+ if (status != XST_SUCCESS) {
+ xil_printf("run.c: Error in IMU Power Up.\n\r");
+ return 0;
+ }
 
-	cleanup_platform();
-	return 0;
+ //3. Read Device ID
+ //	status = imuI2cRead(imuAddr, MPU9150_WHO_AM_I, 8, data);
+ //	if (status != XST_SUCCESS) {
+ //		xil_printf("run.c: Error in reading IMU device ID.\n\r");
+ //		return 0;
+ //	} else {
+ //		xil_printf("IMU Device ID: 0x%x\r\n", *data);
+ //	}
+
+ //4. Read Data
+ int i;
+ for (i = 0; i <= 50; i++) {
+ //Gyro
+ status = readDoubleReg(MPU9150_GYRO_XOUT_H, MPU9150_GYRO_XOUT_L,
+ &data_16);
+ if (status != XST_SUCCESS) {
+ xil_printf("run.c: Error in reading IMU device ID.\n\r");
+ return 0;
+ } else {
+ xil_printf("IMU Gyro X: 0x%x\r\n", data_16);
+ }
+
+ //Acc
+ status = readDoubleReg(MPU9150_ACCEL_XOUT_H, MPU9150_ACCEL_XOUT_L,
+ &data_16);
+ if (status != XST_SUCCESS) {
+ xil_printf("run.c: Error in reading IMU device ID.\n\r");
+ return 0;
+ } else {
+ xil_printf("IMU Acc X: 0x%x\r\n", data_16);
+ }
+
+ //Temp
+ status = readDoubleReg(MPU9150_TEMP_OUT_H, MPU9150_TEMP_OUT_L,
+ &data_16);
+ if (status != XST_SUCCESS) {
+ xil_printf("run.c: Error in reading IMU device ID.\n\r");
+ return 0;
+ } else {
+ xil_printf("IMU Temp: 0x%x\r\n", data_16);
+ }
+ sleep(1);
+ }*/
+
+//PWM
+pwm();
+
+/*while (1){
+ print("Hello World\n\r");
+ }*/
+
+cleanup_platform();
+return 0;
 }
