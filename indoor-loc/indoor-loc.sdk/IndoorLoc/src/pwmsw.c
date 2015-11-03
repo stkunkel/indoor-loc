@@ -57,13 +57,10 @@
 
 void xil_print(char *str);
 
-int pwm() {
+int pwm(int amount) {
 	//variables
-		unsigned int i;
+		unsigned int a, i;
 		u32 val;
-
-		//init
-		init_platform();
 
 		//set steps to PWMSTEPS
 		PWM_mWriteReg(PWMADDRESS, PWM_S00_AXI_SLV_REG6_OFFSET, PWMSTEPS);
@@ -74,7 +71,7 @@ int pwm() {
 		PWM_mWriteReg(PWMADDRESS, PWM_S00_AXI_SLV_REG11_OFFSET, PWMSTEPS);
 
 		//main loop
-		while (1) {
+		for (a = 0; a <= amount; a++) {
 			//LED1
 			PWM_mWriteReg(PWMADDRESS, PWM_S00_AXI_SLV_REG1_OFFSET,
 					PWMSTEPS/2);
@@ -90,14 +87,9 @@ int pwm() {
 			//LED0
 			for (i = 0; i <= PWMSTEPS; i = i + PWMSTEPS / 5) {
 				PWM_mWriteReg(PWMADDRESS, PWM_S00_AXI_SLV_REG0_OFFSET, i);
-//				sleep(1);
-//				val = (u32) PWM_mReadReg(PWMADDRESS,
-//						PWM_S00_AXI_SLV_REG0_OFFSET);
-//				xil_printf("Steps: %d\r\n", val);
 			}
 		}
 
 		//finish
-		cleanup_platform();
 		return 0;
 }

@@ -1,0 +1,83 @@
+/*
+ * mpu.c
+ *
+ *  Created on: Nov 3, 2015
+ *      Author: ruppi
+ */
+
+//Includes
+#include "mpu.h"
+
+/*
+ * Print Data and don't use MPU
+ */
+int printDataNoMPU() {
+	//Variables
+	int status, i;
+	long tempdata;
+	short gyrodata[3], accdata[3], compassdata[3];
+	unsigned long temp_timestamp;
+	unsigned long int timestamp;
+
+	//Gyro
+	status = mpu_get_gyro_reg(gyrodata, &timestamp);
+	if (status != 0) {
+		xil_printf("run.c: Error getting Gyroscope data.\n\r");
+		return 0;
+	}
+
+	printf("Gyro: (");
+	for (i = 0; i < 3; i++) {
+		printf("%d", gyrodata[i]);
+		if (i < 2) {
+			printf(", ");
+		} else {
+			printf(")| ");
+		}
+	}
+
+	//Acc
+	status = mpu_get_accel_reg(accdata, &timestamp);
+	if (status != 0) {
+		xil_printf("run.c: Error getting Gyroscope data.\n\r");
+		return 0;
+	}
+
+	printf("Acc: (");
+	for (i = 0; i < 3; i++) {
+		printf("%d", accdata[i]);
+		if (i < 2) {
+			printf(", ");
+		} else {
+			printf(") | ");
+		}
+	}
+
+	//Compass
+	status = mpu_get_compass_reg(compassdata, &timestamp);
+	if (status != 0) {
+		xil_printf("run.c: Error getting Compass data.\n\r");
+		return 0;
+	}
+
+	printf("Compass: (");
+	for (i = 0; i < 3; i++) {
+		printf("%d", compassdata[i]);
+		if (i < 2) {
+			printf(", ");
+		} else {
+			printf(") | ");
+		}
+	}
+
+	//Temperature
+	status = mpu_get_temperature(&tempdata, &temp_timestamp);
+	if (status != 0) {
+		xil_printf("run.c: Error getting Temperature data.\r\n");
+		return 0;
+	}
+	printf("Temperature: %fC\r\n", tempdata / 65536.0);
+
+	//Return
+	return XST_SUCCESS;
+}

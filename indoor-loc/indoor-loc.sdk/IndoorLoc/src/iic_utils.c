@@ -7,6 +7,10 @@
 #include "iic_utils.h"
 
 /*
+ * Functions
+ */
+
+/*
  * Set IIC Clock
  */
 int SetIiCSClk(XIicPs *InstancePtr, u32 FsclHz) {

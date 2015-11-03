@@ -41,7 +41,7 @@
 #define MPU9150
 
 #if defined MOTION_DRIVER_TARGET_ZEDBOARD
-#include "imu.h"
+#include "mpu_utils.h"
 
 #define i2c_write   imuI2cWrite
 #define i2c_read    imuI2cRead
