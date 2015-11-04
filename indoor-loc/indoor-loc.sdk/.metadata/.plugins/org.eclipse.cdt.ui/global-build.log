@@ -670,3 +670,760 @@ Finished building: IndoorLoc.elf.size
 10:28:17 **** Incremental Build of configuration Debug for project IndoorLoc ****
 make all 
 make: Nothing to be done for 'all'.
+10:32:33 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+10:33:17 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu9150/inv_mpu_dmp_motion_driver.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/inv_mpu_dmp_motion_driver.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/inv_mpu_dmp_motion_driver.d" -MT"src/mpu9150/inv_mpu_dmp_motion_driver.d" -o "src/mpu9150/inv_mpu_dmp_motion_driver.o" "../src/mpu9150/inv_mpu_dmp_motion_driver.c"
+../src/mpu9150/inv_mpu_dmp_motion_driver.c:35:0: error: unterminated #if
+ #if defined MOTION_DRIVER_TARGET_ZEDBOARD
+ ^
+src/mpu9150/subdir.mk:21: recipe for target 'src/mpu9150/inv_mpu_dmp_motion_driver.o' failed
+make: *** [src/mpu9150/inv_mpu_dmp_motion_driver.o] Error 1
+10:33:26 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu9150/inv_mpu_dmp_motion_driver.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/inv_mpu_dmp_motion_driver.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/inv_mpu_dmp_motion_driver.d" -MT"src/mpu9150/inv_mpu_dmp_motion_driver.d" -o "src/mpu9150/inv_mpu_dmp_motion_driver.o" "../src/mpu9150/inv_mpu_dmp_motion_driver.c"
+../src/mpu9150/inv_mpu_dmp_motion_driver.c:86:2: error: #error Gyro driver is missing the system layer implementations.
+ #error  Gyro driver is missing the system layer implementations.
+  ^
+../src/mpu9150/inv_mpu_dmp_motion_driver.c: In function 'dmp_set_accel_bias':
+../src/mpu9150/inv_mpu_dmp_motion_driver.c:649:5: warning: implicit declaration of function '__no_operation' [-Wimplicit-function-declaration]
+     __no_operation();
+     ^
+../src/mpu9150/inv_mpu_dmp_motion_driver.c: In function 'dmp_read_fifo':
+../src/mpu9150/inv_mpu_dmp_motion_driver.c:1353:5: warning: implicit declaration of function 'get_ms' [-Wimplicit-function-declaration]
+     get_ms(timestamp);
+     ^
+make: *** [src/mpu9150/inv_mpu_dmp_motion_driver.o] Error 1
+src/mpu9150/subdir.mk:21: recipe for target 'src/mpu9150/inv_mpu_dmp_motion_driver.o' failed
+10:34:41 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu9150/inv_mpu_dmp_motion_driver.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/inv_mpu_dmp_motion_driver.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/inv_mpu_dmp_motion_driver.d" -MT"src/mpu9150/inv_mpu_dmp_motion_driver.d" -o "src/mpu9150/inv_mpu_dmp_motion_driver.o" "../src/mpu9150/inv_mpu_dmp_motion_driver.c"
+../src/mpu9150/inv_mpu_dmp_motion_driver.c: In function 'dmp_set_accel_bias':
+../src/mpu9150/inv_mpu_dmp_motion_driver.c:652:5: warning: implicit declaration of function '__no_operation' [-Wimplicit-function-declaration]
+     __no_operation();
+     ^
+Finished building: ../src/mpu9150/inv_mpu_dmp_motion_driver.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+./src/mpu9150/inv_mpu_dmp_motion_driver.o: In function `dmp_set_accel_bias':
+/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/inv_mpu_dmp_motion_driver.c:652: undefined reference to `__no_operation'
+collect2: error: ld returned 1 exit status
+makefile:37: recipe for target 'IndoorLoc.elf' failed
+make: *** [IndoorLoc.elf] Error 1
+10:36:47 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu9150/inv_mpu_dmp_motion_driver.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/inv_mpu_dmp_motion_driver.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/inv_mpu_dmp_motion_driver.d" -MT"src/mpu9150/inv_mpu_dmp_motion_driver.d" -o "src/mpu9150/inv_mpu_dmp_motion_driver.o" "../src/mpu9150/inv_mpu_dmp_motion_driver.c"
+Finished building: ../src/mpu9150/inv_mpu_dmp_motion_driver.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 117620	   2400	  22764	 142784	  22dc0	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:37:27 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 117620	   2400	  22764	 142784	  22dc0	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:39:44 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 117620	   2400	  22764	 142784	  22dc0	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:41:05 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 117700	   2400	  22764	 142864	  22e10	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:41:14 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 117700	   2400	  22764	 142864	  22e10	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:41:21 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+10:41:49 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 117620	   2400	  22764	 142784	  22dc0	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:42:14 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 117620	   2400	  22764	 142784	  22dc0	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:42:33 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 117620	   2400	  22764	 142784	  22dc0	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:42:42 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 117620	   2400	  22764	 142784	  22dc0	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:42:57 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 117620	   2400	  22764	 142784	  22dc0	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:43:09 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 117620	   2400	  22764	 142784	  22dc0	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:43:27 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 117620	   2400	  22764	 142784	  22dc0	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:44:14 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 117684	   2400	  22764	 142848	  22e00	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:47:56 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 117684	   2400	  22764	 142848	  22e00	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:47:58 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 117780	   2400	  22764	 142944	  22e60	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:50:42 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printDataWithDMP':
+../src/mpu.c:24:14: warning: unused variable 'i' [-Wunused-variable]
+  int status, i;
+              ^
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 117948	   2400	  22764	 143112	  22f08	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:56:09 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 117948	   2400	  22764	 143112	  22f08	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:58:04 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 117948	   2400	  22764	 143112	  22f08	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+11:01:18 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 117948	   2400	  22764	 143112	  22f08	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+11:01:20 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printDataWithDMP':
+../src/mpu.c:36:7: error: 'dmpFwLoaded' undeclared (first use in this function)
+  if (!dmpFwLoaded) {
+       ^
+../src/mpu.c:36:7: note: each undeclared identifier is reported only once for each function it appears in
+../src/mpu.c:37:3: warning: implicit declaration of function 'initDMP' [-Wimplicit-function-declaration]
+   initDMP();
+   ^
+make: *** [src/mpu.o] Error 1
+src/subdir.mk:39: recipe for target 'src/mpu.o' failed
+11:01:38 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printDataWithDMP':
+../src/mpu.c:37:3: warning: implicit declaration of function 'initDMP' [-Wimplicit-function-declaration]
+   initDMP();
+   ^
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 118060	   2400	  22764	 143224	  22f78	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+11:01:57 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 118060	   2400	  22764	 143224	  22f78	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+11:19:35 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printDataWithDMP':
+../src/mpu.c:42:20: warning: pointer targets in passing argument 1 of 'dmp_get_fifo_rate' differ in signedness [-Wpointer-sign]
+  dmp_get_fifo_rate(&fifoRate);
+                    ^
+In file included from ../src/mpu.h:17:0,
+                 from ../src/mpu.c:11:
+../src/mpu9150/inv_mpu_dmp_motion_driver.h:55:5: note: expected 'short unsigned int *' but argument is of type 'short int *'
+ int dmp_get_fifo_rate(unsigned short *rate);
+     ^
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 118180	   2400	  22764	 143344	  22ff0	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+11:19:59 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:69:14: warning: unused variable 'i' [-Wunused-variable]
+  int status, i;
+              ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 118012	   2400	  22764	 143176	  22f48	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+11:20:02 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+11:21:24 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printDataWithDMP':
+../src/mpu.c:45:20: warning: pointer targets in passing argument 1 of 'dmp_get_fifo_rate' differ in signedness [-Wpointer-sign]
+  dmp_get_fifo_rate(&fifoRate);
+                    ^
+In file included from ../src/mpu.h:17:0,
+                 from ../src/mpu.c:11:
+../src/mpu9150/inv_mpu_dmp_motion_driver.h:55:5: note: expected 'short unsigned int *' but argument is of type 'short int *'
+ int dmp_get_fifo_rate(unsigned short *rate);
+     ^
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 118012	   2400	  22764	 143176	  22f48	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+11:21:44 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 118012	   2400	  22764	 143176	  22f48	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+11:21:47 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+11:22:31 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 118012	   2400	  22764	 143176	  22f48	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+11:22:37 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+11:26:46 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+11:27:04 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+11:36:41 **** Clean-only build of configuration Debug for project IndoorLoc ****
+make clean 
+rm -rf  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o  ./src/mpu9150/inv_mpu.d ./src/mpu9150/inv_mpu_dmp_motion_driver.d  ./src/iicTest.d ./src/iic_utils.d ./src/mpu.d ./src/mpu_utils.d ./src/platform.d ./src/pwmsw.d ./src/run.d  IndoorLoc.elf.size  IndoorLoc.elf
+ 
+11:36:41 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu9150/inv_mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/inv_mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/inv_mpu.d" -MT"src/mpu9150/inv_mpu.d" -o "src/mpu9150/inv_mpu.o" "../src/mpu9150/inv_mpu.c"
+../src/mpu9150/inv_mpu.c:40:0: warning: "MOTION_DRIVER_TARGET_ZEDBOARD" redefined
+ #define MOTION_DRIVER_TARGET_ZEDBOARD
+ ^
+<command-line>:0:0: note: this is the location of the previous definition
+../src/mpu9150/inv_mpu.c:41:0: warning: "MPU9150" redefined
+ #define MPU9150
+ ^
+<command-line>:0:0: note: this is the location of the previous definition
+Finished building: ../src/mpu9150/inv_mpu.c
+ 
+Building file: ../src/mpu9150/inv_mpu_dmp_motion_driver.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/inv_mpu_dmp_motion_driver.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/inv_mpu_dmp_motion_driver.d" -MT"src/mpu9150/inv_mpu_dmp_motion_driver.d" -o "src/mpu9150/inv_mpu_dmp_motion_driver.o" "../src/mpu9150/inv_mpu_dmp_motion_driver.c"
+../src/mpu9150/inv_mpu_dmp_motion_driver.c:35:0: warning: "MOTION_DRIVER_TARGET_ZEDBOARD" redefined
+ #define MOTION_DRIVER_TARGET_ZEDBOARD
+ ^
+<command-line>:0:0: note: this is the location of the previous definition
+../src/mpu9150/inv_mpu_dmp_motion_driver.c:36:0: warning: "MPU9150" redefined
+ #define MPU9150
+ ^
+<command-line>:0:0: note: this is the location of the previous definition
+Finished building: ../src/mpu9150/inv_mpu_dmp_motion_driver.c
+ 
+Building file: ../src/iicTest.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/iicTest.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/iicTest.d" -MT"src/iicTest.d" -o "src/iicTest.o" "../src/iicTest.c"
+Finished building: ../src/iicTest.c
+ 
+Building file: ../src/iic_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/iic_utils.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/iic_utils.d" -MT"src/iic_utils.d" -o "src/iic_utils.o" "../src/iic_utils.c"
+Finished building: ../src/iic_utils.c
+ 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building file: ../src/mpu_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu_utils.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu_utils.d" -MT"src/mpu_utils.d" -o "src/mpu_utils.o" "../src/mpu_utils.c"
+../src/mpu_utils.c:262:5: warning: 'readInt' defined but not used [-Wunused-function]
+ int readInt(u32 *DataRead) {
+     ^
+Finished building: ../src/mpu_utils.c
+ 
+Building file: ../src/platform.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/platform.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/platform.d" -MT"src/platform.d" -o "src/platform.o" "../src/platform.c"
+Finished building: ../src/platform.c
+ 
+Building file: ../src/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/pwmsw.d" -MT"src/pwmsw.d" -o "src/pwmsw.o" "../src/pwmsw.c"
+../src/pwmsw.c: In function 'pwm':
+../src/pwmsw.c:63:7: warning: unused variable 'val' [-Wunused-variable]
+   u32 val;
+       ^
+Finished building: ../src/pwmsw.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:69:14: warning: unused variable 'i' [-Wunused-variable]
+  int status, i;
+              ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 118012	   2400	  22764	 143176	  22f48	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+11:36:51 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu9150/inv_mpu_dmp_motion_driver.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/inv_mpu_dmp_motion_driver.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/inv_mpu_dmp_motion_driver.d" -MT"src/mpu9150/inv_mpu_dmp_motion_driver.d" -o "src/mpu9150/inv_mpu_dmp_motion_driver.o" "../src/mpu9150/inv_mpu_dmp_motion_driver.c"
+Finished building: ../src/mpu9150/inv_mpu_dmp_motion_driver.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 118012	   2400	  22764	 143176	  22f48	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+11:37:02 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu9150/inv_mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/inv_mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/inv_mpu.d" -MT"src/mpu9150/inv_mpu.d" -o "src/mpu9150/inv_mpu.o" "../src/mpu9150/inv_mpu.c"
+Finished building: ../src/mpu9150/inv_mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 118012	   2400	  22764	 143176	  22f48	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+11:37:17 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+12:05:26 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 118012	   2400	  22764	 143176	  22f48	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 

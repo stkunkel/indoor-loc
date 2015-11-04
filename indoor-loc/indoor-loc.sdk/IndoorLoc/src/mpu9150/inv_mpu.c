@@ -37,8 +37,6 @@
  * min(int a, int b)
  */
 
-#define MOTION_DRIVER_TARGET_ZEDBOARD
-#define MPU9150
 
 #if defined MOTION_DRIVER_TARGET_ZEDBOARD
 #include "../mpu_utils.h"

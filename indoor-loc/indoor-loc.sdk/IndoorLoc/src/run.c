@@ -58,12 +58,8 @@
 /*
  * Defines
  */
-#define DATA_NO_MPU_RUNS 	20
+#define DATA_NO_DMP_RUNS 	20
 #define PWM_RUNS 			10
-
-/*
- * Functions
- */
 
 /*
  * Main
@@ -82,25 +78,28 @@ int main() {
 		return 0;
 	}
 
-	//4. Get Data without MPU
-	for (i = 0; i <= DATA_NO_MPU_RUNS; i++) {
+	//2. Get Data without DMP
+	/*for (i = 0; i <= DATA_NO_DMP_RUNS; i++) {
 		sleep(5);
-		status = printDataNoMPU();
+		status = printDataNoDMP();
 		if (status != XST_SUCCESS) {
 			printf("run.c: Error Printing Sensor Data\r\n");
 			break;
 		}
-	}
+	}*/
 
-	//5. PWM
+	//3. Get Data with DMP
+	printDataWithDMP();
+
+	//4. PWM
 	pwm(PWM_RUNS);
 
-	//6. Stay in here
+	//5. Stay in here
 	while (1) {
-
+		;
 	}
 
-	//7. Finish
+	//6. Finish
 	cleanup_platform();
 	return 0;
 }
