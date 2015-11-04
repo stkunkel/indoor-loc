@@ -12,7 +12,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "xstatus.h"
-#include "inv_mpu.h"
+#include "mpu_utils.h"
+#include "mpu9150/inv_mpu.h"
+#include "mpu9150/mpl/invensense_adv.h"
 
 //IMU Parameters
 #define GYRO_SENS_FRS_0		131			//LSB/(°/s) for FS_SEL = 0, 16-bit
@@ -34,6 +36,7 @@ int convertGyroData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
 int convertAccData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
 int convertCompassData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
 int convertTemperaturetoC(long* raw, float* converted);
-
+int getImuAddr(u8* addr);
+int initMPU();
 
 #endif /* MPU_H_ */

@@ -5,8 +5,15 @@
  *      Author: ruppi
  */
 
-//Includes
+/*
+ * Includes
+ */
 #include "mpu.h"
+
+/*
+ * Variables
+ */
+static u8 imuAddr = 0;
 
 /*
  * Print Data and don't use MPU
@@ -38,7 +45,7 @@ int printDataNoMPU() {
 	printf("Gyro: (");
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
 		printf("%.6fdgr/s", conv[i]);
-		if (i < NUMBER_OF_AXES-1) {
+		if (i < NUMBER_OF_AXES - 1) {
 			printf(", ");
 		} else {
 			printf(")| ");
@@ -63,7 +70,7 @@ int printDataNoMPU() {
 	printf("Acc: (");
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
 		printf("%.0fg", conv[i]);
-		if (i < NUMBER_OF_AXES-1) {
+		if (i < NUMBER_OF_AXES - 1) {
 			printf(", ");
 		} else {
 			printf(") | ");
@@ -88,7 +95,7 @@ int printDataNoMPU() {
 	printf("Compass: (");
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
 		printf("%.1fT", conv[i]);
-		if (i < NUMBER_OF_AXES-1) {
+		if (i < NUMBER_OF_AXES - 1) {
 			printf(", ");
 		} else {
 			printf(") | ");
@@ -184,6 +191,51 @@ int convertCompassData(short raw[NUMBER_OF_AXES],
 int convertTemperaturetoC(long* raw, float* converted) {
 	//convert data
 	*converted = *raw / 65536.0;
+
+	//Return
+	return XST_SUCCESS;
+}
+
+/*
+ * get IMU Address
+ */
+int getImuAddr(u8* addr) {
+	if (imuAddr == 0) {
+		initMPU();
+	}
+	*addr = imuAddr;
+	return XST_SUCCESS;
+}
+
+/*
+ * Initialize IMU
+ */
+int initMPU() {
+	//Variables
+	int status;
+
+	//1. Init IMU (Set Address, etc.)
+	status = imuInit(&imuAddr);
+	if (status != XST_SUCCESS) {
+		xil_printf("mpu.c: Error in Setting IMU Address.\n\r");
+		return XST_FAILURE;
+	}
+
+	//2. Init IMU
+	struct int_param_s param;
+	status = mpu_init(&param);
+	if (status != 0) {
+		xil_printf("mpu.c: Error initializing IMU\r\n.");
+		return XST_FAILURE;
+	}
+
+	//3. Select Sensors
+	unsigned char sensors = INV_XYZ_GYRO | INV_XYZ_ACCEL | INV_XYZ_COMPASS;
+	mpu_set_sensors(sensors);
+	if (status != 0) {
+		xil_printf("mpu.c: Error setting sensors.\r\n");
+		return XST_FAILURE;
+	}
 
 	//Return
 	return XST_SUCCESS;

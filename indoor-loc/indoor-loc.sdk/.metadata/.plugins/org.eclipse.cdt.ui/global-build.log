@@ -1,496 +1,48 @@
-15:01:44 **** Incremental Build of configuration Debug for project IndoorLoc ****
+10:02:59 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+10:04:54 **** Auto Build of configuration Debug for project IndoorLoc ****
 make all 
 Building file: ../src/mpu.c
 Invoking: ARM gcc compiler
 arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'printDataNoMPU':
-../src/mpu.c:21:2: warning: implicit declaration of function 'mpu_get_gyro_reg' [-Wimplicit-function-declaration]
-  status = mpu_get_gyro_reg(gyrodata, &timestamp);
-  ^
-../src/mpu.c:23:3: warning: implicit declaration of function 'xil_printf' [-Wimplicit-function-declaration]
-   xil_printf("run.c: Error getting Gyroscope data.\n\r");
-   ^
-../src/mpu.c:27:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
-  printf("Gyro: (");
-  ^
-../src/mpu.c:27:2: warning: incompatible implicit declaration of built-in function 'printf'
-../src/mpu.c:38:2: warning: implicit declaration of function 'mpu_get_accel_reg' [-Wimplicit-function-declaration]
-src/subdir.mk:42: recipe for target 'src/mpu.o' failed
-  status = mpu_get_accel_reg(accdata, &timestamp);
-  ^
-../src/mpu.c:55:2: warning: implicit declaration of function 'mpu_get_compass_reg' [-Wimplicit-function-declaration]
-  status = mpu_get_compass_reg(compassdata, &timestamp);
-  ^
-../src/mpu.c:72:2: warning: implicit declaration of function 'mpu_get_temperature' [-Wimplicit-function-declaration]
-  status = mpu_get_temperature(&tempdata, &temp_timestamp);
-  ^
-../src/mpu.c:80:9: error: 'XST_SUCCESS' undeclared (first use in this function)
-  return XST_SUCCESS;
-         ^
-../src/mpu.c:80:9: note: each undeclared identifier is reported only once for each function it appears in
-../src/mpu.c:81:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-make: *** [src/mpu.o] Error 1
-15:03:21 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'printDataNoMPU':
-../src/mpu.c:21:2: warning: implicit declaration of function 'mpu_get_gyro_reg' [-Wimplicit-function-declaration]
-  status = mpu_get_gyro_reg(gyrodata, &timestamp);
-  ^
-../src/mpu.c:23:3: warning: implicit declaration of function 'xil_printf' [-Wimplicit-function-declaration]
-   xil_printf("run.c: Error getting Gyroscope data.\n\r");
-   ^
-../src/mpu.c:27:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
-  printf("Gyro: (");
-  ^
-../src/mpu.c:27:2: warning: incompatible implicit declaration of built-in function 'printf'
-../src/mpu.c:38:2: warning: implicit declaration of function 'mpu_get_accel_reg' [-Wimplicit-function-declaration]
-  status = mpu_get_accel_reg(accdata, &timestamp);
-  ^
-../src/mpu.c:55:2: warning: implicit declaration of function 'mpu_get_compass_reg' [-Wimplicit-function-declaration]
-src/subdir.mk:42: recipe for target 'src/mpu.o' failed
-  status = mpu_get_compass_reg(compassdata, &timestamp);
-  ^
-../src/mpu.c:72:2: warning: implicit declaration of function 'mpu_get_temperature' [-Wimplicit-function-declaration]
-  status = mpu_get_temperature(&tempdata, &temp_timestamp);
-  ^
-../src/mpu.c:80:9: error: 'XST_SUCCESS' undeclared (first use in this function)
-  return XST_SUCCESS;
-         ^
-../src/mpu.c:80:9: note: each undeclared identifier is reported only once for each function it appears in
-../src/mpu.c:81:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-make: *** [src/mpu.o] Error 1
-15:03:28 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'printDataNoMPU':
-../src/mpu.c:21:2: warning: implicit declaration of function 'mpu_get_gyro_reg' [-Wimplicit-function-declaration]
-  status = mpu_get_gyro_reg(gyrodata, &timestamp);
-  ^
-../src/mpu.c:23:3: warning: implicit declaration of function 'xil_printf' [-Wimplicit-function-declaration]
-   xil_printf("run.c: Error getting Gyroscope data.\n\r");
-   ^
-../src/mpu.c:27:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
-  printf("Gyro: (");
-  ^
-../src/mpu.c:27:2: warning: incompatible implicit declaration of built-in function 'printf'
-src/subdir.mk:42: recipe for target 'src/mpu.o' failed
-../src/mpu.c:38:2: warning: implicit declaration of function 'mpu_get_accel_reg' [-Wimplicit-function-declaration]
-  status = mpu_get_accel_reg(accdata, &timestamp);
-  ^
-../src/mpu.c:55:2: warning: implicit declaration of function 'mpu_get_compass_reg' [-Wimplicit-function-declaration]
-  status = mpu_get_compass_reg(compassdata, &timestamp);
-  ^
-../src/mpu.c:72:2: warning: implicit declaration of function 'mpu_get_temperature' [-Wimplicit-function-declaration]
-  status = mpu_get_temperature(&tempdata, &temp_timestamp);
-  ^
-../src/mpu.c:80:9: error: 'XST_SUCCESS' undeclared (first use in this function)
-  return XST_SUCCESS;
-         ^
-../src/mpu.c:80:9: note: each undeclared identifier is reported only once for each function it appears in
-../src/mpu.c:81:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-make: *** [src/mpu.o] Error 1
-15:03:48 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'printDataNoMPU':
-../src/mpu.c:21:2: warning: implicit declaration of function 'mpu_get_gyro_reg' [-Wimplicit-function-declaration]
-  status = mpu_get_gyro_reg(gyrodata, &timestamp);
-  ^
-../src/mpu.c:23:3: warning: implicit declaration of function 'xil_printf' [-Wimplicit-function-declaration]
-   xil_printf("run.c: Error getting Gyroscope data.\n\r");
-   ^
-../src/mpu.c:27:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
-  printf("Gyro: (");
-  ^
-../src/mpu.c:27:2: warning: incompatible implicit declaration of built-in function 'printf'
-src/subdir.mk:42: recipe for target 'src/mpu.o' failed
-../src/mpu.c:38:2: warning: implicit declaration of function 'mpu_get_accel_reg' [-Wimplicit-function-declaration]
-  status = mpu_get_accel_reg(accdata, &timestamp);
-  ^
-../src/mpu.c:55:2: warning: implicit declaration of function 'mpu_get_compass_reg' [-Wimplicit-function-declaration]
-  status = mpu_get_compass_reg(compassdata, &timestamp);
-  ^
-../src/mpu.c:72:2: warning: implicit declaration of function 'mpu_get_temperature' [-Wimplicit-function-declaration]
-  status = mpu_get_temperature(&tempdata, &temp_timestamp);
-  ^
-../src/mpu.c:80:9: error: 'XST_SUCCESS' undeclared (first use in this function)
-  return XST_SUCCESS;
-         ^
-../src/mpu.c:80:9: note: each undeclared identifier is reported only once for each function it appears in
-../src/mpu.c:81:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-make: *** [src/mpu.o] Error 1
-15:04:08 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'printDataNoMPU':
-../src/mpu.c:21:2: warning: implicit declaration of function 'mpu_get_gyro_reg' [-Wimplicit-function-declaration]
-  status = mpu_get_gyro_reg(gyrodata, &timestamp);
-  ^
-../src/mpu.c:23:3: warning: implicit declaration of function 'xil_printf' [-Wimplicit-function-declaration]
-   xil_printf("run.c: Error getting Gyroscope data.\n\r");
-   ^
-../src/mpu.c:27:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
-  printf("Gyro: (");
-  ^
-../src/mpu.c:27:2: warning: incompatible implicit declaration of built-in function 'printf'
-../src/mpu.c:38:2: warning: implicit declaration of function 'mpu_get_accel_reg' [-Wimplicit-function-declaration]
-  status = mpu_get_accel_reg(accdata, &timestamp);
-  ^
-../src/mpu.c:55:2: warning: implicit declaration of function 'mpu_get_compass_reg' [-Wimplicit-function-declaration]
-  status = mpu_get_compass_reg(compassdata, &timestamp);
-src/subdir.mk:42: recipe for target 'src/mpu.o' failed
-  ^
-../src/mpu.c:72:2: warning: implicit declaration of function 'mpu_get_temperature' [-Wimplicit-function-declaration]
-  status = mpu_get_temperature(&tempdata, &temp_timestamp);
-  ^
-../src/mpu.c:80:9: error: 'XST_SUCCESS' undeclared (first use in this function)
-  return XST_SUCCESS;
-         ^
-../src/mpu.c:80:9: note: each undeclared identifier is reported only once for each function it appears in
-../src/mpu.c:81:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-make: *** [src/mpu.o] Error 1
-15:04:16 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'printDataNoMPU':
-../src/mpu.c:25:3: warning: implicit declaration of function 'xil_printf' [-Wimplicit-function-declaration]
-   xil_printf("run.c: Error getting Gyroscope data.\n\r");
-   ^
-../src/mpu.c:29:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
-  printf("Gyro: (");
-  ^
-../src/mpu.c:29:2: warning: incompatible implicit declaration of built-in function 'printf'
-../src/mpu.c:82:9: error: 'XST_SUCCESS' undeclared (first use in this function)
-  return XST_SUCCESS;
-         ^
-../src/mpu.c:82:9: note: each undeclared identifier is reported only once for each function it appears in
-src/subdir.mk:42: recipe for target 'src/mpu.o' failed
-../src/mpu.c:83:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-make: *** [src/mpu.o] Error 1
-15:04:48 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'printDataNoMPU':
-../src/mpu.c:29:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
-  printf("Gyro: (");
-  ^
-../src/mpu.c:29:2: warning: incompatible implicit declaration of built-in function 'printf'
-../src/mpu.c:82:9: error: 'XST_SUCCESS' undeclared (first use in this function)
-  return XST_SUCCESS;
-         ^
-../src/mpu.c:82:9: note: each undeclared identifier is reported only once for each function it appears in
-../src/mpu.c:83:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-src/subdir.mk:42: recipe for target 'src/mpu.o' failed
-make: *** [src/mpu.o] Error 1
-15:04:59 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'printDataNoMPU':
-../src/mpu.c:25:3: warning: implicit declaration of function 'xil_printf' [-Wimplicit-function-declaration]
-   xil_printf("run.c: Error getting Gyroscope data.\n\r");
-   ^
-../src/mpu.c:29:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
-  printf("Gyro: (");
-  ^
-../src/mpu.c:29:2: warning: incompatible implicit declaration of built-in function 'printf'
-../src/mpu.c:82:9: error: 'XST_SUCCESS' undeclared (first use in this function)
-  return XST_SUCCESS;
-         ^
-../src/mpu.c:82:9: note: each undeclared identifier is reported only once for each function it appears in
-src/subdir.mk:42: recipe for target 'src/mpu.o' failed
-../src/mpu.c:83:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-make: *** [src/mpu.o] Error 1
-15:05:29 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'printDataNoMPU':
-../src/mpu.c:25:3: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
-   printf("run.c: Error getting Gyroscope data.\n\r");
-   ^
-../src/mpu.c:25:3: warning: incompatible implicit declaration of built-in function 'printf'
-../src/mpu.c:29:2: warning: incompatible implicit declaration of built-in function 'printf'
-  printf("Gyro: (");
-  ^
-../src/mpu.c:82:9: error: 'XST_SUCCESS' undeclared (first use in this function)
-  return XST_SUCCESS;
-         ^
-../src/mpu.c:82:9: note: each undeclared identifier is reported only once for each function it appears in
-../src/mpu.c:83:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-make: *** [src/mpu.o] Error 1
-src/subdir.mk:42: recipe for target 'src/mpu.o' failed
-15:05:43 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'printDataNoMPU':
-../src/mpu.c:25:3: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
-   printf("run.c: Error getting Gyroscope data.\n\r");
-   ^
-../src/mpu.c:25:3: warning: incompatible implicit declaration of built-in function 'printf'
-../src/mpu.c:29:2: warning: implicit declaration of function 'print' [-Wimplicit-function-declaration]
-  print("Gyro: (");
-  ^
-../src/mpu.c:31:3: warning: incompatible implicit declaration of built-in function 'printf'
-   printf("%d", gyrodata[i]);
-   ^
-../src/mpu.c:42:3: warning: incompatible implicit declaration of built-in function 'printf'
-src/subdir.mk:42: recipe for target 'src/mpu.o' failed
-   printf("run.c: Error getting Gyroscope data.\n\r");
-   ^
-../src/mpu.c:46:2: warning: incompatible implicit declaration of built-in function 'printf'
-  printf("Acc: (");
-  ^
-../src/mpu.c:82:9: error: 'XST_SUCCESS' undeclared (first use in this function)
-  return XST_SUCCESS;
-         ^
-../src/mpu.c:82:9: note: each undeclared identifier is reported only once for each function it appears in
-../src/mpu.c:83:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-make: *** [src/mpu.o] Error 1
-15:05:46 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'printDataNoMPU':
-../src/mpu.c:25:3: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
-   printf("run.c: Error getting Gyroscope data.\n\r");
-   ^
-../src/mpu.c:25:3: warning: incompatible implicit declaration of built-in function 'printf'
-../src/mpu.c:29:2: warning: incompatible implicit declaration of built-in function 'printf'
-  printf("Gyro: (");
-  ^
-../src/mpu.c:82:9: error: 'XST_SUCCESS' undeclared (first use in this function)
-  return XST_SUCCESS;
-         ^
-../src/mpu.c:82:9: note: each undeclared identifier is reported only once for each function it appears in
-../src/mpu.c:83:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-make: *** [src/mpu.o] Error 1
-src/subdir.mk:42: recipe for target 'src/mpu.o' failed
-15:06:23 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'printDataNoMPU':
-../src/mpu.c:25:3: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
-   printf("run.c: Error getting Gyroscope data.\n\r");
-src/subdir.mk:42: recipe for target 'src/mpu.o' failed
-   ^
-../src/mpu.c:25:3: warning: incompatible implicit declaration of built-in function 'printf'
-../src/mpu.c:29:2: warning: incompatible implicit declaration of built-in function 'printf'
-  printf("Gyro: (");
-  ^
-../src/mpu.c:82:9: error: 'XST_SUCCESS' undeclared (first use in this function)
-  return XST_SUCCESS;
-         ^
-../src/mpu.c:82:9: note: each undeclared identifier is reported only once for each function it appears in
-../src/mpu.c:83:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-make: *** [src/mpu.o] Error 1
-15:06:48 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/inv_mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/inv_mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/inv_mpu.d" -MT"src/inv_mpu.d" -o "src/inv_mpu.o" "../src/inv_mpu.c"
-Finished building: ../src/inv_mpu.c
+Finished building: ../src/mpu.c
  
-Building file: ../src/mpu.c
+Building file: ../src/run.c
 Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'printDataNoMPU':
-../src/mpu.c:25:3: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
-   printf("run.c: Error getting Gyroscope data.\n\r");
-   ^
-../src/mpu.c:25:3: warning: incompatible implicit declaration of built-in function 'printf'
-../src/mpu.c:29:2: warning: incompatible implicit declaration of built-in function 'printf'
-  printf("Gyro: (");
-  ^
-../src/mpu.c:82:9: error: 'XST_SUCCESS' undeclared (first use in this function)
-  return XST_SUCCESS;
-         ^
-../src/mpu.c:82:9: note: each undeclared identifier is reported only once for each function it appears in
-../src/mpu.c:83:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-src/subdir.mk:42: recipe for target 'src/mpu.o' failed
-make: *** [src/mpu.o] Error 1
-15:07:06 **** Auto Build of configuration Debug for project IndoorLoc ****
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/inv_mpu.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 106276	   2400	  22748	 131424	  20160	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:06:11 **** Auto Build of configuration Debug for project IndoorLoc ****
 make all 
-Building file: ../src/mpu.c
+make: Nothing to be done for 'all'.
+10:06:16 **** Clean-only build of configuration Debug for project IndoorLoc ****
+make clean 
+rm -rf  ./src/iicTest.o ./src/iic_utils.o ./src/inv_mpu.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o  ./src/iicTest.d ./src/iic_utils.d ./src/inv_mpu.d ./src/mpu.d ./src/mpu_utils.d ./src/platform.d ./src/pwmsw.d ./src/run.d  IndoorLoc.elf.size  IndoorLoc.elf
+ 
+10:06:16 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/iicTest.c
 Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'printDataNoMPU':
-../src/mpu.c:82:9: error: 'XST_SUCCESS' undeclared (first use in this function)
-  return XST_SUCCESS;
-         ^
-../src/mpu.c:82:9: note: each undeclared identifier is reported only once for each function it appears in
-../src/mpu.c:83:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-src/subdir.mk:42: recipe for target 'src/mpu.o' failed
-make: *** [src/mpu.o] Error 1
-15:07:20 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/iicTest.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/iicTest.d" -MT"src/iicTest.d" -o "src/iicTest.o" "../src/iicTest.c"
+Finished building: ../src/iicTest.c
+ 
+Building file: ../src/iic_utils.c
 Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'printDataNoMPU':
-../src/mpu.c:82:9: error: 'XST_SUCCESS' undeclared (first use in this function)
-  return XST_SUCCESS;
-         ^
-../src/mpu.c:82:9: note: each undeclared identifier is reported only once for each function it appears in
-../src/mpu.c:83:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-make: *** [src/mpu.o] Error 1
-src/subdir.mk:42: recipe for target 'src/mpu.o' failed
-15:22:44 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-In file included from ../src/mpu.c:9:0:
-../src/mpu.h:19:30: error: expected ';', ',' or ')' before 'raw'
- int convertGyroData(short[3] raw, float converted[3]);
-                              ^
-../src/mpu.h:20:29: error: expected ';', ',' or ')' before 'raw'
- int convertAccData(short[3] raw, float converted[3]);
-                             ^
-../src/mpu.h:21:33: error: expected ';', ',' or ')' before 'raw'
- int convertCompassData(short[3] raw, float converted[3]);
-                                 ^
-../src/mpu.c: In function 'printDataNoMPU':
-../src/mpu.c:82:9: error: 'XST_SUCCESS' undeclared (first use in this function)
-  return XST_SUCCESS;
-         ^
-../src/mpu.c:82:9: note: each undeclared identifier is reported only once for each function it appears in
-../src/mpu.c:83:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-make: *** [src/mpu.o] Error 1
-src/subdir.mk:42: recipe for target 'src/mpu.o' failed
-15:22:46 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-In file included from ../src/mpu.c:9:0:
-../src/mpu.h:19:30: error: expected ';', ',' or ')' before 'raw'
- int convertGyroData(short[3] raw, float converted[3]);
-                              ^
-../src/mpu.h:20:29: error: expected ';', ',' or ')' before 'raw'
- int convertAccData(short[3] raw, float converted[3]);
-                             ^
-../src/mpu.h:21:33: error: expected ';', ',' or ')' before 'raw'
- int convertCompassData(short[3] raw, float converted[3]);
-                                 ^
-../src/mpu.c: In function 'printDataNoMPU':
-../src/mpu.c:82:9: error: 'XST_SUCCESS' undeclared (first use in this function)
-  return XST_SUCCESS;
-         ^
-../src/mpu.c:82:9: note: each undeclared identifier is reported only once for each function it appears in
-../src/mpu.c: At top level:
-../src/mpu.c:88:30: error: expected ';', ',' or ')' before 'raw'
- int convertGyroData(short[3] raw, float converted[3]){
-src/subdir.mk:42: recipe for target 'src/mpu.o' failed
-                              ^
-../src/mpu.c:95:29: error: expected ';', ',' or ')' before 'raw'
- int convertAccData(short[3] raw, float converted[3]){
-                             ^
-../src/mpu.c:102:33: error: expected ';', ',' or ')' before 'raw'
- int convertCompassData(short[3] raw, float converted[3]){
-                                 ^
-../src/mpu.c: In function 'printDataNoMPU':
-../src/mpu.c:83:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-make: *** [src/mpu.o] Error 1
-15:23:51 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-In file included from ../src/mpu.c:9:0:
-../src/mpu.h:19:30: error: expected ';', ',' or ')' before 'raw'
- int convertGyroData(short[3] raw, float converted[3]);
-                              ^
-../src/mpu.h:20:29: error: expected ';', ',' or ')' before 'raw'
- int convertAccData(short[3] raw, float converted[3]);
-                             ^
-../src/mpu.h:21:33: error: expected ';', ',' or ')' before 'raw'
- int convertCompassData(short[3] raw, float converted[3]);
-                                 ^
-../src/mpu.c:88:30: error: expected ';', ',' or ')' before 'raw'
- int convertGyroData(short[3] raw, float converted[3]){
-                              ^
-../src/mpu.c:95:29: error: expected ';', ',' or ')' before 'raw'
- int convertAccData(short[3] raw, float converted[3]){
-src/subdir.mk:42: recipe for target 'src/mpu.o' failed
-                             ^
-../src/mpu.c:102:33: error: expected ';', ',' or ')' before 'raw'
- int convertCompassData(short[3] raw, float converted[3]){
-                                 ^
-make: *** [src/mpu.o] Error 1
-15:24:27 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-In file included from ../src/mpu.c:9:0:
-../src/mpu.h:19:30: error: expected ';', ',' or ')' before 'raw'
- int convertGyroData(short[3] raw, float converted[3]);
-                              ^
-../src/mpu.h:20:29: error: expected ';', ',' or ')' before 'raw'
- int convertAccData(short[3] raw, float converted[3]);
-src/subdir.mk:42: recipe for target 'src/mpu.o' failed
-                             ^
-../src/mpu.h:21:33: error: expected ';', ',' or ')' before 'raw'
- int convertCompassData(short[3] raw, float converted[3]);
-                                 ^
-make: *** [src/mpu.o] Error 1
-15:25:05 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/iic_utils.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/iic_utils.d" -MT"src/iic_utils.d" -o "src/iic_utils.o" "../src/iic_utils.c"
+Finished building: ../src/iic_utils.c
+ 
 Building file: ../src/inv_mpu.c
 Invoking: ARM gcc compiler
 arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/inv_mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/inv_mpu.d" -MT"src/inv_mpu.d" -o "src/inv_mpu.o" "../src/inv_mpu.c"
@@ -500,35 +52,226 @@ Building file: ../src/mpu.c
 Invoking: ARM gcc compiler
 arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
 In file included from ../src/mpu.c:9:0:
-../src/mpu.h:19:30: error: expected ';', ',' or ')' before 'raw'
- int convertGyroData(short[3] raw, float converted[3]);
-                              ^
+../src/mpu.h:16:32: fatal error: mpl/invensense_adv.h: No such file or directory
+ #include "mpl/invensense_adv.h"
+                                ^
+compilation terminated.
 src/subdir.mk:42: recipe for target 'src/mpu.o' failed
-../src/mpu.h:20:29: error: expected ';', ',' or ')' before 'raw'
- int convertAccData(short[3] raw, float converted[3]);
-                             ^
-../src/mpu.h:21:33: error: expected ';', ',' or ')' before 'raw'
- int convertCompassData(short[3] raw, float converted[3]);
-                                 ^
 make: *** [src/mpu.o] Error 1
-15:25:16 **** Auto Build of configuration Debug for project IndoorLoc ****
+10:06:35 **** Auto Build of project IndoorLoc_bsp ****
+make -k all 
+Running Make include in ps7_cortexa9_0/libsrc/ddrps_v1_0/src
+make -C ps7_cortexa9_0/libsrc/ddrps_v1_0/src -s include  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Running Make include in ps7_cortexa9_0/libsrc/uartps_v3_1/src
+make -C ps7_cortexa9_0/libsrc/uartps_v3_1/src -s include  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Running Make include in ps7_cortexa9_0/libsrc/coresightps_dcc_v1_1/src
+make -C ps7_cortexa9_0/libsrc/coresightps_dcc_v1_1/src -s include  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Running Make include in ps7_cortexa9_0/libsrc/cpu_cortexa9_v2_1/src
+make -C ps7_cortexa9_0/libsrc/cpu_cortexa9_v2_1/src -s include  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Running Make include in ps7_cortexa9_0/libsrc/devcfg_v3_3/src
+make -C ps7_cortexa9_0/libsrc/devcfg_v3_3/src -s include  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Running Make include in ps7_cortexa9_0/libsrc/xadcps_v2_2/src
+make -C ps7_cortexa9_0/libsrc/xadcps_v2_2/src -s include  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Running Make include in ps7_cortexa9_0/libsrc/ttcps_v3_0/src
+make -C ps7_cortexa9_0/libsrc/ttcps_v3_0/src -s include  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Running Make include in ps7_cortexa9_0/libsrc/sdps_v2_5/src
+make -C ps7_cortexa9_0/libsrc/sdps_v2_5/src -s include  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Running Make include in ps7_cortexa9_0/libsrc/pwm_v1_0/src
+make -C ps7_cortexa9_0/libsrc/pwm_v1_0/src -s include  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Running Make include in ps7_cortexa9_0/libsrc/gpiops_v3_1/src
+make -C ps7_cortexa9_0/libsrc/gpiops_v3_1/src -s include  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Running Make include in ps7_cortexa9_0/libsrc/scuwdt_v2_1/src
+make -C ps7_cortexa9_0/libsrc/scuwdt_v2_1/src -s include  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Running Make include in ps7_cortexa9_0/libsrc/standalone_v5_2/src
+make -C ps7_cortexa9_0/libsrc/standalone_v5_2/src -s include  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Running Make include in ps7_cortexa9_0/libsrc/iicps_v3_0/src
+make -C ps7_cortexa9_0/libsrc/iicps_v3_0/src -s include  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Running Make include in ps7_cortexa9_0/libsrc/emacps_v3_1/src
+make -C ps7_cortexa9_0/libsrc/emacps_v3_1/src -s include  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Running Make include in ps7_cortexa9_0/libsrc/scugic_v3_1/src
+make -C ps7_cortexa9_0/libsrc/scugic_v3_1/src -s include  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Running Make include in ps7_cortexa9_0/libsrc/usbps_v2_2/src
+make -C ps7_cortexa9_0/libsrc/usbps_v2_2/src -s include  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Running Make include in ps7_cortexa9_0/libsrc/dmaps_v2_1/src
+make -C ps7_cortexa9_0/libsrc/dmaps_v2_1/src -s include  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Running Make include in ps7_cortexa9_0/libsrc/scutimer_v2_1/src
+make -C ps7_cortexa9_0/libsrc/scutimer_v2_1/src -s include  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Running Make include in ps7_cortexa9_0/libsrc/qspips_v3_2/src
+make -C ps7_cortexa9_0/libsrc/qspips_v3_2/src -s include  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Running Make libs in ps7_cortexa9_0/libsrc/ddrps_v1_0/src
+make -C ps7_cortexa9_0/libsrc/ddrps_v1_0/src -s libs  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Compiling ddrps
+Running Make libs in ps7_cortexa9_0/libsrc/uartps_v3_1/src
+make -C ps7_cortexa9_0/libsrc/uartps_v3_1/src -s libs  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Compiling uartps
+Running Make libs in ps7_cortexa9_0/libsrc/coresightps_dcc_v1_1/src
+make -C ps7_cortexa9_0/libsrc/coresightps_dcc_v1_1/src -s libs  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Compiling coresightps_dcc
+Running Make libs in ps7_cortexa9_0/libsrc/cpu_cortexa9_v2_1/src
+make -C ps7_cortexa9_0/libsrc/cpu_cortexa9_v2_1/src -s libs  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Compiling cpu_cortexa9
+Running Make libs in ps7_cortexa9_0/libsrc/devcfg_v3_3/src
+make -C ps7_cortexa9_0/libsrc/devcfg_v3_3/src -s libs  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Compiling devcfg
+Running Make libs in ps7_cortexa9_0/libsrc/xadcps_v2_2/src
+make -C ps7_cortexa9_0/libsrc/xadcps_v2_2/src -s libs  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Compiling xadcps
+Running Make libs in ps7_cortexa9_0/libsrc/ttcps_v3_0/src
+make -C ps7_cortexa9_0/libsrc/ttcps_v3_0/src -s libs  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Compiling ttcps
+Running Make libs in ps7_cortexa9_0/libsrc/sdps_v2_5/src
+make -C ps7_cortexa9_0/libsrc/sdps_v2_5/src -s libs  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Compiling sdps
+Running Make libs in ps7_cortexa9_0/libsrc/pwm_v1_0/src
+make -C ps7_cortexa9_0/libsrc/pwm_v1_0/src -s libs  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Compiling pwm...
+Running Make libs in ps7_cortexa9_0/libsrc/gpiops_v3_1/src
+make -C ps7_cortexa9_0/libsrc/gpiops_v3_1/src -s libs  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Compiling gpiops
+Running Make libs in ps7_cortexa9_0/libsrc/scuwdt_v2_1/src
+make -C ps7_cortexa9_0/libsrc/scuwdt_v2_1/src -s libs  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Compiling scuwdt
+Running Make libs in ps7_cortexa9_0/libsrc/standalone_v5_2/src
+make -C ps7_cortexa9_0/libsrc/standalone_v5_2/src -s libs  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Compiling standalone
+Running Make libs in ps7_cortexa9_0/libsrc/iicps_v3_0/src
+make -C ps7_cortexa9_0/libsrc/iicps_v3_0/src -s libs  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Compiling iicps
+Running Make libs in ps7_cortexa9_0/libsrc/emacps_v3_1/src
+make -C ps7_cortexa9_0/libsrc/emacps_v3_1/src -s libs  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Compiling emacps
+Running Make libs in ps7_cortexa9_0/libsrc/scugic_v3_1/src
+make -C ps7_cortexa9_0/libsrc/scugic_v3_1/src -s libs  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Compiling scugic
+Running Make libs in ps7_cortexa9_0/libsrc/usbps_v2_2/src
+make -C ps7_cortexa9_0/libsrc/usbps_v2_2/src -s libs  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Compiling usbps
+Running Make libs in ps7_cortexa9_0/libsrc/dmaps_v2_1/src
+make -C ps7_cortexa9_0/libsrc/dmaps_v2_1/src -s libs  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Compiling dmaps
+Running Make libs in ps7_cortexa9_0/libsrc/scutimer_v2_1/src
+make -C ps7_cortexa9_0/libsrc/scutimer_v2_1/src -s libs  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Compiling scutimer
+Running Make libs in ps7_cortexa9_0/libsrc/qspips_v3_2/src
+make -C ps7_cortexa9_0/libsrc/qspips_v3_2/src -s libs  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
+Compiling qspips
+Finished building libraries
+10:06:40 **** Clean-only build of configuration Debug for project IndoorLoc ****
+make clean 
+rm -rf  ./src/iicTest.o ./src/iic_utils.o ./src/inv_mpu.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o  ./src/iicTest.d ./src/iic_utils.d ./src/inv_mpu.d ./src/mpu.d ./src/mpu_utils.d ./src/platform.d ./src/pwmsw.d ./src/run.d  IndoorLoc.elf.size  IndoorLoc.elf
+ 
+10:06:40 **** Auto Build of configuration Debug for project IndoorLoc ****
 make all 
+Building file: ../src/mpu9150/inv_mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/inv_mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/inv_mpu.d" -MT"src/mpu9150/inv_mpu.d" -o "src/mpu9150/inv_mpu.o" "../src/mpu9150/inv_mpu.c"
+../src/mpu9150/inv_mpu.c:44:23: fatal error: mpu_utils.h: No such file or directory
+ #include "mpu_utils.h"
+                       ^
+compilation terminated.
+src/mpu9150/subdir.mk:18: recipe for target 'src/mpu9150/inv_mpu.o' failed
+make: *** [src/mpu9150/inv_mpu.o] Error 1
+10:06:40 **** Auto Build of configuration Debug for project t2 ****
+make all 
+Building file: ../src/testperiph.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/testperiph.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/testperiph.d" -MT"src/testperiph.d" -o "src/testperiph.o" "../src/testperiph.c"
+Finished building: ../src/testperiph.c
+ 
+Building file: ../src/xdevcfg_selftest_example.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/xdevcfg_selftest_example.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/xdevcfg_selftest_example.d" -MT"src/xdevcfg_selftest_example.d" -o "src/xdevcfg_selftest_example.o" "../src/xdevcfg_selftest_example.c"
+Finished building: ../src/xdevcfg_selftest_example.c
+ 
+Building file: ../src/xdmaps_example_w_intr.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/xdmaps_example_w_intr.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/xdmaps_example_w_intr.d" -MT"src/xdmaps_example_w_intr.d" -o "src/xdmaps_example_w_intr.o" "../src/xdmaps_example_w_intr.c"
+Finished building: ../src/xdmaps_example_w_intr.c
+ 
+Building file: ../src/xemacps_example_intr_dma.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/xemacps_example_intr_dma.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/xemacps_example_intr_dma.d" -MT"src/xemacps_example_intr_dma.d" -o "src/xemacps_example_intr_dma.o" "../src/xemacps_example_intr_dma.c"
+Finished building: ../src/xemacps_example_intr_dma.c
+ 
+Building file: ../src/xemacps_example_util.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/xemacps_example_util.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/xemacps_example_util.d" -MT"src/xemacps_example_util.d" -o "src/xemacps_example_util.o" "../src/xemacps_example_util.c"
+Finished building: ../src/xemacps_example_util.c
+ 
+Building file: ../src/xiicps_selftest_example.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/xiicps_selftest_example.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/xiicps_selftest_example.d" -MT"src/xiicps_selftest_example.d" -o "src/xiicps_selftest_example.o" "../src/xiicps_selftest_example.c"
+Finished building: ../src/xiicps_selftest_example.c
+ 
+Building file: ../src/xqspips_selftest_example.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/xqspips_selftest_example.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/xqspips_selftest_example.d" -MT"src/xqspips_selftest_example.d" -o "src/xqspips_selftest_example.o" "../src/xqspips_selftest_example.c"
+Finished building: ../src/xqspips_selftest_example.c
+ 
+Building file: ../src/xscugic_tapp_example.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/xscugic_tapp_example.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/xscugic_tapp_example.d" -MT"src/xscugic_tapp_example.d" -o "src/xscugic_tapp_example.o" "../src/xscugic_tapp_example.c"
+Finished building: ../src/xscugic_tapp_example.c
+ 
+Building file: ../src/xscutimer_intr_example.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/xscutimer_intr_example.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/xscutimer_intr_example.d" -MT"src/xscutimer_intr_example.d" -o "src/xscutimer_intr_example.o" "../src/xscutimer_intr_example.c"
+Finished building: ../src/xscutimer_intr_example.c
+ 
+Building file: ../src/xscutimer_polled_example.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/xscutimer_polled_example.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/xscutimer_polled_example.d" -MT"src/xscutimer_polled_example.d" -o "src/xscutimer_polled_example.o" "../src/xscutimer_polled_example.c"
+Finished building: ../src/xscutimer_polled_example.c
+ 
+Building file: ../src/xscuwdt_intr_example.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/xscuwdt_intr_example.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/xscuwdt_intr_example.d" -MT"src/xscuwdt_intr_example.d" -o "src/xscuwdt_intr_example.o" "../src/xscuwdt_intr_example.c"
+Finished building: ../src/xscuwdt_intr_example.c
+ 
+Building file: ../src/xttcps_tapp_example.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/xttcps_tapp_example.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/xttcps_tapp_example.d" -MT"src/xttcps_tapp_example.d" -o "src/xttcps_tapp_example.o" "../src/xttcps_tapp_example.c"
+Finished building: ../src/xttcps_tapp_example.c
+ 
+Building target: t2.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "t2.elf"  ./src/testperiph.o ./src/xdevcfg_selftest_example.o ./src/xdmaps_example_w_intr.o ./src/xemacps_example_intr_dma.o ./src/xemacps_example_util.o ./src/xiicps_selftest_example.o ./src/xqspips_selftest_example.o ./src/xscugic_tapp_example.o ./src/xscutimer_intr_example.o ./src/xscutimer_polled_example.o ./src/xscuwdt_intr_example.o ./src/xttcps_tapp_example.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: t2.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size t2.elf  |tee "t2.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  77012	   2136	  54592	 133740	  20a6c	t2.elf
+Finished building: t2.elf.size
+ 
+10:07:13 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu9150/inv_mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/inv_mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/inv_mpu.d" -MT"src/mpu9150/inv_mpu.d" -o "src/mpu9150/inv_mpu.o" "../src/mpu9150/inv_mpu.c"
+Finished building: ../src/mpu9150/inv_mpu.c
+ 
+Building file: ../src/iicTest.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/iicTest.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/iicTest.d" -MT"src/iicTest.d" -o "src/iicTest.o" "../src/iicTest.c"
+Finished building: ../src/iicTest.c
+ 
+Building file: ../src/iic_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/iic_utils.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/iic_utils.d" -MT"src/iic_utils.d" -o "src/iic_utils.o" "../src/iic_utils.c"
+Finished building: ../src/iic_utils.c
+ 
 Building file: ../src/mpu.c
 Invoking: ARM gcc compiler
 arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
 In file included from ../src/mpu.c:9:0:
-../src/mpu.h:32:30: error: expected ';', ',' or ')' before 'raw'
- int convertGyroData(short[3] raw, float converted[3]);
-                              ^
-../src/mpu.h:33:29: error: expected ';', ',' or ')' before 'raw'
- int convertAccData(short[3] raw, float converted[3]);
-                             ^
-../src/mpu.h:34:33: error: expected ';', ',' or ')' before 'raw'
- int convertCompassData(short[3] raw, float converted[3]);
-                                 ^
-src/subdir.mk:42: recipe for target 'src/mpu.o' failed
+../src/mpu.h:15:21: fatal error: inv_mpu.h: No such file or directory
+ #include "inv_mpu.h"
+                     ^
+compilation terminated.
+src/subdir.mk:39: recipe for target 'src/mpu.o' failed
 make: *** [src/mpu.o] Error 1
-15:25:31 **** Auto Build of configuration Debug for project IndoorLoc ****
+10:07:28 **** Auto Build of configuration Debug for project IndoorLoc ****
 make all 
 Building file: ../src/mpu.c
 Invoking: ARM gcc compiler
@@ -560,771 +303,24 @@ Finished building: ../src/pwmsw.c
 Building file: ../src/run.c
 Invoking: ARM gcc compiler
 arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
-Finished building: ../src/run.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/inv_mpu.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 105364	   2400	  22748	 130512	  1fdd0	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-15:27:38 **** Auto Build of configuration Debug for project IndoorLoc ****
+../src/run.c:56:21: fatal error: inv_mpu.h: No such file or directory
+ #include "inv_mpu.h"
+                     ^
+compilation terminated.
+src/subdir.mk:39: recipe for target 'src/run.o' failed
+make: *** [src/run.o] Error 1
+10:07:40 **** Auto Build of configuration Debug for project IndoorLoc ****
 make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-Finished building: ../src/mpu.c
- 
 Building file: ../src/run.c
 Invoking: ARM gcc compiler
 arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
-Finished building: ../src/run.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/inv_mpu.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 105364	   2400	  22748	 130512	  1fdd0	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-15:28:08 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-Finished building: ../src/mpu.c
- 
-Building file: ../src/run.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
-Finished building: ../src/run.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/inv_mpu.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 105364	   2400	  22748	 130512	  1fdd0	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-15:29:30 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-Finished building: ../src/mpu.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/inv_mpu.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 105540	   2400	  22748	 130688	  1fe80	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-15:29:47 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-Finished building: ../src/mpu.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/inv_mpu.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 105540	   2400	  22748	 130688	  1fe80	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-15:30:58 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'convertAccData':
-../src/mpu.c:118:31: warning: passing argument 1 of 'mpu_get_accel_sens' from incompatible pointer type
-   status = mpu_get_accel_sens(&sensitivity);
-                               ^
-In file included from ../src/mpu.h:15:0,
-                 from ../src/mpu.c:9:
-../src/inv_mpu.h:88:5: note: expected 'short unsigned int *' but argument is of type 'float *'
- int mpu_get_accel_sens(unsigned short *sens);
-     ^
-Finished building: ../src/mpu.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/inv_mpu.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 105796	   2400	  22748	 130944	  1ff80	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-15:33:11 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'convertAccData':
-../src/mpu.c:118:31: warning: pointer targets in passing argument 1 of 'mpu_get_accel_sens' differ in signedness [-Wpointer-sign]
-   status = mpu_get_accel_sens(&sensitivity);
-                               ^
-In file included from ../src/mpu.h:15:0,
-                 from ../src/mpu.c:9:
-../src/inv_mpu.h:88:5: note: expected 'short unsigned int *' but argument is of type 'short int *'
- int mpu_get_accel_sens(unsigned short *sens);
-     ^
-../src/mpu.c: In function 'convertCompassData':
-../src/mpu.c:142:3: warning: implicit declaration of function 'mpu_get_compass_sens' [-Wimplicit-function-declaration]
-   status = mpu_get_compass_sens(&sensitivity);
-   ^
-Finished building: ../src/mpu.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/inv_mpu.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-./src/mpu.o: In function `convertCompassData':
-/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu.c:142: undefined reference to `mpu_get_compass_sens'
-collect2: error: ld returned 1 exit status
-makefile:36: recipe for target 'IndoorLoc.elf' failed
-make: *** [IndoorLoc.elf] Error 1
-15:33:27 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'convertAccData':
-../src/mpu.c:118:31: warning: pointer targets in passing argument 1 of 'mpu_get_accel_sens' differ in signedness [-Wpointer-sign]
-   status = mpu_get_accel_sens(&sensitivity);
-                               ^
-In file included from ../src/mpu.h:15:0,
-                 from ../src/mpu.c:9:
-../src/inv_mpu.h:88:5: note: expected 'short unsigned int *' but argument is of type 'short int *'
- int mpu_get_accel_sens(unsigned short *sens);
-     ^
-../src/mpu.c: In function 'convertCompassData':
-../src/mpu.c:142:3: warning: implicit declaration of function 'mpu_get_compass_sens' [-Wimplicit-function-declaration]
-   status = mpu_get_compass_sens(&sensitivity);
-   ^
-Finished building: ../src/mpu.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/inv_mpu.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-./src/mpu.o: In function `convertCompassData':
-/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu.c:142: undefined reference to `mpu_get_compass_sens'
-collect2: error: ld returned 1 exit status
-makefile:36: recipe for target 'IndoorLoc.elf' failed
-make: *** [IndoorLoc.elf] Error 1
-15:33:48 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'convertCompassData':
-../src/mpu.c:142:3: warning: implicit declaration of function 'mpu_get_compass_sens' [-Wimplicit-function-declaration]
-   status = mpu_get_compass_sens(&sensitivity);
-   ^
-Finished building: ../src/mpu.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/inv_mpu.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-./src/mpu.o: In function `convertCompassData':
-/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu.c:142: undefined reference to `mpu_get_compass_sens'
-collect2: error: ld returned 1 exit status
-makefile:36: recipe for target 'IndoorLoc.elf' failed
-make: *** [IndoorLoc.elf] Error 1
-15:34:46 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'convertCompassData':
-../src/mpu.c:150:28: error: 'sensitivity' undeclared (first use in this function)
-src/subdir.mk:42: recipe for target 'src/mpu.o' failed
-    converted[i] = raw[i] * sensitivity;
-                            ^
-../src/mpu.c:150:28: note: each undeclared identifier is reported only once for each function it appears in
-make: *** [src/mpu.o] Error 1
-15:36:11 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'convertCompassData':
-../src/mpu.c:150:28: error: 'sensitivity' undeclared (first use in this function)
-    converted[i] = raw[i] * sensitivity;
-                            ^
-../src/mpu.c:150:28: note: each undeclared identifier is reported only once for each function it appears in
-src/subdir.mk:42: recipe for target 'src/mpu.o' failed
-make: *** [src/mpu.o] Error 1
-15:38:31 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'convertCompassData':
-../src/mpu.c:139:9: warning: unused variable 'sensitivity' [-Wunused-variable]
-   float sensitivity;
-         ^
-../src/mpu.c:138:7: warning: unused variable 'status' [-Wunused-variable]
-   int status, i;
-       ^
-Finished building: ../src/mpu.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/inv_mpu.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 105796	   2400	  22748	 130944	  1ff80	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-15:38:38 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-Finished building: ../src/mpu.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/inv_mpu.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 105796	   2400	  22748	 130944	  1ff80	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-15:39:46 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-Finished building: ../src/mpu.c
- 
-Building file: ../src/run.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
-Finished building: ../src/run.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/inv_mpu.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 105796	   2400	  22748	 130944	  1ff80	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-15:41:22 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c:150:5: error: conflicting types for 'convertTemperaturetoC'
- int convertTemperaturetoC(long* raw, float* converted) {
-     ^
-In file included from ../src/mpu.c:9:0:
-../src/mpu.h:36:5: note: previous declaration of 'convertTemperaturetoC' was here
- int convertTemperaturetoC(long raw, float converted);
-     ^
-../src/mpu.c: In function 'convertTemperaturetoC':
-../src/mpu.c:155:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-make: *** [src/mpu.o] Error 1
-src/subdir.mk:42: recipe for target 'src/mpu.o' failed
-15:41:28 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'convertTemperaturetoC':
-../src/mpu.c:155:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-Finished building: ../src/mpu.c
- 
-Building file: ../src/run.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
-Finished building: ../src/run.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/inv_mpu.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 105860	   2400	  22748	 131008	  1ffc0	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-15:42:03 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-Finished building: ../src/mpu.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/inv_mpu.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 105860	   2400	  22748	 131008	  1ffc0	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-15:44:10 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'printDataNoMPU':
-../src/mpu.c:41:29: error: 'accdata' undeclared (first use in this function)
-  status = mpu_get_accel_reg(accdata, &timestamp);
+../src/run.c:56:29: fatal error: mpup150/inv_mpu.h: No such file or directory
+ #include "mpup150/inv_mpu.h"
                              ^
-../src/mpu.c:41:29: note: each undeclared identifier is reported only once for each function it appears in
-../src/mpu.c:19:35: warning: unused variable 'compass_conv' [-Wunused-variable]
-  float gyro_conv[3], acc_conv[3], compass_conv[3];
-                                   ^
-../src/mpu.c:19:22: warning: unused variable 'acc_conv' [-Wunused-variable]
-  float gyro_conv[3], acc_conv[3], compass_conv[3];
-                      ^
-../src/mpu.c:19:8: warning: unused variable 'gyro_conv' [-Wunused-variable]
-  float gyro_conv[3], acc_conv[3], compass_conv[3];
-        ^
-make: *** [src/mpu.o] Error 1
-src/subdir.mk:42: recipe for target 'src/mpu.o' failed
-15:44:23 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'printDataNoMPU':
-../src/mpu.c:19:35: warning: unused variable 'compass_conv' [-Wunused-variable]
-  float gyro_conv[3], acc_conv[3], compass_conv[3];
-                                   ^
-../src/mpu.c:19:22: warning: unused variable 'acc_conv' [-Wunused-variable]
-  float gyro_conv[3], acc_conv[3], compass_conv[3];
-                      ^
-../src/mpu.c:19:8: warning: unused variable 'gyro_conv' [-Wunused-variable]
-  float gyro_conv[3], acc_conv[3], compass_conv[3];
-        ^
-Finished building: ../src/mpu.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/inv_mpu.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 105860	   2400	  22748	 131008	  1ffc0	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-15:44:34 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'printDataNoMPU':
-../src/mpu.c:19:52: warning: unused variable 'temp' [-Wunused-variable]
-  float gyro_conv[3], acc_conv[3], compass_conv[3], temp;
-                                                    ^
-../src/mpu.c:19:35: warning: unused variable 'compass_conv' [-Wunused-variable]
-  float gyro_conv[3], acc_conv[3], compass_conv[3], temp;
-                                   ^
-../src/mpu.c:19:22: warning: unused variable 'acc_conv' [-Wunused-variable]
-  float gyro_conv[3], acc_conv[3], compass_conv[3], temp;
-                      ^
-../src/mpu.c:19:8: warning: unused variable 'gyro_conv' [-Wunused-variable]
-  float gyro_conv[3], acc_conv[3], compass_conv[3], temp;
-        ^
-Finished building: ../src/mpu.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/inv_mpu.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 105860	   2400	  22748	 131008	  1ffc0	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-15:45:20 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'printDataNoMPU':
-../src/mpu.c:24:28: error: 'gyro_raw' undeclared (first use in this function)
-  status = mpu_get_gyro_reg(gyro_raw, &timestamp);
-                            ^
-../src/mpu.c:24:28: note: each undeclared identifier is reported only once for each function it appears in
-../src/mpu.c:41:29: error: 'acc_raw' undeclared (first use in this function)
-  status = mpu_get_accel_reg(acc_raw, &timestamp);
-                             ^
-../src/mpu.c:58:31: error: 'compass_raw' undeclared (first use in this function)
-  status = mpu_get_compass_reg(compass_raw, &timestamp);
-                               ^
-../src/mpu.c:19:17: warning: unused variable 'temp_conv' [-Wunused-variable]
-  float conv[3], temp_conv;
-                 ^
-../src/mpu.c:19:8: warning: unused variable 'conv' [-Wunused-variable]
-  float conv[3], temp_conv;
-        ^
-../src/mpu.c:18:8: warning: unused variable 'raw' [-Wunused-variable]
-  short raw[3];
-        ^
-make: *** [src/mpu.o] Error 1
-src/subdir.mk:42: recipe for target 'src/mpu.o' failed
-15:46:14 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'printDataNoMPU':
-../src/mpu.c:32:16: error: 'gyro_raw' undeclared (first use in this function)
-   printf("%d", gyro_raw[i]);
-                ^
-../src/mpu.c:32:16: note: each undeclared identifier is reported only once for each function it appears in
-../src/mpu.c:19:8: warning: unused variable 'conv' [-Wunused-variable]
-  float conv[3], temp_conv;
-        ^
-make: *** [src/mpu.o] Error 1
-src/subdir.mk:42: recipe for target 'src/mpu.o' failed
-15:46:21 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'printDataNoMPU':
-../src/mpu.c:19:8: warning: unused variable 'conv' [-Wunused-variable]
-  float conv[3], temp_conv;
-        ^
-Finished building: ../src/mpu.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/inv_mpu.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 105860	   2400	  22748	 131008	  1ffc0	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-15:51:17 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'printDataNoMPU':
-../src/mpu.c:31:27: warning: passing argument 1 of 'convertGyroData' from incompatible pointer type
-  status = convertGyroData(&raw, &conv);
-                           ^
-In file included from ../src/mpu.c:9:0:
-../src/mpu.h:33:5: note: expected 'short int *' but argument is of type 'short int (*)[3]'
- int convertGyroData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
-     ^
-../src/mpu.c:31:33: warning: passing argument 2 of 'convertGyroData' from incompatible pointer type
-  status = convertGyroData(&raw, &conv);
-                                 ^
-In file included from ../src/mpu.c:9:0:
-../src/mpu.h:33:5: note: expected 'float *' but argument is of type 'float (*)[3]'
- int convertGyroData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
-     ^
-../src/mpu.c:40:3: warning: format '%d' expects argument of type 'int', but argument 2 has type 'double' [-Wformat=]
-   printf("%d", conv[i]);
-   ^
-../src/mpu.c:40:3: warning: format '%d' expects argument of type 'int', but argument 2 has type 'double' [-Wformat=]
-../src/mpu.c:56:26: warning: passing argument 1 of 'convertAccData' from incompatible pointer type
-  status = convertAccData(&raw, &conv);
-                          ^
-In file included from ../src/mpu.c:9:0:
-../src/mpu.h:34:5: note: expected 'short int *' but argument is of type 'short int (*)[3]'
- int convertAccData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
-     ^
-../src/mpu.c:56:32: warning: passing argument 2 of 'convertAccData' from incompatible pointer type
-  status = convertAccData(&raw, &conv);
-                                ^
-In file included from ../src/mpu.c:9:0:
-../src/mpu.h:34:5: note: expected 'float *' but argument is of type 'float (*)[3]'
- int convertAccData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
-     ^
-../src/mpu.c:65:3: warning: format '%d' expects argument of type 'int', but argument 2 has type 'double' [-Wformat=]
-   printf("%d", conv[i]);
-   ^
-../src/mpu.c:65:3: warning: format '%d' expects argument of type 'int', but argument 2 has type 'double' [-Wformat=]
-../src/mpu.c:81:30: warning: passing argument 1 of 'convertCompassData' from incompatible pointer type
-  status = convertCompassData(&raw, &conv);
-                              ^
-In file included from ../src/mpu.c:9:0:
-../src/mpu.h:35:5: note: expected 'short int *' but argument is of type 'short int (*)[3]'
- int convertCompassData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
-     ^
-../src/mpu.c:81:36: warning: passing argument 2 of 'convertCompassData' from incompatible pointer type
-  status = convertCompassData(&raw, &conv);
-                                    ^
-In file included from ../src/mpu.c:9:0:
-../src/mpu.h:35:5: note: expected 'float *' but argument is of type 'float (*)[3]'
- int convertCompassData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
-     ^
-../src/mpu.c:90:3: warning: format '%d' expects argument of type 'int', but argument 2 has type 'double' [-Wformat=]
-   printf("%d", conv[i]);
-   ^
-../src/mpu.c:90:3: warning: format '%d' expects argument of type 'int', but argument 2 has type 'double' [-Wformat=]
-Finished building: ../src/mpu.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/inv_mpu.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 106252	   2400	  22748	 131400	  20148	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-15:52:44 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'printDataNoMPU':
-../src/mpu.c:31:27: warning: passing argument 1 of 'convertGyroData' from incompatible pointer type
-  status = convertGyroData(&raw, &conv);
-                           ^
-In file included from ../src/mpu.c:9:0:
-../src/mpu.h:33:5: note: expected 'short int *' but argument is of type 'short int (*)[3]'
- int convertGyroData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
-     ^
-../src/mpu.c:31:33: warning: passing argument 2 of 'convertGyroData' from incompatible pointer type
-  status = convertGyroData(&raw, &conv);
-                                 ^
-In file included from ../src/mpu.c:9:0:
-../src/mpu.h:33:5: note: expected 'float *' but argument is of type 'float (*)[3]'
- int convertGyroData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
-     ^
-../src/mpu.c:40:3: warning: format '%d' expects argument of type 'int', but argument 2 has type 'double' [-Wformat=]
-   printf("%d", conv[i]);
-   ^
-../src/mpu.c:40:3: warning: format '%d' expects argument of type 'int', but argument 2 has type 'double' [-Wformat=]
-../src/mpu.c:56:26: warning: passing argument 1 of 'convertAccData' from incompatible pointer type
-  status = convertAccData(&raw, &conv);
-                          ^
-In file included from ../src/mpu.c:9:0:
-../src/mpu.h:34:5: note: expected 'short int *' but argument is of type 'short int (*)[3]'
- int convertAccData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
-     ^
-../src/mpu.c:56:32: warning: passing argument 2 of 'convertAccData' from incompatible pointer type
-  status = convertAccData(&raw, &conv);
-                                ^
-In file included from ../src/mpu.c:9:0:
-../src/mpu.h:34:5: note: expected 'float *' but argument is of type 'float (*)[3]'
- int convertAccData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
-     ^
-../src/mpu.c:65:3: warning: format '%d' expects argument of type 'int', but argument 2 has type 'double' [-Wformat=]
-   printf("%d", conv[i]);
-   ^
-../src/mpu.c:65:3: warning: format '%d' expects argument of type 'int', but argument 2 has type 'double' [-Wformat=]
-../src/mpu.c:81:30: warning: passing argument 1 of 'convertCompassData' from incompatible pointer type
-  status = convertCompassData(&raw, &conv);
-                              ^
-In file included from ../src/mpu.c:9:0:
-../src/mpu.h:35:5: note: expected 'short int *' but argument is of type 'short int (*)[3]'
- int convertCompassData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
-     ^
-../src/mpu.c:81:36: warning: passing argument 2 of 'convertCompassData' from incompatible pointer type
-  status = convertCompassData(&raw, &conv);
-                                    ^
-In file included from ../src/mpu.c:9:0:
-../src/mpu.h:35:5: note: expected 'float *' but argument is of type 'float (*)[3]'
- int convertCompassData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
-     ^
-../src/mpu.c:90:3: warning: format '%d' expects argument of type 'int', but argument 2 has type 'double' [-Wformat=]
-   printf("%d", conv[i]);
-   ^
-../src/mpu.c:90:3: warning: format '%d' expects argument of type 'int', but argument 2 has type 'double' [-Wformat=]
-Finished building: ../src/mpu.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/inv_mpu.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 106252	   2400	  22748	 131400	  20148	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-15:53:43 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-../src/mpu.c: In function 'printDataNoMPU':
-../src/mpu.c:31:27: warning: passing argument 1 of 'convertGyroData' from incompatible pointer type
-  status = convertGyroData(&raw, &conv);
-                           ^
-In file included from ../src/mpu.c:9:0:
-../src/mpu.h:33:5: note: expected 'short int *' but argument is of type 'short int (*)[3]'
- int convertGyroData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
-     ^
-../src/mpu.c:31:33: warning: passing argument 2 of 'convertGyroData' from incompatible pointer type
-  status = convertGyroData(&raw, &conv);
-                                 ^
-In file included from ../src/mpu.c:9:0:
-../src/mpu.h:33:5: note: expected 'float *' but argument is of type 'float (*)[3]'
- int convertGyroData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
-     ^
-../src/mpu.c:56:26: warning: passing argument 1 of 'convertAccData' from incompatible pointer type
-  status = convertAccData(&raw, &conv);
-                          ^
-In file included from ../src/mpu.c:9:0:
-../src/mpu.h:34:5: note: expected 'short int *' but argument is of type 'short int (*)[3]'
- int convertAccData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
-     ^
-../src/mpu.c:56:32: warning: passing argument 2 of 'convertAccData' from incompatible pointer type
-  status = convertAccData(&raw, &conv);
-                                ^
-In file included from ../src/mpu.c:9:0:
-../src/mpu.h:34:5: note: expected 'float *' but argument is of type 'float (*)[3]'
- int convertAccData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
-     ^
-../src/mpu.c:81:30: warning: passing argument 1 of 'convertCompassData' from incompatible pointer type
-  status = convertCompassData(&raw, &conv);
-                              ^
-In file included from ../src/mpu.c:9:0:
-../src/mpu.h:35:5: note: expected 'short int *' but argument is of type 'short int (*)[3]'
- int convertCompassData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
-     ^
-../src/mpu.c:81:36: warning: passing argument 2 of 'convertCompassData' from incompatible pointer type
-  status = convertCompassData(&raw, &conv);
-                                    ^
-In file included from ../src/mpu.c:9:0:
-../src/mpu.h:35:5: note: expected 'float *' but argument is of type 'float (*)[3]'
- int convertCompassData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
-     ^
-Finished building: ../src/mpu.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/inv_mpu.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 106252	   2400	  22748	 131400	  20148	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-15:54:21 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-Finished building: ../src/mpu.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/inv_mpu.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 106252	   2400	  22748	 131400	  20148	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-15:54:27 **** Incremental Build of configuration Debug for project IndoorLoc ****
-make all 
-make: Nothing to be done for 'all'.
-15:55:03 **** Incremental Build of configuration Debug for project IndoorLoc ****
-make all 
-make: Nothing to be done for 'all'.
-15:57:02 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-Finished building: ../src/mpu.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/inv_mpu.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 106260	   2400	  22748	 131408	  20150	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-15:57:05 **** Incremental Build of configuration Debug for project IndoorLoc ****
-make all 
-make: Nothing to be done for 'all'.
-15:59:08 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/mpu.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-Finished building: ../src/mpu.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/inv_mpu.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 106276	   2400	  22748	 131424	  20160	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-15:59:44 **** Auto Build of configuration Debug for project IndoorLoc ****
+compilation terminated.
+src/subdir.mk:39: recipe for target 'src/run.o' failed
+make: *** [src/run.o] Error 1
+10:07:44 **** Auto Build of configuration Debug for project IndoorLoc ****
 make all 
 Building file: ../src/run.c
 Invoking: ARM gcc compiler
@@ -1333,7 +329,7 @@ Finished building: ../src/run.c
  
 Building target: IndoorLoc.elf
 Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/inv_mpu.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
 Finished building target: IndoorLoc.elf
  
 Invoking: ARM Print Size
@@ -1342,10 +338,131 @@ arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
  106276	   2400	  22748	 131424	  20160	IndoorLoc.elf
 Finished building: IndoorLoc.elf.size
  
-16:00:23 **** Incremental Build of configuration Debug for project IndoorLoc ****
+10:13:23 **** Auto Build of configuration Debug for project IndoorLoc ****
 make all 
-make: Nothing to be done for 'all'.
-16:01:16 **** Auto Build of configuration Debug for project IndoorLoc ****
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'initMPU':
+../src/mpu.c:204:2: warning: implicit declaration of function 'imuInit' [-Wimplicit-function-declaration]
+  status = imuInit(&imuAddr);
+  ^
+../src/mpu.c:206:3: warning: implicit declaration of function 'xil_printf' [-Wimplicit-function-declaration]
+   xil_printf("run.c: Error in Setting IMU Address.\n\r");
+   ^
+../src/mpu.c:201:14: warning: unused variable 'i' [-Wunused-variable]
+  int status, i;
+              ^
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 106580	   2400	  22748	 131728	  20290	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:13:33 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'initMPU':
+../src/mpu.c:204:2: warning: implicit declaration of function 'imuInit' [-Wimplicit-function-declaration]
+  status = imuInit(&imuAddr);
+  ^
+../src/mpu.c:206:3: warning: implicit declaration of function 'xil_printf' [-Wimplicit-function-declaration]
+   xil_printf("run.c: Error in Setting IMU Address.\n\r");
+   ^
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 106580	   2400	  22748	 131728	  20290	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:14:31 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'initMPU':
+../src/mpu.c:204:2: warning: implicit declaration of function 'imuInit' [-Wimplicit-function-declaration]
+  status = imuInit(&imuAddr);
+  ^
+../src/mpu.c:206:3: warning: implicit declaration of function 'xil_printf' [-Wimplicit-function-declaration]
+   xil_printf("run.c: Error in Setting IMU Address.\n\r");
+   ^
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 106580	   2400	  22748	 131728	  20290	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:14:55 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 106580	   2400	  22748	 131728	  20290	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:15:53 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 106580	   2400	  22748	 131728	  20290	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:15:55 **** Auto Build of configuration Debug for project IndoorLoc ****
 make all 
 Building file: ../src/mpu.c
 Invoking: ARM gcc compiler
@@ -1354,19 +471,53 @@ Finished building: ../src/mpu.c
  
 Building target: IndoorLoc.elf
 Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/inv_mpu.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
 Finished building target: IndoorLoc.elf
  
 Invoking: ARM Print Size
 arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
    text	   data	    bss	    dec	    hex	filename
- 106276	   2400	  22748	 131424	  20160	IndoorLoc.elf
+ 106644	   2400	  22748	 131792	  202d0	IndoorLoc.elf
 Finished building: IndoorLoc.elf.size
  
-16:01:19 **** Incremental Build of configuration Debug for project IndoorLoc ****
+10:17:57 **** Auto Build of configuration Debug for project IndoorLoc ****
 make all 
-make: Nothing to be done for 'all'.
-16:02:50 **** Auto Build of configuration Debug for project IndoorLoc ****
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c:202:5: error: conflicting types for 'getImuAddr'
+ int getImuAddr(u8* addr) {
+     ^
+In file included from ../src/mpu.c:11:0:
+../src/mpu.h:39:4: note: previous declaration of 'getImuAddr' was here
+ u8 getImuAddr();
+    ^
+make: *** [src/mpu.o] Error 1
+src/subdir.mk:39: recipe for target 'src/mpu.o' failed
+10:18:11 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 106708	   2400	  22748	 131856	  20310	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:18:16 **** Auto Build of configuration Debug for project IndoorLoc ****
 make all 
 Building file: ../src/run.c
 Invoking: ARM gcc compiler
@@ -1375,15 +526,147 @@ Finished building: ../src/run.c
  
 Building target: IndoorLoc.elf
 Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/iicTest.o ./src/iic_utils.o ./src/inv_mpu.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
 Finished building target: IndoorLoc.elf
  
 Invoking: ARM Print Size
 arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
    text	   data	    bss	    dec	    hex	filename
- 106276	   2400	  22748	 131424	  20160	IndoorLoc.elf
+ 106444	   2400	  22748	 131592	  20208	IndoorLoc.elf
 Finished building: IndoorLoc.elf.size
  
-16:02:52 **** Incremental Build of configuration Debug for project IndoorLoc ****
+10:18:19 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+10:19:07 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+10:20:01 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 106444	   2400	  22748	 131592	  20208	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:20:35 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 106540	   2400	  22748	 131688	  20268	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:20:38 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+10:21:38 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 106444	   2400	  22748	 131592	  20208	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:21:51 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 106540	   2400	  22748	 131688	  20268	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:21:53 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+10:22:30 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 106540	   2400	  22748	 131688	  20268	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:22:41 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+10:23:02 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+10:25:14 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+10:25:50 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+10:28:14 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 106540	   2400	  22748	 131688	  20268	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:28:17 **** Incremental Build of configuration Debug for project IndoorLoc ****
 make all 
 make: Nothing to be done for 'all'.

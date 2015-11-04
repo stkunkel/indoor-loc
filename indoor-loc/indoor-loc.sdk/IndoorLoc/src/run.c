@@ -52,8 +52,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "platform.h"
-#include "mpu_utils.h"
-#include "inv_mpu.h"
 #include "mpu.h"
 #include "pwmsw.h"
 
@@ -73,31 +71,16 @@
 int main() {
 	//Variables
 	int status, i;
-	u8 imuAddr;
-	unsigned char* data = (unsigned char*) malloc(8);
-	*data = '0';
 
 	//0. Init Platform
 	init_platform();
 
-	//1. Init IMU (Set Address, etc.)
-	status = imuInit(&imuAddr);
+	//1. Init IMU
+	status = initMPU();
 	if (status != XST_SUCCESS) {
-		xil_printf("run.c: Error in Setting IMU Address.\n\r");
+		printf("run.c: Error initializing IMU.\n\r");
 		return 0;
 	}
-
-	//2. Init IMU
-	struct int_param_s param;
-	status = mpu_init(&param);
-	if (status != 0) {
-		xil_printf("run.c: Error initializing IMU.");
-		return 0;
-	}
-
-	//3. Select Sensors
-	unsigned char sensors = INV_XYZ_GYRO | INV_XYZ_ACCEL | INV_XYZ_COMPASS;
-	mpu_set_sensors(sensors);
 
 	//4. Get Data without MPU
 	for (i = 0; i <= DATA_NO_MPU_RUNS; i++) {
@@ -113,7 +96,7 @@ int main() {
 	pwm(PWM_RUNS);
 
 	//6. Stay in here
-	while (1){
+	while (1) {
 
 	}
 
