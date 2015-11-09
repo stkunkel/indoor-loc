@@ -117,7 +117,7 @@ int imuI2cWrite(unsigned char slave_addr, unsigned char reg_addr,
 	int status;
 
 	//IIC Read
-	status = iic_write2(&IicPs, slave_addr, reg_addr, *data);
+	status = iic_burstWrite(&IicPs, slave_addr, reg_addr, length, data);
 
 	if (status != XST_SUCCESS) {
 		xil_printf("imu.c: Error on IIC Write (0x%x).\r\n", reg_addr);

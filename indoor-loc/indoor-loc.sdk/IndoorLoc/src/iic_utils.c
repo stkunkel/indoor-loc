@@ -248,6 +248,40 @@ int iic_write2(XIicPs *IicPs, u8 Address, u8 Register, u8 Data) {
 	return XST_SUCCESS;
 }
 
+/*
+ * IIC Burst Write
+ */
+int iic_burstWrite(XIicPs *IicPs, u8 Address, u8 Register, u32 length, unsigned char* Data) {
+	u8 WriteBuffer[length +1];
+	int Status;
+
+	/*
+	 * A temporary write buffer must be used which contains both the address
+	 * and the data to be written, put the address in first
+	 */
+	WriteBuffer[0] = Register;
+	memcpy(&WriteBuffer[1], Data, length);
+
+	/*
+	 * Wait until bus is idle to start another transfer.
+	 */
+	while (XIicPs_BusIsBusy(IicPs)) {
+		/* NOP */
+		//sleep(1);
+	}
+
+	/*
+	 * Send the buffer using the IIC and check for errors.
+	 */
+	Status = XIicPs_MasterSendPolled(IicPs, WriteBuffer, 2, Address);
+	if (Status != XST_SUCCESS) {
+		xil_printf("XIicPs_MasterSendPolled error!\n\r");
+		return XST_FAILURE;
+	}
+
+	return XST_SUCCESS;
+}
+
 ///*
 // * IIC Write X
 // */

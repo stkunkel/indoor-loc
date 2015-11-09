@@ -1,9 +1,13 @@
-12:05:26 **** Auto Build of configuration Debug for project IndoorLoc ****
+13:51:41 **** Auto Build of configuration Debug for project IndoorLoc ****
 make all 
-Building file: ../src/mpu.c
+Building file: ../src/run.c
 Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
-Finished building: ../src/mpu.c
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:69:14: warning: unused variable 'i' [-Wunused-variable]
+  int status, i;
+              ^
+Finished building: ../src/run.c
  
 Building target: IndoorLoc.elf
 Invoking: ARM gcc linker
@@ -13,9 +17,9 @@ Finished building target: IndoorLoc.elf
 Invoking: ARM Print Size
 arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
    text	   data	    bss	    dec	    hex	filename
- 118012	   2400	  22764	 143176	  22f48	IndoorLoc.elf
+ 118300	   2400	  22764	 143464	  23068	IndoorLoc.elf
 Finished building: IndoorLoc.elf.size
  
 
-12:05:26 Build Finished (took 122ms)
+13:51:41 Build Finished (took 113ms)
 
