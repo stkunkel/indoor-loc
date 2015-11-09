@@ -273,12 +273,15 @@ int iic_burstWrite(XIicPs *IicPs, u8 Address, u8 Register, u32 length, unsigned 
 	/*
 	 * Send the buffer using the IIC and check for errors.
 	 */
-	Status = XIicPs_MasterSendPolled(IicPs, WriteBuffer, 2, Address);
+	Status = XIicPs_MasterSendPolled(IicPs, WriteBuffer, length+1, Address);
 	if (Status != XST_SUCCESS) {
 		xil_printf("XIicPs_MasterSendPolled error!\n\r");
 		return XST_FAILURE;
 	}
-
+	//print and return
+	if (length > 2)
+		xil_printf("[iic_burstWrite] 0x%02X(0x%02X)=0x%X\n\r", Address, Register,
+				*Data);
 	return XST_SUCCESS;
 }
 
@@ -385,8 +388,8 @@ int iic_read2(XIicPs *IicPs, u8 Address, u8 Register, u8 *Data,
 	}
 //	xil_printf("%d\n\r", __LINE__);
 
-//	xil_printf("[iic_read2] 0x%02X(0x%02X)=0x%02X\n\r", Address, Register,
-//			*Data);
+	xil_printf("[iic_read2] 0x%02X(0x%02X)=0x%X\n\r", Address, Register,
+			*Data);
 
 	return XST_SUCCESS;
 }

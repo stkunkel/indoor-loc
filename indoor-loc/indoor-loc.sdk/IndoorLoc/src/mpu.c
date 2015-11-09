@@ -23,6 +23,7 @@ int printDataWithDMP() {
 	//Variables
 	int status;
 	unsigned short fifoRate;
+	unsigned short int features;
 
 	//Initialize IMU first if required
 	if (imuAddr == 0) {
@@ -40,13 +41,51 @@ int printDataWithDMP() {
 		}
 	}
 
-	//Get FIFO rate
-	dmp_get_fifo_rate(&fifoRate);
+	//Enable Features
+	status = dmp_enable_feature(DMP_FEATURE_6X_LP_QUAT);
 	if (status != XST_SUCCESS) {
-		printf("mpu.c: Error getting FIFO rate.\n\r");
+		printf("mpu.c: Error enabling desired features.\r\n");
 		return XST_FAILURE;
 	}
-	printf("FIFO rate: %dHz\n\r", fifoRate);
+
+	//Get enabled features
+	status = dmp_get_enabled_features(&features);
+	if (status == XST_SUCCESS) {
+		printf("Enabled Features: 0x%X.\n\r", features);
+	}
+
+	//Set FIFO rate
+	status = dmp_set_fifo_rate(100);
+	if (status != XST_SUCCESS) {
+		printf("mpu.c: Error Setting FIFO rate.\n\r");
+	}
+
+	//Get FIFO rate
+	status = dmp_get_fifo_rate(&fifoRate);
+	if (status == XST_SUCCESS) {
+		printf("FIFO rate: %dHz\n\r", fifoRate);
+	}
+
+	//Read FIFO
+	short gyro, accel;
+	long quat;
+	unsigned long timestamp;
+	short int sensors;
+	unsigned char* more = (unsigned char *) malloc(100);
+	do {
+		status = dmp_read_fifo(&gyro, &accel, &quat, &timestamp, &sensors,
+				more);
+		if (status == XST_SUCCESS) {
+			short quaternions[4];
+			quaternions[0] = (quat & 0x000F);
+			quaternions[1] = (quat & 0x00F0);
+			quaternions[2] = (quat & 0x0F00);
+			quaternions[3] = (quat & 0xF000);
+			printf("Gyro: %d, Acc: %d, Quat: %d %d %d %d, \n\r", gyro, accel,
+					quaternions[0], quaternions[1], quaternions[2],
+					quaternions[3]);
+		}
+	} while (status != XST_SUCCESS);
 
 	//Return
 	return XST_SUCCESS;
@@ -254,14 +293,6 @@ int initDMP() {
 	if (status != XST_SUCCESS) {
 		dmpReady = 0;
 		printf("mpu.c: Error loading firmware of DMP.\r\n");
-		return XST_FAILURE;
-	}
-
-	//Enable Features
-	status = dmp_enable_feature(DMP_FEATURE_6X_LP_QUAT);
-	if (status != XST_SUCCESS) {
-		dmpReady = 0;
-		printf("mpu.c: Error enabling desired features.\r\n");
 		return XST_FAILURE;
 	}
 

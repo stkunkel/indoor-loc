@@ -1,25 +1,6 @@
-13:51:41 **** Auto Build of configuration Debug for project IndoorLoc ****
+15:24:55 **** Incremental Build of configuration Debug for project IndoorLoc ****
 make all 
-Building file: ../src/run.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
-../src/run.c: In function 'main':
-../src/run.c:69:14: warning: unused variable 'i' [-Wunused-variable]
-  int status, i;
-              ^
-Finished building: ../src/run.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 118300	   2400	  22764	 143464	  23068	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
+make: Nothing to be done for 'all'.
 
-13:51:41 Build Finished (took 113ms)
+15:24:55 Build Finished (took 64ms)
 

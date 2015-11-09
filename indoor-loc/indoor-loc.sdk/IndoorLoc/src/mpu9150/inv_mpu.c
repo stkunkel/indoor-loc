@@ -2864,6 +2864,10 @@ int mpu_load_firmware(unsigned short length, const unsigned char *firmware,
     /* Must divide evenly into st.hw->bank_size to avoid bank crossings. */
 #define LOAD_CHUNK  (16)
     unsigned char cur[LOAD_CHUNK], tmp[2];
+    unsigned char firmwarecpy[3062];
+    memcpy(firmwarecpy, firmware, 3062);
+    int status;
+
 
     if (st.chip_cfg.dmp_loaded)
         /* DMP should only be loaded once. */
@@ -2873,7 +2877,8 @@ int mpu_load_firmware(unsigned short length, const unsigned char *firmware,
         return -1;
     for (ii = 0; ii < length; ii += this_write) {
         this_write = min(LOAD_CHUNK, length - ii);
-        if (mpu_write_mem(ii, this_write, (unsigned char*)&firmware[ii]))
+        status = mpu_write_mem(ii, this_write, (unsigned char*)&firmware[ii]);
+        if (status != 0)
             return -1;
         if (mpu_read_mem(ii, this_write, cur))
             return -1;
