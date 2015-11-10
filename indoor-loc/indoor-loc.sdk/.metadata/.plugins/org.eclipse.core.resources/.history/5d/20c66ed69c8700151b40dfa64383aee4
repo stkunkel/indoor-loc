@@ -409,7 +409,7 @@ int initDMP(unsigned short int features, unsigned short fifoRate) {
 	}
 
 	//Enable Features
-	status = dmp_enable_feature(FEATURES);
+	status = dmp_enable_feature(DMP_FEATURE_6X_LP_QUAT);
 	if (status != XST_SUCCESS) {
 		printf("mpu.c: Error enabling desired features.\r\n");
 		return XST_FAILURE;

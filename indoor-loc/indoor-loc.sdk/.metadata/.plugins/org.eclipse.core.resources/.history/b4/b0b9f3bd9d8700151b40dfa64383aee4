@@ -59,7 +59,6 @@
  * Defines
  */
 #define DATA_NO_DMP_RUNS 	10
-#define DATA_WITH_DMP_RUNS 	10
 #define PWM_RUNS 			10
 
 /*
@@ -87,10 +86,7 @@ int main() {
 //	}
 
 	//3. Get Data with DMP
-	for (i = 0; i <= DATA_NO_DMP_RUNS; i++) {
-		sleep(1);
-		printDataWithDMP();
-	}
+	printDataWithDMP();
 
 	//4. PWM
 	pwm(PWM_RUNS);
