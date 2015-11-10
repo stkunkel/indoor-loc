@@ -113,17 +113,13 @@ void printDataWithDMP() {
 	//Print new line
 	printf("\r\n");
 
+	long int data;
 
-	//Use library
-//	long int data;
-//	inv_time_t tstamp;
-//	u8 accuracy = 0;
-//
-//	inv_enable_quaternion();
-//
-//	inv_get_sensor_type_gyro(&data, &accuracy, &tstamp);
-//
-//	printf("Quat: %lu\n\r", data);
+	inv_time_t tstamp;
+	u8 accuracy = 0;
+	inv_get_sensor_type_gyro(&data, &accuracy, &tstamp);
+
+	printf("Quat: %d\n\r", data);
 
 }
 
@@ -233,7 +229,7 @@ void printGyro(float conv[NUMBER_OF_AXES]) {
 	//Print Gyro
 	printf("Gyro: (");
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		printf("%.2fdgr/s", conv[i]);
+		printf("%.6fdgr/s", conv[i]);
 		if (i < NUMBER_OF_AXES - 1) {
 			printf(", ");
 		} else {
@@ -253,7 +249,7 @@ void printAccel(float conv[NUMBER_OF_AXES]) {
 	//Print Acc
 	printf("Acc: (");
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		printf("%.2fg", conv[i]);
+		printf("%.0fg", conv[i]);
 		if (i < NUMBER_OF_AXES - 1) {
 			printf(", ");
 		} else {
@@ -273,7 +269,7 @@ void printCompass(float conv[NUMBER_OF_AXES]) {
 	//Print Compass
 	printf("Compass: (");
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		printf("%.1fuT", conv[i]);
+		printf("%.1fT", conv[i]);
 		if (i < NUMBER_OF_AXES - 1) {
 			printf(", ");
 		} else {
@@ -287,7 +283,7 @@ void printCompass(float conv[NUMBER_OF_AXES]) {
  */
 void printTemp(float* temp_conv) {
 	//Print Temperature
-	printf("Temperature: %.2fdgrC\r\n", *temp_conv);
+	printf("Temperature: %.4fdgrC\r\n", *temp_conv);
 }
 
 /*
@@ -348,7 +344,7 @@ int convertAccData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]) {
 
 	//convert data
 	for (i = 0; i <= NUMBER_OF_AXES; i++) {
-		converted[i] = raw[i]*1.0 / sensitivity;
+		converted[i] = raw[i] / sensitivity * 1.0;
 	}
 
 	//Return

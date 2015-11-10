@@ -233,7 +233,7 @@ void printGyro(float conv[NUMBER_OF_AXES]) {
 	//Print Gyro
 	printf("Gyro: (");
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		printf("%.2fdgr/s", conv[i]);
+		printf("%.6fdgr/s", conv[i]);
 		if (i < NUMBER_OF_AXES - 1) {
 			printf(", ");
 		} else {
@@ -253,7 +253,7 @@ void printAccel(float conv[NUMBER_OF_AXES]) {
 	//Print Acc
 	printf("Acc: (");
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		printf("%.2fg", conv[i]);
+		printf("%.1fg", conv[i]);
 		if (i < NUMBER_OF_AXES - 1) {
 			printf(", ");
 		} else {
@@ -287,7 +287,7 @@ void printCompass(float conv[NUMBER_OF_AXES]) {
  */
 void printTemp(float* temp_conv) {
 	//Print Temperature
-	printf("Temperature: %.2fdgrC\r\n", *temp_conv);
+	printf("Temperature: %.4fdgrC\r\n", *temp_conv);
 }
 
 /*

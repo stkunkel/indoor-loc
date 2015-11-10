@@ -39,7 +39,6 @@
 
 #include <stdlib.h>
 #include <stdarg.h>
-#include <stdio.h>//
 
 #ifdef ANDROID
 #ifdef NDK_BUILD
@@ -341,8 +340,7 @@ static inline void __print_result_location(int result,
 					   const char *file,
 					   const char *func, int line)
 {
-	//MPL_LOGE("%s|%s|%d returning %d\n", file, func, line, result);
-	printf("%s|%s|%d returning %d\n", file, func, line, result);
+	MPL_LOGE("%s|%s|%d returning %d\n", file, func, line, result);
 }
 
 #ifdef _WIN32

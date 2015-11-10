@@ -7983,3 +7983,1060 @@ arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/s
 /home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/log.h:343: undefined reference to `_MLPrintLog'
 collect2: error: ld returned 1 exit status
 make: *** [IndoorLoc.elf] Error 1
+14:58:57 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+./src/mpu9150/mpl/data_builder.o: In function `inv_register_data_cb':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/data_builder.c:881: undefined reference to `_MLPrintLog'
+./src/mpu9150/mpl/eMPL_outputs.o: In function `inv_get_sensor_type_heading':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/eMPL_outputs.c:129: undefined reference to `atan2f'
+./src/mpu9150/mpl/eMPL_outputs.o: In function `inv_get_sensor_type_euler':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/eMPL_outputs.c:173: undefined reference to `atan2f'
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/eMPL_outputs.c:178: undefined reference to `sqrtf'
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/eMPL_outputs.c:178: undefined reference to `atan2f'
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/eMPL_outputs.c:198: undefined reference to `atan2f'
+./src/mpu9150/mpl/hal_outputs.o: In function `google_orientation':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/hal_outputs.c:275: undefined reference to `atan2f'
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/hal_outputs.c:276: undefined reference to `atan2f'
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/hal_outputs.c:277: undefined reference to `asinf'
+./src/mpu9150/mpl/ml_math_func.o: In function `inv_compass_angle':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/ml_math_func.c:114: undefined reference to `atan2f'
+./src/mpu9150/mpl/ml_math_func.o: In function `inv_vector_normalize':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/ml_math_func.c:261: undefined reference to `sqrt'
+./src/mpu9150/mpl/ml_math_func.o: In function `quaternion_to_rotation_angle':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/ml_math_func.c:296: undefined reference to `acos'
+./src/mpu9150/mpl/ml_math_func.o: In function `inv_q_norm4':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/ml_math_func.c:368: undefined reference to `sqrtf'
+./src/mpu9150/mpl/ml_math_func.o: In function `inv_vector_norm':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/ml_math_func.c:710: undefined reference to `sqrt'
+./src/mpu9150/mpl/mlmath.o: In function `ml_asin':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/mlmath.c:17: undefined reference to `asin'
+./src/mpu9150/mpl/mlmath.o: In function `ml_atan':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/mlmath.c:22: undefined reference to `atan'
+./src/mpu9150/mpl/mlmath.o: In function `ml_atan2':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/mlmath.c:27: undefined reference to `atan2'
+./src/mpu9150/mpl/mlmath.o: In function `ml_log':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/mlmath.c:32: undefined reference to `log'
+./src/mpu9150/mpl/mlmath.o: In function `ml_sqrt':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/mlmath.c:37: undefined reference to `sqrt'
+./src/mpu9150/mpl/mlmath.o: In function `ml_ceil':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/mlmath.c:42: undefined reference to `ceil'
+./src/mpu9150/mpl/mlmath.o: In function `ml_floor':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/mlmath.c:47: undefined reference to `floor'
+./src/mpu9150/mpl/mlmath.o: In function `ml_cos':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/mlmath.c:52: undefined reference to `cos'
+./src/mpu9150/mpl/mlmath.o: In function `ml_sin':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/mlmath.c:57: undefined reference to `sin'
+./src/mpu9150/mpl/mlmath.o: In function `ml_acos':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/mlmath.c:62: undefined reference to `acos'
+./src/mpu9150/mpl/mlmath.o: In function `ml_pow':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/mlmath.c:67: undefined reference to `pow'
+./src/mpu9150/mpl/mpl.o: In function `__print_result_location':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/log.h:343: undefined reference to `_MLPrintLog'
+collect2: error: ld returned 1 exit status
+make: *** [IndoorLoc.elf] Error 1
+14:59:06 **** Clean-only build of configuration Debug for project IndoorLoc ****
+make clean 
+rm -rf  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o  ./src/mpu9150/mpl/data_builder.d ./src/mpu9150/mpl/eMPL_outputs.d ./src/mpu9150/mpl/hal_outputs.d ./src/mpu9150/mpl/message_layer.d ./src/mpu9150/mpl/ml_math_func.d ./src/mpu9150/mpl/mlmath.d ./src/mpu9150/mpl/mpl.d ./src/mpu9150/mpl/results_holder.d ./src/mpu9150/mpl/start_manager.d ./src/mpu9150/mpl/storage_manager.d  ./src/mpu9150/inv_mpu.d ./src/mpu9150/inv_mpu_dmp_motion_driver.d  ./src/iicTest.d ./src/iic_utils.d ./src/mpu.d ./src/mpu_utils.d ./src/platform.d ./src/pwmsw.d ./src/run.d  IndoorLoc.elf.size  IndoorLoc.elf
+ 
+14:59:06 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu9150/mpl/data_builder.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/data_builder.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/data_builder.d" -MT"src/mpu9150/mpl/data_builder.d" -o "src/mpu9150/mpl/data_builder.o" "../src/mpu9150/mpl/data_builder.c"
+Finished building: ../src/mpu9150/mpl/data_builder.c
+ 
+Building file: ../src/mpu9150/mpl/eMPL_outputs.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/eMPL_outputs.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/eMPL_outputs.d" -MT"src/mpu9150/mpl/eMPL_outputs.d" -o "src/mpu9150/mpl/eMPL_outputs.o" "../src/mpu9150/mpl/eMPL_outputs.c"
+../src/mpu9150/mpl/eMPL_outputs.c: In function 'inv_get_sensor_type_quat':
+../src/mpu9150/mpl/eMPL_outputs.c:100:5: warning: implicit declaration of function 'memcpy' [-Wimplicit-function-declaration]
+     memcpy(data, eMPL_out.quat, sizeof(eMPL_out.quat));
+     ^
+../src/mpu9150/mpl/eMPL_outputs.c:100:5: warning: incompatible implicit declaration of built-in function 'memcpy'
+../src/mpu9150/mpl/eMPL_outputs.c: In function 'inv_init_eMPL_outputs':
+../src/mpu9150/mpl/eMPL_outputs.c:295:5: warning: implicit declaration of function 'memset' [-Wimplicit-function-declaration]
+     memset(&eMPL_out, 0, sizeof(eMPL_out));
+     ^
+../src/mpu9150/mpl/eMPL_outputs.c:295:5: warning: incompatible implicit declaration of built-in function 'memset'
+Finished building: ../src/mpu9150/mpl/eMPL_outputs.c
+ 
+Building file: ../src/mpu9150/mpl/hal_outputs.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/hal_outputs.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/hal_outputs.d" -MT"src/mpu9150/mpl/hal_outputs.d" -o "src/mpu9150/mpl/hal_outputs.o" "../src/mpu9150/mpl/hal_outputs.c"
+Finished building: ../src/mpu9150/mpl/hal_outputs.c
+ 
+Building file: ../src/mpu9150/mpl/message_layer.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/message_layer.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/message_layer.d" -MT"src/mpu9150/mpl/message_layer.d" -o "src/mpu9150/mpl/message_layer.o" "../src/mpu9150/mpl/message_layer.c"
+Finished building: ../src/mpu9150/mpl/message_layer.c
+ 
+Building file: ../src/mpu9150/mpl/ml_math_func.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/ml_math_func.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/ml_math_func.d" -MT"src/mpu9150/mpl/ml_math_func.d" -o "src/mpu9150/mpl/ml_math_func.o" "../src/mpu9150/mpl/ml_math_func.c"
+In file included from ../src/mpu9150/mpl/ml_math_func.c:26:0:
+../src/mpu9150/mpl/ml_math_func.c: In function 'inv_q_mult':
+../src/mpu9150/mpl/mlinclude.h:9:44: warning: typedef 'invensensePutFunctionCallsHere' locally defined but not used [-Wunused-local-typedefs]
+ #define INVENSENSE_FUNC_START  typedef int invensensePutFunctionCallsHere
+                                            ^
+../src/mpu9150/mpl/ml_math_func.c:220:5: note: in expansion of macro 'INVENSENSE_FUNC_START'
+     INVENSENSE_FUNC_START;
+     ^
+../src/mpu9150/mpl/ml_math_func.c: In function 'inv_q_add':
+../src/mpu9150/mpl/mlinclude.h:9:44: warning: typedef 'invensensePutFunctionCallsHere' locally defined but not used [-Wunused-local-typedefs]
+ #define INVENSENSE_FUNC_START  typedef int invensensePutFunctionCallsHere
+                                            ^
+../src/mpu9150/mpl/ml_math_func.c:244:5: note: in expansion of macro 'INVENSENSE_FUNC_START'
+     INVENSENSE_FUNC_START;
+     ^
+../src/mpu9150/mpl/ml_math_func.c: In function 'inv_vector_normalize':
+../src/mpu9150/mpl/mlinclude.h:9:44: warning: typedef 'invensensePutFunctionCallsHere' locally defined but not used [-Wunused-local-typedefs]
+ #define INVENSENSE_FUNC_START  typedef int invensensePutFunctionCallsHere
+                                            ^
+../src/mpu9150/mpl/ml_math_func.c:253:5: note: in expansion of macro 'INVENSENSE_FUNC_START'
+     INVENSENSE_FUNC_START;
+     ^
+../src/mpu9150/mpl/ml_math_func.c: In function 'inv_q_normalize':
+../src/mpu9150/mpl/mlinclude.h:9:44: warning: typedef 'invensensePutFunctionCallsHere' locally defined but not used [-Wunused-local-typedefs]
+ #define INVENSENSE_FUNC_START  typedef int invensensePutFunctionCallsHere
+                                            ^
+../src/mpu9150/mpl/ml_math_func.c:275:5: note: in expansion of macro 'INVENSENSE_FUNC_START'
+     INVENSENSE_FUNC_START;
+     ^
+../src/mpu9150/mpl/ml_math_func.c: In function 'inv_q_invert':
+../src/mpu9150/mpl/mlinclude.h:9:44: warning: typedef 'invensensePutFunctionCallsHere' locally defined but not used [-Wunused-local-typedefs]
+ #define INVENSENSE_FUNC_START  typedef int invensensePutFunctionCallsHere
+                                            ^
+../src/mpu9150/mpl/ml_math_func.c:281:5: note: in expansion of macro 'INVENSENSE_FUNC_START'
+     INVENSENSE_FUNC_START;
+     ^
+../src/mpu9150/mpl/ml_math_func.c: In function 'inv_q_multf':
+../src/mpu9150/mpl/mlinclude.h:9:44: warning: typedef 'invensensePutFunctionCallsHere' locally defined but not used [-Wunused-local-typedefs]
+ #define INVENSENSE_FUNC_START  typedef int invensensePutFunctionCallsHere
+                                            ^
+../src/mpu9150/mpl/ml_math_func.c:317:5: note: in expansion of macro 'INVENSENSE_FUNC_START'
+     INVENSENSE_FUNC_START;
+     ^
+../src/mpu9150/mpl/ml_math_func.c: In function 'inv_q_addf':
+../src/mpu9150/mpl/mlinclude.h:9:44: warning: typedef 'invensensePutFunctionCallsHere' locally defined but not used [-Wunused-local-typedefs]
+ #define INVENSENSE_FUNC_START  typedef int invensensePutFunctionCallsHere
+                                            ^
+../src/mpu9150/mpl/ml_math_func.c:330:5: note: in expansion of macro 'INVENSENSE_FUNC_START'
+     INVENSENSE_FUNC_START;
+     ^
+../src/mpu9150/mpl/ml_math_func.c: In function 'inv_q_normalizef':
+../src/mpu9150/mpl/mlinclude.h:9:44: warning: typedef 'invensensePutFunctionCallsHere' locally defined but not used [-Wunused-local-typedefs]
+ #define INVENSENSE_FUNC_START  typedef int invensensePutFunctionCallsHere
+                                            ^
+../src/mpu9150/mpl/ml_math_func.c:339:5: note: in expansion of macro 'INVENSENSE_FUNC_START'
+     INVENSENSE_FUNC_START;
+     ^
+../src/mpu9150/mpl/ml_math_func.c: In function 'inv_q_invertf':
+../src/mpu9150/mpl/mlinclude.h:9:44: warning: typedef 'invensensePutFunctionCallsHere' locally defined but not used [-Wunused-local-typedefs]
+ #define INVENSENSE_FUNC_START  typedef int invensensePutFunctionCallsHere
+                                            ^
+../src/mpu9150/mpl/ml_math_func.c:384:5: note: in expansion of macro 'INVENSENSE_FUNC_START'
+     INVENSENSE_FUNC_START;
+     ^
+Finished building: ../src/mpu9150/mpl/ml_math_func.c
+ 
+Building file: ../src/mpu9150/mpl/mlmath.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/mlmath.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/mlmath.d" -MT"src/mpu9150/mpl/mlmath.d" -o "src/mpu9150/mpl/mlmath.o" "../src/mpu9150/mpl/mlmath.c"
+Finished building: ../src/mpu9150/mpl/mlmath.c
+ 
+Building file: ../src/mpu9150/mpl/mpl.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/mpl.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/mpl.d" -MT"src/mpu9150/mpl/mpl.d" -o "src/mpu9150/mpl/mpl.o" "../src/mpu9150/mpl/mpl.c"
+In file included from ../src/mpu9150/mpl/mpl.c:23:0:
+../src/mpu9150/mpl/mpl.c: In function 'inv_get_version':
+../src/mpu9150/mpl/mlinclude.h:9:44: warning: typedef 'invensensePutFunctionCallsHere' locally defined but not used [-Wunused-local-typedefs]
+ #define INVENSENSE_FUNC_START  typedef int invensensePutFunctionCallsHere
+                                            ^
+../src/mpu9150/mpl/mpl.c:53:5: note: in expansion of macro 'INVENSENSE_FUNC_START'
+     INVENSENSE_FUNC_START;
+     ^
+Finished building: ../src/mpu9150/mpl/mpl.c
+ 
+Building file: ../src/mpu9150/mpl/results_holder.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/results_holder.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/results_holder.d" -MT"src/mpu9150/mpl/results_holder.d" -o "src/mpu9150/mpl/results_holder.o" "../src/mpu9150/mpl/results_holder.c"
+Finished building: ../src/mpu9150/mpl/results_holder.c
+ 
+Building file: ../src/mpu9150/mpl/start_manager.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/start_manager.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/start_manager.d" -MT"src/mpu9150/mpl/start_manager.d" -o "src/mpu9150/mpl/start_manager.o" "../src/mpu9150/mpl/start_manager.c"
+Finished building: ../src/mpu9150/mpl/start_manager.c
+ 
+Building file: ../src/mpu9150/mpl/storage_manager.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/storage_manager.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/storage_manager.d" -MT"src/mpu9150/mpl/storage_manager.d" -o "src/mpu9150/mpl/storage_manager.o" "../src/mpu9150/mpl/storage_manager.c"
+Finished building: ../src/mpu9150/mpl/storage_manager.c
+ 
+Building file: ../src/mpu9150/inv_mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/inv_mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/inv_mpu.d" -MT"src/mpu9150/inv_mpu.d" -o "src/mpu9150/inv_mpu.o" "../src/mpu9150/inv_mpu.c"
+Finished building: ../src/mpu9150/inv_mpu.c
+ 
+Building file: ../src/mpu9150/inv_mpu_dmp_motion_driver.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/inv_mpu_dmp_motion_driver.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/inv_mpu_dmp_motion_driver.d" -MT"src/mpu9150/inv_mpu_dmp_motion_driver.d" -o "src/mpu9150/inv_mpu_dmp_motion_driver.o" "../src/mpu9150/inv_mpu_dmp_motion_driver.c"
+Finished building: ../src/mpu9150/inv_mpu_dmp_motion_driver.c
+ 
+Building file: ../src/iicTest.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/iicTest.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/iicTest.d" -MT"src/iicTest.d" -o "src/iicTest.o" "../src/iicTest.c"
+Finished building: ../src/iicTest.c
+ 
+Building file: ../src/iic_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/iic_utils.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/iic_utils.d" -MT"src/iic_utils.d" -o "src/iic_utils.o" "../src/iic_utils.c"
+Finished building: ../src/iic_utils.c
+ 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printDataWithDMP':
+../src/mpu.c:120:2: warning: implicit declaration of function 'inv_get_sensor_type_gyro' [-Wimplicit-function-declaration]
+  inv_get_sensor_type_gyro(&data, &accuracy, &tstamp);
+  ^
+../src/mpu.c:122:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long int' [-Wformat=]
+  printf("Quat: %d\n\r", data);
+  ^
+../src/mpu.c:122:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long int' [-Wformat=]
+Finished building: ../src/mpu.c
+ 
+Building file: ../src/mpu_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu_utils.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu_utils.d" -MT"src/mpu_utils.d" -o "src/mpu_utils.o" "../src/mpu_utils.c"
+../src/mpu_utils.c:262:5: warning: 'readInt' defined but not used [-Wunused-function]
+ int readInt(u32 *DataRead) {
+     ^
+Finished building: ../src/mpu_utils.c
+ 
+Building file: ../src/platform.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/platform.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/platform.d" -MT"src/platform.d" -o "src/platform.o" "../src/platform.c"
+Finished building: ../src/platform.c
+ 
+Building file: ../src/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/pwmsw.d" -MT"src/pwmsw.d" -o "src/pwmsw.o" "../src/pwmsw.c"
+../src/pwmsw.c: In function 'pwm':
+../src/pwmsw.c:63:7: warning: unused variable 'val' [-Wunused-variable]
+   u32 val;
+       ^
+Finished building: ../src/pwmsw.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+./src/mpu9150/mpl/data_builder.o: In function `inv_register_data_cb':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/data_builder.c:881: undefined reference to `_MLPrintLog'
+./src/mpu9150/mpl/mpl.o: In function `__print_result_location':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/log.h:343: undefined reference to `_MLPrintLog'
+collect2: error: ld returned 1 exit status
+make: *** [IndoorLoc.elf] Error 1
+15:00:39 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu9150/mpl/data_builder.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/data_builder.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/data_builder.d" -MT"src/mpu9150/mpl/data_builder.d" -o "src/mpu9150/mpl/data_builder.o" "../src/mpu9150/mpl/data_builder.c"
+../src/mpu9150/mpl/data_builder.c: In function 'inv_register_data_cb':
+../src/mpu9150/mpl/data_builder.c:882:9: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+         printf("Unable to add feature callback as too many were already registered\n");
+         ^
+../src/mpu9150/mpl/data_builder.c:882:9: warning: incompatible implicit declaration of built-in function 'printf'
+Finished building: ../src/mpu9150/mpl/data_builder.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+./src/mpu9150/mpl/mpl.o: In function `__print_result_location':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/log.h:343: undefined reference to `_MLPrintLog'
+collect2: error: ld returned 1 exit status
+make: *** [IndoorLoc.elf] Error 1
+15:00:52 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu9150/mpl/data_builder.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/data_builder.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/data_builder.d" -MT"src/mpu9150/mpl/data_builder.d" -o "src/mpu9150/mpl/data_builder.o" "../src/mpu9150/mpl/data_builder.c"
+In file included from ../src/mpu9150/mpl/data_builder.c:30:0:
+../src/mpu9150/mpl/log.h: In function '__print_result_location':
+../src/mpu9150/mpl/log.h:344:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+  printf("%s|%s|%d returning %d\n", file, func, line, result);
+  ^
+../src/mpu9150/mpl/log.h:344:2: warning: incompatible implicit declaration of built-in function 'printf'
+../src/mpu9150/mpl/data_builder.c: In function 'inv_register_data_cb':
+../src/mpu9150/mpl/data_builder.c:882:9: warning: incompatible implicit declaration of built-in function 'printf'
+         printf("Unable to add feature callback as too many were already registered\n");
+         ^
+Finished building: ../src/mpu9150/mpl/data_builder.c
+ 
+Building file: ../src/mpu9150/mpl/hal_outputs.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/hal_outputs.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/hal_outputs.d" -MT"src/mpu9150/mpl/hal_outputs.d" -o "src/mpu9150/mpl/hal_outputs.o" "../src/mpu9150/mpl/hal_outputs.c"
+In file included from ../src/mpu9150/mpl/hal_outputs.c:21:0:
+../src/mpu9150/mpl/log.h: In function '__print_result_location':
+../src/mpu9150/mpl/log.h:344:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+  printf("%s|%s|%d returning %d\n", file, func, line, result);
+  ^
+../src/mpu9150/mpl/log.h:344:2: warning: incompatible implicit declaration of built-in function 'printf'
+Finished building: ../src/mpu9150/mpl/hal_outputs.c
+ 
+Building file: ../src/mpu9150/mpl/message_layer.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/message_layer.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/message_layer.d" -MT"src/mpu9150/mpl/message_layer.d" -o "src/mpu9150/mpl/message_layer.o" "../src/mpu9150/mpl/message_layer.c"
+In file included from ../src/mpu9150/mpl/message_layer.c:17:0:
+../src/mpu9150/mpl/log.h: In function '__print_result_location':
+../src/mpu9150/mpl/log.h:344:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+  printf("%s|%s|%d returning %d\n", file, func, line, result);
+  ^
+../src/mpu9150/mpl/log.h:344:2: warning: incompatible implicit declaration of built-in function 'printf'
+Finished building: ../src/mpu9150/mpl/message_layer.c
+ 
+Building file: ../src/mpu9150/mpl/mpl.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/mpl.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/mpl.d" -MT"src/mpu9150/mpl/mpl.d" -o "src/mpu9150/mpl/mpl.o" "../src/mpu9150/mpl/mpl.c"
+In file included from ../src/mpu9150/mpl/mpl.c:18:0:
+../src/mpu9150/mpl/log.h: In function '__print_result_location':
+../src/mpu9150/mpl/log.h:344:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+  printf("%s|%s|%d returning %d\n", file, func, line, result);
+  ^
+../src/mpu9150/mpl/log.h:344:2: warning: incompatible implicit declaration of built-in function 'printf'
+In file included from ../src/mpu9150/mpl/mpl.c:23:0:
+../src/mpu9150/mpl/mpl.c: In function 'inv_get_version':
+../src/mpu9150/mpl/mlinclude.h:9:44: warning: typedef 'invensensePutFunctionCallsHere' locally defined but not used [-Wunused-local-typedefs]
+ #define INVENSENSE_FUNC_START  typedef int invensensePutFunctionCallsHere
+                                            ^
+../src/mpu9150/mpl/mpl.c:53:5: note: in expansion of macro 'INVENSENSE_FUNC_START'
+     INVENSENSE_FUNC_START;
+     ^
+Finished building: ../src/mpu9150/mpl/mpl.c
+ 
+Building file: ../src/mpu9150/mpl/results_holder.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/results_holder.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/results_holder.d" -MT"src/mpu9150/mpl/results_holder.d" -o "src/mpu9150/mpl/results_holder.o" "../src/mpu9150/mpl/results_holder.c"
+In file included from ../src/mpu9150/mpl/results_holder.c:25:0:
+../src/mpu9150/mpl/log.h: In function '__print_result_location':
+../src/mpu9150/mpl/log.h:344:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+  printf("%s|%s|%d returning %d\n", file, func, line, result);
+  ^
+../src/mpu9150/mpl/log.h:344:2: warning: incompatible implicit declaration of built-in function 'printf'
+Finished building: ../src/mpu9150/mpl/results_holder.c
+ 
+Building file: ../src/mpu9150/mpl/start_manager.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/start_manager.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/start_manager.d" -MT"src/mpu9150/mpl/start_manager.d" -o "src/mpu9150/mpl/start_manager.o" "../src/mpu9150/mpl/start_manager.c"
+In file included from ../src/mpu9150/mpl/start_manager.c:25:0:
+../src/mpu9150/mpl/log.h: In function '__print_result_location':
+../src/mpu9150/mpl/log.h:344:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+  printf("%s|%s|%d returning %d\n", file, func, line, result);
+  ^
+../src/mpu9150/mpl/log.h:344:2: warning: incompatible implicit declaration of built-in function 'printf'
+Finished building: ../src/mpu9150/mpl/start_manager.c
+ 
+Building file: ../src/mpu9150/mpl/storage_manager.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/storage_manager.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/storage_manager.d" -MT"src/mpu9150/mpl/storage_manager.d" -o "src/mpu9150/mpl/storage_manager.o" "../src/mpu9150/mpl/storage_manager.c"
+In file included from ../src/mpu9150/mpl/storage_manager.c:21:0:
+../src/mpu9150/mpl/log.h: In function '__print_result_location':
+../src/mpu9150/mpl/log.h:344:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+  printf("%s|%s|%d returning %d\n", file, func, line, result);
+  ^
+../src/mpu9150/mpl/log.h:344:2: warning: incompatible implicit declaration of built-in function 'printf'
+Finished building: ../src/mpu9150/mpl/storage_manager.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 170596	   2424	  24456	 197476	  30364	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:01:11 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu9150/mpl/data_builder.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/data_builder.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/data_builder.d" -MT"src/mpu9150/mpl/data_builder.d" -o "src/mpu9150/mpl/data_builder.o" "../src/mpu9150/mpl/data_builder.c"
+In file included from ../src/mpu9150/mpl/data_builder.c:30:0:
+../src/mpu9150/mpl/log.h: In function '__print_result_location':
+../src/mpu9150/mpl/log.h:344:2: warning: implicit declaration of function 'xil_printf' [-Wimplicit-function-declaration]
+  xil_printf("%s|%s|%d returning %d\n", file, func, line, result);
+  ^
+../src/mpu9150/mpl/data_builder.c: In function 'inv_register_data_cb':
+../src/mpu9150/mpl/data_builder.c:882:9: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+         printf("Unable to add feature callback as too many were already registered\n");
+         ^
+../src/mpu9150/mpl/data_builder.c:882:9: warning: incompatible implicit declaration of built-in function 'printf'
+Finished building: ../src/mpu9150/mpl/data_builder.c
+ 
+Building file: ../src/mpu9150/mpl/hal_outputs.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/hal_outputs.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/hal_outputs.d" -MT"src/mpu9150/mpl/hal_outputs.d" -o "src/mpu9150/mpl/hal_outputs.o" "../src/mpu9150/mpl/hal_outputs.c"
+In file included from ../src/mpu9150/mpl/hal_outputs.c:21:0:
+../src/mpu9150/mpl/log.h: In function '__print_result_location':
+../src/mpu9150/mpl/log.h:344:2: warning: implicit declaration of function 'xil_printf' [-Wimplicit-function-declaration]
+  xil_printf("%s|%s|%d returning %d\n", file, func, line, result);
+  ^
+Finished building: ../src/mpu9150/mpl/hal_outputs.c
+ 
+Building file: ../src/mpu9150/mpl/message_layer.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/message_layer.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/message_layer.d" -MT"src/mpu9150/mpl/message_layer.d" -o "src/mpu9150/mpl/message_layer.o" "../src/mpu9150/mpl/message_layer.c"
+In file included from ../src/mpu9150/mpl/message_layer.c:17:0:
+../src/mpu9150/mpl/log.h: In function '__print_result_location':
+../src/mpu9150/mpl/log.h:344:2: warning: implicit declaration of function 'xil_printf' [-Wimplicit-function-declaration]
+  xil_printf("%s|%s|%d returning %d\n", file, func, line, result);
+  ^
+Finished building: ../src/mpu9150/mpl/message_layer.c
+ 
+Building file: ../src/mpu9150/mpl/mpl.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/mpl.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/mpl.d" -MT"src/mpu9150/mpl/mpl.d" -o "src/mpu9150/mpl/mpl.o" "../src/mpu9150/mpl/mpl.c"
+In file included from ../src/mpu9150/mpl/mpl.c:18:0:
+../src/mpu9150/mpl/log.h: In function '__print_result_location':
+../src/mpu9150/mpl/log.h:344:2: warning: implicit declaration of function 'xil_printf' [-Wimplicit-function-declaration]
+  xil_printf("%s|%s|%d returning %d\n", file, func, line, result);
+  ^
+In file included from ../src/mpu9150/mpl/mpl.c:23:0:
+../src/mpu9150/mpl/mpl.c: In function 'inv_get_version':
+../src/mpu9150/mpl/mlinclude.h:9:44: warning: typedef 'invensensePutFunctionCallsHere' locally defined but not used [-Wunused-local-typedefs]
+ #define INVENSENSE_FUNC_START  typedef int invensensePutFunctionCallsHere
+                                            ^
+../src/mpu9150/mpl/mpl.c:53:5: note: in expansion of macro 'INVENSENSE_FUNC_START'
+     INVENSENSE_FUNC_START;
+     ^
+Finished building: ../src/mpu9150/mpl/mpl.c
+ 
+Building file: ../src/mpu9150/mpl/results_holder.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/results_holder.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/results_holder.d" -MT"src/mpu9150/mpl/results_holder.d" -o "src/mpu9150/mpl/results_holder.o" "../src/mpu9150/mpl/results_holder.c"
+In file included from ../src/mpu9150/mpl/results_holder.c:25:0:
+../src/mpu9150/mpl/log.h: In function '__print_result_location':
+../src/mpu9150/mpl/log.h:344:2: warning: implicit declaration of function 'xil_printf' [-Wimplicit-function-declaration]
+  xil_printf("%s|%s|%d returning %d\n", file, func, line, result);
+  ^
+Finished building: ../src/mpu9150/mpl/results_holder.c
+ 
+Building file: ../src/mpu9150/mpl/start_manager.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/start_manager.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/start_manager.d" -MT"src/mpu9150/mpl/start_manager.d" -o "src/mpu9150/mpl/start_manager.o" "../src/mpu9150/mpl/start_manager.c"
+In file included from ../src/mpu9150/mpl/start_manager.c:25:0:
+../src/mpu9150/mpl/log.h: In function '__print_result_location':
+../src/mpu9150/mpl/log.h:344:2: warning: implicit declaration of function 'xil_printf' [-Wimplicit-function-declaration]
+  xil_printf("%s|%s|%d returning %d\n", file, func, line, result);
+  ^
+Finished building: ../src/mpu9150/mpl/start_manager.c
+ 
+Building file: ../src/mpu9150/mpl/storage_manager.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/storage_manager.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/storage_manager.d" -MT"src/mpu9150/mpl/storage_manager.d" -o "src/mpu9150/mpl/storage_manager.o" "../src/mpu9150/mpl/storage_manager.c"
+In file included from ../src/mpu9150/mpl/storage_manager.c:21:0:
+../src/mpu9150/mpl/log.h: In function '__print_result_location':
+../src/mpu9150/mpl/log.h:344:2: warning: implicit declaration of function 'xil_printf' [-Wimplicit-function-declaration]
+  xil_printf("%s|%s|%d returning %d\n", file, func, line, result);
+  ^
+Finished building: ../src/mpu9150/mpl/storage_manager.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 170596	   2424	  24456	 197476	  30364	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:01:18 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu9150/mpl/data_builder.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/data_builder.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/data_builder.d" -MT"src/mpu9150/mpl/data_builder.d" -o "src/mpu9150/mpl/data_builder.o" "../src/mpu9150/mpl/data_builder.c"
+In file included from ../src/mpu9150/mpl/data_builder.c:30:0:
+../src/mpu9150/mpl/log.h: In function '__print_result_location':
+../src/mpu9150/mpl/log.h:344:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+  printf("%s|%s|%d returning %d\n", file, func, line, result);
+  ^
+../src/mpu9150/mpl/log.h:344:2: warning: incompatible implicit declaration of built-in function 'printf'
+../src/mpu9150/mpl/data_builder.c: In function 'inv_register_data_cb':
+../src/mpu9150/mpl/data_builder.c:882:9: warning: incompatible implicit declaration of built-in function 'printf'
+         printf("Unable to add feature callback as too many were already registered\n");
+         ^
+Finished building: ../src/mpu9150/mpl/data_builder.c
+ 
+Building file: ../src/mpu9150/mpl/hal_outputs.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/hal_outputs.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/hal_outputs.d" -MT"src/mpu9150/mpl/hal_outputs.d" -o "src/mpu9150/mpl/hal_outputs.o" "../src/mpu9150/mpl/hal_outputs.c"
+In file included from ../src/mpu9150/mpl/hal_outputs.c:21:0:
+../src/mpu9150/mpl/log.h: In function '__print_result_location':
+../src/mpu9150/mpl/log.h:344:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+  printf("%s|%s|%d returning %d\n", file, func, line, result);
+  ^
+../src/mpu9150/mpl/log.h:344:2: warning: incompatible implicit declaration of built-in function 'printf'
+Finished building: ../src/mpu9150/mpl/hal_outputs.c
+ 
+Building file: ../src/mpu9150/mpl/message_layer.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/message_layer.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/message_layer.d" -MT"src/mpu9150/mpl/message_layer.d" -o "src/mpu9150/mpl/message_layer.o" "../src/mpu9150/mpl/message_layer.c"
+In file included from ../src/mpu9150/mpl/message_layer.c:17:0:
+../src/mpu9150/mpl/log.h: In function '__print_result_location':
+../src/mpu9150/mpl/log.h:344:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+  printf("%s|%s|%d returning %d\n", file, func, line, result);
+  ^
+../src/mpu9150/mpl/log.h:344:2: warning: incompatible implicit declaration of built-in function 'printf'
+Finished building: ../src/mpu9150/mpl/message_layer.c
+ 
+Building file: ../src/mpu9150/mpl/mpl.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/mpl.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/mpl.d" -MT"src/mpu9150/mpl/mpl.d" -o "src/mpu9150/mpl/mpl.o" "../src/mpu9150/mpl/mpl.c"
+In file included from ../src/mpu9150/mpl/mpl.c:18:0:
+../src/mpu9150/mpl/log.h: In function '__print_result_location':
+../src/mpu9150/mpl/log.h:344:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+  printf("%s|%s|%d returning %d\n", file, func, line, result);
+  ^
+../src/mpu9150/mpl/log.h:344:2: warning: incompatible implicit declaration of built-in function 'printf'
+In file included from ../src/mpu9150/mpl/mpl.c:23:0:
+../src/mpu9150/mpl/mpl.c: In function 'inv_get_version':
+../src/mpu9150/mpl/mlinclude.h:9:44: warning: typedef 'invensensePutFunctionCallsHere' locally defined but not used [-Wunused-local-typedefs]
+ #define INVENSENSE_FUNC_START  typedef int invensensePutFunctionCallsHere
+                                            ^
+../src/mpu9150/mpl/mpl.c:53:5: note: in expansion of macro 'INVENSENSE_FUNC_START'
+     INVENSENSE_FUNC_START;
+     ^
+Finished building: ../src/mpu9150/mpl/mpl.c
+ 
+Building file: ../src/mpu9150/mpl/results_holder.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/results_holder.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/results_holder.d" -MT"src/mpu9150/mpl/results_holder.d" -o "src/mpu9150/mpl/results_holder.o" "../src/mpu9150/mpl/results_holder.c"
+In file included from ../src/mpu9150/mpl/results_holder.c:25:0:
+../src/mpu9150/mpl/log.h: In function '__print_result_location':
+../src/mpu9150/mpl/log.h:344:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+  printf("%s|%s|%d returning %d\n", file, func, line, result);
+  ^
+../src/mpu9150/mpl/log.h:344:2: warning: incompatible implicit declaration of built-in function 'printf'
+Finished building: ../src/mpu9150/mpl/results_holder.c
+ 
+Building file: ../src/mpu9150/mpl/start_manager.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/start_manager.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/start_manager.d" -MT"src/mpu9150/mpl/start_manager.d" -o "src/mpu9150/mpl/start_manager.o" "../src/mpu9150/mpl/start_manager.c"
+In file included from ../src/mpu9150/mpl/start_manager.c:25:0:
+../src/mpu9150/mpl/log.h: In function '__print_result_location':
+../src/mpu9150/mpl/log.h:344:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+  printf("%s|%s|%d returning %d\n", file, func, line, result);
+  ^
+../src/mpu9150/mpl/log.h:344:2: warning: incompatible implicit declaration of built-in function 'printf'
+Finished building: ../src/mpu9150/mpl/start_manager.c
+ 
+Building file: ../src/mpu9150/mpl/storage_manager.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/storage_manager.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/storage_manager.d" -MT"src/mpu9150/mpl/storage_manager.d" -o "src/mpu9150/mpl/storage_manager.o" "../src/mpu9150/mpl/storage_manager.c"
+In file included from ../src/mpu9150/mpl/storage_manager.c:21:0:
+../src/mpu9150/mpl/log.h: In function '__print_result_location':
+../src/mpu9150/mpl/log.h:344:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+  printf("%s|%s|%d returning %d\n", file, func, line, result);
+  ^
+../src/mpu9150/mpl/log.h:344:2: warning: incompatible implicit declaration of built-in function 'printf'
+Finished building: ../src/mpu9150/mpl/storage_manager.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 170596	   2424	  24456	 197476	  30364	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:01:30 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu9150/mpl/data_builder.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/data_builder.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/data_builder.d" -MT"src/mpu9150/mpl/data_builder.d" -o "src/mpu9150/mpl/data_builder.o" "../src/mpu9150/mpl/data_builder.c"
+Finished building: ../src/mpu9150/mpl/data_builder.c
+ 
+Building file: ../src/mpu9150/mpl/hal_outputs.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/hal_outputs.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/hal_outputs.d" -MT"src/mpu9150/mpl/hal_outputs.d" -o "src/mpu9150/mpl/hal_outputs.o" "../src/mpu9150/mpl/hal_outputs.c"
+Finished building: ../src/mpu9150/mpl/hal_outputs.c
+ 
+Building file: ../src/mpu9150/mpl/message_layer.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/message_layer.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/message_layer.d" -MT"src/mpu9150/mpl/message_layer.d" -o "src/mpu9150/mpl/message_layer.o" "../src/mpu9150/mpl/message_layer.c"
+Finished building: ../src/mpu9150/mpl/message_layer.c
+ 
+Building file: ../src/mpu9150/mpl/mpl.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/mpl.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/mpl.d" -MT"src/mpu9150/mpl/mpl.d" -o "src/mpu9150/mpl/mpl.o" "../src/mpu9150/mpl/mpl.c"
+In file included from ../src/mpu9150/mpl/mpl.c:23:0:
+../src/mpu9150/mpl/mpl.c: In function 'inv_get_version':
+../src/mpu9150/mpl/mlinclude.h:9:44: warning: typedef 'invensensePutFunctionCallsHere' locally defined but not used [-Wunused-local-typedefs]
+ #define INVENSENSE_FUNC_START  typedef int invensensePutFunctionCallsHere
+                                            ^
+../src/mpu9150/mpl/mpl.c:53:5: note: in expansion of macro 'INVENSENSE_FUNC_START'
+     INVENSENSE_FUNC_START;
+     ^
+Finished building: ../src/mpu9150/mpl/mpl.c
+ 
+Building file: ../src/mpu9150/mpl/results_holder.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/results_holder.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/results_holder.d" -MT"src/mpu9150/mpl/results_holder.d" -o "src/mpu9150/mpl/results_holder.o" "../src/mpu9150/mpl/results_holder.c"
+Finished building: ../src/mpu9150/mpl/results_holder.c
+ 
+Building file: ../src/mpu9150/mpl/start_manager.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/start_manager.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/start_manager.d" -MT"src/mpu9150/mpl/start_manager.d" -o "src/mpu9150/mpl/start_manager.o" "../src/mpu9150/mpl/start_manager.c"
+Finished building: ../src/mpu9150/mpl/start_manager.c
+ 
+Building file: ../src/mpu9150/mpl/storage_manager.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/storage_manager.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/storage_manager.d" -MT"src/mpu9150/mpl/storage_manager.d" -o "src/mpu9150/mpl/storage_manager.o" "../src/mpu9150/mpl/storage_manager.c"
+Finished building: ../src/mpu9150/mpl/storage_manager.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 170596	   2424	  24456	 197476	  30364	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:01:36 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu9150/mpl/data_builder.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/data_builder.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/data_builder.d" -MT"src/mpu9150/mpl/data_builder.d" -o "src/mpu9150/mpl/data_builder.o" "../src/mpu9150/mpl/data_builder.c"
+Finished building: ../src/mpu9150/mpl/data_builder.c
+ 
+Building file: ../src/mpu9150/mpl/hal_outputs.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/hal_outputs.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/hal_outputs.d" -MT"src/mpu9150/mpl/hal_outputs.d" -o "src/mpu9150/mpl/hal_outputs.o" "../src/mpu9150/mpl/hal_outputs.c"
+Finished building: ../src/mpu9150/mpl/hal_outputs.c
+ 
+Building file: ../src/mpu9150/mpl/message_layer.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/message_layer.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/message_layer.d" -MT"src/mpu9150/mpl/message_layer.d" -o "src/mpu9150/mpl/message_layer.o" "../src/mpu9150/mpl/message_layer.c"
+Finished building: ../src/mpu9150/mpl/message_layer.c
+ 
+Building file: ../src/mpu9150/mpl/mpl.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/mpl.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/mpl.d" -MT"src/mpu9150/mpl/mpl.d" -o "src/mpu9150/mpl/mpl.o" "../src/mpu9150/mpl/mpl.c"
+In file included from ../src/mpu9150/mpl/mpl.c:23:0:
+../src/mpu9150/mpl/mpl.c: In function 'inv_get_version':
+../src/mpu9150/mpl/mlinclude.h:9:44: warning: typedef 'invensensePutFunctionCallsHere' locally defined but not used [-Wunused-local-typedefs]
+ #define INVENSENSE_FUNC_START  typedef int invensensePutFunctionCallsHere
+                                            ^
+../src/mpu9150/mpl/mpl.c:53:5: note: in expansion of macro 'INVENSENSE_FUNC_START'
+     INVENSENSE_FUNC_START;
+     ^
+Finished building: ../src/mpu9150/mpl/mpl.c
+ 
+Building file: ../src/mpu9150/mpl/results_holder.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/results_holder.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/results_holder.d" -MT"src/mpu9150/mpl/results_holder.d" -o "src/mpu9150/mpl/results_holder.o" "../src/mpu9150/mpl/results_holder.c"
+Finished building: ../src/mpu9150/mpl/results_holder.c
+ 
+Building file: ../src/mpu9150/mpl/start_manager.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/start_manager.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/start_manager.d" -MT"src/mpu9150/mpl/start_manager.d" -o "src/mpu9150/mpl/start_manager.o" "../src/mpu9150/mpl/start_manager.c"
+Finished building: ../src/mpu9150/mpl/start_manager.c
+ 
+Building file: ../src/mpu9150/mpl/storage_manager.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu9150/mpl/storage_manager.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu9150/mpl/storage_manager.d" -MT"src/mpu9150/mpl/storage_manager.d" -o "src/mpu9150/mpl/storage_manager.o" "../src/mpu9150/mpl/storage_manager.c"
+Finished building: ../src/mpu9150/mpl/storage_manager.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 170596	   2424	  24456	 197476	  30364	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:01:54 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+15:01:58 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+15:02:26 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+15:02:55 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+15:05:36 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printDataWithDMP':
+../src/mpu.c:124:2: warning: implicit declaration of function 'inv_get_sensor_type_gyro' [-Wimplicit-function-declaration]
+  inv_get_sensor_type_gyro(&data, &accuracy, &tstamp);
+  ^
+../src/mpu.c:126:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long int' [-Wformat=]
+  printf("Quat: %d\n\r", data);
+  ^
+../src/mpu.c:126:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long int' [-Wformat=]
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+/opt/Xilinx/SDK/2015.3/gnu/arm/lin/bin/../lib/gcc/arm-xilinx-eabi/4.9.2/../../../../arm-xilinx-eabi/bin/ld: error: /home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl/libmpllib.a(quaternion_supervisor.o): Conflicting architecture profiles M/A
+/opt/Xilinx/SDK/2015.3/gnu/arm/lin/bin/../lib/gcc/arm-xilinx-eabi/4.9.2/../../../../arm-xilinx-eabi/bin/ld: warning: /home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl/libmpllib.a(quaternion_supervisor.o) uses 2-byte wchar_t yet the output is to use 4-byte wchar_t; use of wchar_t values across objects may fail
+/opt/Xilinx/SDK/2015.3/gnu/arm/lin/bin/../lib/gcc/arm-xilinx-eabi/4.9.2/../../../../arm-xilinx-eabi/bin/ld: failed to merge target specific data of file /home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl/libmpllib.a(quaternion_supervisor.o)
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl/libmpllib.a(quaternion_supervisor.o): In function `inv_disable_quaternion':
+C:\STM32_EWARM\STM32L_MPLLIB\mpl\quaternion_supervisor.c:(.text+0xa78): undefined reference to `mpl_key'
+collect2: error: ld returned 1 exit status
+make: *** [IndoorLoc.elf] Error 1
+15:05:53 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printDataWithDMP':
+../src/mpu.c:124:2: warning: implicit declaration of function 'inv_get_sensor_type_gyro' [-Wimplicit-function-declaration]
+  inv_get_sensor_type_gyro(&data, &accuracy, &tstamp);
+  ^
+../src/mpu.c:126:2: warning: format '%f' expects argument of type 'double', but argument 2 has type 'long int' [-Wformat=]
+  printf("Quat: %f\n\r", data);
+  ^
+../src/mpu.c:126:2: warning: format '%f' expects argument of type 'double', but argument 2 has type 'long int' [-Wformat=]
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+/opt/Xilinx/SDK/2015.3/gnu/arm/lin/bin/../lib/gcc/arm-xilinx-eabi/4.9.2/../../../../arm-xilinx-eabi/bin/ld: error: /home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl/libmpllib.a(quaternion_supervisor.o): Conflicting architecture profiles M/A
+/opt/Xilinx/SDK/2015.3/gnu/arm/lin/bin/../lib/gcc/arm-xilinx-eabi/4.9.2/../../../../arm-xilinx-eabi/bin/ld: warning: /home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl/libmpllib.a(quaternion_supervisor.o) uses 2-byte wchar_t yet the output is to use 4-byte wchar_t; use of wchar_t values across objects may fail
+/opt/Xilinx/SDK/2015.3/gnu/arm/lin/bin/../lib/gcc/arm-xilinx-eabi/4.9.2/../../../../arm-xilinx-eabi/bin/ld: failed to merge target specific data of file /home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl/libmpllib.a(quaternion_supervisor.o)
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl/libmpllib.a(quaternion_supervisor.o): In function `inv_disable_quaternion':
+C:\STM32_EWARM\STM32L_MPLLIB\mpl\quaternion_supervisor.c:(.text+0xa78): undefined reference to `mpl_key'
+collect2: error: ld returned 1 exit status
+make: *** [IndoorLoc.elf] Error 1
+15:06:23 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printDataWithDMP':
+../src/mpu.c:124:2: warning: implicit declaration of function 'inv_get_sensor_type_gyro' [-Wimplicit-function-declaration]
+  inv_get_sensor_type_gyro(&data, &accuracy, &tstamp);
+  ^
+../src/mpu.c:126:2: warning: format '%u' expects argument of type 'unsigned int', but argument 2 has type 'long int' [-Wformat=]
+  printf("Quat: %ui\n\r", data);
+  ^
+../src/mpu.c:126:2: warning: format '%u' expects argument of type 'unsigned int', but argument 2 has type 'long int' [-Wformat=]
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+/opt/Xilinx/SDK/2015.3/gnu/arm/lin/bin/../lib/gcc/arm-xilinx-eabi/4.9.2/../../../../arm-xilinx-eabi/bin/ld: error: /home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl/libmpllib.a(quaternion_supervisor.o): Conflicting architecture profiles M/A
+/opt/Xilinx/SDK/2015.3/gnu/arm/lin/bin/../lib/gcc/arm-xilinx-eabi/4.9.2/../../../../arm-xilinx-eabi/bin/ld: warning: /home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl/libmpllib.a(quaternion_supervisor.o) uses 2-byte wchar_t yet the output is to use 4-byte wchar_t; use of wchar_t values across objects may fail
+/opt/Xilinx/SDK/2015.3/gnu/arm/lin/bin/../lib/gcc/arm-xilinx-eabi/4.9.2/../../../../arm-xilinx-eabi/bin/ld: failed to merge target specific data of file /home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl/libmpllib.a(quaternion_supervisor.o)
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl/libmpllib.a(quaternion_supervisor.o): In function `inv_disable_quaternion':
+C:\STM32_EWARM\STM32L_MPLLIB\mpl\quaternion_supervisor.c:(.text+0xa78): undefined reference to `mpl_key'
+collect2: error: ld returned 1 exit status
+make: *** [IndoorLoc.elf] Error 1
+15:06:27 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printDataWithDMP':
+../src/mpu.c:124:2: warning: implicit declaration of function 'inv_get_sensor_type_gyro' [-Wimplicit-function-declaration]
+  inv_get_sensor_type_gyro(&data, &accuracy, &tstamp);
+  ^
+../src/mpu.c:126:2: warning: format '%u' expects argument of type 'unsigned int', but argument 2 has type 'long int' [-Wformat=]
+  printf("Quat: %ul\n\r", data);
+  ^
+../src/mpu.c:126:2: warning: format '%u' expects argument of type 'unsigned int', but argument 2 has type 'long int' [-Wformat=]
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+/opt/Xilinx/SDK/2015.3/gnu/arm/lin/bin/../lib/gcc/arm-xilinx-eabi/4.9.2/../../../../arm-xilinx-eabi/bin/ld: error: /home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl/libmpllib.a(quaternion_supervisor.o): Conflicting architecture profiles M/A
+/opt/Xilinx/SDK/2015.3/gnu/arm/lin/bin/../lib/gcc/arm-xilinx-eabi/4.9.2/../../../../arm-xilinx-eabi/bin/ld: warning: /home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl/libmpllib.a(quaternion_supervisor.o) uses 2-byte wchar_t yet the output is to use 4-byte wchar_t; use of wchar_t values across objects may fail
+/opt/Xilinx/SDK/2015.3/gnu/arm/lin/bin/../lib/gcc/arm-xilinx-eabi/4.9.2/../../../../arm-xilinx-eabi/bin/ld: failed to merge target specific data of file /home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl/libmpllib.a(quaternion_supervisor.o)
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl/libmpllib.a(quaternion_supervisor.o): In function `inv_disable_quaternion':
+C:\STM32_EWARM\STM32L_MPLLIB\mpl\quaternion_supervisor.c:(.text+0xa78): undefined reference to `mpl_key'
+collect2: error: ld returned 1 exit status
+make: *** [IndoorLoc.elf] Error 1
+15:06:37 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printDataWithDMP':
+../src/mpu.c:124:2: warning: implicit declaration of function 'inv_get_sensor_type_gyro' [-Wimplicit-function-declaration]
+  inv_get_sensor_type_gyro(&data, &accuracy, &tstamp);
+  ^
+../src/mpu.c:126:2: warning: unknown conversion type character 0xa in format [-Wformat=]
+  printf("Quat: %l\n\r", data);
+  ^
+../src/mpu.c:126:2: warning: too many arguments for format [-Wformat-extra-args]
+../src/mpu.c:126:2: warning: unknown conversion type character 0xa in format [-Wformat=]
+../src/mpu.c:126:2: warning: too many arguments for format [-Wformat-extra-args]
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+/opt/Xilinx/SDK/2015.3/gnu/arm/lin/bin/../lib/gcc/arm-xilinx-eabi/4.9.2/../../../../arm-xilinx-eabi/bin/ld: error: /home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl/libmpllib.a(quaternion_supervisor.o): Conflicting architecture profiles M/A
+/opt/Xilinx/SDK/2015.3/gnu/arm/lin/bin/../lib/gcc/arm-xilinx-eabi/4.9.2/../../../../arm-xilinx-eabi/bin/ld: warning: /home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl/libmpllib.a(quaternion_supervisor.o) uses 2-byte wchar_t yet the output is to use 4-byte wchar_t; use of wchar_t values across objects may fail
+/opt/Xilinx/SDK/2015.3/gnu/arm/lin/bin/../lib/gcc/arm-xilinx-eabi/4.9.2/../../../../arm-xilinx-eabi/bin/ld: failed to merge target specific data of file /home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl/libmpllib.a(quaternion_supervisor.o)
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl/libmpllib.a(quaternion_supervisor.o): In function `inv_disable_quaternion':
+C:\STM32_EWARM\STM32L_MPLLIB\mpl\quaternion_supervisor.c:(.text+0xa78): undefined reference to `mpl_key'
+collect2: error: ld returned 1 exit status
+make: *** [IndoorLoc.elf] Error 1
+15:07:15 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printDataWithDMP':
+../src/mpu.c:124:2: warning: implicit declaration of function 'inv_get_sensor_type_gyro' [-Wimplicit-function-declaration]
+  inv_get_sensor_type_gyro(&data, &accuracy, &tstamp);
+  ^
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+/opt/Xilinx/SDK/2015.3/gnu/arm/lin/bin/../lib/gcc/arm-xilinx-eabi/4.9.2/../../../../arm-xilinx-eabi/bin/ld: error: /home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl/libmpllib.a(quaternion_supervisor.o): Conflicting architecture profiles M/A
+/opt/Xilinx/SDK/2015.3/gnu/arm/lin/bin/../lib/gcc/arm-xilinx-eabi/4.9.2/../../../../arm-xilinx-eabi/bin/ld: warning: /home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl/libmpllib.a(quaternion_supervisor.o) uses 2-byte wchar_t yet the output is to use 4-byte wchar_t; use of wchar_t values across objects may fail
+/opt/Xilinx/SDK/2015.3/gnu/arm/lin/bin/../lib/gcc/arm-xilinx-eabi/4.9.2/../../../../arm-xilinx-eabi/bin/ld: failed to merge target specific data of file /home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl/libmpllib.a(quaternion_supervisor.o)
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl/libmpllib.a(quaternion_supervisor.o): In function `inv_disable_quaternion':
+C:\STM32_EWARM\STM32L_MPLLIB\mpl\quaternion_supervisor.c:(.text+0xa78): undefined reference to `mpl_key'
+collect2: error: ld returned 1 exit status
+make: *** [IndoorLoc.elf] Error 1
+15:13:30 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 170524	   2424	  24456	 197404	  3031c	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:13:32 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+15:22:34 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 170524	   2424	  24456	 197404	  3031c	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:22:35 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+15:23:04 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+15:23:38 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 170524	   2424	  24456	 197404	  3031c	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:23:40 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+15:24:51 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 170524	   2424	  24456	 197404	  3031c	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:24:53 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+15:25:19 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+15:25:40 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+15:26:00 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+15:26:27 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+15:26:43 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+15:31:23 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 170524	   2424	  24456	 197404	  3031c	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:31:25 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+15:32:11 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+15:33:49 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 170524	   2424	  24456	 197404	  3031c	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:33:56 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+15:34:34 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 170524	   2424	  24456	 197404	  3031c	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:34:36 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+15:35:00 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+15:35:24 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+15:36:17 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 170524	   2424	  24456	 197404	  3031c	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:36:19 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
