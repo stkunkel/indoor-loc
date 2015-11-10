@@ -113,14 +113,6 @@ void printDataWithDMP() {
 	//Print new line
 	printf("\r\n");
 
-	long int data;
-
-	inv_time_t tstamp;
-	u8 accuracy = 0;
-	inv_get_sensor_type_gyro(&data, &accuracy, &tstamp);
-
-	printf("Quat: %d\n\r", data);
-
 }
 
 /*
@@ -292,11 +284,13 @@ void printTemp(float* temp_conv) {
 void printQuat(long quat[QUATERNION_AMOUNT]) {
 	//Variables
 	int i;
+	float length = sqrtl(quat[0] + quat[1] + quat [2] + quat [3]);
 
 	//Print
 	printf("Quaternions: ");
 	for (i = 0; i < QUATERNION_AMOUNT; i++) {
-		printf("%lu", quat[i]);
+		printf("%f", quat[i]/length);
+		//printf("%lu", quat[i]);
 		if (i < QUATERNION_AMOUNT - 1) {
 			printf(", ");
 		}

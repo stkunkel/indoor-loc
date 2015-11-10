@@ -119,7 +119,7 @@ void printDataWithDMP() {
 	u8 accuracy = 0;
 	inv_get_sensor_type_gyro(&data, &accuracy, &tstamp);
 
-	printf("Quat: %d\n\r", data);
+	printf("Quat: %x\n\r", data);
 
 }
 

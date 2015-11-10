@@ -28,7 +28,7 @@
 								<option id="xilinx.gnu.compiler.inferred.swplatform.includes.1299524426" name="Software Platform Include Path" superClass="xilinx.gnu.compiler.inferred.swplatform.includes" valueType="includePath">
 									<listOptionValue builtIn="false" value="../../IndoorLoc_bsp/ps7_cortexa9_0/include"/>
 								</option>
-								<option id="xilinx.gnu.compiler.symbols.defined.625639265" superClass="xilinx.gnu.compiler.symbols.defined" valueType="definedSymbols">
+								<option id="xilinx.gnu.compiler.symbols.defined.625639265" name="Defined symbols (-D)" superClass="xilinx.gnu.compiler.symbols.defined" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="MOTION_DRIVER_TARGET_ZEDBOARD"/>
 									<listOptionValue builtIn="false" value="MPU9150"/>
 								</option>
@@ -50,6 +50,13 @@
 									<listOptionValue builtIn="false" value="-Wl,--start-group,-lxil,-lgcc,-lc,--end-group"/>
 								</option>
 								<option id="xilinx.gnu.c.linker.option.lscript.1667173078" name="Linker Script" superClass="xilinx.gnu.c.linker.option.lscript" value="../src/lscript.ld" valueType="string"/>
+								<option id="xilinx.gnu.c.link.option.paths.14700724" name="Library search path (-L)" superClass="xilinx.gnu.c.link.option.paths" valueType="libPaths">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/mpu9150/mpl}&quot;"/>
+								</option>
+								<option id="xilinx.gnu.c.link.option.libs.641277691" name="Libraries (-l)" superClass="xilinx.gnu.c.link.option.libs" valueType="libs">
+									<listOptionValue builtIn="false" value="mpllib"/>
+									<listOptionValue builtIn="false" value="libmplmpu"/>
+								</option>
 								<inputType id="xilinx.gnu.linker.input.1417488787" superClass="xilinx.gnu.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>

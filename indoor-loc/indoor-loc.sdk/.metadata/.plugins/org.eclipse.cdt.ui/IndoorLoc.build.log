@@ -1,6 +1,70 @@
-12:26:29 **** Incremental Build of configuration Debug for project IndoorLoc ****
+14:57:22 **** Auto Build of configuration Debug for project IndoorLoc ****
 make all 
-make: Nothing to be done for `all'.
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printDataWithDMP':
+../src/mpu.c:120:2: warning: implicit declaration of function 'inv_get_sensor_type_gyro' [-Wimplicit-function-declaration]
+  inv_get_sensor_type_gyro(&data, &accuracy, &tstamp);
+  ^
+../src/mpu.c:122:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long int' [-Wformat=]
+  printf("Quat: %d\n\r", data);
+  ^
+../src/mpu.c:122:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long int' [-Wformat=]
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+./src/mpu9150/mpl/data_builder.o: In function `inv_register_data_cb':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/data_builder.c:881: undefined reference to `_MLPrintLog'
+./src/mpu9150/mpl/eMPL_outputs.o: In function `inv_get_sensor_type_heading':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/eMPL_outputs.c:129: undefined reference to `atan2f'
+./src/mpu9150/mpl/eMPL_outputs.o: In function `inv_get_sensor_type_euler':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/eMPL_outputs.c:173: undefined reference to `atan2f'
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/eMPL_outputs.c:178: undefined reference to `sqrtf'
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/eMPL_outputs.c:178: undefined reference to `atan2f'
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/eMPL_outputs.c:198: undefined reference to `atan2f'
+./src/mpu9150/mpl/hal_outputs.o: In function `google_orientation':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/hal_outputs.c:275: undefined reference to `atan2f'
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/hal_outputs.c:276: undefined reference to `atan2f'
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/hal_outputs.c:277: undefined reference to `asinf'
+./src/mpu9150/mpl/ml_math_func.o: In function `inv_compass_angle':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/ml_math_func.c:114: undefined reference to `atan2f'
+./src/mpu9150/mpl/ml_math_func.o: In function `inv_vector_normalize':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/ml_math_func.c:261: undefined reference to `sqrt'
+./src/mpu9150/mpl/ml_math_func.o: In function `quaternion_to_rotation_angle':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/ml_math_func.c:296: undefined reference to `acos'
+./src/mpu9150/mpl/ml_math_func.o: In function `inv_q_norm4':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/ml_math_func.c:368: undefined reference to `sqrtf'
+./src/mpu9150/mpl/ml_math_func.o: In function `inv_vector_norm':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/ml_math_func.c:710: undefined reference to `sqrt'
+./src/mpu9150/mpl/mlmath.o: In function `ml_asin':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/mlmath.c:17: undefined reference to `asin'
+./src/mpu9150/mpl/mlmath.o: In function `ml_atan':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/mlmath.c:22: undefined reference to `atan'
+./src/mpu9150/mpl/mlmath.o: In function `ml_atan2':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/mlmath.c:27: undefined reference to `atan2'
+./src/mpu9150/mpl/mlmath.o: In function `ml_log':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/mlmath.c:32: undefined reference to `log'
+./src/mpu9150/mpl/mlmath.o: In function `ml_sqrt':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/mlmath.c:37: undefined reference to `sqrt'
+./src/mpu9150/mpl/mlmath.o: In function `ml_ceil':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/mlmath.c:42: undefined reference to `ceil'
+./src/mpu9150/mpl/mlmath.o: In function `ml_floor':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/mlmath.c:47: undefined reference to `floor'
+./src/mpu9150/mpl/mlmath.o: In function `ml_cos':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/mlmath.c:52: undefined reference to `cos'
+./src/mpu9150/mpl/mlmath.o: In function `ml_sin':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/mlmath.c:57: undefined reference to `sin'
+./src/mpu9150/mpl/mlmath.o: In function `ml_acos':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/mlmath.c:62: undefined reference to `acos'
+./src/mpu9150/mpl/mlmath.o: In function `ml_pow':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/mlmath.c:67: undefined reference to `pow'
+./src/mpu9150/mpl/mpl.o: In function `__print_result_location':
+/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu9150/mpl/log.h:343: undefined reference to `_MLPrintLog'
+collect2: error: ld returned 1 exit status
+make: *** [IndoorLoc.elf] Error 1
 
-12:26:30 Build Finished (took 67ms)
+14:57:23 Build Finished (took 335ms)
 
