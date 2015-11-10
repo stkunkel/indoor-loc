@@ -58,7 +58,7 @@
 /*
  * Defines
  */
-#define DATA_NO_DMP_RUNS 	20
+#define DATA_NO_DMP_RUNS 	10
 #define PWM_RUNS 			10
 
 /*
@@ -80,14 +80,10 @@ int main() {
 	}
 
 	//2. Get Data without DMP
-/*	for (i = 0; i <= DATA_NO_DMP_RUNS; i++) {
-		sleep(5);
-		status = printDataNoDMP();
-		if (status != XST_SUCCESS) {
-			printf("run.c: Error Printing Sensor Data\r\n");
-			break;
-		}
-	}*/
+//	for (i = 0; i <= DATA_NO_DMP_RUNS; i++) {
+//		sleep(1);
+		printDataNoDMP();
+//	}
 
 	//3. Get Data with DMP
 	printDataWithDMP();

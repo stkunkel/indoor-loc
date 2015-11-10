@@ -279,9 +279,7 @@ int iic_burstWrite(XIicPs *IicPs, u8 Address, u8 Register, u32 length, unsigned 
 		return XST_FAILURE;
 	}
 	//print and return
-	if (length > 2)
-		xil_printf("[iic_burstWrite] 0x%02X(0x%02X)=0x%X\n\r", Address, Register,
-				*Data);
+	//xil_printf("[iic_burstWrite] 0x%02X(0x%02X)=0x%X\n\r", Address, Register, *Data);
 	return XST_SUCCESS;
 }
 
@@ -388,8 +386,7 @@ int iic_read2(XIicPs *IicPs, u8 Address, u8 Register, u8 *Data,
 	}
 //	xil_printf("%d\n\r", __LINE__);
 
-	xil_printf("[iic_read2] 0x%02X(0x%02X)=0x%X\n\r", Address, Register,
-			*Data);
+	//xil_printf("[iic_read2] 0x%02X(0x%02X)=0x%X\n\r", Address, Register, *Data);
 
 	return XST_SUCCESS;
 }
