@@ -301,7 +301,7 @@ void printQuat(long quat[QUATERNION_AMOUNT]) {
 	printf("Quaternions: ");
 	for (i = 0; i < QUATERNION_AMOUNT; i++) {
 		//printf("%lld", (long long) quat[i]>>30);
-		printf("%f", (double) quat[i]/QUATERNION_SCALING);
+		printf("%f", (double) quat[i]/1073741824);
 		if (i < QUATERNION_AMOUNT - 1) {
 			printf(", ");
 		}
