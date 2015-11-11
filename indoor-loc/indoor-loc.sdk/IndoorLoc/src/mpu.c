@@ -49,63 +49,63 @@ void printDataWithDMP() {
 		}
 	} while (status != XST_SUCCESS);
 
-	//Convert Gyro
-	status = convertGyroData(gyro, conv);
-	if (status != 0) {
-		printf("Error converting Gyroscope data.");
-	} else {
-
-		//Print Gyro
-		printGyro(conv);
-	}
-	printf(" | ");
-
-	//Convert Acc
-	status = convertAccData(accel, conv);
-	if (status != 0) {
-		printf("Error converting Acc data.");
-	} else {
-
-		//Print Acc
-		printAccel(conv);
-	}
-	printf(" | ");
-
-	//Get Compass
-	status = mpu_get_compass_reg(compass, &timestamp);
-	if (status != 0) {
-		printf("Error getting Compass data.");
-	} else {
-
-		//Convert Compass
-		status = convertCompassData(compass, conv);
-		if (status != 0) {
-			printf("Error converting Compass data.");
-		} else {
-
-			//Print Compass
-			printCompass(conv);
-		}
-	}
-	printf(" | ");
-
-	//Get Temperature
-	status = mpu_get_temperature(&temp_raw, &timestamp);
-	if (status != 0) {
-		printf("Error getting Temperature data.");
-	} else {
-
-		//Convert Temperature
-		status = convertTemperaturetoC(&temp_raw, &temp_conv);
-		if (status != 0) {
-			printf("Error converting Temperature data.");
-		} else {
-
-			//Print Temperature
-			printTemp(&temp_conv);
-		}
-	}
-	printf(" | ");
+//	//Convert Gyro
+//	status = convertGyroData(gyro, conv);
+//	if (status != 0) {
+//		printf("Error converting Gyroscope data.");
+//	} else {
+//
+//		//Print Gyro
+//		printGyro(conv);
+//	}
+//	printf(" | ");
+//
+//	//Convert Acc
+//	status = convertAccData(accel, conv);
+//	if (status != 0) {
+//		printf("Error converting Acc data.");
+//	} else {
+//
+//		//Print Acc
+//		printAccel(conv);
+//	}
+//	printf(" | ");
+//
+//	//Get Compass
+//	status = mpu_get_compass_reg(compass, &timestamp);
+//	if (status != 0) {
+//		printf("Error getting Compass data.");
+//	} else {
+//
+//		//Convert Compass
+//		status = convertCompassData(compass, conv);
+//		if (status != 0) {
+//			printf("Error converting Compass data.");
+//		} else {
+//
+//			//Print Compass
+//			printCompass(conv);
+//		}
+//	}
+//	printf(" | ");
+//
+//	//Get Temperature
+//	status = mpu_get_temperature(&temp_raw, &timestamp);
+//	if (status != 0) {
+//		printf("Error getting Temperature data.");
+//	} else {
+//
+//		//Convert Temperature
+//		status = convertTemperaturetoC(&temp_raw, &temp_conv);
+//		if (status != 0) {
+//			printf("Error converting Temperature data.");
+//		} else {
+//
+//			//Print Temperature
+//			printTemp(&temp_conv);
+//		}
+//	}
+//	printf(" | ");
 
 	//Print Quaternions
 	printQuat(quat);
@@ -300,7 +300,8 @@ void printQuat(long quat[QUATERNION_AMOUNT]) {
 	//Print
 	printf("Quaternions: ");
 	for (i = 0; i < QUATERNION_AMOUNT; i++) {
-		printf("%lu", quat[i]);
+		//printf("%lld", (long long) quat[i]>>30);
+		printf("%f", (double) quat[i]/1073741824);
 		if (i < QUATERNION_AMOUNT - 1) {
 			printf(", ");
 		}

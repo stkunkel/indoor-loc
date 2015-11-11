@@ -1,0 +1,31 @@
+/*
+ * quaternion.h
+ *
+ *  Created on: Nov 11, 2015
+ *      Author: ruppi
+ */
+
+#ifndef QUATERNION_H_
+#define QUATERNION_H_
+
+
+
+#endif /* QUATERNION_H_ */
+
+/*
+ * Quaternion Struct
+ */
+typedef struct {
+	float w, x, y, z;
+} Quaternion;
+
+
+/*
+ * Functions
+ */
+float getQuaternionLength(struct Quaternion* quat);
+void normalizeQuaternion(struct Quaternion* quat);
+void getQuaternionConjugate(Quaternion* quat, Quaternion* conjugate)
+void addQuaternions(struct Quaternion* quat1, struct Quaternion* quat2, struct Quaternion* result);
+void substractQuaternions(struct Quaternion* quat1, struct Quaternion* quat2, struct Quaternion* result);
+void multiplyQuaternions(struct Quaternion* quat1, struct Quaternion* quat2, struct Quaternion* result);
