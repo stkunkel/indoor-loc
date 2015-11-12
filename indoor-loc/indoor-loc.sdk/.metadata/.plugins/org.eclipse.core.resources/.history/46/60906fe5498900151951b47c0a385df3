@@ -27,7 +27,7 @@ void printDataWithDMP() {
 	unsigned long timestamp;
 	short int sensors;
 	unsigned char* more = (unsigned char *) malloc(100);
-	float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT], sigma, theta, psi;
+	float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT];
 
 	//init DMP
 	if (!dmpReady) {
@@ -117,13 +117,10 @@ void printDataWithDMP() {
 	}
 	printf(" | ");
 
-	//Computate Euler Angles
-	eulerGetSigma(quat_conv, &sigma);
-	eulerGetTheta(quat_conv, &theta);
-	eulerGetPsi(quat_conv, &psi);
+	//Compute Euler Angles
 
 	//Print Euler Angles
-	printEulerAngles(&sigma, &theta, &psi);
+	printEulerAngles(quat);
 
 	//Print new line
 	printf("\r\n");
@@ -335,9 +332,17 @@ void printRotationAngle(long quat[QUATERNION_AMOUNT]) {
  *
  * Input_ Quaternions, already converted
  */
-void printEulerAngles(float* sigma, float* theta, float* psi) {
+void printEulerAngles(float quat[QUATERNION_AMOUNT]) {
+	//Variables
+	float sigma, theta, psi;
+
+	//Computation
+	eulerGetSigma(quat, &sigma);
+	eulerGetTheta(quat, &theta);
+	eulerGetPsi(quat, &psi);
+
 	//Print
-	printf("Euler Angles: roll=%f, pitch=%f, yaw=%f", *sigma, *theta, *psi);
+	printf("Euler Angles: roll=%f, pitch=%f, yaw=%f", sigma, theta, psi);
 }
 
 /*

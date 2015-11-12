@@ -959,3 +959,601 @@ make: Nothing to be done for `all'.
 15:18:35 **** Incremental Build of configuration Debug for project IndoorLoc ****
 make all 
 make: Nothing to be done for `all'.
+15:20:30 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+15:23:45 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printDataWithDMP':
+../src/mpu.c:30:30: warning: unused variable 'temp_conv' [-Wunused-variable]
+  float conv[NUMBER_OF_AXES], temp_conv;
+                              ^
+../src/mpu.c:26:7: warning: unused variable 'temp_raw' [-Wunused-variable]
+  long temp_raw, quat[QUATERNION_AMOUNT];
+       ^
+../src/mpu.c:25:53: warning: unused variable 'compass' [-Wunused-variable]
+  short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
+                                                     ^
+../src/mpu.c: In function 'printEulerAngles':
+../src/mpu.c:346:5: warning: 'status' is used uninitialized in this function [-Wuninitialized]
+  if (status == XST_SUCCESS) {
+     ^
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 171348	   2424	  24456	 198228	  30654	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:25:47 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printDataWithDMP':
+../src/mpu.c:116:12: warning: passing argument 1 of 'printQuat' from incompatible pointer type
+  printQuat(quat);
+            ^
+In file included from ../src/mpu.c:11:0:
+../src/mpu.h:48:6: note: expected 'float *' but argument is of type 'long int *'
+ void printQuat(float quat[QUATERNION_AMOUNT]);
+      ^
+../src/mpu.c:30:30: warning: unused variable 'temp_conv' [-Wunused-variable]
+  float conv[NUMBER_OF_AXES], temp_conv;
+                              ^
+../src/mpu.c:26:7: warning: unused variable 'temp_raw' [-Wunused-variable]
+  long temp_raw, quat[QUATERNION_AMOUNT];
+       ^
+../src/mpu.c:25:53: warning: unused variable 'compass' [-Wunused-variable]
+  short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
+                                                     ^
+../src/mpu.c: At top level:
+../src/mpu.c:307:6: error: conflicting types for 'printQuat'
+ void printQuat(long quat[QUATERNION_AMOUNT]) {
+      ^
+In file included from ../src/mpu.c:11:0:
+../src/mpu.h:48:6: note: previous declaration of 'printQuat' was here
+ void printQuat(float quat[QUATERNION_AMOUNT]);
+      ^
+make: *** [src/mpu.o] Error 1
+15:25:54 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printDataWithDMP':
+../src/mpu.c:30:30: warning: unused variable 'temp_conv' [-Wunused-variable]
+  float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT];
+                              ^
+../src/mpu.c:30:8: warning: unused variable 'conv' [-Wunused-variable]
+  float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT];
+        ^
+../src/mpu.c:26:7: warning: unused variable 'temp_raw' [-Wunused-variable]
+  long temp_raw, quat[QUATERNION_AMOUNT];
+       ^
+../src/mpu.c:25:53: warning: unused variable 'compass' [-Wunused-variable]
+  short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
+                                                     ^
+../src/mpu.c: In function 'printQuat':
+../src/mpu.c:314:17: error: 'conv' undeclared (first use in this function)
+    printf("%f", conv[i]);
+                 ^
+../src/mpu.c:314:17: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [src/mpu.o] Error 1
+15:26:00 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printDataWithDMP':
+../src/mpu.c:30:30: warning: unused variable 'temp_conv' [-Wunused-variable]
+  float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT];
+                              ^
+../src/mpu.c:30:8: warning: unused variable 'conv' [-Wunused-variable]
+  float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT];
+        ^
+../src/mpu.c:26:7: warning: unused variable 'temp_raw' [-Wunused-variable]
+  long temp_raw, quat[QUATERNION_AMOUNT];
+       ^
+../src/mpu.c:25:53: warning: unused variable 'compass' [-Wunused-variable]
+  short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
+                                                     ^
+../src/mpu.c: In function 'printEulerAngles':
+../src/mpu.c:341:5: warning: 'status' is used uninitialized in this function [-Wuninitialized]
+  if (status == XST_SUCCESS) {
+     ^
+Finished building: ../src/mpu.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 171284	   2424	  24456	 198164	  30614	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:26:45 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printDataWithDMP':
+../src/mpu.c:30:30: warning: unused variable 'temp_conv' [-Wunused-variable]
+  float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT];
+                              ^
+../src/mpu.c:30:8: warning: unused variable 'conv' [-Wunused-variable]
+  float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT];
+        ^
+../src/mpu.c:26:7: warning: unused variable 'temp_raw' [-Wunused-variable]
+  long temp_raw, quat[QUATERNION_AMOUNT];
+       ^
+../src/mpu.c:25:53: warning: unused variable 'compass' [-Wunused-variable]
+  short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
+                                                     ^
+../src/mpu.c: In function 'printEulerAngles':
+../src/mpu.c:341:5: warning: 'status' is used uninitialized in this function [-Wuninitialized]
+  if (status == XST_SUCCESS) {
+     ^
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 171284	   2424	  24456	 198164	  30614	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:27:06 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printDataWithDMP':
+../src/mpu.c:123:19: warning: passing argument 1 of 'printEulerAngles' from incompatible pointer type
+  printEulerAngles(quat);
+                   ^
+In file included from ../src/mpu.c:11:0:
+../src/mpu.h:50:6: note: expected 'float *' but argument is of type 'long int *'
+ void printEulerAngles(float quat[QUATERNION_AMOUNT]);
+      ^
+../src/mpu.c:30:30: warning: unused variable 'temp_conv' [-Wunused-variable]
+  float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT];
+                              ^
+../src/mpu.c:30:8: warning: unused variable 'conv' [-Wunused-variable]
+  float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT];
+        ^
+../src/mpu.c:26:7: warning: unused variable 'temp_raw' [-Wunused-variable]
+  long temp_raw, quat[QUATERNION_AMOUNT];
+       ^
+../src/mpu.c:25:53: warning: unused variable 'compass' [-Wunused-variable]
+  short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
+                                                     ^
+../src/mpu.c: At top level:
+../src/mpu.c:334:6: error: conflicting types for 'printEulerAngles'
+ void printEulerAngles(long quat[QUATERNION_AMOUNT]) {
+      ^
+In file included from ../src/mpu.c:11:0:
+../src/mpu.h:50:6: note: previous declaration of 'printEulerAngles' was here
+ void printEulerAngles(float quat[QUATERNION_AMOUNT]);
+      ^
+make: *** [src/mpu.o] Error 1
+15:27:29 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printDataWithDMP':
+../src/mpu.c:123:19: warning: passing argument 1 of 'printEulerAngles' from incompatible pointer type
+  printEulerAngles(quat);
+                   ^
+In file included from ../src/mpu.c:11:0:
+../src/mpu.h:50:6: note: expected 'float *' but argument is of type 'long int *'
+ void printEulerAngles(float quat[QUATERNION_AMOUNT]);
+      ^
+../src/mpu.c:30:30: warning: unused variable 'temp_conv' [-Wunused-variable]
+  float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT];
+                              ^
+../src/mpu.c:30:8: warning: unused variable 'conv' [-Wunused-variable]
+  float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT];
+        ^
+../src/mpu.c:26:7: warning: unused variable 'temp_raw' [-Wunused-variable]
+  long temp_raw, quat[QUATERNION_AMOUNT];
+       ^
+../src/mpu.c:25:53: warning: unused variable 'compass' [-Wunused-variable]
+  short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
+                                                     ^
+../src/mpu.c: In function 'printEulerAngles':
+../src/mpu.c:339:8: warning: unused variable 'conv' [-Wunused-variable]
+  float conv[QUATERNION_AMOUNT], sigma, theta, psi;
+        ^
+../src/mpu.c:343:5: warning: 'status' is used uninitialized in this function [-Wuninitialized]
+  if (status == XST_SUCCESS) {
+     ^
+Finished building: ../src/mpu.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 171284	   2424	  24456	 198164	  30614	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:27:47 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printDataWithDMP':
+../src/mpu.c:123:19: warning: passing argument 1 of 'printEulerAngles' from incompatible pointer type
+  printEulerAngles(quat);
+                   ^
+In file included from ../src/mpu.c:11:0:
+../src/mpu.h:50:6: note: expected 'float *' but argument is of type 'long int *'
+ void printEulerAngles(float quat[QUATERNION_AMOUNT]);
+      ^
+../src/mpu.c:30:30: warning: unused variable 'temp_conv' [-Wunused-variable]
+  float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT];
+                              ^
+../src/mpu.c:30:8: warning: unused variable 'conv' [-Wunused-variable]
+  float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT];
+        ^
+../src/mpu.c:26:7: warning: unused variable 'temp_raw' [-Wunused-variable]
+  long temp_raw, quat[QUATERNION_AMOUNT];
+       ^
+../src/mpu.c:25:53: warning: unused variable 'compass' [-Wunused-variable]
+  short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
+                                                     ^
+../src/mpu.c: In function 'printEulerAngles':
+../src/mpu.c:337:6: warning: unused variable 'status' [-Wunused-variable]
+  int status;
+      ^
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 171188	   2424	  24456	 198068	  305b4	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:27:51 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printDataWithDMP':
+../src/mpu.c:123:19: warning: passing argument 1 of 'printEulerAngles' from incompatible pointer type
+  printEulerAngles(quat);
+                   ^
+In file included from ../src/mpu.c:11:0:
+../src/mpu.h:50:6: note: expected 'float *' but argument is of type 'long int *'
+ void printEulerAngles(float quat[QUATERNION_AMOUNT]);
+      ^
+../src/mpu.c:30:30: warning: unused variable 'temp_conv' [-Wunused-variable]
+  float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT];
+                              ^
+../src/mpu.c:30:8: warning: unused variable 'conv' [-Wunused-variable]
+  float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT];
+        ^
+../src/mpu.c:26:7: warning: unused variable 'temp_raw' [-Wunused-variable]
+  long temp_raw, quat[QUATERNION_AMOUNT];
+       ^
+../src/mpu.c:25:53: warning: unused variable 'compass' [-Wunused-variable]
+  short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
+                                                     ^
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 171188	   2424	  24456	 198068	  305b4	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:30:15 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printDataWithDMP':
+../src/mpu.c:123:19: warning: passing argument 1 of 'printEulerAngles' from incompatible pointer type
+  printEulerAngles(quat);
+                   ^
+In file included from ../src/mpu.c:11:0:
+../src/mpu.h:50:6: note: expected 'float *' but argument is of type 'long int *'
+ void printEulerAngles(float* sigma, float* theta, float* psi);
+      ^
+../src/mpu.c:123:2: error: too few arguments to function 'printEulerAngles'
+  printEulerAngles(quat);
+  ^
+In file included from ../src/mpu.c:11:0:
+../src/mpu.h:50:6: note: declared here
+ void printEulerAngles(float* sigma, float* theta, float* psi);
+      ^
+../src/mpu.c:30:30: warning: unused variable 'temp_conv' [-Wunused-variable]
+  float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT];
+                              ^
+../src/mpu.c:30:8: warning: unused variable 'conv' [-Wunused-variable]
+  float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT];
+        ^
+../src/mpu.c:26:7: warning: unused variable 'temp_raw' [-Wunused-variable]
+  long temp_raw, quat[QUATERNION_AMOUNT];
+       ^
+../src/mpu.c:25:53: warning: unused variable 'compass' [-Wunused-variable]
+  short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
+                                                     ^
+../src/mpu.c: At top level:
+../src/mpu.c:335:6: error: conflicting types for 'printEulerAngles'
+ void printEulerAngles(float quat[QUATERNION_AMOUNT]) {
+      ^
+In file included from ../src/mpu.c:11:0:
+../src/mpu.h:50:6: note: previous declaration of 'printEulerAngles' was here
+ void printEulerAngles(float* sigma, float* theta, float* psi);
+      ^
+make: *** [src/mpu.o] Error 1
+15:30:18 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printDataWithDMP':
+../src/mpu.c:121:16: warning: passing argument 1 of 'eulerGetSigma' from incompatible pointer type
+  eulerGetSigma(quat, &sigma);
+                ^
+In file included from ../src/mpu.h:20:0,
+                 from ../src/mpu.c:11:
+../src/math_utils.h:17:6: note: expected 'float *' but argument is of type 'long int *'
+ void eulerGetSigma(float quat[QUATERNION_AMOUNT], float* sigma);
+      ^
+../src/mpu.c:122:16: warning: passing argument 1 of 'eulerGetTheta' from incompatible pointer type
+  eulerGetTheta(quat, &theta);
+                ^
+In file included from ../src/mpu.h:20:0,
+                 from ../src/mpu.c:11:
+../src/math_utils.h:18:6: note: expected 'float *' but argument is of type 'long int *'
+ void eulerGetTheta(float quat[QUATERNION_AMOUNT], float* theta);
+      ^
+../src/mpu.c:123:14: warning: passing argument 1 of 'eulerGetPsi' from incompatible pointer type
+  eulerGetPsi(quat, &psi);
+              ^
+In file included from ../src/mpu.h:20:0,
+                 from ../src/mpu.c:11:
+../src/math_utils.h:19:6: note: expected 'float *' but argument is of type 'long int *'
+ void eulerGetPsi(float quat[QUATERNION_AMOUNT], float* psi);
+      ^
+../src/mpu.c:126:19: warning: passing argument 1 of 'printEulerAngles' from incompatible pointer type
+  printEulerAngles(quat);
+                   ^
+In file included from ../src/mpu.c:11:0:
+../src/mpu.h:50:6: note: expected 'float *' but argument is of type 'long int *'
+ void printEulerAngles(float* sigma, float* theta, float* psi);
+      ^
+../src/mpu.c:126:2: error: too few arguments to function 'printEulerAngles'
+  printEulerAngles(quat);
+  ^
+In file included from ../src/mpu.c:11:0:
+../src/mpu.h:50:6: note: declared here
+ void printEulerAngles(float* sigma, float* theta, float* psi);
+      ^
+../src/mpu.c:30:30: warning: unused variable 'temp_conv' [-Wunused-variable]
+  float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT], sigma, theta, psi;
+                              ^
+../src/mpu.c:30:8: warning: unused variable 'conv' [-Wunused-variable]
+  float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT], sigma, theta, psi;
+        ^
+../src/mpu.c:26:7: warning: unused variable 'temp_raw' [-Wunused-variable]
+  long temp_raw, quat[QUATERNION_AMOUNT];
+       ^
+../src/mpu.c:25:53: warning: unused variable 'compass' [-Wunused-variable]
+  short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
+                                                     ^
+../src/mpu.c: In function 'printEulerAngles':
+../src/mpu.c:340:2: warning: format '%f' expects argument of type 'double', but argument 2 has type 'float *' [-Wformat=]
+  printf("Euler Angles: roll=%f, pitch=%f, yaw=%f", sigma, theta, psi);
+  ^
+../src/mpu.c:340:2: warning: format '%f' expects argument of type 'double', but argument 3 has type 'float *' [-Wformat=]
+../src/mpu.c:340:2: warning: format '%f' expects argument of type 'double', but argument 4 has type 'float *' [-Wformat=]
+../src/mpu.c:340:2: warning: format '%f' expects argument of type 'double', but argument 2 has type 'float *' [-Wformat=]
+../src/mpu.c:340:2: warning: format '%f' expects argument of type 'double', but argument 3 has type 'float *' [-Wformat=]
+../src/mpu.c:340:2: warning: format '%f' expects argument of type 'double', but argument 4 has type 'float *' [-Wformat=]
+make: *** [src/mpu.o] Error 1
+15:30:33 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printDataWithDMP':
+../src/mpu.c:121:16: warning: passing argument 1 of 'eulerGetSigma' from incompatible pointer type
+  eulerGetSigma(quat, &sigma);
+                ^
+In file included from ../src/mpu.h:20:0,
+                 from ../src/mpu.c:11:
+../src/math_utils.h:17:6: note: expected 'float *' but argument is of type 'long int *'
+ void eulerGetSigma(float quat[QUATERNION_AMOUNT], float* sigma);
+      ^
+../src/mpu.c:122:16: warning: passing argument 1 of 'eulerGetTheta' from incompatible pointer type
+  eulerGetTheta(quat, &theta);
+                ^
+In file included from ../src/mpu.h:20:0,
+                 from ../src/mpu.c:11:
+../src/math_utils.h:18:6: note: expected 'float *' but argument is of type 'long int *'
+ void eulerGetTheta(float quat[QUATERNION_AMOUNT], float* theta);
+      ^
+../src/mpu.c:123:14: warning: passing argument 1 of 'eulerGetPsi' from incompatible pointer type
+  eulerGetPsi(quat, &psi);
+              ^
+In file included from ../src/mpu.h:20:0,
+                 from ../src/mpu.c:11:
+../src/math_utils.h:19:6: note: expected 'float *' but argument is of type 'long int *'
+ void eulerGetPsi(float quat[QUATERNION_AMOUNT], float* psi);
+      ^
+../src/mpu.c:126:19: warning: passing argument 1 of 'printEulerAngles' from incompatible pointer type
+  printEulerAngles(quat);
+                   ^
+In file included from ../src/mpu.c:11:0:
+../src/mpu.h:50:6: note: expected 'float *' but argument is of type 'long int *'
+ void printEulerAngles(float* sigma, float* theta, float* psi);
+      ^
+../src/mpu.c:126:2: error: too few arguments to function 'printEulerAngles'
+  printEulerAngles(quat);
+  ^
+In file included from ../src/mpu.c:11:0:
+../src/mpu.h:50:6: note: declared here
+ void printEulerAngles(float* sigma, float* theta, float* psi);
+      ^
+../src/mpu.c:30:30: warning: unused variable 'temp_conv' [-Wunused-variable]
+  float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT], sigma, theta, psi;
+                              ^
+../src/mpu.c:30:8: warning: unused variable 'conv' [-Wunused-variable]
+  float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT], sigma, theta, psi;
+        ^
+../src/mpu.c:26:7: warning: unused variable 'temp_raw' [-Wunused-variable]
+  long temp_raw, quat[QUATERNION_AMOUNT];
+       ^
+../src/mpu.c:25:53: warning: unused variable 'compass' [-Wunused-variable]
+  short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
+                                                     ^
+../src/mpu.c: In function 'printEulerAngles':
+../src/mpu.c:340:2: warning: format '%f' expects argument of type 'double', but argument 2 has type 'float **' [-Wformat=]
+  printf("Euler Angles: roll=%f, pitch=%f, yaw=%f", &sigma, &theta, &psi);
+  ^
+../src/mpu.c:340:2: warning: format '%f' expects argument of type 'double', but argument 3 has type 'float **' [-Wformat=]
+../src/mpu.c:340:2: warning: format '%f' expects argument of type 'double', but argument 4 has type 'float **' [-Wformat=]
+../src/mpu.c:340:2: warning: format '%f' expects argument of type 'double', but argument 2 has type 'float **' [-Wformat=]
+../src/mpu.c:340:2: warning: format '%f' expects argument of type 'double', but argument 3 has type 'float **' [-Wformat=]
+../src/mpu.c:340:2: warning: format '%f' expects argument of type 'double', but argument 4 has type 'float **' [-Wformat=]
+make: *** [src/mpu.o] Error 1
+15:30:49 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printDataWithDMP':
+../src/mpu.c:121:16: warning: passing argument 1 of 'eulerGetSigma' from incompatible pointer type
+  eulerGetSigma(quat, &sigma);
+                ^
+In file included from ../src/mpu.h:20:0,
+                 from ../src/mpu.c:11:
+../src/math_utils.h:17:6: note: expected 'float *' but argument is of type 'long int *'
+ void eulerGetSigma(float quat[QUATERNION_AMOUNT], float* sigma);
+      ^
+../src/mpu.c:122:16: warning: passing argument 1 of 'eulerGetTheta' from incompatible pointer type
+  eulerGetTheta(quat, &theta);
+                ^
+In file included from ../src/mpu.h:20:0,
+                 from ../src/mpu.c:11:
+../src/math_utils.h:18:6: note: expected 'float *' but argument is of type 'long int *'
+ void eulerGetTheta(float quat[QUATERNION_AMOUNT], float* theta);
+      ^
+../src/mpu.c:123:14: warning: passing argument 1 of 'eulerGetPsi' from incompatible pointer type
+  eulerGetPsi(quat, &psi);
+              ^
+In file included from ../src/mpu.h:20:0,
+                 from ../src/mpu.c:11:
+../src/math_utils.h:19:6: note: expected 'float *' but argument is of type 'long int *'
+ void eulerGetPsi(float quat[QUATERNION_AMOUNT], float* psi);
+      ^
+../src/mpu.c:126:19: warning: passing argument 1 of 'printEulerAngles' from incompatible pointer type
+  printEulerAngles(quat);
+                   ^
+In file included from ../src/mpu.c:11:0:
+../src/mpu.h:50:6: note: expected 'float *' but argument is of type 'long int *'
+ void printEulerAngles(float* sigma, float* theta, float* psi);
+      ^
+../src/mpu.c:126:2: error: too few arguments to function 'printEulerAngles'
+  printEulerAngles(quat);
+  ^
+In file included from ../src/mpu.c:11:0:
+../src/mpu.h:50:6: note: declared here
+ void printEulerAngles(float* sigma, float* theta, float* psi);
+      ^
+../src/mpu.c:30:30: warning: unused variable 'temp_conv' [-Wunused-variable]
+  float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT], sigma, theta, psi;
+                              ^
+../src/mpu.c:30:8: warning: unused variable 'conv' [-Wunused-variable]
+  float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT], sigma, theta, psi;
+        ^
+../src/mpu.c:26:7: warning: unused variable 'temp_raw' [-Wunused-variable]
+  long temp_raw, quat[QUATERNION_AMOUNT];
+       ^
+../src/mpu.c:25:53: warning: unused variable 'compass' [-Wunused-variable]
+  short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
+                                                     ^
+make: *** [src/mpu.o] Error 1
+15:31:35 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printDataWithDMP':
+../src/mpu.c:30:30: warning: unused variable 'temp_conv' [-Wunused-variable]
+  float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT], sigma, theta, psi;
+                              ^
+../src/mpu.c:30:8: warning: unused variable 'conv' [-Wunused-variable]
+  float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT], sigma, theta, psi;
+        ^
+../src/mpu.c:26:7: warning: unused variable 'temp_raw' [-Wunused-variable]
+  long temp_raw, quat[QUATERNION_AMOUNT];
+       ^
+../src/mpu.c:25:53: warning: unused variable 'compass' [-Wunused-variable]
+  short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
+                                                     ^
+Finished building: ../src/mpu.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 171252	   2424	  24456	 198132	  305f4	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:31:42 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.

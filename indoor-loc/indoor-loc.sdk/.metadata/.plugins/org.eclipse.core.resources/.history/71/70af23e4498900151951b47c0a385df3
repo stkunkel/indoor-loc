@@ -47,7 +47,7 @@ void printCompass(float conv[NUMBER_OF_AXES]);
 void printTemp(float* temp_conv);
 void printQuat(float quat[QUATERNION_AMOUNT]);
 void printRotationAngle(long quat[QUATERNION_AMOUNT]);
-void printEulerAngles(float* sigma, float* theta, float* psi);
+void printEulerAngles(float quat[QUATERNION_AMOUNT]);
 int convertGyroData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
 int convertAccData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
 int convertCompassData(short raw[NUMBER_OF_AXES],

@@ -118,12 +118,12 @@ void printDataWithDMP() {
 	printf(" | ");
 
 	//Computate Euler Angles
-	eulerGetSigma(quat_conv, &sigma);
-	eulerGetTheta(quat_conv, &theta);
-	eulerGetPsi(quat_conv, &psi);
+	eulerGetSigma(quat, &sigma);
+	eulerGetTheta(quat, &theta);
+	eulerGetPsi(quat, &psi);
 
 	//Print Euler Angles
-	printEulerAngles(&sigma, &theta, &psi);
+	printEulerAngles(quat);
 
 	//Print new line
 	printf("\r\n");
@@ -337,7 +337,7 @@ void printRotationAngle(long quat[QUATERNION_AMOUNT]) {
  */
 void printEulerAngles(float* sigma, float* theta, float* psi) {
 	//Print
-	printf("Euler Angles: roll=%f, pitch=%f, yaw=%f", *sigma, *theta, *psi);
+	printf("Euler Angles: roll=%f, pitch=%f, yaw=%f", &sigma, &theta, &psi);
 }
 
 /*

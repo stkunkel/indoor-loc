@@ -27,7 +27,7 @@ void printDataWithDMP() {
 	unsigned long timestamp;
 	short int sensors;
 	unsigned char* more = (unsigned char *) malloc(100);
-	float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT], sigma, theta, psi;
+	float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT];
 
 	//init DMP
 	if (!dmpReady) {
@@ -107,23 +107,20 @@ void printDataWithDMP() {
 //	}
 //	printf(" | ");
 
-//Convert Quaternions
+	//Convert Quaternions
 	status = convertQuatenions(quat, quat_conv);
-	if (status != 0) {
+	if (status != 0){
 		printf("Error converting quaternions.");
 	} else {
 		//Print Quaternions
-		printQuat(quat_conv);
+	printQuat(quat_conv);
 	}
 	printf(" | ");
 
-	//Computate Euler Angles
-	eulerGetSigma(quat_conv, &sigma);
-	eulerGetTheta(quat_conv, &theta);
-	eulerGetPsi(quat_conv, &psi);
+	//Compute Euler Angles
 
 	//Print Euler Angles
-	printEulerAngles(&sigma, &theta, &psi);
+	printEulerAngles(quat);
 
 	//Print new line
 	printf("\r\n");
@@ -312,13 +309,14 @@ void printQuat(float quat[QUATERNION_AMOUNT]) {
 	int i;
 
 	//Print
-	printf("Quaternions: ");
-	for (i = 0; i < QUATERNION_AMOUNT; i++) {
-		printf("%f", quat[i]);
-		if (i < QUATERNION_AMOUNT - 1) {
-			printf(", ");
+		printf("Quaternions: ");
+		for (i = 0; i < QUATERNION_AMOUNT; i++) {
+			printf("%f", quat[i]);
+			if (i < QUATERNION_AMOUNT - 1) {
+				printf(", ");
+			}
 		}
-	}
+
 
 }
 
@@ -335,9 +333,25 @@ void printRotationAngle(long quat[QUATERNION_AMOUNT]) {
  *
  * Input_ Quaternions, already converted
  */
-void printEulerAngles(float* sigma, float* theta, float* psi) {
-	//Print
-	printf("Euler Angles: roll=%f, pitch=%f, yaw=%f", *sigma, *theta, *psi);
+void printEulerAngles(float quat[QUATERNION_AMOUNT]) {
+	//Variables
+	int status;
+	float conv[QUATERNION_AMOUNT], sigma, theta, psi;
+
+
+
+	if (status == XST_SUCCESS) {
+		//Computation
+		eulerGetSigma(quat, &sigma);
+		eulerGetTheta(quat, &theta);
+		eulerGetPsi(quat, &psi);
+
+		//Print
+		printf("Euler Angles: roll=%f, pitch=%f, yaw=%f", sigma, theta, psi);
+	} else {
+		printf("Euler Angles not available.");
+	}
+
 }
 
 /*

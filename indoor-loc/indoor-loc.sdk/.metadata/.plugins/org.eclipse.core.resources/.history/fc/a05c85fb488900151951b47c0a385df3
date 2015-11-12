@@ -27,7 +27,7 @@ void printDataWithDMP() {
 	unsigned long timestamp;
 	short int sensors;
 	unsigned char* more = (unsigned char *) malloc(100);
-	float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT], sigma, theta, psi;
+	float conv[NUMBER_OF_AXES], temp_conv;
 
 	//init DMP
 	if (!dmpReady) {
@@ -107,23 +107,12 @@ void printDataWithDMP() {
 //	}
 //	printf(" | ");
 
-//Convert Quaternions
-	status = convertQuatenions(quat, quat_conv);
-	if (status != 0) {
-		printf("Error converting quaternions.");
-	} else {
-		//Print Quaternions
-		printQuat(quat_conv);
-	}
+//Print Quaternions
+	printQuat(quat);
 	printf(" | ");
 
-	//Computate Euler Angles
-	eulerGetSigma(quat_conv, &sigma);
-	eulerGetTheta(quat_conv, &theta);
-	eulerGetPsi(quat_conv, &psi);
-
 	//Print Euler Angles
-	printEulerAngles(&sigma, &theta, &psi);
+	printEulerAngles(quat);
 
 	//Print new line
 	printf("\r\n");
@@ -238,7 +227,7 @@ void printDataNoDMP() {
 }
 
 /*
- * Print Gyro Data (already converted)
+ * Convert and Print Gyro Data
  */
 void printGyro(float conv[NUMBER_OF_AXES]) {
 	//Variables
@@ -258,7 +247,7 @@ void printGyro(float conv[NUMBER_OF_AXES]) {
 }
 
 /*
- * Print Accelerometer Data (already converted)
+ * Convert and Print Accelerometer Data
  */
 void printAccel(float conv[NUMBER_OF_AXES]) {
 	//Variables
@@ -278,7 +267,7 @@ void printAccel(float conv[NUMBER_OF_AXES]) {
 }
 
 /*
- * Print Compass Data  (already converted)
+ * Convert and Print Compass Data
  */
 void printCompass(float conv[NUMBER_OF_AXES]) {
 	//Variables
@@ -297,7 +286,7 @@ void printCompass(float conv[NUMBER_OF_AXES]) {
 }
 
 /*
- * Convert and Print Temperature Data  (already converted)
+ * Convert and Print Temperature Data
  */
 void printTemp(float* temp_conv) {
 	//Print Temperature
@@ -305,18 +294,24 @@ void printTemp(float* temp_conv) {
 }
 
 /*
- * Print Quaternions (already converted)
+ * Print Quaternions
  */
-void printQuat(float quat[QUATERNION_AMOUNT]) {
+void printQuat(long quat[QUATERNION_AMOUNT]) {
 	//Variables
-	int i;
+	int status, i;
+	float conv[QUATERNION_AMOUNT];
+
+	//Convert
+	status = convertQuatenions(quat, conv);
 
 	//Print
-	printf("Quaternions: ");
-	for (i = 0; i < QUATERNION_AMOUNT; i++) {
-		printf("%f", quat[i]);
-		if (i < QUATERNION_AMOUNT - 1) {
-			printf(", ");
+	if (status == XST_SUCCESS) {
+		printf("Quaternions: ");
+		for (i = 0; i < QUATERNION_AMOUNT; i++) {
+			printf("%f", conv[i]);
+			if (i < QUATERNION_AMOUNT - 1) {
+				printf(", ");
+			}
 		}
 	}
 
@@ -332,12 +327,27 @@ void printRotationAngle(long quat[QUATERNION_AMOUNT]) {
 
 /*
  * Print Euler Angles
- *
- * Input_ Quaternions, already converted
  */
-void printEulerAngles(float* sigma, float* theta, float* psi) {
-	//Print
-	printf("Euler Angles: roll=%f, pitch=%f, yaw=%f", *sigma, *theta, *psi);
+void printEulerAngles(long quat[QUATERNION_AMOUNT]) {
+	//Variables
+	int status;
+	float conv[QUATERNION_AMOUNT], sigma, theta, psi;
+
+	//Convert Quaternions
+	status = convertQuatenions(quat, conv);
+
+	if (status == XST_SUCCESS) {
+		//Computation
+		eulerGetSigma(conv, &sigma);
+		eulerGetTheta(conv, &theta);
+		eulerGetPsi(conv, &psi);
+
+		//Print
+		printf("Euler Angles: roll=%f, pitch=%f, yaw=%f", sigma, theta, psi);
+	} else {
+		printf("Euler Angles not available.");
+	}
+
 }
 
 /*
