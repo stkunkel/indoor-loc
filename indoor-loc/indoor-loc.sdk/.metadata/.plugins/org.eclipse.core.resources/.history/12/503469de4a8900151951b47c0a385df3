@@ -87,8 +87,9 @@ int main() {
 //	}
 
 	//3. Get Data with DMP
+	sleep(15); //give IMU some time to stabilize
 	for (i = 0; i <= DATA_NO_DMP_RUNS; i++) {
-		sleep(1);
+		sleep(2);
 		printDataWithDMP();
 	}
 
