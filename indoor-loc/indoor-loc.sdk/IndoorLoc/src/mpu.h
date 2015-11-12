@@ -16,6 +16,8 @@
 #include "mpu9150/inv_mpu.h"
 #include "mpu9150/inv_mpu_dmp_motion_driver.h"
 #include "mpu9150/mpl/invensense_adv.h"
+#include "mpu9150/mpl/ml_math_func.h"
+#include "math_utils.h"
 
 //IMU Parameters
 #define GYRO_SENS_FRS_0		131			//LSB/(°/s) for FS_SEL = 0, 16-bit
@@ -44,10 +46,15 @@ void printAccel(float conv[NUMBER_OF_AXES]);
 void printCompass(float conv[NUMBER_OF_AXES]);
 void printTemp(float* temp_conv);
 void printQuat(long quat[QUATERNION_AMOUNT]);
+void printRotationAngle(long quat[QUATERNION_AMOUNT]);
+void printEulerAngles(long quat[QUATERNION_AMOUNT]);
 int convertGyroData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
 int convertAccData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
-int convertCompassData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
+int convertCompassData(short raw[NUMBER_OF_AXES],
+		float converted[NUMBER_OF_AXES]);
 int convertTemperaturetoC(long* raw, float* converted);
+int convertQuatenions(long raw[QUATERNION_AMOUNT],
+		float conv[QUATERNION_AMOUNT]);
 int initDMP(unsigned short int features, unsigned short fifoRate);
 int getImuAddr(u8* addr);
 int initMPU();

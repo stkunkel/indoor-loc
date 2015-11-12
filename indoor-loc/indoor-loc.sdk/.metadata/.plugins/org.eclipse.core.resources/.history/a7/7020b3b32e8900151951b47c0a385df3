@@ -1,0 +1,16 @@
+/*
+ * math_utils.c
+ *
+ *  Created on: Nov 12, 2015
+ *      Author: rupprich
+ */
+
+#include "math_utils.h"
+
+void eulerGetSigma(long quat[QUATERNION_AMOUNT], double* sigma){
+	*sigma = ml_atan2((double)(quat[2]*quat[3] + quat[0] + quat[1]), 0.5-(quat[1]*quat[1] + quat[2]*quat[2]));
+}
+
+void eulerGetTheta(long quat[QUATERNION_AMOUNT], double* theta){
+	*theta = ml_asin(-2.0*(quat[1]*quat[3] + quat[0] + quat[2]));
+}
