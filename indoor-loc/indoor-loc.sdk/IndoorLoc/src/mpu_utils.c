@@ -1,5 +1,5 @@
 /*
- * imu.c
+ * mpu_utils.c
  *
  *  Created on: Oct 28, 2015
  *      Author: rupprich
@@ -39,7 +39,7 @@ int writeDoubleReg(u8 reg_h, u8 reg_l, u16* data) {
 	data8 = (*data & 0xFF00) >> 8; //get high bites
 	status = imuI2cWrite(imuAddr, reg_h, sizeof(data8), &data8);
 	if (status != XST_SUCCESS) {
-		xil_printf("imu.c: Error during reading double register (high bits of 0x%x).\r\n", reg_h);
+		//xil_printf("mpu_utils.c: Error during reading double register (high bits of 0x%x).\r\n", reg_h);
 		return XST_FAILURE;
 	}
 
@@ -47,7 +47,7 @@ int writeDoubleReg(u8 reg_h, u8 reg_l, u16* data) {
 	data8 = *data & 0x00FF; //get low bites
 	status = imuI2cWrite(imuAddr, reg_l, sizeof(data8), &data8);
 	if (status != XST_SUCCESS) {
-		xil_printf("imu.c: Error during reading double register (low bits of 0x%x).\r\n", reg_l);
+		//xil_printf("mpu_utils.c: Error during reading double register (low bits of 0x%x).\r\n", reg_l);
 		return XST_FAILURE;
 	}
 
@@ -61,7 +61,7 @@ int writeSingleReg(u8 reg, u8* data) {
 	int status;
 	status = imuI2cWrite(imuAddr, reg, sizeof(*data), data);
 	if (status != XST_SUCCESS) {
-		xil_printf("imu.c: Error during writing single register (0x%x).\r\n", reg);
+		//xil_printf("mpu_utils.c: Error during writing single register (0x%x).\r\n", reg);
 		return XST_FAILURE;
 	}
 	return 0;
@@ -77,7 +77,7 @@ int readDoubleReg(u8 reg_h, u8 reg_l, u16* data) {
 	//get high bits
 	status = imuI2cRead(imuAddr, reg_h, sizeof(data8), &data8);
 	if (status != XST_SUCCESS) {
-		xil_printf("imu.c: Error during reading double register (high bits of 0x%x).\r\n", reg_h);
+		//xil_printf("mpu_utils.c: Error during reading double register (high bits of 0x%x).\r\n", reg_h);
 		return XST_FAILURE;
 	}
 
@@ -86,7 +86,7 @@ int readDoubleReg(u8 reg_h, u8 reg_l, u16* data) {
 	//get low bits
 	status = imuI2cRead(imuAddr, reg_l, sizeof(data8), &data8);
 	if (status != XST_SUCCESS) {
-		xil_printf("imu.c: Error during reading double register (low bits of 0x%x).\r\n", reg_l);
+		//xil_printf("mpu_utils.c: Error during reading double register (low bits of 0x%x).\r\n", reg_l);
 		return XST_FAILURE;
 	}
 
@@ -102,7 +102,7 @@ int readSingleReg(u8 reg, u8* data) {
 	int status;
 	status = imuI2cRead(imuAddr, reg, sizeof(*data), data);
 	if (status != XST_SUCCESS) {
-		xil_printf("imu.c: Error during reading single register (0x%x).\r\n", reg);
+		//xil_printf("mpu_utils.c: Error during reading single register (0x%x).\r\n", reg);
 		return XST_FAILURE;
 	}
 	return 0;
@@ -120,7 +120,7 @@ int imuI2cWrite(unsigned char slave_addr, unsigned char reg_addr,
 	status = iic_burstWrite(&IicPs, slave_addr, reg_addr, length, data);
 
 	if (status != XST_SUCCESS) {
-		xil_printf("imu.c: Error on IIC Write (0x%x).\r\n", reg_addr);
+		//xil_printf("mpu_utils.c: Error on IIC Write (0x%x).\r\n", reg_addr);
 		return XST_FAILURE;
 	}
 
@@ -140,7 +140,7 @@ int imuI2cRead(unsigned char slave_addr, unsigned char reg_addr,
 	status = iic_read2(&IicPs, slave_addr, reg_addr, data, length);
 
 	if (status != XST_SUCCESS) {
-		xil_printf("imu.c: Error on IIC Read (0x%x).\r\n", reg_addr);
+		//xil_printf("mpu_utils.c: Error on IIC Read (0x%x).\r\n", reg_addr);
 		return XST_FAILURE;
 	}
 
@@ -189,14 +189,14 @@ int imuInit(u8 *imuAddr) {
 	//Init IIC
 	status = iic_init(&IicPs, IIC_DEVICE_ID, IIC_SCLK_RATE);
 	if (status != XST_SUCCESS) {
-		xil_printf("imu.c: Error initializing IIC.\r\n");
+		//xil_printf("mpu_utils.c: Error initializing IIC.\r\n");
 		return XST_FAILURE;
 	}
 
 	//Set IMU Address
 	status = setAddr(imuAddr, imuAddr_cp);
 	if (status != XST_SUCCESS) {
-		xil_printf("imu.c: Error setting IMU address.\r\n");
+		//xil_printf("mpu_utils.c: Error setting IMU address.\r\n");
 		return XST_FAILURE;
 	}
 
@@ -217,14 +217,14 @@ int setAddr(u8* addr, char* addr_c) {
 	ConfigPtr = XGpioPs_LookupConfig(GPIO_DEVICE_ID);
 	status = XGpioPs_CfgInitialize(&Gpio, ConfigPtr, ConfigPtr->BaseAddr);
 	if (status != XST_SUCCESS) {
-		xil_printf("imu.c: Error initializing GPIO Config.\r\n");
+		//xil_printf("mpu_utils.c: Error initializing GPIO Config.\r\n");
 		return XST_FAILURE;
 	}
 
 	//2. Set ad0
 	status = writeAD0(&addr_last_bit);
 	if (status != XST_SUCCESS) {
-		xil_printf("imu.c: Error setting AD0 for IMU.\r\n");
+		//xil_printf("mpu_utils.c: Error setting AD0 for IMU.\r\n");
 		return XST_FAILURE;
 	}
 

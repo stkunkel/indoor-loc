@@ -17,6 +17,54 @@ static u8 imuAddr = 0;
 static char dmpReady = 0;
 
 /*
+ * Print Quaternions for Display
+ * (No error messages!)
+ */
+void printQuatForDisplay() {
+	//Variables
+	int status, i = 0;
+	short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES];
+	long quat[QUATERNION_AMOUNT];
+	unsigned long timestamp;
+	short int sensors;
+	unsigned char* more = (unsigned char *) malloc(100);
+	float quat_conv[QUATERNION_AMOUNT];
+
+	//init DMP
+	if (!dmpReady) {
+		status = initDMP(FEATURES, DMP_FIFO_RATE);
+		if (status != XST_SUCCESS) {
+			return;
+		}
+	}
+
+	//Read FIFO
+//	do {
+		status = dmp_read_fifo(gyro, accel, quat, &timestamp, &sensors, more);
+//		i++;
+
+//		if (i >= 100) {
+//			return;
+//		}
+//	} while (status != XST_SUCCESS);
+
+	if (status != XST_SUCCESS){
+		return;
+	}
+
+	//Convert Quaternions
+	status = convertQuatenions(quat, quat_conv);
+
+	//Print Quaternions
+	if (status == XST_SUCCESS) {
+		for (i = 0; i < QUATERNION_AMOUNT; i++) {
+			printf("%f ", quat_conv[i]);
+		}
+		printf("\r\n");
+	}
+}
+
+/*
  * Print Data using DMP
  */
 void printDataWithDMP() {
@@ -27,7 +75,8 @@ void printDataWithDMP() {
 	unsigned long timestamp;
 	short int sensors;
 	unsigned char* more = (unsigned char *) malloc(100);
-	float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT], sigma, theta, psi;
+	float conv[NUMBER_OF_AXES], temp_conv, quat_conv[QUATERNION_AMOUNT], sigma,
+			theta, psi;
 
 	//init DMP
 	if (!dmpReady) {
@@ -49,63 +98,63 @@ void printDataWithDMP() {
 		}
 	} while (status != XST_SUCCESS);
 
-//	//Convert Gyro
-//	status = convertGyroData(gyro, conv);
-//	if (status != 0) {
-//		printf("Error converting Gyroscope data.");
-//	} else {
-//
-//		//Print Gyro
-//		printGyro(conv);
-//	}
-//	printf(" | ");
-//
-//	//Convert Acc
-//	status = convertAccData(accel, conv);
-//	if (status != 0) {
-//		printf("Error converting Acc data.");
-//	} else {
-//
-//		//Print Acc
-//		printAccel(conv);
-//	}
-//	printf(" | ");
-//
-//	//Get Compass
-//	status = mpu_get_compass_reg(compass, &timestamp);
-//	if (status != 0) {
-//		printf("Error getting Compass data.");
-//	} else {
-//
-//		//Convert Compass
-//		status = convertCompassData(compass, conv);
-//		if (status != 0) {
-//			printf("Error converting Compass data.");
-//		} else {
-//
-//			//Print Compass
-//			printCompass(conv);
-//		}
-//	}
-//	printf(" | ");
-//
-//	//Get Temperature
-//	status = mpu_get_temperature(&temp_raw, &timestamp);
-//	if (status != 0) {
-//		printf("Error getting Temperature data.");
-//	} else {
-//
-//		//Convert Temperature
-//		status = convertTemperaturetoC(&temp_raw, &temp_conv);
-//		if (status != 0) {
-//			printf("Error converting Temperature data.");
-//		} else {
-//
-//			//Print Temperature
-//			printTemp(&temp_conv);
-//		}
-//	}
-//	printf(" | ");
+	//Convert Gyro
+	status = convertGyroData(gyro, conv);
+	if (status != 0) {
+		printf("Error converting Gyroscope data.");
+	} else {
+
+		//Print Gyro
+		printGyro(conv);
+	}
+	printf(" | ");
+
+	//Convert Acc
+	status = convertAccData(accel, conv);
+	if (status != 0) {
+		printf("Error converting Acc data.");
+	} else {
+
+		//Print Acc
+		printAccel(conv);
+	}
+	printf(" | ");
+
+	//Get Compass
+	status = mpu_get_compass_reg(compass, &timestamp);
+	if (status != 0) {
+		printf("Error getting Compass data.");
+	} else {
+
+		//Convert Compass
+		status = convertCompassData(compass, conv);
+		if (status != 0) {
+			printf("Error converting Compass data.");
+		} else {
+
+			//Print Compass
+			printCompass(conv);
+		}
+	}
+	printf(" | ");
+
+	//Get Temperature
+	status = mpu_get_temperature(&temp_raw, &timestamp);
+	if (status != 0) {
+		printf("Error getting Temperature data.");
+	} else {
+
+		//Convert Temperature
+		status = convertTemperaturetoC(&temp_raw, &temp_conv);
+		if (status != 0) {
+			printf("Error converting Temperature data.");
+		} else {
+
+			//Print Temperature
+			printTemp(&temp_conv);
+		}
+	}
+	printf(" | ");
 
 //Convert Quaternions
 	status = convertQuatenions(quat, quat_conv);
@@ -115,17 +164,17 @@ void printDataWithDMP() {
 		//Print Quaternions
 		printQuat(quat_conv);
 	}
-	printf(" | ");
+//	printf(" | ");
+//
+//	//Computate Euler Angles
+//	eulerGetSigma(quat_conv, &sigma);
+//	eulerGetTheta(quat_conv, &theta);
+//	eulerGetPsi(quat_conv, &psi);
+//
+//	//Print Euler Angles
+//	printEulerAngles(&sigma, &theta, &psi);
 
-	//Computate Euler Angles
-	eulerGetSigma(quat_conv, &sigma);
-	eulerGetTheta(quat_conv, &theta);
-	eulerGetPsi(quat_conv, &psi);
-
-	//Print Euler Angles
-	printEulerAngles(&sigma, &theta, &psi);
-
-	//Print new line
+//Print new line
 	printf("\r\n");
 
 	//Use library
@@ -318,7 +367,7 @@ void printQuat(float quat[QUATERNION_AMOUNT]) {
 		if (i < QUATERNION_AMOUNT - 1) {
 			printf(", ");
 		}
-	}
+}
 
 }
 
@@ -326,7 +375,7 @@ void printQuat(float quat[QUATERNION_AMOUNT]) {
  * Print Rotation Angles
  */
 void printRotationAngle(long quat[QUATERNION_AMOUNT]) {
-	printf("Rotation Angle: %f", quaternion_to_rotation_angle(quat));
+printf("Rotation Angle: %f", quaternion_to_rotation_angle(quat));
 
 }
 
@@ -336,8 +385,8 @@ void printRotationAngle(long quat[QUATERNION_AMOUNT]) {
  * Input_ Quaternions, already converted
  */
 void printEulerAngles(float* sigma, float* theta, float* psi) {
-	//Print
-	printf("Euler Angles: roll=%f, pitch=%f, yaw=%f", *sigma, *theta, *psi);
+//Print
+printf("Euler Angles: roll=%f, pitch=%f, yaw=%f", *sigma, *theta, *psi);
 }
 
 /*
@@ -345,23 +394,23 @@ void printEulerAngles(float* sigma, float* theta, float* psi) {
  */
 int convertGyroData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]) {
 //Variables
-	int status, i;
-	float sensitivity;
+int status, i;
+float sensitivity;
 
 //get sensitivity
-	status = mpu_get_gyro_sens(&sensitivity);
-	if (status != XST_SUCCESS) {
-		printf("mpu.c: Error getting sensitivity of gyroscope.\r\n");
-		return XST_FAILURE;
-	}
+status = mpu_get_gyro_sens(&sensitivity);
+if (status != XST_SUCCESS) {
+	printf("mpu.c: Error getting sensitivity of gyroscope.\r\n");
+	return XST_FAILURE;
+}
 
 //convert data
-	for (i = 0; i <= NUMBER_OF_AXES; i++) {
-		converted[i] = raw[i] / sensitivity;
-	}
+for (i = 0; i <= NUMBER_OF_AXES; i++) {
+	converted[i] = raw[i] / sensitivity;
+}
 
 //Return
-	return XST_SUCCESS;
+return XST_SUCCESS;
 }
 
 /*
@@ -369,68 +418,68 @@ int convertGyroData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]) 
  */
 int convertAccData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]) {
 //Variables
-	int status, i;
-	unsigned short sensitivity;
+int status, i;
+unsigned short sensitivity;
 
 //get sensitivity
-	status = mpu_get_accel_sens(&sensitivity);
-	if (status != XST_SUCCESS) {
-		printf("mpu.c: Error getting sensitivity of gyroscope.\r\n");
-		return XST_FAILURE;
-	}
+status = mpu_get_accel_sens(&sensitivity);
+if (status != XST_SUCCESS) {
+	printf("mpu.c: Error getting sensitivity of gyroscope.\r\n");
+	return XST_FAILURE;
+}
 
 //convert data
-	for (i = 0; i <= NUMBER_OF_AXES; i++) {
-		converted[i] = raw[i] * 1.0 / sensitivity;
-	}
+for (i = 0; i <= NUMBER_OF_AXES; i++) {
+	converted[i] = raw[i] * 1.0 / sensitivity;
+}
 
 //Return
-	return XST_SUCCESS;
+return XST_SUCCESS;
 }
 
 /*
  * Convert Magnetometer Data using Sensitivity
  */
 int convertCompassData(short raw[NUMBER_OF_AXES],
-		float converted[NUMBER_OF_AXES]) {
+	float converted[NUMBER_OF_AXES]) {
 //Variables
-	int i;
+int i;
 
 //convert data
-	for (i = 0; i <= NUMBER_OF_AXES; i++) {
-		converted[i] = raw[i] * MAG_SENS_FRS_1200;
-	}
+for (i = 0; i <= NUMBER_OF_AXES; i++) {
+	converted[i] = raw[i] * MAG_SENS_FRS_1200;
+}
 
 //Return
-	return XST_SUCCESS;
+return XST_SUCCESS;
 }
 
 /*
  * Convert Temperature Data
  */
 int convertTemperaturetoC(long* raw, float* converted) {
-	//convert data
-	*converted = *raw / 65536.0;
+//convert data
+*converted = *raw / 65536.0;
 
-	//Return
-	return XST_SUCCESS;
+//Return
+return XST_SUCCESS;
 }
 
 /*
  * Convert Quaternions using Scaling
  */
 int convertQuatenions(long raw[QUATERNION_AMOUNT],
-		float conv[QUATERNION_AMOUNT]) {
-	//Variables
-	int i;
+	float conv[QUATERNION_AMOUNT]) {
+//Variables
+int i;
 
-	//Conversion
-	for (i = 0; i < QUATERNION_AMOUNT; i++) {
-		conv[i] = (float) raw[i] / QUATERNION_SCALING; //quat[i]>>30
-	}
+//Conversion
+for (i = 0; i < QUATERNION_AMOUNT; i++) {
+	conv[i] = (float) raw[i] / QUATERNION_SCALING; //quat[i]>>30
+}
 
-	//Return
-	return XST_SUCCESS;
+//Return
+return XST_SUCCESS;
 }
 
 /*
@@ -438,75 +487,75 @@ int convertQuatenions(long raw[QUATERNION_AMOUNT],
  */
 int initDMP(unsigned short int features, unsigned short fifoRate) {
 //Variables
-	int status;
+int status;
 
 //Initialize IMU first if required
-	if (imuAddr == 0) {
-		status = initMPU();
-		if (status != XST_SUCCESS) {
-			return XST_FAILURE;
-		}
+if (imuAddr == 0) {
+	status = initMPU();
+	if (status != XST_SUCCESS) {
+		return XST_FAILURE;
 	}
+}
 
 //Load Firmware and set flag
-	status = dmp_load_motion_driver_firmware();
-	if (status != XST_SUCCESS) {
-		dmpReady = 0;
-		printf("mpu.c: Error loading firmware of DMP.\r\n");
-		return XST_FAILURE;
-	}
+status = dmp_load_motion_driver_firmware();
+if (status != XST_SUCCESS) {
+	dmpReady = 0;
+	printf("mpu.c: Error loading firmware of DMP.\r\n");
+	return XST_FAILURE;
+}
 
 //IS DMP Enabled?
-	unsigned char enabled;
-	status = mpu_get_dmp_state(&enabled);
-	if (status != XST_SUCCESS) {
-		printf("mpu.c: Could not get DMP enabled.\n\r");
-	}
+unsigned char enabled;
+status = mpu_get_dmp_state(&enabled);
+if (status != XST_SUCCESS) {
+	printf("mpu.c: Could not get DMP enabled.\n\r");
+}
 
 //Enable DMP
-	if (!enabled) {
-		enabled = 1;
-		status = mpu_set_dmp_state(enabled);
-		if (status != XST_SUCCESS) {
-			printf("mpu.c: Could not enable DMP.\r\n");
-			return XST_FAILURE;
-		}
-	}
-
-//Enable Features
-	status = dmp_enable_feature(FEATURES);
+if (!enabled) {
+	enabled = 1;
+	status = mpu_set_dmp_state(enabled);
 	if (status != XST_SUCCESS) {
-		printf("mpu.c: Error enabling desired features.\r\n");
+		printf("mpu.c: Could not enable DMP.\r\n");
 		return XST_FAILURE;
 	}
+}
+
+//Enable Features
+status = dmp_enable_feature(FEATURES);
+if (status != XST_SUCCESS) {
+	printf("mpu.c: Error enabling desired features.\r\n");
+	return XST_FAILURE;
+}
 
 //Enable MPU FIFO
-	status = mpu_configure_fifo(INV_XYZ_ACCEL | INV_XYZ_GYRO);
-	if (status != XST_SUCCESS) {
-		printf("mpu.c: Error configuring FIFO.\n\r");
-	}
+status = mpu_configure_fifo(INV_XYZ_ACCEL | INV_XYZ_GYRO);
+if (status != XST_SUCCESS) {
+	printf("mpu.c: Error configuring FIFO.\n\r");
+}
 
 //Set FIFO rate
-	status = dmp_set_fifo_rate(100);
-	if (status != XST_SUCCESS) {
-		printf("mpu.c: Error Setting FIFO rate.\n\r");
-	}
+status = dmp_set_fifo_rate(DMP_FIFO_RATE);
+if (status != XST_SUCCESS) {
+	printf("mpu.c: Error Setting FIFO rate.\n\r");
+}
 
 //Set flag, sleep and return
-	dmpReady = 1;
-	sleep(1);
-	return XST_SUCCESS;
+dmpReady = 1;
+sleep(1);
+return XST_SUCCESS;
 }
 
 /*
  * get IMU Address
  */
 int getImuAddr(u8* addr) {
-	if (imuAddr == 0) {
-		initMPU();
-	}
-	*addr = imuAddr;
-	return XST_SUCCESS;
+if (imuAddr == 0) {
+	initMPU();
+}
+*addr = imuAddr;
+return XST_SUCCESS;
 }
 
 /*
@@ -514,32 +563,32 @@ int getImuAddr(u8* addr) {
  */
 int initMPU() {
 //Variables
-	int status;
+int status;
 
 //1. Init IMU (Set Address, etc.)
-	status = imuInit(&imuAddr);
-	if (status != XST_SUCCESS) {
-		xil_printf("mpu.c: Error in Setting IMU Address.\n\r");
-		return XST_FAILURE;
-	}
+status = imuInit(&imuAddr);
+if (status != XST_SUCCESS) {
+	xil_printf("mpu.c: Error in Setting IMU Address.\n\r");
+	return XST_FAILURE;
+}
 
 //2. Init IMU
-	struct int_param_s param;
-	status = mpu_init(&param);
-	if (status != 0) {
-		xil_printf("mpu.c: Error initializing IMU\r\n.");
-		return XST_FAILURE;
-	}
+struct int_param_s param;
+status = mpu_init(&param);
+if (status != 0) {
+	xil_printf("mpu.c: Error initializing IMU\r\n.");
+	return XST_FAILURE;
+}
 
 //3. Select Sensors
-	unsigned char sensors = SENSORS;
-	mpu_set_sensors(sensors);
-	if (status != 0) {
-		xil_printf("mpu.c: Error setting sensors.\r\n");
-		return XST_FAILURE;
-	}
+unsigned char sensors = SENSORS;
+mpu_set_sensors(sensors);
+if (status != 0) {
+	xil_printf("mpu.c: Error setting sensors.\r\n");
+	return XST_FAILURE;
+}
 
 //Sleep and Return
-	sleep(1);
-	return XST_SUCCESS;
+sleep(1);
+return XST_SUCCESS;
 }

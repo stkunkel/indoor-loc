@@ -275,7 +275,7 @@ int iic_burstWrite(XIicPs *IicPs, u8 Address, u8 Register, u32 length, unsigned 
 	 */
 	Status = XIicPs_MasterSendPolled(IicPs, WriteBuffer, length+1, Address);
 	if (Status != XST_SUCCESS) {
-		xil_printf("XIicPs_MasterSendPolled error!\n\r");
+		//xil_printf("XIicPs_MasterSendPolled error!\n\r");
 		return XST_FAILURE;
 	}
 	//print and return
@@ -364,7 +364,7 @@ int iic_read2(XIicPs *IicPs, u8 Address, u8 Register, u8 *Data,
 	 */
 	Status = XIicPs_MasterSendPolled(IicPs, &Register, 1, Address);
 	if (Status != XST_SUCCESS) {
-		xil_printf("XIicPs_MasterSendPolled error!\n\r");
+		//xil_printf("XIicPs_MasterSendPolled error!\n\r");
 		return XST_FAILURE;
 	}
 
@@ -373,7 +373,7 @@ int iic_read2(XIicPs *IicPs, u8 Address, u8 Register, u8 *Data,
 	 */
 	Status = XIicPs_MasterRecvPolled(IicPs, Data, ByteCount, Address);
 	if (Status != XST_SUCCESS) {
-		xil_printf("XIicPs_MasterRecvPolled error!\n\r");
+		//xil_printf("XIicPs_MasterRecvPolled error!\n\r");
 		return XST_FAILURE;
 	}
 
