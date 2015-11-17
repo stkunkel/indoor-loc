@@ -71,7 +71,7 @@ int main() {
 
 	//0. Init Platform
 	init_platform();
-	//printf("-----------------------\r\n");
+	printf("-----------------------\r\n");
 
 	//1. Init IMU
 	status = initMPU();
@@ -83,7 +83,6 @@ int main() {
 	//Print Quaternions to Serial Port
 	while (1){
 		printQuatForDisplay();
-		sleep(1);
 	}
 
 //	//2. Get Data without DMP

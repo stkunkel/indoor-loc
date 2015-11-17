@@ -8,7 +8,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <osgViewer/Viewer>
 #include <osg/Node>
 #include <osg/Group>
@@ -48,7 +47,6 @@ int main(){
 	osgViewer::Viewer viewer;
 	transform = new osg::PositionAttitudeTransform;
 	FILE* fp;
-	int status;
 	
 	//Light
 	osg::ref_ptr<osg::Group> lightGroup = createLight();
@@ -62,13 +60,6 @@ int main(){
 	transform->addChild(imuGeode);
 	viewer.setSceneData(transform); 
 	viewer.setCameraManipulator(new osgGA::TrackballManipulator());
-	
-	//Set UART Permissions
-	status = system("chmod +x /dev/ttyACM0");
-	if (status != 0){
-		printf("Could not set permissions.\r\n");
-		return 0;
-	}
 	
 	//Run
 	while(!viewer.done()){
@@ -85,18 +76,15 @@ int main(){
  */
 void updateScene(FILE* fp){
 	//Variables
-	osg::Quat quat;
 	float w, x, y, z;
 	int status;
 	
-	//Initialize Quaternion
-	quat = transform->getAttitude();
-	w = quat.w();
-	x = quat.x();
-	y = quat.y();
-	z = quat.z();
-	
 	//Open UART Connection
+	status = system("chmod +x /dev/ttyACM0");
+	if (status != 0){
+		printf("Could not set permissions.\r\n");
+		return;
+	}
 	fp = fopen("/dev/ttyACM0", "r");
 	
 	//Get Quaternion from UART
@@ -106,10 +94,12 @@ void updateScene(FILE* fp){
 	} else {
 		status = fscanf(fp, "%f %f %f %f", &w, &x, &y, &z);
 		if (status != 4){
-			printf("Could not get Quaternion (%d).\r\n", status);
+			printf("Could not get Quaternions.\r\n");
 			return;
 		}
 		
+		printf(Quat: %f %f %f %f\r\n", %w, %x, %y, %z);
+
 		//Close UART Connection
 		status = fclose(fp);
 		if (status != 0){
@@ -117,7 +107,7 @@ void updateScene(FILE* fp){
 		}
 		
 		//Update Scene
-		quat = osg::Quat(w, x, y, z);
+		osg::Quat quat = osg::Quat(w, x, y, z);
 		transform->setAttitude(osg::Quat(w, x, y, z));
 	}
 }
