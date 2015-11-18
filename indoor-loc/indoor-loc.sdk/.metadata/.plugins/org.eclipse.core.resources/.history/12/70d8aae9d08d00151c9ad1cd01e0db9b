@@ -565,10 +565,6 @@ int initDMP(unsigned short int features, unsigned short fifoRate) {
 		printf("mpu.c: Error Setting FIFO rate.\n\r");
 	}
 
-////Set Interrupt
-//	short int interrupt;
-//	status = mpu_get_int_status(&interrupt);
-
 //Set flag, sleep and return
 	dmpReady = 1;
 	sleep(1);

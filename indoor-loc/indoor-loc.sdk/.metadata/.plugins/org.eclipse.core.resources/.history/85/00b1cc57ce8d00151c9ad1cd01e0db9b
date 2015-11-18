@@ -36,13 +36,26 @@
 #define QUATERNION_SCALING	1073741824	//Internal values: 1.0 is scaled to 2^30 = 1073741824
 #define SENSORS				INV_XYZ_GYRO | INV_XYZ_ACCEL | INV_XYZ_COMPASS 	//all sensors
 #define FEATURES			DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_SEND_CAL_GYRO | DMP_FEATURE_SEND_RAW_ACCEL // DMP_FEATURE_SEND_RAW_GYRO							//6xLP quaternions
-#define MPU_SAMPLE_RATE		60			//Hz
 #define DMP_FIFO_RATE		1			//Hz
 
 //Functions
 void printQuatForDisplay();
 void printDataWithDMP();
 void printDataNoDMP();
+void printGyro(float conv[NUMBER_OF_AXES]);
+void printAccel(float conv[NUMBER_OF_AXES]);
+void printCompass(float conv[NUMBER_OF_AXES]);
+void printTemp(float* temp_conv);
+void printQuat(float quat[QUATERNION_AMOUNT]);
+void printRotationAngle(long quat[QUATERNION_AMOUNT]);
+void printEulerAngles(float* sigma, float* theta, float* psi);
+int convertGyroData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
+int convertAccData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
+int convertCompassData(short raw[NUMBER_OF_AXES],
+		float converted[NUMBER_OF_AXES]);
+int convertTemperaturetoC(long* raw, float* converted);
+int convertQuatenions(long raw[QUATERNION_AMOUNT],
+		float conv[QUATERNION_AMOUNT]);
 int initDMP(unsigned short int features, unsigned short fifoRate);
 int getImuAddr(u8* addr);
 int initMPU();
