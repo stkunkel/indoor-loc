@@ -67,46 +67,39 @@
  */
 int main() {
 	//Variables
-	int status, i;
+	int i;
 
 	//0. Init Platform
 	init_platform();
 	//printf("-----------------------\r\n");
 
-	//1. Init IMU
-	status = initMPU();
-	if (status != XST_SUCCESS) {
-		printf("run.c: Error initializing IMU.\n\r");
-		return 0;
-	}
-
 	//Print Quaternions to Serial Port
 	while (1){
 		printQuatForDisplay();
-		sleep(1);
+		sleep(1);//usleep(16666);
 	}
 
-//	//2. Get Data without DMP
+//	//Get Data without DMP
 //	for (i = 0; i <= DATA_NO_DMP_RUNS; i++) {
 //		sleep(1);
 //		printDataNoDMP();
 //	}
 //
-//	//3. Get Data with DMP
+//	//Get Data with DMP
 //	for (i = 0; i <= DATA_NO_DMP_RUNS; i++) {
 //		sleep(1);
 //		printDataWithDMP();
 //	}
 
-	//4. PWM
+	//PWM
 	pwm(PWM_RUNS);
 
-	//5. Stay in here
+	//Stay in here
 	while (1) {
 		;
 	}
 
-	//6. Finish
+	//Finish
 	cleanup_platform();
 	return 0;
 }

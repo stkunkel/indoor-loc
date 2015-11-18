@@ -42,20 +42,6 @@
 void printQuatForDisplay();
 void printDataWithDMP();
 void printDataNoDMP();
-void printGyro(float conv[NUMBER_OF_AXES]);
-void printAccel(float conv[NUMBER_OF_AXES]);
-void printCompass(float conv[NUMBER_OF_AXES]);
-void printTemp(float* temp_conv);
-void printQuat(float quat[QUATERNION_AMOUNT]);
-void printRotationAngle(long quat[QUATERNION_AMOUNT]);
-void printEulerAngles(float* sigma, float* theta, float* psi);
-int convertGyroData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
-int convertAccData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
-int convertCompassData(short raw[NUMBER_OF_AXES],
-		float converted[NUMBER_OF_AXES]);
-int convertTemperaturetoC(long* raw, float* converted);
-int convertQuatenions(long raw[QUATERNION_AMOUNT],
-		float conv[QUATERNION_AMOUNT]);
 int initDMP(unsigned short int features, unsigned short fifoRate);
 int getImuAddr(u8* addr);
 int initMPU();
