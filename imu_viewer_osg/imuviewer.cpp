@@ -162,7 +162,6 @@ void updateScene(int tty_fd){
 	printf("%f %f %f %f\n\r", w, x, y, z);
 	
 	//Update Scene
-	quat = osg::Quat(w, x, y, z);
 	transform->setAttitude(osg::Quat(w, x, y, z));
 }
 
