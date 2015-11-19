@@ -6272,3 +6272,52 @@ make: Nothing to be done for `all'.
 12:09:12 **** Incremental Build of configuration Debug for project IndoorLoc ****
 make all 
 make: Nothing to be done for `all'.
+12:14:19 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+12:16:04 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+12:18:01 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+12:19:01 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+12:19:52 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:70:6: warning: unused variable 'i' [-Wunused-variable]
+  int i = 0;
+      ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iicTest.o ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 171108	   2424	  24472	 198004	  30574	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+12:19:56 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+12:20:30 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+13:29:55 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+13:33:41 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+13:34:23 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.

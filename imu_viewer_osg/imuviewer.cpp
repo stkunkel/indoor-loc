@@ -131,7 +131,7 @@ int main(){
 		viewer.frame();
 		updateScene(tty_fd);
 		//sleep(1);
-		usleep(150);
+		usleep(500);
 	}
 	
 	//Close UART Connection
@@ -159,18 +159,18 @@ void updateScene(int tty_fd){
 	z = quat.z();
 	
 	//Get Line from UART
-	status = readUartLine(tty_fd, line);
-	if (status != 0){
+	status = read(tty_fd, line, 255);
+	if (status == 0){
 		//printf("Could not read from UART (%d).\r\n", status);
 		return;
 	}
 	
-	printf("%s\r\n", line);
+	//printf("%s\r\n", line);
 	
 	//Get Quaternions
 	status = sscanf(line, "%f %f %f %f", &w, &x, &y, &z);
 	if (status != 4 || w > 1.0 || x > 1.0 || y > 1.0 || z > 1.0){
-		printf("Could not get Quaternion (%d).\r\n", status);
+		//printf("Could not get Quaternion (%d).\r\n", status);
 		return;
 	}
 	
@@ -194,10 +194,8 @@ int configureUart(int tty_fd){
 	memset(&tio,0,sizeof(tio));
 	tio.c_iflag=0;
 	tio.c_oflag=0;
-	tio.c_cflag=CS8|CREAD|CLOCAL;           // 8n1, see termios.h for more information
-	tio.c_lflag=0;
-	tio.c_cc[VMIN]=1;
-	tio.c_cc[VTIME]=5;
+	tio.c_cflag=CS8|CREAD|CLOCAL;           // 8-bit, reader, no modem printouts
+	tio.c_lflag=ICANON;			//Canonical Mode
 
 	//Open device file
 	cfsetospeed(&tio,BAUDRATE);            // 115200 baud
@@ -242,8 +240,8 @@ int configureStdout(){
 	
 	//Configuration
 	memset(&stdio,0,sizeof(stdio));
-	stdio.c_iflag=0;
-	stdio.c_oflag=0;
+	stdio.c_iflag=IUTF8;
+	stdio.c_oflag=IUTF8;
 	stdio.c_cflag=0;
 	stdio.c_lflag=0;
 	stdio.c_cc[VMIN]=1;
