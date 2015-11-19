@@ -31,8 +31,9 @@
 #define LENGTH 		2.0
 #define WIDTH		1.0
 #define HEIGHT		0.1
-//#define DEVICE		"quat.txt"
-#define DEVICE		"/dev/ttyACM0"
+#define DEVICE0		"/dev/ttyACM0"
+#define DEVICE1		"/dev/ttyACM1"
+#define DEVICE2		"quat.txt"
 #define BAUDRATE 	B115200
 
 /*
@@ -98,13 +99,26 @@ int main(){
 	
 	
 	//Open UART Connection
-	strcpy(line, "chmod +r ");
-	strcat(line, DEVICE);
+	//strcpy(line, "chmod +r ");
+	//strcat(line, DEVICE);
 	//status = system(line);
-	tty_fd = open(DEVICE,  O_RDWR | O_NOCTTY | O_NDELAY);
+	//DEVICE0
+	tty_fd = open(DEVICE0,  O_RDWR | O_NOCTTY | O_NDELAY);
 	if (tty_fd == -1){
-		printf("Could not open port\r\n");
-		return 0;
+		printf("Could not open port %s, trying %s.\r\n", DEVICE0, DEVICE1);
+		  //DEVICE1
+		  tty_fd = open(DEVICE1,  O_RDWR | O_NOCTTY | O_NDELAY);
+		  if (tty_fd == -1){
+		    printf("Could not open port %s, trying %s.\r\n", DEVICE1, DEVICE2);
+		    //DEVICE2
+		    tty_fd = open(DEVICE2,  O_RDWR | O_NOCTTY | O_NDELAY);
+		    if (tty_fd == -1){
+		      printf("Could not open port %s.\r\n", DEVICE2);
+		      return 0;
+		    } else {
+		      printf("Using Sample Data.\r\n");
+		    }
+		  }
 	}
 	
 	//Configure UART
@@ -116,8 +130,8 @@ int main(){
 	while(!viewer.done()){
 		viewer.frame();
 		updateScene(tty_fd);
-		sleep(1);
-		//usleep(16666);
+		//sleep(1);
+		usleep(100);
 	}
 	
 	//Close UART Connection
@@ -186,7 +200,6 @@ int configureUart(int tty_fd){
 	tio.c_cc[VTIME]=5;
 
 	//Open device file
-	tty_fd=open(DEVICE, O_RDWR | O_NONBLOCK);      
 	cfsetospeed(&tio,BAUDRATE);            // 115200 baud
 	cfsetispeed(&tio,BAUDRATE);            // 115200 baud
 	
