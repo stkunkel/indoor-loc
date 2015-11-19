@@ -100,7 +100,7 @@ int main(){
 	//Open UART Connection
 	strcpy(line, "chmod +r ");
 	strcat(line, DEVICE);
-	status = system(line);
+	//status = system(line);
 	tty_fd = open(DEVICE,  O_RDWR | O_NOCTTY | O_NDELAY);
 	if (tty_fd == -1){
 		printf("Could not open port\r\n");
@@ -116,7 +116,8 @@ int main(){
 	while(!viewer.done()){
 		viewer.frame();
 		updateScene(tty_fd);
-		sleep(1);//usleep(16666);
+		sleep(1);
+		//usleep(16666);
 	}
 	
 	//Close UART Connection
@@ -150,7 +151,7 @@ void updateScene(int tty_fd){
 		return;
 	}
 	
-	//printf("%s\n\r", line);
+	printf("%s\r\n", line);
 	
 	//Get Quaternions
 	status = sscanf(line, "%f %f %f %f", &w, &x, &y, &z);
@@ -159,7 +160,9 @@ void updateScene(int tty_fd){
 		return;
 	}
 	
-	printf("%f %f %f %f\n\r", w, x, y, z);
+	y = -y;//Invert Y due to inverted axis of OSG compared to IMU
+	
+	printf("%f %f %f %f\n\r", w, x, y, z); 
 	
 	//Update Scene
 	transform->setAttitude(osg::Quat(w, x, y, z));
@@ -200,10 +203,14 @@ int configureUart(int tty_fd){
 int readUartLine(int tty_fd, char* line){
 	char c;
 	strcpy(line, "");
+	int i = 0;
 
 	while(read(tty_fd,&c,1)>0){
 		if (c != '\n'){
-			strcat(line, &c);
+			//strcat(line, &c);
+			line[i] = c;
+			i++;
+			//printf("%s\r\n", line);
 		} else {
 			return 0;
 		}
