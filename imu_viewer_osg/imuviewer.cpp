@@ -283,7 +283,7 @@ osg::ref_ptr<osg::Group> createLight(){
 	osg::ref_ptr<osg::LightSource> lightSource2 = new osg::LightSource;
 	
 	// create a local light.
-	osg::Vec4f lightPosition (osg::Vec4f(-5.0,-5.0,5.0,5.0f));
+	osg::Vec4f lightPosition (osg::Vec4f(-1.0,-1.0,1.0,1.0f));
   	osg::ref_ptr<osg::Light> myLight = new osg::Light;
 	myLight->setLightNum(1);
 	myLight->setPosition(lightPosition);
@@ -295,7 +295,7 @@ osg::ref_ptr<osg::Group> createLight(){
 	lightSource1->setLocalStateSetModes(osg::StateAttribute::ON); 
        
 	// create a local light
-	osg::Vec4f lightPosition2 (osg::Vec4f(5.0,5.0,-5.0,-5.0f));
+	osg::Vec4f lightPosition2 (osg::Vec4f(1.0,1.0,-1.0,-1.0f));
   	osg::ref_ptr<osg::Light> myLight2 = new osg::Light;
 	myLight2->setLightNum(0);
 	myLight2->setPosition(lightPosition2);

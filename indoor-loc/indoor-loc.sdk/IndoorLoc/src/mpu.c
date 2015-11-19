@@ -32,6 +32,8 @@ int convertQuatenion(long raw[QUATERNION_AMOUNT], float conv[QUATERNION_AMOUNT])
  */
 static u8 imuAddr = 0;
 static char dmpReady = 0;
+static int count = 0;
+float quat_conv[QUATERNION_AMOUNT];
 
 /*
  * Print Quaternions for Display using DMP Interrupt
@@ -53,7 +55,7 @@ void printQuatForDisplay() {
 	unsigned long timestamp;
 	short int sensors;
 	unsigned char* more = (unsigned char *) malloc(100);
-	float quat_conv[QUATERNION_AMOUNT];
+	//float quat_conv[QUATERNION_AMOUNT];
 
 	//init DMP
 	if (!dmpReady) {
@@ -64,28 +66,28 @@ void printQuatForDisplay() {
 	}
 
 	//Read FIFO
-//	do {
-	status = dmp_read_fifo(gyro, accel, quat, &timestamp, &sensors, more);
-//		i++;
+	count++;
+	if (count >= 500) {
+		//Reset Count
+		count = 0;
 
-//		if (i >= 100) {
-//			return;
-//		}
-//	} while (status != XST_SUCCESS);
+		//Read Data
+		status = dmp_read_fifo(gyro, accel, quat, &timestamp, &sensors, more);
 
-	if (status != XST_SUCCESS) {
-		return;
-	}
-
-	//Convert Quaternion
-	status = convertQuatenion(quat, quat_conv);
-
-	//Print Quaternion
-	if (status == XST_SUCCESS) {
-		for (i = 0; i < QUATERNION_AMOUNT; i++) {
-			printf("%f ", quat_conv[i]);
+		//Convert Quaternion
+		if (status == XST_SUCCESS) {
+			status = convertQuatenion(quat, quat_conv);
 		}
-		printf("\r\n");
+
+		//Print Quaternion
+		if (status == XST_SUCCESS) {
+			for (i = 0; i < QUATERNION_AMOUNT; i++) {
+				printf("%f ", quat_conv[i]);
+			}
+			printf("\r\n");
+		}
+	} else {
+		return;
 	}
 }
 

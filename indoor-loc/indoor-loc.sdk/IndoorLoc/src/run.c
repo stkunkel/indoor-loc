@@ -67,7 +67,7 @@
  */
 int main() {
 	//Variables
-	int i;
+	int i = 0;
 
 	//0. Init Platform
 	init_platform();
@@ -76,7 +76,7 @@ int main() {
 	//Print Quaternions to Serial Port
 	while (1){
 		printQuatForDisplay();
-		sleep(1);//usleep(16666);
+		usleep(100);
 	}
 
 //	//Get Data without DMP
