@@ -131,7 +131,7 @@ int main(){
 		viewer.frame();
 		updateScene(tty_fd);
 		//sleep(1);
-		usleep(500);
+		usleep(100);
 	}
 	
 	//Close UART Connection

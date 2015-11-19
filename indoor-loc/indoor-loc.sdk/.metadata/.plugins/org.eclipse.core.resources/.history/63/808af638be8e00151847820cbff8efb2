@@ -267,7 +267,7 @@ int iic_burstWrite(XIicPs *IicPs, u8 Address, u8 Register, u32 length, unsigned 
 	 */
 	while (XIicPs_BusIsBusy(IicPs)) {
 		/* NOP */
-		usleep(100);
+		//sleep(1);
 	}
 
 	/*
@@ -348,7 +348,7 @@ int iic_read2(XIicPs *IicPs, u8 Address, u8 Register, u8 *Data,
 	 */
 	while (XIicPs_BusIsBusy(IicPs)) {
 		/* NOP */
-		usleep(100);
+		//sleep(1);
 	}
 
 	/*

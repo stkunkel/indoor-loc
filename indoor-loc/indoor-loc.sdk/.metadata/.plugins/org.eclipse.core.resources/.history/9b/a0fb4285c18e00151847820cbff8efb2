@@ -52,6 +52,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "platform.h"
+#include "iicps.h"
 #include "mpu.h"
 #include "pwmsw.h"
 
@@ -71,7 +72,7 @@ int main() {
 
 	//0. Init Platform
 	init_platform();
-
+	XIicPs_Abort(XIicPs *InstancePtr);
 	//printf("-----------------------\r\n");
 
 	//Print Quaternions to Serial Port
