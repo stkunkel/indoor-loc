@@ -427,7 +427,9 @@ int convertGyroData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]) 
 //get sensitivity
 	status = mpu_get_gyro_sens(&sensitivity);
 	if (status != XST_SUCCESS) {
+#ifdef DEBUG
 		printf("mpu.c: Error getting sensitivity of gyroscope.\r\n");
+#endif
 		return XST_FAILURE;
 	}
 
@@ -451,7 +453,9 @@ int convertAccData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]) {
 //get sensitivity
 	status = mpu_get_accel_sens(&sensitivity);
 	if (status != XST_SUCCESS) {
+#ifdef DEBUG
 		printf("mpu.c: Error getting sensitivity of gyroscope.\r\n");
+#endif
 		return XST_FAILURE;
 	}
 
@@ -527,7 +531,9 @@ int initDMP(unsigned short int features, unsigned short fifoRate) {
 	status = dmp_load_motion_driver_firmware();
 	if (status != XST_SUCCESS) {
 		dmpReady = 0;
+#ifdef DEBUG
 		printf("mpu.c: Error loading firmware of DMP.\r\n");
+#endif
 		return XST_FAILURE;
 	}
 
@@ -535,7 +541,9 @@ int initDMP(unsigned short int features, unsigned short fifoRate) {
 	unsigned char enabled;
 	status = mpu_get_dmp_state(&enabled);
 	if (status != XST_SUCCESS) {
+#ifdef DEBUG
 		printf("mpu.c: Could not get DMP enabled.\n\r");
+#endif
 	}
 
 //Enable DMP
@@ -543,7 +551,9 @@ int initDMP(unsigned short int features, unsigned short fifoRate) {
 		enabled = 1;
 		status = mpu_set_dmp_state(enabled);
 		if (status != XST_SUCCESS) {
+#ifdef DEBUG
 			printf("mpu.c: Could not enable DMP.\r\n");
+#endif
 			return XST_FAILURE;
 		}
 	}
@@ -551,20 +561,26 @@ int initDMP(unsigned short int features, unsigned short fifoRate) {
 //Enable Features
 	status = dmp_enable_feature(FEATURES);
 	if (status != XST_SUCCESS) {
+#ifdef DEBUG
 		printf("mpu.c: Error enabling desired features.\r\n");
+#endif
 		return XST_FAILURE;
 	}
 
 //Enable MPU FIFO
 	status = mpu_configure_fifo(INV_XYZ_ACCEL | INV_XYZ_GYRO);
 	if (status != XST_SUCCESS) {
+#ifdef DEBUG
 		printf("mpu.c: Error configuring FIFO.\n\r");
+#endif
 	}
 
 //Set FIFO rate
 	status = dmp_set_fifo_rate(DMP_FIFO_RATE);
 	if (status != XST_SUCCESS) {
+#ifdef DEBUG
 		printf("mpu.c: Error Setting FIFO rate.\n\r");
+#endif
 	}
 
 ////Set Interrupt
@@ -598,7 +614,9 @@ int initMPU() {
 //1. Init IMU (Set Address, etc.)
 	status = imuInit(&imuAddr);
 	if (status != XST_SUCCESS) {
+#ifdef DEBUG
 		xil_printf("mpu.c: Error in Setting IMU Address.\n\r");
+#endif
 		return XST_FAILURE;
 	}
 
@@ -606,20 +624,30 @@ int initMPU() {
 	struct int_param_s param;
 	status = mpu_init(&param);
 	if (status != 0) {
+#ifdef DEBUG
 		xil_printf("mpu.c: Error initializing IMU\r\n.");
+#endif
 		return XST_FAILURE;
 	}
 
 //3. Select Sensors
 	unsigned char sensors = SENSORS;
-	mpu_set_sensors(sensors);
+	status = mpu_set_sensors(sensors);
 	if (status != 0) {
+#ifdef DEBUG
 		xil_printf("mpu.c: Error setting sensors.\r\n");
+#endif
 		return XST_FAILURE;
 	}
 
 //4. Set Sample Rate
-	mpu_set_sample_rate(MPU_SAMPLE_RATE);
+	status = mpu_set_sample_rate(MPU_SAMPLE_RATE);
+	if (status != 0) {
+#ifdef DEBUG
+		xil_printf("mpu.c: Error MPU sample rate.\r\n");
+#endif
+		return XST_FAILURE;
+	}
 
 //Sleep and Return
 	sleep(1);
