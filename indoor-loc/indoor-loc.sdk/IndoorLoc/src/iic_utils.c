@@ -142,16 +142,18 @@ int iic_init(XIicPs *IicPs, u16 DeviceId, u32 ClkRate) {
 	 */
 	IicPs_Config = XIicPs_LookupConfig(DeviceId);
 	if (IicPs_Config == NULL) {
-		//printf("No XIicPs instance found for ID %d\n\r", DeviceId);
+#ifdef DEBUG
 		xil_printf("No XIicPs instance found for ID %d\n\r", DeviceId);
+#endif
 		return XST_FAILURE;
 	}
 
 	Status = XIicPs_CfgInitialize(IicPs, IicPs_Config,
 			IicPs_Config->BaseAddress);
 	if (Status != XST_SUCCESS) {
-		//printf("XIicPs Initialization failed for ID %d\n\r", DeviceId);
+#ifdef DEBUG
 		xil_printf("XIicPs Initialization failed for ID %d\n\r", DeviceId);
+#endif
 		return XST_FAILURE;
 	}
 
@@ -161,12 +163,41 @@ int iic_init(XIicPs *IicPs, u16 DeviceId, u32 ClkRate) {
 	//Status = XIicPs_SetSClk(IicPs, ClkRate);
 	Status = SetIiCSClk(IicPs, ClkRate);
 	if (Status != XST_SUCCESS) {
-		//printf("Setting XIicPs clock rate failed for ID %d\n\r", DeviceId);
+#ifdef DEBUG
 		xil_printf("Setting XIicPs clock rate failed for ID %d, Status: %d\n\r",
+#endif
 				DeviceId, Status);
 		return XST_FAILURE;
 	}
 
+	return XST_SUCCESS;
+}
+
+/*
+ * IIC Abort Transaction
+ */
+int iic_reset_init_abort(XIicPs *IicPs, u16 DeviceId, u32 ClkRate) {
+	//Variables
+//	int i = 0;
+
+//	//Check if IIC is busy
+//	while (XIicPs_BusIsBusy(IicPs)) {
+//		i++;
+//		if (i >= 1000) {
+//#ifdef DEBUG
+//			xil_printf("Cannot abort IIC Transaction because IIC is busy.\r\n");
+//#endif
+//			return XST_FAILURE;
+//		}
+//	}
+
+	//Reset and Init
+	XIicPs_ResetHw(IIC_BASE_ADDR);
+	iic_init(IicPs, IIC_DEVICE_ID, IIC_SCLK_RATE);
+	XIicPs_Reset(IicPs);
+
+	//Abort and return
+	XIicPs_Abort(IicPs);
 	return XST_SUCCESS;
 }
 
@@ -176,9 +207,7 @@ int iic_init(XIicPs *IicPs, u16 DeviceId, u32 ClkRate) {
 int isIicBusBusy(XIicPs* IicPs) {
 	u32 StatusReg = 0;
 
-
-	StatusReg = XIicPs_ReadReg(IicPs->Config.BaseAddress,
-			XIICPS_SR_OFFSET);
+	StatusReg = XIicPs_ReadReg(IicPs->Config.BaseAddress, XIICPS_SR_OFFSET);
 	if (StatusReg & XIICPS_SR_BA_MASK) {
 		return TRUE;
 	} else {
@@ -207,7 +236,9 @@ int iic_write1(XIicPs *IicPs, u8 Address, u8 Data) {
 	 */
 	Status = XIicPs_MasterSendPolled(IicPs, &Data, 1, Address);
 	if (Status != XST_SUCCESS) {
+#ifdef DEBUG
 		xil_printf("XIicPs_MasterSendPolled error!\n\r");
+#endif
 		return XST_FAILURE;
 	}
 
@@ -241,7 +272,9 @@ int iic_write2(XIicPs *IicPs, u8 Address, u8 Register, u8 Data) {
 	 */
 	Status = XIicPs_MasterSendPolled(IicPs, WriteBuffer, 2, Address);
 	if (Status != XST_SUCCESS) {
+#ifdef DEBUG
 		xil_printf("XIicPs_MasterSendPolled error!\n\r");
+#endif
 		return XST_FAILURE;
 	}
 
@@ -251,8 +284,9 @@ int iic_write2(XIicPs *IicPs, u8 Address, u8 Register, u8 Data) {
 /*
  * IIC Burst Write
  */
-int iic_burstWrite(XIicPs *IicPs, u8 Address, u8 Register, u32 length, unsigned char* Data) {
-	u8 WriteBuffer[length +1];
+int iic_burstWrite(XIicPs *IicPs, u8 Address, u8 Register, u32 length,
+		unsigned char* Data) {
+	u8 WriteBuffer[length + 1];
 	int Status;
 
 	/*
@@ -273,13 +307,17 @@ int iic_burstWrite(XIicPs *IicPs, u8 Address, u8 Register, u32 length, unsigned 
 	/*
 	 * Send the buffer using the IIC and check for errors.
 	 */
-	Status = XIicPs_MasterSendPolled(IicPs, WriteBuffer, length+1, Address);
+	Status = XIicPs_MasterSendPolled(IicPs, WriteBuffer, length + 1, Address);
 	if (Status != XST_SUCCESS) {
-		//xil_printf("XIicPs_MasterSendPolled error!\n\r");
+#ifdef DEBUG
+		xil_printf("XIicPs_MasterSendPolled error!\n\r");
+#endif
 		return XST_FAILURE;
 	}
-	//print and return
-	//xil_printf("[iic_burstWrite] 0x%02X(0x%02X)=0x%X\n\r", Address, Register, *Data);
+//print and return
+#ifdef DEBUG
+//xil_printf("[iic_burstWrite] 0x%02X(0x%02X)=0x%X\n\r", Address, Register, *Data);
+#endif
 	return XST_SUCCESS;
 }
 
@@ -330,8 +368,9 @@ int iic_read1(XIicPs *IicPs, u8 Address, u8 *Data) {
 		xil_printf("XIicPs_MasterRecvPolled error!\n\r");
 		return XST_FAILURE;
 	}
-
+#ifdef DEBUG
 //	xil_printf("[iic_read1] 0x%02X=0x%02X\n\r", Address, *Data);
+#endif
 
 	return XST_SUCCESS;
 }
@@ -339,8 +378,7 @@ int iic_read1(XIicPs *IicPs, u8 Address, u8 *Data) {
 /*
  * IIC Read 2
  */
-int iic_read2(XIicPs *IicPs, u8 Address, u8 Register, u8 *Data,
-		int ByteCount) {
+int iic_read2(XIicPs *IicPs, u8 Address, u8 Register, u8 *Data, int ByteCount) {
 	int Status;
 
 	/*
@@ -364,7 +402,9 @@ int iic_read2(XIicPs *IicPs, u8 Address, u8 Register, u8 *Data,
 	 */
 	Status = XIicPs_MasterSendPolled(IicPs, &Register, 1, Address);
 	if (Status != XST_SUCCESS) {
-		//xil_printf("XIicPs_MasterSendPolled error!\n\r");
+#ifdef DEBUG
+		xil_printf("XIicPs_MasterSendPolled error!\n\r");
+#endif
 		return XST_FAILURE;
 	}
 
@@ -373,7 +413,9 @@ int iic_read2(XIicPs *IicPs, u8 Address, u8 Register, u8 *Data,
 	 */
 	Status = XIicPs_MasterRecvPolled(IicPs, Data, ByteCount, Address);
 	if (Status != XST_SUCCESS) {
-		//xil_printf("XIicPs_MasterRecvPolled error!\n\r");
+#ifdef DEBUG
+		xil_printf("XIicPs_MasterRecvPolled error!\n\r");
+#endif
 		return XST_FAILURE;
 	}
 
@@ -384,9 +426,10 @@ int iic_read2(XIicPs *IicPs, u8 Address, u8 Register, u8 *Data,
 	if (Status != XST_SUCCESS) {
 		return XST_FAILURE;
 	}
-//	xil_printf("%d\n\r", __LINE__);
 
-	//xil_printf("[iic_read2] 0x%02X(0x%02X)=0x%X\n\r", Address, Register, *Data);
+#ifdef DEBUG
+//xil_printf("[iic_read2] 0x%02X(0x%02X)=0x%X\n\r", Address, Register, *Data);
+#endif
 
 	return XST_SUCCESS;
 }
