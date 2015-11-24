@@ -215,7 +215,7 @@ int imuInit(u8 *imuAddr) {
 	imuAddr_cp = (char *) malloc(8);
 
 	//Abort old IIC transaction
-	//status = iic_reset_init_abort(&IicPs, IIC_DEVICE_ID, IIC_SCLK_RATE);
+	status = iic_reset_init_abort(&IicPs, IIC_DEVICE_ID, IIC_SCLK_RATE);
 
 	//Init IIC
 	status = iic_init(&IicPs, IIC_DEVICE_ID, IIC_SCLK_RATE);
