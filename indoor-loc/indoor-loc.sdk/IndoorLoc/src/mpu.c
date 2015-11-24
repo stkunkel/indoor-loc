@@ -68,7 +68,7 @@ void printQuatForDisplay() {
 	//Read FIFO
 	count++;
 	if (count >= 500) {
-		//Reset Count
+		//Reset Count, increment read count
 		count = 0;
 
 		//Read Data
@@ -86,9 +86,8 @@ void printQuatForDisplay() {
 			}
 			printf("\r\n");
 		}
-	} else {
-		return;
 	}
+	free(more);
 }
 
 /*
@@ -183,6 +182,8 @@ void printDataWithDMP() {
 	}
 	printf(" | ");
 
+	free(more);
+
 //Convert Quaternion
 	status = convertQuatenion(quat, quat_conv);
 	if (status != 0) {
@@ -215,6 +216,7 @@ void printDataWithDMP() {
 //
 //	printf("Quat: %lu\n\r", data);
 
+	free(more);
 }
 
 /*
@@ -583,9 +585,22 @@ int initDMP(unsigned short int features, unsigned short fifoRate) {
 #endif
 	}
 
-////Set Interrupt
-//	short int interrupt;
-//	status = mpu_get_int_status(&interrupt);
+	//Enable Gyro Calibration
+	status = dmp_enable_gyro_cal(1);
+	if (status != XST_SUCCESS) {
+#ifdef DEBUG
+		printf("mpu.c: Could not enable Gyroscope Calibration.\n\r");
+#endif
+	}
+
+//Get Interrupt
+	short int interrupt;
+	status = mpu_get_int_status(&interrupt);
+	if (status == XST_SUCCESS) {
+#ifdef DEBUG
+		printf("MPU Interrupt Status: 0x%x.\n\r", interrupt);
+#endif
+	}
 
 //Set flag, sleep and return
 	dmpReady = 1;
