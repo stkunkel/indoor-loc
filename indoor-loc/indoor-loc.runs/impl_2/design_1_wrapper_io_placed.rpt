@@ -1,7 +1,7 @@
 Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2015.3 (lin64) Build 1368829 Mon Sep 28 20:06:39 MDT 2015
-| Date         : Mon Nov  2 11:10:27 2015
+| Date         : Mon Nov 23 14:23:54 2015
 | Host         : ruppi-PC running 64-bit Ubuntu 15.10
 | Command      : report_io -file design_1_wrapper_io_placed.rpt
 | Design       : design_1_wrapper
@@ -102,7 +102,7 @@ Table of Contents
 | B1         | DDR_dm[0]         |            | PS_DDR_DM0_502          | BIDIR       | SSTL15_T_DCI      |         |            | FAST |           DCI SPLIT |            FP_VTT_50 |         | FIXED      |           |          |      | SPLIT            |
 | B2         | DDR_dq[2]         |            | PS_DDR_DQ2_502          | BIDIR       | SSTL15_T_DCI      |         |            | FAST |           DCI SPLIT |            FP_VTT_50 |         | FIXED      |           |          |      | SPLIT            |
 | B3         |                   |            | VCCO_MIO0_500           | VCCO        |                   |         |            |      |                     |                      |   any** |            |           |          |      |                  |
-| B4         | FIXED_IO_mio[11]  |            | PS_MIO11_500            | BIDIR       | LVCMOS33          |         |          8 | SLOW |                     |                 NONE |         | FIXED      |           |          |      | NONE             |
+| B4         | FIXED_IO_mio[11]  |            | PS_MIO11_500            | BIDIR       | LVCMOS33          |         |          8 | SLOW |                     |                 NONE |         | FIXED      | PULLUP    |          |      | NONE             |
 | B5         | FIXED_IO_ps_porb  |            | PS_POR_B_500            | BIDIR       | LVCMOS33          |         |          8 | SLOW |                     |                 NONE |         | FIXED      |           |          |      | NONE             |
 | B6         | FIXED_IO_mio[14]  |            | PS_MIO14_500            | BIDIR       | LVCMOS33          |         |          8 | SLOW |                     |                 NONE |         | FIXED      |           |          |      | NONE             |
 | B7         | FIXED_IO_mio[24]  |            | PS_MIO24_501            | BIDIR       | LVCMOS18          |         |          8 | FAST |                     |                 NONE |         | FIXED      |           |          |      | NONE             |
@@ -215,7 +215,7 @@ Table of Contents
 | G4         | DDR_addr[14]      |            | PS_DDR_A14_502          | BIDIR       | SSTL15            |         |            | SLOW |                     |            FP_VTT_50 |         | FIXED      |           |          |      | NONE             |
 | G5         | DDR_addr[11]      |            | PS_DDR_A11_502          | BIDIR       | SSTL15            |         |            | SLOW |                     |            FP_VTT_50 |         | FIXED      |           |          |      | NONE             |
 | G6         | FIXED_IO_mio[0]   |            | PS_MIO0_500             | BIDIR       | LVCMOS33          |         |          8 | SLOW |                     |                 NONE |         | FIXED      |           |          |      | NONE             |
-| G7         | FIXED_IO_mio[10]  |            | PS_MIO10_500            | BIDIR       | LVCMOS33          |         |          8 | SLOW |                     |                 NONE |         | FIXED      |           |          |      | NONE             |
+| G7         | FIXED_IO_mio[10]  |            | PS_MIO10_500            | BIDIR       | LVCMOS33          |         |          8 | SLOW |                     |                 NONE |         | FIXED      | PULLUP    |          |      | NONE             |
 | G8         |                   |            | VCCPINT                 | PSS VCCINT  |                   |         |            |      |                     |                      |         |            |           |          |      |                  |
 | G9         |                   | Dedicated  | VCCBATT_0               | Config      |                   |       0 |            |      |                     |                      |         |            |           |          |      |                  |
 | G10        |                   |            | RSVDGND                 | GND         |                   |         |            |      |                     |                      |         |            |           |          |      |                  |

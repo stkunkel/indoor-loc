@@ -1,4 +1,4 @@
-09:10:47 **** Auto Build of project IndoorLoc_bsp ****
+12:20:21 **** Auto Build of project IndoorLoc_bsp ****
 make -k all 
 Running Make include in ps7_cortexa9_0/libsrc/ddrps_v1_0/src
 make -C ps7_cortexa9_0/libsrc/ddrps_v1_0/src -s include  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
@@ -74,9 +74,25 @@ Compiling scuwdt
 Running Make libs in ps7_cortexa9_0/libsrc/standalone_v5_2/src
 make -C ps7_cortexa9_0/libsrc/standalone_v5_2/src -s libs  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
 Compiling standalone
+xil_exception.c: In function 'Xil_DataAbortHandler':
+xil_exception.c:207:2: warning: incompatible implicit declaration of built-in function 'printf'
+  printf("Data abort with Data Fault Status Register  %x\n",FaultStatus);
+  ^
+xil_exception.c: In function 'Xil_PrefetchAbortHandler':
+xil_exception.c:241:2: warning: incompatible implicit declaration of built-in function 'printf'
+  printf("Prefetch abort with Instruction Fault Status Register  %x\n",FaultStatus);
+  ^
 Running Make libs in ps7_cortexa9_0/libsrc/iicps_v3_0/src
 make -C ps7_cortexa9_0/libsrc/iicps_v3_0/src -s libs  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
 Compiling iicps
+xiicps_master.c: In function 'XIicPs_MasterSendPolled':
+xiicps_master.c:338:4: warning: incompatible implicit declaration of built-in function 'printf'
+    printf("I2C Send: Received Interrupt (0x%x).\r\n", IntrStatusReg);
+    ^
+xiicps_master.c: In function 'XIicPs_MasterRecvPolled':
+xiicps_master.c:538:3: warning: incompatible implicit declaration of built-in function 'printf'
+   printf("I2C Recv: Received Interrupt (0x%x).\r\n", IntrStatusReg);
+   ^
 Running Make libs in ps7_cortexa9_0/libsrc/emacps_v3_1/src
 make -C ps7_cortexa9_0/libsrc/emacps_v3_1/src -s libs  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
 Compiling emacps
@@ -97,5 +113,5 @@ make -C ps7_cortexa9_0/libsrc/qspips_v3_2/src -s libs  "SHELL=/bin/sh" "COMPILER
 Compiling qspips
 Finished building libraries
 
-09:10:57 Build Finished (took 10s.369ms)
+12:20:26 Build Finished (took 5s.183ms)
 

@@ -2352,14 +2352,14 @@ unsigned long ps7_mio_init_data_3_0[] = {
     // .. IO_Type = 3
     // .. ==> 0XF8000728[11:9] = 0x00000003U
     // ..     ==> MASK : 0x00000E00U    VAL : 0x00000600U
-    // .. PULLUP = 0
-    // .. ==> 0XF8000728[12:12] = 0x00000000U
-    // ..     ==> MASK : 0x00001000U    VAL : 0x00000000U
+    // .. PULLUP = 1
+    // .. ==> 0XF8000728[12:12] = 0x00000001U
+    // ..     ==> MASK : 0x00001000U    VAL : 0x00001000U
     // .. DisableRcvr = 0
     // .. ==> 0XF8000728[13:13] = 0x00000000U
     // ..     ==> MASK : 0x00002000U    VAL : 0x00000000U
     // .. 
-    EMIT_MASKWRITE(0XF8000728, 0x00003FFFU ,0x00000640U),
+    EMIT_MASKWRITE(0XF8000728, 0x00003FFFU ,0x00001640U),
     // .. TRI_ENABLE = 0
     // .. ==> 0XF800072C[0:0] = 0x00000000U
     // ..     ==> MASK : 0x00000001U    VAL : 0x00000000U
@@ -2381,14 +2381,14 @@ unsigned long ps7_mio_init_data_3_0[] = {
     // .. IO_Type = 3
     // .. ==> 0XF800072C[11:9] = 0x00000003U
     // ..     ==> MASK : 0x00000E00U    VAL : 0x00000600U
-    // .. PULLUP = 0
-    // .. ==> 0XF800072C[12:12] = 0x00000000U
-    // ..     ==> MASK : 0x00001000U    VAL : 0x00000000U
+    // .. PULLUP = 1
+    // .. ==> 0XF800072C[12:12] = 0x00000001U
+    // ..     ==> MASK : 0x00001000U    VAL : 0x00001000U
     // .. DisableRcvr = 0
     // .. ==> 0XF800072C[13:13] = 0x00000000U
     // ..     ==> MASK : 0x00002000U    VAL : 0x00000000U
     // .. 
-    EMIT_MASKWRITE(0XF800072C, 0x00003FFFU ,0x00000640U),
+    EMIT_MASKWRITE(0XF800072C, 0x00003FFFU ,0x00001640U),
     // .. TRI_ENABLE = 0
     // .. ==> 0XF8000730[0:0] = 0x00000000U
     // ..     ==> MASK : 0x00000001U    VAL : 0x00000000U
@@ -6620,14 +6620,14 @@ unsigned long ps7_mio_init_data_2_0[] = {
     // .. IO_Type = 3
     // .. ==> 0XF8000728[11:9] = 0x00000003U
     // ..     ==> MASK : 0x00000E00U    VAL : 0x00000600U
-    // .. PULLUP = 0
-    // .. ==> 0XF8000728[12:12] = 0x00000000U
-    // ..     ==> MASK : 0x00001000U    VAL : 0x00000000U
+    // .. PULLUP = 1
+    // .. ==> 0XF8000728[12:12] = 0x00000001U
+    // ..     ==> MASK : 0x00001000U    VAL : 0x00001000U
     // .. DisableRcvr = 0
     // .. ==> 0XF8000728[13:13] = 0x00000000U
     // ..     ==> MASK : 0x00002000U    VAL : 0x00000000U
     // .. 
-    EMIT_MASKWRITE(0XF8000728, 0x00003FFFU ,0x00000640U),
+    EMIT_MASKWRITE(0XF8000728, 0x00003FFFU ,0x00001640U),
     // .. TRI_ENABLE = 0
     // .. ==> 0XF800072C[0:0] = 0x00000000U
     // ..     ==> MASK : 0x00000001U    VAL : 0x00000000U
@@ -6649,14 +6649,14 @@ unsigned long ps7_mio_init_data_2_0[] = {
     // .. IO_Type = 3
     // .. ==> 0XF800072C[11:9] = 0x00000003U
     // ..     ==> MASK : 0x00000E00U    VAL : 0x00000600U
-    // .. PULLUP = 0
-    // .. ==> 0XF800072C[12:12] = 0x00000000U
-    // ..     ==> MASK : 0x00001000U    VAL : 0x00000000U
+    // .. PULLUP = 1
+    // .. ==> 0XF800072C[12:12] = 0x00000001U
+    // ..     ==> MASK : 0x00001000U    VAL : 0x00001000U
     // .. DisableRcvr = 0
     // .. ==> 0XF800072C[13:13] = 0x00000000U
     // ..     ==> MASK : 0x00002000U    VAL : 0x00000000U
     // .. 
-    EMIT_MASKWRITE(0XF800072C, 0x00003FFFU ,0x00000640U),
+    EMIT_MASKWRITE(0XF800072C, 0x00003FFFU ,0x00001640U),
     // .. TRI_ENABLE = 0
     // .. ==> 0XF8000730[0:0] = 0x00000000U
     // ..     ==> MASK : 0x00000001U    VAL : 0x00000000U
@@ -10819,14 +10819,14 @@ unsigned long ps7_mio_init_data_1_0[] = {
     // .. IO_Type = 3
     // .. ==> 0XF8000728[11:9] = 0x00000003U
     // ..     ==> MASK : 0x00000E00U    VAL : 0x00000600U
-    // .. PULLUP = 0
-    // .. ==> 0XF8000728[12:12] = 0x00000000U
-    // ..     ==> MASK : 0x00001000U    VAL : 0x00000000U
+    // .. PULLUP = 1
+    // .. ==> 0XF8000728[12:12] = 0x00000001U
+    // ..     ==> MASK : 0x00001000U    VAL : 0x00001000U
     // .. DisableRcvr = 0
     // .. ==> 0XF8000728[13:13] = 0x00000000U
     // ..     ==> MASK : 0x00002000U    VAL : 0x00000000U
     // .. 
-    EMIT_MASKWRITE(0XF8000728, 0x00003FFFU ,0x00000640U),
+    EMIT_MASKWRITE(0XF8000728, 0x00003FFFU ,0x00001640U),
     // .. TRI_ENABLE = 0
     // .. ==> 0XF800072C[0:0] = 0x00000000U
     // ..     ==> MASK : 0x00000001U    VAL : 0x00000000U
@@ -10848,14 +10848,14 @@ unsigned long ps7_mio_init_data_1_0[] = {
     // .. IO_Type = 3
     // .. ==> 0XF800072C[11:9] = 0x00000003U
     // ..     ==> MASK : 0x00000E00U    VAL : 0x00000600U
-    // .. PULLUP = 0
-    // .. ==> 0XF800072C[12:12] = 0x00000000U
-    // ..     ==> MASK : 0x00001000U    VAL : 0x00000000U
+    // .. PULLUP = 1
+    // .. ==> 0XF800072C[12:12] = 0x00000001U
+    // ..     ==> MASK : 0x00001000U    VAL : 0x00001000U
     // .. DisableRcvr = 0
     // .. ==> 0XF800072C[13:13] = 0x00000000U
     // ..     ==> MASK : 0x00002000U    VAL : 0x00000000U
     // .. 
-    EMIT_MASKWRITE(0XF800072C, 0x00003FFFU ,0x00000640U),
+    EMIT_MASKWRITE(0XF800072C, 0x00003FFFU ,0x00001640U),
     // .. TRI_ENABLE = 0
     // .. ==> 0XF8000730[0:0] = 0x00000000U
     // ..     ==> MASK : 0x00000001U    VAL : 0x00000000U

@@ -36,6 +36,7 @@
 								<option id="xilinx.gnu.compiler.symbols.undefined.859717927" name="Undefined symbols (-U)" superClass="xilinx.gnu.compiler.symbols.undefined" valueType="undefDefinedSymbols">
 									<listOptionValue builtIn="false" value="__ACCUM_EPSILON__"/>
 								</option>
+								<option id="xilinx.gnu.compiler.option.profiling.enable.1914900293" name="Enable Profiling (-pg)" superClass="xilinx.gnu.compiler.option.profiling.enable" value="false" valueType="boolean"/>
 								<inputType id="xilinx.gnu.arm.c.compiler.input.923718330" name="C source files" superClass="xilinx.gnu.arm.c.compiler.input"/>
 							</tool>
 							<tool id="xilinx.gnu.arm.cxx.toolchain.compiler.debug.233183225" name="ARM g++ compiler" superClass="xilinx.gnu.arm.cxx.toolchain.compiler.debug">
@@ -62,6 +63,7 @@
 									<listOptionValue builtIn="false" value="m"/>
 									<listOptionValue builtIn="false" value="libmplmpu"/>
 								</option>
+								<option id="xilinx.gnu.c.linker.option.pg.1304157538" name="Enable Profiling" superClass="xilinx.gnu.c.linker.option.pg" value="false" valueType="boolean"/>
 								<inputType id="xilinx.gnu.linker.input.1417488787" superClass="xilinx.gnu.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -76,6 +78,7 @@
 									<listOptionValue builtIn="false" value="-Wl,--start-group,-lxil,-lgcc,-lc,--end-group"/>
 								</option>
 								<option id="xilinx.gnu.c.linker.option.lscript.837383934" name="Linker Script" superClass="xilinx.gnu.c.linker.option.lscript" value="../src/lscript.ld" valueType="string"/>
+								<option id="xilinx.gnu.c.linker.option.pg.822098798" name="Enable Profiling" superClass="xilinx.gnu.c.linker.option.pg" value="false" valueType="boolean"/>
 							</tool>
 							<tool id="xilinx.gnu.arm.size.debug.1784037665" name="ARM Print Size" superClass="xilinx.gnu.arm.size.debug"/>
 						</toolChain>

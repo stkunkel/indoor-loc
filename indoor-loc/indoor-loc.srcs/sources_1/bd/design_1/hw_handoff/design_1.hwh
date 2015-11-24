@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Wed Oct 28 11:08:56 2015" VIVADOVERSION="2015.3">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Mon Nov 23 14:22:32 2015" VIVADOVERSION="2015.3">
 
   <SYSTEMINFO ARCH="zynq" BOARD="em.avnet.com:zed:part0:1.3" DEVICE="7z020" NAME="design_1" PACKAGE="clg484" SPEEDGRADE="-1"/>
 
@@ -775,11 +775,11 @@
         <PARAMETER NAME="PCW_MIO_9_IOTYPE" VALUE="LVCMOS 3.3V"/>
         <PARAMETER NAME="PCW_MIO_9_DIRECTION" VALUE="inout"/>
         <PARAMETER NAME="PCW_MIO_9_SLEW" VALUE="slow"/>
-        <PARAMETER NAME="PCW_MIO_10_PULLUP" VALUE="disabled"/>
+        <PARAMETER NAME="PCW_MIO_10_PULLUP" VALUE="enabled"/>
         <PARAMETER NAME="PCW_MIO_10_IOTYPE" VALUE="LVCMOS 3.3V"/>
         <PARAMETER NAME="PCW_MIO_10_DIRECTION" VALUE="inout"/>
         <PARAMETER NAME="PCW_MIO_10_SLEW" VALUE="slow"/>
-        <PARAMETER NAME="PCW_MIO_11_PULLUP" VALUE="disabled"/>
+        <PARAMETER NAME="PCW_MIO_11_PULLUP" VALUE="enabled"/>
         <PARAMETER NAME="PCW_MIO_11_IOTYPE" VALUE="LVCMOS 3.3V"/>
         <PARAMETER NAME="PCW_MIO_11_DIRECTION" VALUE="inout"/>
         <PARAMETER NAME="PCW_MIO_11_SLEW" VALUE="slow"/>
@@ -2035,23 +2035,23 @@
         <PORT DIR="I" NAME="M01_AXI_rresp" SIGIS="undef"/>
         <PORT DIR="I" NAME="M01_AXI_rvalid" SIGIS="undef"/>
         <PORT DIR="O" NAME="M01_AXI_rready" SIGIS="undef"/>
-        <PORT DIR="O" LEFT="8" NAME="M00_AXI_awaddr" RIGHT="0" SIGIS="undef"/>
+        <PORT DIR="O" NAME="M00_AXI_awaddr" SIGIS="undef"/>
         <PORT DIR="O" NAME="M00_AXI_awprot" SIGIS="undef"/>
         <PORT DIR="O" NAME="M00_AXI_awvalid" SIGIS="undef"/>
         <PORT DIR="I" NAME="M00_AXI_awready" SIGIS="undef"/>
-        <PORT DIR="O" LEFT="31" NAME="M00_AXI_wdata" RIGHT="0" SIGIS="undef"/>
-        <PORT DIR="O" LEFT="3" NAME="M00_AXI_wstrb" RIGHT="0" SIGIS="undef"/>
+        <PORT DIR="O" NAME="M00_AXI_wdata" SIGIS="undef"/>
+        <PORT DIR="O" NAME="M00_AXI_wstrb" SIGIS="undef"/>
         <PORT DIR="O" NAME="M00_AXI_wvalid" SIGIS="undef"/>
         <PORT DIR="I" NAME="M00_AXI_wready" SIGIS="undef"/>
-        <PORT DIR="I" LEFT="1" NAME="M00_AXI_bresp" RIGHT="0" SIGIS="undef"/>
+        <PORT DIR="I" NAME="M00_AXI_bresp" SIGIS="undef"/>
         <PORT DIR="I" NAME="M00_AXI_bvalid" SIGIS="undef"/>
         <PORT DIR="O" NAME="M00_AXI_bready" SIGIS="undef"/>
-        <PORT DIR="O" LEFT="8" NAME="M00_AXI_araddr" RIGHT="0" SIGIS="undef"/>
+        <PORT DIR="O" NAME="M00_AXI_araddr" SIGIS="undef"/>
         <PORT DIR="O" NAME="M00_AXI_arprot" SIGIS="undef"/>
         <PORT DIR="O" NAME="M00_AXI_arvalid" SIGIS="undef"/>
         <PORT DIR="I" NAME="M00_AXI_arready" SIGIS="undef"/>
-        <PORT DIR="I" LEFT="31" NAME="M00_AXI_rdata" RIGHT="0" SIGIS="undef"/>
-        <PORT DIR="I" LEFT="1" NAME="M00_AXI_rresp" RIGHT="0" SIGIS="undef"/>
+        <PORT DIR="I" NAME="M00_AXI_rdata" SIGIS="undef"/>
+        <PORT DIR="I" NAME="M00_AXI_rresp" SIGIS="undef"/>
         <PORT DIR="I" NAME="M00_AXI_rvalid" SIGIS="undef"/>
         <PORT DIR="O" NAME="M00_AXI_rready" SIGIS="undef"/>
       </PORTS>
