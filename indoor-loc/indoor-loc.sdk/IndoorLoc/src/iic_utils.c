@@ -165,8 +165,8 @@ int iic_init(XIicPs *IicPs, u16 DeviceId, u32 ClkRate) {
 	if (Status != XST_SUCCESS) {
 #ifdef DEBUG
 		xil_printf("Setting XIicPs clock rate failed for ID %d, Status: %d\n\r",
-#endif
 				DeviceId, Status);
+#endif
 		return XST_FAILURE;
 	}
 
@@ -191,12 +191,12 @@ int iic_reset_init_abort(XIicPs *IicPs, u16 DeviceId, u32 ClkRate) {
 //		}
 //	}
 
-	//Reset and Init
-	XIicPs_ResetHw(IIC_BASE_ADDR);
+//Reset and Init
+//	XIicPs_ResetHw(IIC_BASE_ADDR);
 	iic_init(IicPs, IIC_DEVICE_ID, IIC_SCLK_RATE);
-	XIicPs_Reset(IicPs);
+//	XIicPs_Reset(IicPs);
 
-	//Abort and return
+//Abort and return
 	XIicPs_Abort(IicPs);
 	return XST_SUCCESS;
 }
@@ -288,6 +288,7 @@ int iic_burstWrite(XIicPs *IicPs, u8 Address, u8 Register, u32 length,
 		unsigned char* Data) {
 	u8 WriteBuffer[length + 1];
 	int Status;
+//	int cnt = 0;
 
 	/*
 	 * A temporary write buffer must be used which contains both the address
@@ -302,6 +303,10 @@ int iic_burstWrite(XIicPs *IicPs, u8 Address, u8 Register, u32 length,
 	while (XIicPs_BusIsBusy(IicPs)) {
 		/* NOP */
 		usleep(100);
+//		cnt++;
+//		if (cnt > 100) {
+//			return XST_FAILURE;
+//		}
 	}
 
 	/*
@@ -380,6 +385,7 @@ int iic_read1(XIicPs *IicPs, u8 Address, u8 *Data) {
  */
 int iic_read2(XIicPs *IicPs, u8 Address, u8 Register, u8 *Data, int ByteCount) {
 	int Status;
+//	int cnt = 0;
 
 	/*
 	 * Wait until bus is idle to start another transfer.
@@ -387,6 +393,10 @@ int iic_read2(XIicPs *IicPs, u8 Address, u8 Register, u8 *Data, int ByteCount) {
 	while (XIicPs_BusIsBusy(IicPs)) {
 		/* NOP */
 		usleep(100);
+//		cnt++;
+//		if (cnt > 100) {
+//			return XST_FAILURE;
+//		}
 	}
 
 	/*
@@ -396,7 +406,6 @@ int iic_read2(XIicPs *IicPs, u8 Address, u8 Register, u8 *Data, int ByteCount) {
 	if (Status != XST_SUCCESS) {
 		return XST_FAILURE;
 	}
-
 	/*
 	 * Send the buffer using the IIC and check for errors.
 	 */
