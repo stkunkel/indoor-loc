@@ -35,8 +35,8 @@
 #define QUATERNION_AMOUNT	4			//w, x, y, z rotational angles
 #define QUATERNION_SCALING	1073741824	//Internal values: 1.0 is scaled to 2^30 = 1073741824
 #define SENSORS				INV_XYZ_GYRO | INV_XYZ_ACCEL | INV_XYZ_COMPASS 	//all sensors
-#define FEATURES			DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_SEND_CAL_GYRO | DMP_FEATURE_SEND_RAW_ACCEL // DMP_FEATURE_SEND_RAW_GYRO							//6xLP quaternions
-#define MPU_SAMPLE_RATE		60			//Hz
+#define FEATURES			DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_SEND_CAL_GYRO | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_TAP //DMP_FEATURE_TAP for ensure DMP sends interrupts at specified rate
+#define MPU_SAMPLE_RATE		200			//Hz
 #define DMP_FIFO_RATE		10			//Hz
 
 //Functions
