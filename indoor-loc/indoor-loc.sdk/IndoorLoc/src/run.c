@@ -69,15 +69,21 @@ int main() {
 	//Variables
 	int i = 0;
 
-	//0. Init Platform
+	//Init Platform
 	init_platform();
 
-	//printf("-----------------------\r\n");
+	//Print Output Separator
+#ifdef DEBUG
+	printf("---------------------------------\r\n");
+#endif
 
 	//Print Quaternions to Serial Port
-	while (1){
+	while (1) {
 		printQuatForDisplay();
-		usleep(100);
+		//usleep(100);
+		for (i = 0; i <= 10000; i++) {
+			;
+		}
 	}
 
 //	//Get Data without DMP
@@ -92,10 +98,10 @@ int main() {
 //		printDataWithDMP();
 //	}
 
-	//PWM
-	//pwm(PWM_RUNS);
+//PWM
+//pwm(PWM_RUNS);
 
-	//Stay in here
+//Stay in here
 //	while (1) {
 //		;
 //	}
