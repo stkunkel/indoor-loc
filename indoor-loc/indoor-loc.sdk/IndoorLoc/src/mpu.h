@@ -20,31 +20,36 @@
 #include "math_utils.h"
 
 //IMU Parameters
-#define GYRO_SENS_FRS_0		131			//LSB/(°/s) for FS_SEL = 0, 16-bit
-#define GYRO_SENS_FRS_1		65.5		//LSB/(°/s) for FS_SEL = 1
-#define GYRO_SENS_FRS_2		32.8		//LSB/(°/s) for FS_SEL = 2
-#define GYRO_SENS_FRS_3		16.4		//LSB/(°/s) for FS_SEL = 3
-#define ACC_SENS_FRS_0		16384		//LSB/g for AFS_SEL = 0, 16-bit, output in 2's complement format
-#define ACC_SENS_FRS_1		8192		//LSB/g for AFS_SEL = 1
-#define ACC_SENS_FRS_2		4096		//LSB/g for AFS_SEL = 2
-#define ACC_SENS_FRS_3		2048		//LSB/g for AFS_SEL = 3
-#define MAG_SENS_FRS_1200	0.3			//T/LSB for FRS = 1200, 13-bit, output in 2's complement format
-#define TEMP_SENS_UNTRIMMED	340			//LSB/°C
-#define TEMP_OFFSET_35C		-521		//LSB
-#define NUMBER_OF_AXES		3			//x, y, z
-#define QUATERNION_AMOUNT	4			//w, x, y, z rotational angles
-#define QUATERNION_SCALING	1073741824	//Internal values: 1.0 is scaled to 2^30 = 1073741824
-#define SENSORS				INV_XYZ_GYRO | INV_XYZ_ACCEL | INV_XYZ_COMPASS 	//all sensors
-#define FEATURES			DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_SEND_CAL_GYRO | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_TAP //DMP_FEATURE_TAP for ensure DMP sends interrupts at specified rate
-#define MPU_SAMPLE_RATE		200			//Hz
-#define DMP_FIFO_RATE		10			//Hz
-#define CAL_SAMPLES_EXP		14			//2^14 samples
+#define GYRO_SENS_FRS_0			131			//LSB/(°/s) for FS_SEL = 0, 16-bit
+#define GYRO_SENS_FRS_1			65.5		//LSB/(°/s) for FS_SEL = 1
+#define GYRO_SENS_FRS_2			32.8		//LSB/(°/s) for FS_SEL = 2
+#define GYRO_SENS_FRS_3			16.4		//LSB/(°/s) for FS_SEL = 3
+#define ACC_SENS_FRS_0			16384		//LSB/g for AFS_SEL = 0, 16-bit, output in 2's complement format
+#define ACC_SENS_FRS_1			8192		//LSB/g for AFS_SEL = 1
+#define ACC_SENS_FRS_2			4096		//LSB/g for AFS_SEL = 2
+#define ACC_SENS_FRS_3			2048		//LSB/g for AFS_SEL = 3
+#define MAG_SENS_FRS_1200		0.3			//T/LSB for FRS = 1200, 13-bit, output in 2's complement format
+#define TEMP_SENS_UNTRIMMED		340			//LSB/°C
+#define TEMP_OFFSET_35C			-521		//LSB
+#define NUMBER_OF_AXES			3			//x, y, z
+#define QUATERNION_AMOUNT		4			//w, x, y, z rotational angles
+#define QUATERNION_SCALING		1073741824	//Internal values: 1.0 is scaled to 2^30 = 1073741824
+#define SENSORS					INV_XYZ_GYRO | INV_XYZ_ACCEL | INV_XYZ_COMPASS 	//all sensors
+#define FEATURES				DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_SEND_CAL_GYRO | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_TAP //DMP_FEATURE_TAP for ensure DMP sends interrupts at specified rate
+#define MPU_SAMPLE_RATE			200			//Hz
+#define DMP_FIFO_RATE			10			//Hz
+#define CAL_SAMPLES_EXP			14			//2^14 samples
+#define GYRO_CAL_ERROR_MASK		0x01
+#define ACCEL_CAL_ERROR_MASK	0x02
+#define MAG_CAL_ERROR_MASK		0x04
 
 //Functions
-int printQuatForDisplay();
-int printDataWithDMP();
+int printQuatForDisplay(char gyroCal);
+int printDataWithDMP(char gyroCal);
 int printDataNoDMP();
-int initDMP(unsigned short int features, unsigned short fifoRate, char enableGyroCalibration);
+int calibrateGyrAcc();
+int configureDMP(unsigned short int features, unsigned short fifoRate);
+int initDMP();
 int getImuAddr(u8* addr);
 int initMPU();
 
