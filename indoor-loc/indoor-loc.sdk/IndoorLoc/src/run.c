@@ -59,8 +59,8 @@
 /*
  * Defines
  */
-#define DATA_NO_DMP_RUNS 	50
-#define DATA_WITH_DMP_RUNS 	50
+#define DATA_NO_DMP_RUNS 	10
+#define DATA_WITH_DMP_RUNS 	10
 #define PWM_RUNS 			10
 
 /*
@@ -91,26 +91,84 @@ int main() {
 //		}
 //	}
 
-	printf(".........Without DMP...........\n\r");
+////Get Data without DMP
+//#ifdef DEBUG
+//	printf(".........Without DMP...........\n\r");
+//#endif
+//	for (cnt = 0; cnt <= DATA_NO_DMP_RUNS; cnt++) {
+//		//Print
+//		status = printDataNoDMP();
+//
+//		//Decrease count if not successful
+//		if (status != XST_SUCCESS) {
+//			cnt--;
+//		}
+//
+//		//Wait
+//		for (i = 0; i <= 10000; i++) {
+//			;
+//		}
+//	}
 
-	//Get Data without DMP
-	for (i = 0; i <= DATA_NO_DMP_RUNS; i++) {
-		sleep(1);
-		status = printDataNoDMP();
+//Get Data with DMP
+#ifdef DEBUG
+	printf(".........With DMP...........\n\r");
+#endif
+	for (cnt = 0; cnt <= DATA_NO_DMP_RUNS; cnt++) {
+		//Print
+		status = printDataWithDMP(0);
+
+		//Decrease count if not successful
 		if (status != XST_SUCCESS) {
-			i--;
+			cnt--;
+		}
+
+		//Wait
+		for (i = 0; i <= 10000; i++) {
+			;
 		}
 	}
 
-//	printf(".........With DMP...........\n\r");
-//
-//	//Get Data with DMP
-//	for (i = 0; i <= DATA_NO_DMP_RUNS; i++) {
-//		sleep(1);
-//		status = printDataWithDMP();
-//		if (status != XST_SUCCESS) {
-//			i--;
-//		}
+//Calibrate
+#ifdef DEBUG
+	printf(".........Calibration...........\n\r");
+#endif
+	status = calibrateGyrAcc();
+	if (status != XST_SUCCESS) {
+#ifdef DEBUG
+		if (status & GYRO_CAL_ERROR_MASK) {
+			printf("Calibration of Gyroscope failed.\n\r");
+		}
+		if (status & ACCEL_CAL_ERROR_MASK) {
+			printf("Calibration of Accelerometer failed.\n\r");
+		}
+		if (status & MAG_CAL_ERROR_MASK) {
+			printf("Calibration of Magnetometer failed.\n\r");
+		}
+
+#endif
+	}
+
+	//Print second time if there is neither gyro nor accel error
+//	if (!(status & GYRO_CAL_ERROR_MASK) || !(status & ACCEL_CAL_ERROR_MASK)) {
+		//Get Data with DMP
+#ifdef DEBUG
+		printf(".........With DMP...........\n\r");
+#endif
+		for (cnt = 0; cnt <= DATA_NO_DMP_RUNS; cnt++) {
+			//Print
+			status = printDataWithDMP(0);
+
+			//Decrease count if not successful
+			if (status != XST_SUCCESS) {
+				cnt--;
+			}
+
+			//Wait
+			for (i = 0; i <= 10000; i++) {
+				;
+			}
+		}
 //	}
 
 //PWM
