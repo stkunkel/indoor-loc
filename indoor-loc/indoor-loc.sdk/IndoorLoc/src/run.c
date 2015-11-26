@@ -59,7 +59,7 @@
 /*
  * Defines
  */
-#define DATA_NO_DMP_RUNS 	10
+#define DATA_NO_DMP_RUNS 	50
 #define DATA_WITH_DMP_RUNS 	50
 #define PWM_RUNS 			10
 
@@ -78,38 +78,48 @@ int main() {
 	printf("---------------------------------\r\n");
 #endif
 
-	//Print Quaternions to Serial Port
-	//while (1) {
-	for (cnt = 0; cnt <= 1000; ){
-		status = printQuatForDisplay();
-		if (status == XST_SUCCESS) {
-			cnt++;
-		}
-		//usleep(100);
-		for (i = 0; i <= 10000; i++) {
-			;
+//	//Print Quaternions to Serial Port
+//	//while (1) {
+//	for (cnt = 0; cnt <= 1000; ){
+//		status = printQuatForDisplay();
+//		if (status == XST_SUCCESS) {
+//			cnt++;
+//		}
+//		//usleep(100);
+//		for (i = 0; i <= 10000; i++) {
+//			;
+//		}
+//	}
+
+	printf(".........Without DMP...........\n\r");
+
+	//Get Data without DMP
+	for (i = 0; i <= DATA_NO_DMP_RUNS; i++) {
+		sleep(1);
+		status = printDataNoDMP();
+		if (status != XST_SUCCESS) {
+			i--;
 		}
 	}
 
-//	//Get Data without DMP
-//	for (i = 0; i <= DATA_NO_DMP_RUNS; i++) {
-//		sleep(1);
-//		printDataNoDMP();
-//	}
+//	printf(".........With DMP...........\n\r");
 //
 //	//Get Data with DMP
 //	for (i = 0; i <= DATA_NO_DMP_RUNS; i++) {
 //		sleep(1);
-//		printDataWithDMP();
+//		status = printDataWithDMP();
+//		if (status != XST_SUCCESS) {
+//			i--;
+//		}
 //	}
 
 //PWM
 //pwm(PWM_RUNS);
 
 //Stay in here
-//	while (1) {
-//		;
-//	}
+	while (1) {
+		;
+	}
 
 //Finish
 	cleanup_platform();

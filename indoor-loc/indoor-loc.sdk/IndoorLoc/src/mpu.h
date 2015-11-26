@@ -42,8 +42,8 @@
 
 //Functions
 int printQuatForDisplay();
-void printDataWithDMP();
-void printDataNoDMP();
+int printDataWithDMP();
+int printDataNoDMP();
 int initDMP(unsigned short int features, unsigned short fifoRate, char enableGyroCalibration);
 int getImuAddr(u8* addr);
 int initMPU();
