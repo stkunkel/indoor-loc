@@ -54,6 +54,7 @@
 #include "platform.h"
 #include "mpu.h"
 #include "pwmsw.h"
+#include "xtime_l.h"
 
 /*
  * Defines
@@ -67,7 +68,7 @@
  */
 int main() {
 	//Variables
-	int i = 0;
+	int i = 0, cnt = 0, status;
 
 	//Init Platform
 	init_platform();
@@ -78,8 +79,12 @@ int main() {
 #endif
 
 	//Print Quaternions to Serial Port
-	while (1) {
-		printQuatForDisplay();
+	//while (1) {
+	for (cnt = 0; cnt <= 1000; ){
+		status = printQuatForDisplay();
+		if (status == XST_SUCCESS) {
+			cnt++;
+		}
 		//usleep(100);
 		for (i = 0; i <= 10000; i++) {
 			;
@@ -106,7 +111,7 @@ int main() {
 //		;
 //	}
 
-	//Finish
+//Finish
 	cleanup_platform();
 	return 0;
 }
