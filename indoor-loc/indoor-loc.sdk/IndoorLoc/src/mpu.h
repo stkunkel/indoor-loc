@@ -38,12 +38,13 @@
 #define FEATURES			DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_SEND_CAL_GYRO | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_TAP //DMP_FEATURE_TAP for ensure DMP sends interrupts at specified rate
 #define MPU_SAMPLE_RATE		200			//Hz
 #define DMP_FIFO_RATE		10			//Hz
+#define CAL_SAMPLES_EXP		14			//2^14 samples
 
 //Functions
-void printQuatForDisplay();
+int printQuatForDisplay();
 void printDataWithDMP();
 void printDataNoDMP();
-int initDMP(unsigned short int features, unsigned short fifoRate);
+int initDMP(unsigned short int features, unsigned short fifoRate, char enableGyroCalibration);
 int getImuAddr(u8* addr);
 int initMPU();
 

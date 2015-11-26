@@ -34,22 +34,15 @@ static u8 imuAddr = 0;
 static char dmpReady = 0;
 static int count = 0;
 float quat_conv[QUATERNION_AMOUNT];
-
-/*
- * Print Quaternions for Display using DMP Interrupt
- * (No error messages!)
- */
-void printQuatForDisplayWithInterrupt() {
-
-}
+static int gyrAccIsCal = 0;
 
 /*
  * Print one Quaternion for Display
  * (No error messages!)
  */
-void printQuatForDisplay() {
+int printQuatForDisplay() {
 	//Variables
-	int status, i = 0;
+	int status = XST_FAILURE, i = 0;
 	short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES];
 	long quat[QUATERNION_AMOUNT];
 	unsigned long timestamp;
@@ -59,9 +52,9 @@ void printQuatForDisplay() {
 
 	//init DMP
 	if (!dmpReady) {
-		status = initDMP(FEATURES, DMP_FIFO_RATE);
+		status = initDMP(FEATURES, DMP_FIFO_RATE, 1);
 		if (status != XST_SUCCESS) {
-			return;
+			return status;
 		}
 	}
 
@@ -84,10 +77,11 @@ void printQuatForDisplay() {
 			for (i = 0; i < QUATERNION_AMOUNT; i++) {
 				printf("%f ", quat_conv[i]);
 			}
-			printf("\r\n");
+			printf("\n\r");
 		}
 	}
 	free(more);
+	return status;
 }
 
 /*
@@ -106,7 +100,7 @@ void printDataWithDMP() {
 
 	//init DMP
 	if (!dmpReady) {
-		status = initDMP(FEATURES, DMP_FIFO_RATE);
+		status = initDMP(FEATURES, DMP_FIFO_RATE, 1);
 		if (status != XST_SUCCESS) {
 			printf("Error initializing DMP.\r\n");
 			return;
@@ -419,6 +413,87 @@ void printEulerAngles(float* sigma, float* theta, float* psi) {
 }
 
 /*
+ * Calibrate Gyroscope and Accelerometer
+ */
+int calibrateGyrAcc() {
+	//Variables
+	int samples, status, i;
+	long gyro_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
+	long accel_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
+	unsigned long gyro_timestamp, accel_timestamp;
+	short gyro_data[NUMBER_OF_AXES], accel_data[NUMBER_OF_AXES];
+
+	//Init MPU and DMP
+	status = initDMP(FEATURES, DMP_FIFO_RATE, 0);
+	if (status != XST_SUCCESS) {
+		gyrAccIsCal = 0;
+		return status;
+	}
+
+	//Set Gyro Bias to zero
+	status = mpu_set_gyro_bias_reg(gyro_bias);
+	if (status != XST_SUCCESS) {
+		gyrAccIsCal = 0;
+		return status;
+	}
+
+	//Set Accel Bias to zero
+	status = mpu_set_accel_bias_6050_reg(accel_bias);
+	if (status != XST_SUCCESS) {
+		gyrAccIsCal = 0;
+		return status;
+	}
+
+	//Get Samples
+	for (samples = 0; samples <= (1 << CAL_SAMPLES_EXP); samples++) {
+		//Read out raw gyro data
+		status = mpu_get_gyro_reg(gyro_data, &gyro_timestamp);
+		if (status != XST_SUCCESS) {
+			samples--;
+			continue;
+		}
+
+		//Read out raw accel data
+		status = mpu_get_accel_reg(accel_data, &accel_timestamp);
+		if (status != XST_SUCCESS) {
+			samples--;
+			continue;
+		}
+
+		//Compare timestamp
+		if (gyro_timestamp != accel_timestamp) {
+			samples--;
+			continue;
+		}
+
+		//Add gyro and accel data to averages
+		for (i = 0; i < NUMBER_OF_AXES; i++) {
+			gyro_bias[i] += (gyro_data[i] >> CAL_SAMPLES_EXP);
+			accel_bias[i] += (accel_data[i] >> CAL_SAMPLES_EXP); //TODO
+		}
+	}
+
+	//Set Gyro Bias (Bias inputs are LSB in +-1000dps format)
+	status = mpu_set_gyro_bias_reg(gyro_bias);
+	if (status != XST_SUCCESS) {
+		gyrAccIsCal = 0;
+		return status;
+	}
+
+	//Set Accel Bias (Bias inputs are LSB in +-16G format.)
+	status = mpu_set_accel_bias_6050_reg(accel_bias);
+	if (status != XST_SUCCESS) {
+		gyrAccIsCal = 0;
+		return status;
+	}
+
+	//Set calibrated flag
+	gyrAccIsCal = 1;
+
+	//Return
+	return gyrAccIsCal;
+}
+/*
  * Convert Gyroscope Data using Sensitivity
  */
 int convertGyroData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]) {
@@ -517,7 +592,8 @@ int convertQuatenion(long raw[QUATERNION_AMOUNT], float conv[QUATERNION_AMOUNT])
 /*
  * Init DMP
  */
-int initDMP(unsigned short int features, unsigned short fifoRate) {
+int initDMP(unsigned short int features, unsigned short fifoRate,
+		char enableGyroCalibration) {
 //Variables
 	int status;
 
@@ -586,7 +662,7 @@ int initDMP(unsigned short int features, unsigned short fifoRate) {
 	}
 
 	//Enable Gyro Calibration
-	status = dmp_enable_gyro_cal(1);
+	status = dmp_enable_gyro_cal(enableGyroCalibration);
 	if (status != XST_SUCCESS) {
 #ifdef DEBUG
 		printf("mpu.c: Could not enable Gyroscope Calibration.\n\r");
