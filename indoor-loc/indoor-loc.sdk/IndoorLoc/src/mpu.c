@@ -403,64 +403,6 @@ void printEulerAngles(float* sigma, float* theta, float* psi) {
 }
 
 /*
- * Calibrate Gyroscope and Accelerometer
- */
-int calibrateGyrAcc() {
-//Variables
-	int status, i;
-	long gyro_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
-	long accel_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
-
-//Init MPU and DMP
-	status = configureDMP(FEATURES, DMP_FIFO_RATE);
-	if (status != XST_SUCCESS) {
-		gyrAccIsCal = 0;
-		return status;
-	}
-
-//Get Gyro and Accel Offets
-	status = mpu_run_self_test(gyro_bias, accel_bias);
-
-	//Print Offsets
-	myprintf("Gyro Bias: ");
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		myprintf("%d ", gyro_bias[i]);
-	}
-	myprintf("\r\nAccel Bias: ");
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		myprintf("%d ", accel_bias[i]);
-	}
-	myprintf("\r\n");
-
-//Set calibrated flag
-	if (status & GYRO_CAL_ERROR_MASK && status & ACCEL_CAL_ERROR_MASK) { //gyro and accel calibrated
-		//Push accel bias to DMP
-		status = dmp_set_accel_bias(accel_bias);
-		if (status != XST_SUCCESS) {
-			gyrAccIsCal = 0;
-			return XST_FAILURE;
-		}
-
-		//Push gyro bias to DMP
-		status = dmp_set_gyro_bias(gyro_bias);
-		if (status != XST_SUCCESS) {
-			gyrAccIsCal = 0;
-			return XST_FAILURE;
-		}
-
-		//Calibration successful --> set flag
-		gyrAccIsCal = 1;
-		status = XST_SUCCESS;
-	} else {
-		//Calibration successful --> set flag
-		gyrAccIsCal = 0;
-		status = XST_FAILURE;
-	}
-
-	//Return
-	return status;
-}
-/*
  * Convert Gyroscope Data using Sensitivity
  */
 int convertGyroData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]) {
@@ -550,6 +492,65 @@ int convertQuatenion(long raw[QUATERNION_AMOUNT], float conv[QUATERNION_AMOUNT])
 
 //Return
 	return XST_SUCCESS;
+}
+
+/*
+ * Calibrate Gyroscope and Accelerometer
+ */
+int calibrateGyrAcc() {
+//Variables
+	int status, i;
+	long gyro_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
+	long accel_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
+
+//Init MPU and DMP
+	status = configureDMP(FEATURES, DMP_FIFO_RATE);
+	if (status != XST_SUCCESS) {
+		gyrAccIsCal = 0;
+		return status;
+	}
+
+//Get Gyro and Accel Offets
+	status = mpu_run_self_test(gyro_bias, accel_bias);
+
+	//Print Offsets
+	myprintf("Gyro Bias: ");
+	for (i = 0; i < NUMBER_OF_AXES; i++) {
+		myprintf("%d ", gyro_bias[i]);
+	}
+	myprintf("\r\nAccel Bias: ");
+	for (i = 0; i < NUMBER_OF_AXES; i++) {
+		myprintf("%d ", accel_bias[i]);
+	}
+	myprintf("\r\n");
+
+//Set calibrated flag
+	if (status & GYRO_CAL_ERROR_MASK && status & ACCEL_CAL_ERROR_MASK) { //gyro and accel calibrated
+		//Push accel bias to DMP
+		status = dmp_set_accel_bias(accel_bias);
+		if (status != XST_SUCCESS) {
+			gyrAccIsCal = 0;
+			return XST_FAILURE;
+		}
+
+		//Push gyro bias to DMP
+		status = dmp_set_gyro_bias(gyro_bias);
+		if (status != XST_SUCCESS) {
+			gyrAccIsCal = 0;
+			return XST_FAILURE;
+		}
+
+		//Calibration successful --> set flag
+		gyrAccIsCal = 1;
+		status = XST_SUCCESS;
+	} else {
+		//Calibration successful --> set flag
+		gyrAccIsCal = 0;
+		status = XST_FAILURE;
+	}
+
+	//Return
+	return status;
 }
 
 /*
