@@ -116,7 +116,7 @@ int main() {
 #endif
 	for (cnt = 0; cnt <= DATA_NO_DMP_RUNS; cnt++) {
 		//Print
-		status = printDataWithDMP(0);
+		status = printDataWithDMP();
 
 		//Decrease count if not successful
 		if (status != XST_SUCCESS) {
@@ -128,6 +128,9 @@ int main() {
 			;
 		}
 	}
+
+	//Sleep
+	sleep(1);
 
 //Calibrate
 #ifdef DEBUG
@@ -157,7 +160,7 @@ int main() {
 #endif
 		for (cnt = 0; cnt <= DATA_NO_DMP_RUNS; cnt++) {
 			//Print
-			status = printDataWithDMP(0);
+			status = printDataWithDMP();
 
 			//Decrease count if not successful
 			if (status != XST_SUCCESS) {
@@ -168,6 +171,9 @@ int main() {
 			for (i = 0; i <= 10000; i++) {
 				;
 			}
+
+			//Print forever
+			cnt--;
 		}
 //	}
 

@@ -26,6 +26,8 @@ int convertCompassData(short raw[NUMBER_OF_AXES],
 		float converted[NUMBER_OF_AXES]);
 int convertTemperaturetoC(long* raw, float* converted);
 int convertQuatenion(long raw[QUATERNION_AMOUNT], float conv[QUATERNION_AMOUNT]);
+int readFromFifo(short *gyro, short *accel, long *quat,
+		unsigned long *timestamp, short *sensors, unsigned char *more);
 
 /*
  * Variables
@@ -35,12 +37,13 @@ static char dmpReady = 0;
 static int count = 0;
 float quat_conv[QUATERNION_AMOUNT];
 static char gyrAccIsCal = 0;
+static char gyroCalEnabled = 0;
 
 /*
  * Print one Quaternion for Display
  * (No error messages!)
  */
-int printQuatForDisplay(char gyroCal) {
+int printQuatForDisplay() {
 	//Variables
 	int status = XST_FAILURE, i = 0;
 	short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES];
@@ -58,36 +61,23 @@ int printQuatForDisplay(char gyroCal) {
 		}
 	}
 
-	//Enable gyro cal if requested
-	status = dmp_enable_gyro_cal(gyroCal);
-	if (status != XST_SUCCESS) {
-#ifdef DEBUG
-		printf("mpu.c: Could not enable/disable Gyroscope Calibration.\n\r");
-#endif
+	//Get Data
+	status = readFromFifo(gyro, accel, quat, &timestamp, &sensors, more);
+
+	//Convert Quaternion
+	if (status == XST_SUCCESS) {
+		status = convertQuatenion(quat, quat_conv);
 	}
 
-	//Read FIFO
-	count++;
-	if (count >= 500) {
-		//Reset Count, increment read count
-		count = 0;
-
-		//Read Data
-		status = dmp_read_fifo(gyro, accel, quat, &timestamp, &sensors, more);
-
-		//Convert Quaternion
-		if (status == XST_SUCCESS) {
-			status = convertQuatenion(quat, quat_conv);
+	//Print Quaternion
+	if (status == XST_SUCCESS) {
+		for (i = 0; i < QUATERNION_AMOUNT; i++) {
+			printf("%f ", quat_conv[i]);
 		}
-
-		//Print Quaternion
-		if (status == XST_SUCCESS) {
-			for (i = 0; i < QUATERNION_AMOUNT; i++) {
-				printf("%f ", quat_conv[i]);
-			}
-			printf("\n\r");
-		}
+		printf("\n\r");
 	}
+
+	//Free memory and return
 	free(more);
 	return status;
 }
@@ -95,9 +85,9 @@ int printQuatForDisplay(char gyroCal) {
 /*
  * Print Data using DMP
  */
-int printDataWithDMP(char gyroCal) {
-	//Variables
-	int status, i = 0;
+int printDataWithDMP() {
+//Variables
+	int status;
 	short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
 	long temp_raw, quat[QUATERNION_AMOUNT];
 	unsigned long timestamp;
@@ -105,7 +95,7 @@ int printDataWithDMP(char gyroCal) {
 	unsigned char* more = (unsigned char *) malloc(100);
 	float conv[NUMBER_OF_AXES], temp_conv; //, quat_conv[QUATERNION_AMOUNT];
 
-	//init and configre DMP
+//init and configre DMP
 	if (!dmpReady) {
 		status = configureDMP(FEATURES, DMP_FIFO_RATE);
 		if (status != XST_SUCCESS) {
@@ -116,101 +106,84 @@ int printDataWithDMP(char gyroCal) {
 		}
 	}
 
-	//Enable gyro calibration if required
-	status = dmp_enable_gyro_cal(gyroCal);
-	if (status != XST_SUCCESS) {
-#ifdef DEBUG
-		printf("mpu.c: Could not enable/disable Gyroscope Calibration.\n\r");
-#endif
-	}
+//Get Data
+	status = readFromFifo(gyro, accel, quat, &timestamp, &sensors, more);
+	if (status == XST_SUCCESS) {
 
-	//Read FIFO
-	do {
-		status = dmp_read_fifo(gyro, accel, quat, &timestamp, &sensors, more);
-		i++;
-
-		if (i >= 500) {
-#ifdef DEBUG
-			printf("mpu.c: Could not read DMP FIFO.\n\r");
-#endif
-			return XST_FAILURE;
-		}
-	} while (status != XST_SUCCESS);
-
-	//Convert Gyro
-	status = convertGyroData(gyro, conv);
-	if (status != 0) {
-#ifdef DEBUG
-		printf("mpu.c Error converting Gyroscope data.");
-#endif
-		return XST_FAILURE;
-	} else {
-
-		//Print Gyro
-		printGyro(conv);
-	}
-	printf(" | ");
-
-	//Convert Acc
-	status = convertAccData(accel, conv);
-	if (status != 0) {
-#ifdef DEBUG
-		printf("mpu.c Error converting Acc data.");
-#endif
-		return XST_FAILURE;
-	} else {
-
-		//Print Acc
-		printAccel(conv);
-	}
-	printf(" | ");
-
-	//Get Compass
-	status = mpu_get_compass_reg(compass, &timestamp);
-	if (status != 0) {
-#ifdef DEBUG
-		printf("mpu.c Error getting Compass data.");
-#endif
-		return XST_FAILURE;
-	} else {
-
-		//Convert Compass
-		status = convertCompassData(compass, conv);
+//Convert Gyro
+		status = convertGyroData(gyro, conv);
 		if (status != 0) {
 #ifdef DEBUG
-			printf("mpu.c Error converting Compass data.");
+			printf("mpu.c Error converting Gyroscope data.");
 #endif
 			return XST_FAILURE;
 		} else {
 
-			//Print Compass
-			printCompass(conv);
+			//Print Gyro
+			printGyro(conv);
 		}
-	}
-	printf(" | ");
+		printf(" | ");
 
-	//Get Temperature
-	status = mpu_get_temperature(&temp_raw, &timestamp);
-	if (status != 0) {
-#ifdef DEBUG
-		printf("mpu.c Error getting Temperature data.");
-#endif
-		return XST_FAILURE;
-	} else {
-
-		//Convert Temperature
-		status = convertTemperaturetoC(&temp_raw, &temp_conv);
+//Convert Acc
+		status = convertAccData(accel, conv);
 		if (status != 0) {
 #ifdef DEBUG
-			printf("mpu.c Error converting Temperature data.");
+			printf("mpu.c Error converting Acc data.");
 #endif
 			return XST_FAILURE;
 		} else {
 
-			//Print Temperature
-			printTemp(&temp_conv);
+			//Print Acc
+			printAccel(conv);
 		}
-	}
+		printf(" | ");
+
+//Get Compass
+		status = mpu_get_compass_reg(compass, &timestamp);
+		if (status != 0) {
+#ifdef DEBUG
+			printf("mpu.c Error getting Compass data.");
+#endif
+			return XST_FAILURE;
+		} else {
+
+			//Convert Compass
+			status = convertCompassData(compass, conv);
+			if (status != 0) {
+#ifdef DEBUG
+				printf("mpu.c Error converting Compass data.");
+#endif
+				return XST_FAILURE;
+			} else {
+
+				//Print Compass
+				printCompass(conv);
+			}
+		}
+		printf(" | ");
+
+//Get Temperature
+		status = mpu_get_temperature(&temp_raw, &timestamp);
+		if (status != 0) {
+#ifdef DEBUG
+			printf("mpu.c Error getting Temperature data.");
+#endif
+			return XST_FAILURE;
+		} else {
+
+			//Convert Temperature
+			status = convertTemperaturetoC(&temp_raw, &temp_conv);
+			if (status != 0) {
+#ifdef DEBUG
+				printf("mpu.c Error converting Temperature data.");
+#endif
+				return XST_FAILURE;
+			} else {
+
+				//Print Temperature
+				printTemp(&temp_conv);
+			}
+		}
 //	printf(" | ");
 //
 ////Convert Quaternion
@@ -226,9 +199,10 @@ int printDataWithDMP(char gyroCal) {
 //	}
 
 //Print new line
-	printf("\r\n");
+		printf("\r\n");
+	}
 
-	//Free Memory and Return
+//Free Memory and Return
 	free(more);
 	return XST_SUCCESS;
 }
@@ -237,7 +211,7 @@ int printDataWithDMP(char gyroCal) {
  * Print Data and don't use DMP
  */
 int printDataNoDMP() {
-	//Variables
+//Variables
 	int status;
 	long temp_raw;
 	short raw[NUMBER_OF_AXES];
@@ -245,7 +219,7 @@ int printDataNoDMP() {
 	unsigned long temp_timestamp;
 	unsigned long int timestamp;
 
-	//Initialize IMU first if required
+//Initialize IMU first if required
 	if (imuAddr == 0) {
 		status = initMPU();
 		if (status != XST_SUCCESS) {
@@ -256,7 +230,7 @@ int printDataNoDMP() {
 		}
 	}
 
-	//Get Gyro
+//Get Gyro
 	status = mpu_get_gyro_reg(raw, &timestamp);
 	if (status != XST_SUCCESS) {
 #ifdef DEBUG
@@ -280,7 +254,7 @@ int printDataNoDMP() {
 	}
 	printf(" | ");
 
-	//Get Acc
+//Get Acc
 	status = mpu_get_accel_reg(raw, &timestamp);
 	if (status != 0) {
 #ifdef DEBUG
@@ -304,7 +278,7 @@ int printDataNoDMP() {
 	}
 	printf(" | ");
 
-	//Get Compass
+//Get Compass
 	status = mpu_get_compass_reg(raw, &timestamp);
 	if (status != 0) {
 #ifdef DEBUG
@@ -328,7 +302,7 @@ int printDataNoDMP() {
 	}
 	printf(" | ");
 
-	//Get Temperature
+//Get Temperature
 	status = mpu_get_temperature(&temp_raw, &temp_timestamp);
 	if (status != 0) {
 #ifdef DEBUG
@@ -351,10 +325,10 @@ int printDataNoDMP() {
 		}
 	}
 
-	//Print new line
+//Print new line
 	printf("\r\n");
 
-	//Return
+//Return
 	return XST_SUCCESS;
 }
 
@@ -362,10 +336,10 @@ int printDataNoDMP() {
  * Print Gyro Data (already converted)
  */
 void printGyro(float conv[NUMBER_OF_AXES]) {
-	//Variables
+//Variables
 	int i;
 
-	//Print Gyro
+//Print Gyro
 	printf("Gyro: (");
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
 		printf("%.2fdgr/s", conv[i]);
@@ -382,10 +356,10 @@ void printGyro(float conv[NUMBER_OF_AXES]) {
  * Print Accelerometer Data (already converted)
  */
 void printAccel(float conv[NUMBER_OF_AXES]) {
-	//Variables
+//Variables
 	int i;
 
-	//Print Acc
+//Print Acc
 	printf("Acc: (");
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
 		printf("%.2fg", conv[i]);
@@ -402,10 +376,10 @@ void printAccel(float conv[NUMBER_OF_AXES]) {
  * Print Compass Data  (already converted)
  */
 void printCompass(float conv[NUMBER_OF_AXES]) {
-	//Variables
+//Variables
 	int i;
 
-	//Print Compass
+//Print Compass
 	printf("Comp: (");
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
 		printf("%.1fuT", conv[i]);
@@ -421,7 +395,7 @@ void printCompass(float conv[NUMBER_OF_AXES]) {
  * Convert and Print Temperature Data  (already converted)
  */
 void printTemp(float* temp_conv) {
-	//Print Temperature
+//Print Temperature
 	printf("Temp: %.2fdgrC\r\n", *temp_conv);
 }
 
@@ -429,10 +403,10 @@ void printTemp(float* temp_conv) {
  * Print Quaternions (already converted)
  */
 void printQuat(float quat[QUATERNION_AMOUNT]) {
-	//Variables
+//Variables
 	int i;
 
-	//Print
+//Print
 	printf("Quat: ");
 	for (i = 0; i < QUATERNION_AMOUNT; i++) {
 		printf("%f", quat[i]);
@@ -465,29 +439,29 @@ void printEulerAngles(float* sigma, float* theta, float* psi) {
  * Calibrate Gyroscope and Accelerometer
  */
 int calibrateGyrAcc() {
-	//Variables
+//Variables
 	int status;
 	long gyro_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
 	long accel_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
 
-	//Init MPU and DMP
+//Init MPU and DMP
 	status = configureDMP(FEATURES, DMP_FIFO_RATE);
 	if (status != XST_SUCCESS) {
 		gyrAccIsCal = 0;
 		return status;
 	}
 
-	//Calibrate Gyro and Accel
+//Calibrate Gyro and Accel
 	status = mpu_run_self_test(gyro_bias, accel_bias);
 
-	//Set calibrated flag
+//Set calibrated flag
 	if (status & GYRO_CAL_ERROR_MASK || status & ACCEL_CAL_ERROR_MASK) { //Gyro or Acc calibration error
 		gyrAccIsCal = 0;
 	} else {
 		gyrAccIsCal = 1;
 	}
 
-	//Return
+//Return
 	return status;
 }
 /*
@@ -587,6 +561,57 @@ int convertQuatenion(long raw[QUATERNION_AMOUNT], float conv[QUATERNION_AMOUNT])
 }
 
 /*
+ * Read from FIFO
+ */
+int readFromFifo(short *gyro, short *accel, long *quat,
+		unsigned long *timestamp, short *sensors, unsigned char *more) {
+//Variables
+	int status = XST_FAILURE;
+
+//Increase count
+	count++;
+
+//Make sure the read command is not called too often
+	if (count >= 500) {
+		//Reset Count, increment read count
+		count = 0;
+
+		//Read FIFO
+		status = dmp_read_fifo(gyro, accel, quat, timestamp, sensors, more);
+		if (status != XST_SUCCESS) {
+#ifdef DEBUG
+			//printf("mpu.c: Could not read DMP FIFO.\n\r");
+#endif
+		}
+	}
+
+//Return
+	return status;
+}
+
+/*
+ * Enable Gyro Calibration
+ */
+int dmpGyroCalibration(char enable) {
+//Variables
+	int status;
+
+//Enable gyro cal if requested
+	if (enable != gyroCalEnabled) {
+		status = dmp_enable_gyro_cal(enable);
+		if (status != XST_SUCCESS) {
+#ifdef DEBUG
+			printf(
+					"mpu.c: Could not enable/disable Gyroscope Calibration.\n\r");
+#endif
+		} else {
+			gyroCalEnabled = enable;
+		}
+	}
+	return status;
+}
+
+/*
  * Init DMP
  */
 int configureDMP(unsigned short int features, unsigned short fifoRate) {
@@ -601,7 +626,7 @@ int configureDMP(unsigned short int features, unsigned short fifoRate) {
 		}
 	}
 
-	//Initialize DMP
+//Initialize DMP
 	if (!dmpReady) {
 		status = initDMP();
 		if (status != XST_SUCCESS) {
@@ -665,10 +690,10 @@ int configureDMP(unsigned short int features, unsigned short fifoRate) {
  * Init DMP
  */
 int initDMP() {
-	//Variables
+//Variables
 	int status;
 
-	//Check wheter DMP has already been initialized
+//Check wheter DMP has already been initialized
 	if (!dmpReady) {
 		//Load Firmware and set flag
 		status = dmp_load_motion_driver_firmware();
@@ -681,7 +706,7 @@ int initDMP() {
 		}
 	}
 
-	//Enable DMP
+//Enable DMP
 	status = mpu_set_dmp_state(1);
 	if (status != XST_SUCCESS) {
 #ifdef DEBUG
@@ -690,7 +715,7 @@ int initDMP() {
 		return XST_FAILURE;
 	}
 
-	//Return
+//Return
 	return XST_SUCCESS;
 }
 /*

@@ -44,10 +44,11 @@
 #define MAG_CAL_ERROR_MASK		0x04
 
 //Functions
-int printQuatForDisplay(char gyroCal);
-int printDataWithDMP(char gyroCal);
+int printQuatForDisplay();
+int printDataWithDMP();
 int printDataNoDMP();
 int calibrateGyrAcc();
+int dmpGyroCalibration(char enable);
 int configureDMP(unsigned short int features, unsigned short fifoRate);
 int initDMP();
 int getImuAddr(u8* addr);
