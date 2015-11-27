@@ -35,20 +35,21 @@
 #define NUMBER_OF_AXES			3			//x, y, z
 #define QUATERNION_AMOUNT		4			//w, x, y, z rotational angles
 #define QUATERNION_SCALING		1073741824	//Internal values: 1.0 is scaled to 2^30 = 1073741824
-#define SENSORS					INV_XYZ_GYRO | INV_XYZ_ACCEL | INV_XYZ_COMPASS 	//all sensors
+#define SENSOR_TEMP				0x80		//my define
+#define SENSORS_ALL					INV_XYZ_GYRO | INV_XYZ_ACCEL | INV_XYZ_COMPASS | SENSOR_TEMP//all sensors
 #define FEATURES				DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_SEND_CAL_GYRO | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_TAP //DMP_FEATURE_TAP for ensure DMP sends interrupts at specified rate
 #define MPU_SAMPLE_RATE			200			//Hz
 #define DMP_FIFO_RATE			10			//Hz
-#define CAL_SAMPLES_EXP			14			//2^14 samples
-#define GYRO_CAL_ERROR_MASK		0x01
-#define ACCEL_CAL_ERROR_MASK	0x02
-#define MAG_CAL_ERROR_MASK		0x04
+#define CAL_SAMPLES				10000		//
+#define GYRO_CAL_MASK			0x01
+#define ACCEL_CAL_MASK			0x02
+#define MAG_CAL_MASK			0x04
 
 //Functions
 int printQuatForDisplay();
 int printDataWithDMP();
-int printDataNoDMP();
-int calibrateGyrAcc();
+int printDataNoDMP(short int *sensors);
+int calibrateGyrAcc(char useInvMethod);
 int dmpGyroCalibration(char enable);
 int configureDMP(unsigned short int features, unsigned short fifoRate);
 int initDMP();

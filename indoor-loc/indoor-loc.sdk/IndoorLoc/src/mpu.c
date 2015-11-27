@@ -28,6 +28,8 @@ int convertTemperaturetoC(long* raw, float* converted);
 int convertQuatenion(long raw[QUATERNION_AMOUNT], float conv[QUATERNION_AMOUNT]);
 int readFromFifo(short *gyro, short *accel, long *quat,
 		unsigned long *timestamp, short *sensors, unsigned char *more);
+int readFromRegs(short *gyro, short *accel, short* comp,
+		unsigned long *timestamp, short *sensors);
 
 /*
  * Variables
@@ -196,14 +198,14 @@ int printDataWithDMP() {
 /*
  * Print Data and don't use DMP
  */
-int printDataNoDMP() {
+int printDataNoDMP(short int *sensors) {
 //Variables
 	int status, return_val = XST_SUCCESS;
+	short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
+	unsigned long timestamp;
 	long temp_raw;
-	short raw[NUMBER_OF_AXES];
 	float conv[NUMBER_OF_AXES], temp_conv;
-	unsigned long temp_timestamp;
-	unsigned long int timestamp;
+	unsigned long int temp_timestamp;
 
 //Initialize IMU first if required
 	if (imuAddr == 0) {
@@ -214,82 +216,77 @@ int printDataNoDMP() {
 		}
 	}
 
+	//Get Data
+	status = readFromRegs(gyro, accel, compass, &timestamp, sensors);
+
 //Get Gyro
-	status = mpu_get_gyro_reg(raw, &timestamp);
 	if (status != XST_SUCCESS) {
-		myprintf("mpu.c Error getting Gyroscope data.");
 		return_val = XST_FAILURE;
 	} else {
+		//Gyro
+		if (sensors[0] & INV_XYZ_GYRO) {
+			//Convert Gyro
+			status = convertGyroData(gyro, conv);
+			if (status != XST_SUCCESS) {
+				myprintf("mpu.c Error converting Gyroscope data.");
+				return_val = XST_FAILURE;
+			} else {
 
-		//Convert Gyro
-		status = convertGyroData(raw, conv);
-		if (status != XST_SUCCESS) {
-			myprintf("mpu.c Error converting Gyroscope data.");
-			return_val = XST_FAILURE;
-		} else {
+				//Print Gyro
+				printGyro(conv);
+				printf(" | ");
+			}
+		}
 
-			//Print Gyro
-			printGyro(conv);
+		//Accel
+		if (sensors[0] & INV_XYZ_ACCEL) {
+			//Convert Acc
+			status = convertAccData(accel, conv);
+			if (status != XST_SUCCESS) {
+				myprintf("mpu.c Error converting Acc data.");
+				return_val = XST_FAILURE;
+			} else {
+
+				//Print Acc
+				printAccel(conv);
+				printf(" | ");
+			}
+		}
+
+		//Compass
+		if (sensors[0] & INV_XYZ_COMPASS) {
+			//Convert Compass
+			status = convertCompassData(compass, conv);
+			if (status != XST_SUCCESS) {
+				myprintf("mpu.c Error converting Compass data.");
+				return_val = XST_FAILURE;
+			} else {
+
+				//Print Compass
+				printCompass(conv);
+				printf(" | ");
+			}
 		}
 	}
-	printf(" | ");
-
-//Get Acc
-	status = mpu_get_accel_reg(raw, &timestamp);
-	if (status != XST_SUCCESS) {
-		myprintf("mpu.c Error getting Acc data.");
-		return_val = XST_FAILURE;
-	} else {
-
-		//Convert Acc
-		status = convertAccData(raw, conv);
-		if (status != XST_SUCCESS) {
-			myprintf("mpu.c Error converting Acc data.");
-			return_val = XST_FAILURE;
-		} else {
-
-			//Print Acc
-			printAccel(conv);
-		}
-	}
-	printf(" | ");
-
-//Get Compass
-	status = mpu_get_compass_reg(raw, &timestamp);
-	if (status != XST_SUCCESS) {
-		myprintf("mpu.c Error getting Compass data.");
-		return_val = XST_FAILURE;
-	} else {
-
-		//Convert Compass
-		status = convertCompassData(raw, conv);
-		if (status != XST_SUCCESS) {
-			myprintf("mpu.c Error converting Compass data.");
-			return_val = XST_FAILURE;
-		} else {
-
-			//Print Compass
-			printCompass(conv);
-		}
-	}
-	printf(" | ");
 
 //Get Temperature
-	status = mpu_get_temperature(&temp_raw, &temp_timestamp);
-	if (status != XST_SUCCESS) {
-		myprintf("mpu.c Error getting Temperature data.");
-		return_val = XST_FAILURE;
-	} else {
-
-		//Convert Temperature
-		status = convertTemperaturetoC(&temp_raw, &temp_conv);
+	if (sensors[0] & SENSOR_TEMP) {
+		status = mpu_get_temperature(&temp_raw, &temp_timestamp);
 		if (status != XST_SUCCESS) {
-			myprintf("mpu.c Error converting Temperature data.");
+			myprintf("mpu.c Error getting Temperature data.");
 			return_val = XST_FAILURE;
 		} else {
 
-			//Print Temperature
-			printTemp(&temp_conv);
+			//Convert Temperature
+			status = convertTemperaturetoC(&temp_raw, &temp_conv);
+			if (status != XST_SUCCESS) {
+				myprintf("mpu.c Error converting Temperature data.");
+				return_val = XST_FAILURE;
+			} else {
+
+				//Print Temperature
+				printTemp(&temp_conv);
+			}
 		}
 	}
 
@@ -497,9 +494,14 @@ int convertQuatenion(long raw[QUATERNION_AMOUNT], float conv[QUATERNION_AMOUNT])
 /*
  * Calibrate Gyroscope and Accelerometer
  */
-int calibrateGyrAcc() {
+int calibrateGyrAcc(char useInvMethod) {
 //Variables
-	int status, i;
+	int status = XST_FAILURE, i = 0, sample = 0;
+	short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES];
+	long quat[QUATERNION_AMOUNT];
+	unsigned long timestamp;
+	short int sensors;
+	unsigned char* more = (unsigned char *) malloc(100);
 	long gyro_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
 	long accel_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
 
@@ -511,9 +513,25 @@ int calibrateGyrAcc() {
 	}
 
 //Get Gyro and Accel Offets
-	status = mpu_run_self_test(gyro_bias, accel_bias);
+	if (useInvMethod) {
+		status = mpu_run_self_test(gyro_bias, accel_bias);
+	} else {
+		for (sample = 0; sample < CAL_SAMPLES; sample++) {
+			status = readFromFifo(gyro, accel, quat, &timestamp, &sensors,
+					more);
+			if (status != 0) {
+				sample--;
+			} else {
+				for (i = 0; i < NUMBER_OF_AXES; i++) {
+					gyro_bias[i] += (long) ((gyro[i] << 16) / CAL_SAMPLES);
+					accel_bias[i] += (long) ((accel[i] << 16) / CAL_SAMPLES);
+				}
+			}
+		}
+		status = GYRO_CAL_MASK | ACCEL_CAL_MASK;
+	}
 
-	//Print Offsets
+//Print Offsets
 	myprintf("Gyro Bias: ");
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
 		myprintf("%d ", gyro_bias[i]);
@@ -525,7 +543,7 @@ int calibrateGyrAcc() {
 	myprintf("\r\n");
 
 //Set calibrated flag
-	if (status & GYRO_CAL_ERROR_MASK && status & ACCEL_CAL_ERROR_MASK) { //gyro and accel calibrated
+	if (status & GYRO_CAL_MASK && status & ACCEL_CAL_MASK) { //gyro and accel calibrated
 		//Push accel bias to DMP
 		status = dmp_set_accel_bias(accel_bias);
 		if (status != XST_SUCCESS) {
@@ -549,7 +567,8 @@ int calibrateGyrAcc() {
 		status = XST_FAILURE;
 	}
 
-	//Return
+//Return
+	free(more);
 	return status;
 }
 
@@ -693,6 +712,64 @@ int initDMP() {
 //Return
 	return XST_SUCCESS;
 }
+
+/*
+ * Read from Registers
+ * OUT: gyro, accel, comp, timestamp
+ * IN: sensors (INV_XYZ_GYRO for gyro, INV_XYZ_ACCEL for accel, INV_XYZ_COMPASS for compass)
+ */
+int readFromRegs(short *gyro, short *accel, short* comp,
+		unsigned long *timestamp, short *sensors) {
+//Variables
+	int status, i;
+	unsigned long ts_gyro = 0, ts_accel = 0, ts_comp = 0;
+
+//Get Gyro
+	if (sensors[0] & INV_XYZ_GYRO) {
+		for (i = 0; i < NUMBER_OF_AXES; i++) {
+			status = mpu_get_gyro_reg(gyro, &ts_gyro);
+			if (status != XST_SUCCESS) {
+				myprintf("mpu.c Error getting Gyroscope data.");
+				return XST_FAILURE;
+			}
+		}
+	}
+
+//Get Acc
+	if (sensors[0] & INV_XYZ_ACCEL) {
+		status = mpu_get_accel_reg(accel, &ts_accel);
+		if (status != XST_SUCCESS) {
+			myprintf("mpu.c Error getting Acc data.");
+			return XST_FAILURE;
+		}
+	}
+
+//Get Compass
+	if (sensors[0] & INV_XYZ_COMPASS) {
+		status = mpu_get_compass_reg(comp, &ts_comp);
+		if (status != XST_SUCCESS) {
+			myprintf("mpu.c Error getting Compass data.");
+			return XST_FAILURE;
+		}
+	}
+
+//Make sure timestamp is the same
+	if (ts_gyro) {
+		*timestamp = ts_gyro;
+	}
+
+	if (ts_accel && *timestamp != ts_accel) {
+		return XST_FAILURE;
+	}
+
+	if (ts_comp && *timestamp != ts_comp) {
+		return XST_FAILURE;
+	}
+
+//Return
+	return XST_SUCCESS;
+}
+
 /*
  * get IMU Address
  */
@@ -727,7 +804,7 @@ int initMPU() {
 	}
 
 //3. Select Sensors
-	unsigned char sensors = SENSORS;
+	unsigned char sensors = SENSORS_ALL;
 	status = mpu_set_sensors(sensors);
 	if (status != 0) {
 		myprintf("mpu.c: Error setting sensors.\r\n");
