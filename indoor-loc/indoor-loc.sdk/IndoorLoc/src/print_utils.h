@@ -13,6 +13,8 @@
 #include <stdarg.h>
 #include <unistd.h>
 
-#define DEBUG
+#define DEBUG //Comment for DEBUG prints, uncomment for print only for IMU viewer
+
+int myprintf(const char *format, ...);
 
 #endif /* PRINT_UTILS_H_ */
