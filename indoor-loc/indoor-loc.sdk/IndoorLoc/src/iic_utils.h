@@ -2,8 +2,11 @@
 #define I2C_UTILS_H_
 
 //includes
+#include <stdio.h>
 #include <unistd.h>
+#include "xparameters.h"
 #include "xiicps.h"
+#include "print_utils.h"
 
 // PS I2C0 Init Parameters
 #define IIC_DEVICE_ID  	XPAR_PS7_I2C_0_DEVICE_ID

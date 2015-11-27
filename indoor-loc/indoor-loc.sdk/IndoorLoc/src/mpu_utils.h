@@ -19,6 +19,7 @@
 #include "xstatus.h"
 #include "xtime_l.h"
 #include "iic_utils.h"
+#include "print_utils.h"
 
 //Zynq Parameters
 #define GPIO_DEVICE_ID  	XPAR_XGPIOPS_0_DEVICE_ID //from xparameters.h
@@ -36,7 +37,7 @@ int imuI2cWrite(unsigned char slave_addr, unsigned char reg_addr, unsigned char 
 void imuDelay(unsigned long ms);
 int imuInit(u8 *imuAddr);
 unsigned long imuGet_ms();
-void imuLog_i();
-void imuLog_e();
+int imuLog_i(const char *format, ...);
+int imuLog_e(const char *format, ...);
 
 #endif /* IMU_H_ */

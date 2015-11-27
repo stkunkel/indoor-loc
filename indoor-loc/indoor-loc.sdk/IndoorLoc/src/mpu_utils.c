@@ -195,15 +195,27 @@ unsigned long imuGet_ms() {
 /*
  * Log I
  */
-void imuLog_i() {
-	//TODO
+int imuLog_i(const char *format, ...) {
+	int done = 0;
+	//printf("Error: ");
+	va_list arg;
+	va_start(arg, format);
+	done = myprintf(format, arg);
+	va_end(arg);
+	return done;
 }
 
 /*
  * Log I
  */
-void imuLog_e() {
-	//TODO
+int imuLog_e(const char *format, ...) {
+	int done = 0;
+	//printf("Error: ");
+	va_list arg;
+	va_start(arg, format);
+	done = myprintf(format, arg);
+	va_end(arg);
+	return done;
 }
 
 /*
@@ -281,7 +293,6 @@ int setAddr(u8* addr, char* addr_c) {
  * Write to Pin
  */
 int writeAD0(u32 *data) {
-
 	/*
 	 * Set the direction for the pin to be output and
 	 * Enable the Output enable for the LED Pin.
@@ -299,7 +310,6 @@ int writeAD0(u32 *data) {
  * Get Interrupt
  */
 int readInt(u32 *DataRead) {
-
 	/* Set the direction for the specified pin to be input. */
 	XGpioPs_SetDirectionPin(&Gpio, PS_IMU_INT_PIN, 0x0);
 

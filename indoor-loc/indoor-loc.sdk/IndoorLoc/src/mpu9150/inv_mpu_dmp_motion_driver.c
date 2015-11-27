@@ -40,8 +40,8 @@
 #define i2c_read    imuI2cRead
 #define delay_ms    imuDelay
 #define get_ms      imuGet_ms
-#define log_i       printf
-#define log_e       printf
+#define log_i       imuLog_i
+#define log_e       imuLog_e
 #define min(a,b) 	((a<b)?a:b)
 
 #elif defined EMPL_TARGET_STM32F4

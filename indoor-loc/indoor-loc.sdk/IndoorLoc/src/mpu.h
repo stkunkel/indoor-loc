@@ -18,6 +18,7 @@
 #include "mpu9150/mpl/invensense_adv.h"
 #include "mpu9150/mpl/ml_math_func.h"
 #include "math_utils.h"
+#include "print_utils.h"
 
 //IMU Parameters
 #define GYRO_SENS_FRS_0			131			//LSB/(°/s) for FS_SEL = 0, 16-bit

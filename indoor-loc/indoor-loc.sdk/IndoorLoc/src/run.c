@@ -52,6 +52,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "platform.h"
+#include "print_utils.h"
 #include "mpu.h"
 #include "pwmsw.h"
 #include "xtime_l.h"
@@ -74,9 +75,7 @@ int main() {
 	init_platform();
 
 	//Print Output Separator
-#ifdef DEBUG
-	printf("---------------------------------\r\n");
-#endif
+	myprintf("---------------------------------\r\n");
 
 //	//Print Quaternions to Serial Port
 //	//while (1) {
@@ -111,9 +110,38 @@ int main() {
 //	}
 
 //Get Data with DMP
-#ifdef DEBUG
-	printf(".........With DMP...........\n\r");
-#endif
+	myprintf(".........With DMP...........\n\r");
+	for (cnt = 0; cnt <= DATA_NO_DMP_RUNS; cnt++) {
+		//Print
+		status = printDataWithDMP();
+
+		//Decrease count if not successful
+		if (status != XST_SUCCESS) {
+			cnt--;
+		} else {
+			usleep(1);
+		}
+
+		//Wait
+		for (i = 0; i <= 10000; i++) {
+			;
+		}
+	}
+
+	//Sleep
+	sleep(1);
+
+//Calibrate
+	myprintf(".........Calibration...........\n\r");
+	status = calibrateGyrAcc();
+	if (status != XST_SUCCESS) {
+		myprintf("Calibration failed.\r\n");
+	}
+
+	//Print second time if there is neither gyro nor accel error
+//	if (!(status & GYRO_CAL_ERROR_MASK) || !(status & ACCEL_CAL_ERROR_MASK)) {
+	//Get Data with DMP
+	myprintf(".........With DMP...........\n\r");
 	for (cnt = 0; cnt <= DATA_NO_DMP_RUNS; cnt++) {
 		//Print
 		status = printDataWithDMP();
@@ -127,54 +155,10 @@ int main() {
 		for (i = 0; i <= 10000; i++) {
 			;
 		}
+
+		//Print forever
+		//cnt--;
 	}
-
-	//Sleep
-	sleep(1);
-
-//Calibrate
-#ifdef DEBUG
-	printf(".........Calibration...........\n\r");
-#endif
-	status = calibrateGyrAcc();
-	if (status != XST_SUCCESS) {
-#ifdef DEBUG
-		if (status & GYRO_CAL_ERROR_MASK) {
-			printf("Calibration of Gyroscope failed.\n\r");
-		}
-		if (status & ACCEL_CAL_ERROR_MASK) {
-			printf("Calibration of Accelerometer failed.\n\r");
-		}
-		if (status & MAG_CAL_ERROR_MASK) {
-			printf("Calibration of Magnetometer failed.\n\r");
-		}
-
-#endif
-	}
-
-	//Print second time if there is neither gyro nor accel error
-//	if (!(status & GYRO_CAL_ERROR_MASK) || !(status & ACCEL_CAL_ERROR_MASK)) {
-		//Get Data with DMP
-#ifdef DEBUG
-		printf(".........With DMP...........\n\r");
-#endif
-		for (cnt = 0; cnt <= DATA_NO_DMP_RUNS; cnt++) {
-			//Print
-			status = printDataWithDMP();
-
-			//Decrease count if not successful
-			if (status != XST_SUCCESS) {
-				cnt--;
-			}
-
-			//Wait
-			for (i = 0; i <= 10000; i++) {
-				;
-			}
-
-			//Print forever
-			cnt--;
-		}
 //	}
 
 //PWM
