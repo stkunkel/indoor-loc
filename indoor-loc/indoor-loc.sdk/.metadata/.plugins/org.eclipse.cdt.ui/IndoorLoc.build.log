@@ -1,4 +1,4 @@
-12:17:34 **** Auto Build of configuration Debug for project IndoorLoc ****
+12:31:17 **** Build of configuration Debug for project IndoorLoc ****
 make all 
 Building file: ../src/mpu9150/inv_mpu.c
 Invoking: ARM gcc compiler
@@ -28,10 +28,19 @@ arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON_
      ^
 Finished building: ../src/mpu_utils.c
  
-Building file: ../src/print_utils.c
+Building file: ../src/platform.c
 Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/print_utils.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/print_utils.d" -MT"src/print_utils.d" -o "src/print_utils.o" "../src/print_utils.c"
-Finished building: ../src/print_utils.c
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/platform.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/platform.d" -MT"src/platform.d" -o "src/platform.o" "../src/platform.c"
+Finished building: ../src/platform.c
+ 
+Building file: ../src/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/pwmsw.d" -MT"src/pwmsw.d" -o "src/pwmsw.o" "../src/pwmsw.c"
+../src/pwmsw.c: In function 'pwm':
+../src/pwmsw.c:63:7: warning: unused variable 'val' [-Wunused-variable]
+   u32 val;
+       ^
+Finished building: ../src/pwmsw.c
  
 Building file: ../src/run.c
 Invoking: ARM gcc compiler
@@ -50,5 +59,5 @@ arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
 Finished building: IndoorLoc.elf.size
  
 
-12:17:34 Build Finished (took 523ms)
+12:31:17 Build Finished (took 577ms)
 
