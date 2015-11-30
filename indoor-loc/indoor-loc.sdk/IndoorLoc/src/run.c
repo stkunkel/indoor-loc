@@ -76,7 +76,7 @@ int main() {
 	init_platform();
 
 	//Print Output Separator
-	myprintf("---------------------------------\r\n");
+	myprintf("...............................\r\n");
 
 //	//Print Quaternions to Serial Port
 //	//while (1) {
@@ -89,7 +89,6 @@ int main() {
 //		for (i = 0; i <= 10000; i++) {
 //			;
 //		}
-//	}
 
 //Get Data without DMP
 	myprintf(".........Without DMP...........\n\r");
@@ -130,34 +129,34 @@ int main() {
 //	//Sleep
 //	sleep(1);
 //
-////Calibrate
-//	myprintf(".........Calibration...........\n\r");
-//	status = calibrateGyrAcc(0);
-//	if (status != XST_SUCCESS) {
-//		myprintf("Calibration failed.\r\n");
-//	}
-//
-//	//Print second time if there is neither gyro nor accel error
-////	if (!(status & GYRO_CAL_ERROR_MASK) || !(status & ACCEL_CAL_ERROR_MASK)) {
-//	//Get Data with DMP
-//	myprintf(".........With DMP...........\n\r");
-//	for (cnt = 0; cnt <= DATA_NO_DMP_RUNS; cnt++) {
-//		//Print
-//		status = printDataWithDMP();
-//
-//		//Decrease count if not successful
-//		if (status != XST_SUCCESS) {
-//			cnt--;
-//		}
-//
-//		//Wait
-//		for (i = 0; i <= 10000; i++) {
-//			;
-//		}
-//
-//		//Print forever
-//		//cnt--;
-//	}
+//Calibrate
+	myprintf(".........Calibration...........\n\r");
+	status = calibrateGyrAcc(0);
+	if (status != XST_SUCCESS) {
+		myprintf("Calibration failed.\r\n");
+	}
+
+	//Print second time if there is neither gyro nor accel error
+//	if (!(status & GYRO_CAL_ERROR_MASK) || !(status & ACCEL_CAL_ERROR_MASK)) {
+	//Get Data with DMP
+	myprintf(".........With DMP...........\n\r");
+	for (cnt = 0; cnt <= DATA_NO_DMP_RUNS; cnt++) {
+		//Print
+		status = printDataWithDMP();
+
+		//Decrease count if not successful
+		if (status != XST_SUCCESS) {
+			cnt--;
+		}
+
+		//Wait
+		for (i = 0; i <= 10000; i++) {
+			;
+		}
+
+		//Print forever
+		cnt--;
+	}
 
 //PWM
 //pwm(PWM_RUNS);
