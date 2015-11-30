@@ -644,9 +644,9 @@ int calibrateGyrAcc() {
 		status = XST_FAILURE;
 	}
 
-	//Free memory and return
+	//Free memory, sleep and return
 	free(more);
-	sleep(3); //sleep to ensure all following readings are calibrated
+	sleep(1);
 	return status;
 }
 

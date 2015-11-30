@@ -646,7 +646,7 @@ int calibrateGyrAcc() {
 
 	//Free memory and return
 	free(more);
-	sleep(3); //sleep to ensure all following readings are calibrated
+	sleep(5);
 	return status;
 }
 

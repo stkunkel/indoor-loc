@@ -5008,3 +5008,11 @@ org.eclipse.core.internal.resources.ResourceException: Marker id 7682 not found.
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
 !SUBENTRY 1 org.eclipse.core.resources 4 376 2015-11-30 13:55:23.389
 !MESSAGE Marker id 7682 not found.
+
+!ENTRY org.eclipse.tcf 4 0 2015-11-30 16:26:00.397
+!MESSAGE TCF channel terminated
+!STACK 0
+java.io.IOException: Communication channel is closed by remote peer
+	at org.eclipse.tcf.core.AbstractChannel$1$2.run(AbstractChannel.java:305)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.lang.Thread.run(Thread.java:745)

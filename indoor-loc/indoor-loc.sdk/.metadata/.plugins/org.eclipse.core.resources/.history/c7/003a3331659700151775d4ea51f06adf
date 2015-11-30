@@ -493,14 +493,14 @@ int convertQuatenion(long raw[QUATERNION_AMOUNT], float conv[QUATERNION_AMOUNT])
 
 /*
  * Calibrate Gyroscope and Accelerometer
+ * In: Use Invensense Calibration Method (0 - use my method, 1 - use theirs)
  * Note: My Calibration is only for Gyro and Accel //TODO
- * Note2: MPU9150 has to sit on a flat surface, x axis (where LED is) facing upwards or downward
+ * Note2: MPU9150 has to sit on a flat surface, x axis (where LED is) facing upwards
  */
 int calibrateGyrAcc() {
 //Variables
 	int status = XST_FAILURE, i = 0, sample = 0;
 	short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
-	long int quat[4];
 	unsigned long timestamp;
 	short int sensors = INV_XYZ_GYRO | INV_XYZ_ACCEL;
 	unsigned char* more = (unsigned char *) malloc(100);
@@ -515,30 +515,6 @@ int calibrateGyrAcc() {
 	status = initMPU();
 	if (status != XST_SUCCESS) {
 		gyrAccIsCal = 0;
-		return status;
-	}
-
-	//Disable DMP
-	status = mpu_set_dmp_state(0);
-	if (status != XST_SUCCESS) {
-		gyrAccIsCal = 0;
-		myprintf("mpu.c: Could not disable DMP.\r\n");
-		return status;
-	}
-
-	//Clear FIFO
-	for (i = 0; i < 10; i++) {
-		status = readFromFifo(gyro, accel, quat, &timestamp, &sensors, more);
-		if (status == XST_SUCCESS){
-			i--;
-		}
-	}
-
-	//Reset FIFO
-	status = mpu_reset_fifo();
-	if (status != XST_SUCCESS) {
-		gyrAccIsCal = 0;
-		myprintf("mpu.c: Could not reset FIFO.\r\n");
 		return status;
 	}
 
@@ -598,7 +574,7 @@ int calibrateGyrAcc() {
 		accel_bias[i] = (long) (accel_bias_f[i] / 2 * ACC_SENS_FRS_2);
 	}
 
-	//Configure and enable DMP
+	//Configure DMP
 	status = configureDMP(FEATURES_CAL, DMP_FIFO_RATE);
 	if (status != XST_SUCCESS) {
 		gyrAccIsCal = 0;
@@ -628,12 +604,26 @@ int calibrateGyrAcc() {
 			return XST_FAILURE;
 		}
 
+//		//Push accel bias to DMP
+//		status = dmp_set_accel_bias(accel_bias);
+//		if (status != XST_SUCCESS) {
+//			gyrAccIsCal = 0;
+//			return XST_FAILURE;
+//		}
+
 		//Push Gyro Bias to register
 		status = mpu_set_gyro_bias_reg(gyro_bias);
 		if (status != XST_SUCCESS) {
 			gyrAccIsCal = 0;
 			return XST_FAILURE;
 		}
+
+//		//Push gyro bias to DMP
+//		status = dmp_set_gyro_bias(gyro_bias);
+//		if (status != XST_SUCCESS) {
+//			gyrAccIsCal = 0;
+//			return XST_FAILURE;
+//		}
 
 		//Calibration successful --> set flag
 		gyrAccIsCal = 1;
@@ -644,9 +634,8 @@ int calibrateGyrAcc() {
 		status = XST_FAILURE;
 	}
 
-	//Free memory and return
+	//Return
 	free(more);
-	sleep(3); //sleep to ensure all following readings are calibrated
 	return status;
 }
 
@@ -722,14 +711,14 @@ int configureDMP(unsigned short int features, unsigned short fifoRate) {
 		}
 	}
 
-	//Enable DMP
+//Enable DMP
 	status = mpu_set_dmp_state(1);
 	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Could not enable DMP.\r\n");
 		return XST_FAILURE;
 	}
 
-	//Enable Features
+//Enable Features
 	status = dmp_enable_feature(features);
 	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Error enabling desired features.\r\n");

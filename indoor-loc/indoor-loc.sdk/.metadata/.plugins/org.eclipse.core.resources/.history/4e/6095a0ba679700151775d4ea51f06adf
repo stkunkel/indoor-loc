@@ -136,6 +136,8 @@ int main() {
 		myprintf("Calibration failed.\r\n");
 	}
 
+	//Print second time if there is neither gyro nor accel error
+//	if (!(status & GYRO_CAL_ERROR_MASK) || !(status & ACCEL_CAL_ERROR_MASK)) {
 	//Get Data with DMP
 	myprintf(".........With DMP...........\n\r");
 	for (cnt = 0; cnt <= DATA_NO_DMP_RUNS; cnt++) {

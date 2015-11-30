@@ -500,7 +500,6 @@ int calibrateGyrAcc() {
 //Variables
 	int status = XST_FAILURE, i = 0, sample = 0;
 	short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
-	long int quat[4];
 	unsigned long timestamp;
 	short int sensors = INV_XYZ_GYRO | INV_XYZ_ACCEL;
 	unsigned char* more = (unsigned char *) malloc(100);
@@ -510,6 +509,7 @@ int calibrateGyrAcc() {
 	float accel_bias_conv[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 };
 	float gyro_bias_f[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 };
 	float accel_bias_f[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 };
+	long int quat[4];
 
 	//Init MPU
 	status = initMPU();
@@ -527,12 +527,9 @@ int calibrateGyrAcc() {
 	}
 
 	//Clear FIFO
-	for (i = 0; i < 10; i++) {
+	do {
 		status = readFromFifo(gyro, accel, quat, &timestamp, &sensors, more);
-		if (status == XST_SUCCESS){
-			i--;
-		}
-	}
+	} while (status == XST_SUCCESS);
 
 	//Reset FIFO
 	status = mpu_reset_fifo();
@@ -644,9 +641,8 @@ int calibrateGyrAcc() {
 		status = XST_FAILURE;
 	}
 
-	//Free memory and return
+	//Return
 	free(more);
-	sleep(3); //sleep to ensure all following readings are calibrated
 	return status;
 }
 

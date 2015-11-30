@@ -50,7 +50,7 @@
 int printQuatForDisplay();
 int printDataWithDMP();
 int printDataNoDMP(short int *sensors);
-int calibrateGyrAcc();
+int calibrateGyrAcc(char useInvMethod);
 int dmpGyroCalibration(char enable);
 int configureDMP(unsigned short int features, unsigned short fifoRate);
 int initDMP();
