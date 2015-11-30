@@ -552,15 +552,15 @@ int calibrateGyrAcc(char useInvMethod) {
 			if (status != 0) {
 				sample--;
 			} else {
-				//Convert accel
-				status = convertAccData(accel, accel_bias_conv);
+				//Convert gyro
+				status = convertGyroData(gyro, gyro_bias_conv);
 				if (status != XST_SUCCESS) {
 					gyrAccIsCal = 0;
 					return status;
 				}
 
-				//Convert gyro
-				status = convertGyroData(gyro, gyro_bias_conv);
+				//Convert accel
+				status = convertAccData(accel, accel_bias_conv);
 				if (status != XST_SUCCESS) {
 					gyrAccIsCal = 0;
 					return status;
@@ -578,9 +578,9 @@ int calibrateGyrAcc(char useInvMethod) {
 		accel_bias_f[2] = 0.0;
 
 		//Convert biases
-		for (i = 0; i < NUMBER_OF_AXES; i++) {
+		for (i = 0; i < NUMBER_OF_AXES; i++){
 			gyro_bias[i] = (long) (gyro_bias_f[i] * GYRO_SENS_FRS_2);
-			accel_bias[i] = (long) (accel_bias_f[i] / 2 * ACC_SENS_FRS_2);
+			accel_bias[i] = (long) (accel_bias_f[i]/2 * ACC_SENS_FRS_2);
 		}
 
 		//Configure DMP
