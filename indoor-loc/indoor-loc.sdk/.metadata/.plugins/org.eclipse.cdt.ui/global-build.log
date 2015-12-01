@@ -6967,3 +6967,1481 @@ arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
  176288	   2424	  24488	 203200	  319c0	IndoorLoc.elf
 Finished building: IndoorLoc.elf.size
  
+12:20:19 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+12:21:54 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 176352	   2424	  24488	 203264	  31a00	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+12:22:12 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+12:23:06 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 176416	   2424	  24488	 203328	  31a40	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+12:23:07 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+12:23:19 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+12:24:21 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 176288	   2424	  24488	 203200	  319c0	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+12:33:16 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 176288	   2424	  24488	 203200	  319c0	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+12:46:02 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'getDrift':
+../src/mpu.c:54:28: warning: unused variable 'i' [-Wunused-variable]
+  int status = XST_FAILURE, i = 0;
+                            ^
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 176760	   2424	  24488	 203672	  31b98	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+12:46:32 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 176696	   2424	  24488	 203608	  31b58	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+12:46:41 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 176696	   2424	  24488	 203608	  31b58	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+12:53:50 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printQuatDrift':
+../src/mpu.c:53:2: error: 'status' undeclared (first use in this function)
+  status = getDrift(quat_drift, calibration, time);
+  ^
+../src/mpu.c:53:2: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [src/mpu.o] Error 1
+src/subdir.mk:42: recipe for target 'src/mpu.o' failed
+12:54:04 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printQuatDrift':
+../src/mpu.c:53:2: error: 'status' undeclared (first use in this function)
+  status = getDrift(quat_drift, calibration, time);
+  ^
+../src/mpu.c:53:2: note: each undeclared identifier is reported only once for each function it appears in
+../src/mpu.c:53:2: warning: implicit declaration of function 'getDrift' [-Wimplicit-function-declaration]
+../src/mpu.c: At top level:
+../src/mpu.c:84:5: error: conflicting types for 'getDrift'
+ int getDrift(float *quat_drift, char calibration, unsigned int time_min) {
+     ^
+../src/mpu.c:84:1: note: an argument type that has a default promotion can't match an empty parameter name list declaration
+ int getDrift(float *quat_drift, char calibration, unsigned int time_min) {
+ ^
+../src/mpu.c:53:11: note: previous implicit declaration of 'getDrift' was here
+  status = getDrift(quat_drift, calibration, time);
+           ^
+src/subdir.mk:42: recipe for target 'src/mpu.o' failed
+make: *** [src/mpu.o] Error 1
+12:54:06 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printQuatDrift':
+../src/mpu.c:53:2: error: 'status' undeclared (first use in this function)
+  status = getDrift(quat_drift, calibration, time);
+  ^
+../src/mpu.c:53:2: note: each undeclared identifier is reported only once for each function it appears in
+../src/mpu.c:53:2: warning: implicit declaration of function 'getDrift' [-Wimplicit-function-declaration]
+src/subdir.mk:42: recipe for target 'src/mpu.o' failed
+make: *** [src/mpu.o] Error 1
+12:54:11 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printQuatDrift':
+../src/mpu.c:53:2: error: 'status' undeclared (first use in this function)
+  status = getQuatDrift(quat_drift, calibration, time);
+  ^
+../src/mpu.c:53:2: note: each undeclared identifier is reported only once for each function it appears in
+../src/mpu.c:66:2: warning: implicit declaration of function 'getDrift' [-Wimplicit-function-declaration]
+  status = getDrift(quat_drift, calibration, time);
+  ^
+make: *** [src/mpu.o] Error 1
+src/subdir.mk:42: recipe for target 'src/mpu.o' failed
+12:54:28 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printQuatDrift':
+../src/mpu.c:53:2: error: 'status' undeclared (first use in this function)
+  status = getQuatDrift(quat_drift, calibration, time);
+  ^
+../src/mpu.c:53:2: note: each undeclared identifier is reported only once for each function it appears in
+../src/mpu.c:66:2: warning: implicit declaration of function 'getDrift' [-Wimplicit-function-declaration]
+  status = getDrift(quat_drift, calibration, time);
+  ^
+src/subdir.mk:42: recipe for target 'src/mpu.o' failed
+make: *** [src/mpu.o] Error 1
+12:54:41 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printQuatDrift':
+../src/mpu.c:67:2: warning: implicit declaration of function 'getDrift' [-Wimplicit-function-declaration]
+  status = getDrift(quat_drift, calibration, time);
+  ^
+Finished building: ../src/mpu.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+./src/mpu.o: In function `printQuatDrift':
+/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/mpu.c:67: undefined reference to `getDrift'
+makefile:38: recipe for target 'IndoorLoc.elf' failed
+collect2: error: ld returned 1 exit status
+make: *** [IndoorLoc.elf] Error 1
+12:54:50 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 177200	   2424	  24488	 204112	  31d50	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+12:55:15 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 177200	   2424	  24488	 204112	  31d50	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+12:55:17 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printQuatDrift':
+../src/mpu.c:61:5: error: 'time' undeclared (first use in this function)
+     time, calibration, quat_drift[0], quat_drift[1], quat_drift[2],
+     ^
+../src/mpu.c:61:5: note: each undeclared identifier is reported only once for each function it appears in
+src/subdir.mk:42: recipe for target 'src/mpu.o' failed
+make: *** [src/mpu.o] Error 1
+12:55:31 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 177200	   2424	  24488	 204112	  31d50	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+12:55:48 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 177200	   2424	  24488	 204112	  31d50	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+12:56:11 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:82:22: error: expected declaration specifiers or '...' before numeric constant
+  void printQuatDrift(1);
+                      ^
+make: *** [src/run.o] Error 1
+src/subdir.mk:42: recipe for target 'src/run.o' failed
+12:56:15 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 177200	   2424	  24488	 204112	  31d50	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+12:56:53 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+12:57:53 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+12:58:45 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 177200	   2424	  24488	 204112	  31d50	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+12:58:49 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+12:59:32 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+13:00:09 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 177200	   2424	  24488	 204112	  31d50	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+13:01:35 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 177200	   2424	  24488	 204112	  31d50	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+13:05:38 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 177200	   2424	  24488	 204112	  31d50	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+13:05:40 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 177264	   2424	  24488	 204176	  31d90	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+14:11:14 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+14:12:31 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 177264	   2424	  24488	 204176	  31d90	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+14:13:19 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:73:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+../src/run.c:72:22: warning: unused variable 'status' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+                      ^
+../src/run.c:72:13: warning: unused variable 'cnt' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+             ^
+../src/run.c:72:6: warning: unused variable 'i' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+      ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 176816	   2424	  24488	 203728	  31bd0	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+14:13:21 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+14:14:03 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+14:15:30 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:73:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+../src/run.c:72:22: warning: unused variable 'status' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+                      ^
+../src/run.c:72:13: warning: unused variable 'cnt' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+             ^
+../src/run.c:72:6: warning: unused variable 'i' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+      ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 176840	   2424	  24488	 203752	  31be8	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+14:15:31 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+14:15:47 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+14:18:38 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 176840	   2424	  24488	 203752	  31be8	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+14:18:40 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+14:19:10 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+14:20:19 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 176840	   2424	  24488	 203752	  31be8	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+14:20:47 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+14:27:10 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+14:30:06 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 176840	   2424	  24488	 203752	  31be8	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+14:30:45 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+14:31:50 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:85:6: error: redeclaration of 'status' with no linkage
+  int status;
+      ^
+../src/run.c:72:22: note: previous declaration of 'status' was here
+  int i = 0, cnt = 0, status;
+                      ^
+../src/run.c:97:5: error: 'time_min' undeclared (first use in this function)
+     time_min, calibration, quat_drift[0], quat_drift[1],
+     ^
+../src/run.c:97:5: note: each undeclared identifier is reported only once for each function it appears in
+../src/run.c:73:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+../src/run.c:72:13: warning: unused variable 'cnt' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+             ^
+../src/run.c:72:6: warning: unused variable 'i' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+      ^
+src/subdir.mk:42: recipe for target 'src/run.o' failed
+make: *** [src/run.o] Error 1
+14:31:55 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:96:5: error: 'time_min' undeclared (first use in this function)
+     time_min, calibration, quat_drift[0], quat_drift[1],
+src/subdir.mk:42: recipe for target 'src/run.o' failed
+     ^
+../src/run.c:96:5: note: each undeclared identifier is reported only once for each function it appears in
+../src/run.c:73:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+../src/run.c:72:13: warning: unused variable 'cnt' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+             ^
+../src/run.c:72:6: warning: unused variable 'i' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+      ^
+make: *** [src/run.o] Error 1
+14:32:01 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:73:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+../src/run.c:72:13: warning: unused variable 'cnt' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+             ^
+../src/run.c:72:6: warning: unused variable 'i' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+      ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 177152	   2424	  24488	 204064	  31d20	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+14:32:19 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+14:32:35 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+14:33:36 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+14:36:24 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:73:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+../src/run.c:72:13: warning: unused variable 'cnt' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+             ^
+../src/run.c:72:6: warning: unused variable 'i' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+      ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 177152	   2424	  24488	 204064	  31d20	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+14:37:11 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+14:37:49 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+14:39:34 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 177152	   2424	  24488	 204064	  31d20	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+14:39:39 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+14:40:15 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+14:40:52 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:73:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 177000	   2424	  24488	 203912	  31c88	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+14:41:07 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+14:45:04 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 177000	   2424	  24488	 203912	  31c88	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+14:45:07 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:73:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+../src/run.c:72:13: warning: unused variable 'cnt' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+             ^
+../src/run.c:72:6: warning: unused variable 'i' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+      ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 177152	   2424	  24488	 204064	  31d20	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+14:45:09 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+14:45:46 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+14:46:18 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:73:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+../src/run.c:72:22: warning: unused variable 'status' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+                      ^
+../src/run.c:72:13: warning: unused variable 'cnt' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+             ^
+../src/run.c:72:6: warning: unused variable 'i' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+      ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 176840	   2424	  24488	 203752	  31be8	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+14:47:13 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+14:49:43 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:73:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+../src/run.c:72:22: warning: unused variable 'status' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+                      ^
+../src/run.c:72:13: warning: unused variable 'cnt' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+             ^
+../src/run.c:72:6: warning: unused variable 'i' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+      ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 176840	   2424	  24488	 203752	  31be8	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+14:50:05 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+14:51:03 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 176840	   2424	  24488	 203752	  31be8	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+14:51:53 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+14:53:56 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'getQuatDrift':
+../src/mpu.c:128:8: error: 'i' undeclared (first use in this function)
+   for (i = 0; i <= 10000; i++) {
+        ^
+../src/mpu.c:128:8: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [src/mpu.o] Error 1
+src/subdir.mk:42: recipe for target 'src/mpu.o' failed
+14:54:03 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 176904	   2424	  24488	 203816	  31c28	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+14:54:18 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+14:55:26 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 176840	   2424	  24488	 203752	  31be8	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+14:58:01 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:73:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 176880	   2424	  24488	 203792	  31c10	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+14:58:51 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+15:09:04 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:73:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 177000	   2424	  24488	 203912	  31c88	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:09:07 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+15:20:42 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:73:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 177056	   2424	  24488	 203968	  31cc0	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:20:59 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+15:24:31 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+15:36:58 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:73:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+../src/run.c:72:22: warning: unused variable 'status' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+                      ^
+../src/run.c:72:13: warning: unused variable 'cnt' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+             ^
+../src/run.c:72:6: warning: unused variable 'i' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+      ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 176816	   2424	  24488	 203728	  31bd0	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:37:06 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:73:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+../src/run.c:72:22: warning: unused variable 'status' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+                      ^
+../src/run.c:72:13: warning: unused variable 'cnt' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+             ^
+../src/run.c:72:6: warning: unused variable 'i' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+      ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 176840	   2424	  24488	 203752	  31be8	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:37:37 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 176840	   2424	  24488	 203752	  31be8	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:37:55 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+15:38:44 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 176840	   2424	  24488	 203752	  31be8	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:40:46 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 176904	   2424	  24488	 203816	  31c28	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:41:14 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 176968	   2424	  24488	 203880	  31c68	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:42:07 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+15:49:07 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'getQuatDrift':
+../src/mpu.c:121:27: warning: passing argument 1 of 'convertGyroData' from incompatible pointer type
+  status = convertGyroData(quat, quat_init);
+                           ^
+../src/mpu.c:23:5: note: expected 'short int *' but argument is of type 'long int *'
+ int convertGyroData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
+     ^
+../src/mpu.c:148:7: error: 'i' undeclared (first use in this function)
+  for (i = 0; i < QUATERNION_AMOUNT; i++) {
+       ^
+../src/mpu.c:148:7: note: each undeclared identifier is reported only once for each function it appears in
+src/subdir.mk:42: recipe for target 'src/mpu.o' failed
+make: *** [src/mpu.o] Error 1
+15:49:21 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'getQuatDrift':
+../src/mpu.c:121:27: warning: passing argument 1 of 'convertGyroData' from incompatible pointer type
+  status = convertGyroData(quat, quat_init);
+                           ^
+../src/mpu.c:23:5: note: expected 'short int *' but argument is of type 'long int *'
+ int convertGyroData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
+     ^
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 177144	   2424	  24488	 204056	  31d18	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:49:54 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'getQuatDrift':
+../src/mpu.c:121:27: warning: passing argument 1 of 'convertGyroData' from incompatible pointer type
+  status = convertGyroData(quat, quat_init);
+                           ^
+../src/mpu.c:23:5: note: expected 'short int *' but argument is of type 'long int *'
+ int convertGyroData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
+     ^
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 177144	   2424	  24488	 204056	  31d18	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:50:34 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 177144	   2424	  24488	 204056	  31d18	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:51:24 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 177144	   2424	  24488	 204056	  31d18	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:51:48 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 177256	   2424	  24488	 204168	  31d88	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:58:03 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+15:58:26 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+16:00:07 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+../src/mpu.c: In function 'printQuatDrift':
+../src/mpu.c:54:11: error: too few arguments to function 'getQuatDrift'
+  status = getQuatDrift(quat_drift, time_min);
+           ^
+In file included from ../src/mpu.c:11:0:
+../src/mpu.h:52:5: note: declared here
+ int getQuatDrift(float *quat_drift, char calibration, unsigned int time_min);
+     ^
+src/subdir.mk:42: recipe for target 'src/mpu.o' failed
+make: *** [src/mpu.o] Error 1
+16:00:27 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 177304	   2424	  24488	 204216	  31db8	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:01:19 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 177368	   2424	  24488	 204280	  31df8	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:02:43 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+16:07:26 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 177696	   2424	  24488	 204608	  31f40	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:07:44 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/mpu.d" -MT"src/mpu.d" -o "src/mpu.o" "../src/mpu.c"
+Finished building: ../src/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 177624	   2424	  24488	 204536	  31ef8	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:08:39 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:73:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+../src/run.c:72:22: warning: unused variable 'status' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+                      ^
+../src/run.c:72:13: warning: unused variable 'cnt' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+             ^
+../src/run.c:72:6: warning: unused variable 'i' [-Wunused-variable]
+  int i = 0, cnt = 0, status;
+      ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/mpu9150/mpl/data_builder.o ./src/mpu9150/mpl/eMPL_outputs.o ./src/mpu9150/mpl/hal_outputs.o ./src/mpu9150/mpl/message_layer.o ./src/mpu9150/mpl/ml_math_func.o ./src/mpu9150/mpl/mlmath.o ./src/mpu9150/mpl/mpl.o ./src/mpu9150/mpl/results_holder.o ./src/mpu9150/mpl/start_manager.o ./src/mpu9150/mpl/storage_manager.o  ./src/mpu9150/inv_mpu.o ./src/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/iic_utils.o ./src/math_utils.o ./src/mpu.o ./src/mpu_utils.o ./src/platform.o ./src/print_utils.o ./src/pwmsw.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 177624	   2424	  24488	 204536	  31ef8	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:09:16 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
