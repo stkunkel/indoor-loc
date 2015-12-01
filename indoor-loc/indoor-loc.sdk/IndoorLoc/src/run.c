@@ -78,34 +78,51 @@ int main() {
 	//Print Output Separator
 	myprintf("...............................\r\n");
 
+	//Quaternion Drift
+	myprintf(".........Drift...........\n\r");
+	printQuatDrift(10);
+
+//////Calibrate
+////	myprintf(".........Calibration...........\n\r");
+////	status = calibrateGyrAcc();
+////	if (status != XST_SUCCESS) {
+////		myprintf("Calibration failed.\r\n");
+////	}
+//
+////	//Enable dynamic gyro calibration
+////	status = dmpGyroCalibration(1);
+////	if (status != XST_SUCCESS) {
+////		myprintf("Could not enable DMP dynamic gyro calibration.\r\n");
+////	}
+//
 //	//Print Quaternions to Serial Port
-//	//while (1) {
-//	for (cnt = 0; cnt <= 1000; ){
+//	for (cnt = 0; cnt <= 1000;) {
 //		status = printQuatForDisplay();
 //		if (status == XST_SUCCESS) {
-//			cnt++;
+//			//cnt++;
 //		}
 //		//usleep(100);
 //		for (i = 0; i <= 10000; i++) {
 //			;
 //		}
+//	}
 
-//Get Data without DMP
-	myprintf(".........Without DMP...........\n\r");
-	for (cnt = 0; cnt <= DATA_NO_DMP_RUNS; cnt++) {
-		//Print
-		status = printDataNoDMP(&sensors);
-
-		//Decrease count if not successful
-		if (status != XST_SUCCESS) {
-			cnt--;
-		}
-
-		//Wait
-		for (i = 0; i <= 10000; i++) {
-			;
-		}
-	}
+////Get Data without DMP
+//	myprintf(".........Without DMP...........\n\r");
+//	for (cnt = 0; cnt <= DATA_NO_DMP_RUNS; cnt++) {
+//		//Print
+//		status = printDataNoDMP(&sensors);
+//
+//		//Decrease count if not successful
+//		if (status != XST_SUCCESS) {
+//			cnt--;
+//		}
+//
+//		//Wait
+//		for (i = 0; i <= 10000; i++) {
+//			;
+//		}
+//	}
 
 ////Get Data with DMP
 //	myprintf(".........With DMP...........\n\r");
@@ -129,32 +146,32 @@ int main() {
 //	//Sleep
 //	sleep(1);
 //
-//Calibrate
-	myprintf(".........Calibration...........\n\r");
-	status = calibrateGyrAcc();
-	if (status != XST_SUCCESS) {
-		myprintf("Calibration failed.\r\n");
-	}
-
-	//Get Data with DMP
-	myprintf(".........With DMP...........\n\r");
-	for (cnt = 0; cnt <= DATA_NO_DMP_RUNS; cnt++) {
-		//Print
-		status = printDataWithDMP();
-
-		//Decrease count if not successful
-		if (status != XST_SUCCESS) {
-			cnt--;
-		}
-
-		//Wait
-		for (i = 0; i <= 10000; i++) {
-			;
-		}
-
-		//Print forever
-		cnt--;
-	}
+////Calibrate
+//	myprintf(".........Calibration...........\n\r");
+//	status = calibrateGyrAcc();
+//	if (status != XST_SUCCESS) {
+//		myprintf("Calibration failed.\r\n");
+//	}
+//
+//	//Get Data with DMP
+//	myprintf(".........With DMP...........\n\r");
+//	for (cnt = 0; cnt <= DATA_NO_DMP_RUNS; cnt++) {
+//		//Print
+//		status = printDataWithDMP();
+//
+//		//Decrease count if not successful
+//		if (status != XST_SUCCESS) {
+//			cnt--;
+//		}
+//
+//		//Wait
+//		for (i = 0; i <= 10000; i++) {
+//			;
+//		}
+//
+//		//Print forever
+//		cnt--;
+//	}
 
 //PWM
 //pwm(PWM_RUNS);

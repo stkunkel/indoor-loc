@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "xstatus.h"
+#include "xtime_l.h"
 #include "mpu_utils.h"
 #include "mpu9150/inv_mpu.h"
 #include "mpu9150/inv_mpu_dmp_motion_driver.h"
@@ -47,6 +48,8 @@
 #define MAG_CAL_MASK			0x04
 
 //Functions
+void printQuatDrift(unsigned int time_min);
+int getQuatDrift(float *quat_drift, char calibration, unsigned int time_min);
 int printQuatForDisplay();
 int printDataWithDMP();
 int printDataNoDMP(short int *sensors);
