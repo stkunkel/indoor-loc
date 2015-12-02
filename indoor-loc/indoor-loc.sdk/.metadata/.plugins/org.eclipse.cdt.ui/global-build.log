@@ -10348,3 +10348,2207 @@ arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
  174828	   2416	  24488	 201732	  31404	IndoorLoc.elf
 Finished building: IndoorLoc.elf.size
  
+15:22:07 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:19:7: warning: unused variable 'val' [-Wunused-variable]
+   u32 val;
+       ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:31:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 174828	   2416	  24488	 201732	  31404	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:33:12 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+In file included from ../src/robot/pwmsw.c:13:0:
+../../IndoorLoc_bsp/ps7_cortexa9_0/include/pwm.h:13:37: error: expected identifier or '(' before numeric constant
+ #define PWM_S00_AXI_SLV_REG3_OFFSET 12
+                                     ^
+../src/robot/pwmsw.h:41:1: note: in expansion of macro 'PWM_S00_AXI_SLV_REG3_OFFSET'
+ PWM_S00_AXI_SLV_REG3_OFFSET
+ ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:19:7: warning: unused variable 'val' [-Wunused-variable]
+   u32 val;
+       ^
+make: *** [src/robot/pwmsw.o] Error 1
+15:35:44 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+In file included from ../src/robot/pwmsw.c:14:0:
+../src/robot/pwmsw.h:13:0: warning: "PWMSTEPS" redefined
+ #define PWMSTEPS 7
+ ^
+../src/robot/pwmsw.c:7:0: note: this is the location of the previous definition
+ #define PWMSTEPS 10
+ ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:19:7: warning: unused variable 'val' [-Wunused-variable]
+   u32 val;
+       ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:31:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 174828	   2416	  24488	 201732	  31404	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:36:11 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:22:7: warning: unused variable 'val' [-Wunused-variable]
+   u32 val;
+       ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 174828	   2416	  24488	 201732	  31404	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:40:26 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:22:7: warning: unused variable 'val' [-Wunused-variable]
+   u32 val;
+       ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:31:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 174828	   2416	  24488	 201732	  31404	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:40:50 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:22:7: warning: unused variable 'val' [-Wunused-variable]
+   u32 val;
+       ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:31:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 174828	   2416	  24488	 201732	  31404	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:40:54 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:22:7: warning: unused variable 'val' [-Wunused-variable]
+   u32 val;
+       ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:31:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 174828	   2416	  24488	 201732	  31404	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:41:04 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:22:7: warning: unused variable 'val' [-Wunused-variable]
+   u32 val;
+       ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:31:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 174828	   2416	  24488	 201732	  31404	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:41:48 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+In file included from ../src/robot/pwmsw.c:14:0:
+../src/robot/pwmsw.h:54:2: error: expected identifier before numeric constant
+  0,
+  ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:22:7: warning: unused variable 'val' [-Wunused-variable]
+   u32 val;
+       ^
+make: *** [src/robot/pwmsw.o] Error 1
+15:42:18 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:22:7: warning: unused variable 'val' [-Wunused-variable]
+   u32 val;
+       ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:31:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 174828	   2416	  24488	 201732	  31404	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:42:34 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:22:7: warning: unused variable 'val' [-Wunused-variable]
+   u32 val;
+       ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:31:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 174828	   2416	  24488	 201732	  31404	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:44:56 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c:19:14: error: unknown type name 'Joint'
+ int setAngle(Joint joint, u32 dgr) {
+              ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:52:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+make: *** [src/robot/pwmsw.o] Error 1
+15:45:37 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c:19:14: error: unknown type name 'Joint'
+ int setAngle(Joint joint, u32 dgr) {
+              ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:52:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+make: *** [src/robot/pwmsw.o] Error 1
+15:45:59 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c:18:14: error: unknown type name 'Joint'
+ int setAngle(Joint joint, u32 dgr) {
+              ^
+../src/robot/pwmsw.c: In function 'initPWM':
+../src/robot/pwmsw.c:27:2: warning: implicit declaration of function 'Xil_Out32' [-Wimplicit-function-declaration]
+  PWM_mWriteReg(PWMADDRESS, PWM_S00_AXI_SLV_REG6_OFFSET, steps);
+  ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:51:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+make: *** [src/robot/pwmsw.o] Error 1
+15:46:07 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c:19:14: error: unknown type name 'Joint'
+ int setAngle(Joint joint, u32 dgr) {
+              ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:52:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+make: *** [src/robot/pwmsw.o] Error 1
+15:49:18 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c:19:14: error: unknown type name 'Joint'
+ int setAngle(Joint joint, u32 dgr) {
+              ^
+../src/robot/pwmsw.c:26:24: error: unknown type name 'Joint'
+ unsigned int getValReg(Joint joint) {
+                        ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:73:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+make: *** [src/robot/pwmsw.o] Error 1
+15:49:58 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c:19:14: error: unknown type name 'Joint'
+ int setAngle(Joint joint, u32 dgr) {
+              ^
+../src/robot/pwmsw.c:26:24: error: unknown type name 'Joint'
+ unsigned int getValReg(Joint joint) {
+                        ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:72:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+make: *** [src/robot/pwmsw.o] Error 1
+15:51:29 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c:19:14: error: unknown type name 'Joint'
+ int setAngle(Joint joint, u32 dgr) {
+              ^
+../src/robot/pwmsw.c: In function 'getValReg':
+../src/robot/pwmsw.c:29:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return BASE_REG;
+   ^
+../src/robot/pwmsw.c:31:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return SHOULDER_REG;
+   ^
+../src/robot/pwmsw.c:33:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return ELBOW_REG;
+   ^
+../src/robot/pwmsw.c:35:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return WRIST_REG;
+   ^
+../src/robot/pwmsw.c:37:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return THUMB_REG;
+   ^
+../src/robot/pwmsw.c:39:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return FINGER_REG;
+   ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:72:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+make: *** [src/robot/pwmsw.o] Error 1
+15:52:00 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'getValReg':
+../src/robot/pwmsw.c:29:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return BASE_REG;
+   ^
+../src/robot/pwmsw.c:31:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return SHOULDER_REG;
+   ^
+../src/robot/pwmsw.c:33:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return ELBOW_REG;
+   ^
+../src/robot/pwmsw.c:35:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return WRIST_REG;
+   ^
+../src/robot/pwmsw.c:37:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return THUMB_REG;
+   ^
+../src/robot/pwmsw.c:39:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return FINGER_REG;
+   ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:72:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:31:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 175212	   2416	  24488	 202116	  31584	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:52:35 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c:19:14: error: unknown type name 'Joint'
+ int setAngle(Joint joint, u32 dgr) {
+              ^
+../src/robot/pwmsw.c:26:24: error: unknown type name 'Joint'
+ unsigned int getValReg(Joint joint) {
+                        ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:72:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+make: *** [src/robot/pwmsw.o] Error 1
+15:52:45 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+In file included from ../src/robot/pwmsw.c:14:0:
+../src/robot/pwmsw.h:53:1: warning: useless storage class specifier in empty declaration
+ };
+ ^
+../src/robot/pwmsw.c:19:14: error: unknown type name 'Joint'
+ int setAngle(Joint joint, u32 dgr) {
+              ^
+../src/robot/pwmsw.c:26:24: error: unknown type name 'Joint'
+ unsigned int getValReg(Joint joint) {
+                        ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:72:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+make: *** [src/robot/pwmsw.o] Error 1
+15:53:05 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'getValReg':
+../src/robot/pwmsw.c:29:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return BASE_REG;
+   ^
+../src/robot/pwmsw.c:31:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return SHOULDER_REG;
+   ^
+../src/robot/pwmsw.c:33:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return ELBOW_REG;
+   ^
+../src/robot/pwmsw.c:35:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return WRIST_REG;
+   ^
+../src/robot/pwmsw.c:37:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return THUMB_REG;
+   ^
+../src/robot/pwmsw.c:39:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return FINGER_REG;
+   ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:72:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:31:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 175212	   2416	  24488	 202116	  31584	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:53:54 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'getValReg':
+../src/robot/pwmsw.c:30:20: error: expected expression before ';' token
+   valReg = BASE_REG;
+                    ^
+../src/robot/pwmsw.c:32:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return SHOULDER_REG;
+   ^
+../src/robot/pwmsw.c:34:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return ELBOW_REG;
+   ^
+../src/robot/pwmsw.c:36:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return WRIST_REG;
+   ^
+../src/robot/pwmsw.c:38:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return THUMB_REG;
+   ^
+../src/robot/pwmsw.c:40:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return FINGER_REG;
+   ^
+../src/robot/pwmsw.c:27:15: warning: variable 'valReg' set but not used [-Wunused-but-set-variable]
+  unsigned int valReg;
+               ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:73:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+make: *** [src/robot/pwmsw.o] Error 1
+15:54:15 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'getValReg':
+../src/robot/pwmsw.c:30:20: error: expected expression before ';' token
+   valReg = BASE_REG;
+                    ^
+../src/robot/pwmsw.c:33:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return SHOULDER_REG;
+   ^
+../src/robot/pwmsw.c:35:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return ELBOW_REG;
+   ^
+../src/robot/pwmsw.c:37:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return WRIST_REG;
+   ^
+../src/robot/pwmsw.c:39:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return THUMB_REG;
+   ^
+../src/robot/pwmsw.c:41:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return FINGER_REG;
+   ^
+../src/robot/pwmsw.c:27:15: warning: variable 'valReg' set but not used [-Wunused-but-set-variable]
+  unsigned int valReg;
+               ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:74:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+make: *** [src/robot/pwmsw.o] Error 1
+15:54:37 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'getValReg':
+../src/robot/pwmsw.c:30:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return BASE_REG;
+   ^
+../src/robot/pwmsw.c:32:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return SHOULDER_REG;
+   ^
+../src/robot/pwmsw.c:34:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return ELBOW_REG;
+   ^
+../src/robot/pwmsw.c:36:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return WRIST_REG;
+   ^
+../src/robot/pwmsw.c:38:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return THUMB_REG;
+   ^
+../src/robot/pwmsw.c:40:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+   return FINGER_REG;
+   ^
+../src/robot/pwmsw.c:27:15: warning: unused variable 'valReg' [-Wunused-variable]
+  unsigned int valReg;
+               ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:73:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 175212	   2416	  24488	 202116	  31584	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:55:16 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'getValReg':
+../src/robot/pwmsw.c:27:15: warning: unused variable 'valReg' [-Wunused-variable]
+  unsigned int valReg;
+               ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:73:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'getValReg':
+../src/robot/pwmsw.c:42:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:31:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 175276	   2416	  24488	 202180	  315c4	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:55:22 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:72:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'getValReg':
+../src/robot/pwmsw.c:41:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 175276	   2416	  24488	 202180	  315c4	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:55:53 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:74:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 175276	   2416	  24488	 202180	  315c4	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+15:56:45 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'setAngle':
+../src/robot/pwmsw.c:22:2: warning: implicit declaration of function 'getValReg' [-Wimplicit-function-declaration]
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+  ^
+In file included from ../src/robot/pwmsw.c:13:0:
+../src/robot/pwmsw.c:22:46: error: 'steps' undeclared (first use in this function)
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+                                              ^
+../../IndoorLoc_bsp/ps7_cortexa9_0/include/pwm.h:44:49: note: in definition of macro 'PWM_mWriteReg'
+    Xil_Out32((BaseAddress) + (RegOffset), (u32)(Data))
+                                                 ^
+../src/robot/pwmsw.c:22:46: note: each undeclared identifier is reported only once for each function it appears in
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+                                              ^
+../../IndoorLoc_bsp/ps7_cortexa9_0/include/pwm.h:44:49: note: in definition of macro 'PWM_mWriteReg'
+    Xil_Out32((BaseAddress) + (RegOffset), (u32)(Data))
+                                                 ^
+../src/robot/pwmsw.c: At top level:
+../src/robot/pwmsw.c:28:14: error: conflicting types for 'getValReg'
+ unsigned int getValReg(Joint joint) {
+              ^
+In file included from ../src/robot/pwmsw.c:13:0:
+../src/robot/pwmsw.c:22:28: note: previous implicit declaration of 'getValReg' was here
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+                            ^
+../../IndoorLoc_bsp/ps7_cortexa9_0/include/pwm.h:44:31: note: in definition of macro 'PWM_mWriteReg'
+    Xil_Out32((BaseAddress) + (RegOffset), (u32)(Data))
+                               ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:76:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'setAngle':
+../src/robot/pwmsw.c:23:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/robot/pwmsw.o] Error 1
+15:57:29 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'setAngle':
+../src/robot/pwmsw.c:23:2: warning: implicit declaration of function 'getValReg' [-Wimplicit-function-declaration]
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+  ^
+In file included from ../src/robot/pwmsw.c:13:0:
+../src/robot/pwmsw.c:23:46: error: 'steps' undeclared (first use in this function)
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+                                              ^
+../../IndoorLoc_bsp/ps7_cortexa9_0/include/pwm.h:44:49: note: in definition of macro 'PWM_mWriteReg'
+    Xil_Out32((BaseAddress) + (RegOffset), (u32)(Data))
+                                                 ^
+../src/robot/pwmsw.c:23:46: note: each undeclared identifier is reported only once for each function it appears in
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+                                              ^
+../../IndoorLoc_bsp/ps7_cortexa9_0/include/pwm.h:44:49: note: in definition of macro 'PWM_mWriteReg'
+    Xil_Out32((BaseAddress) + (RegOffset), (u32)(Data))
+                                                 ^
+../src/robot/pwmsw.c: At top level:
+../src/robot/pwmsw.c:29:14: error: conflicting types for 'getValReg'
+ unsigned int getValReg(Joint joint) {
+              ^
+In file included from ../src/robot/pwmsw.c:13:0:
+../src/robot/pwmsw.c:23:28: note: previous implicit declaration of 'getValReg' was here
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+                            ^
+../../IndoorLoc_bsp/ps7_cortexa9_0/include/pwm.h:44:31: note: in definition of macro 'PWM_mWriteReg'
+    Xil_Out32((BaseAddress) + (RegOffset), (u32)(Data))
+                               ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:77:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'setAngle':
+../src/robot/pwmsw.c:24:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/robot/pwmsw.o] Error 1
+15:57:50 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'setAngle':
+../src/robot/pwmsw.c:23:2: warning: implicit declaration of function 'getValReg' [-Wimplicit-function-declaration]
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+  ^
+In file included from ../src/robot/pwmsw.c:13:0:
+../src/robot/pwmsw.c:23:46: error: 'steps' undeclared (first use in this function)
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+                                              ^
+../../IndoorLoc_bsp/ps7_cortexa9_0/include/pwm.h:44:49: note: in definition of macro 'PWM_mWriteReg'
+    Xil_Out32((BaseAddress) + (RegOffset), (u32)(Data))
+                                                 ^
+../src/robot/pwmsw.c:23:46: note: each undeclared identifier is reported only once for each function it appears in
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+                                              ^
+../../IndoorLoc_bsp/ps7_cortexa9_0/include/pwm.h:44:49: note: in definition of macro 'PWM_mWriteReg'
+    Xil_Out32((BaseAddress) + (RegOffset), (u32)(Data))
+                                                 ^
+../src/robot/pwmsw.c: At top level:
+../src/robot/pwmsw.c:29:14: error: conflicting types for 'getValReg'
+ unsigned int getValReg(Joint joint) {
+              ^
+In file included from ../src/robot/pwmsw.c:13:0:
+../src/robot/pwmsw.c:23:28: note: previous implicit declaration of 'getValReg' was here
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+                            ^
+../../IndoorLoc_bsp/ps7_cortexa9_0/include/pwm.h:44:31: note: in definition of macro 'PWM_mWriteReg'
+    Xil_Out32((BaseAddress) + (RegOffset), (u32)(Data))
+                               ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:77:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'setAngle':
+../src/robot/pwmsw.c:24:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/robot/pwmsw.o] Error 1
+15:58:16 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'setAngle':
+../src/robot/pwmsw.c:23:2: warning: implicit declaration of function 'getValReg' [-Wimplicit-function-declaration]
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+  ^
+In file included from ../src/robot/pwmsw.c:13:0:
+../src/robot/pwmsw.c:23:46: error: 'steps' undeclared (first use in this function)
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+                                              ^
+../../IndoorLoc_bsp/ps7_cortexa9_0/include/pwm.h:44:49: note: in definition of macro 'PWM_mWriteReg'
+    Xil_Out32((BaseAddress) + (RegOffset), (u32)(Data))
+                                                 ^
+../src/robot/pwmsw.c:23:46: note: each undeclared identifier is reported only once for each function it appears in
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+                                              ^
+../../IndoorLoc_bsp/ps7_cortexa9_0/include/pwm.h:44:49: note: in definition of macro 'PWM_mWriteReg'
+    Xil_Out32((BaseAddress) + (RegOffset), (u32)(Data))
+                                                 ^
+../src/robot/pwmsw.c: At top level:
+../src/robot/pwmsw.c:29:14: error: conflicting types for 'getValReg'
+ unsigned int getValReg(Joint joint) {
+              ^
+In file included from ../src/robot/pwmsw.c:13:0:
+../src/robot/pwmsw.c:23:28: note: previous implicit declaration of 'getValReg' was here
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+                            ^
+../../IndoorLoc_bsp/ps7_cortexa9_0/include/pwm.h:44:31: note: in definition of macro 'PWM_mWriteReg'
+    Xil_Out32((BaseAddress) + (RegOffset), (u32)(Data))
+                               ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:78:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'setAngle':
+../src/robot/pwmsw.c:24:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/robot/pwmsw.o] Error 1
+15:58:25 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'setAngle':
+../src/robot/pwmsw.c:23:2: warning: implicit declaration of function 'getValReg' [-Wimplicit-function-declaration]
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+  ^
+In file included from ../src/robot/pwmsw.c:13:0:
+../src/robot/pwmsw.c:23:46: error: 'steps' undeclared (first use in this function)
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+                                              ^
+../../IndoorLoc_bsp/ps7_cortexa9_0/include/pwm.h:44:49: note: in definition of macro 'PWM_mWriteReg'
+    Xil_Out32((BaseAddress) + (RegOffset), (u32)(Data))
+                                                 ^
+../src/robot/pwmsw.c:23:46: note: each undeclared identifier is reported only once for each function it appears in
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+                                              ^
+../../IndoorLoc_bsp/ps7_cortexa9_0/include/pwm.h:44:49: note: in definition of macro 'PWM_mWriteReg'
+    Xil_Out32((BaseAddress) + (RegOffset), (u32)(Data))
+                                                 ^
+../src/robot/pwmsw.c: At top level:
+../src/robot/pwmsw.c:29:14: error: conflicting types for 'getValReg'
+ unsigned int getValReg(Joint joint) {
+              ^
+In file included from ../src/robot/pwmsw.c:13:0:
+../src/robot/pwmsw.c:23:28: note: previous implicit declaration of 'getValReg' was here
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+                            ^
+../../IndoorLoc_bsp/ps7_cortexa9_0/include/pwm.h:44:31: note: in definition of macro 'PWM_mWriteReg'
+    Xil_Out32((BaseAddress) + (RegOffset), (u32)(Data))
+                               ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:78:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'setAngle':
+../src/robot/pwmsw.c:24:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/robot/pwmsw.o] Error 1
+15:58:52 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'setAngle':
+../src/robot/pwmsw.c:23:2: warning: implicit declaration of function 'getValReg' [-Wimplicit-function-declaration]
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+  ^
+In file included from ../src/robot/pwmsw.c:13:0:
+../src/robot/pwmsw.c:23:46: error: 'steps' undeclared (first use in this function)
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+                                              ^
+../../IndoorLoc_bsp/ps7_cortexa9_0/include/pwm.h:44:49: note: in definition of macro 'PWM_mWriteReg'
+    Xil_Out32((BaseAddress) + (RegOffset), (u32)(Data))
+                                                 ^
+../src/robot/pwmsw.c:23:46: note: each undeclared identifier is reported only once for each function it appears in
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+                                              ^
+../../IndoorLoc_bsp/ps7_cortexa9_0/include/pwm.h:44:49: note: in definition of macro 'PWM_mWriteReg'
+    Xil_Out32((BaseAddress) + (RegOffset), (u32)(Data))
+                                                 ^
+../src/robot/pwmsw.c: At top level:
+../src/robot/pwmsw.c:29:14: error: conflicting types for 'getValReg'
+ unsigned int getValReg(Joint joint) {
+              ^
+In file included from ../src/robot/pwmsw.c:13:0:
+../src/robot/pwmsw.c:23:28: note: previous implicit declaration of 'getValReg' was here
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+                            ^
+../../IndoorLoc_bsp/ps7_cortexa9_0/include/pwm.h:44:31: note: in definition of macro 'PWM_mWriteReg'
+    Xil_Out32((BaseAddress) + (RegOffset), (u32)(Data))
+                               ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:78:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'setAngle':
+../src/robot/pwmsw.c:24:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/robot/pwmsw.o] Error 1
+15:59:17 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'setAngle':
+../src/robot/pwmsw.c:25:2: warning: implicit declaration of function 'getValReg' [-Wimplicit-function-declaration]
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+  ^
+../src/robot/pwmsw.c: At top level:
+../src/robot/pwmsw.c:31:14: error: conflicting types for 'getValReg'
+ unsigned int getValReg(Joint joint) {
+              ^
+In file included from ../src/robot/pwmsw.c:13:0:
+../src/robot/pwmsw.c:25:28: note: previous implicit declaration of 'getValReg' was here
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+                            ^
+../../IndoorLoc_bsp/ps7_cortexa9_0/include/pwm.h:44:31: note: in definition of macro 'PWM_mWriteReg'
+    Xil_Out32((BaseAddress) + (RegOffset), (u32)(Data))
+                               ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:80:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'setAngle':
+../src/robot/pwmsw.c:26:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/robot/pwmsw.o] Error 1
+16:02:51 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'setAngle':
+../src/robot/pwmsw.c:34:2: warning: implicit declaration of function 'getValReg' [-Wimplicit-function-declaration]
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+  ^
+../src/robot/pwmsw.c: At top level:
+../src/robot/pwmsw.c:40:5: error: conflicting types for 'getValReg'
+ u32 getValReg(Joint joint) {
+     ^
+In file included from ../src/robot/pwmsw.c:13:0:
+../src/robot/pwmsw.c:34:28: note: previous implicit declaration of 'getValReg' was here
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+                            ^
+../../IndoorLoc_bsp/ps7_cortexa9_0/include/pwm.h:44:31: note: in definition of macro 'PWM_mWriteReg'
+    Xil_Out32((BaseAddress) + (RegOffset), (u32)(Data))
+                               ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:89:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'setAngle':
+../src/robot/pwmsw.c:35:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/robot/pwmsw.o] Error 1
+16:03:13 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:95:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'setAngle':
+../src/robot/pwmsw.c:41:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+In file included from ../src/robot/pwmsw.c:13:0:
+../../IndoorLoc_bsp/ps7_cortexa9_0/include/pwm.h:44:4: warning: 'steps' is used uninitialized in this function [-Wuninitialized]
+    Xil_Out32((BaseAddress) + (RegOffset), (u32)(Data))
+    ^
+../src/robot/pwmsw.c:34:6: note: 'steps' was declared here
+  u32 steps;
+      ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 175340	   2416	  24488	 202244	  31604	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:05:29 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'setAngle':
+../src/robot/pwmsw.c:46:2: error: void value not ignored as it ought to be
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+  ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:101:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'setAngle':
+../src/robot/pwmsw.c:47:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/robot/pwmsw.o] Error 1
+16:06:26 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'setAngle':
+../src/robot/pwmsw.c:46:2: error: void value not ignored as it ought to be
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+  ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:104:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'setAngle':
+../src/robot/pwmsw.c:47:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/robot/pwmsw.o] Error 1
+16:06:58 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'setAngle':
+../src/robot/pwmsw.c:46:2: error: void value not ignored as it ought to be
+  PWM_mWriteReg(PWMADDRESS, getValReg(joint), steps);
+  ^
+In file included from ../src/robot/pwmsw.c:13:0:
+../src/robot/pwmsw.c: In function 'initPWM':
+../src/robot/pwmsw.c:76:57: error: 'steps' undeclared (first use in this function)
+  PWM_mWriteReg(PWMADDRESS, PWM_S00_AXI_SLV_REG6_OFFSET, steps);
+                                                         ^
+../../IndoorLoc_bsp/ps7_cortexa9_0/include/pwm.h:44:49: note: in definition of macro 'PWM_mWriteReg'
+    Xil_Out32((BaseAddress) + (RegOffset), (u32)(Data))
+                                                 ^
+../src/robot/pwmsw.c:76:57: note: each undeclared identifier is reported only once for each function it appears in
+  PWM_mWriteReg(PWMADDRESS, PWM_S00_AXI_SLV_REG6_OFFSET, steps);
+                                                         ^
+../../IndoorLoc_bsp/ps7_cortexa9_0/include/pwm.h:44:49: note: in definition of macro 'PWM_mWriteReg'
+    Xil_Out32((BaseAddress) + (RegOffset), (u32)(Data))
+                                                 ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:104:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'setAngle':
+../src/robot/pwmsw.c:47:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/robot/pwmsw.o] Error 1
+16:07:18 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+In file included from ../src/robot/pwmsw.c:13:0:
+../src/robot/pwmsw.c: In function 'initPWM':
+../src/robot/pwmsw.c:76:57: error: 'steps' undeclared (first use in this function)
+  PWM_mWriteReg(PWMADDRESS, PWM_S00_AXI_SLV_REG6_OFFSET, steps);
+                                                         ^
+../../IndoorLoc_bsp/ps7_cortexa9_0/include/pwm.h:44:49: note: in definition of macro 'PWM_mWriteReg'
+    Xil_Out32((BaseAddress) + (RegOffset), (u32)(Data))
+                                                 ^
+../src/robot/pwmsw.c:76:57: note: each undeclared identifier is reported only once for each function it appears in
+  PWM_mWriteReg(PWMADDRESS, PWM_S00_AXI_SLV_REG6_OFFSET, steps);
+                                                         ^
+../../IndoorLoc_bsp/ps7_cortexa9_0/include/pwm.h:44:49: note: in definition of macro 'PWM_mWriteReg'
+    Xil_Out32((BaseAddress) + (RegOffset), (u32)(Data))
+                                                 ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:104:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'setAngle':
+../src/robot/pwmsw.c:47:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/robot/pwmsw.o] Error 1
+16:08:57 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c:32:1: error: unknown type name 'u31'
+ u31 getAbsAngle(Joint joint){
+ ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:109:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'getAbsAngle':
+../src/robot/pwmsw.c:34:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../src/robot/pwmsw.c: In function 'setAbsAngle':
+../src/robot/pwmsw.c:50:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/robot/pwmsw.o] Error 1
+16:11:08 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:113:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'setAbsAngle':
+../src/robot/pwmsw.c:52:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 175468	   2416	  24488	 202372	  31684	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:15:22 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'getAbsAngle':
+../src/robot/pwmsw.c:37:38: error: macro "PWM_mReadReg" requires 2 arguments, but only 1 given
+  return PWM_mReadReg(getValReg(joint));
+                                      ^
+../src/robot/pwmsw.c:37:9: error: 'PWM_mReadReg' undeclared (first use in this function)
+  return PWM_mReadReg(getValReg(joint));
+         ^
+../src/robot/pwmsw.c:37:9: note: each undeclared identifier is reported only once for each function it appears in
+../src/robot/pwmsw.c: In function 'writePwmReg':
+../src/robot/pwmsw.c:120:31: error: 'val' undeclared (first use in this function)
+  writePwmReg(PWMADDRESS, reg, val);
+                               ^
+../src/robot/pwmsw.c:120:2: error: too many arguments to function 'writePwmReg'
+  writePwmReg(PWMADDRESS, reg, val);
+  ^
+../src/robot/pwmsw.c:119:6: note: declared here
+ void writePwmReg(u32 reg, u32 value){
+      ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:129:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'getAbsAngle':
+../src/robot/pwmsw.c:38:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../src/robot/pwmsw.c: In function 'setAbsAngle':
+../src/robot/pwmsw.c:54:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/robot/pwmsw.o] Error 1
+16:15:37 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'getAbsAngle':
+../src/robot/pwmsw.c:37:38: error: macro "PWM_mReadReg" requires 2 arguments, but only 1 given
+  return PWM_mReadReg(getValReg(joint));
+                                      ^
+../src/robot/pwmsw.c:37:9: error: 'PWM_mReadReg' undeclared (first use in this function)
+  return PWM_mReadReg(getValReg(joint));
+         ^
+../src/robot/pwmsw.c:37:9: note: each undeclared identifier is reported only once for each function it appears in
+In file included from ../src/robot/pwmsw.c:13:0:
+../src/robot/pwmsw.c: In function 'writePwmReg':
+../src/robot/pwmsw.c:120:33: error: 'val' undeclared (first use in this function)
+  PWM_mWriteReg(PWMADDRESS, reg, val);
+                                 ^
+../../IndoorLoc_bsp/ps7_cortexa9_0/include/pwm.h:44:49: note: in definition of macro 'PWM_mWriteReg'
+    Xil_Out32((BaseAddress) + (RegOffset), (u32)(Data))
+                                                 ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:129:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'getAbsAngle':
+../src/robot/pwmsw.c:38:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../src/robot/pwmsw.c: In function 'setAbsAngle':
+../src/robot/pwmsw.c:54:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/robot/pwmsw.o] Error 1
+16:15:44 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'getAbsAngle':
+../src/robot/pwmsw.c:37:38: error: macro "PWM_mReadReg" requires 2 arguments, but only 1 given
+  return PWM_mReadReg(getValReg(joint));
+                                      ^
+../src/robot/pwmsw.c:37:9: error: 'PWM_mReadReg' undeclared (first use in this function)
+  return PWM_mReadReg(getValReg(joint));
+         ^
+../src/robot/pwmsw.c:37:9: note: each undeclared identifier is reported only once for each function it appears in
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:129:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'getAbsAngle':
+../src/robot/pwmsw.c:38:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../src/robot/pwmsw.c: In function 'setAbsAngle':
+../src/robot/pwmsw.c:54:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/robot/pwmsw.o] Error 1
+16:16:23 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'getAbsAngle':
+../src/robot/pwmsw.c:37:38: error: macro "PWM_mReadReg" requires 2 arguments, but only 1 given
+  return PWM_mReadReg(getValReg(joint));
+                                      ^
+../src/robot/pwmsw.c:37:9: error: 'PWM_mReadReg' undeclared (first use in this function)
+  return PWM_mReadReg(getValReg(joint));
+         ^
+../src/robot/pwmsw.c:37:9: note: each undeclared identifier is reported only once for each function it appears in
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:129:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'getAbsAngle':
+../src/robot/pwmsw.c:38:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../src/robot/pwmsw.c: In function 'setAbsAngle':
+../src/robot/pwmsw.c:54:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/robot/pwmsw.o] Error 1
+16:16:35 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'getAbsAngle':
+../src/robot/pwmsw.c:37:38: error: macro "PWM_mReadReg" requires 2 arguments, but only 1 given
+  return PWM_mReadReg(getValReg(joint));
+                                      ^
+../src/robot/pwmsw.c:37:9: error: 'PWM_mReadReg' undeclared (first use in this function)
+  return PWM_mReadReg(getValReg(joint));
+         ^
+../src/robot/pwmsw.c:37:9: note: each undeclared identifier is reported only once for each function it appears in
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:129:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'getAbsAngle':
+../src/robot/pwmsw.c:38:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../src/robot/pwmsw.c: In function 'setAbsAngle':
+../src/robot/pwmsw.c:54:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/robot/pwmsw.o] Error 1
+16:16:45 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:129:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'setAbsAngle':
+../src/robot/pwmsw.c:54:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:31:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 175468	   2416	  24488	 202372	  31684	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:17:51 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:132:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'setAbsAngle':
+../src/robot/pwmsw.c:54:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 175468	   2416	  24488	 202372	  31684	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:19:59 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c:45:6: error: conflicting types for 'setAbsAngle'
+ void setAbsAngle(Joint joint, u32 dgr) {
+      ^
+In file included from ../src/robot/pwmsw.c:14:0:
+../src/robot/pwmsw.h:60:5: note: previous declaration of 'setAbsAngle' was here
+ int setAbsAngle(Joint joint, u32 dgr);
+     ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:132:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+make: *** [src/robot/pwmsw.o] Error 1
+16:20:18 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:132:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:31:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 175468	   2416	  24488	 202372	  31684	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:20:40 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c:45:6: error: conflicting types for 'setAbsAngle'
+ void setAbsAngle(Joint joint, u32 dgr) {
+      ^
+In file included from ../src/robot/pwmsw.c:14:0:
+../src/robot/pwmsw.h:60:5: note: previous declaration of 'setAbsAngle' was here
+ int setAbsAngle(Joint joint, u32 dgr);
+     ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:132:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+make: *** [src/robot/pwmsw.o] Error 1
+16:22:59 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c:122:5: error: conflicting types for 'writePwmReg'
+ int writePwmReg(u32 reg, u32 value){
+     ^
+../src/robot/pwmsw.c:26:6: note: previous declaration of 'writePwmReg' was here
+ void writePwmReg(u32 reg, u32 value);
+      ^
+../src/robot/pwmsw.c: In function 'writePwmReg':
+../src/robot/pwmsw.c:130:10: error: 'PWM_REG_CONT_NO_MATCH' undeclared (first use in this function)
+   return PWM_REG_CONT_NO_MATCH;
+          ^
+../src/robot/pwmsw.c:130:10: note: each undeclared identifier is reported only once for each function it appears in
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:140:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'setAbsAngle':
+../src/robot/pwmsw.c:54:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../src/robot/pwmsw.c: In function 'writePwmReg':
+../src/robot/pwmsw.c:132:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/robot/pwmsw.o] Error 1
+16:23:12 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'writePwmReg':
+../src/robot/pwmsw.c:130:10: error: 'PWM_REG_CONT_NO_MATCH' undeclared (first use in this function)
+   return PWM_REG_CONT_NO_MATCH;
+          ^
+../src/robot/pwmsw.c:130:10: note: each undeclared identifier is reported only once for each function it appears in
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:140:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'setAbsAngle':
+../src/robot/pwmsw.c:54:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../src/robot/pwmsw.c: In function 'writePwmReg':
+../src/robot/pwmsw.c:132:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/robot/pwmsw.o] Error 1
+16:23:22 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:140:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'setAbsAngle':
+../src/robot/pwmsw.c:54:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:31:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 175468	   2416	  24488	 202372	  31684	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:24:16 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:144:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 175468	   2416	  24488	 202372	  31684	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:25:03 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:145:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 175468	   2416	  24488	 202372	  31684	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:25:51 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:145:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:31:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 175468	   2416	  24488	 202372	  31684	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:29:18 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c:36:44: error: unknown type name 'time_ms'
+ int moveToAbsAngle(Joint joint, float dgr, time_ms) {
+                                            ^
+../src/robot/pwmsw.c:52:7: error: conflicting types for 'getAbsAngle'
+ float getAbsAngle(Joint joint) {
+       ^
+In file included from ../src/robot/pwmsw.c:14:0:
+../src/robot/pwmsw.h:64:5: note: previous declaration of 'getAbsAngle' was here
+ u32 getAbsAngle(Joint joint);
+     ^
+../src/robot/pwmsw.c: In function 'getAbsAngle':
+../src/robot/pwmsw.c:56:8: warning: unused variable 'angle' [-Wunused-variable]
+  float angle;
+        ^
+../src/robot/pwmsw.c:55:6: warning: unused variable 'status' [-Wunused-variable]
+  int status;
+      ^
+../src/robot/pwmsw.c:54:6: warning: variable 'steps' set but not used [-Wunused-but-set-variable]
+  u32 steps;
+      ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:170:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'getAbsAngle':
+../src/robot/pwmsw.c:63:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/robot/pwmsw.o] Error 1
+16:29:27 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c:36:44: error: unknown type name 'time_ms'
+ int moveToAbsAngle(Joint joint, float dgr, time_ms) {
+                                            ^
+../src/robot/pwmsw.c:52:7: error: conflicting types for 'getAbsAngle'
+ float getAbsAngle(Joint joint) {
+       ^
+In file included from ../src/robot/pwmsw.c:14:0:
+../src/robot/pwmsw.h:64:5: note: previous declaration of 'getAbsAngle' was here
+ u32 getAbsAngle(Joint joint);
+     ^
+../src/robot/pwmsw.c: In function 'getAbsAngle':
+../src/robot/pwmsw.c:56:8: warning: unused variable 'angle' [-Wunused-variable]
+  float angle;
+        ^
+../src/robot/pwmsw.c:55:6: warning: unused variable 'status' [-Wunused-variable]
+  int status;
+      ^
+../src/robot/pwmsw.c:54:6: warning: variable 'steps' set but not used [-Wunused-but-set-variable]
+  u32 steps;
+      ^
+../src/robot/pwmsw.c: At top level:
+../src/robot/pwmsw.c:70:5: error: conflicting types for 'setAbsAngle'
+ int setAbsAngle(Joint joint, float dgr) {
+     ^
+../src/robot/pwmsw.c:24:7: note: previous declaration of 'setAbsAngle' was here
+ float setAbsAngle(Joint joint, float dgr);
+       ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:170:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'getAbsAngle':
+../src/robot/pwmsw.c:63:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/robot/pwmsw.o] Error 1
+16:29:37 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'moveToAbsAngle':
+../src/robot/pwmsw.c:39:6: warning: unused variable 'steps' [-Wunused-variable]
+  u32 steps;
+      ^
+../src/robot/pwmsw.c:38:6: warning: unused variable 'status' [-Wunused-variable]
+  int status;
+      ^
+../src/robot/pwmsw.c: At top level:
+../src/robot/pwmsw.c:52:7: error: conflicting types for 'getAbsAngle'
+ float getAbsAngle(Joint joint) {
+       ^
+In file included from ../src/robot/pwmsw.c:14:0:
+../src/robot/pwmsw.h:64:5: note: previous declaration of 'getAbsAngle' was here
+ u32 getAbsAngle(Joint joint);
+     ^
+../src/robot/pwmsw.c: In function 'getAbsAngle':
+../src/robot/pwmsw.c:56:8: warning: unused variable 'angle' [-Wunused-variable]
+  float angle;
+        ^
+../src/robot/pwmsw.c:55:6: warning: unused variable 'status' [-Wunused-variable]
+  int status;
+      ^
+../src/robot/pwmsw.c:54:6: warning: variable 'steps' set but not used [-Wunused-but-set-variable]
+  u32 steps;
+      ^
+../src/robot/pwmsw.c: At top level:
+../src/robot/pwmsw.c:70:5: error: conflicting types for 'setAbsAngle'
+ int setAbsAngle(Joint joint, float dgr) {
+     ^
+../src/robot/pwmsw.c:24:7: note: previous declaration of 'setAbsAngle' was here
+ float setAbsAngle(Joint joint, float dgr);
+       ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:170:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'getAbsAngle':
+../src/robot/pwmsw.c:63:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/robot/pwmsw.o] Error 1
+16:29:44 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'moveToAbsAngle':
+../src/robot/pwmsw.c:39:6: warning: unused variable 'steps' [-Wunused-variable]
+  u32 steps;
+      ^
+../src/robot/pwmsw.c:38:6: warning: unused variable 'status' [-Wunused-variable]
+  int status;
+      ^
+../src/robot/pwmsw.c: At top level:
+../src/robot/pwmsw.c:52:7: error: conflicting types for 'getAbsAngle'
+ float getAbsAngle(Joint joint) {
+       ^
+In file included from ../src/robot/pwmsw.c:14:0:
+../src/robot/pwmsw.h:64:5: note: previous declaration of 'getAbsAngle' was here
+ u32 getAbsAngle(Joint joint);
+     ^
+../src/robot/pwmsw.c: In function 'getAbsAngle':
+../src/robot/pwmsw.c:56:8: warning: unused variable 'angle' [-Wunused-variable]
+  float angle;
+        ^
+../src/robot/pwmsw.c:55:6: warning: unused variable 'status' [-Wunused-variable]
+  int status;
+      ^
+../src/robot/pwmsw.c:54:6: warning: variable 'steps' set but not used [-Wunused-but-set-variable]
+  u32 steps;
+      ^
+../src/robot/pwmsw.c: At top level:
+../src/robot/pwmsw.c:70:5: error: conflicting types for 'setAbsAngle'
+ int setAbsAngle(Joint joint, float dgr) {
+     ^
+../src/robot/pwmsw.c:24:7: note: previous declaration of 'setAbsAngle' was here
+ float setAbsAngle(Joint joint, float dgr);
+       ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:170:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c: In function 'getAbsAngle':
+../src/robot/pwmsw.c:63:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [src/robot/pwmsw.o] Error 1
+16:30:42 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'moveToAbsAngle':
+../src/robot/pwmsw.c:39:6: warning: unused variable 'steps' [-Wunused-variable]
+  u32 steps;
+      ^
+../src/robot/pwmsw.c:38:6: warning: unused variable 'status' [-Wunused-variable]
+  int status;
+      ^
+../src/robot/pwmsw.c: At top level:
+../src/robot/pwmsw.c:52:7: error: conflicting types for 'getAbsAngle'
+ float getAbsAngle(Joint joint) {
+       ^
+In file included from ../src/robot/pwmsw.c:14:0:
+../src/robot/pwmsw.h:64:5: note: previous declaration of 'getAbsAngle' was here
+ u32 getAbsAngle(Joint joint);
+     ^
+../src/robot/pwmsw.c: In function 'getAbsAngle':
+../src/robot/pwmsw.c:55:6: warning: unused variable 'status' [-Wunused-variable]
+  int status;
+      ^
+../src/robot/pwmsw.c: At top level:
+../src/robot/pwmsw.c:69:5: error: conflicting types for 'setAbsAngle'
+ int setAbsAngle(Joint joint, float dgr) {
+     ^
+../src/robot/pwmsw.c:24:7: note: previous declaration of 'setAbsAngle' was here
+ float setAbsAngle(Joint joint, float dgr);
+       ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:169:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+make: *** [src/robot/pwmsw.o] Error 1
+16:30:46 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'moveToAbsAngle':
+../src/robot/pwmsw.c:39:6: warning: unused variable 'steps' [-Wunused-variable]
+  u32 steps;
+      ^
+../src/robot/pwmsw.c:38:6: warning: unused variable 'status' [-Wunused-variable]
+  int status;
+      ^
+../src/robot/pwmsw.c: At top level:
+../src/robot/pwmsw.c:52:7: error: conflicting types for 'getAbsAngle'
+ float getAbsAngle(Joint joint) {
+       ^
+In file included from ../src/robot/pwmsw.c:14:0:
+../src/robot/pwmsw.h:64:5: note: previous declaration of 'getAbsAngle' was here
+ u32 getAbsAngle(Joint joint);
+     ^
+../src/robot/pwmsw.c: In function 'getAbsAngle':
+../src/robot/pwmsw.c:55:6: warning: unused variable 'status' [-Wunused-variable]
+  int status;
+      ^
+../src/robot/pwmsw.c: At top level:
+../src/robot/pwmsw.c:69:5: error: conflicting types for 'setAbsAngle'
+ int setAbsAngle(Joint joint, float dgr) {
+     ^
+../src/robot/pwmsw.c:24:7: note: previous declaration of 'setAbsAngle' was here
+ float setAbsAngle(Joint joint, float dgr);
+       ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:169:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+make: *** [src/robot/pwmsw.o] Error 1
+16:30:54 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'moveToAbsAngle':
+../src/robot/pwmsw.c:39:6: warning: unused variable 'steps' [-Wunused-variable]
+  u32 steps;
+      ^
+../src/robot/pwmsw.c:38:6: warning: unused variable 'status' [-Wunused-variable]
+  int status;
+      ^
+../src/robot/pwmsw.c: In function 'getAbsAngle':
+../src/robot/pwmsw.c:55:6: warning: unused variable 'status' [-Wunused-variable]
+  int status;
+      ^
+../src/robot/pwmsw.c: At top level:
+../src/robot/pwmsw.c:69:5: error: conflicting types for 'setAbsAngle'
+ int setAbsAngle(Joint joint, float dgr) {
+     ^
+../src/robot/pwmsw.c:24:7: note: previous declaration of 'setAbsAngle' was here
+ float setAbsAngle(Joint joint, float dgr);
+       ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:169:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+make: *** [src/robot/pwmsw.o] Error 1
+16:31:28 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'moveToAbsAngle':
+../src/robot/pwmsw.c:39:6: warning: unused variable 'steps' [-Wunused-variable]
+  u32 steps;
+      ^
+../src/robot/pwmsw.c:38:6: warning: unused variable 'status' [-Wunused-variable]
+  int status;
+      ^
+../src/robot/pwmsw.c: In function 'getAbsAngle':
+../src/robot/pwmsw.c:55:6: warning: unused variable 'status' [-Wunused-variable]
+  int status;
+      ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:169:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:31:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 175596	   2416	  24488	 202500	  31704	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:31:44 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'moveToAbsAngle':
+../src/robot/pwmsw.c:39:6: warning: unused variable 'steps' [-Wunused-variable]
+  u32 steps;
+      ^
+../src/robot/pwmsw.c:38:6: warning: unused variable 'status' [-Wunused-variable]
+  int status;
+      ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:168:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 175596	   2416	  24488	 202500	  31704	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:35:26 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'moveToAbsAngle':
+../src/robot/pwmsw.c:41:6: warning: unused variable 'steps' [-Wunused-variable]
+  u32 steps;
+      ^
+../src/robot/pwmsw.c:40:6: warning: unused variable 'status' [-Wunused-variable]
+  int status;
+      ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:188:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 175724	   2416	  24488	 202628	  31784	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:35:47 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'moveToAbsAngle':
+../src/robot/pwmsw.c:41:6: warning: unused variable 'steps' [-Wunused-variable]
+  u32 steps;
+      ^
+../src/robot/pwmsw.c:40:6: warning: unused variable 'status' [-Wunused-variable]
+  int status;
+      ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:188:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 175724	   2416	  24488	 202628	  31784	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:38:53 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'moveToAbsAngle':
+../src/robot/pwmsw.c:42:8: warning: variable 'cur_angle' set but not used [-Wunused-but-set-variable]
+  float cur_angle;
+        ^
+../src/robot/pwmsw.c:41:6: warning: unused variable 'steps_goal' [-Wunused-variable]
+  u32 steps_goal;
+      ^
+../src/robot/pwmsw.c:40:6: warning: unused variable 'status' [-Wunused-variable]
+  int status;
+      ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:193:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 175724	   2416	  24488	 202628	  31784	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:39:57 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'moveToAbsAngle':
+../src/robot/pwmsw.c:42:8: warning: variable 'cur_angle' set but not used [-Wunused-but-set-variable]
+  float cur_angle;
+        ^
+../src/robot/pwmsw.c:41:6: warning: variable 'steps_goal' set but not used [-Wunused-but-set-variable]
+  u32 steps_goal;
+      ^
+../src/robot/pwmsw.c:40:6: warning: unused variable 'status' [-Wunused-variable]
+  int status;
+      ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:196:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 175724	   2416	  24488	 202628	  31784	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:50:13 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'moveToAbsAngle':
+../src/robot/pwmsw.c:42:8: warning: variable 'cur_angle' set but not used [-Wunused-but-set-variable]
+  float cur_angle;
+        ^
+../src/robot/pwmsw.c:41:6: warning: variable 'steps_goal' set but not used [-Wunused-but-set-variable]
+  u32 steps_goal;
+      ^
+../src/robot/pwmsw.c:40:6: warning: unused variable 'status' [-Wunused-variable]
+  int status;
+      ^
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:196:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:31:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 175724	   2416	  24488	 202628	  31784	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:54:42 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'pwm':
+../src/robot/pwmsw.c:228:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 175980	   2416	  24488	 202884	  31884	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 

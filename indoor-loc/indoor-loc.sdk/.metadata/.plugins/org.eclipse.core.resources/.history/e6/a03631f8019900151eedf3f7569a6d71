@@ -1,0 +1,48 @@
+/*
+ * pwmsw.h
+ * Author: Stephanie Kunkel
+ */
+
+#ifndef __PMWSW_H_
+#define __PWMSW_H_
+
+/*
+ * Defines: General
+ */
+#define PWMADDRESS  0x43c00000
+#define PWMSTEPS	10
+
+/*
+ * Defines: Registers
+ */
+#define BASE_REG
+#define SHOULDER_REG
+#define ELBOW_REG
+#define WRIST_REG
+#define THUMB_REG
+#define FINGER_REG
+
+
+
+#define PWM0_VAL		PWM_S00_AXI_SLV_REG0_OFFSET
+#define PWM1_VAL		PWM_S00_AXI_SLV_REG1_OFFSET
+#define PWM2_VAL		PWM_S00_AXI_SLV_REG2_OFFSET
+#define PWM3_VAL		PWM_S00_AXI_SLV_REG3_OFFSET
+#define PWM4_VAL		PWM_S00_AXI_SLV_REG4_OFFSET
+#define PWM5_VAL		PWM_S00_AXI_SLV_REG5_OFFSET
+#define PWM0_STEPS		PWM_S00_AXI_SLV_REG6_OFFSET
+#define PWM1_STEPS		PWM_S00_AXI_SLV_REG7_OFFSET
+#define PWM2_STEPS		PWM_S00_AXI_SLV_REG8_OFFSET
+#define PWM3_STEPS		PWM_S00_AXI_SLV_REG9_OFFSET
+#define PWM4_STEPS		PWM_S00_AXI_SLV_REG10_OFFSET
+#define PWM5_STEPS		PWM_S00_AXI_SLV_REG11_OFFSET
+
+
+PWM_S00_AXI_SLV_REG3_OFFSET
+PWM_S00_AXI_SLV_REG4_OFFSET
+
+
+//Functions
+int pwm(int amount);
+
+#endif
