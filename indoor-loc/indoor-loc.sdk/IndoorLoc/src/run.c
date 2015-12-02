@@ -78,34 +78,34 @@ int main() {
 	//Print Output Separator
 	myprintf("...............................\r\n");
 
-	//Quaternion Drift
-	myprintf(".........Drift...........\n\r");
-	printQuatDrift(10);
+//	//Quaternion Drift
+//	myprintf(".........Drift...........\n\r");
+//	printQuatDrift(1);
 
-//////Calibrate
-////	myprintf(".........Calibration...........\n\r");
-////	status = calibrateGyrAcc();
-////	if (status != XST_SUCCESS) {
-////		myprintf("Calibration failed.\r\n");
-////	}
-//
-////	//Enable dynamic gyro calibration
-////	status = dmpGyroCalibration(1);
-////	if (status != XST_SUCCESS) {
-////		myprintf("Could not enable DMP dynamic gyro calibration.\r\n");
-////	}
-//
-//	//Print Quaternions to Serial Port
-//	for (cnt = 0; cnt <= 1000;) {
-//		status = printQuatForDisplay();
-//		if (status == XST_SUCCESS) {
-//			//cnt++;
-//		}
-//		//usleep(100);
-//		for (i = 0; i <= 10000; i++) {
-//			;
-//		}
-//	}
+//Calibrate
+	myprintf(".........Calibration...........\n\r");
+	status = calibrateGyrAcc();
+	if (status != XST_SUCCESS) {
+		myprintf("Calibration failed.\r\n");
+	}
+
+	//Enable dynamic gyro calibration
+	status = dmpGyroCalibration(1);
+	if (status != XST_SUCCESS) {
+		myprintf("Could not enable DMP dynamic gyro calibration.\r\n");
+	}
+
+	//Print Quaternions to Serial Port
+	for (cnt = 0; cnt <= 1000;) {
+		status = printQuatForDisplay();
+		if (status == XST_SUCCESS) {
+			//cnt++;
+		}
+		//usleep(100);
+		for (i = 0; i <= 10000; i++) {
+			;
+		}
+	}
 
 ////Get Data without DMP
 //	myprintf(".........Without DMP...........\n\r");
