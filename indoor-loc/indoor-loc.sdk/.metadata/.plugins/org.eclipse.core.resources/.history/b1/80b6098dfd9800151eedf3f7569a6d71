@@ -1,13 +1,14 @@
 /*
- * print_utils.c: Print utilities for debug prints
- * Author: Stephanie Kunkel
+ * print_utils.c
+ *
+ *  Created on: Nov 27, 2015
+ *      Author: ruppi
  */
 
 #include "print_utils.h"
 
 /*
  * Like printf
- * Prints only if DEBUG is defined in print_utils.h
  */
 int myprintf(const char *format, ...) {
 	int done = 0;
