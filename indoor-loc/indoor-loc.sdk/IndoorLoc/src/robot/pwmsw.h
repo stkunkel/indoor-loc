@@ -45,19 +45,19 @@
 #define WRIST_REG			PWM3_VAL_REG
 #define THUMB_REG			PWM4_VAL_REG
 #define FINGER_REG			PWM5_VAL_REG
+#define BASE_INDEX			0
+#define SHOULDER_INDEX		1
+#define ELBOW_INDEX			2
+#define WRIST_INDEX			3
+#define THUMB_INDEX			4
+#define FINGER_INDEX		5
 
 /*
  * Types
  */
-typedef enum{
-	base,
-	shoulder,
-	elbow,
-	wrist,
-	thumb,
-	finger
+typedef enum {
+	base, shoulder, elbow, wrist, thumb, finger
 } Joint;
-
 
 /*
  * Functions

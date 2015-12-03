@@ -18,6 +18,16 @@
  * Global Variables
  */
 u32 stepAmount = 0;
+/*
+ * Arrays for faster access
+ */
+static const u32 pwmValRegister[6] = { PWM0_VAL_REG, PWM1_VAL_REG, PWM2_VAL_REG,
+PWM3_VAL_REG, PWM4_VAL_REG, PWM5_VAL_REG };
+static const u32 pwmStepsRegister[6] = { PWM0_STEPS_REG, PWM1_STEPS_REG,
+PWM2_STEPS_REG, PWM3_STEPS_REG, PWM4_STEPS_REG, PWM5_STEPS_REG };
+static const char* jointName[6] = { "Base", "Shoulder", "Elbow", "Wrist",
+		"Thumb", "Finger" };
+static const short sign[6] = { -1, -1, -1, 1, -1, 1 };
 
 /*
  * Function Prototypes
@@ -28,8 +38,10 @@ int setAbsAngle(Joint joint, float dgr);
 float stepsToAngle(u32 steps);
 u32 angleToSteps(float dgr);
 u32 getValReg(Joint joint);
+int initPWM(u32 steps);
 u32 readPwmReg(u32 reg);
 int writePwmReg(u32 reg, u32 value);
+u32 getIndex(Joint joint);
 
 /*
  * Functions
@@ -41,13 +53,50 @@ int writePwmReg(u32 reg, u32 value);
  */
 int pwmTest() {
 	//variables
-	unsigned int a, i;
-	u32 val;
+	u32 steps = 20000;
+	u32 val = 1500;
+	int status = PWM_SUCCESS;
+	int reg = 0, i = 0;
 
-	//Init PWM
+//	//Init PWM
+//	status = initPWM(steps);
+//	if (status != PWM_SUCCESS) {
+//		return status;
+//	}
+
+//Get Reg Values
+	for (reg = 0; reg < 6; reg++) {
+		writePwmReg(pwmValRegister[reg], 1500);
+
+		//Get current value
+		val = readPwmReg(pwmValRegister[reg]);
+
+		//Print current value
+		myprintf("Steps of %s: %d\r\n", jointName[reg],
+				readPwmReg(pwmStepsRegister[reg]));
+		myprintf("Value of %s: %d\r\n", jointName[reg], val);
+
+		//Set val to 0.5ms
+		for (i = 0; i < 1000; i++) {
+			val += sign[reg];
+			writePwmReg(pwmValRegister[reg], val);
+			usleep(4000);
+		}
+
+		//Set val back to 1.5ms
+		for (i = 0; i < 1000; i++) {
+			val -= sign[reg];
+			writePwmReg(pwmValRegister[reg], val);
+			usleep(4000);
+		}
+
+		//Get and print current value
+		val = readPwmReg(pwmValRegister[reg]);
+		myprintf("New Value of %s: %d\r\n", jointName[reg], val);
+	}
 
 	//finish
-	return PWM_SUCCESS;
+	return status;
 }
 
 /*
@@ -187,17 +236,9 @@ u32 getValReg(Joint joint) {
  * In: Amount of steps
  * Returns 0 if successful
  */
-int initPWM(u32 steps) {
+int initPWM(u32 steps) { //TODO: Keep angle same
 	//Variables
-	u32 val = (u32) steps/2;
-
-	//Set steps
-	writePwmReg(PWM_S00_AXI_SLV_REG6_OFFSET, steps);
-	writePwmReg(PWM_S00_AXI_SLV_REG7_OFFSET, steps);
-	writePwmReg(PWM_S00_AXI_SLV_REG8_OFFSET, steps);
-	writePwmReg(PWM_S00_AXI_SLV_REG9_OFFSET, steps);
-	writePwmReg(PWM_S00_AXI_SLV_REG10_OFFSET, steps);
-	writePwmReg(PWM_S00_AXI_SLV_REG11_OFFSET, steps);
+	u32 val = (u32) steps / 2;
 
 	//Set initial val --> 90 dgrs
 	writePwmReg(PWM_S00_AXI_SLV_REG0_OFFSET, val);
@@ -206,6 +247,14 @@ int initPWM(u32 steps) {
 	writePwmReg(PWM_S00_AXI_SLV_REG3_OFFSET, val);
 	writePwmReg(PWM_S00_AXI_SLV_REG4_OFFSET, val);
 	writePwmReg(PWM_S00_AXI_SLV_REG5_OFFSET, val);
+
+	//Set steps
+	writePwmReg(PWM_S00_AXI_SLV_REG6_OFFSET, steps);
+	writePwmReg(PWM_S00_AXI_SLV_REG7_OFFSET, steps);
+	writePwmReg(PWM_S00_AXI_SLV_REG8_OFFSET, steps);
+	writePwmReg(PWM_S00_AXI_SLV_REG9_OFFSET, steps);
+	writePwmReg(PWM_S00_AXI_SLV_REG10_OFFSET, steps);
+	writePwmReg(PWM_S00_AXI_SLV_REG11_OFFSET, steps);
 
 	//Remember steps
 	stepAmount = steps;
@@ -237,5 +286,29 @@ int writePwmReg(u32 reg, u32 value) {
 		return PWM_SUCCESS;
 	} else {
 		return PWM_REG_CONT_NO_MATCH;
+	}
+}
+
+/*
+ * Get index of Joint
+ * In: Joint
+ * Returns internal index
+ */
+u32 getIndex(Joint joint) {
+	switch (joint) {
+	case base:
+		return BASE_INDEX;
+	case shoulder:
+		return SHOULDER_INDEX;
+	case elbow:
+		return ELBOW_INDEX;
+	case wrist:
+		return WRIST_INDEX;
+	case thumb:
+		return THUMB_INDEX;
+	case finger:
+		return FINGER_INDEX;
+	default:
+		return -1;
 	}
 }

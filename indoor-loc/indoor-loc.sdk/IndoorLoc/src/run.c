@@ -13,7 +13,7 @@
 #include "print_utils.h"
 #include "imu/mpu.h"
 #include "robot/pwmsw.h"
-#include "xtime_l.h"
+
 
 /*
  * Defines
@@ -58,10 +58,13 @@ int main() {
 	//status |= printDataUsingDMP(1, 1, DATA_WITH_DMP_RUNS);
 
 	//Print Quaternions to Serial Port
-	status |= printQuatForImuViewer(QUAT_DISPLAY_RUNS);
+	//status |= printQuatForImuViewer(QUAT_DISPLAY_RUNS);
 
 	//Quaternion Drift
 	//status |= printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
+
+	//PWM Test
+	status = pwmTest();
 
 	//Done?
 	if (status == XST_SUCCESS){
