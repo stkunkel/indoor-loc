@@ -13236,3 +13236,225 @@ arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
  175724	   2416	  24488	 202628	  31784	IndoorLoc.elf
 Finished building: IndoorLoc.elf.size
  
+10:12:54 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+10:13:21 **** Clean-only build of configuration Debug for project IndoorLoc ****
+make clean 
+rm -rf  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o  ./src/robot/pwmsw.d  ./src/imu/mpu9150/mpl/data_builder.d ./src/imu/mpu9150/mpl/eMPL_outputs.d ./src/imu/mpu9150/mpl/hal_outputs.d ./src/imu/mpu9150/mpl/message_layer.d ./src/imu/mpu9150/mpl/ml_math_func.d ./src/imu/mpu9150/mpl/mlmath.d ./src/imu/mpu9150/mpl/mpl.d ./src/imu/mpu9150/mpl/results_holder.d ./src/imu/mpu9150/mpl/start_manager.d ./src/imu/mpu9150/mpl/storage_manager.d  ./src/imu/mpu9150/inv_mpu.d ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.d  ./src/imu/iic_utils.d ./src/imu/math_utils.d ./src/imu/mpu.d ./src/imu/mpu_utils.d  ./src/platform.d ./src/print_utils.d ./src/run.d  IndoorLoc.elf.size  IndoorLoc.elf
+ 
+10:13:21 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'pwmTest':
+../src/robot/pwmsw.c:45:6: warning: unused variable 'val' [-Wunused-variable]
+  u32 val;
+      ^
+../src/robot/pwmsw.c:44:18: warning: unused variable 'i' [-Wunused-variable]
+  unsigned int a, i;
+                  ^
+../src/robot/pwmsw.c:44:15: warning: unused variable 'a' [-Wunused-variable]
+  unsigned int a, i;
+               ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building file: ../src/imu/mpu9150/mpl/data_builder.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu9150/mpl/data_builder.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu9150/mpl/data_builder.d" -MT"src/imu/mpu9150/mpl/data_builder.d" -o "src/imu/mpu9150/mpl/data_builder.o" "../src/imu/mpu9150/mpl/data_builder.c"
+Finished building: ../src/imu/mpu9150/mpl/data_builder.c
+ 
+Building file: ../src/imu/mpu9150/mpl/eMPL_outputs.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu9150/mpl/eMPL_outputs.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu9150/mpl/eMPL_outputs.d" -MT"src/imu/mpu9150/mpl/eMPL_outputs.d" -o "src/imu/mpu9150/mpl/eMPL_outputs.o" "../src/imu/mpu9150/mpl/eMPL_outputs.c"
+../src/imu/mpu9150/mpl/eMPL_outputs.c: In function 'inv_get_sensor_type_quat':
+../src/imu/mpu9150/mpl/eMPL_outputs.c:100:5: warning: implicit declaration of function 'memcpy' [-Wimplicit-function-declaration]
+     memcpy(data, eMPL_out.quat, sizeof(eMPL_out.quat));
+     ^
+../src/imu/mpu9150/mpl/eMPL_outputs.c:100:5: warning: incompatible implicit declaration of built-in function 'memcpy'
+../src/imu/mpu9150/mpl/eMPL_outputs.c: In function 'inv_init_eMPL_outputs':
+../src/imu/mpu9150/mpl/eMPL_outputs.c:295:5: warning: implicit declaration of function 'memset' [-Wimplicit-function-declaration]
+     memset(&eMPL_out, 0, sizeof(eMPL_out));
+     ^
+../src/imu/mpu9150/mpl/eMPL_outputs.c:295:5: warning: incompatible implicit declaration of built-in function 'memset'
+Finished building: ../src/imu/mpu9150/mpl/eMPL_outputs.c
+ 
+Building file: ../src/imu/mpu9150/mpl/hal_outputs.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu9150/mpl/hal_outputs.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu9150/mpl/hal_outputs.d" -MT"src/imu/mpu9150/mpl/hal_outputs.d" -o "src/imu/mpu9150/mpl/hal_outputs.o" "../src/imu/mpu9150/mpl/hal_outputs.c"
+Finished building: ../src/imu/mpu9150/mpl/hal_outputs.c
+ 
+Building file: ../src/imu/mpu9150/mpl/message_layer.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu9150/mpl/message_layer.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu9150/mpl/message_layer.d" -MT"src/imu/mpu9150/mpl/message_layer.d" -o "src/imu/mpu9150/mpl/message_layer.o" "../src/imu/mpu9150/mpl/message_layer.c"
+Finished building: ../src/imu/mpu9150/mpl/message_layer.c
+ 
+Building file: ../src/imu/mpu9150/mpl/ml_math_func.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu9150/mpl/ml_math_func.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu9150/mpl/ml_math_func.d" -MT"src/imu/mpu9150/mpl/ml_math_func.d" -o "src/imu/mpu9150/mpl/ml_math_func.o" "../src/imu/mpu9150/mpl/ml_math_func.c"
+In file included from ../src/imu/mpu9150/mpl/ml_math_func.c:26:0:
+../src/imu/mpu9150/mpl/ml_math_func.c: In function 'inv_q_mult':
+../src/imu/mpu9150/mpl/mlinclude.h:9:44: warning: typedef 'invensensePutFunctionCallsHere' locally defined but not used [-Wunused-local-typedefs]
+ #define INVENSENSE_FUNC_START  typedef int invensensePutFunctionCallsHere
+                                            ^
+../src/imu/mpu9150/mpl/ml_math_func.c:220:5: note: in expansion of macro 'INVENSENSE_FUNC_START'
+     INVENSENSE_FUNC_START;
+     ^
+../src/imu/mpu9150/mpl/ml_math_func.c: In function 'inv_q_add':
+../src/imu/mpu9150/mpl/mlinclude.h:9:44: warning: typedef 'invensensePutFunctionCallsHere' locally defined but not used [-Wunused-local-typedefs]
+ #define INVENSENSE_FUNC_START  typedef int invensensePutFunctionCallsHere
+                                            ^
+../src/imu/mpu9150/mpl/ml_math_func.c:244:5: note: in expansion of macro 'INVENSENSE_FUNC_START'
+     INVENSENSE_FUNC_START;
+     ^
+../src/imu/mpu9150/mpl/ml_math_func.c: In function 'inv_vector_normalize':
+../src/imu/mpu9150/mpl/mlinclude.h:9:44: warning: typedef 'invensensePutFunctionCallsHere' locally defined but not used [-Wunused-local-typedefs]
+ #define INVENSENSE_FUNC_START  typedef int invensensePutFunctionCallsHere
+                                            ^
+../src/imu/mpu9150/mpl/ml_math_func.c:253:5: note: in expansion of macro 'INVENSENSE_FUNC_START'
+     INVENSENSE_FUNC_START;
+     ^
+../src/imu/mpu9150/mpl/ml_math_func.c: In function 'inv_q_normalize':
+../src/imu/mpu9150/mpl/mlinclude.h:9:44: warning: typedef 'invensensePutFunctionCallsHere' locally defined but not used [-Wunused-local-typedefs]
+ #define INVENSENSE_FUNC_START  typedef int invensensePutFunctionCallsHere
+                                            ^
+../src/imu/mpu9150/mpl/ml_math_func.c:275:5: note: in expansion of macro 'INVENSENSE_FUNC_START'
+     INVENSENSE_FUNC_START;
+     ^
+../src/imu/mpu9150/mpl/ml_math_func.c: In function 'inv_q_invert':
+../src/imu/mpu9150/mpl/mlinclude.h:9:44: warning: typedef 'invensensePutFunctionCallsHere' locally defined but not used [-Wunused-local-typedefs]
+ #define INVENSENSE_FUNC_START  typedef int invensensePutFunctionCallsHere
+                                            ^
+../src/imu/mpu9150/mpl/ml_math_func.c:281:5: note: in expansion of macro 'INVENSENSE_FUNC_START'
+     INVENSENSE_FUNC_START;
+     ^
+../src/imu/mpu9150/mpl/ml_math_func.c: In function 'inv_q_multf':
+../src/imu/mpu9150/mpl/mlinclude.h:9:44: warning: typedef 'invensensePutFunctionCallsHere' locally defined but not used [-Wunused-local-typedefs]
+ #define INVENSENSE_FUNC_START  typedef int invensensePutFunctionCallsHere
+                                            ^
+../src/imu/mpu9150/mpl/ml_math_func.c:317:5: note: in expansion of macro 'INVENSENSE_FUNC_START'
+     INVENSENSE_FUNC_START;
+     ^
+../src/imu/mpu9150/mpl/ml_math_func.c: In function 'inv_q_addf':
+../src/imu/mpu9150/mpl/mlinclude.h:9:44: warning: typedef 'invensensePutFunctionCallsHere' locally defined but not used [-Wunused-local-typedefs]
+ #define INVENSENSE_FUNC_START  typedef int invensensePutFunctionCallsHere
+                                            ^
+../src/imu/mpu9150/mpl/ml_math_func.c:330:5: note: in expansion of macro 'INVENSENSE_FUNC_START'
+     INVENSENSE_FUNC_START;
+     ^
+../src/imu/mpu9150/mpl/ml_math_func.c: In function 'inv_q_normalizef':
+../src/imu/mpu9150/mpl/mlinclude.h:9:44: warning: typedef 'invensensePutFunctionCallsHere' locally defined but not used [-Wunused-local-typedefs]
+ #define INVENSENSE_FUNC_START  typedef int invensensePutFunctionCallsHere
+                                            ^
+../src/imu/mpu9150/mpl/ml_math_func.c:339:5: note: in expansion of macro 'INVENSENSE_FUNC_START'
+     INVENSENSE_FUNC_START;
+     ^
+../src/imu/mpu9150/mpl/ml_math_func.c: In function 'inv_q_invertf':
+../src/imu/mpu9150/mpl/mlinclude.h:9:44: warning: typedef 'invensensePutFunctionCallsHere' locally defined but not used [-Wunused-local-typedefs]
+ #define INVENSENSE_FUNC_START  typedef int invensensePutFunctionCallsHere
+                                            ^
+../src/imu/mpu9150/mpl/ml_math_func.c:384:5: note: in expansion of macro 'INVENSENSE_FUNC_START'
+     INVENSENSE_FUNC_START;
+     ^
+Finished building: ../src/imu/mpu9150/mpl/ml_math_func.c
+ 
+Building file: ../src/imu/mpu9150/mpl/mlmath.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu9150/mpl/mlmath.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu9150/mpl/mlmath.d" -MT"src/imu/mpu9150/mpl/mlmath.d" -o "src/imu/mpu9150/mpl/mlmath.o" "../src/imu/mpu9150/mpl/mlmath.c"
+Finished building: ../src/imu/mpu9150/mpl/mlmath.c
+ 
+Building file: ../src/imu/mpu9150/mpl/mpl.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu9150/mpl/mpl.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu9150/mpl/mpl.d" -MT"src/imu/mpu9150/mpl/mpl.d" -o "src/imu/mpu9150/mpl/mpl.o" "../src/imu/mpu9150/mpl/mpl.c"
+In file included from ../src/imu/mpu9150/mpl/mpl.c:23:0:
+../src/imu/mpu9150/mpl/mpl.c: In function 'inv_get_version':
+../src/imu/mpu9150/mpl/mlinclude.h:9:44: warning: typedef 'invensensePutFunctionCallsHere' locally defined but not used [-Wunused-local-typedefs]
+ #define INVENSENSE_FUNC_START  typedef int invensensePutFunctionCallsHere
+                                            ^
+../src/imu/mpu9150/mpl/mpl.c:53:5: note: in expansion of macro 'INVENSENSE_FUNC_START'
+     INVENSENSE_FUNC_START;
+     ^
+Finished building: ../src/imu/mpu9150/mpl/mpl.c
+ 
+Building file: ../src/imu/mpu9150/mpl/results_holder.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu9150/mpl/results_holder.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu9150/mpl/results_holder.d" -MT"src/imu/mpu9150/mpl/results_holder.d" -o "src/imu/mpu9150/mpl/results_holder.o" "../src/imu/mpu9150/mpl/results_holder.c"
+Finished building: ../src/imu/mpu9150/mpl/results_holder.c
+ 
+Building file: ../src/imu/mpu9150/mpl/start_manager.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu9150/mpl/start_manager.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu9150/mpl/start_manager.d" -MT"src/imu/mpu9150/mpl/start_manager.d" -o "src/imu/mpu9150/mpl/start_manager.o" "../src/imu/mpu9150/mpl/start_manager.c"
+Finished building: ../src/imu/mpu9150/mpl/start_manager.c
+ 
+Building file: ../src/imu/mpu9150/mpl/storage_manager.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu9150/mpl/storage_manager.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu9150/mpl/storage_manager.d" -MT"src/imu/mpu9150/mpl/storage_manager.d" -o "src/imu/mpu9150/mpl/storage_manager.o" "../src/imu/mpu9150/mpl/storage_manager.c"
+Finished building: ../src/imu/mpu9150/mpl/storage_manager.c
+ 
+Building file: ../src/imu/mpu9150/inv_mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu9150/inv_mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu9150/inv_mpu.d" -MT"src/imu/mpu9150/inv_mpu.d" -o "src/imu/mpu9150/inv_mpu.o" "../src/imu/mpu9150/inv_mpu.c"
+Finished building: ../src/imu/mpu9150/inv_mpu.c
+ 
+Building file: ../src/imu/mpu9150/inv_mpu_dmp_motion_driver.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu9150/inv_mpu_dmp_motion_driver.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu9150/inv_mpu_dmp_motion_driver.d" -MT"src/imu/mpu9150/inv_mpu_dmp_motion_driver.d" -o "src/imu/mpu9150/inv_mpu_dmp_motion_driver.o" "../src/imu/mpu9150/inv_mpu_dmp_motion_driver.c"
+Finished building: ../src/imu/mpu9150/inv_mpu_dmp_motion_driver.c
+ 
+Building file: ../src/imu/iic_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/iic_utils.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/iic_utils.d" -MT"src/imu/iic_utils.d" -o "src/imu/iic_utils.o" "../src/imu/iic_utils.c"
+Finished building: ../src/imu/iic_utils.c
+ 
+Building file: ../src/imu/math_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/math_utils.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/math_utils.d" -MT"src/imu/math_utils.d" -o "src/imu/math_utils.o" "../src/imu/math_utils.c"
+Finished building: ../src/imu/math_utils.c
+ 
+Building file: ../src/imu/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu.d" -MT"src/imu/mpu.d" -o "src/imu/mpu.o" "../src/imu/mpu.c"
+Finished building: ../src/imu/mpu.c
+ 
+Building file: ../src/imu/mpu_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu_utils.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu_utils.d" -MT"src/imu/mpu_utils.d" -o "src/imu/mpu_utils.o" "../src/imu/mpu_utils.c"
+../src/imu/mpu_utils.c:310:5: warning: 'readInt' defined but not used [-Wunused-function]
+ int readInt(u32 *DataRead) {
+     ^
+Finished building: ../src/imu/mpu_utils.c
+ 
+Building file: ../src/platform.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/platform.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/platform.d" -MT"src/platform.d" -o "src/platform.o" "../src/platform.c"
+Finished building: ../src/platform.c
+ 
+Building file: ../src/print_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/print_utils.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/print_utils.d" -MT"src/print_utils.d" -o "src/print_utils.o" "../src/print_utils.c"
+Finished building: ../src/print_utils.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:31:12: warning: unused variable 'sensors' [-Wunused-variable]
+  short int sensors = SENSORS_ALL;
+            ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 175724	   2416	  24488	 202628	  31784	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:14:11 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.

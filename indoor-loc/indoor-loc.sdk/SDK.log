@@ -37316,3 +37316,49 @@ Reason: ERROR: [Common 17-39] 'hsi::open_sw_design' failed due to earlier errors
 10:08:13 INFO  : Clearing existing target manager status.
 10:08:15 INFO  : Workspace synchronized with the new hardware specification file. Cleaning dependent projects...
 10:08:15 WARN  : Linker script will not be updated automatically. Users need to update it manually.
+10:12:58 ERROR : (XSDB Server)ERROR: [Hsi 55-1558] Software Design system system is not found
+
+10:12:58 ERROR :  [Common 17-39] 'hsi::current_sw_design' failed due to earlier errors.
+10:12:58 ERROR : (XSDB Server)ERROR: [Hsi 55-1558] Software Design system system is not found
+
+10:12:58 INFO  : Unable to read in MSS file /home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc_bsp/system.mss : null
+10:14:00 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+10:14:01 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent Zed 210248492852" && level==0} -index 1' command is executed.
+10:14:03 INFO  : FPGA configured successfully with bitstream "/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/design_1_wrapper_hw_platform_0/design_1_wrapper.bit"
+10:14:14 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent Zed 210248492852" && level==0} -index 1' command is executed.
+10:14:14 INFO  : 'fpga -state' command is executed.
+10:14:14 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+10:14:14 INFO  : Sourcing of '/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/design_1_wrapper_hw_platform_0/ps7_init.tcl' is done.
+10:14:14 INFO  : 'targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent Zed 210248492852"} -index 0' command is executed.
+10:14:14 INFO  : Hardware design information is loaded from '/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/design_1_wrapper_hw_platform_0/system.hdf'.
+10:14:15 INFO  : 'targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent Zed 210248492852"} -index 0' command is executed.
+10:14:16 INFO  : 'ps7_init' command is executed.
+10:14:16 INFO  : 'ps7_post_config' command is executed.
+10:14:17 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+10:14:17 INFO  : Processor reset is completed for 'ps7_cortexa9_0'.
+10:14:17 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+10:14:18 INFO  : The application '/home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/IndoorLoc.elf' is downloaded to processor 'ps7_cortexa9_0'.
+10:14:18 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+source /home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/design_1_wrapper_hw_platform_0/ps7_init.tcl
+targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent Zed 210248492852"} -index 0
+loadhw /home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/design_1_wrapper_hw_platform_0/system.hdf
+targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent Zed 210248492852"} -index 0
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent Zed 210248492852"} -index 0
+rst -processor
+targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent Zed 210248492852"} -index 0
+dow /home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/IndoorLoc.elf
+----------------End of Script----------------
+
+10:14:18 INFO  : Memory regions updated for context APU
+10:14:18 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+10:14:18 INFO  : 'con' command is executed.
+10:14:18 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent Zed 210248492852"} -index 0
+con
+----------------End of Script----------------
+
+10:15:03 INFO  : Disconnected from the channel tcfchan#1.
+10:15:12 ERROR : Unexpected error while parsing XMD response ￿: com.google.gson.JsonSyntaxException: com.google.gson.stream.MalformedJsonException: invalid number or unquoted string near 
