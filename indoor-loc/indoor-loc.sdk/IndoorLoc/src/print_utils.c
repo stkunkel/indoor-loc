@@ -9,7 +9,7 @@
  * Like printf
  * Prints only if DEBUG is defined in print_utils.h
  */
-int myprintf(const char *format, ...) {
+int myprintf(const char *format, ...) { //BUG: does only work for full lines, otherwise: delayed print
 	int done = 0;
 #ifdef DEBUG
 	//printf("Error: ");
