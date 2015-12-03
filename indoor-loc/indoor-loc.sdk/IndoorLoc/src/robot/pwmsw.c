@@ -76,23 +76,27 @@ int pwmTest() {
 				readPwmReg(pwmStepsRegister[reg]));
 		myprintf("Value of %s: %d\r\n", jointName[reg], val);
 
-		//Set val to 0.5ms
+		//Move 90dgrs
 		for (i = 0; i < 1000; i++) {
-			val += sign[reg];
+			val = (u32) (val + sign[reg]);
 			writePwmReg(pwmValRegister[reg], val);
-			usleep(4000);
-		}
-
-		//Set val back to 1.5ms
-		for (i = 0; i < 1000; i++) {
-			val -= sign[reg];
-			writePwmReg(pwmValRegister[reg], val);
-			usleep(4000);
+			usleep(2000);
 		}
 
 		//Get and print current value
 		val = readPwmReg(pwmValRegister[reg]);
-		myprintf("New Value of %s: %d\r\n", jointName[reg], val);
+		myprintf("Value of %s: %d\r\n", jointName[reg], val);
+
+		//Move back 90dgrs
+		for (i = 0; i < 1000; i++) {
+			val = (u32) (val - sign[reg]);
+			writePwmReg(pwmValRegister[reg], val);
+			usleep(2000);
+		}
+
+		//Get and print current value
+		val = readPwmReg(pwmValRegister[reg]);
+		myprintf("Value of %s: %d\r\n", jointName[reg], val);
 	}
 
 	//finish
