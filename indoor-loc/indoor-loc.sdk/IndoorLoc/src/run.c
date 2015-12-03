@@ -20,126 +20,182 @@
  */
 #define DATA_NO_DMP_RUNS 	10
 #define DATA_WITH_DMP_RUNS 	10
-#define PWM_RUNS 			10
+#define QUAT_DISPLAY_RUNS	0
+#define QUAT_DRIFT_MIN		1
+
+/*
+ * Function Prototypes
+ */
+int printQuaternionDriftAfterXMin(unsigned int time_min);
+int printQuatForImuViewer(unsigned int numberOfRuns);
+int printDataWithoutDMP(short int sensors, unsigned int numberOfRuns);
+int printDataUsingDMP(char initialCalibration, char dmpCalibration,
+		unsigned int numberOfRuns);
 
 /*
  * Main
  */
 int main() {
 	//Variables
-	int i = 0, cnt = 0, status;
-	short int sensors = SENSORS_ALL;
+	int status =XST_SUCCESS;
 
 	//Init Platform
 	init_platform();
 
 	//Print Output Separator
-	myprintf("...............................\r\n");
+	myprintf(".........Program Start...........\n\r");
 
-//	//Quaternion Drift
-//	myprintf(".........Drift...........\n\r");
-//	printQuatDrift(1);
+	//Print Data without DMP
+	//status |= printDataWithoutDMP(SENSORS_ALL, DATA_NO_DMP_RUNS);
 
-//Calibrate
-	myprintf(".........Calibration...........\n\r");
-	status = calibrateGyrAcc();
-	if (status != XST_SUCCESS) {
-		myprintf("Calibration failed.\r\n");
-	}
+	//Print Data with DMP without initial or DMP gyro calibration
+	//status |= printDataUsingDMP(0, 0, DATA_WITH_DMP_RUNS);
 
-	//Enable dynamic gyro calibration
-	status = dmpGyroCalibration(1);
-	if (status != XST_SUCCESS) {
-		myprintf("Could not enable DMP dynamic gyro calibration.\r\n");
-	}
+	//Print Data with DMP with initial calibration but no DMP gyro calibration
+	//status |= printDataUsingDMP(1, 0, DATA_WITH_DMP_RUNS);
+
+	//Print Data with DMP with and DMP gyro calibration
+	//status |= printDataUsingDMP(1, 1, DATA_WITH_DMP_RUNS);
 
 	//Print Quaternions to Serial Port
-	for (cnt = 0; cnt <= 1000;) {
+	status |= printQuatForImuViewer(QUAT_DISPLAY_RUNS);
+
+	//Quaternion Drift
+	//status |= printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
+
+	//Done?
+	if (status == XST_SUCCESS){
+		myprintf(".........Success...........\n\r");
+	} else {
+		myprintf(".........Failure...........\n\r");
+	}
+
+	//Stay in here
+	while (1) {
+		;
+	}
+
+	//Finish
+	cleanup_platform();
+	return 0;
+}
+
+/*
+ * Prints Quaternion Drift
+ * In: time in min
+ * Returns 0 when done
+ */
+int printQuaternionDriftAfterXMin(unsigned int time_min) {
+	//Print
+	myprintf(".........Drift...........\n\r");
+	printQuatDrift(time_min);
+
+	//Return
+	return XST_SUCCESS;
+}
+
+/*
+ * Prints Quaternions for Imu Viewer
+ * In: number of runs (if 0 --> print forever)
+ * Returns 0 if successful
+ */
+int printQuatForImuViewer(unsigned int numberOfRuns) {
+	//Variables
+	int cnt = 0, status, i;
+
+	//Print Quaternions to Serial Port
+	myprintf(".........Quaternions...........\n\r");
+	for (cnt = 0; cnt <= numberOfRuns; cnt++) {
+		//Print
 		status = printQuatForDisplay();
-		if (status == XST_SUCCESS) {
-			//cnt++;
+
+		//Make sure only successful prints count
+		if (status != XST_SUCCESS || numberOfRuns < 1) {
+			cnt--;
 		}
-		//usleep(100);
+
+		//Wait
 		for (i = 0; i <= 10000; i++) {
 			;
 		}
 	}
 
-////Get Data without DMP
-//	myprintf(".........Without DMP...........\n\r");
-//	for (cnt = 0; cnt <= DATA_NO_DMP_RUNS; cnt++) {
-//		//Print
-//		status = printDataNoDMP(&sensors);
-//
-//		//Decrease count if not successful
-//		if (status != XST_SUCCESS) {
-//			cnt--;
-//		}
-//
-//		//Wait
-//		for (i = 0; i <= 10000; i++) {
-//			;
-//		}
-//	}
+	//Return
+	return status;
+}
 
-////Get Data with DMP
-//	myprintf(".........With DMP...........\n\r");
-//	for (cnt = 0; cnt <= DATA_NO_DMP_RUNS; cnt++) {
-//		//Print
-//		status = printDataWithDMP();
-//
-//		//Decrease count if not successful
-//		if (status != XST_SUCCESS) {
-//			cnt--;
-//		} else {
-//			usleep(1);
-//		}
-//
-//		//Wait
-//		for (i = 0; i <= 10000; i++) {
-//			;
-//		}
-//	}
-//
-//	//Sleep
-//	sleep(1);
-//
-////Calibrate
-//	myprintf(".........Calibration...........\n\r");
-//	status = calibrateGyrAcc();
-//	if (status != XST_SUCCESS) {
-//		myprintf("Calibration failed.\r\n");
-//	}
-//
-//	//Get Data with DMP
-//	myprintf(".........With DMP...........\n\r");
-//	for (cnt = 0; cnt <= DATA_NO_DMP_RUNS; cnt++) {
-//		//Print
-//		status = printDataWithDMP();
-//
-//		//Decrease count if not successful
-//		if (status != XST_SUCCESS) {
-//			cnt--;
-//		}
-//
-//		//Wait
-//		for (i = 0; i <= 10000; i++) {
-//			;
-//		}
-//
-//		//Print forever
-//		cnt--;
-//	}
+/*
+ * Print Data using DMP
+ * In: calibration, number of runs (if 0 --> endless loop)
+ */
+int printDataUsingDMP(char initialCalibration, char dmpCalibration,
+		unsigned int numberOfRuns) {
+	//Variables
+	int status, i, cnt;
 
-//PWM
-//pwm(PWM_RUNS);
-
-//Stay in here
-	while (1) {
-		;
+	//Calibrate if required
+	if (initialCalibration) {
+		myprintf(".........Calibration...........\n\r");
+		status = calibrateGyrAcc();
+		if (status != XST_SUCCESS) {
+			myprintf("Calibration failed.\r\n");
+			return status;
+		} else {
+			myprintf("Calibration done.\r\n");
+		}
 	}
 
-//Finish
-	cleanup_platform();
-	return 0;
+	//En- or disable dynamic gyro calibration
+	status = dmpGyroCalibration(dmpCalibration);
+	if (status != XST_SUCCESS) {
+		myprintf("Could not enable DMP dynamic gyro calibration.\r\n");
+		return status;
+	}
+
+	//Get Data with DMP
+	myprintf(".........With DMP...........\n\r");
+	for (cnt = 0; cnt <= numberOfRuns; cnt++) {
+		//Print
+		status = printDataWithDMP();
+
+		//Decrease count if not successful
+		if (status != XST_SUCCESS || numberOfRuns == 0) {
+			cnt--;
+		}
+
+		//Wait
+		for (i = 0; i <= 10000; i++) {
+			;
+		}
+	}
+
+	//Return
+	return XST_SUCCESS;
+}
+
+/*
+ * Print Data without DMP
+ * In: sensors, number of runs (if 0 --> endless loop)
+ */
+int printDataWithoutDMP(short int sensors, unsigned int numberOfRuns) {
+	//Variables
+	int i, cnt, status;
+
+	//Get Data without DMP
+	myprintf(".........Without DMP...........\n\r");
+	for (cnt = 0; cnt <= numberOfRuns; cnt++) {
+		//Print
+		status = printDataNoDMP(&sensors);
+
+		//Decrease count if not successful
+		if (status != XST_SUCCESS || numberOfRuns < 1) {
+			cnt--;
+		}
+
+		//Wait
+		for (i = 0; i <= 10000; i++) {
+			;
+		}
+	}
+	return XST_SUCCESS;
 }
