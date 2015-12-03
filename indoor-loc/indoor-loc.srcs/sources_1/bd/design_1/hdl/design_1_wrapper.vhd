@@ -1,8 +1,8 @@
 --Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2015.3 (lin64) Build 1368829 Mon Sep 28 20:06:39 MDT 2015
---Date        : Mon Nov 23 14:22:16 2015
---Host        : ruppi-PC running 64-bit Ubuntu 15.10
+--Date        : Thu Dec  3 10:00:38 2015
+--Host        : mp-akulapd.ziti.uni-heidelberg.de running 64-bit unknown
 --Command     : generate_target design_1_wrapper.bd
 --Design      : design_1_wrapper
 --Purpose     : IP block netlist
@@ -34,6 +34,8 @@ entity design_1_wrapper is
     FIXED_IO_ps_clk : inout STD_LOGIC;
     FIXED_IO_ps_porb : inout STD_LOGIC;
     FIXED_IO_ps_srstb : inout STD_LOGIC;
+    pwmDir : out STD_LOGIC_VECTOR ( 0 to 0 );
+    pwmOe : out STD_LOGIC_VECTOR ( 0 to 0 );
     pwmPulse : out STD_LOGIC_VECTOR ( 5 downto 0 )
   );
 end design_1_wrapper;
@@ -62,7 +64,9 @@ architecture STRUCTURE of design_1_wrapper is
     FIXED_IO_ps_srstb : inout STD_LOGIC;
     FIXED_IO_ps_clk : inout STD_LOGIC;
     FIXED_IO_ps_porb : inout STD_LOGIC;
-    pwmPulse : out STD_LOGIC_VECTOR ( 5 downto 0 )
+    pwmPulse : out STD_LOGIC_VECTOR ( 5 downto 0 );
+    pwmDir : out STD_LOGIC_VECTOR ( 0 to 0 );
+    pwmOe : out STD_LOGIC_VECTOR ( 0 to 0 )
   );
   end component design_1;
 begin
@@ -89,6 +93,8 @@ design_1_i: component design_1
       FIXED_IO_ps_clk => FIXED_IO_ps_clk,
       FIXED_IO_ps_porb => FIXED_IO_ps_porb,
       FIXED_IO_ps_srstb => FIXED_IO_ps_srstb,
+      pwmDir(0) => pwmDir(0),
+      pwmOe(0) => pwmOe(0),
       pwmPulse(5 downto 0) => pwmPulse(5 downto 0)
     );
 end STRUCTURE;

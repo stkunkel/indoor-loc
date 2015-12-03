@@ -16,16 +16,16 @@ Command: synth_design -top design_1_wrapper -part xc7z020clg484-1
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
-INFO: [Common 17-1223] The version limit for your license is '2015.12' and will expire in 29 days. A version limit expiration means that, although you may be able to continue to use the current version of tools or IP with this license, you will not be eligible for any updates or new releases.
+INFO: [Common 17-1223] The version limit for your license is '2015.12' and will expire in 28 days. A version limit expiration means that, although you may be able to continue to use the current version of tools or IP with this license, you will not be eligible for any updates or new releases.
 WARNING: [Synth 8-992] S_AXI_GP0_ACLK_temp is already implicitly declared earlier [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/hdl/verilog/processing_system7_v5_5_processing_system7.v:2701]
 WARNING: [Synth 8-992] S_AXI_GP1_ACLK_temp is already implicitly declared earlier [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/hdl/verilog/processing_system7_v5_5_processing_system7.v:2702]
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:15 ; elapsed = 00:00:15 . Memory (MB): peak = 1208.172 ; gain = 257.012 ; free physical = 1356 ; free virtual = 13127
+Starting RTL Elaboration : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 1208.180 ; gain = 257.012 ; free physical = 1346 ; free virtual = 13206
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-638] synthesizing module 'design_1_wrapper' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1_wrapper.vhd:41]
-INFO: [Synth 8-3491] module 'design_1' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1456' bound to instance 'design_1_i' of component 'design_1' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1_wrapper.vhd:69]
-INFO: [Synth 8-638] synthesizing module 'design_1' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1487]
-INFO: [Synth 8-3491] module 'design_1_processing_system7_0_0' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/synth/design_1_processing_system7_0_0.v:57' bound to instance 'processing_system7_0' of component 'design_1_processing_system7_0_0' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1715]
+INFO: [Synth 8-638] synthesizing module 'design_1_wrapper' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1_wrapper.vhd:43]
+INFO: [Synth 8-3491] module 'design_1' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1456' bound to instance 'design_1_i' of component 'design_1' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1_wrapper.vhd:73]
+INFO: [Synth 8-638] synthesizing module 'design_1' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1489]
+INFO: [Synth 8-3491] module 'design_1_processing_system7_0_0' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/synth/design_1_processing_system7_0_0.v:57' bound to instance 'processing_system7_0' of component 'design_1_processing_system7_0_0' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1731]
 INFO: [Synth 8-638] synthesizing module 'design_1_processing_system7_0_0' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/synth/design_1_processing_system7_0_0.v:57]
 INFO: [Synth 8-638] synthesizing module 'processing_system7_v5_5_processing_system7' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/hdl/verilog/processing_system7_v5_5_processing_system7.v:156]
 	Parameter C_USE_DEFAULT_ACP_USER_VAL bound to: 0 - type: integer 
@@ -1046,7 +1046,7 @@ INFO: [Synth 8-256] done synthesizing module 'axi_crossbar_v2_1_7_crossbar_sasd'
 INFO: [Synth 8-256] done synthesizing module 'axi_crossbar_v2_1_7_axi_crossbar' (36#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_axi_crossbar.v:54]
 INFO: [Synth 8-256] done synthesizing module 'design_1_xbar_0' (37#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xbar_0/synth/design_1_xbar_0.v:57]
 INFO: [Synth 8-256] done synthesizing module 'design_1_processing_system7_0_axi_periph_0' (38#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:773]
-INFO: [Synth 8-3491] module 'design_1_pwm_0_1' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_pwm_0_1/synth/design_1_pwm_0_1.vhd:56' bound to instance 'pwm_0' of component 'design_1_pwm_0_1' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1894]
+INFO: [Synth 8-3491] module 'design_1_pwm_0_1' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_pwm_0_1/synth/design_1_pwm_0_1.vhd:56' bound to instance 'pwm_0' of component 'design_1_pwm_0_1' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1910]
 INFO: [Synth 8-638] synthesizing module 'design_1_pwm_0_1' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_pwm_0_1/synth/design_1_pwm_0_1.vhd:83]
 	Parameter C_S00_AXI_DATA_WIDTH bound to: 32 - type: integer 
 	Parameter C_S00_AXI_ADDR_WIDTH bound to: 6 - type: integer 
@@ -1091,7 +1091,27 @@ INFO: [Synth 8-3491] module 'pwm' declared at '/home/rupprich/Zynq/indoor-loc/in
 INFO: [Synth 8-256] done synthesizing module 'pwm_v1_0_S00_AXI' (40#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm_v1_0_S00_AXI.vhd:88]
 INFO: [Synth 8-256] done synthesizing module 'pwm_v1_0' (41#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm_v1_0.vhd:51]
 INFO: [Synth 8-256] done synthesizing module 'design_1_pwm_0_1' (42#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_pwm_0_1/synth/design_1_pwm_0_1.vhd:83]
-INFO: [Synth 8-3491] module 'design_1_rst_processing_system7_0_100M_0' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_rst_processing_system7_0_100M_0/synth/design_1_rst_processing_system7_0_100M_0.vhd:59' bound to instance 'rst_processing_system7_0_100M' of component 'design_1_rst_processing_system7_0_100M_0' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1919]
+INFO: [Synth 8-3491] module 'design_1_xlconstant_0_0' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xlconstant_0_0/sim/design_1_xlconstant_0_0.vhd:29' bound to instance 'pwm_dir_1' of component 'design_1_xlconstant_0_0' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1935]
+INFO: [Synth 8-638] synthesizing module 'design_1_xlconstant_0_0' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xlconstant_0_0/sim/design_1_xlconstant_0_0.vhd:35]
+	Parameter CONST_VAL bound to: 1'b1 
+	Parameter CONST_WIDTH bound to: 1 - type: integer 
+INFO: [Synth 8-3491] module 'xlconstant' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/xlconstant_v1_1/xlconstant.vhd:27' bound to instance 'U0' of component 'xlconstant' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xlconstant_0_0/sim/design_1_xlconstant_0_0.vhd:49]
+INFO: [Synth 8-638] synthesizing module 'xlconstant' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/xlconstant_v1_1/xlconstant.vhd:36]
+	Parameter CONST_VAL bound to: 1'b1 
+	Parameter CONST_WIDTH bound to: 1 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'xlconstant' (43#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/xlconstant_v1_1/xlconstant.vhd:36]
+INFO: [Synth 8-256] done synthesizing module 'design_1_xlconstant_0_0' (44#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xlconstant_0_0/sim/design_1_xlconstant_0_0.vhd:35]
+INFO: [Synth 8-3491] module 'design_1_xlconstant_0_1' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xlconstant_0_1/sim/design_1_xlconstant_0_1.vhd:29' bound to instance 'pwm_oe_0' of component 'design_1_xlconstant_0_1' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1939]
+INFO: [Synth 8-638] synthesizing module 'design_1_xlconstant_0_1' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xlconstant_0_1/sim/design_1_xlconstant_0_1.vhd:35]
+	Parameter CONST_VAL bound to: 1'b0 
+	Parameter CONST_WIDTH bound to: 1 - type: integer 
+INFO: [Synth 8-3491] module 'xlconstant' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/xlconstant_v1_1/xlconstant.vhd:27' bound to instance 'U0' of component 'xlconstant' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xlconstant_0_1/sim/design_1_xlconstant_0_1.vhd:49]
+INFO: [Synth 8-638] synthesizing module 'xlconstant__parameterized1' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/xlconstant_v1_1/xlconstant.vhd:36]
+	Parameter CONST_VAL bound to: 1'b0 
+	Parameter CONST_WIDTH bound to: 1 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'xlconstant__parameterized1' (44#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/xlconstant_v1_1/xlconstant.vhd:36]
+INFO: [Synth 8-256] done synthesizing module 'design_1_xlconstant_0_1' (45#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xlconstant_0_1/sim/design_1_xlconstant_0_1.vhd:35]
+INFO: [Synth 8-3491] module 'design_1_rst_processing_system7_0_100M_0' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_rst_processing_system7_0_100M_0/synth/design_1_rst_processing_system7_0_100M_0.vhd:59' bound to instance 'rst_processing_system7_0_100M' of component 'design_1_rst_processing_system7_0_100M_0' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1943]
 INFO: [Synth 8-638] synthesizing module 'design_1_rst_processing_system7_0_100M_0' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_rst_processing_system7_0_100M_0/synth/design_1_rst_processing_system7_0_100M_0.vhd:74]
 	Parameter C_FAMILY bound to: zynq - type: string 
 	Parameter C_EXT_RST_WIDTH bound to: 4 - type: integer 
@@ -1121,7 +1141,7 @@ INFO: [Synth 8-638] synthesizing module 'lpf' [/home/rupprich/Zynq/indoor-loc/in
 INFO: [Synth 8-3491] module 'SRL16' declared at '/opt/Xilinx/Vivado/2015.3/scripts/rt/data/unisim_comp.v:43311' bound to instance 'POR_SRL_I' of component 'SRL16' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/lpf.vhd:190]
 INFO: [Synth 8-638] synthesizing module 'SRL16' [/opt/Xilinx/Vivado/2015.3/scripts/rt/data/unisim_comp.v:43311]
 	Parameter INIT bound to: 16'b0000000000000000 
-INFO: [Synth 8-256] done synthesizing module 'SRL16' (43#1) [/opt/Xilinx/Vivado/2015.3/scripts/rt/data/unisim_comp.v:43311]
+INFO: [Synth 8-256] done synthesizing module 'SRL16' (46#1) [/opt/Xilinx/Vivado/2015.3/scripts/rt/data/unisim_comp.v:43311]
 INFO: [Synth 8-638] synthesizing module 'cdc_sync' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/lib_cdc_v1_0/hdl/src/vhdl/cdc_sync.vhd:106]
 	Parameter C_CDC_TYPE bound to: 1 - type: integer 
 	Parameter C_RESET_STATE bound to: 0 - type: integer 
@@ -1141,19 +1161,19 @@ INFO: [Synth 8-113] binding component instance 'CROSS_PLEVEL_IN2SCNDRY_s_level_o
 INFO: [Synth 8-113] binding component instance 'CROSS_PLEVEL_IN2SCNDRY_s_level_out_d5' to cell 'FDR' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/lib_cdc_v1_0/hdl/src/vhdl/cdc_sync.vhd:574]
 	Parameter INIT bound to: 1'b0 
 INFO: [Synth 8-113] binding component instance 'CROSS_PLEVEL_IN2SCNDRY_s_level_out_d6' to cell 'FDR' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/lib_cdc_v1_0/hdl/src/vhdl/cdc_sync.vhd:584]
-INFO: [Synth 8-256] done synthesizing module 'cdc_sync' (44#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/lib_cdc_v1_0/hdl/src/vhdl/cdc_sync.vhd:106]
-INFO: [Synth 8-256] done synthesizing module 'lpf' (45#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/lpf.vhd:138]
+INFO: [Synth 8-256] done synthesizing module 'cdc_sync' (47#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/lib_cdc_v1_0/hdl/src/vhdl/cdc_sync.vhd:106]
+INFO: [Synth 8-256] done synthesizing module 'lpf' (48#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/lpf.vhd:138]
 INFO: [Synth 8-638] synthesizing module 'sequence_psr' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/sequence_psr.vhd:146]
 INFO: [Synth 8-638] synthesizing module 'upcnt_n' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/upcnt_n.vhd:125]
 	Parameter C_SIZE bound to: 6 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'upcnt_n' (46#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/upcnt_n.vhd:125]
-INFO: [Synth 8-256] done synthesizing module 'sequence_psr' (47#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/sequence_psr.vhd:146]
-INFO: [Synth 8-256] done synthesizing module 'proc_sys_reset' (48#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/proc_sys_reset.vhd:199]
-INFO: [Synth 8-256] done synthesizing module 'design_1_rst_processing_system7_0_100M_0' (49#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_rst_processing_system7_0_100M_0/synth/design_1_rst_processing_system7_0_100M_0.vhd:74]
-INFO: [Synth 8-256] done synthesizing module 'design_1' (50#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1487]
-INFO: [Synth 8-256] done synthesizing module 'design_1_wrapper' (51#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1_wrapper.vhd:41]
+INFO: [Synth 8-256] done synthesizing module 'upcnt_n' (49#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/upcnt_n.vhd:125]
+INFO: [Synth 8-256] done synthesizing module 'sequence_psr' (50#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/sequence_psr.vhd:146]
+INFO: [Synth 8-256] done synthesizing module 'proc_sys_reset' (51#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/proc_sys_reset.vhd:199]
+INFO: [Synth 8-256] done synthesizing module 'design_1_rst_processing_system7_0_100M_0' (52#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_rst_processing_system7_0_100M_0/synth/design_1_rst_processing_system7_0_100M_0.vhd:74]
+INFO: [Synth 8-256] done synthesizing module 'design_1' (53#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1489]
+INFO: [Synth 8-256] done synthesizing module 'design_1_wrapper' (54#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1_wrapper.vhd:43]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:43 ; elapsed = 00:00:44 . Memory (MB): peak = 1308.723 ; gain = 357.562 ; free physical = 1255 ; free virtual = 13027
+Finished RTL Elaboration : Time (s): cpu = 00:00:44 ; elapsed = 00:00:44 . Memory (MB): peak = 1308.730 ; gain = 357.562 ; free physical = 1247 ; free virtual = 13108
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -1163,7 +1183,7 @@ Report Check Netlist:
 |1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
 +------+------------------+-------+---------+-------+------------------+
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:43 ; elapsed = 00:00:44 . Memory (MB): peak = 1308.723 ; gain = 357.562 ; free physical = 1255 ; free virtual = 13027
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:44 ; elapsed = 00:00:45 . Memory (MB): peak = 1308.730 ; gain = 357.562 ; free physical = 1247 ; free virtual = 13108
 ---------------------------------------------------------------------------------
 INFO: [Netlist 29-17] Analyzing 13 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
@@ -1195,32 +1215,34 @@ INFO: [Project 1-111] Unisim Transformation Summary:
   FDR => FDRE: 12 instances
   SRL16 => SRL16E: 1 instances
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 1548.902 ; gain = 0.000 ; free physical = 1137 ; free virtual = 12910
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.01 . Memory (MB): peak = 1549.910 ; gain = 0.000 ; free physical = 1127 ; free virtual = 12988
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 27621 
+INFO: Helper process launched with PID 7364 
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:55 ; elapsed = 00:00:56 . Memory (MB): peak = 1548.906 ; gain = 597.746 ; free physical = 1135 ; free virtual = 12907
+Finished Constraint Validation : Time (s): cpu = 00:00:56 ; elapsed = 00:00:57 . Memory (MB): peak = 1549.914 ; gain = 598.746 ; free physical = 1123 ; free virtual = 12984
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7z020clg484-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:55 ; elapsed = 00:00:56 . Memory (MB): peak = 1548.906 ; gain = 597.746 ; free physical = 1135 ; free virtual = 12907
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:56 ; elapsed = 00:00:57 . Memory (MB): peak = 1549.914 ; gain = 598.746 ; free physical = 1123 ; free virtual = 12984
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
-Applied set_property DONT_TOUCH = true for design_1_i/processing_system7_0/inst. (constraint file  /home/rupprich/Zynq/indoor-loc/indoor-loc.runs/synth_2/dont_touch.xdc, line 28).
+Applied set_property DONT_TOUCH = true for design_1_i/processing_system7_0/inst. (constraint file  /home/rupprich/Zynq/indoor-loc/indoor-loc.runs/synth_2/dont_touch.xdc, line 34).
 Applied set_property DONT_TOUCH = true for design_1_i. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for design_1_i/processing_system7_0. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for design_1_i/processing_system7_0_axi_periph. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for design_1_i/processing_system7_0_axi_periph/s00_couplers/auto_pc. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for design_1_i/processing_system7_0_axi_periph/xbar. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for design_1_i/pwm_0. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for design_1_i/pwm_dir_1. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for design_1_i/pwm_oe_0. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for design_1_i/rst_processing_system7_0_100M. (constraint file  auto generated constraint, line ).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:56 ; elapsed = 00:00:57 . Memory (MB): peak = 1548.906 ; gain = 597.746 ; free physical = 1135 ; free virtual = 12907
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:57 ; elapsed = 00:00:57 . Memory (MB): peak = 1549.914 ; gain = 598.746 ; free physical = 1123 ; free virtual = 12984
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-5544] ROM "address_offset" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
 INFO: [Synth 8-4471] merging register 'gen_axilite.s_axi_wready_i_reg' into 'gen_axilite.s_axi_awready_i_reg' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_decerr_slave.v:136]
@@ -1238,7 +1260,7 @@ INFO: [Synth 8-5544] ROM "p_0_in2" won't be mapped to Block RAM because address 
 INFO: [Synth 8-5544] ROM "p_0_in1" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
 INFO: [Synth 8-4471] merging register 'seq_cnt_en_reg' into 'from_sys_reg' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/sequence_psr.vhd:222]
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:58 ; elapsed = 00:00:59 . Memory (MB): peak = 1548.906 ; gain = 597.746 ; free physical = 1122 ; free virtual = 12894
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:59 ; elapsed = 00:01:00 . Memory (MB): peak = 1549.914 ; gain = 598.746 ; free physical = 1096 ; free virtual = 12957
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -1560,7 +1582,7 @@ BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
 ---------------------------------------------------------------------------------
 Finished Part Resource Summary
 ---------------------------------------------------------------------------------
-Start Parallel Synthesis Optimization  : Time (s): cpu = 00:00:58 ; elapsed = 00:00:59 . Memory (MB): peak = 1548.910 ; gain = 597.750 ; free physical = 1122 ; free virtual = 12894
+Start Parallel Synthesis Optimization  : Time (s): cpu = 00:00:59 ; elapsed = 00:01:00 . Memory (MB): peak = 1549.918 ; gain = 598.750 ; free physical = 1096 ; free virtual = 12957
 ---------------------------------------------------------------------------------
 Start Cross Boundary Optimization
 ---------------------------------------------------------------------------------
@@ -1568,9 +1590,9 @@ INFO: [Synth 8-3936] Found unconnected internal register 'inst/gen_axilite.gen_b
 INFO: [Synth 8-3936] Found unconnected internal register 'inst/gen_axilite.gen_b2s_conv.axilite_b2s/SI_REG/ar_pipe/m_payload_i_reg' and it is trimmed from '66' to '62' bits. [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:121]
 INFO: [Synth 8-3936] Found unconnected internal register 'inst/gen_sasd.crossbar_sasd_0/reg_slice_r/m_payload_i_reg' and it is trimmed from '36' to '35' bits. [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:121]
 ---------------------------------------------------------------------------------
-Finished Cross Boundary Optimization : Time (s): cpu = 00:00:59 ; elapsed = 00:01:00 . Memory (MB): peak = 1548.910 ; gain = 597.750 ; free physical = 1124 ; free virtual = 12896
+Finished Cross Boundary Optimization : Time (s): cpu = 00:01:00 ; elapsed = 00:01:01 . Memory (MB): peak = 1549.918 ; gain = 598.750 ; free physical = 1098 ; free virtual = 12959
 ---------------------------------------------------------------------------------
-Finished Parallel Reinference  : Time (s): cpu = 00:00:59 ; elapsed = 00:01:00 . Memory (MB): peak = 1548.910 ; gain = 597.750 ; free physical = 1124 ; free virtual = 12896
+Finished Parallel Reinference  : Time (s): cpu = 00:01:00 ; elapsed = 00:01:01 . Memory (MB): peak = 1549.918 ; gain = 598.750 ; free physical = 1098 ; free virtual = 12959
 
 Report RTL Partitions: 
 +-+--------------+------------+----------+
@@ -1581,9 +1603,9 @@ Report RTL Partitions:
 Start Area Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Area Optimization : Time (s): cpu = 00:01:03 ; elapsed = 00:01:04 . Memory (MB): peak = 1548.910 ; gain = 597.750 ; free physical = 1100 ; free virtual = 12872
+Finished Area Optimization : Time (s): cpu = 00:01:04 ; elapsed = 00:01:05 . Memory (MB): peak = 1549.918 ; gain = 598.750 ; free physical = 1088 ; free virtual = 12949
 ---------------------------------------------------------------------------------
-Finished Parallel Area Optimization  : Time (s): cpu = 00:01:03 ; elapsed = 00:01:04 . Memory (MB): peak = 1548.910 ; gain = 597.750 ; free physical = 1100 ; free virtual = 12872
+Finished Parallel Area Optimization  : Time (s): cpu = 00:01:04 ; elapsed = 00:01:05 . Memory (MB): peak = 1549.918 ; gain = 598.750 ; free physical = 1088 ; free virtual = 12949
 
 Report RTL Partitions: 
 +-+--------------+------------+----------+
@@ -1597,19 +1619,19 @@ Start Timing Optimization
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:13 ; elapsed = 00:01:14 . Memory (MB): peak = 1697.902 ; gain = 746.742 ; free physical = 909 ; free virtual = 12681
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:14 ; elapsed = 00:01:15 . Memory (MB): peak = 1697.910 ; gain = 746.742 ; free physical = 899 ; free virtual = 12760
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:01:15 ; elapsed = 00:01:16 . Memory (MB): peak = 1740.270 ; gain = 789.109 ; free physical = 866 ; free virtual = 12639
+Finished Timing Optimization : Time (s): cpu = 00:01:16 ; elapsed = 00:01:17 . Memory (MB): peak = 1740.277 ; gain = 789.109 ; free physical = 845 ; free virtual = 12706
 ---------------------------------------------------------------------------------
-Finished Parallel Timing Optimization  : Time (s): cpu = 00:01:15 ; elapsed = 00:01:16 . Memory (MB): peak = 1740.270 ; gain = 789.109 ; free physical = 866 ; free virtual = 12639
+Finished Parallel Timing Optimization  : Time (s): cpu = 00:01:16 ; elapsed = 00:01:17 . Memory (MB): peak = 1740.277 ; gain = 789.109 ; free physical = 845 ; free virtual = 12706
 
 Report RTL Partitions: 
 +-+--------------+------------+----------+
 | |RTL Partition |Replication |Instances |
 +-+--------------+------------+----------+
 +-+--------------+------------+----------+
-Finished Parallel Synthesis Optimization  : Time (s): cpu = 00:01:15 ; elapsed = 00:01:16 . Memory (MB): peak = 1740.270 ; gain = 789.109 ; free physical = 866 ; free virtual = 12639
+Finished Parallel Synthesis Optimization  : Time (s): cpu = 00:01:16 ; elapsed = 00:01:17 . Memory (MB): peak = 1740.277 ; gain = 789.109 ; free physical = 845 ; free virtual = 12706
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
@@ -1656,7 +1678,7 @@ INFO: [Synth 8-3332] Sequential element (\U0/EXT_LPF/ACTIVE_LOW_EXT.ACT_LO_EXT/G
 INFO: [Synth 8-3332] Sequential element (\U0/EXT_LPF/ACTIVE_LOW_AUX.ACT_LO_AUX/GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d5 ) is unused and will be removed from module design_1_rst_processing_system7_0_100M_0.
 INFO: [Synth 8-3332] Sequential element (\U0/EXT_LPF/ACTIVE_LOW_AUX.ACT_LO_AUX/GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d6 ) is unused and will be removed from module design_1_rst_processing_system7_0_100M_0.
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:01:17 ; elapsed = 00:01:18 . Memory (MB): peak = 1748.277 ; gain = 797.117 ; free physical = 859 ; free virtual = 12631
+Finished Technology Mapping : Time (s): cpu = 00:01:18 ; elapsed = 00:01:19 . Memory (MB): peak = 1748.285 ; gain = 797.117 ; free physical = 843 ; free virtual = 12704
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -1704,7 +1726,7 @@ INFO: [Synth 8-4618] Found max_fanout attribute set to 10 on net \inst/gen_axili
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:01:19 ; elapsed = 00:01:20 . Memory (MB): peak = 1748.277 ; gain = 797.117 ; free physical = 859 ; free virtual = 12631
+Finished IO Insertion : Time (s): cpu = 00:01:21 ; elapsed = 00:01:22 . Memory (MB): peak = 1748.285 ; gain = 797.117 ; free physical = 848 ; free virtual = 12709
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -1717,7 +1739,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:01:19 ; elapsed = 00:01:20 . Memory (MB): peak = 1748.277 ; gain = 797.117 ; free physical = 859 ; free virtual = 12631
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:21 ; elapsed = 00:01:22 . Memory (MB): peak = 1748.285 ; gain = 797.117 ; free physical = 848 ; free virtual = 12709
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -1729,25 +1751,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:19 ; elapsed = 00:01:20 . Memory (MB): peak = 1748.277 ; gain = 797.117 ; free physical = 859 ; free virtual = 12631
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:21 ; elapsed = 00:01:22 . Memory (MB): peak = 1748.285 ; gain = 797.117 ; free physical = 847 ; free virtual = 12709
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:01:19 ; elapsed = 00:01:20 . Memory (MB): peak = 1748.277 ; gain = 797.117 ; free physical = 859 ; free virtual = 12631
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:21 ; elapsed = 00:01:22 . Memory (MB): peak = 1748.285 ; gain = 797.117 ; free physical = 847 ; free virtual = 12709
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:01:19 ; elapsed = 00:01:20 . Memory (MB): peak = 1748.277 ; gain = 797.117 ; free physical = 859 ; free virtual = 12631
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:21 ; elapsed = 00:01:22 . Memory (MB): peak = 1748.285 ; gain = 797.117 ; free physical = 847 ; free virtual = 12709
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:01:19 ; elapsed = 00:01:20 . Memory (MB): peak = 1748.277 ; gain = 797.117 ; free physical = 859 ; free virtual = 12631
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:21 ; elapsed = 00:01:22 . Memory (MB): peak = 1748.285 ; gain = 797.117 ; free physical = 847 ; free virtual = 12709
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -1796,14 +1818,14 @@ Report Cell Usage:
 |14    |FDR     |     8|
 |15    |FDRE    |  1362|
 |16    |FDSE    |   145|
-|17    |OBUF    |     6|
+|17    |OBUF    |     8|
 +------+--------+------+
 
 Report Instance Areas: 
 +------+---------------------------------------------------+--------------------------------------------------------------+------+
 |      |Instance                                           |Module                                                        |Cells |
 +------+---------------------------------------------------+--------------------------------------------------------------+------+
-|1     |top                                                |                                                              |  3444|
+|1     |top                                                |                                                              |  3446|
 |2     |  design_1_i                                       |design_1                                                      |  3438|
 |3     |    processing_system7_0                           |design_1_processing_system7_0_0                               |   290|
 |4     |      inst                                         |processing_system7_v5_5_processing_system7                    |   290|
@@ -1852,20 +1874,22 @@ Report Instance Areas:
 |47    |          pwm_inst4                                |pwm_3                                                         |   138|
 |48    |          pwm_inst5                                |pwm_4                                                         |   138|
 |49    |          pwm_inst6                                |pwm_5                                                         |   139|
-|50    |    rst_processing_system7_0_100M                  |design_1_rst_processing_system7_0_100M_0                      |    68|
-|51    |      U0                                           |proc_sys_reset                                                |    68|
-|52    |        EXT_LPF                                    |lpf                                                           |    23|
-|53    |          \ACTIVE_LOW_AUX.ACT_LO_AUX               |cdc_sync                                                      |     5|
-|54    |          \ACTIVE_LOW_EXT.ACT_LO_EXT               |cdc_sync_0                                                    |     5|
-|55    |        SEQ                                        |sequence_psr                                                  |    40|
-|56    |          SEQ_COUNTER                              |upcnt_n                                                       |    14|
+|50    |    pwm_dir_1                                      |design_1_xlconstant_0_0                                       |     0|
+|51    |    pwm_oe_0                                       |design_1_xlconstant_0_1                                       |     0|
+|52    |    rst_processing_system7_0_100M                  |design_1_rst_processing_system7_0_100M_0                      |    68|
+|53    |      U0                                           |proc_sys_reset                                                |    68|
+|54    |        EXT_LPF                                    |lpf                                                           |    23|
+|55    |          \ACTIVE_LOW_AUX.ACT_LO_AUX               |cdc_sync                                                      |     5|
+|56    |          \ACTIVE_LOW_EXT.ACT_LO_EXT               |cdc_sync_0                                                    |     5|
+|57    |        SEQ                                        |sequence_psr                                                  |    40|
+|58    |          SEQ_COUNTER                              |upcnt_n                                                       |    14|
 +------+---------------------------------------------------+--------------------------------------------------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:01:19 ; elapsed = 00:01:20 . Memory (MB): peak = 1748.277 ; gain = 797.117 ; free physical = 859 ; free virtual = 12631
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:21 ; elapsed = 00:01:22 . Memory (MB): peak = 1748.285 ; gain = 797.117 ; free physical = 847 ; free virtual = 12709
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:01:08 ; elapsed = 00:01:09 . Memory (MB): peak = 1748.277 ; gain = 378.316 ; free physical = 859 ; free virtual = 12631
-Synthesis Optimization Complete : Time (s): cpu = 00:01:20 ; elapsed = 00:01:21 . Memory (MB): peak = 1748.277 ; gain = 797.117 ; free physical = 859 ; free virtual = 12631
+Synthesis Optimization Runtime : Time (s): cpu = 00:01:10 ; elapsed = 00:01:11 . Memory (MB): peak = 1748.285 ; gain = 377.316 ; free physical = 847 ; free virtual = 12709
+Synthesis Optimization Complete : Time (s): cpu = 00:01:21 ; elapsed = 00:01:23 . Memory (MB): peak = 1748.285 ; gain = 797.117 ; free physical = 847 ; free virtual = 12709
 INFO: [Project 1-571] Translating synthesized netlist
 INFO: [Netlist 29-17] Analyzing 123 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
@@ -1877,8 +1901,8 @@ INFO: [Project 1-111] Unisim Transformation Summary:
   SRL16 => SRL16E: 1 instances
 
 INFO: [Common 17-83] Releasing license: Synthesis
-272 Infos, 3 Warnings, 0 Critical Warnings and 0 Errors encountered.
+284 Infos, 3 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:01:18 ; elapsed = 00:01:19 . Memory (MB): peak = 1748.281 ; gain = 667.102 ; free physical = 859 ; free virtual = 12631
-report_utilization: Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.04 . Memory (MB): peak = 1780.297 ; gain = 0.000 ; free physical = 858 ; free virtual = 12631
-INFO: [Common 17-206] Exiting Vivado at Wed Dec  2 14:37:07 2015...
+synth_design: Time (s): cpu = 00:01:20 ; elapsed = 00:01:21 . Memory (MB): peak = 1748.289 ; gain = 667.102 ; free physical = 845 ; free virtual = 12707
+report_utilization: Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.04 . Memory (MB): peak = 1780.305 ; gain = 0.000 ; free physical = 846 ; free virtual = 12708
+INFO: [Common 17-206] Exiting Vivado at Thu Dec  3 10:05:37 2015...

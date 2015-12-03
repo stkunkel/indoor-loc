@@ -1,8 +1,8 @@
 --Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2015.3 (lin64) Build 1368829 Mon Sep 28 20:06:39 MDT 2015
---Date        : Mon Nov 23 14:22:16 2015
---Host        : ruppi-PC running 64-bit Ubuntu 15.10
+--Date        : Thu Dec  3 10:00:38 2015
+--Host        : mp-akulapd.ziti.uni-heidelberg.de running 64-bit unknown
 --Command     : generate_target design_1.bd
 --Design      : design_1
 --Purpose     : IP block netlist
@@ -1476,10 +1476,12 @@ entity design_1 is
     FIXED_IO_ps_clk : inout STD_LOGIC;
     FIXED_IO_ps_porb : inout STD_LOGIC;
     FIXED_IO_ps_srstb : inout STD_LOGIC;
+    pwmDir : out STD_LOGIC_VECTOR ( 0 to 0 );
+    pwmOe : out STD_LOGIC_VECTOR ( 0 to 0 );
     pwmPulse : out STD_LOGIC_VECTOR ( 5 downto 0 )
   );
   attribute CORE_GENERATION_INFO : string;
-  attribute CORE_GENERATION_INFO of design_1 : entity is "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=10,numReposBlks=5,numNonXlnxBlks=1,numHierBlks=5,maxHierDepth=0,da_axi4_cnt=12,da_board_cnt=16,da_ps7_cnt=1,synth_mode=Global}";
+  attribute CORE_GENERATION_INFO of design_1 : entity is "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=12,numReposBlks=7,numNonXlnxBlks=1,numHierBlks=5,maxHierDepth=0,da_axi4_cnt=12,da_board_cnt=16,da_ps7_cnt=1,synth_mode=Global}";
   attribute HW_HANDOFF : string;
   attribute HW_HANDOFF of design_1 : entity is "design_1.hwdef";
 end design_1;
@@ -1597,6 +1599,16 @@ architecture STRUCTURE of design_1 is
     peripheral_aresetn : out STD_LOGIC_VECTOR ( 0 to 0 )
   );
   end component design_1_rst_processing_system7_0_100M_0;
+  component design_1_xlconstant_0_0 is
+  port (
+    dout : out STD_LOGIC_VECTOR ( 0 to 0 )
+  );
+  end component design_1_xlconstant_0_0;
+  component design_1_xlconstant_0_1 is
+  port (
+    dout : out STD_LOGIC_VECTOR ( 0 to 0 )
+  );
+  end component design_1_xlconstant_0_1;
   signal processing_system7_0_DDR_ADDR : STD_LOGIC_VECTOR ( 14 downto 0 );
   signal processing_system7_0_DDR_BA : STD_LOGIC_VECTOR ( 2 downto 0 );
   signal processing_system7_0_DDR_CAS_N : STD_LOGIC;
@@ -1678,6 +1690,8 @@ architecture STRUCTURE of design_1 is
   signal processing_system7_0_axi_periph_M02_AXI_WSTRB : STD_LOGIC_VECTOR ( 3 downto 0 );
   signal processing_system7_0_axi_periph_M02_AXI_WVALID : STD_LOGIC;
   signal pwm_0_pwmPulse : STD_LOGIC_VECTOR ( 5 downto 0 );
+  signal pwm_dir_1_dout : STD_LOGIC_VECTOR ( 0 to 0 );
+  signal pwm_oe_0_dout : STD_LOGIC_VECTOR ( 0 to 0 );
   signal rst_processing_system7_0_100M_interconnect_aresetn : STD_LOGIC_VECTOR ( 0 to 0 );
   signal rst_processing_system7_0_100M_peripheral_aresetn : STD_LOGIC_VECTOR ( 0 to 0 );
   signal NLW_processing_system7_0_TTC0_WAVE0_OUT_UNCONNECTED : STD_LOGIC;
@@ -1711,6 +1725,8 @@ architecture STRUCTURE of design_1 is
   signal NLW_rst_processing_system7_0_100M_bus_struct_reset_UNCONNECTED : STD_LOGIC_VECTOR ( 0 to 0 );
   signal NLW_rst_processing_system7_0_100M_peripheral_reset_UNCONNECTED : STD_LOGIC_VECTOR ( 0 to 0 );
 begin
+  pwmDir(0) <= pwm_dir_1_dout(0);
+  pwmOe(0) <= pwm_oe_0_dout(0);
   pwmPulse(5 downto 0) <= pwm_0_pwmPulse(5 downto 0);
 processing_system7_0: component design_1_processing_system7_0_0
      port map (
@@ -1915,6 +1931,14 @@ pwm_0: component design_1_pwm_0_1
       s00_axi_wready => processing_system7_0_axi_periph_M02_AXI_WREADY,
       s00_axi_wstrb(3 downto 0) => processing_system7_0_axi_periph_M02_AXI_WSTRB(3 downto 0),
       s00_axi_wvalid => processing_system7_0_axi_periph_M02_AXI_WVALID
+    );
+pwm_dir_1: component design_1_xlconstant_0_0
+     port map (
+      dout(0) => pwm_dir_1_dout(0)
+    );
+pwm_oe_0: component design_1_xlconstant_0_1
+     port map (
+      dout(0) => pwm_oe_0_dout(0)
     );
 rst_processing_system7_0_100M: component design_1_rst_processing_system7_0_100M_0
      port map (

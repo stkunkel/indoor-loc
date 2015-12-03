@@ -62,9 +62,6 @@ typedef enum{
 /*
  * Functions
  */
-float getAbsAngle(Joint joint);
-
-
-
+int pwmTest();
 
 #endif

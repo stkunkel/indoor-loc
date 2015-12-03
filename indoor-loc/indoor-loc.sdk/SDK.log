@@ -37294,3 +37294,25 @@ Reason: ERROR: [Common 17-39] 'hsi::open_sw_design' failed due to earlier errors
 14:20:46 INFO  : XSDB server has started successfully.
 14:20:47 INFO  : Processing command line option -hwspec /home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/design_1_wrapper.hdf.
 14:20:47 INFO  : Checking for hwspec changes in the project design_1_wrapper_hw_platform_0.
+09:39:20 INFO  : Launching XSDB server: xsdb -n /opt/Xilinx/SDK/2015.3/scripts/xsdb/xsdb/xsdb-server.tcl
+09:39:22 INFO  : XSDB server has started successfully.
+09:39:22 INFO  : Processing command line option -hwspec /home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/design_1_wrapper.hdf.
+09:39:22 INFO  : Checking for hwspec changes in the project design_1_wrapper_hw_platform_0.
+10:08:00 INFO  : SDK has detected change in the last modified timestamps for source hardware specification file Source:1449133634000,  Project:1449062317000
+10:08:00 INFO  : Project design_1_wrapper_hw_platform_0's source hardware specification located at /home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/design_1_wrapper.hdf is now different from the local copy.
+		 The local copy will be replaced with the source specification and your workspace will be updated.
+10:08:04 INFO  : Copied contents of /home/rupprich/Zynq/indoor-loc/indoor-loc.sdk/design_1_wrapper.hdf into /design_1_wrapper_hw_platform_0/system.hdf.
+10:08:11 INFO  : Synchronizing projects in the workspace with the hardware platform specification changes.
+10:08:12 ERROR : (XSDB Server)ERROR: [Hsi 55-1433] Error boost::filesystem::directory_iterator::construct: Permission denied: "/tmp/systemd-private-QSYMBK"
+ERROR: [Hsi 55-1433] Error boost::filesystem::directory_iterator::construct: Permission denied: "/tmp/systemd-private-XjZlCx"
+
+10:08:12 ERROR : (XSDB Server)ERROR: [Hsi 55-1433] Error boost::filesystem::directory_iterator::construct: Permission denied: "/tmp/systemd-private-lJoEOS"
+
+10:08:12 ERROR : Failed to call sync_sw_with_hw_change
+Reason: ERROR: [Common 17-39] 'hsi::open_sw_design' failed due to earlier errors.
+
+10:08:12 ERROR : Error updating BSP project MSS files.
+10:08:13 INFO  : Updating hardware inferred compiler options for IndoorLoc.
+10:08:13 INFO  : Clearing existing target manager status.
+10:08:15 INFO  : Workspace synchronized with the new hardware specification file. Cleaning dependent projects...
+10:08:15 WARN  : Linker script will not be updated automatically. Users need to update it manually.

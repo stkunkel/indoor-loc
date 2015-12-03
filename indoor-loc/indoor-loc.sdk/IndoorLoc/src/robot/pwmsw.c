@@ -10,6 +10,7 @@
 #include <xil_io.h>
 #include <unistd.h>
 #include "../platform.h"
+#include "../print_utils.h"
 #include "pwm.h"
 #include "pwmsw.h"
 
@@ -21,6 +22,8 @@ u32 stepAmount = 0;
 /*
  * Function Prototypes
  */
+int moveToAbsAngle(Joint joint, float dgr, unsigned int time_ms);
+float getAbsAngle(Joint joint);
 int setAbsAngle(Joint joint, float dgr);
 float stepsToAngle(u32 steps);
 u32 angleToSteps(float dgr);
@@ -31,6 +34,21 @@ int writePwmReg(u32 reg, u32 value);
 /*
  * Functions
  */
+
+/*
+ * PWM Test
+ * Returns 0 if successful
+ */
+int pwmTest() {
+	//variables
+	unsigned int a, i;
+	u32 val;
+
+	//Init PWM
+
+	//finish
+	return PWM_SUCCESS;
+}
 
 /*
  * Move to Absolute Angle
@@ -170,6 +188,9 @@ u32 getValReg(Joint joint) {
  * Returns 0 if successful
  */
 int initPWM(u32 steps) {
+	//Variables
+	u32 val = (u32) steps/2;
+
 	//Set steps
 	writePwmReg(PWM_S00_AXI_SLV_REG6_OFFSET, steps);
 	writePwmReg(PWM_S00_AXI_SLV_REG7_OFFSET, steps);
@@ -178,13 +199,13 @@ int initPWM(u32 steps) {
 	writePwmReg(PWM_S00_AXI_SLV_REG10_OFFSET, steps);
 	writePwmReg(PWM_S00_AXI_SLV_REG11_OFFSET, steps);
 
-	//Set initial val --> 0 dgrs
-	writePwmReg(PWM_S00_AXI_SLV_REG0_OFFSET, (u32) (steps / 2));
-	writePwmReg(PWM_S00_AXI_SLV_REG1_OFFSET, (u32) (steps / 2));
-	writePwmReg(PWM_S00_AXI_SLV_REG2_OFFSET, (u32) (steps / 2));
-	writePwmReg(PWM_S00_AXI_SLV_REG3_OFFSET, (u32) (steps / 2));
-	writePwmReg(PWM_S00_AXI_SLV_REG4_OFFSET, (u32) (steps / 2));
-	writePwmReg(PWM_S00_AXI_SLV_REG5_OFFSET, (u32) (steps / 2));
+	//Set initial val --> 90 dgrs
+	writePwmReg(PWM_S00_AXI_SLV_REG0_OFFSET, val);
+	writePwmReg(PWM_S00_AXI_SLV_REG1_OFFSET, val);
+	writePwmReg(PWM_S00_AXI_SLV_REG2_OFFSET, val);
+	writePwmReg(PWM_S00_AXI_SLV_REG3_OFFSET, val);
+	writePwmReg(PWM_S00_AXI_SLV_REG4_OFFSET, val);
+	writePwmReg(PWM_S00_AXI_SLV_REG5_OFFSET, val);
 
 	//Remember steps
 	stepAmount = steps;
@@ -217,41 +238,4 @@ int writePwmReg(u32 reg, u32 value) {
 	} else {
 		return PWM_REG_CONT_NO_MATCH;
 	}
-}
-
-/*
- * PWM control
- */
-int pwm(int amount) {
-	//variables
-	unsigned int a, i;
-	u32 val;
-
-	//set steps to PWMSTEPS
-	writePwmReg(PWM_S00_AXI_SLV_REG6_OFFSET, PWMSTEPS);
-	writePwmReg(PWM_S00_AXI_SLV_REG7_OFFSET, PWMSTEPS);
-	writePwmReg(PWM_S00_AXI_SLV_REG8_OFFSET, PWMSTEPS);
-	writePwmReg(PWM_S00_AXI_SLV_REG9_OFFSET, PWMSTEPS);
-	writePwmReg(PWM_S00_AXI_SLV_REG10_OFFSET, PWMSTEPS);
-	writePwmReg(PWM_S00_AXI_SLV_REG11_OFFSET, PWMSTEPS);
-
-	//main loop
-	for (a = 0; a <= amount; a++) {
-		//LED1
-		writePwmReg(PWM_S00_AXI_SLV_REG1_OFFSET, PWMSTEPS / 2);
-
-		//LED2
-		writePwmReg(PWM_S00_AXI_SLV_REG2_OFFSET, PWMSTEPS / 10);
-
-		//LED3
-		writePwmReg(PWM_S00_AXI_SLV_REG3_OFFSET, PWMSTEPS);
-
-		//LED0
-		for (i = 0; i <= PWMSTEPS; i = i + PWMSTEPS / 5) {
-			writePwmReg(PWM_S00_AXI_SLV_REG0_OFFSET, i);
-		}
-	}
-
-	//finish
-	return 0;
 }

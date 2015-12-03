@@ -1,7 +1,7 @@
 Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2015.3 (lin64) Build 1368829 Mon Sep 28 20:06:39 MDT 2015
-| Date         : Wed Dec  2 14:37:47 2015
+| Date         : Thu Dec  3 10:06:18 2015
 | Host         : mp-akulapd.ziti.uni-heidelberg.de running 64-bit unknown
 | Command      : report_io -file design_1_wrapper_io_placed.rpt
 | Design       : design_1_wrapper
@@ -23,7 +23,7 @@ Table of Contents
 +---------------+
 | Total User IO |
 +---------------+
-|           136 |
+|           138 |
 +---------------+
 
 
@@ -458,11 +458,11 @@ Table of Contents
 | V5         |                   | High Range | IO_L21P_T3_DQS_13       | User IO     |                   |      13 |            |      |                     |                      |         |            |           |          |      |                  |
 | V6         |                   |            | GND                     | GND         |                   |         |            |      |                     |                      |     0.0 |            |           |          |      |                  |
 | V7         |                   | High Range | IO_L23P_T3_13           | User IO     |                   |      13 |            |      |                     |                      |         |            |           |          |      |                  |
-| V8         |                   | High Range | IO_L2P_T0_13            | User IO     |                   |      13 |            |      |                     |                      |         |            |           |          |      |                  |
-| V9         |                   | High Range | IO_L1N_T0_13            | User IO     |                   |      13 |            |      |                     |                      |         |            |           |          |      |                  |
-| V10        | pwmPulse[2]       | High Range | IO_L1P_T0_13            | OUTPUT      | LVCMOS33          |      13 |         12 | SLOW |                     |            FP_VTT_50 |         | FIXED      |           |          |      | NONE             |
+| V8         | pwmPulse[4]       | High Range | IO_L2P_T0_13            | OUTPUT      | LVCMOS33          |      13 |         12 | SLOW |                     |            FP_VTT_50 |         | FIXED      |           |          |      | NONE             |
+| V9         | pwmPulse[2]       | High Range | IO_L1N_T0_13            | OUTPUT      | LVCMOS33          |      13 |         12 | SLOW |                     |            FP_VTT_50 |         | FIXED      |           |          |      | NONE             |
+| V10        | pwmPulse[3]       | High Range | IO_L1P_T0_13            | OUTPUT      | LVCMOS33          |      13 |         12 | SLOW |                     |            FP_VTT_50 |         | FIXED      |           |          |      | NONE             |
 | V11        |                   | High Range | VCCO_13                 | VCCO        |                   |      13 |            |      |                     |                      |    3.30 |            |           |          |      |                  |
-| V12        | pwmPulse[4]       | High Range | IO_L4P_T0_13            | OUTPUT      | LVCMOS33          |      13 |         12 | SLOW |                     |            FP_VTT_50 |         | FIXED      |           |          |      | NONE             |
+| V12        | pwmDir[0]         | High Range | IO_L4P_T0_13            | OUTPUT      | LVCMOS33          |      13 |         12 | SLOW |                     |            FP_VTT_50 |         | FIXED      |           |          |      | NONE             |
 | V13        |                   | High Range | IO_L20P_T3_33           | User IO     |                   |      33 |            |      |                     |                      |         |            |           |          |      |                  |
 | V14        |                   | High Range | IO_L19P_T3_33           | User IO     |                   |      33 |            |      |                     |                      |         |            |           |          |      |                  |
 | V15        |                   | High Range | IO_L19N_T3_VREF_33      | User IO     |                   |      33 |            |      |                     |                      |         |            |           |          |      |                  |
@@ -480,9 +480,9 @@ Table of Contents
 | W5         |                   | High Range | IO_L24N_T3_13           | User IO     |                   |      13 |            |      |                     |                      |         |            |           |          |      |                  |
 | W6         |                   | High Range | IO_L24P_T3_13           | User IO     |                   |      13 |            |      |                     |                      |         |            |           |          |      |                  |
 | W7         |                   | High Range | IO_L23N_T3_13           | User IO     |                   |      13 |            |      |                     |                      |         |            |           |          |      |                  |
-| W8         | pwmPulse[3]       | High Range | IO_L2N_T0_13            | OUTPUT      | LVCMOS33          |      13 |         12 | SLOW |                     |            FP_VTT_50 |         | FIXED      |           |          |      | NONE             |
+| W8         | pwmPulse[5]       | High Range | IO_L2N_T0_13            | OUTPUT      | LVCMOS33          |      13 |         12 | SLOW |                     |            FP_VTT_50 |         | FIXED      |           |          |      | NONE             |
 | W9         |                   |            | GND                     | GND         |                   |         |            |      |                     |                      |     0.0 |            |           |          |      |                  |
-| W10        | pwmPulse[5]       | High Range | IO_L3N_T0_DQS_13        | OUTPUT      | LVCMOS33          |      13 |         12 | SLOW |                     |            FP_VTT_50 |         | FIXED      |           |          |      | NONE             |
+| W10        | pwmOe[0]          | High Range | IO_L3N_T0_DQS_13        | OUTPUT      | LVCMOS33          |      13 |         12 | SLOW |                     |            FP_VTT_50 |         | FIXED      |           |          |      | NONE             |
 | W11        | pwmPulse[1]       | High Range | IO_L3P_T0_DQS_13        | OUTPUT      | LVCMOS33          |      13 |         12 | SLOW |                     |            FP_VTT_50 |         | FIXED      |           |          |      | NONE             |
 | W12        | pwmPulse[0]       | High Range | IO_L4N_T0_13            | OUTPUT      | LVCMOS33          |      13 |         12 | SLOW |                     |            FP_VTT_50 |         | FIXED      |           |          |      | NONE             |
 | W13        |                   | High Range | IO_L20N_T3_33           | User IO     |                   |      33 |            |      |                     |                      |         |            |           |          |      |                  |
