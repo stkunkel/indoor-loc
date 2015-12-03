@@ -54,7 +54,7 @@ void printQuatDrift(unsigned int time_min) {
 		myprintf("Error in drift calculation without calibration\r\n.");
 	} else {
 		myprintf(
-				"Quat Drift after %d minutes without initial calibration: %f %f %f %f\r\n",
+				"Quat Drift after %d minute(s) without initial calibration: %f %f %f %f\r\n",
 				time_min, quat_drift[0], quat_drift[1], quat_drift[2],
 				quat_drift[3]);
 	}
@@ -66,7 +66,7 @@ void printQuatDrift(unsigned int time_min) {
 		myprintf("Error in drift calculation with calibration\r\n.");
 	} else {
 		myprintf(
-				"Quat Drift after %d minutes with initial calibration: %f %f %f %f\r\n",
+				"Quat Drift after %d minute(s) with initial calibration: %f %f %f %f\r\n",
 				time_min, quat_drift[0], quat_drift[1],
 				quat_drift[2], quat_drift[3]);
 	}
