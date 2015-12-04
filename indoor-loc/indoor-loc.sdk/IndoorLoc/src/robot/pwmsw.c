@@ -38,7 +38,7 @@ static const Joint jointVal[6] = { base, shoulder, elbow, wrist, thumb, finger }
 int moveToAbsAngle(Joint joint, float dgr);
 float getAbsAngle(Joint joint);
 float valToAngle(Joint joint, u32 value);
-u32 toValue(Joint joint, float dgr);
+u32 angleToValue(Joint joint, float dgr);
 int moveTo(Joint joint, u32 value);
 short getPosMvDir(Joint joint);
 u32 getValReg(Joint joint);
@@ -69,17 +69,18 @@ int pwmTest() {
 	}
 
 	//Debug
-//	myprintf(("Degree -> Val:\r\n"));
-//	for (reg = -180; reg <= 180; reg += 10) {
-//		myprintf("J  : %d / %f\r\n", reg, toValue(jointVal[4], (float) reg));
-//		myprintf("W/F: %d / %f\r\n", reg, toValue(jointVal[4], (float) reg));
-//	}
-
-	myprintf(("Val -> Degree:\r\n"));
-	for (reg = 0; reg <= 3100; reg += 100) {
-		myprintf("J  : %d / %f\r\n", reg, valToAngle(jointVal[4], reg));
-		myprintf("W/F: %d / %f\r\n", reg, valToAngle(jointVal[5], reg));
+	myprintf(("Degree -> Val:\r\n"));
+	for (reg = -180; reg <= 180; reg += 10) {
+		myprintf("J  : %d / %d\r\n", reg, angleToValue(jointVal[4], (float) reg));
+		//myprintf("W/F: %d / %d\r\n", reg,
+		//		angleToValue(jointVal[5], (float) reg));
 	}
+
+//	myprintf(("Val -> Degree:\r\n"));
+//	for (reg = 0; reg <= 3100; reg += 100) {
+//		myprintf("J  : %d / %f\r\n", reg, valToAngle(jointVal[4], reg));
+//		myprintf("W/F: %d / %f\r\n", reg, valToAngle(jointVal[5], reg));
+//	}
 	return 0;
 
 //Get Reg Values
@@ -137,7 +138,7 @@ int moveToAbsAngle(Joint joint, float dgr) {
 	u32 val;
 
 	//Get final steps
-	val = toValue(joint, dgr);
+	val = angleToValue(joint, dgr);
 
 	//Move
 	status = moveTo(joint, val);
@@ -243,13 +244,14 @@ float valToAngle(Joint joint, u32 value) {
  * In: Joint Angle in Degrees
  * Returns Step value
  */
-u32 toValue(Joint joint, float dgr) {
+u32 angleToValue(Joint joint, float dgr) {
 	//Variables
 	int factor;
 	int limit;
 	float remainder;
 	float m;
 	int n;
+	float result;
 
 	//Make sure dgr is btw. -180 and +180 dgrs
 	if (dgr > DGR_POS_LIMIT || dgr < DGR_NEG_LIMIT) {
@@ -264,43 +266,42 @@ u32 toValue(Joint joint, float dgr) {
 		dgr = remainder - limit;
 	}
 
-	//Compute m and n
-	if (dgr >= -90.0 && dgr <= 90.0) {
-		if (joint == wrist || joint == finger) {
+	//Compute m and n for wrist or finger
+	if (joint == wrist || joint == finger) {
+		if (dgr >= DGR_NEG_LIMIT / 2.0 && dgr <= DGR_POS_LIMIT / 2.0) {
 			m = 100.0 / 9.0;
-			n = 1500;
+			n = 500;
 		} else {
-			m = -100.0 / 9.0;
-			n = 3500;
-		}
-	} else {
-
-		if (joint == wrist || joint == finger) {
 			//Get m
 			m = 50.0 / 9.0;
 
 			//Get n
-			if (dgr < -90.0) {
-				n = 0;
+			if (dgr < DGR_NEG_LIMIT / 2) {
+				n = -2000;
 			} else { //dgr > 90
-				n = 500;
+				n = 1000;
 			}
+		}
+	} else { //other joints
+		if (dgr >= DGR_NEG_LIMIT / 2.0 && dgr <= DGR_POS_LIMIT / 2.0) {
+			m = -100.0 / 9.0;
+			n = 1500;
 		} else {
 			//Get m
 			m = -50.0 / 9.0;
 
 			//Get n
-			if (dgr < -90.0) {
-				n = 3000;
+			if (dgr < DGR_NEG_LIMIT/2) {
+				n = 2000;
 			} else { //dgr > 90
-				n = 2500;
+				n = 1000;
 			}
 		}
-
 	}
 
 	//Return
-	return (u32) (m * dgr + n);
+	result = round(m * dgr + n);
+	return (u32) result;
 }
 
 /*
