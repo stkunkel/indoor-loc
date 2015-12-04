@@ -17,8 +17,11 @@
  * Defines: General
  */
 #define PWMADDRESS  	0x43c00000
-#define PWMSTEPS		7
-#define US_PER_DGR		22222 // 4s/°
+#define PWM_STEPS		20000
+#define PWM_VAL_INIT	1500
+#define PWM_VAL_MAX		3000
+#define SLEEP_BTW_STEPS	2000 //us
+
 
 /*
  * Defines: Registers
@@ -37,8 +40,11 @@
 #define PWM5_STEPS_REG		PWM_S00_AXI_SLV_REG11_OFFSET
 
 /*
- * Readable Defines
+ * Robot Arm Defines
  */
+#define DGR_POS_LIMIT		180
+#define DGR_NEG_LIMIT		-180
+#define NUMBER_OF_JOINTS	6
 #define BASE_REG			PWM0_VAL_REG
 #define SHOULDER_REG		PWM1_VAL_REG
 #define ELBOW_REG			PWM2_VAL_REG
@@ -51,6 +57,12 @@
 #define WRIST_INDEX			3
 #define THUMB_INDEX			4
 #define FINGER_INDEX		5
+#define BASE_SIGN			-1
+#define SHOULDER_SIGN		-1
+#define ELBOW_SIGN			-1
+#define WRIST_SIGN			1
+#define THUMB_SIGN			-1
+#define FINGER_SIGN			1
 
 /*
  * Types
@@ -63,5 +75,7 @@ typedef enum {
  * Functions
  */
 int pwmTest();
+float degToRad(float deg);
+float radToDeg(float rad);
 
 #endif
