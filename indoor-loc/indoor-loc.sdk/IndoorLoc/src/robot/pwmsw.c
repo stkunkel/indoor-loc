@@ -60,7 +60,7 @@ int pwmTest() {
 	u32 steps = PWM_STEPS;
 	u32 val = PWM_VAL_INIT;
 	int status = PWM_SUCCESS;
-	int reg = 0, i;
+	int reg = 0;
 
 	//Reset
 	for (reg = 0; reg < NUMBER_OF_JOINTS; reg++) {
@@ -240,7 +240,7 @@ u32 toValue(Joint joint, float dgr) {
  */
 int moveTo(Joint joint, u32 value) {
 	//Variables
-	u32 currValue, newValue;
+	u32 currValue;
 
 	//Make sure value is positive
 	if (value < 0) {
