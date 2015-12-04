@@ -70,8 +70,9 @@ int pwmTest() {
 
 	//Debug
 	myprintf(("Degree -> Val:\r\n"));
-	for (reg = -180; reg <= 180; reg += 10) {
-		myprintf("J  : %d / %d\r\n", reg, angleToValue(jointVal[4], (float) reg));
+	for (reg = -720; reg <= 720; reg += 60) {
+		myprintf("J  : %d / %d\r\n", reg,
+				angleToValue(jointVal[4], (float) reg));
 		//myprintf("W/F: %d / %d\r\n", reg,
 		//		angleToValue(jointVal[5], (float) reg));
 	}
@@ -256,14 +257,32 @@ u32 angleToValue(Joint joint, float dgr) {
 	//Make sure dgr is btw. -180 and +180 dgrs
 	if (dgr > DGR_POS_LIMIT || dgr < DGR_NEG_LIMIT) {
 		if (dgr > DGR_POS_LIMIT) {
-			limit = DGR_POS_LIMIT;
+			//Compute Remainder
+			limit = 2 * DGR_POS_LIMIT;
+			factor = (int) dgr / limit;
+			remainder = dgr - factor * limit;
+
+			//Correct dgr
+			if (remainder > DGR_POS_LIMIT) {
+				dgr = remainder - limit;
+			} else {
+				dgr = remainder;
+			}
+
 		} else {
-			limit = DGR_NEG_LIMIT;
+			//Compute Remainder
+			limit = 2 * DGR_NEG_LIMIT;
+			factor = (int) dgr / limit;
+			remainder = dgr - factor * limit;
+
+			//Correct dgr
+			if (remainder < DGR_NEG_LIMIT) {
+				dgr = remainder - limit;
+			} else {
+				dgr = remainder;
+			}
 		}
 
-		factor = (int) dgr / limit;
-		remainder = dgr - factor * limit;
-		dgr = remainder - limit;
 	}
 
 	//Compute m and n for wrist or finger
@@ -291,7 +310,7 @@ u32 angleToValue(Joint joint, float dgr) {
 			m = -50.0 / 9.0;
 
 			//Get n
-			if (dgr < DGR_NEG_LIMIT/2) {
+			if (dgr < DGR_NEG_LIMIT / 2) {
 				n = 2000;
 			} else { //dgr > 90
 				n = 1000;
