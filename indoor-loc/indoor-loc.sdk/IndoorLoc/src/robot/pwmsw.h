@@ -18,6 +18,7 @@
  */
 #define PWMADDRESS  	0x43c00000
 #define PWM_STEPS		20000
+#define PWM_VAL_MIN		0
 #define PWM_VAL_INIT	1500
 #define PWM_VAL_MAX		3000
 #define SLEEP_BTW_STEPS	2000 //us

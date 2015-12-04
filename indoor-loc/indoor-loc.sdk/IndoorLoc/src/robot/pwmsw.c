@@ -37,7 +37,7 @@ static const Joint jointVal[6] = { base, shoulder, elbow, wrist, thumb, finger }
  */
 int moveToAbsAngle(Joint joint, float dgr);
 float getAbsAngle(Joint joint);
-float valToRadians(Joint joint, u32 value);
+float valToAngle(Joint joint, u32 value);
 u32 toValue(Joint joint, float dgr);
 int moveTo(Joint joint, u32 value);
 short getPosMvDir(Joint joint);
@@ -63,15 +63,24 @@ int pwmTest() {
 	int reg = 0;
 
 	//Reset
-	for (reg = 0; reg < NUMBER_OF_JOINTS; reg++) {
-		moveTo(jointVal[reg], 1400);
-	}
-
-	//Init PWM
 	status = reset();
 	if (status != PWM_SUCCESS) {
 		return status;
 	}
+
+	//Debug
+//	myprintf(("Degree -> Val:\r\n"));
+//	for (reg = -180; reg <= 180; reg += 10) {
+//		myprintf("J  : %d / %f\r\n", reg, toValue(jointVal[4], (float) reg));
+//		myprintf("W/F: %d / %f\r\n", reg, toValue(jointVal[4], (float) reg));
+//	}
+
+	myprintf(("Val -> Degree:\r\n"));
+	for (reg = 0; reg <= 3100; reg += 100) {
+		myprintf("J  : %d / %f\r\n", reg, valToAngle(jointVal[4], reg));
+		myprintf("W/F: %d / %f\r\n", reg, valToAngle(jointVal[5], reg));
+	}
+	return 0;
 
 //Get Reg Values
 	for (reg = 4; reg < NUMBER_OF_JOINTS; reg++) {
@@ -82,7 +91,7 @@ int pwmTest() {
 		myprintf("Steps of %s: %d\r\n", jointName[reg],
 				readPwmReg(pwmStepsRegister[reg]));
 		myprintf("Value of %s: %d (%fdgrs)\r\n", jointName[reg], val,
-				radToDeg(valToRadians(jointVal[reg], val)));
+				radToDeg(valToAngle(jointVal[reg], val)));
 
 		//Move 90dgrs
 		if (jointVal[reg] == wrist || jointVal[reg] == finger) {
@@ -96,7 +105,7 @@ int pwmTest() {
 		//Get and print current value
 		val = readPwmReg(pwmValRegister[reg]);
 		myprintf("Value of %s: %d (%fdgrs)\r\n", jointName[reg], val,
-				radToDeg(valToRadians(jointVal[reg], val)));
+				radToDeg(valToAngle(jointVal[reg], val)));
 
 		//Move back 90dgrs
 		if (jointVal[reg] == wrist || jointVal[reg] == finger) {
@@ -109,7 +118,7 @@ int pwmTest() {
 		//Get and print current value
 		val = readPwmReg(pwmValRegister[reg]);
 		myprintf("Value of %s: %d (%fdgrs)\r\n", jointName[reg], val,
-				radToDeg(valToRadians(jointVal[reg], val)));
+				radToDeg(valToAngle(jointVal[reg], val)));
 
 		//Reset
 		writePwmReg(pwmValRegister[reg], 1500);
@@ -150,7 +159,7 @@ float getAbsAngle(Joint joint) {
 	steps = readPwmReg(getValReg(joint));
 
 	//Convert to angle and return
-	return valToRadians(joint, steps);
+	return valToAngle(joint, steps);
 }
 
 /*
@@ -176,22 +185,57 @@ float radToDeg(float rad) {
  * In: Joint, step value
  * Returns Angle in Degrees
  */
-float valToRadians(Joint joint, u32 value) {
+float valToAngle(Joint joint, u32 value) {
 	//Variables
-	float rad;
+	float m;
+	int n;
 
-	//Scale
-	//value = (u32) (value * PWM_STEPS / stepAmount);
+	//Make sure value is bigger than 0
+	if (value < PWM_VAL_MIN) {
+		value = PWM_VAL_MIN;
+	}
 
-	//Compute Angle
-	if (joint == wrist || joint == finger) {
-		rad = asin((value - 1500.0) / 3000.0);
+	//Make sure value is max. 3000
+	if (value > PWM_VAL_MAX) {
+		value = PWM_VAL_MAX;
+	}
+
+	//Compute m and n
+	if (value >= 500 && value <= 1500) {
+		if (joint == wrist || joint == finger) {
+			m = 9.0 / 100.0;
+			n = -135;
+		} else {
+			m = -9.0 / 100.0;
+			n = 135;
+		}
 	} else {
-		rad = acos((value / 3000.0 - 0.5)) - M_PI_2;
+		if (joint == wrist || joint == finger) {
+			//Get m
+			m = 9.0 / 50.0;
+
+			//Get n
+			if (value < 500) {
+				n = -180;
+			} else { //value > 1500
+				n = -360;
+			}
+		} else {
+			//Get m
+			m = -9.0 / 50.0;
+
+			//Get n
+			if (value < 500) {
+				n = 180;
+			} else { //value > 1500
+				n = 360;
+			}
+		}
+
 	}
 
 	//Return
-	return rad;
+	return (m * value + n);
 }
 
 /*
@@ -204,7 +248,8 @@ u32 toValue(Joint joint, float dgr) {
 	int factor;
 	int limit;
 	float remainder;
-	u32 value;
+	float m;
+	int n;
 
 	//Make sure dgr is btw. -180 and +180 dgrs
 	if (dgr > DGR_POS_LIMIT || dgr < DGR_NEG_LIMIT) {
@@ -219,18 +264,43 @@ u32 toValue(Joint joint, float dgr) {
 		dgr = remainder - limit;
 	}
 
-	//Compute value
-	if (joint == wrist || joint == finger) {
-		value = (u32) (50.0 * (180.0 + dgr) / 3.0);
+	//Compute m and n
+	if (dgr >= -90.0 && dgr <= 90.0) {
+		if (joint == wrist || joint == finger) {
+			m = 100.0 / 9.0;
+			n = 1500;
+		} else {
+			m = -100.0 / 9.0;
+			n = 3500;
+		}
 	} else {
-		value = (u32) (-50.0 * (180.0 - dgr) / 3.0);
+
+		if (joint == wrist || joint == finger) {
+			//Get m
+			m = 50.0 / 9.0;
+
+			//Get n
+			if (dgr < -90.0) {
+				n = 0;
+			} else { //dgr > 90
+				n = 500;
+			}
+		} else {
+			//Get m
+			m = -50.0 / 9.0;
+
+			//Get n
+			if (dgr < -90.0) {
+				n = 3000;
+			} else { //dgr > 90
+				n = 2500;
+			}
+		}
+
 	}
 
-	//Scale value
-	value = (u32) (value / PWM_STEPS * stepAmount);
-
 	//Return
-	return value;
+	return (u32) (m * dgr + n);
 }
 
 /*
