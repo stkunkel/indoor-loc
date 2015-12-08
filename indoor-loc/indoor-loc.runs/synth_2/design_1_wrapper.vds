@@ -2,33 +2,32 @@
 # Vivado v2015.3 (64-bit)
 # SW Build 1368829 on Mon Sep 28 20:06:39 MDT 2015
 # IP Build 1367837 on Mon Sep 28 08:56:14 MDT 2015
-# Start of session at: Thu Dec  3 10:04:04 2015
-# Process ID: 7339
-# Current directory: /home/rupprich/Zynq/indoor-loc/indoor-loc.runs/synth_2
+# Start of session at: Mon Dec  7 10:11:28 2015
+# Process ID: 5643
+# Current directory: /home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.runs/synth_2
 # Command line: vivado -log design_1_wrapper.vds -mode batch -messageDb vivado.pb -notrace -source design_1_wrapper.tcl
-# Log file: /home/rupprich/Zynq/indoor-loc/indoor-loc.runs/synth_2/design_1_wrapper.vds
-# Journal file: /home/rupprich/Zynq/indoor-loc/indoor-loc.runs/synth_2/vivado.jou
+# Log file: /home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.runs/synth_2/design_1_wrapper.vds
+# Journal file: /home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.runs/synth_2/vivado.jou
 #-----------------------------------------------------------
 source design_1_wrapper.tcl -notrace
 INFO: [IP_Flow 19-234] Refreshing IP repositories
-INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/rupprich/Zynq/ip_repo/pwm_1.0'.
-INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/Xilinx/Vivado/2015.3/data/ip'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/ruppi/Masterarbeit/Zynq/indoor-loc/ip_repo/pwm_1.0'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/Xilinx2/Vivado/2015.3/data/ip'.
 Command: synth_design -top design_1_wrapper -part xc7z020clg484-1
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
-INFO: [Common 17-1223] The version limit for your license is '2015.12' and will expire in 28 days. A version limit expiration means that, although you may be able to continue to use the current version of tools or IP with this license, you will not be eligible for any updates or new releases.
-WARNING: [Synth 8-992] S_AXI_GP0_ACLK_temp is already implicitly declared earlier [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/hdl/verilog/processing_system7_v5_5_processing_system7.v:2701]
-WARNING: [Synth 8-992] S_AXI_GP1_ACLK_temp is already implicitly declared earlier [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/hdl/verilog/processing_system7_v5_5_processing_system7.v:2702]
+WARNING: [Synth 8-992] S_AXI_GP0_ACLK_temp is already implicitly declared earlier [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/hdl/verilog/processing_system7_v5_5_processing_system7.v:2701]
+WARNING: [Synth 8-992] S_AXI_GP1_ACLK_temp is already implicitly declared earlier [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/hdl/verilog/processing_system7_v5_5_processing_system7.v:2702]
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 1208.180 ; gain = 257.012 ; free physical = 1346 ; free virtual = 13206
+Starting RTL Elaboration : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 1110.645 ; gain = 244.008 ; free physical = 2147 ; free virtual = 4508
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-638] synthesizing module 'design_1_wrapper' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1_wrapper.vhd:43]
-INFO: [Synth 8-3491] module 'design_1' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1456' bound to instance 'design_1_i' of component 'design_1' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1_wrapper.vhd:73]
-INFO: [Synth 8-638] synthesizing module 'design_1' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1489]
-INFO: [Synth 8-3491] module 'design_1_processing_system7_0_0' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/synth/design_1_processing_system7_0_0.v:57' bound to instance 'processing_system7_0' of component 'design_1_processing_system7_0_0' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1731]
-INFO: [Synth 8-638] synthesizing module 'design_1_processing_system7_0_0' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/synth/design_1_processing_system7_0_0.v:57]
-INFO: [Synth 8-638] synthesizing module 'processing_system7_v5_5_processing_system7' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/hdl/verilog/processing_system7_v5_5_processing_system7.v:156]
+INFO: [Synth 8-638] synthesizing module 'design_1_wrapper' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1_wrapper.vhd:43]
+INFO: [Synth 8-3491] module 'design_1' declared at '/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1456' bound to instance 'design_1_i' of component 'design_1' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1_wrapper.vhd:73]
+INFO: [Synth 8-638] synthesizing module 'design_1' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1489]
+INFO: [Synth 8-3491] module 'design_1_processing_system7_0_0' declared at '/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/synth/design_1_processing_system7_0_0.v:57' bound to instance 'processing_system7_0' of component 'design_1_processing_system7_0_0' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1731]
+INFO: [Synth 8-638] synthesizing module 'design_1_processing_system7_0_0' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/synth/design_1_processing_system7_0_0.v:57]
+INFO: [Synth 8-638] synthesizing module 'processing_system7_v5_5_processing_system7' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/hdl/verilog/processing_system7_v5_5_processing_system7.v:156]
 	Parameter C_USE_DEFAULT_ACP_USER_VAL bound to: 0 - type: integer 
 	Parameter C_S_AXI_ACP_ARUSER_VAL bound to: 31 - type: integer 
 	Parameter C_S_AXI_ACP_AWUSER_VAL bound to: 31 - type: integer 
@@ -83,34 +82,34 @@ INFO: [Synth 8-638] synthesizing module 'processing_system7_v5_5_processing_syst
 	Parameter C_USE_S_AXI_GP0 bound to: 0 - type: integer 
 	Parameter C_USE_S_AXI_GP1 bound to: 0 - type: integer 
 	Parameter C_USE_S_AXI_ACP bound to: 0 - type: integer 
-INFO: [Synth 8-5534] Detected attribute (* keep = "true" *) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/hdl/verilog/processing_system7_v5_5_processing_system7.v:1328]
-INFO: [Synth 8-5534] Detected attribute (* keep = "true" *) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/hdl/verilog/processing_system7_v5_5_processing_system7.v:1329]
-INFO: [Synth 8-638] synthesizing module 'BUFG' [/opt/Xilinx/Vivado/2015.3/scripts/rt/data/unisim_comp.v:607]
-INFO: [Synth 8-256] done synthesizing module 'BUFG' (1#1) [/opt/Xilinx/Vivado/2015.3/scripts/rt/data/unisim_comp.v:607]
-INFO: [Synth 8-638] synthesizing module 'BIBUF' [/opt/Xilinx/Vivado/2015.3/scripts/rt/data/unisim_comp.v:268]
-INFO: [Synth 8-256] done synthesizing module 'BIBUF' (2#1) [/opt/Xilinx/Vivado/2015.3/scripts/rt/data/unisim_comp.v:268]
-INFO: [Synth 8-638] synthesizing module 'PS7' [/opt/Xilinx/Vivado/2015.3/scripts/rt/data/unisim_comp.v:33208]
-INFO: [Synth 8-256] done synthesizing module 'PS7' (3#1) [/opt/Xilinx/Vivado/2015.3/scripts/rt/data/unisim_comp.v:33208]
-INFO: [Synth 8-638] synthesizing module 'xlnx_axi_wrshim_unwrap' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/hdl/verilog/processing_system7_v5_5_processing_system7.v:4213]
+INFO: [Synth 8-5534] Detected attribute (* keep = "true" *) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/hdl/verilog/processing_system7_v5_5_processing_system7.v:1328]
+INFO: [Synth 8-5534] Detected attribute (* keep = "true" *) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/hdl/verilog/processing_system7_v5_5_processing_system7.v:1329]
+INFO: [Synth 8-638] synthesizing module 'BUFG' [/opt/Xilinx2/Vivado/2015.3/scripts/rt/data/unisim_comp.v:607]
+INFO: [Synth 8-256] done synthesizing module 'BUFG' (1#1) [/opt/Xilinx2/Vivado/2015.3/scripts/rt/data/unisim_comp.v:607]
+INFO: [Synth 8-638] synthesizing module 'BIBUF' [/opt/Xilinx2/Vivado/2015.3/scripts/rt/data/unisim_comp.v:268]
+INFO: [Synth 8-256] done synthesizing module 'BIBUF' (2#1) [/opt/Xilinx2/Vivado/2015.3/scripts/rt/data/unisim_comp.v:268]
+INFO: [Synth 8-638] synthesizing module 'PS7' [/opt/Xilinx2/Vivado/2015.3/scripts/rt/data/unisim_comp.v:33208]
+INFO: [Synth 8-256] done synthesizing module 'PS7' (3#1) [/opt/Xilinx2/Vivado/2015.3/scripts/rt/data/unisim_comp.v:33208]
+INFO: [Synth 8-638] synthesizing module 'xlnx_axi_wrshim_unwrap' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/hdl/verilog/processing_system7_v5_5_processing_system7.v:4213]
 	Parameter ID_WIDTH bound to: 6 - type: integer 
 	Parameter AD_WIDTH bound to: 32 - type: integer 
 	Parameter D_WIDTH bound to: 32 - type: integer 
 	Parameter AXI_WRSHIM_APB_SYNC_LEVELS bound to: 2 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'xlnx_axi_wrshim_unwrap' (4#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/hdl/verilog/processing_system7_v5_5_processing_system7.v:4213]
-INFO: [Synth 8-256] done synthesizing module 'processing_system7_v5_5_processing_system7' (5#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/hdl/verilog/processing_system7_v5_5_processing_system7.v:156]
-WARNING: [Synth 8-350] instance 'inst' of module 'processing_system7_v5_5_processing_system7' requires 685 connections, but only 672 given [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/synth/design_1_processing_system7_0_0.v:316]
-INFO: [Synth 8-256] done synthesizing module 'design_1_processing_system7_0_0' (6#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/synth/design_1_processing_system7_0_0.v:57]
-INFO: [Synth 8-638] synthesizing module 'design_1_processing_system7_0_axi_periph_0' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:773]
-INFO: [Synth 8-638] synthesizing module 'm00_couplers_imp_OBU1DD' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:61]
-INFO: [Synth 8-256] done synthesizing module 'm00_couplers_imp_OBU1DD' (7#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:61]
-INFO: [Synth 8-638] synthesizing module 'm01_couplers_imp_1FBREZ4' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:172]
-INFO: [Synth 8-256] done synthesizing module 'm01_couplers_imp_1FBREZ4' (8#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:172]
-INFO: [Synth 8-638] synthesizing module 'm02_couplers_imp_MVV5YQ' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:283]
-INFO: [Synth 8-256] done synthesizing module 'm02_couplers_imp_MVV5YQ' (9#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:283]
-INFO: [Synth 8-638] synthesizing module 's00_couplers_imp_1CFO1MB' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:413]
-INFO: [Synth 8-3491] module 'design_1_auto_pc_0' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_auto_pc_0/synth/design_1_auto_pc_0.v:57' bound to instance 'auto_pc' of component 'design_1_auto_pc_0' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:596]
-INFO: [Synth 8-638] synthesizing module 'design_1_auto_pc_0' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_auto_pc_0/synth/design_1_auto_pc_0.v:57]
-INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_axi_protocol_converter' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_axi_protocol_converter.v:62]
+INFO: [Synth 8-256] done synthesizing module 'xlnx_axi_wrshim_unwrap' (4#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/hdl/verilog/processing_system7_v5_5_processing_system7.v:4213]
+INFO: [Synth 8-256] done synthesizing module 'processing_system7_v5_5_processing_system7' (5#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/hdl/verilog/processing_system7_v5_5_processing_system7.v:156]
+WARNING: [Synth 8-350] instance 'inst' of module 'processing_system7_v5_5_processing_system7' requires 685 connections, but only 672 given [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/synth/design_1_processing_system7_0_0.v:316]
+INFO: [Synth 8-256] done synthesizing module 'design_1_processing_system7_0_0' (6#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/synth/design_1_processing_system7_0_0.v:57]
+INFO: [Synth 8-638] synthesizing module 'design_1_processing_system7_0_axi_periph_0' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:773]
+INFO: [Synth 8-638] synthesizing module 'm00_couplers_imp_OBU1DD' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:61]
+INFO: [Synth 8-256] done synthesizing module 'm00_couplers_imp_OBU1DD' (7#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:61]
+INFO: [Synth 8-638] synthesizing module 'm01_couplers_imp_1FBREZ4' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:172]
+INFO: [Synth 8-256] done synthesizing module 'm01_couplers_imp_1FBREZ4' (8#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:172]
+INFO: [Synth 8-638] synthesizing module 'm02_couplers_imp_MVV5YQ' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:283]
+INFO: [Synth 8-256] done synthesizing module 'm02_couplers_imp_MVV5YQ' (9#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:283]
+INFO: [Synth 8-638] synthesizing module 's00_couplers_imp_1CFO1MB' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:413]
+INFO: [Synth 8-3491] module 'design_1_auto_pc_0' declared at '/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_auto_pc_0/synth/design_1_auto_pc_0.v:57' bound to instance 'auto_pc' of component 'design_1_auto_pc_0' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:596]
+INFO: [Synth 8-638] synthesizing module 'design_1_auto_pc_0' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_auto_pc_0/synth/design_1_auto_pc_0.v:57]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_axi_protocol_converter' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_axi_protocol_converter.v:62]
 	Parameter C_FAMILY bound to: zynq - type: string 
 	Parameter C_M_AXI_PROTOCOL bound to: 2 - type: integer 
 	Parameter C_S_AXI_PROTOCOL bound to: 1 - type: integer 
@@ -136,39 +135,39 @@ INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_axi_proto
 	Parameter P_SLVERR bound to: 2'b10 
 	Parameter P_PROTECTION bound to: 1 - type: integer 
 	Parameter P_CONVERSION bound to: 2 - type: integer 
-INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s.v:39]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s.v:39]
 	Parameter C_S_AXI_PROTOCOL bound to: 1 - type: integer 
 	Parameter C_AXI_ID_WIDTH bound to: 12 - type: integer 
 	Parameter C_AXI_ADDR_WIDTH bound to: 32 - type: integer 
 	Parameter C_AXI_DATA_WIDTH bound to: 32 - type: integer 
 	Parameter C_AXI_SUPPORTS_WRITE bound to: 1 - type: integer 
 	Parameter C_AXI_SUPPORTS_READ bound to: 1 - type: integer 
-INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_aw_channel' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_aw_channel.v:5]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_aw_channel' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_aw_channel.v:5]
 	Parameter C_ID_WIDTH bound to: 12 - type: integer 
 	Parameter C_AXI_ADDR_WIDTH bound to: 32 - type: integer 
-INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_cmd_translator' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_cmd_translator.v:17]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_cmd_translator' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_cmd_translator.v:17]
 	Parameter C_AXI_ADDR_WIDTH bound to: 32 - type: integer 
 	Parameter P_AXBURST_FIXED bound to: 2'b00 
 	Parameter P_AXBURST_INCR bound to: 2'b01 
 	Parameter P_AXBURST_WRAP bound to: 2'b10 
-INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_incr_cmd' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_incr_cmd.v:11]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_incr_cmd' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_incr_cmd.v:11]
 	Parameter C_AXI_ADDR_WIDTH bound to: 32 - type: integer 
 	Parameter L_AXI_ADDR_LOW_BIT bound to: 12 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_b2s_incr_cmd' (10#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_incr_cmd.v:11]
-INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_wrap_cmd' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_wrap_cmd.v:11]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_b2s_incr_cmd' (10#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_incr_cmd.v:11]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_wrap_cmd' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_wrap_cmd.v:11]
 	Parameter C_AXI_ADDR_WIDTH bound to: 32 - type: integer 
 	Parameter L_AXI_ADDR_LOW_BIT bound to: 12 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_b2s_wrap_cmd' (11#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_wrap_cmd.v:11]
-INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_b2s_cmd_translator' (12#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_cmd_translator.v:17]
-INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_wr_cmd_fsm' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_wr_cmd_fsm.v:10]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_b2s_wrap_cmd' (11#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_wrap_cmd.v:11]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_b2s_cmd_translator' (12#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_cmd_translator.v:17]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_wr_cmd_fsm' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_wr_cmd_fsm.v:10]
 	Parameter SM_IDLE bound to: 2'b00 
 	Parameter SM_CMD_EN bound to: 2'b01 
 	Parameter SM_CMD_ACCEPTED bound to: 2'b10 
 	Parameter SM_DONE_WAIT bound to: 2'b11 
-INFO: [Synth 8-226] default block is never used [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_wr_cmd_fsm.v:64]
-INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_b2s_wr_cmd_fsm' (13#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_wr_cmd_fsm.v:10]
-INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_b2s_aw_channel' (14#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_aw_channel.v:5]
-INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_b_channel' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_b_channel.v:10]
+INFO: [Synth 8-226] default block is never used [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_wr_cmd_fsm.v:64]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_b2s_wr_cmd_fsm' (13#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_wr_cmd_fsm.v:10]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_b2s_aw_channel' (14#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_aw_channel.v:5]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_b_channel' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_b_channel.v:10]
 	Parameter C_ID_WIDTH bound to: 12 - type: integer 
 	Parameter LP_RESP_OKAY bound to: 2'b00 
 	Parameter LP_RESP_EXOKAY bound to: 2'b01 
@@ -180,7 +179,7 @@ INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_b_cha
 	Parameter P_RWIDTH bound to: 2 - type: integer 
 	Parameter P_RDEPTH bound to: 4 - type: integer 
 	Parameter P_RAWIDTH bound to: 2 - type: integer 
-INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_simple_fifo' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_simple_fifo.v:9]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_simple_fifo' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_simple_fifo.v:9]
 	Parameter C_WIDTH bound to: 20 - type: integer 
 	Parameter C_AWIDTH bound to: 2 - type: integer 
 	Parameter C_DEPTH bound to: 4 - type: integer 
@@ -188,8 +187,8 @@ INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_simpl
 	Parameter C_EMPTY_PRE bound to: 2'b00 
 	Parameter C_FULL bound to: 2'b10 
 	Parameter C_FULL_PRE bound to: 2'b01 
-INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_b2s_simple_fifo' (15#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_simple_fifo.v:9]
-INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_simple_fifo__parameterized0' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_simple_fifo.v:9]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_b2s_simple_fifo' (15#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_simple_fifo.v:9]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_simple_fifo__parameterized0' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_simple_fifo.v:9]
 	Parameter C_WIDTH bound to: 2 - type: integer 
 	Parameter C_AWIDTH bound to: 2 - type: integer 
 	Parameter C_DEPTH bound to: 4 - type: integer 
@@ -197,20 +196,20 @@ INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_simpl
 	Parameter C_EMPTY_PRE bound to: 2'b00 
 	Parameter C_FULL bound to: 2'b10 
 	Parameter C_FULL_PRE bound to: 2'b01 
-INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_b2s_simple_fifo__parameterized0' (15#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_simple_fifo.v:9]
-INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_b2s_b_channel' (16#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_b_channel.v:10]
-INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_ar_channel' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_ar_channel.v:5]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_b2s_simple_fifo__parameterized0' (15#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_simple_fifo.v:9]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_b2s_b_channel' (16#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_b_channel.v:10]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_ar_channel' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_ar_channel.v:5]
 	Parameter C_ID_WIDTH bound to: 12 - type: integer 
 	Parameter C_AXI_ADDR_WIDTH bound to: 32 - type: integer 
-INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_rd_cmd_fsm' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_rd_cmd_fsm.v:10]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_rd_cmd_fsm' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_rd_cmd_fsm.v:10]
 	Parameter SM_IDLE bound to: 2'b00 
 	Parameter SM_CMD_EN bound to: 2'b01 
 	Parameter SM_CMD_ACCEPTED bound to: 2'b10 
 	Parameter SM_DONE bound to: 2'b11 
-INFO: [Synth 8-226] default block is never used [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_rd_cmd_fsm.v:72]
-INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_b2s_rd_cmd_fsm' (17#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_rd_cmd_fsm.v:10]
-INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_b2s_ar_channel' (18#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_ar_channel.v:5]
-INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_r_channel' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_r_channel.v:21]
+INFO: [Synth 8-226] default block is never used [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_rd_cmd_fsm.v:72]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_b2s_rd_cmd_fsm' (17#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_rd_cmd_fsm.v:10]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_b2s_ar_channel' (18#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_ar_channel.v:5]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_r_channel' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_r_channel.v:21]
 	Parameter C_ID_WIDTH bound to: 12 - type: integer 
 	Parameter C_DATA_WIDTH bound to: 32 - type: integer 
 	Parameter P_WIDTH bound to: 13 - type: integer 
@@ -219,7 +218,7 @@ INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_r_cha
 	Parameter P_D_WIDTH bound to: 34 - type: integer 
 	Parameter P_D_DEPTH bound to: 32 - type: integer 
 	Parameter P_D_AWIDTH bound to: 5 - type: integer 
-INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_simple_fifo__parameterized1' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_simple_fifo.v:9]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_simple_fifo__parameterized1' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_simple_fifo.v:9]
 	Parameter C_WIDTH bound to: 34 - type: integer 
 	Parameter C_AWIDTH bound to: 5 - type: integer 
 	Parameter C_DEPTH bound to: 32 - type: integer 
@@ -227,8 +226,8 @@ INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_simpl
 	Parameter C_EMPTY_PRE bound to: 5'b00000 
 	Parameter C_FULL bound to: 5'b11110 
 	Parameter C_FULL_PRE bound to: 5'b11010 
-INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_b2s_simple_fifo__parameterized1' (18#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_simple_fifo.v:9]
-INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_simple_fifo__parameterized2' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_simple_fifo.v:9]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_b2s_simple_fifo__parameterized1' (18#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_simple_fifo.v:9]
+INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_simple_fifo__parameterized2' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_simple_fifo.v:9]
 	Parameter C_WIDTH bound to: 13 - type: integer 
 	Parameter C_AWIDTH bound to: 5 - type: integer 
 	Parameter C_DEPTH bound to: 32 - type: integer 
@@ -236,9 +235,9 @@ INFO: [Synth 8-638] synthesizing module 'axi_protocol_converter_v2_1_6_b2s_simpl
 	Parameter C_EMPTY_PRE bound to: 5'b00000 
 	Parameter C_FULL bound to: 5'b11110 
 	Parameter C_FULL_PRE bound to: 5'b11010 
-INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_b2s_simple_fifo__parameterized2' (18#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_simple_fifo.v:9]
-INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_b2s_r_channel' (19#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_r_channel.v:21]
-INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_6_axi_register_slice' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axi_register_slice.v:64]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_b2s_simple_fifo__parameterized2' (18#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_simple_fifo.v:9]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_b2s_r_channel' (19#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s_r_channel.v:21]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_6_axi_register_slice' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axi_register_slice.v:64]
 	Parameter C_FAMILY bound to: virtex6 - type: string 
 	Parameter C_AXI_PROTOCOL bound to: 1 - type: integer 
 	Parameter C_AXI_ID_WIDTH bound to: 12 - type: integer 
@@ -331,7 +330,7 @@ INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_6_axi_register_
 	Parameter G_AXI_RUSER_INDEX bound to: 47 - type: integer 
 	Parameter G_AXI_RUSER_WIDTH bound to: 0 - type: integer 
 	Parameter G_AXI_RPAYLOAD_WIDTH bound to: 47 - type: integer 
-INFO: [Synth 8-638] synthesizing module 'axi_infrastructure_v1_1_0_axi2vector' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_infrastructure_v1_1/hdl/verilog/axi_infrastructure_v1_1_axi2vector.v:60]
+INFO: [Synth 8-638] synthesizing module 'axi_infrastructure_v1_1_0_axi2vector' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_infrastructure_v1_1/hdl/verilog/axi_infrastructure_v1_1_axi2vector.v:60]
 	Parameter C_AXI_PROTOCOL bound to: 1 - type: integer 
 	Parameter C_AXI_ID_WIDTH bound to: 12 - type: integer 
 	Parameter C_AXI_ADDR_WIDTH bound to: 32 - type: integer 
@@ -423,28 +422,28 @@ INFO: [Synth 8-638] synthesizing module 'axi_infrastructure_v1_1_0_axi2vector' [
 	Parameter G_AXI_RUSER_INDEX bound to: 47 - type: integer 
 	Parameter G_AXI_RUSER_WIDTH bound to: 0 - type: integer 
 	Parameter G_AXI_RPAYLOAD_WIDTH bound to: 47 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'axi_infrastructure_v1_1_0_axi2vector' (20#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_infrastructure_v1_1/hdl/verilog/axi_infrastructure_v1_1_axi2vector.v:60]
-INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
+INFO: [Synth 8-256] done synthesizing module 'axi_infrastructure_v1_1_0_axi2vector' (20#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_infrastructure_v1_1/hdl/verilog/axi_infrastructure_v1_1_axi2vector.v:60]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
 	Parameter C_FAMILY bound to: virtex6 - type: string 
 	Parameter C_DATA_WIDTH bound to: 66 - type: integer 
 	Parameter C_REG_CONFIG bound to: 1 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice' (21#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
-INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized0' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice' (21#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized0' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
 	Parameter C_FAMILY bound to: virtex6 - type: string 
 	Parameter C_DATA_WIDTH bound to: 49 - type: integer 
 	Parameter C_REG_CONFIG bound to: 0 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized0' (21#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
-INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized1' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized0' (21#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized1' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
 	Parameter C_FAMILY bound to: virtex6 - type: string 
 	Parameter C_DATA_WIDTH bound to: 14 - type: integer 
 	Parameter C_REG_CONFIG bound to: 1 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized1' (21#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
-INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized2' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized1' (21#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized2' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
 	Parameter C_FAMILY bound to: virtex6 - type: string 
 	Parameter C_DATA_WIDTH bound to: 47 - type: integer 
 	Parameter C_REG_CONFIG bound to: 1 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized2' (21#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
-INFO: [Synth 8-638] synthesizing module 'axi_infrastructure_v1_1_0_vector2axi' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_infrastructure_v1_1/hdl/verilog/axi_infrastructure_v1_1_vector2axi.v:60]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized2' (21#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
+INFO: [Synth 8-638] synthesizing module 'axi_infrastructure_v1_1_0_vector2axi' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_infrastructure_v1_1/hdl/verilog/axi_infrastructure_v1_1_vector2axi.v:60]
 	Parameter C_AXI_PROTOCOL bound to: 1 - type: integer 
 	Parameter C_AXI_ID_WIDTH bound to: 12 - type: integer 
 	Parameter C_AXI_ADDR_WIDTH bound to: 32 - type: integer 
@@ -536,9 +535,9 @@ INFO: [Synth 8-638] synthesizing module 'axi_infrastructure_v1_1_0_vector2axi' [
 	Parameter G_AXI_RUSER_INDEX bound to: 47 - type: integer 
 	Parameter G_AXI_RUSER_WIDTH bound to: 0 - type: integer 
 	Parameter G_AXI_RPAYLOAD_WIDTH bound to: 47 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'axi_infrastructure_v1_1_0_vector2axi' (22#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_infrastructure_v1_1/hdl/verilog/axi_infrastructure_v1_1_vector2axi.v:60]
-INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_6_axi_register_slice' (23#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axi_register_slice.v:64]
-INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_6_axi_register_slice__parameterized0' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axi_register_slice.v:64]
+INFO: [Synth 8-256] done synthesizing module 'axi_infrastructure_v1_1_0_vector2axi' (22#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_infrastructure_v1_1/hdl/verilog/axi_infrastructure_v1_1_vector2axi.v:60]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_6_axi_register_slice' (23#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axi_register_slice.v:64]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_6_axi_register_slice__parameterized0' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axi_register_slice.v:64]
 	Parameter C_FAMILY bound to: virtex6 - type: string 
 	Parameter C_AXI_PROTOCOL bound to: 2 - type: integer 
 	Parameter C_AXI_ID_WIDTH bound to: 1 - type: integer 
@@ -631,7 +630,7 @@ INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_6_axi_register_
 	Parameter G_AXI_RUSER_INDEX bound to: 34 - type: integer 
 	Parameter G_AXI_RUSER_WIDTH bound to: 0 - type: integer 
 	Parameter G_AXI_RPAYLOAD_WIDTH bound to: 34 - type: integer 
-INFO: [Synth 8-638] synthesizing module 'axi_infrastructure_v1_1_0_axi2vector__parameterized0' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_infrastructure_v1_1/hdl/verilog/axi_infrastructure_v1_1_axi2vector.v:60]
+INFO: [Synth 8-638] synthesizing module 'axi_infrastructure_v1_1_0_axi2vector__parameterized0' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_infrastructure_v1_1/hdl/verilog/axi_infrastructure_v1_1_axi2vector.v:60]
 	Parameter C_AXI_PROTOCOL bound to: 2 - type: integer 
 	Parameter C_AXI_ID_WIDTH bound to: 1 - type: integer 
 	Parameter C_AXI_ADDR_WIDTH bound to: 32 - type: integer 
@@ -723,33 +722,33 @@ INFO: [Synth 8-638] synthesizing module 'axi_infrastructure_v1_1_0_axi2vector__p
 	Parameter G_AXI_RUSER_INDEX bound to: 34 - type: integer 
 	Parameter G_AXI_RUSER_WIDTH bound to: 0 - type: integer 
 	Parameter G_AXI_RPAYLOAD_WIDTH bound to: 34 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'axi_infrastructure_v1_1_0_axi2vector__parameterized0' (23#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_infrastructure_v1_1/hdl/verilog/axi_infrastructure_v1_1_axi2vector.v:60]
-INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized3' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
+INFO: [Synth 8-256] done synthesizing module 'axi_infrastructure_v1_1_0_axi2vector__parameterized0' (23#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_infrastructure_v1_1/hdl/verilog/axi_infrastructure_v1_1_axi2vector.v:60]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized3' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
 	Parameter C_FAMILY bound to: virtex6 - type: string 
 	Parameter C_DATA_WIDTH bound to: 35 - type: integer 
 	Parameter C_REG_CONFIG bound to: 0 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized3' (23#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
-INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized4' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized3' (23#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized4' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
 	Parameter C_FAMILY bound to: virtex6 - type: string 
 	Parameter C_DATA_WIDTH bound to: 36 - type: integer 
 	Parameter C_REG_CONFIG bound to: 0 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized4' (23#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
-INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized5' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized4' (23#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized5' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
 	Parameter C_FAMILY bound to: virtex6 - type: string 
 	Parameter C_DATA_WIDTH bound to: 2 - type: integer 
 	Parameter C_REG_CONFIG bound to: 0 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized5' (23#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
-INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized6' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized5' (23#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized6' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
 	Parameter C_FAMILY bound to: virtex6 - type: string 
 	Parameter C_DATA_WIDTH bound to: 35 - type: integer 
 	Parameter C_REG_CONFIG bound to: 0 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized6' (23#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
-INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized7' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized6' (23#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized7' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
 	Parameter C_FAMILY bound to: virtex6 - type: string 
 	Parameter C_DATA_WIDTH bound to: 34 - type: integer 
 	Parameter C_REG_CONFIG bound to: 0 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized7' (23#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
-INFO: [Synth 8-638] synthesizing module 'axi_infrastructure_v1_1_0_vector2axi__parameterized0' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_infrastructure_v1_1/hdl/verilog/axi_infrastructure_v1_1_vector2axi.v:60]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized7' (23#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
+INFO: [Synth 8-638] synthesizing module 'axi_infrastructure_v1_1_0_vector2axi__parameterized0' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_infrastructure_v1_1/hdl/verilog/axi_infrastructure_v1_1_vector2axi.v:60]
 	Parameter C_AXI_PROTOCOL bound to: 2 - type: integer 
 	Parameter C_AXI_ID_WIDTH bound to: 1 - type: integer 
 	Parameter C_AXI_ADDR_WIDTH bound to: 32 - type: integer 
@@ -841,15 +840,15 @@ INFO: [Synth 8-638] synthesizing module 'axi_infrastructure_v1_1_0_vector2axi__p
 	Parameter G_AXI_RUSER_INDEX bound to: 34 - type: integer 
 	Parameter G_AXI_RUSER_WIDTH bound to: 0 - type: integer 
 	Parameter G_AXI_RPAYLOAD_WIDTH bound to: 34 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'axi_infrastructure_v1_1_0_vector2axi__parameterized0' (23#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_infrastructure_v1_1/hdl/verilog/axi_infrastructure_v1_1_vector2axi.v:60]
-INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_6_axi_register_slice__parameterized0' (23#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axi_register_slice.v:64]
-INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_b2s' (24#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s.v:39]
-INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_axi_protocol_converter' (25#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_axi_protocol_converter.v:62]
-INFO: [Synth 8-256] done synthesizing module 'design_1_auto_pc_0' (26#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_auto_pc_0/synth/design_1_auto_pc_0.v:57]
-INFO: [Synth 8-256] done synthesizing module 's00_couplers_imp_1CFO1MB' (27#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:413]
-INFO: [Synth 8-3491] module 'design_1_xbar_0' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xbar_0/synth/design_1_xbar_0.v:57' bound to instance 'xbar' of component 'design_1_xbar_0' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1304]
-INFO: [Synth 8-638] synthesizing module 'design_1_xbar_0' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xbar_0/synth/design_1_xbar_0.v:57]
-INFO: [Synth 8-638] synthesizing module 'axi_crossbar_v2_1_7_axi_crossbar' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_axi_crossbar.v:54]
+INFO: [Synth 8-256] done synthesizing module 'axi_infrastructure_v1_1_0_vector2axi__parameterized0' (23#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_infrastructure_v1_1/hdl/verilog/axi_infrastructure_v1_1_vector2axi.v:60]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_6_axi_register_slice__parameterized0' (23#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axi_register_slice.v:64]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_b2s' (24#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_b2s.v:39]
+INFO: [Synth 8-256] done synthesizing module 'axi_protocol_converter_v2_1_6_axi_protocol_converter' (25#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_protocol_converter_v2_1/hdl/verilog/axi_protocol_converter_v2_1_axi_protocol_converter.v:62]
+INFO: [Synth 8-256] done synthesizing module 'design_1_auto_pc_0' (26#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_auto_pc_0/synth/design_1_auto_pc_0.v:57]
+INFO: [Synth 8-256] done synthesizing module 's00_couplers_imp_1CFO1MB' (27#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:413]
+INFO: [Synth 8-3491] module 'design_1_xbar_0' declared at '/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xbar_0/synth/design_1_xbar_0.v:57' bound to instance 'xbar' of component 'design_1_xbar_0' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1304]
+INFO: [Synth 8-638] synthesizing module 'design_1_xbar_0' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xbar_0/synth/design_1_xbar_0.v:57]
+INFO: [Synth 8-638] synthesizing module 'axi_crossbar_v2_1_7_axi_crossbar' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_axi_crossbar.v:54]
 	Parameter C_FAMILY bound to: zynq - type: string 
 	Parameter C_NUM_SLAVE_SLOTS bound to: 1 - type: integer 
 	Parameter C_NUM_MASTER_SLOTS bound to: 3 - type: integer 
@@ -898,7 +897,7 @@ INFO: [Synth 8-638] synthesizing module 'axi_crossbar_v2_1_7_axi_crossbar' [/hom
 	Parameter P_LEN bound to: 8 - type: integer 
 	Parameter P_LOCK bound to: 1 - type: integer 
 	Parameter P_FAMILY bound to: zynq - type: string 
-INFO: [Synth 8-638] synthesizing module 'axi_crossbar_v2_1_7_crossbar_sasd' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_crossbar_sasd.v:79]
+INFO: [Synth 8-638] synthesizing module 'axi_crossbar_v2_1_7_crossbar_sasd' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_crossbar_sasd.v:79]
 	Parameter C_FAMILY bound to: zynq - type: string 
 	Parameter C_NUM_SLAVE_SLOTS bound to: 1 - type: integer 
 	Parameter C_NUM_MASTER_SLOTS bound to: 3 - type: integer 
@@ -951,7 +950,7 @@ INFO: [Synth 8-638] synthesizing module 'axi_crossbar_v2_1_7_crossbar_sasd' [/ho
 	Parameter P_FULLY_REG bound to: 1 - type: integer 
 	Parameter P_R_REG_CONFIG bound to: 1 - type: integer 
 	Parameter P_DECERR bound to: 2'b11 
-INFO: [Synth 8-638] synthesizing module 'axi_crossbar_v2_1_7_addr_decoder' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_addr_decoder.v:69]
+INFO: [Synth 8-638] synthesizing module 'axi_crossbar_v2_1_7_addr_decoder' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_addr_decoder.v:69]
 	Parameter C_FAMILY bound to: zynq - type: string 
 	Parameter C_NUM_TARGETS bound to: 3 - type: integer 
 	Parameter C_NUM_TARGETS_LOG bound to: 2 - type: integer 
@@ -965,19 +964,19 @@ INFO: [Synth 8-638] synthesizing module 'axi_crossbar_v2_1_7_addr_decoder' [/hom
 	Parameter C_TARGET_QUAL bound to: 4'b0111 
 	Parameter C_RESOLUTION bound to: 2 - type: integer 
 	Parameter C_COMPARATOR_THRESHOLD bound to: 6 - type: integer 
-INFO: [Synth 8-638] synthesizing module 'generic_baseblocks_v2_1_0_comparator_static' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/generic_baseblocks_v2_1/hdl/verilog/generic_baseblocks_v2_1_comparator_static.v:61]
+INFO: [Synth 8-638] synthesizing module 'generic_baseblocks_v2_1_0_comparator_static' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/generic_baseblocks_v2_1/hdl/verilog/generic_baseblocks_v2_1_comparator_static.v:61]
 	Parameter C_FAMILY bound to: rtl - type: string 
 	Parameter C_VALUE bound to: 30'b010000111100000000000000000000 
 	Parameter C_DATA_WIDTH bound to: 30 - type: integer 
 	Parameter C_BITS_PER_LUT bound to: 6 - type: integer 
 	Parameter C_NUM_LUT bound to: 5 - type: integer 
 	Parameter C_FIX_DATA_WIDTH bound to: 30 - type: integer 
-INFO: [Synth 8-638] synthesizing module 'generic_baseblocks_v2_1_0_carry_and' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/generic_baseblocks_v2_1/hdl/verilog/generic_baseblocks_v2_1_carry_and.v:62]
+INFO: [Synth 8-638] synthesizing module 'generic_baseblocks_v2_1_0_carry_and' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/generic_baseblocks_v2_1/hdl/verilog/generic_baseblocks_v2_1_carry_and.v:62]
 	Parameter C_FAMILY bound to: rtl - type: string 
-INFO: [Synth 8-256] done synthesizing module 'generic_baseblocks_v2_1_0_carry_and' (28#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/generic_baseblocks_v2_1/hdl/verilog/generic_baseblocks_v2_1_carry_and.v:62]
-INFO: [Synth 8-256] done synthesizing module 'generic_baseblocks_v2_1_0_comparator_static' (29#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/generic_baseblocks_v2_1/hdl/verilog/generic_baseblocks_v2_1_comparator_static.v:61]
-INFO: [Synth 8-256] done synthesizing module 'axi_crossbar_v2_1_7_addr_decoder' (30#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_addr_decoder.v:69]
-INFO: [Synth 8-638] synthesizing module 'axi_crossbar_v2_1_7_decerr_slave' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_decerr_slave.v:64]
+INFO: [Synth 8-256] done synthesizing module 'generic_baseblocks_v2_1_0_carry_and' (28#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/generic_baseblocks_v2_1/hdl/verilog/generic_baseblocks_v2_1_carry_and.v:62]
+INFO: [Synth 8-256] done synthesizing module 'generic_baseblocks_v2_1_0_comparator_static' (29#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/generic_baseblocks_v2_1/hdl/verilog/generic_baseblocks_v2_1_comparator_static.v:61]
+INFO: [Synth 8-256] done synthesizing module 'axi_crossbar_v2_1_7_addr_decoder' (30#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_addr_decoder.v:69]
+INFO: [Synth 8-638] synthesizing module 'axi_crossbar_v2_1_7_decerr_slave' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_decerr_slave.v:64]
 	Parameter C_AXI_ID_WIDTH bound to: 1 - type: integer 
 	Parameter C_AXI_DATA_WIDTH bound to: 32 - type: integer 
 	Parameter C_AXI_BUSER_WIDTH bound to: 1 - type: integer 
@@ -992,8 +991,8 @@ INFO: [Synth 8-638] synthesizing module 'axi_crossbar_v2_1_7_decerr_slave' [/hom
 	Parameter P_AXI4 bound to: 0 - type: integer 
 	Parameter P_AXI3 bound to: 1 - type: integer 
 	Parameter P_AXILITE bound to: 2 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'axi_crossbar_v2_1_7_decerr_slave' (31#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_decerr_slave.v:64]
-INFO: [Synth 8-638] synthesizing module 'axi_crossbar_v2_1_7_addr_arbiter_sasd' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_addr_arbiter_sasd.v:65]
+INFO: [Synth 8-256] done synthesizing module 'axi_crossbar_v2_1_7_decerr_slave' (31#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_decerr_slave.v:64]
+INFO: [Synth 8-638] synthesizing module 'axi_crossbar_v2_1_7_addr_arbiter_sasd' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_addr_arbiter_sasd.v:65]
 	Parameter C_FAMILY bound to: zynq - type: string 
 	Parameter C_NUM_S bound to: 1 - type: integer 
 	Parameter C_NUM_S_LOG bound to: 1 - type: integer 
@@ -1001,67 +1000,67 @@ INFO: [Synth 8-638] synthesizing module 'axi_crossbar_v2_1_7_addr_arbiter_sasd' 
 	Parameter C_GRANT_ENC bound to: 1 - type: integer 
 	Parameter C_ARB_PRIORITY bound to: 0 - type: integer 
 	Parameter P_PRIO_MASK bound to: 1'b0 
-INFO: [Synth 8-256] done synthesizing module 'axi_crossbar_v2_1_7_addr_arbiter_sasd' (32#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_addr_arbiter_sasd.v:65]
-INFO: [Synth 8-638] synthesizing module 'axi_crossbar_v2_1_7_splitter' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_splitter.v:72]
+INFO: [Synth 8-256] done synthesizing module 'axi_crossbar_v2_1_7_addr_arbiter_sasd' (32#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_addr_arbiter_sasd.v:65]
+INFO: [Synth 8-638] synthesizing module 'axi_crossbar_v2_1_7_splitter' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_splitter.v:72]
 	Parameter C_NUM_M bound to: 3 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'axi_crossbar_v2_1_7_splitter' (33#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_splitter.v:72]
-INFO: [Synth 8-638] synthesizing module 'axi_crossbar_v2_1_7_splitter__parameterized0' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_splitter.v:72]
+INFO: [Synth 8-256] done synthesizing module 'axi_crossbar_v2_1_7_splitter' (33#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_splitter.v:72]
+INFO: [Synth 8-638] synthesizing module 'axi_crossbar_v2_1_7_splitter__parameterized0' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_splitter.v:72]
 	Parameter C_NUM_M bound to: 2 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'axi_crossbar_v2_1_7_splitter__parameterized0' (33#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_splitter.v:72]
-INFO: [Synth 8-638] synthesizing module 'generic_baseblocks_v2_1_0_mux_enc' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/generic_baseblocks_v2_1/hdl/verilog/generic_baseblocks_v2_1_mux_enc.v:63]
+INFO: [Synth 8-256] done synthesizing module 'axi_crossbar_v2_1_7_splitter__parameterized0' (33#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_splitter.v:72]
+INFO: [Synth 8-638] synthesizing module 'generic_baseblocks_v2_1_0_mux_enc' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/generic_baseblocks_v2_1/hdl/verilog/generic_baseblocks_v2_1_mux_enc.v:63]
 	Parameter C_FAMILY bound to: rtl - type: string 
 	Parameter C_RATIO bound to: 4 - type: integer 
 	Parameter C_SEL_WIDTH bound to: 2 - type: integer 
 	Parameter C_DATA_WIDTH bound to: 1 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'generic_baseblocks_v2_1_0_mux_enc' (34#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/generic_baseblocks_v2_1/hdl/verilog/generic_baseblocks_v2_1_mux_enc.v:63]
-INFO: [Synth 8-638] synthesizing module 'generic_baseblocks_v2_1_0_mux_enc__parameterized0' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/generic_baseblocks_v2_1/hdl/verilog/generic_baseblocks_v2_1_mux_enc.v:63]
+INFO: [Synth 8-256] done synthesizing module 'generic_baseblocks_v2_1_0_mux_enc' (34#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/generic_baseblocks_v2_1/hdl/verilog/generic_baseblocks_v2_1_mux_enc.v:63]
+INFO: [Synth 8-638] synthesizing module 'generic_baseblocks_v2_1_0_mux_enc__parameterized0' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/generic_baseblocks_v2_1/hdl/verilog/generic_baseblocks_v2_1_mux_enc.v:63]
 	Parameter C_FAMILY bound to: rtl - type: string 
 	Parameter C_RATIO bound to: 1 - type: integer 
 	Parameter C_SEL_WIDTH bound to: 1 - type: integer 
 	Parameter C_DATA_WIDTH bound to: 1 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'generic_baseblocks_v2_1_0_mux_enc__parameterized0' (34#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/generic_baseblocks_v2_1/hdl/verilog/generic_baseblocks_v2_1_mux_enc.v:63]
-INFO: [Synth 8-638] synthesizing module 'generic_baseblocks_v2_1_0_mux_enc__parameterized1' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/generic_baseblocks_v2_1/hdl/verilog/generic_baseblocks_v2_1_mux_enc.v:63]
+INFO: [Synth 8-256] done synthesizing module 'generic_baseblocks_v2_1_0_mux_enc__parameterized0' (34#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/generic_baseblocks_v2_1/hdl/verilog/generic_baseblocks_v2_1_mux_enc.v:63]
+INFO: [Synth 8-638] synthesizing module 'generic_baseblocks_v2_1_0_mux_enc__parameterized1' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/generic_baseblocks_v2_1/hdl/verilog/generic_baseblocks_v2_1_mux_enc.v:63]
 	Parameter C_FAMILY bound to: rtl - type: string 
 	Parameter C_RATIO bound to: 1 - type: integer 
 	Parameter C_SEL_WIDTH bound to: 1 - type: integer 
 	Parameter C_DATA_WIDTH bound to: 1 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'generic_baseblocks_v2_1_0_mux_enc__parameterized1' (34#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/generic_baseblocks_v2_1/hdl/verilog/generic_baseblocks_v2_1_mux_enc.v:63]
-INFO: [Synth 8-638] synthesizing module 'generic_baseblocks_v2_1_0_mux_enc__parameterized2' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/generic_baseblocks_v2_1/hdl/verilog/generic_baseblocks_v2_1_mux_enc.v:63]
+INFO: [Synth 8-256] done synthesizing module 'generic_baseblocks_v2_1_0_mux_enc__parameterized1' (34#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/generic_baseblocks_v2_1/hdl/verilog/generic_baseblocks_v2_1_mux_enc.v:63]
+INFO: [Synth 8-638] synthesizing module 'generic_baseblocks_v2_1_0_mux_enc__parameterized2' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/generic_baseblocks_v2_1/hdl/verilog/generic_baseblocks_v2_1_mux_enc.v:63]
 	Parameter C_FAMILY bound to: rtl - type: string 
 	Parameter C_RATIO bound to: 4 - type: integer 
 	Parameter C_SEL_WIDTH bound to: 2 - type: integer 
 	Parameter C_DATA_WIDTH bound to: 36 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'generic_baseblocks_v2_1_0_mux_enc__parameterized2' (34#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/generic_baseblocks_v2_1/hdl/verilog/generic_baseblocks_v2_1_mux_enc.v:63]
-INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized8' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
+INFO: [Synth 8-256] done synthesizing module 'generic_baseblocks_v2_1_0_mux_enc__parameterized2' (34#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/generic_baseblocks_v2_1/hdl/verilog/generic_baseblocks_v2_1_mux_enc.v:63]
+INFO: [Synth 8-638] synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized8' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
 	Parameter C_FAMILY bound to: zynq - type: string 
 	Parameter C_DATA_WIDTH bound to: 36 - type: integer 
 	Parameter C_REG_CONFIG bound to: 1 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized8' (34#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
-INFO: [Synth 8-638] synthesizing module 'generic_baseblocks_v2_1_0_mux_enc__parameterized3' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/generic_baseblocks_v2_1/hdl/verilog/generic_baseblocks_v2_1_mux_enc.v:63]
+INFO: [Synth 8-256] done synthesizing module 'axi_register_slice_v2_1_6_axic_register_slice__parameterized8' (34#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:62]
+INFO: [Synth 8-638] synthesizing module 'generic_baseblocks_v2_1_0_mux_enc__parameterized3' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/generic_baseblocks_v2_1/hdl/verilog/generic_baseblocks_v2_1_mux_enc.v:63]
 	Parameter C_FAMILY bound to: rtl - type: string 
 	Parameter C_RATIO bound to: 4 - type: integer 
 	Parameter C_SEL_WIDTH bound to: 2 - type: integer 
 	Parameter C_DATA_WIDTH bound to: 3 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'generic_baseblocks_v2_1_0_mux_enc__parameterized3' (34#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/generic_baseblocks_v2_1/hdl/verilog/generic_baseblocks_v2_1_mux_enc.v:63]
-INFO: [Synth 8-256] done synthesizing module 'axi_crossbar_v2_1_7_crossbar_sasd' (35#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_crossbar_sasd.v:79]
-INFO: [Synth 8-256] done synthesizing module 'axi_crossbar_v2_1_7_axi_crossbar' (36#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_axi_crossbar.v:54]
-INFO: [Synth 8-256] done synthesizing module 'design_1_xbar_0' (37#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xbar_0/synth/design_1_xbar_0.v:57]
-INFO: [Synth 8-256] done synthesizing module 'design_1_processing_system7_0_axi_periph_0' (38#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:773]
-INFO: [Synth 8-3491] module 'design_1_pwm_0_1' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_pwm_0_1/synth/design_1_pwm_0_1.vhd:56' bound to instance 'pwm_0' of component 'design_1_pwm_0_1' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1910]
-INFO: [Synth 8-638] synthesizing module 'design_1_pwm_0_1' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_pwm_0_1/synth/design_1_pwm_0_1.vhd:83]
+INFO: [Synth 8-256] done synthesizing module 'generic_baseblocks_v2_1_0_mux_enc__parameterized3' (34#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/generic_baseblocks_v2_1/hdl/verilog/generic_baseblocks_v2_1_mux_enc.v:63]
+INFO: [Synth 8-256] done synthesizing module 'axi_crossbar_v2_1_7_crossbar_sasd' (35#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_crossbar_sasd.v:79]
+INFO: [Synth 8-256] done synthesizing module 'axi_crossbar_v2_1_7_axi_crossbar' (36#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_axi_crossbar.v:54]
+INFO: [Synth 8-256] done synthesizing module 'design_1_xbar_0' (37#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xbar_0/synth/design_1_xbar_0.v:57]
+INFO: [Synth 8-256] done synthesizing module 'design_1_processing_system7_0_axi_periph_0' (38#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:773]
+INFO: [Synth 8-3491] module 'design_1_pwm_0_1' declared at '/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_pwm_0_1/synth/design_1_pwm_0_1.vhd:56' bound to instance 'pwm_0' of component 'design_1_pwm_0_1' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1910]
+INFO: [Synth 8-638] synthesizing module 'design_1_pwm_0_1' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_pwm_0_1/synth/design_1_pwm_0_1.vhd:83]
 	Parameter C_S00_AXI_DATA_WIDTH bound to: 32 - type: integer 
 	Parameter C_S00_AXI_ADDR_WIDTH bound to: 6 - type: integer 
 	Parameter pwmChannels bound to: 6 - type: integer 
-INFO: [Synth 8-3491] module 'pwm_v1_0' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm_v1_0.vhd:5' bound to instance 'U0' of component 'pwm_v1_0' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_pwm_0_1/synth/design_1_pwm_0_1.vhd:145]
-INFO: [Synth 8-638] synthesizing module 'pwm_v1_0' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm_v1_0.vhd:51]
+INFO: [Synth 8-3491] module 'pwm_v1_0' declared at '/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm_v1_0.vhd:5' bound to instance 'U0' of component 'pwm_v1_0' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_pwm_0_1/synth/design_1_pwm_0_1.vhd:145]
+INFO: [Synth 8-638] synthesizing module 'pwm_v1_0' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm_v1_0.vhd:51]
 	Parameter pwmChannels bound to: 6 - type: integer 
 	Parameter C_S00_AXI_DATA_WIDTH bound to: 32 - type: integer 
 	Parameter C_S00_AXI_ADDR_WIDTH bound to: 6 - type: integer 
 	Parameter pwmChannels bound to: 6 - type: integer 
 	Parameter C_S_AXI_DATA_WIDTH bound to: 32 - type: integer 
 	Parameter C_S_AXI_ADDR_WIDTH bound to: 6 - type: integer 
-INFO: [Synth 8-3491] module 'pwm_v1_0_S00_AXI' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm_v1_0_S00_AXI.vhd:5' bound to instance 'pwm_v1_0_S00_AXI_inst' of component 'pwm_v1_0_S00_AXI' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm_v1_0.vhd:90]
-INFO: [Synth 8-638] synthesizing module 'pwm_v1_0_S00_AXI' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm_v1_0_S00_AXI.vhd:88]
+INFO: [Synth 8-3491] module 'pwm_v1_0_S00_AXI' declared at '/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm_v1_0_S00_AXI.vhd:5' bound to instance 'pwm_v1_0_S00_AXI_inst' of component 'pwm_v1_0_S00_AXI' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm_v1_0.vhd:90]
+INFO: [Synth 8-638] synthesizing module 'pwm_v1_0_S00_AXI' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm_v1_0_S00_AXI.vhd:88]
 	Parameter pwmChannels bound to: 6 - type: integer 
 	Parameter pwmClkScale bound to: 100 - type: integer 
 	Parameter pwmResolution bound to: 16 - type: integer 
@@ -1069,51 +1068,51 @@ INFO: [Synth 8-638] synthesizing module 'pwm_v1_0_S00_AXI' [/home/rupprich/Zynq/
 	Parameter C_S_AXI_ADDR_WIDTH bound to: 6 - type: integer 
 	Parameter clkScale bound to: 100 - type: integer 
 	Parameter resolution bound to: 16 - type: integer 
-INFO: [Synth 8-3491] module 'pwm' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm.vhd:32' bound to instance 'pwm_inst1' of component 'pwm' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm_v1_0_S00_AXI.vhd:527]
-INFO: [Synth 8-638] synthesizing module 'pwm' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm.vhd:50]
+INFO: [Synth 8-3491] module 'pwm' declared at '/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm.vhd:32' bound to instance 'pwm_inst1' of component 'pwm' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm_v1_0_S00_AXI.vhd:527]
+INFO: [Synth 8-638] synthesizing module 'pwm' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm.vhd:50]
 	Parameter clkScale bound to: 100 - type: integer 
 	Parameter resolution bound to: 16 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'pwm' (39#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm.vhd:50]
+INFO: [Synth 8-256] done synthesizing module 'pwm' (39#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm.vhd:50]
 	Parameter clkScale bound to: 100 - type: integer 
 	Parameter resolution bound to: 16 - type: integer 
-INFO: [Synth 8-3491] module 'pwm' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm.vhd:32' bound to instance 'pwm_inst2' of component 'pwm' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm_v1_0_S00_AXI.vhd:541]
+INFO: [Synth 8-3491] module 'pwm' declared at '/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm.vhd:32' bound to instance 'pwm_inst2' of component 'pwm' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm_v1_0_S00_AXI.vhd:541]
 	Parameter clkScale bound to: 100 - type: integer 
 	Parameter resolution bound to: 16 - type: integer 
-INFO: [Synth 8-3491] module 'pwm' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm.vhd:32' bound to instance 'pwm_inst3' of component 'pwm' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm_v1_0_S00_AXI.vhd:555]
+INFO: [Synth 8-3491] module 'pwm' declared at '/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm.vhd:32' bound to instance 'pwm_inst3' of component 'pwm' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm_v1_0_S00_AXI.vhd:555]
 	Parameter clkScale bound to: 100 - type: integer 
 	Parameter resolution bound to: 16 - type: integer 
-INFO: [Synth 8-3491] module 'pwm' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm.vhd:32' bound to instance 'pwm_inst4' of component 'pwm' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm_v1_0_S00_AXI.vhd:569]
+INFO: [Synth 8-3491] module 'pwm' declared at '/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm.vhd:32' bound to instance 'pwm_inst4' of component 'pwm' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm_v1_0_S00_AXI.vhd:569]
 	Parameter clkScale bound to: 100 - type: integer 
 	Parameter resolution bound to: 16 - type: integer 
-INFO: [Synth 8-3491] module 'pwm' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm.vhd:32' bound to instance 'pwm_inst5' of component 'pwm' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm_v1_0_S00_AXI.vhd:583]
+INFO: [Synth 8-3491] module 'pwm' declared at '/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm.vhd:32' bound to instance 'pwm_inst5' of component 'pwm' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm_v1_0_S00_AXI.vhd:583]
 	Parameter clkScale bound to: 100 - type: integer 
 	Parameter resolution bound to: 16 - type: integer 
-INFO: [Synth 8-3491] module 'pwm' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm.vhd:32' bound to instance 'pwm_inst6' of component 'pwm' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm_v1_0_S00_AXI.vhd:597]
-INFO: [Synth 8-256] done synthesizing module 'pwm_v1_0_S00_AXI' (40#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm_v1_0_S00_AXI.vhd:88]
-INFO: [Synth 8-256] done synthesizing module 'pwm_v1_0' (41#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm_v1_0.vhd:51]
-INFO: [Synth 8-256] done synthesizing module 'design_1_pwm_0_1' (42#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_pwm_0_1/synth/design_1_pwm_0_1.vhd:83]
-INFO: [Synth 8-3491] module 'design_1_xlconstant_0_0' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xlconstant_0_0/sim/design_1_xlconstant_0_0.vhd:29' bound to instance 'pwm_dir_1' of component 'design_1_xlconstant_0_0' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1935]
-INFO: [Synth 8-638] synthesizing module 'design_1_xlconstant_0_0' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xlconstant_0_0/sim/design_1_xlconstant_0_0.vhd:35]
+INFO: [Synth 8-3491] module 'pwm' declared at '/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm.vhd:32' bound to instance 'pwm_inst6' of component 'pwm' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm_v1_0_S00_AXI.vhd:597]
+INFO: [Synth 8-256] done synthesizing module 'pwm_v1_0_S00_AXI' (40#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm_v1_0_S00_AXI.vhd:88]
+INFO: [Synth 8-256] done synthesizing module 'pwm_v1_0' (41#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/user.org/pwm_v1_0/hdl/pwm_v1_0.vhd:51]
+INFO: [Synth 8-256] done synthesizing module 'design_1_pwm_0_1' (42#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_pwm_0_1/synth/design_1_pwm_0_1.vhd:83]
+INFO: [Synth 8-3491] module 'design_1_xlconstant_0_0' declared at '/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xlconstant_0_0/sim/design_1_xlconstant_0_0.vhd:29' bound to instance 'pwm_dir_1' of component 'design_1_xlconstant_0_0' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1935]
+INFO: [Synth 8-638] synthesizing module 'design_1_xlconstant_0_0' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xlconstant_0_0/sim/design_1_xlconstant_0_0.vhd:35]
 	Parameter CONST_VAL bound to: 1'b1 
 	Parameter CONST_WIDTH bound to: 1 - type: integer 
-INFO: [Synth 8-3491] module 'xlconstant' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/xlconstant_v1_1/xlconstant.vhd:27' bound to instance 'U0' of component 'xlconstant' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xlconstant_0_0/sim/design_1_xlconstant_0_0.vhd:49]
-INFO: [Synth 8-638] synthesizing module 'xlconstant' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/xlconstant_v1_1/xlconstant.vhd:36]
+INFO: [Synth 8-3491] module 'xlconstant' declared at '/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/xlconstant_v1_1/xlconstant.vhd:27' bound to instance 'U0' of component 'xlconstant' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xlconstant_0_0/sim/design_1_xlconstant_0_0.vhd:49]
+INFO: [Synth 8-638] synthesizing module 'xlconstant' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/xlconstant_v1_1/xlconstant.vhd:36]
 	Parameter CONST_VAL bound to: 1'b1 
 	Parameter CONST_WIDTH bound to: 1 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'xlconstant' (43#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/xlconstant_v1_1/xlconstant.vhd:36]
-INFO: [Synth 8-256] done synthesizing module 'design_1_xlconstant_0_0' (44#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xlconstant_0_0/sim/design_1_xlconstant_0_0.vhd:35]
-INFO: [Synth 8-3491] module 'design_1_xlconstant_0_1' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xlconstant_0_1/sim/design_1_xlconstant_0_1.vhd:29' bound to instance 'pwm_oe_0' of component 'design_1_xlconstant_0_1' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1939]
-INFO: [Synth 8-638] synthesizing module 'design_1_xlconstant_0_1' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xlconstant_0_1/sim/design_1_xlconstant_0_1.vhd:35]
+INFO: [Synth 8-256] done synthesizing module 'xlconstant' (43#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/xlconstant_v1_1/xlconstant.vhd:36]
+INFO: [Synth 8-256] done synthesizing module 'design_1_xlconstant_0_0' (44#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xlconstant_0_0/sim/design_1_xlconstant_0_0.vhd:35]
+INFO: [Synth 8-3491] module 'design_1_xlconstant_0_1' declared at '/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xlconstant_0_1/sim/design_1_xlconstant_0_1.vhd:29' bound to instance 'pwm_oe_0' of component 'design_1_xlconstant_0_1' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1939]
+INFO: [Synth 8-638] synthesizing module 'design_1_xlconstant_0_1' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xlconstant_0_1/sim/design_1_xlconstant_0_1.vhd:35]
 	Parameter CONST_VAL bound to: 1'b0 
 	Parameter CONST_WIDTH bound to: 1 - type: integer 
-INFO: [Synth 8-3491] module 'xlconstant' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/xlconstant_v1_1/xlconstant.vhd:27' bound to instance 'U0' of component 'xlconstant' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xlconstant_0_1/sim/design_1_xlconstant_0_1.vhd:49]
-INFO: [Synth 8-638] synthesizing module 'xlconstant__parameterized1' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/xlconstant_v1_1/xlconstant.vhd:36]
+INFO: [Synth 8-3491] module 'xlconstant' declared at '/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/xlconstant_v1_1/xlconstant.vhd:27' bound to instance 'U0' of component 'xlconstant' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xlconstant_0_1/sim/design_1_xlconstant_0_1.vhd:49]
+INFO: [Synth 8-638] synthesizing module 'xlconstant__parameterized1' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/xlconstant_v1_1/xlconstant.vhd:36]
 	Parameter CONST_VAL bound to: 1'b0 
 	Parameter CONST_WIDTH bound to: 1 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'xlconstant__parameterized1' (44#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/xlconstant_v1_1/xlconstant.vhd:36]
-INFO: [Synth 8-256] done synthesizing module 'design_1_xlconstant_0_1' (45#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xlconstant_0_1/sim/design_1_xlconstant_0_1.vhd:35]
-INFO: [Synth 8-3491] module 'design_1_rst_processing_system7_0_100M_0' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_rst_processing_system7_0_100M_0/synth/design_1_rst_processing_system7_0_100M_0.vhd:59' bound to instance 'rst_processing_system7_0_100M' of component 'design_1_rst_processing_system7_0_100M_0' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1943]
-INFO: [Synth 8-638] synthesizing module 'design_1_rst_processing_system7_0_100M_0' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_rst_processing_system7_0_100M_0/synth/design_1_rst_processing_system7_0_100M_0.vhd:74]
+INFO: [Synth 8-256] done synthesizing module 'xlconstant__parameterized1' (44#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/xlconstant_v1_1/xlconstant.vhd:36]
+INFO: [Synth 8-256] done synthesizing module 'design_1_xlconstant_0_1' (45#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_xlconstant_0_1/sim/design_1_xlconstant_0_1.vhd:35]
+INFO: [Synth 8-3491] module 'design_1_rst_processing_system7_0_100M_0' declared at '/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_rst_processing_system7_0_100M_0/synth/design_1_rst_processing_system7_0_100M_0.vhd:59' bound to instance 'rst_processing_system7_0_100M' of component 'design_1_rst_processing_system7_0_100M_0' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1943]
+INFO: [Synth 8-638] synthesizing module 'design_1_rst_processing_system7_0_100M_0' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_rst_processing_system7_0_100M_0/synth/design_1_rst_processing_system7_0_100M_0.vhd:74]
 	Parameter C_FAMILY bound to: zynq - type: string 
 	Parameter C_EXT_RST_WIDTH bound to: 4 - type: integer 
 	Parameter C_AUX_RST_WIDTH bound to: 4 - type: integer 
@@ -1123,8 +1122,8 @@ INFO: [Synth 8-638] synthesizing module 'design_1_rst_processing_system7_0_100M_
 	Parameter C_NUM_PERP_RST bound to: 1 - type: integer 
 	Parameter C_NUM_INTERCONNECT_ARESETN bound to: 1 - type: integer 
 	Parameter C_NUM_PERP_ARESETN bound to: 1 - type: integer 
-INFO: [Synth 8-3491] module 'proc_sys_reset' declared at '/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/proc_sys_reset.vhd:140' bound to instance 'U0' of component 'proc_sys_reset' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_rst_processing_system7_0_100M_0/synth/design_1_rst_processing_system7_0_100M_0.vhd:120]
-INFO: [Synth 8-638] synthesizing module 'proc_sys_reset' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/proc_sys_reset.vhd:199]
+INFO: [Synth 8-3491] module 'proc_sys_reset' declared at '/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/proc_sys_reset.vhd:140' bound to instance 'U0' of component 'proc_sys_reset' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_rst_processing_system7_0_100M_0/synth/design_1_rst_processing_system7_0_100M_0.vhd:120]
+INFO: [Synth 8-638] synthesizing module 'proc_sys_reset' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/proc_sys_reset.vhd:199]
 	Parameter C_FAMILY bound to: zynq - type: string 
 	Parameter C_EXT_RST_WIDTH bound to: 4 - type: integer 
 	Parameter C_AUX_RST_WIDTH bound to: 4 - type: integer 
@@ -1134,16 +1133,16 @@ INFO: [Synth 8-638] synthesizing module 'proc_sys_reset' [/home/rupprich/Zynq/in
 	Parameter C_NUM_PERP_RST bound to: 1 - type: integer 
 	Parameter C_NUM_INTERCONNECT_ARESETN bound to: 1 - type: integer 
 	Parameter C_NUM_PERP_ARESETN bound to: 1 - type: integer 
-INFO: [Synth 8-638] synthesizing module 'lpf' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/lpf.vhd:138]
+INFO: [Synth 8-638] synthesizing module 'lpf' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/lpf.vhd:138]
 	Parameter C_EXT_RST_WIDTH bound to: 4 - type: integer 
 	Parameter C_AUX_RST_WIDTH bound to: 4 - type: integer 
 	Parameter C_EXT_RESET_HIGH bound to: 1'b0 
 	Parameter C_AUX_RESET_HIGH bound to: 1'b0 
-INFO: [Synth 8-3491] module 'SRL16' declared at '/opt/Xilinx/Vivado/2015.3/scripts/rt/data/unisim_comp.v:43311' bound to instance 'POR_SRL_I' of component 'SRL16' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/lpf.vhd:190]
-INFO: [Synth 8-638] synthesizing module 'SRL16' [/opt/Xilinx/Vivado/2015.3/scripts/rt/data/unisim_comp.v:43311]
+INFO: [Synth 8-3491] module 'SRL16' declared at '/opt/Xilinx2/Vivado/2015.3/scripts/rt/data/unisim_comp.v:43311' bound to instance 'POR_SRL_I' of component 'SRL16' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/lpf.vhd:190]
+INFO: [Synth 8-638] synthesizing module 'SRL16' [/opt/Xilinx2/Vivado/2015.3/scripts/rt/data/unisim_comp.v:43311]
 	Parameter INIT bound to: 16'b0000000000000000 
-INFO: [Synth 8-256] done synthesizing module 'SRL16' (46#1) [/opt/Xilinx/Vivado/2015.3/scripts/rt/data/unisim_comp.v:43311]
-INFO: [Synth 8-638] synthesizing module 'cdc_sync' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/lib_cdc_v1_0/hdl/src/vhdl/cdc_sync.vhd:106]
+INFO: [Synth 8-256] done synthesizing module 'SRL16' (46#1) [/opt/Xilinx2/Vivado/2015.3/scripts/rt/data/unisim_comp.v:43311]
+INFO: [Synth 8-638] synthesizing module 'cdc_sync' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/lib_cdc_v1_0/hdl/src/vhdl/cdc_sync.vhd:106]
 	Parameter C_CDC_TYPE bound to: 1 - type: integer 
 	Parameter C_RESET_STATE bound to: 0 - type: integer 
 	Parameter C_SINGLE_BIT bound to: 1 - type: integer 
@@ -1151,30 +1150,30 @@ INFO: [Synth 8-638] synthesizing module 'cdc_sync' [/home/rupprich/Zynq/indoor-l
 	Parameter C_VECTOR_WIDTH bound to: 2 - type: integer 
 	Parameter C_MTBF_STAGES bound to: 4 - type: integer 
 	Parameter INIT bound to: 1'b0 
-INFO: [Synth 8-113] binding component instance 'CROSS_PLEVEL_IN2SCNDRY_IN_cdc_to' to cell 'FDR' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/lib_cdc_v1_0/hdl/src/vhdl/cdc_sync.vhd:514]
+INFO: [Synth 8-113] binding component instance 'CROSS_PLEVEL_IN2SCNDRY_IN_cdc_to' to cell 'FDR' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/lib_cdc_v1_0/hdl/src/vhdl/cdc_sync.vhd:514]
 	Parameter INIT bound to: 1'b0 
-INFO: [Synth 8-113] binding component instance 'CROSS_PLEVEL_IN2SCNDRY_s_level_out_d2' to cell 'FDR' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/lib_cdc_v1_0/hdl/src/vhdl/cdc_sync.vhd:545]
+INFO: [Synth 8-113] binding component instance 'CROSS_PLEVEL_IN2SCNDRY_s_level_out_d2' to cell 'FDR' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/lib_cdc_v1_0/hdl/src/vhdl/cdc_sync.vhd:545]
 	Parameter INIT bound to: 1'b0 
-INFO: [Synth 8-113] binding component instance 'CROSS_PLEVEL_IN2SCNDRY_s_level_out_d3' to cell 'FDR' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/lib_cdc_v1_0/hdl/src/vhdl/cdc_sync.vhd:554]
+INFO: [Synth 8-113] binding component instance 'CROSS_PLEVEL_IN2SCNDRY_s_level_out_d3' to cell 'FDR' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/lib_cdc_v1_0/hdl/src/vhdl/cdc_sync.vhd:554]
 	Parameter INIT bound to: 1'b0 
-INFO: [Synth 8-113] binding component instance 'CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4' to cell 'FDR' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/lib_cdc_v1_0/hdl/src/vhdl/cdc_sync.vhd:564]
+INFO: [Synth 8-113] binding component instance 'CROSS_PLEVEL_IN2SCNDRY_s_level_out_d4' to cell 'FDR' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/lib_cdc_v1_0/hdl/src/vhdl/cdc_sync.vhd:564]
 	Parameter INIT bound to: 1'b0 
-INFO: [Synth 8-113] binding component instance 'CROSS_PLEVEL_IN2SCNDRY_s_level_out_d5' to cell 'FDR' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/lib_cdc_v1_0/hdl/src/vhdl/cdc_sync.vhd:574]
+INFO: [Synth 8-113] binding component instance 'CROSS_PLEVEL_IN2SCNDRY_s_level_out_d5' to cell 'FDR' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/lib_cdc_v1_0/hdl/src/vhdl/cdc_sync.vhd:574]
 	Parameter INIT bound to: 1'b0 
-INFO: [Synth 8-113] binding component instance 'CROSS_PLEVEL_IN2SCNDRY_s_level_out_d6' to cell 'FDR' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/lib_cdc_v1_0/hdl/src/vhdl/cdc_sync.vhd:584]
-INFO: [Synth 8-256] done synthesizing module 'cdc_sync' (47#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/lib_cdc_v1_0/hdl/src/vhdl/cdc_sync.vhd:106]
-INFO: [Synth 8-256] done synthesizing module 'lpf' (48#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/lpf.vhd:138]
-INFO: [Synth 8-638] synthesizing module 'sequence_psr' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/sequence_psr.vhd:146]
-INFO: [Synth 8-638] synthesizing module 'upcnt_n' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/upcnt_n.vhd:125]
+INFO: [Synth 8-113] binding component instance 'CROSS_PLEVEL_IN2SCNDRY_s_level_out_d6' to cell 'FDR' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/lib_cdc_v1_0/hdl/src/vhdl/cdc_sync.vhd:584]
+INFO: [Synth 8-256] done synthesizing module 'cdc_sync' (47#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/lib_cdc_v1_0/hdl/src/vhdl/cdc_sync.vhd:106]
+INFO: [Synth 8-256] done synthesizing module 'lpf' (48#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/lpf.vhd:138]
+INFO: [Synth 8-638] synthesizing module 'sequence_psr' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/sequence_psr.vhd:146]
+INFO: [Synth 8-638] synthesizing module 'upcnt_n' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/upcnt_n.vhd:125]
 	Parameter C_SIZE bound to: 6 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'upcnt_n' (49#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/upcnt_n.vhd:125]
-INFO: [Synth 8-256] done synthesizing module 'sequence_psr' (50#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/sequence_psr.vhd:146]
-INFO: [Synth 8-256] done synthesizing module 'proc_sys_reset' (51#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/proc_sys_reset.vhd:199]
-INFO: [Synth 8-256] done synthesizing module 'design_1_rst_processing_system7_0_100M_0' (52#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_rst_processing_system7_0_100M_0/synth/design_1_rst_processing_system7_0_100M_0.vhd:74]
-INFO: [Synth 8-256] done synthesizing module 'design_1' (53#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1489]
-INFO: [Synth 8-256] done synthesizing module 'design_1_wrapper' (54#1) [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1_wrapper.vhd:43]
+INFO: [Synth 8-256] done synthesizing module 'upcnt_n' (49#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/upcnt_n.vhd:125]
+INFO: [Synth 8-256] done synthesizing module 'sequence_psr' (50#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/sequence_psr.vhd:146]
+INFO: [Synth 8-256] done synthesizing module 'proc_sys_reset' (51#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/proc_sys_reset.vhd:199]
+INFO: [Synth 8-256] done synthesizing module 'design_1_rst_processing_system7_0_100M_0' (52#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_rst_processing_system7_0_100M_0/synth/design_1_rst_processing_system7_0_100M_0.vhd:74]
+INFO: [Synth 8-256] done synthesizing module 'design_1' (53#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1.vhd:1489]
+INFO: [Synth 8-256] done synthesizing module 'design_1_wrapper' (54#1) [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/hdl/design_1_wrapper.vhd:43]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:44 ; elapsed = 00:00:44 . Memory (MB): peak = 1308.730 ; gain = 357.562 ; free physical = 1247 ; free virtual = 13108
+Finished RTL Elaboration : Time (s): cpu = 00:00:28 ; elapsed = 00:00:29 . Memory (MB): peak = 1212.195 ; gain = 345.559 ; free physical = 1987 ; free virtual = 4352
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -1184,7 +1183,7 @@ Report Check Netlist:
 |1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
 +------+------------------+-------+---------+-------+------------------+
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:44 ; elapsed = 00:00:45 . Memory (MB): peak = 1308.730 ; gain = 357.562 ; free physical = 1247 ; free virtual = 13108
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:28 ; elapsed = 00:00:29 . Memory (MB): peak = 1212.195 ; gain = 345.559 ; free physical = 1999 ; free virtual = 4363
 ---------------------------------------------------------------------------------
 INFO: [Netlist 29-17] Analyzing 13 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
@@ -1193,21 +1192,21 @@ INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
 Initializing timing engine
-Parsing XDC File [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.xdc] for cell 'design_1_i/processing_system7_0/inst'
-Finished Parsing XDC File [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.xdc] for cell 'design_1_i/processing_system7_0/inst'
-INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/design_1_wrapper_propImpl.xdc].
+Parsing XDC File [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.xdc] for cell 'design_1_i/processing_system7_0/inst'
+Finished Parsing XDC File [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.xdc] for cell 'design_1_i/processing_system7_0/inst'
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/design_1_wrapper_propImpl.xdc].
 Resolution: To avoid this warning, move constraints listed in [.Xil/design_1_wrapper_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
-Parsing XDC File [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_rst_processing_system7_0_100M_0/design_1_rst_processing_system7_0_100M_0_board.xdc] for cell 'design_1_i/rst_processing_system7_0_100M'
-Finished Parsing XDC File [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_rst_processing_system7_0_100M_0/design_1_rst_processing_system7_0_100M_0_board.xdc] for cell 'design_1_i/rst_processing_system7_0_100M'
-Parsing XDC File [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_rst_processing_system7_0_100M_0/design_1_rst_processing_system7_0_100M_0.xdc] for cell 'design_1_i/rst_processing_system7_0_100M'
-Finished Parsing XDC File [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_rst_processing_system7_0_100M_0/design_1_rst_processing_system7_0_100M_0.xdc] for cell 'design_1_i/rst_processing_system7_0_100M'
-Parsing XDC File [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/constrs_1/new/pwm.xdc]
-Finished Parsing XDC File [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/constrs_1/new/pwm.xdc]
-INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/constrs_1/new/pwm.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/design_1_wrapper_propImpl.xdc].
+Parsing XDC File [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_rst_processing_system7_0_100M_0/design_1_rst_processing_system7_0_100M_0_board.xdc] for cell 'design_1_i/rst_processing_system7_0_100M'
+Finished Parsing XDC File [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_rst_processing_system7_0_100M_0/design_1_rst_processing_system7_0_100M_0_board.xdc] for cell 'design_1_i/rst_processing_system7_0_100M'
+Parsing XDC File [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_rst_processing_system7_0_100M_0/design_1_rst_processing_system7_0_100M_0.xdc] for cell 'design_1_i/rst_processing_system7_0_100M'
+Finished Parsing XDC File [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_rst_processing_system7_0_100M_0/design_1_rst_processing_system7_0_100M_0.xdc] for cell 'design_1_i/rst_processing_system7_0_100M'
+Parsing XDC File [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/constrs_1/new/pwm.xdc]
+Finished Parsing XDC File [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/constrs_1/new/pwm.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/constrs_1/new/pwm.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/design_1_wrapper_propImpl.xdc].
 Resolution: To avoid this warning, move constraints listed in [.Xil/design_1_wrapper_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
-Parsing XDC File [/home/rupprich/Zynq/indoor-loc/indoor-loc.runs/synth_2/dont_touch.xdc]
-Finished Parsing XDC File [/home/rupprich/Zynq/indoor-loc/indoor-loc.runs/synth_2/dont_touch.xdc]
-INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/rupprich/Zynq/indoor-loc/indoor-loc.runs/synth_2/dont_touch.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/design_1_wrapper_propImpl.xdc].
+Parsing XDC File [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.runs/synth_2/dont_touch.xdc]
+Finished Parsing XDC File [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.runs/synth_2/dont_touch.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.runs/synth_2/dont_touch.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/design_1_wrapper_propImpl.xdc].
 Resolution: To avoid this warning, move constraints listed in [.Xil/design_1_wrapper_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Completed Processing XDC Constraints
 
@@ -1216,23 +1215,23 @@ INFO: [Project 1-111] Unisim Transformation Summary:
   FDR => FDRE: 12 instances
   SRL16 => SRL16E: 1 instances
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.01 . Memory (MB): peak = 1549.910 ; gain = 0.000 ; free physical = 1127 ; free virtual = 12988
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 1451.375 ; gain = 0.000 ; free physical = 1794 ; free virtual = 4209
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 7364 
+INFO: Helper process launched with PID 5671 
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:56 ; elapsed = 00:00:57 . Memory (MB): peak = 1549.914 ; gain = 598.746 ; free physical = 1123 ; free virtual = 12984
+Finished Constraint Validation : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 1451.379 ; gain = 584.742 ; free physical = 1792 ; free virtual = 4207
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7z020clg484-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:56 ; elapsed = 00:00:57 . Memory (MB): peak = 1549.914 ; gain = 598.746 ; free physical = 1123 ; free virtual = 12984
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 1451.379 ; gain = 584.742 ; free physical = 1792 ; free virtual = 4207
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
-Applied set_property DONT_TOUCH = true for design_1_i/processing_system7_0/inst. (constraint file  /home/rupprich/Zynq/indoor-loc/indoor-loc.runs/synth_2/dont_touch.xdc, line 34).
+Applied set_property DONT_TOUCH = true for design_1_i/processing_system7_0/inst. (constraint file  /home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.runs/synth_2/dont_touch.xdc, line 34).
 Applied set_property DONT_TOUCH = true for design_1_i. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for design_1_i/processing_system7_0. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for design_1_i/processing_system7_0_axi_periph. (constraint file  auto generated constraint, line ).
@@ -1243,10 +1242,10 @@ Applied set_property DONT_TOUCH = true for design_1_i/pwm_dir_1. (constraint fil
 Applied set_property DONT_TOUCH = true for design_1_i/pwm_oe_0. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for design_1_i/rst_processing_system7_0_100M. (constraint file  auto generated constraint, line ).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:57 ; elapsed = 00:00:57 . Memory (MB): peak = 1549.914 ; gain = 598.746 ; free physical = 1123 ; free virtual = 12984
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:37 ; elapsed = 00:00:39 . Memory (MB): peak = 1451.379 ; gain = 584.742 ; free physical = 1793 ; free virtual = 4208
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-5544] ROM "address_offset" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
-INFO: [Synth 8-4471] merging register 'gen_axilite.s_axi_wready_i_reg' into 'gen_axilite.s_axi_awready_i_reg' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_decerr_slave.v:136]
+INFO: [Synth 8-4471] merging register 'gen_axilite.s_axi_wready_i_reg' into 'gen_axilite.s_axi_awready_i_reg' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_crossbar_v2_1/hdl/verilog/axi_crossbar_v2_1_decerr_slave.v:136]
 INFO: [Synth 8-5544] ROM "p_2_out0" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "p_0_in3" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "p_0_in2" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
@@ -1259,9 +1258,9 @@ INFO: [Synth 8-5544] ROM "p_2_out0" won't be mapped to Block RAM because address
 INFO: [Synth 8-5544] ROM "p_0_in3" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "p_0_in2" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "p_0_in1" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
-INFO: [Synth 8-4471] merging register 'seq_cnt_en_reg' into 'from_sys_reg' [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/sequence_psr.vhd:222]
+INFO: [Synth 8-4471] merging register 'seq_cnt_en_reg' into 'from_sys_reg' [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/proc_sys_reset_v5_0/hdl/src/vhdl/sequence_psr.vhd:222]
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:59 ; elapsed = 00:01:00 . Memory (MB): peak = 1549.914 ; gain = 598.746 ; free physical = 1096 ; free virtual = 12957
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:38 ; elapsed = 00:00:41 . Memory (MB): peak = 1451.379 ; gain = 584.742 ; free physical = 1795 ; free virtual = 4210
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -1583,17 +1582,17 @@ BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
 ---------------------------------------------------------------------------------
 Finished Part Resource Summary
 ---------------------------------------------------------------------------------
-Start Parallel Synthesis Optimization  : Time (s): cpu = 00:00:59 ; elapsed = 00:01:00 . Memory (MB): peak = 1549.918 ; gain = 598.750 ; free physical = 1096 ; free virtual = 12957
+Start Parallel Synthesis Optimization  : Time (s): cpu = 00:00:38 ; elapsed = 00:00:41 . Memory (MB): peak = 1451.383 ; gain = 584.746 ; free physical = 1796 ; free virtual = 4210
 ---------------------------------------------------------------------------------
 Start Cross Boundary Optimization
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-3936] Found unconnected internal register 'inst/gen_axilite.gen_b2s_conv.axilite_b2s/SI_REG/aw_pipe/m_payload_i_reg' and it is trimmed from '66' to '62' bits. [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:121]
-INFO: [Synth 8-3936] Found unconnected internal register 'inst/gen_axilite.gen_b2s_conv.axilite_b2s/SI_REG/ar_pipe/m_payload_i_reg' and it is trimmed from '66' to '62' bits. [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:121]
-INFO: [Synth 8-3936] Found unconnected internal register 'inst/gen_sasd.crossbar_sasd_0/reg_slice_r/m_payload_i_reg' and it is trimmed from '36' to '35' bits. [/home/rupprich/Zynq/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:121]
+INFO: [Synth 8-3936] Found unconnected internal register 'inst/gen_axilite.gen_b2s_conv.axilite_b2s/SI_REG/aw_pipe/m_payload_i_reg' and it is trimmed from '66' to '62' bits. [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:121]
+INFO: [Synth 8-3936] Found unconnected internal register 'inst/gen_axilite.gen_b2s_conv.axilite_b2s/SI_REG/ar_pipe/m_payload_i_reg' and it is trimmed from '66' to '62' bits. [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:121]
+INFO: [Synth 8-3936] Found unconnected internal register 'inst/gen_sasd.crossbar_sasd_0/reg_slice_r/m_payload_i_reg' and it is trimmed from '36' to '35' bits. [/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ipshared/xilinx.com/axi_register_slice_v2_1/hdl/verilog/axi_register_slice_v2_1_axic_register_slice.v:121]
 ---------------------------------------------------------------------------------
-Finished Cross Boundary Optimization : Time (s): cpu = 00:01:00 ; elapsed = 00:01:01 . Memory (MB): peak = 1549.918 ; gain = 598.750 ; free physical = 1098 ; free virtual = 12959
+Finished Cross Boundary Optimization : Time (s): cpu = 00:00:39 ; elapsed = 00:00:41 . Memory (MB): peak = 1451.383 ; gain = 584.746 ; free physical = 1798 ; free virtual = 4213
 ---------------------------------------------------------------------------------
-Finished Parallel Reinference  : Time (s): cpu = 00:01:00 ; elapsed = 00:01:01 . Memory (MB): peak = 1549.918 ; gain = 598.750 ; free physical = 1098 ; free virtual = 12959
+Finished Parallel Reinference  : Time (s): cpu = 00:00:39 ; elapsed = 00:00:41 . Memory (MB): peak = 1451.383 ; gain = 584.746 ; free physical = 1798 ; free virtual = 4213
 
 Report RTL Partitions: 
 +-+--------------+------------+----------+
@@ -1604,9 +1603,9 @@ Report RTL Partitions:
 Start Area Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Area Optimization : Time (s): cpu = 00:01:04 ; elapsed = 00:01:05 . Memory (MB): peak = 1549.918 ; gain = 598.750 ; free physical = 1088 ; free virtual = 12949
+Finished Area Optimization : Time (s): cpu = 00:00:41 ; elapsed = 00:00:44 . Memory (MB): peak = 1451.383 ; gain = 584.746 ; free physical = 1778 ; free virtual = 4197
 ---------------------------------------------------------------------------------
-Finished Parallel Area Optimization  : Time (s): cpu = 00:01:04 ; elapsed = 00:01:05 . Memory (MB): peak = 1549.918 ; gain = 598.750 ; free physical = 1088 ; free virtual = 12949
+Finished Parallel Area Optimization  : Time (s): cpu = 00:00:41 ; elapsed = 00:00:44 . Memory (MB): peak = 1451.383 ; gain = 584.746 ; free physical = 1778 ; free virtual = 4197
 
 Report RTL Partitions: 
 +-+--------------+------------+----------+
@@ -1620,19 +1619,19 @@ Start Timing Optimization
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:14 ; elapsed = 00:01:15 . Memory (MB): peak = 1697.910 ; gain = 746.742 ; free physical = 899 ; free virtual = 12760
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:48 ; elapsed = 00:00:51 . Memory (MB): peak = 1601.375 ; gain = 734.738 ; free physical = 1596 ; free virtual = 4023
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:01:16 ; elapsed = 00:01:17 . Memory (MB): peak = 1740.277 ; gain = 789.109 ; free physical = 845 ; free virtual = 12706
+Finished Timing Optimization : Time (s): cpu = 00:00:49 ; elapsed = 00:00:52 . Memory (MB): peak = 1642.742 ; gain = 776.105 ; free physical = 1553 ; free virtual = 3980
 ---------------------------------------------------------------------------------
-Finished Parallel Timing Optimization  : Time (s): cpu = 00:01:16 ; elapsed = 00:01:17 . Memory (MB): peak = 1740.277 ; gain = 789.109 ; free physical = 845 ; free virtual = 12706
+Finished Parallel Timing Optimization  : Time (s): cpu = 00:00:49 ; elapsed = 00:00:52 . Memory (MB): peak = 1642.742 ; gain = 776.105 ; free physical = 1553 ; free virtual = 3980
 
 Report RTL Partitions: 
 +-+--------------+------------+----------+
 | |RTL Partition |Replication |Instances |
 +-+--------------+------------+----------+
 +-+--------------+------------+----------+
-Finished Parallel Synthesis Optimization  : Time (s): cpu = 00:01:16 ; elapsed = 00:01:17 . Memory (MB): peak = 1740.277 ; gain = 789.109 ; free physical = 845 ; free virtual = 12706
+Finished Parallel Synthesis Optimization  : Time (s): cpu = 00:00:49 ; elapsed = 00:00:52 . Memory (MB): peak = 1642.742 ; gain = 776.105 ; free physical = 1553 ; free virtual = 3980
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
@@ -1679,7 +1678,7 @@ INFO: [Synth 8-3332] Sequential element (\U0/EXT_LPF/ACTIVE_LOW_EXT.ACT_LO_EXT/G
 INFO: [Synth 8-3332] Sequential element (\U0/EXT_LPF/ACTIVE_LOW_AUX.ACT_LO_AUX/GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d5 ) is unused and will be removed from module design_1_rst_processing_system7_0_100M_0.
 INFO: [Synth 8-3332] Sequential element (\U0/EXT_LPF/ACTIVE_LOW_AUX.ACT_LO_AUX/GENERATE_LEVEL_P_S_CDC.SINGLE_BIT.CROSS_PLEVEL_IN2SCNDRY_s_level_out_d6 ) is unused and will be removed from module design_1_rst_processing_system7_0_100M_0.
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:01:18 ; elapsed = 00:01:19 . Memory (MB): peak = 1748.285 ; gain = 797.117 ; free physical = 843 ; free virtual = 12704
+Finished Technology Mapping : Time (s): cpu = 00:00:50 ; elapsed = 00:00:53 . Memory (MB): peak = 1650.750 ; gain = 784.113 ; free physical = 1544 ; free virtual = 3972
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -1727,7 +1726,7 @@ INFO: [Synth 8-4618] Found max_fanout attribute set to 10 on net \inst/gen_axili
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:01:21 ; elapsed = 00:01:22 . Memory (MB): peak = 1748.285 ; gain = 797.117 ; free physical = 848 ; free virtual = 12709
+Finished IO Insertion : Time (s): cpu = 00:00:52 ; elapsed = 00:00:55 . Memory (MB): peak = 1650.750 ; gain = 784.113 ; free physical = 1544 ; free virtual = 3972
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -1740,7 +1739,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:01:21 ; elapsed = 00:01:22 . Memory (MB): peak = 1748.285 ; gain = 797.117 ; free physical = 848 ; free virtual = 12709
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:52 ; elapsed = 00:00:55 . Memory (MB): peak = 1650.750 ; gain = 784.113 ; free physical = 1544 ; free virtual = 3972
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -1752,25 +1751,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:21 ; elapsed = 00:01:22 . Memory (MB): peak = 1748.285 ; gain = 797.117 ; free physical = 847 ; free virtual = 12709
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:52 ; elapsed = 00:00:55 . Memory (MB): peak = 1650.750 ; gain = 784.113 ; free physical = 1544 ; free virtual = 3972
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:01:21 ; elapsed = 00:01:22 . Memory (MB): peak = 1748.285 ; gain = 797.117 ; free physical = 847 ; free virtual = 12709
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:52 ; elapsed = 00:00:55 . Memory (MB): peak = 1650.750 ; gain = 784.113 ; free physical = 1544 ; free virtual = 3972
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:01:21 ; elapsed = 00:01:22 . Memory (MB): peak = 1748.285 ; gain = 797.117 ; free physical = 847 ; free virtual = 12709
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:52 ; elapsed = 00:00:55 . Memory (MB): peak = 1650.750 ; gain = 784.113 ; free physical = 1544 ; free virtual = 3972
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:01:21 ; elapsed = 00:01:22 . Memory (MB): peak = 1748.285 ; gain = 797.117 ; free physical = 847 ; free virtual = 12709
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:52 ; elapsed = 00:00:55 . Memory (MB): peak = 1650.750 ; gain = 784.113 ; free physical = 1544 ; free virtual = 3972
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -1886,11 +1885,11 @@ Report Instance Areas:
 |58    |          SEQ_COUNTER                              |upcnt_n                                                       |    14|
 +------+---------------------------------------------------+--------------------------------------------------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:01:21 ; elapsed = 00:01:22 . Memory (MB): peak = 1748.285 ; gain = 797.117 ; free physical = 847 ; free virtual = 12709
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:52 ; elapsed = 00:00:55 . Memory (MB): peak = 1650.750 ; gain = 784.113 ; free physical = 1544 ; free virtual = 3972
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:01:10 ; elapsed = 00:01:11 . Memory (MB): peak = 1748.285 ; gain = 377.316 ; free physical = 847 ; free virtual = 12709
-Synthesis Optimization Complete : Time (s): cpu = 00:01:21 ; elapsed = 00:01:23 . Memory (MB): peak = 1748.285 ; gain = 797.117 ; free physical = 847 ; free virtual = 12709
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:45 ; elapsed = 00:00:47 . Memory (MB): peak = 1650.750 ; gain = 378.320 ; free physical = 1544 ; free virtual = 3972
+Synthesis Optimization Complete : Time (s): cpu = 00:00:52 ; elapsed = 00:00:55 . Memory (MB): peak = 1650.750 ; gain = 784.113 ; free physical = 1544 ; free virtual = 3972
 INFO: [Project 1-571] Translating synthesized netlist
 INFO: [Netlist 29-17] Analyzing 123 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
@@ -1902,8 +1901,8 @@ INFO: [Project 1-111] Unisim Transformation Summary:
   SRL16 => SRL16E: 1 instances
 
 INFO: [Common 17-83] Releasing license: Synthesis
-284 Infos, 3 Warnings, 0 Critical Warnings and 0 Errors encountered.
+283 Infos, 3 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:01:20 ; elapsed = 00:01:21 . Memory (MB): peak = 1748.289 ; gain = 667.102 ; free physical = 845 ; free virtual = 12707
-report_utilization: Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.04 . Memory (MB): peak = 1780.305 ; gain = 0.000 ; free physical = 846 ; free virtual = 12708
-INFO: [Common 17-206] Exiting Vivado at Thu Dec  3 10:05:37 2015...
+synth_design: Time (s): cpu = 00:00:52 ; elapsed = 00:00:55 . Memory (MB): peak = 1650.754 ; gain = 671.844 ; free physical = 1537 ; free virtual = 3970
+report_utilization: Time (s): cpu = 00:00:00.07 ; elapsed = 00:00:00.09 . Memory (MB): peak = 1682.770 ; gain = 0.000 ; free physical = 1535 ; free virtual = 3969
+INFO: [Common 17-206] Exiting Vivado at Mon Dec  7 10:12:30 2015...

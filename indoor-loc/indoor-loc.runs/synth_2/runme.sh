@@ -7,20 +7,20 @@
 # 
 
 if [ -z "$PATH" ]; then
-  PATH=/opt/Xilinx/SDK/2015.3/bin:/opt/Xilinx/Vivado/2015.3/ids_lite/ISE/bin/lin64:/opt/Xilinx/Vivado/2015.3/bin
+  PATH=/opt/Xilinx2/SDK/2015.3/bin:/opt/Xilinx2/Vivado/2015.3/ids_lite/ISE/bin/lin64:/opt/Xilinx2/Vivado/2015.3/bin
 else
-  PATH=/opt/Xilinx/SDK/2015.3/bin:/opt/Xilinx/Vivado/2015.3/ids_lite/ISE/bin/lin64:/opt/Xilinx/Vivado/2015.3/bin:$PATH
+  PATH=/opt/Xilinx2/SDK/2015.3/bin:/opt/Xilinx2/Vivado/2015.3/ids_lite/ISE/bin/lin64:/opt/Xilinx2/Vivado/2015.3/bin:$PATH
 fi
 export PATH
 
 if [ -z "$LD_LIBRARY_PATH" ]; then
-  LD_LIBRARY_PATH=/opt/Xilinx/Vivado/2015.3/ids_lite/ISE/lib/lin64
+  LD_LIBRARY_PATH=/opt/Xilinx2/Vivado/2015.3/ids_lite/ISE/lib/lin64
 else
-  LD_LIBRARY_PATH=/opt/Xilinx/Vivado/2015.3/ids_lite/ISE/lib/lin64:$LD_LIBRARY_PATH
+  LD_LIBRARY_PATH=/opt/Xilinx2/Vivado/2015.3/ids_lite/ISE/lib/lin64:$LD_LIBRARY_PATH
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD=/home/rupprich/Zynq/indoor-loc/indoor-loc.runs/synth_2
+HD_PWD=/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.runs/synth_2
 cd "$HD_PWD"
 
 HD_LOG=runme.log
