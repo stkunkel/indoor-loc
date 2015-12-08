@@ -11,6 +11,8 @@
 /*
  * Function Prototypes
  */
+int printCurrentPositionForDisplay();
+int printQuatForDisplay();
 void printGyro(float conv[NUMBER_OF_AXES]);
 void printAccel(float conv[NUMBER_OF_AXES]);
 void printCompass(float conv[NUMBER_OF_AXES]);
@@ -18,6 +20,9 @@ void printTemp(float* temp_conv);
 void printQuat(float quat[QUATERNION_AMOUNT]);
 void printRotationAngle(long quat[QUATERNION_AMOUNT]);
 void printEulerAngles(float* sigma, float* theta, float* psi);
+void printPosition(Vector* position);
+void updatePosition(float* accel_conv, float* quat_conv,
+		unsigned long timestamp);
 int convertGyroData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
 int convertAccData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
 int convertCompassData(short raw[NUMBER_OF_AXES],
@@ -35,9 +40,98 @@ int readFromRegs(short *gyro, short *accel, short* comp,
 static u8 imuAddr = 0;
 static char dmpReady = 0;
 static int count = 0;
-float quat_conv[QUATERNION_AMOUNT];
 static char gyrAccIsCal = 0;
 static char gyroCalEnabled = 0;
+static Vector recentVelocity = { .value[0] = 0.0, .value[1] = 0.0, .value[2
+		] = 0.0 };
+static Vector recentPosition = { .value[0] = 0.0, .value[1] = 0.0, .value[2
+		] = 0.0 };
+static unsigned long recent_ts = 0;
+static short recentGyro[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 },
+		recentAccel[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 },
+		recentCompass[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 };
+static long recentQuat[QUATERNION_AMOUNT], recentTemp = 0;
+static unsigned long previous_ts = 0;
+static Vector previousVelocity = { .value[0] = 0.0, .value[1] = 0.0, .value[2
+		] = 0.0 };
+static Vector previousPosition = { .value[0] = 0.0, .value[1] = 0.0, .value[2
+		] = 0.0 };
+
+/*
+ * Print for Display
+ * Format: "<quat: w> <quat: x> <quat: y> <quat: z> | <pos: x> <pos: y> <pos: z>" (no new line)
+ * You have to call updateData() first to get most recent value.
+ * In: print quat? print pos?
+ * Returns 0 if successful
+ */
+int printforDisplay(char printQuaternion, char printPos) {
+	//Variables
+	int status = XST_FAILURE;
+
+	//Initialize if required
+	if (!dmpReady) {
+		//init and configure DMP
+		status = configureDMP(FEATURES_CAL, DMP_FIFO_RATE);
+		if (status != XST_SUCCESS) {
+			return status;
+		}
+
+		//Update Data
+		updateData();
+		if (status != XST_SUCCESS) {
+			return status;
+		}
+	}
+
+	//Print Quaternion
+	if (printQuaternion) {
+		status = printQuatForDisplay();
+		if (status == XST_SUCCESS && printPos) {
+			printf(" | ");
+		}
+	}
+
+	//Print Position
+	if (printPos) {
+		status = printCurrentPositionForDisplay();
+	}
+
+	//Return
+	return status;
+}
+
+/*
+ * Print Current Position for Display
+ * (You have to call updateData() to get most recent value.)
+ */
+int printCurrentPositionForDisplay() {
+	//Variables
+	int status = XST_SUCCESS;
+
+	//Initialize if required
+	if (!dmpReady) {
+		//init and configure DMP
+		status = configureDMP(FEATURES_CAL, DMP_FIFO_RATE);
+		if (status != XST_SUCCESS) {
+			return status;
+		}
+
+		//Update Data
+		updateData();
+		if (status != XST_SUCCESS) {
+			return status;
+		}
+	}
+
+	//Print
+	if (status == XST_SUCCESS) {
+		printPosition(&recentPosition);
+		printf("\n\r");
+	}
+
+	//Return
+	return status;
+}
 
 /*
  * Print Drift w/o and with Calibration
@@ -67,20 +161,21 @@ void printQuatDrift(unsigned int time_min) {
 	} else {
 		myprintf(
 				"Quat Drift after %d minute(s) with initial calibration: %f %f %f %f\r\n",
-				time_min, quat_drift[0], quat_drift[1],
-				quat_drift[2], quat_drift[3]);
+				time_min, quat_drift[0], quat_drift[1], quat_drift[2],
+				quat_drift[3]);
 	}
 
 	//also enable dynamic calibration in DMP TODO: does it work?
 	dmpGyroCalibration(1);
 	status = getQuatDrift(quat_drift, calibration, time_min);
 	if (status != XST_SUCCESS) {
-		myprintf("Error in drift calculation with initial calibration and DMP dynamic calibration\r\n.");
+		myprintf(
+				"Error in drift calculation with initial calibration and DMP dynamic calibration\r\n.");
 	} else {
 		myprintf(
 				"Quat Drift after %d minutes with initial calibration and DMP dynamic calibration: %f %f %f %f\r\n",
-				time_min, quat_drift[0], quat_drift[1],
-				quat_drift[2], quat_drift[3]);
+				time_min, quat_drift[0], quat_drift[1], quat_drift[2],
+				quat_drift[3]);
 	}
 }
 
@@ -123,7 +218,6 @@ int getQuatDrift(float *quat_drift, char calibration, unsigned int time_min) {
 	//Get initial quaternion
 	do {
 		status = readFromFifo(gyro, accel, quat, &timestamp, &sensors, more);
-		usleep(100);
 	} while (status != XST_SUCCESS);
 
 	//Convert initial quaternion
@@ -169,155 +263,118 @@ int getQuatDrift(float *quat_drift, char calibration, unsigned int time_min) {
 
 /*
  * Print one Quaternion for Display
- * (No error messages!)
+ * (You have to call updateData() to get most recent value.)
  */
 int printQuatForDisplay() {
 //Variables
 	int status = XST_FAILURE, i = 0;
-	short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES];
-	long quat[QUATERNION_AMOUNT];
-	unsigned long timestamp;
-	short int sensors;
-	unsigned char* more = (unsigned char *) malloc(100);
-//float quat_conv[QUATERNION_AMOUNT];
+	float quat_conv[QUATERNION_AMOUNT];
 
-//init and configure DMP
+	//Initialize
 	if (!dmpReady) {
+		//init and configre DMP
 		status = configureDMP(FEATURES_CAL, DMP_FIFO_RATE);
 		if (status != XST_SUCCESS) {
+			myprintf("mpu.c Error initializing DMP.\r\n");
+			return status;
+		}
+
+		//Get latest Data
+		status = updateData();
+		if (status != XST_SUCCESS) {
+			myprintf("mpu.c Could not update data.\r\n");
 			return status;
 		}
 	}
 
-//Get Data
-	status = readFromFifo(gyro, accel, quat, &timestamp, &sensors, more);
-
 //Convert Quaternion
-	if (status == XST_SUCCESS) {
-		status = convertQuatenion(quat, quat_conv);
-	}
+	status = convertQuatenion(recentQuat, quat_conv);
 
 //Print Quaternion
+	myprintf("Quat: ");
 	if (status == XST_SUCCESS) {
 		for (i = 0; i < QUATERNION_AMOUNT; i++) {
 			printf("%f ", quat_conv[i]);
 		}
-		printf("\n\r");
 	}
 
-//Free memory and return
-	free(more);
+//Return
 	return status;
 }
 
 /*
  * Print Data using DMP
  */
-int printDataWithDMP() {
+int printDataWithDMP() { //TODO: Handle invalid temperature and compass data
 //Variables
 	int status, return_val = XST_SUCCESS;
-	short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
-	long temp_raw, quat[QUATERNION_AMOUNT];
-	unsigned long timestamp;
-	short int sensors;
-	unsigned char* more = (unsigned char *) malloc(100);
-	float conv[NUMBER_OF_AXES], temp_conv; //, quat_conv[QUATERNION_AMOUNT];
+	float conv[NUMBER_OF_AXES], temp_conv;
 
-//init and configre DMP
+//Initialize
 	if (!dmpReady) {
+		//init and configre DMP
 		status = configureDMP(FEATURES_CAL, DMP_FIFO_RATE);
 		if (status != XST_SUCCESS) {
 			myprintf("mpu.c Error initializing DMP.\r\n");
-			return XST_FAILURE;
+			return status;
+		}
+
+		//Get latest Data
+		status = updateData();
+		if (status != XST_SUCCESS) {
+			myprintf("mpu.c Could not update data.\r\n");
+			return status;
 		}
 	}
 
-//Get Data
-	status = readFromFifo(gyro, accel, quat, &timestamp, &sensors, more);
-	if (status != XST_SUCCESS) {
+//Convert Gyro
+	status = convertGyroData(recentGyro, conv);
+	if (status != 0) {
+		myprintf("mpu.c Error converting Gyroscope data.");
 		return_val = XST_FAILURE;
 	} else {
 
-//Convert Gyro
-		status = convertGyroData(gyro, conv);
-		if (status != 0) {
-			myprintf("mpu.c Error converting Gyroscope data.");
-			return_val = XST_FAILURE;
-		} else {
-
-			//Print Gyro
-			printGyro(conv);
-		}
-		printf(" | ");
+		//Print Gyro
+		printGyro(conv);
+	}
+	printf(" | ");
 
 //Convert Acc
-		status = convertAccData(accel, conv);
-		if (status != 0) {
-			myprintf("mpu.c Error converting Acc data.");
-			return_val = XST_FAILURE;
-		} else {
+	status = convertAccData(recentAccel, conv);
+	if (status != 0) {
+		myprintf("mpu.c Error converting Acc data.");
+		return_val = XST_FAILURE;
+	} else {
 
-			//Print Acc
-			printAccel(conv);
-		}
-		printf(" | ");
+		//Print Acc
+		printAccel(conv);
+	}
+	printf(" | ");
 
-//Get Compass
-		status = mpu_get_compass_reg(compass, &timestamp);
-		if (status != 0) {
-			myprintf("mpu.c Error getting Compass data.");
-			return_val = XST_FAILURE;
-		} else {
+	//Convert Compass
+	status = convertCompassData(recentCompass, conv);
+	if (status != 0) {
+		myprintf("mpu.c Error converting Compass data.");
+		return_val = XST_FAILURE;
+	} else {
 
-			//Convert Compass
-			status = convertCompassData(compass, conv);
-			if (status != 0) {
-				myprintf("mpu.c Error converting Compass data.");
-				return_val = XST_FAILURE;
-			} else {
+		//Print Compass
+		printCompass(conv);
+	}
+	printf(" | ");
 
-				//Print Compass
-				printCompass(conv);
-			}
-		}
-		printf(" | ");
+	//Convert Temperature
+	status = convertTemperaturetoC(&recentTemp, &temp_conv);
+	if (status != 0) {
+		myprintf("mpu.c Error converting Temperature data.");
+		return_val = XST_FAILURE;
+	} else {
 
-//Get Temperature
-		status = mpu_get_temperature(&temp_raw, &timestamp);
-		if (status != 0) {
-			myprintf("mpu.c Error getting Temperature data.");
-			return_val = XST_FAILURE;
-		} else {
-
-			//Convert Temperature
-			status = convertTemperaturetoC(&temp_raw, &temp_conv);
-			if (status != 0) {
-				myprintf("mpu.c Error converting Temperature data.");
-				return_val = XST_FAILURE;
-			} else {
-
-				//Print Temperature
-				printTemp(&temp_conv);
-			}
-		}
-//	printf(" | ");
-//
-////Convert Quaternion
-//	status = convertQuatenion(quat, quat_conv);
-//	if (status != 0) {
-//		myprintf("mpu.c Error converting quaternion.");
-//		return XST_FAILURE;
-//	} else {
-//		//Print Quaternion
-//		printQuat(quat_conv);
-//	}
-
-//Print new line
-		printf("\r\n");
+		//Print Temperature
+		printTemp(&temp_conv);
 	}
 
-//Free Memory and Return
-	free(more);
+//Return
 	return return_val;
 }
 
@@ -523,6 +580,149 @@ void printRotationAngle(long quat[QUATERNION_AMOUNT]) {
 void printEulerAngles(float* sigma, float* theta, float* psi) {
 //Print
 	printf("Euler Angles: roll=%f, pitch=%f, yaw=%f", *sigma, *theta, *psi);
+}
+
+/*
+ * Print Position
+ */
+void printPosition(Vector* position) {
+//Variables
+	int i;
+
+//Print
+	myprintf("Pos: ");
+	for (i = 0; i < NUMBER_OF_AXES; i++) {
+		printf("%f", position->value[i]);
+		myprintf("m");
+		if (i < NUMBER_OF_AXES - 1) {
+			printf(", ");
+		}
+	}
+}
+
+/*
+ * Update Sensor Data and Position
+ * Returns 0 if successful
+ */
+int updateData() {
+	//Variables
+	int i, status = XST_SUCCESS;
+	short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES],
+			sensors;
+	long quat[QUATERNION_AMOUNT], temperature;
+	unsigned long timestamp, temp_ts;
+	unsigned char* more = (unsigned char *) malloc(100);
+	float accel_conv[NUMBER_OF_AXES], quat_conv[QUATERNION_AMOUNT];
+
+	//Initialize if required
+	if (!dmpReady) {
+		//init and configure DMP
+		status = configureDMP(FEATURES_CAL, DMP_FIFO_RATE);
+		if (status != XST_SUCCESS) {
+			return status;
+		}
+	}
+
+	//Get latest data
+	do {
+		status = readFromFifo(gyro, accel, quat, &timestamp, &sensors, more);
+	} while (status != XST_SUCCESS);
+
+	//Convert Accel
+	status = convertAccData(accel, accel_conv);
+	if (status != XST_SUCCESS) {
+		free(more);
+		return status;
+	}
+
+	//Convert Quat
+	status = convertQuatenion(quat, quat_conv);
+	if (status != XST_SUCCESS) {
+		free(more);
+		return status;
+	}
+
+	//Get Compass //TODO: Handle unequal timestamp
+	status = mpu_get_compass_reg(compass, &temp_ts);
+	if (status != 0) {
+		//Print
+		myprintf("mpu.c Error getting Compass data.");
+
+		//Set compass data invalid
+		for (i = 0; i < NUMBER_OF_AXES; i++) {
+			compass[i] = -1;
+		}
+	}
+
+	//Get Temperature //TODO: Handle unequal timestamp
+	status = mpu_get_temperature(&temperature, &temp_ts);
+	if (status != 0) {
+		myprintf("mpu.c Error getting Temperature data.");
+		temperature = -1;
+	}
+
+	//Update Position
+	updatePosition(accel_conv, quat_conv, timestamp);
+
+	//Update Sensor Data (Gyro, Accel, Quat)
+	for (i = 0; i < NUMBER_OF_AXES; i++) {
+		recentGyro[i] = gyro[i];
+		recentAccel[i] = accel[i];
+		recentCompass[i] = compass[i];
+		recentQuat[i] = quat[i];
+	}
+	for (i = NUMBER_OF_AXES; i < QUATERNION_AMOUNT; i++) {
+		recentQuat[i] = quat[i];
+	}
+
+	//Update Temperature
+	recentTemp = temperature;
+
+	//Update Timestamp
+	previous_ts = recent_ts;
+	recent_ts = timestamp;
+
+	//Return
+	free(more);
+	return status;
+}
+
+/*
+ * Update Position
+ */
+void updatePosition(float* accel_conv, float* quat_conv,
+		unsigned long timestamp) {
+	//Variables
+	Vector accel_measuremt, accel_inertial, velocity, newPosition;
+	Matrix rotation;
+
+	//Convert acceleration vector: 1g = 9.81m/s^2
+	accel_measuremt = multVectorByScalar(toVector(accel_conv), GRAVITY);
+
+	//Compute Rotational Matrix
+	toRotationMatrix(quat_conv, &rotation);
+
+	//Compute Inertial Acceleration Vector
+	accel_inertial = multMatrixAndVector(rotation, accel_measuremt);
+
+	//Handle first function call
+	if (recent_ts == 0){
+		recent_ts = timestamp -1;
+	}
+
+	//Compute Velocity
+	discreteIntegration(timestamp/1000.0 - recent_ts/1000.0, &accel_inertial,
+			&recentVelocity, &velocity);
+
+	//Compute Position
+	discreteIntegration(timestamp/1000.0 - recent_ts/1000.0, &velocity,
+			&recentPosition, &newPosition);
+
+	//Set new Values
+	previousVelocity = recentVelocity;
+	recentVelocity = velocity;
+	previousPosition = recentPosition;
+	recentPosition = newPosition;
 }
 
 /*
@@ -798,7 +998,7 @@ int readFromFifo(short *gyro, short *accel, long *quat,
 		//Read FIFO
 		status = dmp_read_fifo(gyro, accel, quat, timestamp, sensors, more);
 		if (status != XST_SUCCESS) {
-			usleep(100); //sleep to prevent IIC bus from becoming busy
+			usleep(10000); //sleep to prevent IIC bus from becoming busy (was: 100)
 			//myprintf("mpu.c: Could not read DMP FIFO.\n\r");
 		}
 	}
@@ -812,7 +1012,7 @@ int readFromFifo(short *gyro, short *accel, long *quat,
  */
 int dmpGyroCalibration(char enable) {
 //Variables
-	int status;
+	int status = XST_SUCCESS;
 
 //Enable gyro cal if requested
 	if (enable != gyroCalEnabled) {

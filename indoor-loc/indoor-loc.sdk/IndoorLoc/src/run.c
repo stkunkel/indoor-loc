@@ -14,12 +14,11 @@
 #include "imu/mpu.h"
 #include "robot/pwmsw.h"
 
-
 /*
  * Defines
  */
 #define DATA_NO_DMP_RUNS 	10
-#define DATA_WITH_DMP_RUNS 	10
+#define DATA_WITH_DMP_RUNS 	0
 #define QUAT_DISPLAY_RUNS	0
 #define QUAT_DRIFT_MIN		1
 
@@ -27,7 +26,7 @@
  * Function Prototypes
  */
 int printQuaternionDriftAfterXMin(unsigned int time_min);
-int printQuatForImuViewer(unsigned int numberOfRuns);
+int printForImuViewer(char printQuat, char printPos, unsigned int numberOfRuns);
 int printDataWithoutDMP(short int sensors, unsigned int numberOfRuns);
 int printDataUsingDMP(char initialCalibration, char dmpCalibration,
 		unsigned int numberOfRuns);
@@ -37,7 +36,7 @@ int printDataUsingDMP(char initialCalibration, char dmpCalibration,
  */
 int main() {
 	//Variables
-	int status =XST_SUCCESS;
+	int status = XST_SUCCESS;
 
 	//Init Platform
 	init_platform();
@@ -58,16 +57,19 @@ int main() {
 	//status |= printDataUsingDMP(1, 1, DATA_WITH_DMP_RUNS);
 
 	//Print Quaternions to Serial Port
-	//status |= printQuatForImuViewer(QUAT_DISPLAY_RUNS);
+	//status |= printForImuViewer(1, 0, QUAT_DISPLAY_RUNS);
 
 	//Quaternion Drift
 	//status |= printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
 
+	//Print Quaternions and Position
+	status |= printForImuViewer(0, 1, QUAT_DISPLAY_RUNS);
+
 	//PWM Test
-	status = pwmTest();
+	//status = pwmTest();
 
 	//Done?
-	if (status == XST_SUCCESS){
+	if (status == XST_SUCCESS) {
 		myprintf(".........Success...........\n\r");
 	} else {
 		myprintf(".........Failure...........\n\r");
@@ -98,19 +100,32 @@ int printQuaternionDriftAfterXMin(unsigned int time_min) {
 }
 
 /*
- * Prints Quaternions for Imu Viewer
+ * Prints Quaternions and/or Position for IMU Viewer
  * In: number of runs (if 0 --> print forever)
  * Returns 0 if successful
  */
-int printQuatForImuViewer(unsigned int numberOfRuns) {
+int printForImuViewer(char printQuat, char printPos, unsigned int numberOfRuns) {
 	//Variables
 	int cnt = 0, status, i;
 
 	//Print Quaternions to Serial Port
-	myprintf(".........Quaternions...........\n\r");
+	myprintf(".........Print for IMU Viewer...........\n\r");
 	for (cnt = 0; cnt <= numberOfRuns; cnt++) {
-		//Print
-		status = printQuatForDisplay();
+		//Reset Status
+		status = XST_SUCCESS;
+
+		//Update Data
+		status = updateData();
+		if (status == XST_SUCCESS) {
+
+			//Print
+			status = printforDisplay(printQuat, printPos);
+		}
+
+		//Print new line
+		if (status == XST_SUCCESS) {
+			printf("\n\r");
+		}
 
 		//Make sure only successful prints count
 		if (status != XST_SUCCESS || numberOfRuns < 1) {
@@ -158,8 +173,13 @@ int printDataUsingDMP(char initialCalibration, char dmpCalibration,
 	//Get Data with DMP
 	myprintf(".........With DMP...........\n\r");
 	for (cnt = 0; cnt <= numberOfRuns; cnt++) {
-		//Print
-		status = printDataWithDMP();
+		//Update
+		status = updateData();
+		if (status == XST_SUCCESS) {
+
+			//Print
+			status = printDataWithDMP();
+		}
 
 		//Decrease count if not successful
 		if (status != XST_SUCCESS || numberOfRuns == 0) {

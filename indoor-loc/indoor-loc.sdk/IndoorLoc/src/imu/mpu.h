@@ -31,8 +31,6 @@
 #define MAG_SENS_FRS_1200		0.3			//T/LSB for FRS = 1200, 13-bit, output in 2's complement format
 #define TEMP_SENS_UNTRIMMED		340			//LSB/°C
 #define TEMP_OFFSET_35C			-521		//LSB
-#define NUMBER_OF_AXES			3			//x, y, z
-#define QUATERNION_AMOUNT		4			//w, x, y, z rotational angles
 #define QUATERNION_SCALING		1073741824	//Internal values: 1.0 is scaled to 2^30 = 1073741824
 #define SENSOR_TEMP				0x80		//my define
 #define SENSORS_ALL				INV_XYZ_GYRO | INV_XYZ_ACCEL | INV_XYZ_COMPASS | SENSOR_TEMP//all sensors
@@ -45,12 +43,23 @@
 #define ACCEL_CAL_MASK			0x02
 #define MAG_CAL_MASK			0x04
 
+
+//Constants
+#define GRAVITY					9.80665		//m/s^2
+
+//Typedefs
+typedef struct{
+	Vector coordinates;
+	unsigned long timestamp;
+} Position;
+
 //Functions
+int printforDisplay(char printQuaternion, char printPos);
 void printQuatDrift(unsigned int time_min);
 int getQuatDrift(float *quat_drift, char calibration, unsigned int time_min);
-int printQuatForDisplay();
 int printDataWithDMP();
 int printDataNoDMP(short int *sensors);
+int updateData();
 int calibrateGyrAcc();
 int dmpGyroCalibration(char enable);
 int configureDMP(unsigned short int features, unsigned short fifoRate);
