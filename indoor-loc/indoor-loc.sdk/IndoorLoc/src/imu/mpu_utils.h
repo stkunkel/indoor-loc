@@ -34,7 +34,7 @@ int imuI2cRead(unsigned char slave_addr, unsigned char reg_addr, unsigned char l
 int imuI2cWrite(unsigned char slave_addr, unsigned char reg_addr, unsigned char length, unsigned char *data);
 void imuDelay(unsigned long ms);
 int imuInit(u8 *imuAddr);
-unsigned long imuGet_ms();
+void imuGet_ms(unsigned long* timestamp);
 int imuLog_i(const char *format, ...);
 int imuLog_e(const char *format, ...);
 

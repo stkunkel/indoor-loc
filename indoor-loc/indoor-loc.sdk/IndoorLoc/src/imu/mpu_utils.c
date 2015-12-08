@@ -184,10 +184,10 @@ void imuDelay(unsigned long ms) {
 /*
  * Get Timestamp
  */
-unsigned long imuGet_ms() {
-	XTime time; //use global timer in Zynq SOC --> increases every 2 cycles
-	XTime_GetTime(&time);
-	return time;
+void imuGet_ms(unsigned long* timestamp) {
+	XTime counts; //use global timer in Zynq SOC --> increases every 2 cycles
+	XTime_GetTime(&counts);
+	*timestamp = (unsigned long) (counts / COUNTS_PER_SECOND);
 }
 
 /*
