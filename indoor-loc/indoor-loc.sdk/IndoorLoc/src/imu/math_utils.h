@@ -29,6 +29,8 @@ void eulerGetSigma(float quat[QUATERNION_AMOUNT], float* sigma);
 void eulerGetTheta(float quat[QUATERNION_AMOUNT], float* theta);
 void eulerGetPsi(float quat[QUATERNION_AMOUNT], float* psi);
 long floatToQ16(float x);
+Vector toVector(float* array);
+void toFloatArray(Vector vector, float* array);
 Vector multVectorByScalar(Vector vector, float scalar);
 Vector addVectors(Vector vector1, Vector vector2);
 Vector substractVectors(Vector minuend, Vector substrahend);

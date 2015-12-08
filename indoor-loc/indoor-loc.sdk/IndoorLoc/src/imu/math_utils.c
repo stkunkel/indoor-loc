@@ -66,6 +66,40 @@ float q16ToFloat(long q16) {
 }
 
 /*
+ * Convert float array to Vector
+ * In: Pointer to float array
+ * Returns Vector
+ */
+Vector toVector(float* array){
+	//Variables
+	int i;
+	Vector vector;
+
+	//Create Vector
+	for (i = 0; i < NUMBER_OF_AXES; i++){
+		vector.value[i] = array[i];
+	}
+
+	//Return
+	return vector;
+}
+
+/*
+ * Convert Vector to float array
+ * In: Pointer to Vector
+ * Out: Float array
+ */
+void toFloatArray(Vector vector, float* array){
+	//Variables
+	int i;
+
+	//Create Vector
+	for (i = 0; i < NUMBER_OF_AXES; i++){
+		array[i] = vector.value[i];
+	}
+}
+
+/*
  * Multiply Vector by Scalar
  * In: Vector, Scalar
  * Returns Vector
