@@ -57,7 +57,6 @@ int writePwmReg(u32 reg, u32 value);
  */
 int pwmTest() {
 	//variables
-	u32 steps = PWM_STEPS;
 	u32 val = PWM_VAL_INIT;
 	int status = PWM_SUCCESS;
 	int reg = 0;
@@ -69,23 +68,23 @@ int pwmTest() {
 	}
 
 	//Debug
-	myprintf(("Degree -> Val:\r\n"));
-	for (reg = -720; reg <= 720; reg += 60) {
-		myprintf("J  : %d / %d\r\n", reg,
-				angleToValue(jointVal[4], (float) reg));
-		//myprintf("W/F: %d / %d\r\n", reg,
-		//		angleToValue(jointVal[5], (float) reg));
-	}
+//	myprintf(("Degree -> Val:\r\n"));
+//	for (reg = -720; reg <= 720; reg += 60) {
+//		myprintf("J  : %d / %d\r\n", reg,
+//				angleToValue(jointVal[4], (float) reg));
+//		//myprintf("W/F: %d / %d\r\n", reg,
+//		//		angleToValue(jointVal[5], (float) reg));
+//	}
 
 //	myprintf(("Val -> Degree:\r\n"));
 //	for (reg = 0; reg <= 3100; reg += 100) {
 //		myprintf("J  : %d / %f\r\n", reg, valToAngle(jointVal[4], reg));
 //		myprintf("W/F: %d / %f\r\n", reg, valToAngle(jointVal[5], reg));
 //	}
-	return 0;
+//	return 0;
 
 //Get Reg Values
-	for (reg = 4; reg < NUMBER_OF_JOINTS; reg++) {
+	for (reg = 0; reg < NUMBER_OF_JOINTS; reg++) {
 		//Get current value
 		val = readPwmReg(pwmValRegister[reg]);
 

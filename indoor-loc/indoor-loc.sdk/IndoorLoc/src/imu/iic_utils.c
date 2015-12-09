@@ -393,7 +393,6 @@ int iic_read2(XIicPs *IicPs, u8 Address, u8 Register, u8 *Data, int ByteCount) {
 	 * Wait until bus is idle to start another transfer.
 	 */
 	while (XIicPs_BusIsBusy(IicPs)) {
-		/* NOP */
 		usleep(100);
 //		cnt++;
 //		if (cnt > 100) {

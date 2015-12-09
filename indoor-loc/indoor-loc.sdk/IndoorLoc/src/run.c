@@ -63,10 +63,10 @@ int main() {
 	//status |= printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
 
 	//Print Quaternions and Position
-	status |= printForImuViewer(0, 1, QUAT_DISPLAY_RUNS);
+	//status |= printForImuViewer(0, 1, QUAT_DISPLAY_RUNS);
 
 	//PWM Test
-	//status = pwmTest();
+	status = pwmTest();
 
 	//Done?
 	if (status == XST_SUCCESS) {

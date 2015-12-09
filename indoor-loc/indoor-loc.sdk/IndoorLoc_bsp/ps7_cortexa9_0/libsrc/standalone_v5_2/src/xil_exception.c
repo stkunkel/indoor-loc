@@ -204,8 +204,8 @@ void Xil_DataAbortHandler(void *CallBackRef) {
 		FaultStatus = Reg;
 	}
 #endif
-	printf("Data abort with Data Fault Status Register  %x\n",FaultStatus);
-	printf("Address of Instrcution causing Data abort %x\n",DataAbortAddr);
+	myprintf("Data abort with Data Fault Status Register  %x\n",FaultStatus);
+	myprintf("Address of Instrcution causing Data abort %x\n",DataAbortAddr);
 	//xdbg_printf(XDBG_DEBUG_GENERAL, "Data abort with Data Fault Status Register  %x\n",FaultStatus);
 	//xdbg_printf(XDBG_DEBUG_GENERAL, "Address of Instrcution causing Data abort %x\n",DataAbortAddr);
 	while (1) {
@@ -238,8 +238,8 @@ void Xil_PrefetchAbortHandler(void *CallBackRef) {
 		FaultStatus = Reg;
 	}
 #endif
-	printf("Prefetch abort with Instruction Fault Status Register  %x\n",FaultStatus);
-	printf("Address of Instrcution causing Prefetch abort %x\n",PrefetchAbortAddr);
+	myprintf("Prefetch abort with Instruction Fault Status Register  %x\n",FaultStatus);
+	myprintf("Address of Instrcution causing Prefetch abort %x\n",PrefetchAbortAddr);
 	//xdbg_printf(XDBG_DEBUG_GENERAL, "Prefetch abort with Instruction Fault Status Register  %x\n",FaultStatus); xdbg_printf(XDBG_DEBUG_GENERAL, "Address of Instrcution causing Prefetch abort %x\n",PrefetchAbortAddr);
 	while (1) {
 		;
