@@ -335,7 +335,7 @@ s32 XIicPs_MasterSendPolled(XIicPs *InstancePtr, u8 *MsgPtr,
 		 * If there is an error, tell the caller.
 		 */
 		if ((IntrStatusReg & Intrs) != 0U) {
-			printf("I2C Send: Received Interrupt (0x%x).\r\n", IntrStatusReg);
+			myprintf("I2C Send: Received Interrupt (0x%x).\r\n", IntrStatusReg);
 			return (s32)XST_FAILURE;
 		}
 	}
@@ -535,7 +535,6 @@ s32 XIicPs_MasterRecvPolled(XIicPs *InstancePtr, u8 *MsgPtr,
 	}
 	if ((IntrStatusReg & Intrs) != 0x0U) {
 		Result = (s32)XST_FAILURE;
-		//Debug
 		myprintf("I2C Recv: Received Interrupt (0x%x).\r\n", IntrStatusReg);
 
 	}
