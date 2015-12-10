@@ -1,4 +1,4 @@
-10:30:23 **** Auto Build of project IndoorLoc_bsp ****
+11:35:05 **** Auto Build of project IndoorLoc_bsp ****
 make -k all 
 Running Make include in ps7_cortexa9_0/libsrc/ddrps_v1_0/src
 make -C ps7_cortexa9_0/libsrc/ddrps_v1_0/src -s include  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
@@ -77,10 +77,6 @@ Compiling cpu_cortexa9
 Running Make libs in ps7_cortexa9_0/libsrc/iicps_v3_0/src
 make -C ps7_cortexa9_0/libsrc/iicps_v3_0/src -s libs  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
 Compiling iicps
-xiicps_master.c: In function 'XIicPs_MasterSendPolled':
-xiicps_master.c:338:4: warning: incompatible implicit declaration of built-in function 'printf'
-    printf("I2C Send: Received Interrupt (0x%x).\r\n", IntrStatusReg);
-    ^
 Running Make libs in ps7_cortexa9_0/libsrc/emacps_v3_1/src
 make -C ps7_cortexa9_0/libsrc/emacps_v3_1/src -s libs  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
 Compiling emacps
@@ -101,5 +97,5 @@ make -C ps7_cortexa9_0/libsrc/qspips_v3_2/src -s libs  "SHELL=/bin/sh" "COMPILER
 Compiling qspips
 Finished building libraries
 
-10:30:32 Build Finished (took 9s.167ms)
+11:35:14 Build Finished (took 8s.839ms)
 

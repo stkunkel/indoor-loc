@@ -1155,15 +1155,6 @@ int configureDMP(unsigned short int features, unsigned short fifoRate) {
 		myprintf("mpu.c: Could not reset FIFO.\n\r");
 	}
 
-////Get Interrupt
-//	short int interrupt;
-//	status = mpu_get_int_status(&interrupt);
-//	if (status == XST_SUCCESS) {
-//#ifdef DEBUG
-//		myprintf("MPU Interrupt Status: 0x%x.\n\r", interrupt);
-//#endif
-//	}
-
 //Set flag, sleep and return
 	dmpReady = 1;
 	sleep(1);
