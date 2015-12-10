@@ -37,5 +37,6 @@ int imuInit(u8 *imuAddr);
 void imuGet_ms(unsigned long* timestamp);
 int imuLog_i(const char *format, ...);
 int imuLog_e(const char *format, ...);
+int readInt(u32 *DataRead);
 
 #endif /* IMU_H_ */

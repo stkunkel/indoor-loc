@@ -20,7 +20,6 @@ static char *imuAddr_cp;
  * Function Prototypes
  */
 static int writeAD0(u32 *data);
-static int readInt(u32 *DataRead);
 static int setAddr(u8* addr, char* addr_c);
 
 /*
