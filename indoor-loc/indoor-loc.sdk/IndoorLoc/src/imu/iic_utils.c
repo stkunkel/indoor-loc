@@ -308,13 +308,13 @@ int iic_burstWrite(XIicPs *IicPs, u8 Address, u8 Register, u32 length,
 	if (Status != XST_SUCCESS) {
 #ifdef DEBUG
 		//Get Timestamp
-		u64 timestamp;
+		XTime timestamp;
 		XTime_GetTime(&timestamp);
 
 		//Convert to ms
 		timestamp = (u64) (timestamp * 1000.0 / COUNTS_PER_SECOND);
 #endif
-		myprintf("XIicPs_MasterSendPolled error at %dms!\n\r", timestamp);
+		myprintf("XIicPs_MasterSendPolled error at %d ms!\n\r", (unsigned int)timestamp);
 		return XST_FAILURE;
 	}
 //print and return
@@ -406,13 +406,13 @@ int iic_read2(XIicPs *IicPs, u8 Address, u8 Register, u8 *Data, int ByteCount) {
 	if (Status != XST_SUCCESS) {
 #ifdef DEBUG
 		//Get Timestamp
-		u64 timestamp;
+		XTime timestamp;
 		XTime_GetTime(&timestamp);
 
 		//Convert to ms
 		timestamp = (u64) (timestamp * 1000.0 / COUNTS_PER_SECOND);
 #endif
-		myprintf("XIicPs_MasterSendPolled error at %dms!\n\r", timestamp);
+		myprintf("XIicPs_MasterSendPolled error at %d ms!\n\r", (unsigned int)timestamp);
 
 		return XST_FAILURE;
 	}
@@ -424,13 +424,13 @@ int iic_read2(XIicPs *IicPs, u8 Address, u8 Register, u8 *Data, int ByteCount) {
 	if (Status != XST_SUCCESS) {
 #ifdef DEBUG
 		//Get Timestamp
-		u64 timestamp;
+		XTime timestamp;
 		XTime_GetTime(&timestamp);
 
 		//Convert to ms
 		timestamp = (u64) (timestamp * 1000.0 / COUNTS_PER_SECOND);
 #endif
-		myprintf("XIicPs_MasterRecvPolled error at %dms!\n\r", timestamp);
+		myprintf("XIicPs_MasterRecvPolled error at %d ms!\n\r", (unsigned int)timestamp);
 		return XST_FAILURE;
 	}
 
