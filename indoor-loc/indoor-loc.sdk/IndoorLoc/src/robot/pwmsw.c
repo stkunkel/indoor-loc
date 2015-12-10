@@ -454,7 +454,7 @@ short getIndex(Joint joint) {
  * Reset Robot
  * Returns 0 if successful
  */
-int reset() { //TODO: Keep angle same
+int reset() {
 	//Variables
 	int status = PWM_SUCCESS, i;
 
