@@ -26,6 +26,7 @@
 #define GPIO_INT_PIN		13
 
 //Functions
+int waitForInterrupt();
 int setupMPUInt();
 void IntrHandler(void *CallBackRef,  int Bank, u32 Status);
 

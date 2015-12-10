@@ -12,12 +12,36 @@
 /*
  * Global Variables
  */
-static XScuGic Intc; // Interrupt Controller Driver
-static XGpioPs Gpio; //GPIO Device
+//static XScuGic Intc; // Interrupt Controller Driver
+//static XGpioPs Gpio; //GPIO Device
+u32 lastIntVal = 0;
 
 /*
  * Functions
  */
+
+/*
+ * Wait for Interrupt
+ * Returns 1 when interrupt occured (rising edge on interrupt pin)
+ */
+int waitForInterrupt(){
+	//Variables
+	u32 data;
+
+	//Loop
+	while (1){
+		//Read from interrupt pin
+		readInt(&data);
+
+		//Rising edge?
+		if (lastIntVal == 0 && data == 1){
+			lastIntVal = data;
+			return 1;
+		} else {
+			lastIntVal = data;
+		}
+	}
+}
 
 /*
  * Set Up Interrupt for IMU

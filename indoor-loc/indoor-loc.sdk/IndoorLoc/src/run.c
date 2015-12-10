@@ -129,9 +129,8 @@ int printForImuViewer(char printQuat, char printPos, unsigned int numberOfRuns) 
 		//Reset Status
 		status = XST_SUCCESS;
 
-		//Get Interrupt
-		readInt(&intrpt);
-		if (intrpt) {
+		//Wait for Interrupt Interrupt
+		if (waitForInterrupt()) {
 			//Update Data
 			status = updateData();
 			if (status == XST_SUCCESS) {
@@ -147,12 +146,12 @@ int printForImuViewer(char printQuat, char printPos, unsigned int numberOfRuns) 
 		}
 
 		//Make sure only successful prints count
-		if (status != XST_SUCCESS || numberOfRuns < 1 || !intrpt) {
+		if (status != XST_SUCCESS || numberOfRuns < 1) {
 			cnt--;
 		}
 	}
 
-	//Return
+//Return
 	return status;
 }
 
@@ -162,33 +161,31 @@ int printForImuViewer(char printQuat, char printPos, unsigned int numberOfRuns) 
  */
 int printDataUsingDMP(char initialCalibration, char dmpCalibration,
 		unsigned int numberOfRuns) {
-	//Variables
+//Variables
 	int status, cnt;
 	u32 intrpt;
 
-	//Calibrate if required
+//Calibrate if required
 	if (initialCalibration) {
 		myprintf(".........Calibration...........\n\r");
 		status = calibrateGyrAcc();
-		if (status != XST_SUCCESS){
+		if (status != XST_SUCCESS) {
 			return status;
 		}
 	}
 
-	//En- or disable dynamic gyro calibration
+//En- or disable dynamic gyro calibration
 	status = dmpGyroCalibration(dmpCalibration);
 	if (status != XST_SUCCESS) {
 		return status;
 	}
 
-	//Get Data with DMP
+//Get Data with DMP
 	myprintf(".........With DMP...........\n\r");
 	for (cnt = 0; cnt <= numberOfRuns; cnt++) {
-		//Get Interrupt
-		readInt(&intrpt);
-		if (intrpt) {
-
-			//Update
+		//Wait for Interrupt Interrupt
+		if (waitForInterrupt()) {
+			//Update Data
 			status = updateData();
 			if (status == XST_SUCCESS) {
 
@@ -198,12 +195,12 @@ int printDataUsingDMP(char initialCalibration, char dmpCalibration,
 		}
 
 		//Decrease count if not successful
-		if (status != XST_SUCCESS || numberOfRuns == 0 || !intrpt) {
+		if (status != XST_SUCCESS || numberOfRuns == 0) {
 			cnt--;
 		}
 	}
 
-	//Return
+//Return
 	return XST_SUCCESS;
 }
 
@@ -212,10 +209,10 @@ int printDataUsingDMP(char initialCalibration, char dmpCalibration,
  * In: sensors, number of runs (if 0 --> endless loop)
  */
 int printDataWithoutDMP(short int sensors, unsigned int numberOfRuns) {
-	//Variables
+//Variables
 	int i, cnt, status;
 
-	//Get Data without DMP
+//Get Data without DMP
 	myprintf(".........Without DMP...........\n\r");
 	for (cnt = 0; cnt <= numberOfRuns; cnt++) {
 		//Print
