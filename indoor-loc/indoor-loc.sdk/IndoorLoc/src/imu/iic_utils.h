@@ -11,6 +11,7 @@
 #include <unistd.h>
 #include "xparameters.h"
 #include "xiicps.h"
+#include "xtime_l.h"
 #include "../print_utils.h"
 
 // PS I2C0 Init Parameters
