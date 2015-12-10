@@ -63,10 +63,10 @@ int main() {
 	//status |= printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
 
 	//Print Quaternions and Position
-	//status |= printForImuViewer(0, 1, QUAT_DISPLAY_RUNS);
+	status |= printForImuViewer(1, 1, QUAT_DISPLAY_RUNS);
 
 	//PWM Test
-	status = pwmTest();
+	//status = pwmTest();
 
 	//Done?
 	if (status == XST_SUCCESS) {
@@ -106,7 +106,22 @@ int printQuaternionDriftAfterXMin(unsigned int time_min) {
  */
 int printForImuViewer(char printQuat, char printPos, unsigned int numberOfRuns) {
 	//Variables
-	int cnt = 0, status, i;
+	int cnt = 0, status;
+	u32 intrpt;
+
+	//Init
+	myprintf(".........Configure MPU and DMP...........\n\r");
+	status = configureDMP(FEATURES_CAL, DMP_FIFO_RATE);
+	if (status != XST_SUCCESS) {
+		return status;
+	}
+
+	//Calibrate
+	myprintf(".........Calibrate...........\n\r");
+	status = calibrateGyrAcc();
+	if (status != XST_SUCCESS) {
+		return status;
+	}
 
 	//Print Quaternions to Serial Port
 	myprintf(".........Print for IMU Viewer...........\n\r");
@@ -114,27 +129,26 @@ int printForImuViewer(char printQuat, char printPos, unsigned int numberOfRuns) 
 		//Reset Status
 		status = XST_SUCCESS;
 
-		//Update Data
-		status = updateData();
-		if (status == XST_SUCCESS) {
+		//Get Interrupt
+		readInt(&intrpt);
+		if (intrpt) {
+			//Update Data
+			status = updateData();
+			if (status == XST_SUCCESS) {
 
-			//Print
-			status = printforDisplay(printQuat, printPos);
-		}
+				//Print
+				status = printforDisplay(printQuat, printPos);
 
-		//Print new line
-		if (status == XST_SUCCESS) {
-			printf("\n\r");
+				//Print new line
+				if (status == XST_SUCCESS) {
+					printf("\n\r");
+				}
+			}
 		}
 
 		//Make sure only successful prints count
-		if (status != XST_SUCCESS || numberOfRuns < 1) {
+		if (status != XST_SUCCESS || numberOfRuns < 1 || !intrpt) {
 			cnt--;
-		}
-
-		//Wait
-		for (i = 0; i <= 10000; i++) {
-			;
 		}
 	}
 
@@ -149,46 +163,43 @@ int printForImuViewer(char printQuat, char printPos, unsigned int numberOfRuns) 
 int printDataUsingDMP(char initialCalibration, char dmpCalibration,
 		unsigned int numberOfRuns) {
 	//Variables
-	int status, i, cnt;
+	int status, cnt;
+	u32 intrpt;
 
 	//Calibrate if required
 	if (initialCalibration) {
 		myprintf(".........Calibration...........\n\r");
 		status = calibrateGyrAcc();
-		if (status != XST_SUCCESS) {
-			myprintf("Calibration failed.\r\n");
+		if (status != XST_SUCCESS){
 			return status;
-		} else {
-			myprintf("Calibration done.\r\n");
 		}
 	}
 
 	//En- or disable dynamic gyro calibration
 	status = dmpGyroCalibration(dmpCalibration);
 	if (status != XST_SUCCESS) {
-		myprintf("Could not enable DMP dynamic gyro calibration.\r\n");
 		return status;
 	}
 
 	//Get Data with DMP
 	myprintf(".........With DMP...........\n\r");
 	for (cnt = 0; cnt <= numberOfRuns; cnt++) {
-		//Update
-		status = updateData();
-		if (status == XST_SUCCESS) {
+		//Get Interrupt
+		readInt(&intrpt);
+		if (intrpt) {
 
-			//Print
-			status = printDataWithDMP();
+			//Update
+			status = updateData();
+			if (status == XST_SUCCESS) {
+
+				//Print
+				status = printDataWithDMP();
+			}
 		}
 
 		//Decrease count if not successful
-		if (status != XST_SUCCESS || numberOfRuns == 0) {
+		if (status != XST_SUCCESS || numberOfRuns == 0 || !intrpt) {
 			cnt--;
-		}
-
-		//Wait
-		for (i = 0; i <= 10000; i++) {
-			;
 		}
 	}
 

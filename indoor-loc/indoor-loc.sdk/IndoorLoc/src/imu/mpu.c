@@ -67,6 +67,9 @@ static Vector previousPosition = { .value[0] = 0.0, .value[1] = 0.0, .value[2
 int printforDisplay(char printQuaternion, char printPos) {
 	//Variables
 	int status = XST_FAILURE;
+	long quat[QUATERNION_AMOUNT];
+	float quat_conv[QUATERNION_AMOUNT];
+	Vector position;
 
 	//Initialize if required
 	if (!dmpReady) {
@@ -77,23 +80,38 @@ int printforDisplay(char printQuaternion, char printPos) {
 		}
 
 		//Update Data
-		updateData();
-		if (status != XST_SUCCESS) {
-			return status;
-		}
+//		updateData();
+//		if (status != XST_SUCCESS) {
+//			return status;
+//		}
 	}
+
+	//Create Copy of recent data
+	memcpy(&quat, &recentQuat, QUATERNION_AMOUNT * sizeof(long));
+	position = recentPosition;
 
 	//Print Quaternion
 	if (printQuaternion) {
-		status = printQuatForDisplay();
-		if (status == XST_SUCCESS && printPos) {
-			printf(" | ");
+
+		//Convert Quaternion
+		status = convertQuatenion(quat, quat_conv);
+		if (status == XST_SUCCESS) {
+
+			//Print Quaternion
+			printQuat(quat_conv);
+
+			//Print separator
+			if (printPos) {
+				printf(" | ");
+			}
+		} else {
+			return status;
 		}
 	}
 
 	//Print Position
 	if (printPos) {
-		status = printCurrentPositionForDisplay();
+		printPosition(&position);
 	}
 
 	//Return
@@ -107,6 +125,7 @@ int printforDisplay(char printQuaternion, char printPos) {
 int printCurrentPositionForDisplay() {
 	//Variables
 	int status = XST_SUCCESS;
+	Vector position;
 
 	//Initialize if required
 	if (!dmpReady) {
@@ -116,16 +135,19 @@ int printCurrentPositionForDisplay() {
 			return status;
 		}
 
-		//Update Data
-		updateData();
-		if (status != XST_SUCCESS) {
-			return status;
-		}
+//		//Update Data
+//		updateData();
+//		if (status != XST_SUCCESS) {
+//			return status;
+//		}
 	}
+
+	//Create copy of recent position
+	position = recentPosition;
 
 	//Print
 	if (status == XST_SUCCESS) {
-		printPosition(&recentPosition);
+		printPosition(&position);
 		printf("\n\r");
 	}
 
@@ -268,6 +290,7 @@ int getQuatDrift(float *quat_drift, char calibration, unsigned int time_min) {
 int printQuatForDisplay() {
 //Variables
 	int status = XST_FAILURE, i = 0;
+	long quat[QUATERNION_AMOUNT];
 	float quat_conv[QUATERNION_AMOUNT];
 
 	//Initialize
@@ -280,15 +303,18 @@ int printQuatForDisplay() {
 		}
 
 		//Get latest Data
-		status = updateData();
-		if (status != XST_SUCCESS) {
-			myprintf("mpu.c Could not update data.\r\n");
-			return status;
-		}
+//		status = updateData();
+//		if (status != XST_SUCCESS) {
+//			myprintf("mpu.c Could not update data.\r\n");
+//			return status;
+//		}
 	}
 
+	//Create Copy of recent Quat
+	memcpy(&quat, &recentQuat, QUATERNION_AMOUNT * sizeof(long));
+
 //Convert Quaternion
-	status = convertQuatenion(recentQuat, quat_conv);
+	status = convertQuatenion(quat, quat_conv);
 
 //Print Quaternion
 	myprintf("Quat: ");
@@ -309,6 +335,8 @@ int printDataWithDMP() { //TODO: Handle invalid temperature and compass data
 //Variables
 	int status, return_val = XST_SUCCESS;
 	float conv[NUMBER_OF_AXES], temp_conv;
+	short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
+	long temp;
 
 //Initialize
 	if (!dmpReady) {
@@ -319,16 +347,22 @@ int printDataWithDMP() { //TODO: Handle invalid temperature and compass data
 			return status;
 		}
 
-		//Get latest Data
-		status = updateData();
-		if (status != XST_SUCCESS) {
-			myprintf("mpu.c Could not update data.\r\n");
-			return status;
-		}
+//		//Get latest Data
+//		status = updateData();
+//		if (status != XST_SUCCESS) {
+//			myprintf("mpu.c Could not update data.\r\n");
+//			return status;
+//		}
 	}
 
+	//Create Copy of recent values
+	memcpy(&gyro, &recentGyro, NUMBER_OF_AXES * sizeof(short));
+	memcpy(&accel, &recentAccel, NUMBER_OF_AXES * sizeof(short));
+	memcpy(&compass, &recentCompass, NUMBER_OF_AXES * sizeof(short));
+	temp = recentTemp;
+
 //Convert Gyro
-	status = convertGyroData(recentGyro, conv);
+	status = convertGyroData(gyro, conv);
 	if (status != 0) {
 		myprintf("mpu.c Error converting Gyroscope data.");
 		return_val = XST_FAILURE;
@@ -340,7 +374,7 @@ int printDataWithDMP() { //TODO: Handle invalid temperature and compass data
 	printf(" | ");
 
 //Convert Acc
-	status = convertAccData(recentAccel, conv);
+	status = convertAccData(accel, conv);
 	if (status != 0) {
 		myprintf("mpu.c Error converting Acc data.");
 		return_val = XST_FAILURE;
@@ -352,7 +386,7 @@ int printDataWithDMP() { //TODO: Handle invalid temperature and compass data
 	printf(" | ");
 
 	//Convert Compass
-	status = convertCompassData(recentCompass, conv);
+	status = convertCompassData(compass, conv);
 	if (status != 0) {
 		myprintf("mpu.c Error converting Compass data.");
 		return_val = XST_FAILURE;
@@ -364,7 +398,7 @@ int printDataWithDMP() { //TODO: Handle invalid temperature and compass data
 	printf(" | ");
 
 	//Convert Temperature
-	status = convertTemperaturetoC(&recentTemp, &temp_conv);
+	status = convertTemperaturetoC(&temp, &temp_conv);
 	if (status != 0) {
 		myprintf("mpu.c Error converting Temperature data.");
 		return_val = XST_FAILURE;
@@ -706,16 +740,16 @@ void updatePosition(float* accel_conv, float* quat_conv,
 	accel_inertial = multMatrixAndVector(rotation, accel_measuremt);
 
 	//Handle first function call
-	if (recent_ts == 0){
-		recent_ts = timestamp -1;
+	if (recent_ts == 0) {
+		recent_ts = timestamp - 1;
 	}
 
 	//Compute Velocity
-	discreteIntegration(timestamp/1000.0 - recent_ts/1000.0, &accel_inertial,
-			&recentVelocity, &velocity);
+	discreteIntegration(timestamp / 1000.0 - recent_ts / 1000.0,
+			&accel_inertial, &recentVelocity, &velocity);
 
 	//Compute Position
-	discreteIntegration(timestamp/1000.0 - recent_ts/1000.0, &velocity,
+	discreteIntegration(timestamp / 1000.0 - recent_ts / 1000.0, &velocity,
 			&recentPosition, &newPosition);
 
 	//Set new Values
@@ -973,6 +1007,14 @@ int calibrateGyrAcc() {
 		status = XST_FAILURE;
 	}
 
+	//Print Success
+	if (status != XST_SUCCESS) {
+		myprintf("Calibration failed.\r\n");
+		return status;
+	} else {
+		myprintf("Calibration done.\r\n");
+	}
+
 //Free memory and return
 	free(more);
 	sleep(3); //sleep to ensure all following readings are calibrated
@@ -1005,6 +1047,26 @@ int readFromFifo(short *gyro, short *accel, long *quat,
 
 //Return
 	return status;
+}
+
+/*
+ * Get FIFO Count
+ * Returns DMP FIFO Count
+ */
+int getFifoCount() {
+	//Variables
+	int size;
+	unsigned char* data = (unsigned char*) malloc(sizeof(100));
+
+	//Read FIFO Count Registers
+	imuI2cRead(imuAddr, 0x72, 2, data);
+
+	//Convert
+	size = (data[0] << 8) | data[1];
+
+	//Free memory and return
+	free(data);
+	return size;
 }
 
 /*
@@ -1144,6 +1206,13 @@ int initDMP() {
 	status = mpu_set_dmp_state(1);
 	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Could not enable DMP.\r\n");
+		return XST_FAILURE;
+	}
+
+	//Enable Interrupt
+	status = setupMPUInt();
+	if (status != XST_SUCCESS) {
+		myprintf("mpu.c: Could not set up MPU interrupt.\r\n");
 		return XST_FAILURE;
 	}
 

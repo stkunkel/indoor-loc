@@ -12,6 +12,7 @@
 #include "xstatus.h"
 #include "xtime_l.h"
 #include "mpu_utils.h"
+#include "mpu_int.h"
 #include "mpu9150/inv_mpu.h"
 #include "mpu9150/inv_mpu_dmp_motion_driver.h"
 #include "mpu9150/mpl/invensense_adv.h"
@@ -54,6 +55,7 @@ typedef struct{
 } Position;
 
 //Functions
+int getFifoSize();
 int printforDisplay(char printQuaternion, char printPos);
 void printQuatDrift(unsigned int time_min);
 int getQuatDrift(float *quat_drift, char calibration, unsigned int time_min);
@@ -61,6 +63,7 @@ int printDataWithDMP();
 int printDataNoDMP(short int *sensors);
 int updateData();
 int calibrateGyrAcc();
+int getFifoCount();
 int dmpGyroCalibration(char enable);
 int configureDMP(unsigned short int features, unsigned short fifoRate);
 int initDMP();
