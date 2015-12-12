@@ -24,7 +24,6 @@
 #define INTC_DEVICE_ID		XPAR_SCUGIC_SINGLE_DEVICE_ID
 #define GPIO_INT_ID			XPS_GPIO_INT_ID
 #define GPIO_INT_PIN		13
-#define IRQ_ID_GPIO			52
 
 //Functions
 int waitForInterrupt();

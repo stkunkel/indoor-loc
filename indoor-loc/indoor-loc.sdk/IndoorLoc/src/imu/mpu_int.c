@@ -1,7 +1,8 @@
 /*
  * mpu_int.c: Interrupt-based readout of MPU
  * Author: Stephanie Kunkel
- * Source: http://www.xilinx.com/support/documentation/xcell_articles/how-to-use-interrupts-on-zynqsoc.pdf
+ * Sources:	http://www.xilinx.com/support/documentation/xcell_articles/how-to-use-interrupts-on-zynqsoc.pdf
+ * 			https://forums.xilinx.com/t5/Xcell-Daily-Blog/More-About-MicroZed-Interrupts-Adam-Taylor-s-MicroZed-Chronicles/ba-p/398357
  */
 
 /*
@@ -92,34 +93,35 @@ int setupMPUInt() {
 	}
 
 	//Disable Interrupts from GPIO
-	XScuGic_Disable(&Intc, IRQ_ID_GPIO);
+	//XScuGic_Disable(&Intc, GPIO_INT_ID);
 
-	//Connect to HW
+	//Connect interrupt controller interrupt handler to HW interrupt handling logic in PS
 	Xil_ExceptionRegisterHandler(XIL_EXCEPTION_ID_INT,
 			(Xil_ExceptionHandler) XScuGic_InterruptHandler, &Intc);
 
-	//Set Interrupt Type
+	//Connect driver handler (GIC) called when interrupt occurs to HW defined above
+	XScuGic_Connect(&Intc, GPIO_INT_ID,
+			(Xil_ExceptionHandler) XGpioPs_IntrHandler, (void*) &Gpio);
+
+	//Enable Interrupt for Pin
 	XGpioPs_SetIntrTypePin(&Gpio, GPIO_INT_PIN, XGPIOPS_IRQ_TYPE_EDGE_RISING);
 
-	//Set Callback Handler
+	//Set Callback Handler for GPIO Interrupts
 	XGpioPs_SetCallbackHandler(&Gpio, (void *) &Gpio,
 			(XGpioPs_Handler) IntrHandler);
 
-	//Enable GPIO Interrupt
+	//Enable GPIO Interrupt for Pin
 	XGpioPs_IntrEnablePin(&Gpio, GPIO_INT_PIN);
 	if (!XGpioPs_IntrGetEnabledPin(&Gpio, GPIO_INT_PIN)) {
 		myprintf("mpu_int.c: Interrupt not enabled.\r\n");
 	}
 
-	//Connect GPIO Interrupt Handler with GIC
-	XScuGic_Connect(&Intc, IRQ_ID_GPIO,
-			(Xil_ExceptionHandler) XGpioPs_IntrHandler, (void*) &Gpio);
+	//Enable Interrupts for GPIO
+	XScuGic_Enable(&Intc, GPIO_INT_ID);
 
-	//Enable Interrupts from GPIO
-	XScuGic_Enable(&Intc, IRQ_ID_GPIO);
-
-	//Enable Xil Exceptions
-	Xil_ExceptionEnable();
+	//Enable Interrupts in Processor
+	//Xil_ExceptionEnable();
+	Xil_ExceptionEnableMask(XIL_EXCEPTION_IRQ);
 
 	//Return
 	return XST_SUCCESS;
@@ -134,7 +136,8 @@ void IntrHandler(void *CallBackRef, u32 Bank, u32 Status) {
 	//Debug
 	short irq;
 	mpu_get_int_status(&irq);
-	myprintf("MPU IRQ Status: %x\r\n", irq);
+	myprintf("MPU IRQ Status: 0x%x\r\n", irq);
+	usleep(100000);
 
 	//Variables
 	XGpioPs *GpioInt = (XGpioPs *) CallBackRef;
@@ -142,6 +145,7 @@ void IntrHandler(void *CallBackRef, u32 Bank, u32 Status) {
 
 	//Disable Interrupts
 	XGpioPs_IntrDisablePin(GpioInt, GPIO_INT_PIN);
+	//XGpioPs_IntrDisable(GpioInt, Bank, XIL_EXCEPTION_IRQ);
 
 	//Check whether interrupt came from INT pin of IMU
 	if (XGpioPs_IntrGetStatusPin(GpioInt, GPIO_INT_PIN)) {
@@ -160,5 +164,6 @@ void IntrHandler(void *CallBackRef, u32 Bank, u32 Status) {
 
 	//Enable Interrupts
 	XGpioPs_IntrEnablePin(GpioInt, GPIO_INT_PIN);
+	//XGpioPs_IntrEnable(GpioInt, Bank, XIL_EXCEPTION_IRQ);
 }
 
