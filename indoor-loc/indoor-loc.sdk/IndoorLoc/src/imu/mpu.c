@@ -221,7 +221,7 @@ int getQuatDrift(float *quat_drift, char calibration, unsigned int time_min) {
 
 //Calibrate if required
 	if (calibration) {
-		status = calibrateGyrAcc();
+		status = calibrateGyrAcc(CAL_SAMPLES);
 		if (status != XST_SUCCESS) {
 			myprintf("mpu.c Could not calibrate Gyr. and Acc.\r\n");
 			return status;
@@ -593,7 +593,7 @@ void printQuat(float quat[QUATERNION_AMOUNT]) {
 	for (i = 0; i < QUATERNION_AMOUNT; i++) {
 		printf("%f", quat[i]);
 		if (i < QUATERNION_AMOUNT - 1) {
-			printf(", ");
+			printf(" ");
 		}
 	}
 }
@@ -629,7 +629,7 @@ void printPosition(Vector* position) {
 		printf("%f", position->value[i]);
 		myprintf("m");
 		if (i < NUMBER_OF_AXES - 1) {
-			printf(", ");
+			printf(" ");
 		}
 	}
 }
@@ -855,10 +855,12 @@ int convertQuatenion(long raw[QUATERNION_AMOUNT], float conv[QUATERNION_AMOUNT])
  * Calibrate Gyroscope and Accelerometer
  * Note: My Calibration is only for Gyro and Accel //TODO
  * Note2: MPU9150 has to sit on a flat surface, x axis (where LED is) facing upwards or downward
+ * In: number of samples used for calibration
  */
-int calibrateGyrAcc() {
+int calibrateGyrAcc(unsigned int samples) {
 //Variables
-	int status = XST_FAILURE, i = 0, sample = 0;
+	int status = XST_FAILURE;
+	unsigned int i = 0, sample = 0;
 	short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
 	long int quat[4];
 	unsigned long timestamp;
@@ -922,7 +924,7 @@ int calibrateGyrAcc() {
 	}
 
 //Compute offsets
-	for (sample = 0; sample < CAL_SAMPLES; sample++) {
+	for (sample = 0; sample < samples; sample++) {
 		//Get Data
 		status = readFromRegs(gyro, accel, compass, &timestamp, &sensors);
 
@@ -946,8 +948,8 @@ int calibrateGyrAcc() {
 
 			//Compute Average
 			for (i = 0; i < NUMBER_OF_AXES; i++) {
-				gyro_bias_f[i] += (gyro_bias_conv[i] / CAL_SAMPLES);
-				accel_bias_f[i] += (accel_bias_conv[i] / CAL_SAMPLES);
+				gyro_bias_f[i] += (gyro_bias_conv[i] / samples);
+				accel_bias_f[i] += (accel_bias_conv[i] / samples);
 			}
 		}
 	}

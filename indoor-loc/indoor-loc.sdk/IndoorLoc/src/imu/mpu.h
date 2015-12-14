@@ -39,7 +39,7 @@
 #define FEATURES_RAW			DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_SEND_RAW_GYRO | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_TAP //DMP_FEATURE_TAP for ensure DMP sends interrupts at specified rate
 #define MPU_SAMPLE_RATE			200			//Hz
 #define DMP_FIFO_RATE			10			//Hz
-#define CAL_SAMPLES				1000.0
+#define CAL_SAMPLES				10000
 #define GYRO_CAL_MASK			0x01
 #define ACCEL_CAL_MASK			0x02
 #define MAG_CAL_MASK			0x04
@@ -62,7 +62,7 @@ int getQuatDrift(float *quat_drift, char calibration, unsigned int time_min);
 int printDataWithDMP();
 int printDataNoDMP(short int *sensors);
 int updateData();
-int calibrateGyrAcc();
+int calibrateGyrAcc(unsigned int samples);
 int getFifoCount();
 int dmpGyroCalibration(char enable);
 int configureDMP(unsigned short int features, unsigned short fifoRate);
