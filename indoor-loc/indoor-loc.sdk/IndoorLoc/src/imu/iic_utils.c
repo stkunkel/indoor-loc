@@ -313,8 +313,9 @@ int iic_burstWrite(XIicPs *IicPs, u8 Address, u8 Register, u32 length,
 
 		//Convert to ms
 		timestamp = (u64) (timestamp * 1000.0 / COUNTS_PER_SECOND);
-#endif
+
 		myprintf("XIicPs_MasterSendPolled error at %d ms!\n\r", (unsigned int)timestamp);
+#endif
 		return XST_FAILURE;
 	}
 //print and return
@@ -411,8 +412,8 @@ int iic_read2(XIicPs *IicPs, u8 Address, u8 Register, u8 *Data, int ByteCount) {
 
 		//Convert to ms
 		timestamp = (u64) (timestamp * 1000.0 / COUNTS_PER_SECOND);
-#endif
 		myprintf("XIicPs_MasterSendPolled error at %d ms!\n\r", (unsigned int)timestamp);
+#endif
 
 		return XST_FAILURE;
 	}
@@ -429,8 +430,8 @@ int iic_read2(XIicPs *IicPs, u8 Address, u8 Register, u8 *Data, int ByteCount) {
 
 		//Convert to ms
 		timestamp = (u64) (timestamp * 1000.0 / COUNTS_PER_SECOND);
-#endif
 		myprintf("XIicPs_MasterRecvPolled error at %d ms!\n\r", (unsigned int)timestamp);
+#endif
 		return XST_FAILURE;
 	}
 
