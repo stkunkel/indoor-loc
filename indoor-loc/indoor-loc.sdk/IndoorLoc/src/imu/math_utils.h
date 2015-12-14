@@ -11,7 +11,7 @@
 
 //Defines
 #define NUMBER_OF_AXES			3					//x, y, z
-#define QUATERNION_AMOUNT		NUMBER_OF_AXES +1	//w, x, y, z rotational angles
+#define QUATERNION_AMOUNT		(NUMBER_OF_AXES + 1)//w, x, y, z rotational angles
 
 //Typedefs
 typedef struct {
