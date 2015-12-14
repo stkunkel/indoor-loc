@@ -8,6 +8,7 @@
 
 //Includes
 #include "math.h"
+#include <string.h>
 
 //Defines
 #define NUMBER_OF_AXES			3					//x, y, z

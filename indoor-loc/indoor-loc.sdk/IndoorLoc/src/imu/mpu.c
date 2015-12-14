@@ -658,9 +658,14 @@ int updateData() {
 	}
 
 	//Get latest data
-	do {
+	while (1) {
 		status = readFromFifo(gyro, accel, quat, &timestamp, &sensors, more);
-	} while (status != XST_SUCCESS);
+		if (status != XST_SUCCESS){
+			usleep(100);
+		} else {
+			break;
+		}
+	}
 
 	//Convert Accel
 	status = convertAccData(accel, accel_conv);
@@ -729,6 +734,11 @@ void updatePosition(float* accel_conv, float* quat_conv,
 	//Variables
 	Vector accel_measuremt, accel_inertial, velocity, newPosition;
 	Matrix rotation;
+	float time_diff;
+
+	//Get time difference btw. timestamps in s
+	//time_diff = (float) (timestamp - recent_ts) / COUNTS_PER_SECOND;
+	time_diff = 1.0/DMP_FIFO_RATE;
 
 	//Convert acceleration vector: 1g = 9.81m/s^2
 	accel_measuremt = multVectorByScalar(toVector(accel_conv), GRAVITY);
@@ -738,6 +748,7 @@ void updatePosition(float* accel_conv, float* quat_conv,
 
 	//Compute Inertial Acceleration Vector
 	accel_inertial = multMatrixAndVector(rotation, accel_measuremt);
+	accel_inertial = toVector(accel_conv);
 
 	//Handle first function call
 	if (recent_ts == 0) {
@@ -745,12 +756,10 @@ void updatePosition(float* accel_conv, float* quat_conv,
 	}
 
 	//Compute Velocity
-	discreteIntegration(timestamp / 1000.0 - recent_ts / 1000.0,
-			&accel_inertial, &recentVelocity, &velocity);
+	discreteIntegration(time_diff, &accel_inertial, &recentVelocity, &velocity);
 
 	//Compute Position
-	discreteIntegration(timestamp / 1000.0 - recent_ts / 1000.0, &velocity,
-			&recentPosition, &newPosition);
+	discreteIntegration(time_diff, &velocity, &recentPosition, &newPosition);
 
 	//Set new Values
 	previousVelocity = recentVelocity;
@@ -891,22 +900,6 @@ int calibrateGyrAcc(unsigned int samples) {
 		return status;
 	}
 
-//Clear FIFO
-	for (i = 0; i < 10; i++) {
-		status = readFromFifo(gyro, accel, quat, &timestamp, &sensors, more);
-		if (status == XST_SUCCESS) {
-			i--;
-		}
-	}
-
-//Reset FIFO
-	status = mpu_reset_fifo();
-	if (status != XST_SUCCESS) {
-		gyrAccIsCal = 0;
-		myprintf("mpu.c: Could not reset FIFO.\r\n");
-		return status;
-	}
-
 //Set Gyro Bias to 0
 	status = mpu_set_gyro_bias_reg(gyro_bias);
 	if (status != XST_SUCCESS) {
@@ -921,6 +914,22 @@ int calibrateGyrAcc(unsigned int samples) {
 		gyrAccIsCal = 0;
 		myprintf("mpu.c: Could not initially set accel bias.\r\n");
 		return XST_FAILURE;
+	}
+
+	//Clear FIFO
+	for (i = 0; i < 10; i++) {
+		status = readFromFifo(gyro, accel, quat, &timestamp, &sensors, more);
+		if (status == XST_SUCCESS) {
+			i--;
+		}
+	}
+
+	//Reset FIFO
+	status = mpu_reset_fifo();
+	if (status != XST_SUCCESS) {
+		gyrAccIsCal = 0;
+		myprintf("mpu.c: Could not reset FIFO.\r\n");
+		return status;
 	}
 
 //Compute offsets
@@ -1019,7 +1028,6 @@ int calibrateGyrAcc(unsigned int samples) {
 
 //Free memory and return
 	free(more);
-	sleep(3); //sleep to ensure all following readings are calibrated
 	return status;
 }
 
@@ -1035,7 +1043,7 @@ int readFromFifo(short *gyro, short *accel, long *quat,
 	count++;
 
 //Make sure the read command is not called too often
-	if (count >= 500) { //was_ 500
+	if (count >= 1000) { //was: 500, works better with 1000 for interrupt
 		//Reset Count, increment read count
 		count = 0;
 
@@ -1043,7 +1051,7 @@ int readFromFifo(short *gyro, short *accel, long *quat,
 		status = dmp_read_fifo(gyro, accel, quat, timestamp, sensors, more);
 		if (status != XST_SUCCESS) {
 			usleep(10000); //sleep to prevent IIC bus from becoming busy (was: 100, worked ok with 10000)
-			//myprintf("mpu.c: Could not read DMP FIFO.\n\r");
+			//myprintf("mpu.c: Could not read DMP FIFO.\n\r");#
 		}
 	}
 
@@ -1159,7 +1167,7 @@ int configureDMP(unsigned short int features, unsigned short fifoRate) {
 
 //Set flag, sleep and return
 	dmpReady = 1;
-	sleep(1);
+	//sleep(1); //don't remove or readings will be weird
 	return XST_SUCCESS;
 }
 
@@ -1203,11 +1211,11 @@ int initDMP() {
 	}
 
 	//Enable Interrupt
-	status = setupMPUInt();
-	if (status != XST_SUCCESS) {
-		myprintf("mpu.c: Could not set up MPU interrupt.\r\n");
-		return XST_FAILURE;
-	}
+//	status = setupMPUInt();
+//	if (status != XST_SUCCESS) {
+//		myprintf("mpu.c: Could not set up MPU interrupt.\r\n");
+//		return XST_FAILURE;
+//	}
 
 //Return
 	return XST_SUCCESS;
@@ -1319,6 +1327,5 @@ int initMPU() {
 	}
 
 //Sleep and Return
-	sleep(1);
 	return XST_SUCCESS;
 }

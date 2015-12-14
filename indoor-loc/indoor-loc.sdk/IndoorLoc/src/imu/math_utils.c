@@ -10,7 +10,8 @@
  * In: scalar, vector, recent
  * Out: result
  */
-void discreteIntegration(float scalar, Vector* vector, Vector* recent, Vector* result){
+void discreteIntegration(float scalar, Vector* vector, Vector* recent,
+		Vector* result) {
 	*result = addVectors(*recent, multVectorByScalar(*vector, scalar));
 }
 
@@ -20,18 +21,26 @@ void discreteIntegration(float scalar, Vector* vector, Vector* recent, Vector* r
  * Out: Rotation Matrix
  */
 void toRotationMatrix(float quat[QUATERNION_AMOUNT], Matrix* rotationMatrix) {
-	rotationMatrix->value[0] = quat[0] * quat[0] + quat[1] * quat[1]
-			- quat[2] * quat[2] - quat[3] * quat[3];
-	rotationMatrix->value[1] = 2 * quat[1] * quat[2] - 2 * quat[0] * quat[3];
-	rotationMatrix->value[2] = 2 * quat[1] * quat[3] + 2 * quat[0] * quat[2];
-	rotationMatrix->value[3] = 2 * quat[1] * quat[2] + 2 * quat[0] * quat[3];
-	rotationMatrix->value[4] = quat[0] * quat[0] - quat[1] * quat[1]
-			+ quat[2] * quat[2] - quat[3] * quat[3];
-	rotationMatrix->value[5] = 2 * quat[2] * quat[3] + 2 * quat[0] * quat[1];
-	rotationMatrix->value[6] = 2 * quat[1] * quat[3] - 2 * quat[0] * quat[2];
-	rotationMatrix->value[7] = 2 * quat[2] * quat[3] - 2 * quat[0] * quat[1];
-	rotationMatrix->value[8] = quat[0] * quat[0] - quat[1] * quat[1]
-			- quat[2] * quat[2] + quat[3] * quat[3];
+	float w_w = quat[0] * quat[0];
+	float x_x = quat[1] * quat[1];
+	float y_y = quat[2] * quat[2];
+	float z_z = quat[3] * quat[3];
+	float w_x = quat[0] * quat[1];
+	float w_y = quat[0] * quat[2];
+	float w_z = quat[0] * quat[3];
+	float x_y = quat[1] * quat[2];
+	float x_z = quat[1] * quat[3];
+	float y_z = quat[2] * quat[3];
+
+	rotationMatrix->value[0] = w_w + x_x - y_y - z_z;
+	rotationMatrix->value[1] = 2 * x_y - 2 * w_z;
+	rotationMatrix->value[2] = 2 * x_z + 2 * w_y;
+	rotationMatrix->value[3] = 2 * x_y + 2 * w_z;
+	rotationMatrix->value[4] = w_w - x_x + y_y - z_z;
+	rotationMatrix->value[5] = 2 * y_z + 2 * w_x;
+	rotationMatrix->value[6] = 2 * x_z - 2 * w_y;
+	rotationMatrix->value[7] = 2 * y_z - 2 * w_x;
+	rotationMatrix->value[8] = w_w - x_x - y_y + z_z;
 }
 
 /*
@@ -70,15 +79,12 @@ float q16ToFloat(long q16) {
  * In: Pointer to float array
  * Returns Vector
  */
-Vector toVector(float* array){
+Vector toVector(float* array) {
 	//Variables
-	int i;
 	Vector vector;
 
 	//Create Vector
-	for (i = 0; i < NUMBER_OF_AXES; i++){
-		vector.value[i] = array[i];
-	}
+	memcpy(&(vector.value[0]), array, NUMBER_OF_AXES * sizeof(float));
 
 	//Return
 	return vector;
@@ -89,12 +95,12 @@ Vector toVector(float* array){
  * In: Pointer to Vector
  * Out: Float array
  */
-void toFloatArray(Vector vector, float* array){
+void toFloatArray(Vector vector, float* array) {
 	//Variables
 	int i;
 
 	//Create Vector
-	for (i = 0; i < NUMBER_OF_AXES; i++){
+	for (i = 0; i < NUMBER_OF_AXES; i++) {
 		array[i] = vector.value[i];
 	}
 }

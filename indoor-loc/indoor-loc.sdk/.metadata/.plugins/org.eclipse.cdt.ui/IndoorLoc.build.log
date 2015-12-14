@@ -1,21 +1,6 @@
-10:15:20 **** Auto Build of configuration Debug for project IndoorLoc ****
+16:20:30 **** Incremental Build of configuration Debug for project IndoorLoc ****
 make all 
-Building file: ../src/imu/mpu_int.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu_int.o" -I../../IndoorLoc_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu_int.d" -MT"src/imu/mpu_int.d" -o "src/imu/mpu_int.o" "../src/imu/mpu_int.c"
-Finished building: ../src/imu/mpu_int.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/ruppi/Masterarbeit/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -o "IndoorLoc.elf"  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/iic_utils.o ./src/imu/math_utils.o ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 186564	   3224	  24616	 214404	  34584	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
+make: Nothing to be done for 'all'.
 
-10:15:20 Build Finished (took 175ms)
+16:20:30 Build Finished (took 65ms)
 

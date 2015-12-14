@@ -77,12 +77,17 @@ int main() {
 
 	//Init
 	//initMPU();
-	configureDMP(FEATURES_RAW, DMP_FIFO_RATE);
+	//configureDMP(FEATURES_RAW, DMP_FIFO_RATE);
 	calibrateGyrAcc(CAL_SAMPLES);
 	setupMPUInt();
 
 	//Stay in here
+	short irq;
+
 	while (1) {
+		mpu_get_int_status(&irq);
+		myprintf("FIFO Count: %d, IRQ Status: 0x%x\r\n", getFifoCount(), irq);
+		usleep(1000);
 		;
 	}
 
