@@ -78,7 +78,8 @@ int main() {
 	//Init
 	//initMPU();
 	configureDMP(FEATURES_RAW, DMP_FIFO_RATE);
-	//setupMPUInt();
+	calibrateGyrAcc(CAL_SAMPLES);
+	setupMPUInt();
 
 	//Stay in here
 	while (1) {
@@ -112,7 +113,6 @@ int printQuaternionDriftAfterXMin(unsigned int time_min) {
 int printForImuViewer(char printQuat, char printPos, unsigned int numberOfRuns) {
 	//Variables
 	int cnt = 0, status;
-	u32 intrpt;
 
 	//Init
 	myprintf(".........Configure MPU and DMP...........\n\r");
@@ -123,7 +123,7 @@ int printForImuViewer(char printQuat, char printPos, unsigned int numberOfRuns) 
 
 	//Calibrate
 	myprintf(".........Calibrate...........\n\r");
-	status = calibrateGyrAcc();
+	status = calibrateGyrAcc(CAL_SAMPLES);
 	if (status != XST_SUCCESS) {
 		return status;
 	}
@@ -168,12 +168,11 @@ int printDataUsingDMP(char initialCalibration, char dmpCalibration,
 		unsigned int numberOfRuns) {
 //Variables
 	int status, cnt;
-	u32 intrpt;
 
 //Calibrate if required
 	if (initialCalibration) {
 		myprintf(".........Calibration...........\n\r");
-		status = calibrateGyrAcc();
+		status = calibrateGyrAcc(CAL_SAMPLES);
 		if (status != XST_SUCCESS) {
 			return status;
 		}
