@@ -134,36 +134,36 @@ int setupMPUInt() {
  */
 void IntrHandler(void *CallBackRef, u32 Bank, u32 Status) {
 	//Debug
-	short irq;
-	mpu_get_int_status(&irq);
-	myprintf("MPU IRQ Status: 0x%x\r\n", irq);
-	usleep(100000);
+//	short irq;
+//	mpu_get_int_status(&irq);
+//	myprintf("MPU IRQ Status: 0x%x\r\n", irq);
+	//usleep(100000);
 
 	//Variables
 	XGpioPs *GpioInt = (XGpioPs *) CallBackRef;
 	int status;
 
 	//Disable Interrupts
-	XGpioPs_IntrDisablePin(GpioInt, GPIO_INT_PIN);
+//	XGpioPs_IntrDisablePin(GpioInt, GPIO_INT_PIN);
 	//XGpioPs_IntrDisable(GpioInt, Bank, XIL_EXCEPTION_IRQ);
 
 	//Check whether interrupt came from INT pin of IMU
-	if (XGpioPs_IntrGetStatusPin(GpioInt, GPIO_INT_PIN)) {
+	//if (XGpioPs_IntrGetStatusPin(GpioInt, GPIO_INT_PIN)) {
 		//Update Sensor Data
 		updateData();
 
 		//Print Data
-		status = printforDisplay(1, 1);
+		status = printforDisplay(1, 0);
 		if (status == XST_SUCCESS) {
 			printf("\r\n");
 		}
-	}
+	//}
 
 	//Clear Interrupt Pin
-	XGpioPs_IntrClearPin(GpioInt, GPIO_INT_PIN);
+//	XGpioPs_IntrClearPin(GpioInt, GPIO_INT_PIN);
 
 	//Enable Interrupts
-	XGpioPs_IntrEnablePin(GpioInt, GPIO_INT_PIN);
+//	XGpioPs_IntrEnablePin(GpioInt, GPIO_INT_PIN);
 	//XGpioPs_IntrEnable(GpioInt, Bank, XIL_EXCEPTION_IRQ);
 }
 
