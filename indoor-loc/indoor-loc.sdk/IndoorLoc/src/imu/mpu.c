@@ -1043,17 +1043,17 @@ int readFromFifo(short *gyro, short *accel, long *quat,
 	count++;
 
 //Make sure the read command is not called too often
-	if (count >= 1000) { //was: 500, works better with 1000 for interrupt
+//	if (count >= 500) { //was: 500
 		//Reset Count, increment read count
 		count = 0;
 
 		//Read FIFO
 		status = dmp_read_fifo(gyro, accel, quat, timestamp, sensors, more);
 		if (status != XST_SUCCESS) {
-			usleep(10000); //sleep to prevent IIC bus from becoming busy (was: 100, worked ok with 10000)
-			//myprintf("mpu.c: Could not read DMP FIFO.\n\r");#
+			//usleep(1000); //sleep to prevent IIC bus from becoming busy (was: 100, worked ok with 10000)
+			//myprintf("mpu.c: Could not read DMP FIFO.\n\r");
 		}
-	}
+//	}
 
 //Return
 	return status;

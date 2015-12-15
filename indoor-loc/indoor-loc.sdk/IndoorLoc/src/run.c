@@ -12,6 +12,7 @@
 #include "platform.h"
 #include "print_utils.h"
 #include "imu/mpu.h"
+#include "imu/mpu_int.h"
 #include "robot/pwmsw.h"
 
 /*
@@ -82,13 +83,19 @@ int main() {
 	setupMPUInt();
 
 	//Stay in here
-	short irq;
-
 	while (1) {
-		mpu_get_int_status(&irq);
-		myprintf("FIFO Count: %d, IRQ Status: 0x%x\r\n", getFifoCount(), irq);
-		usleep(1000);
-		;
+		//Update and print data if there is new data available
+		if (imuDataAvailable()) {
+			//Update Sensor Data
+			updateData();
+
+			//Print Data
+			status = printforDisplay(1, 0);
+			if (status == XST_SUCCESS) {
+				printf("\r\n");
+			}
+		}
+
 	}
 
 	//Finish

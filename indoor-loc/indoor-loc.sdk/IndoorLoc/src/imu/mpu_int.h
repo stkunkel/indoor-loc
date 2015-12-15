@@ -26,6 +26,7 @@
 #define GPIO_INT_PIN		13
 
 //Functions
+char imuDataAvailable();
 int waitForInterrupt();
 int setupMPUInt();
 void IntrHandler(void *CallBackRef,  u32 Bank, u32 Status);

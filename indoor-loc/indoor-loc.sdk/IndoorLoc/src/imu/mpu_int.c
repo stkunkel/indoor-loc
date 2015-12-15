@@ -16,10 +16,24 @@
 static XScuGic Intc; // Interrupt Controller Driver
 static XGpioPs Gpio; //GPIO Device
 u32 lastIntVal = 0;
+static char dataAvailable = 0;
 
 /*
  * Functions
  */
+
+/*
+ * Check if data from IMU FIFO is available
+ * Returns 1 if there is new data, 0 if not
+ */
+char imuDataAvailable(){
+	if (dataAvailable){
+		dataAvailable = 0;
+		return 1;
+	} else {
+		return 0;
+	}
+}
 
 /*
  * Wait for Interrupt
@@ -52,16 +66,38 @@ int setupMPUInt() {
 	int status;
 	XScuGic_Config* IntcConfig;
 	XGpioPs_Config* GpioConfig;
+	unsigned char data;
 
 	//MPU
 	//Disable all interrupts
-	unsigned char* data = 0;
-	imuI2cWrite(0x68, 0x38, 2, data);
+//	data = 0x15;
+//	imuI2cWrite(0x68, 0x38, 2, &data);
+
+	//Configure MPU Interrupt Pin
+	status = imuI2cRead(0x68, 0x37, 2, &data);	//Read Register
+	if (status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+	data &= (~INT_LEVEL_BIT); //Clear bit
+	data &= (~INT_OPEN_BIT); //Clear bit
+	data &= (~INT_RD_CLEAR_BIT); //Clear bit
+	data |= LATCH_INT_EN_BIT; //Set bit
+	//data = 0x24; //debug
+	do {
+		status = imuI2cWrite(0x68, 0x37, 1, &data); //Write Register
+	} while (status != XST_SUCCESS);
 
 	//Set Interrupt level
 	status = mpu_set_int_level(0); //Set Interrupt for "active high" (0)
 	if (status != XST_SUCCESS) {
 		myprintf("mpu_int.c: Could not set interrupt level.\r\n");
+		return XST_FAILURE;
+	}
+
+	//Enable Latched Interrupt
+	status = mpu_set_int_latched(1);
+	if (status != XST_SUCCESS) {
+		myprintf("mpu_int.c: Could not set latched interrupt.\r\n");
 		return XST_FAILURE;
 	}
 
@@ -119,7 +155,7 @@ int setupMPUInt() {
 	//Enable Interrupts in Processor
 	Xil_ExceptionEnableMask(XIL_EXCEPTION_IRQ);
 
-	//Return
+	//Free memory and return
 	return XST_SUCCESS;
 }
 
@@ -130,24 +166,24 @@ int setupMPUInt() {
  */
 void IntrHandler(void *CallBackRef, u32 Bank, u32 Status) {
 	//Variables
-	//XGpioPs *GpioInt = (XGpioPs *) CallBackRef;
-	int status;
+	XGpioPs *GpioInt = (XGpioPs *) CallBackRef;
+	int status = XST_SUCCESS;
 	short irq;
 
+	//Disable Interrupts
+//	XGpioPs_IntrDisablePin(GpioInt, GPIO_INT_PIN);
+
 	//Get IRQ Status
-	mpu_get_int_status(&irq);
-
-	//Print IRQ Status
-	myprintf("IRQ: 0x%x | FIFO Cnt: %d | ", irq, getFifoCount());
-
-	//Update Sensor Data
-	updateData();
-
-	//Print Data
-	status = printforDisplay(1, 1);
-	if (status == XST_SUCCESS) {
-		printf("\r\n");
+	status = mpu_get_int_status(&irq);
+	if ((status == XST_SUCCESS) && ((irq & MPU_INT_STATUS_DMP_0) == MPU_INT_STATUS_DMP_0)) { //INT from DMP
+		dataAvailable = 1;
 	}
+
+//	//Clear Interrupt
+//	XGpioPs_IntrClearPin(GpioInt, GPIO_INT_PIN);
+//
+//	//Enable Interrupts
+//	XGpioPs_IntrEnablePin(GpioInt, GPIO_INT_PIN);
 
 }
 
