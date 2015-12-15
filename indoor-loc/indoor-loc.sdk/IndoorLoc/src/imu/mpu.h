@@ -43,6 +43,10 @@
 #define GYRO_CAL_MASK			0x01
 #define ACCEL_CAL_MASK			0x02
 #define MAG_CAL_MASK			0x04
+#define INT_LEVEL_BIT			0x80
+#define INT_OPEN_BIT			0x40
+#define INT_RD_CLEAR_BIT		0x10
+#define LATCH_INT_EN_BIT		0x20
 
 
 //Constants
