@@ -130,7 +130,7 @@ architecture arch_imp of pwm_v1_0_S00_AXI is
 	
 	---signnals for PWM components
 	signal pwm_done : std_logic_vector(pwmChannels-1 downto 0);
-	
+	signal pwmRst: std_logic;
 	-- PWM component
 	component pwm
 		generic ( 
@@ -521,7 +521,7 @@ begin
 
 
 	-- Add user logic here
-	
+	pwmRst <= not S_AXI_ARESETN;
 	
     --pwm instantiations    
     pwm_inst1 : pwm
@@ -531,7 +531,7 @@ begin
     )
     port map (
         clk => S_AXI_ACLK,
-        rst => S_AXI_ARESETN,
+        rst => pwmRst,
         val => slv_reg0(15 downto 0),
         steps => slv_reg6(15 downto 0),
         pulse => pwmPulse(0),
@@ -545,7 +545,7 @@ begin
        	)
         port map (
             clk => S_AXI_ACLK,
-            rst => S_AXI_ARESETN,
+            rst => pwmRst,
             val => slv_reg1(15 downto 0),
             steps => slv_reg7(15 downto 0),
             pulse => pwmPulse(1),
@@ -559,7 +559,7 @@ begin
        	)
         port map (
             clk => S_AXI_ACLK,
-            rst => S_AXI_ARESETN,
+            rst => pwmRst,
             val => slv_reg2(15 downto 0),
             steps => slv_reg8(15 downto 0),
             pulse => pwmPulse(2),
@@ -573,7 +573,7 @@ begin
          )
          port map (
              clk => S_AXI_ACLK,
-             rst => S_AXI_ARESETN,
+             rst => pwmRst,
              val => slv_reg3(15 downto 0),
              steps => slv_reg9(15 downto 0),
              pulse => pwmPulse(3),
@@ -587,7 +587,7 @@ begin
     )
     port map (
         clk => S_AXI_ACLK,
-        rst => S_AXI_ARESETN,
+        rst => pwmRst,
         val => slv_reg4(15 downto 0),
         steps => slv_reg10(15 downto 0),
         pulse => pwmPulse(4),
@@ -601,7 +601,7 @@ begin
     )
     port map (
         clk => S_AXI_ACLK, 
-        rst => S_AXI_ARESETN,
+        rst => pwmRst,
         val => slv_reg5(15 downto 0),
         steps => slv_reg11(15 downto 0),
         pulse => pwmPulse(5),
