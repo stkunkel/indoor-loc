@@ -78,9 +78,7 @@ void imuDelay(unsigned long ms) {
  * Get Timestamp
  */
 void imuGet_ms(unsigned long* timestamp) {
-	XTime counts; //use global timer in Zynq SOC --> increases every 2 cycles
-	XTime_GetTime(&counts);
-	*timestamp = (unsigned long) (counts / COUNTS_PER_SECOND);
+	*timestamp = getElapsedRuntimeUS()/1000;
 }
 
 /*

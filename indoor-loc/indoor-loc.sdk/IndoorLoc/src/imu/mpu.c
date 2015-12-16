@@ -46,12 +46,12 @@ static Vector recentVelocity = { .value[0] = 0.0, .value[1] = 0.0, .value[2
 		] = 0.0 };
 static Vector recentPosition = { .value[0] = 0.0, .value[1] = 0.0, .value[2
 		] = 0.0 };
-static unsigned long recent_ts = 0;
+static unsigned long recent_ts = 0; //timestamp in ms
 static short recentGyro[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 },
 		recentAccel[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 },
-		recentCompass[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 };
+		recentCompass[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 }; //data in HW units
 static long recentQuat[QUATERNION_AMOUNT], recentTemp = 0;
-static unsigned long previous_ts = 0;
+static unsigned long previous_ts = 0; //timestamp in ms
 static Vector previousVelocity = { .value[0] = 0.0, .value[1] = 0.0, .value[2
 		] = 0.0 };
 static Vector previousPosition = { .value[0] = 0.0, .value[1] = 0.0, .value[2
@@ -90,7 +90,7 @@ int printforDisplay(char printQuaternion, char printPos) {
 	memcpy(&quat, &recentQuat, QUATERNION_AMOUNT * sizeof(long));
 	position = recentPosition;
 
-	myprintf("%fms | ", recent_ts * 1000.0 / COUNTS_PER_SECOND);
+	myprintf("recent TS: %dms | ", recent_ts);
 
 	//Print Quaternion
 	if (printQuaternion) {

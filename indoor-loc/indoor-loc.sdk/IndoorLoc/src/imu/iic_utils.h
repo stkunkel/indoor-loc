@@ -11,8 +11,8 @@
 #include <unistd.h>
 #include "xparameters.h"
 #include "xiicps.h"
-#include "xtime_l.h"
 #include "../print_utils.h"
+#include "../zedboard/time_utils.h"
 
 // PS I2C0 Init Parameters
 #define IIC_DEVICE_ID  	XPAR_PS7_I2C_0_DEVICE_ID

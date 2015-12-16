@@ -18,6 +18,7 @@
 #include "xtime_l.h"
 #include "iic_utils.h"
 #include "../print_utils.h"
+#include "../zedboard/time_utils.h"
 
 //Zynq Parameters
 #define GPIO_DEVICE_ID  	XPAR_XGPIOPS_0_DEVICE_ID //from xparameters.h
