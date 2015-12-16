@@ -90,7 +90,7 @@ int main() {
 			updateData();
 
 			//Print Data
-			status = printforDisplay(1, 0);
+			status = printforDisplay(1, 1);
 			if (status == XST_SUCCESS) {
 				printf("\r\n");
 			}
