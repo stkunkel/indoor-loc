@@ -16,18 +16,20 @@
 static XScuGic Intc; // Interrupt Controller Driver
 static XGpioPs Gpio; //GPIO Device
 u32 lastIntVal = 0;
-static char dataAvailable = 0;
+static volatile char dataAvailable = 0;
 
 /*
- * Functions
+ * Function Prototypes
  */
+void ImuIntrHandler(void *CallBackRef, u32 Bank, u32 Status);
+void myXGpioPs_IntrHandler(XGpioPs *InstancePtr);
 
 /*
  * Check if data from IMU FIFO is available
  * Returns 1 if there is new data, 0 if not
  */
-char imuDataAvailable(){
-	if (dataAvailable){
+char imuDataAvailable() {
+	if (dataAvailable) {
 		dataAvailable = 0;
 		return 1;
 	} else {
@@ -134,14 +136,14 @@ int setupMPUInt() {
 
 	//Connect driver handler (GIC) called when interrupt occurs to HW defined above
 	XScuGic_Connect(&Intc, GPIO_INT_ID,
-			(Xil_ExceptionHandler) XGpioPs_IntrHandler, (void*) &Gpio);
+			(Xil_ExceptionHandler) myXGpioPs_IntrHandler, (void*) &Gpio); //Use my own Intr Handler
 
 	//Enable Interrupt for Pin
 	XGpioPs_SetIntrTypePin(&Gpio, GPIO_INT_PIN, XGPIOPS_IRQ_TYPE_EDGE_RISING);
 
 	//Set Callback Handler for GPIO Interrupts
 	XGpioPs_SetCallbackHandler(&Gpio, (void *) &Gpio,
-			(XGpioPs_Handler) IntrHandler);
+			(XGpioPs_Handler) ImuIntrHandler);
 
 	//Enable GPIO Interrupt for Pin
 	XGpioPs_IntrEnablePin(&Gpio, GPIO_INT_PIN);
@@ -164,7 +166,7 @@ int setupMPUInt() {
  * Updates internal copy of sensor data.
  * In: Call-back reference, bank, status
  */
-void IntrHandler(void *CallBackRef, u32 Bank, u32 Status) {
+void ImuIntrHandler(void *CallBackRef, u32 Bank, u32 Status) {
 	//Variables
 	XGpioPs *GpioInt = (XGpioPs *) CallBackRef;
 	int status = XST_SUCCESS;
@@ -175,15 +177,38 @@ void IntrHandler(void *CallBackRef, u32 Bank, u32 Status) {
 
 	//Get IRQ Status
 	status = mpu_get_int_status(&irq);
-	if ((status == XST_SUCCESS) && ((irq & MPU_INT_STATUS_DMP_0) == MPU_INT_STATUS_DMP_0)) { //INT from DMP
+	if ((status == XST_SUCCESS)
+			&& ((irq & MPU_INT_STATUS_DMP_0) == MPU_INT_STATUS_DMP_0)) { //INT from DMP
 		dataAvailable = 1;
 	}
-
-//	//Clear Interrupt
-//	XGpioPs_IntrClearPin(GpioInt, GPIO_INT_PIN);
 //
 //	//Enable Interrupts
 //	XGpioPs_IntrEnablePin(GpioInt, GPIO_INT_PIN);
 
+}
+
+/*
+ * XGpioPS Interrupt Handler
+ * Compared to the original Interrupt Handler, this one only handles an interrupt if it has been enabled.
+ * In: Instance Pointer
+ */
+void myXGpioPs_IntrHandler(XGpioPs *InstancePtr) {
+	u8 Bank;
+	u32 IntrStatus;
+	u32 IntrEnabled;
+
+	Xil_AssertVoid(InstancePtr != NULL);
+	Xil_AssertVoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
+
+	for (Bank = 0U; Bank < InstancePtr->MaxBanks; Bank++) {
+		IntrStatus = XGpioPs_IntrGetStatus(InstancePtr, Bank);
+		IntrEnabled = XGpioPs_IntrGetEnabled(InstancePtr, Bank);
+		if ((IntrStatus & IntrEnabled) != (u32) 0) {
+			XGpioPs_IntrClear((XGpioPs *) InstancePtr, Bank,
+					(IntrStatus & IntrEnabled));
+			InstancePtr->Handler(InstancePtr->CallBackRef, Bank,
+					(IntrStatus & IntrEnabled));
+		}
+	}
 }
 

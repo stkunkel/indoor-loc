@@ -29,7 +29,6 @@
 char imuDataAvailable();
 int waitForInterrupt();
 int setupMPUInt();
-void IntrHandler(void *CallBackRef,  u32 Bank, u32 Status);
 
 
 #endif /* MPU_INT_H_ */
