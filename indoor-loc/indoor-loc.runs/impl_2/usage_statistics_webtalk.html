@@ -2,7 +2,7 @@
 <BODY TEXT='#000000' BGCOLOR='#FFFFFF' LINK='#0000EE' VLINK='#551A8B' ALINK='#FF0000'><H3>Device Usage Page (usage_statistics_webtalk.html)</H3>This HTML page displays the device usage statistics that will be sent to Xilinx.<BR>To see the actual file transmitted to Xilinx, please click <A HREF="./usage_statistics_webtalk.xml">here</A>.<BR><BR><HR>
  <TABLE BORDER='1' CELLSPACING='0' WIDTH='100%'>
   <TR ALIGN='CENTER' BGCOLOR='#A7BFDE'><TD COLSPAN='4'><B>software_version_and_target_device</B></TD></TR>
-<TR ALIGN='LEFT'>  <TD BGCOLOR='#DBE5F1'><B>date_generated</B></TD><TD>Tue Dec 15 15:24:33 2015</TD>
+<TR ALIGN='LEFT'>  <TD BGCOLOR='#DBE5F1'><B>date_generated</B></TD><TD>Wed Dec 16 10:56:11 2015</TD>
   <TD BGCOLOR='#DBE5F1'><B>product_version</B></TD><TD>Vivado v2015.3 (64-bit)</TD>
 </TR><TR ALIGN='LEFT'>  <TD BGCOLOR='#DBE5F1'><B>build_version</B></TD><TD>1368829</TD>
   <TD BGCOLOR='#DBE5F1'><B>os_platform</B></TD><TD>LIN64</TD>
@@ -16,14 +16,14 @@
   <TD BGCOLOR='#DBE5F1'><B>target_speed</B></TD><TD>-1</TD>
 </TR><TR ALIGN='LEFT'>  <TD BGCOLOR='#DBE5F1'><B>random_id</B></TD><TD>749b3db493815e208dcb5cd85f9071e6</TD>
   <TD BGCOLOR='#DBE5F1'><B>project_id</B></TD><TD>11411d820c8b47aea4656b13bfc3e6da</TD>
-</TR><TR ALIGN='LEFT'>  <TD BGCOLOR='#DBE5F1'><B>project_iteration</B></TD><TD>32</TD>
+</TR><TR ALIGN='LEFT'>  <TD BGCOLOR='#DBE5F1'><B>project_iteration</B></TD><TD>33</TD>
 </TR> </TABLE><BR>
  <TABLE BORDER='1' CELLSPACING='0' WIDTH='100%'>
   <TR ALIGN='CENTER' BGCOLOR='#A7BFDE'><TD COLSPAN='4'><B>user_environment</B></TD></TR>
 <TR ALIGN='LEFT'>  <TD BGCOLOR='#DBE5F1'><B>os_name</B></TD><TD>unknown</TD>
   <TD BGCOLOR='#DBE5F1'><B>os_release</B></TD><TD>unknown</TD>
 </TR><TR ALIGN='LEFT'>  <TD BGCOLOR='#DBE5F1'><B>cpu_name</B></TD><TD>Intel(R) Core(TM) i7 CPU       M 620  @ 2.67GHz</TD>
-  <TD BGCOLOR='#DBE5F1'><B>cpu_speed</B></TD><TD>1599.000 MHz</TD>
+  <TD BGCOLOR='#DBE5F1'><B>cpu_speed</B></TD><TD>1199.000 MHz</TD>
 </TR><TR ALIGN='LEFT'>  <TD BGCOLOR='#DBE5F1'><B>total_processors</B></TD><TD>1</TD>
   <TD BGCOLOR='#DBE5F1'><B>system_ram</B></TD><TD>8.000 GB</TD>
 </TR> </TABLE><BR>
@@ -50,7 +50,7 @@
 </TR>  </TABLE>
   <TABLE BORDER='1' CELLSPACING='0' WIDTH='100%'>
    <TR ALIGN='CENTER' BGCOLOR='#DBE5F1'><TD COLSPAN='4'><B>other_data</B></TD></TR>
-<TR ALIGN='LEFT'>   <TD>guimode=52</TD>
+<TR ALIGN='LEFT'>   <TD>guimode=54</TD>
 </TR>  </TABLE>
 </TR> </TABLE><BR>
  <TABLE BORDER='1' CELLSPACING='0' WIDTH='100%'>
@@ -368,10 +368,10 @@
 </TR><TR ALIGN='LEFT'>    <TD>pcw_fpga3_peripheral_freqmhz=50</TD>
     <TD>pcw_override_basic_clock=0</TD>
     <TD>pcw_armpll_ctrl_fbdiv=40</TD>
-    <TD>pcw_iopll_ctrl_fbdiv=30</TD>
+    <TD>pcw_iopll_ctrl_fbdiv=36</TD>
 </TR><TR ALIGN='LEFT'>    <TD>pcw_ddrpll_ctrl_fbdiv=32</TD>
     <TD>pcw_cpu_cpu_pll_freqmhz=1333.333</TD>
-    <TD>pcw_io_io_pll_freqmhz=1000.000</TD>
+    <TD>pcw_io_io_pll_freqmhz=1200.000</TD>
     <TD>pcw_ddr_ddr_pll_freqmhz=1066.667</TD>
 </TR><TR ALIGN='LEFT'>    <TD>pcw_use_m_axi_gp0=1</TD>
     <TD>pcw_use_m_axi_gp1=0</TD>
@@ -442,19 +442,15 @@
     <TD>pcw_qspi_grp_io1_enable=0</TD>
     <TD>pcw_qspi_grp_fbclk_enable=0</TD>
 </TR><TR ALIGN='LEFT'>    <TD>pcw_qspi_internal_highaddress=0xFCFFFFFF</TD>
-    <TD>pcw_enet0_peripheral_enable=1</TD>
-    <TD>pcw_enet0_enet0_io=MIO 16 .. 27</TD>
-    <TD>pcw_enet0_grp_mdio_enable=1</TD>
-</TR><TR ALIGN='LEFT'>    <TD>pcw_enet0_reset_enable=0</TD>
-    <TD>pcw_enet1_peripheral_enable=0</TD>
+    <TD>pcw_enet0_peripheral_enable=0</TD>
+    <TD>pcw_enet0_grp_mdio_enable=0</TD>
+    <TD>pcw_enet0_reset_enable=0</TD>
+</TR><TR ALIGN='LEFT'>    <TD>pcw_enet1_peripheral_enable=0</TD>
     <TD>pcw_enet1_grp_mdio_enable=0</TD>
     <TD>pcw_enet1_reset_enable=0</TD>
-</TR><TR ALIGN='LEFT'>    <TD>pcw_sd0_peripheral_enable=1</TD>
-    <TD>pcw_sd0_sd0_io=MIO 40 .. 45</TD>
-    <TD>pcw_sd0_grp_cd_enable=1</TD>
-    <TD>pcw_sd0_grp_cd_io=MIO 47</TD>
-</TR><TR ALIGN='LEFT'>    <TD>pcw_sd0_grp_wp_enable=1</TD>
-    <TD>pcw_sd0_grp_wp_io=MIO 46</TD>
+    <TD>pcw_sd0_peripheral_enable=0</TD>
+</TR><TR ALIGN='LEFT'>    <TD>pcw_sd0_grp_cd_enable=0</TD>
+    <TD>pcw_sd0_grp_wp_enable=0</TD>
     <TD>pcw_sd0_grp_pow_enable=0</TD>
     <TD>pcw_sd1_peripheral_enable=0</TD>
 </TR><TR ALIGN='LEFT'>    <TD>pcw_sd1_grp_cd_enable=0</TD>
@@ -488,93 +484,92 @@
 </TR><TR ALIGN='LEFT'>    <TD>pcw_ttc0_ttc0_io=EMIO</TD>
     <TD>pcw_ttc1_peripheral_enable=0</TD>
     <TD>pcw_pjtag_peripheral_enable=0</TD>
-    <TD>pcw_usb0_peripheral_enable=1</TD>
-</TR><TR ALIGN='LEFT'>    <TD>pcw_usb0_usb0_io=MIO 28 .. 39</TD>
-    <TD>pcw_usb0_reset_enable=0</TD>
+    <TD>pcw_usb0_peripheral_enable=0</TD>
+</TR><TR ALIGN='LEFT'>    <TD>pcw_usb0_reset_enable=0</TD>
     <TD>pcw_usb1_peripheral_enable=0</TD>
     <TD>pcw_usb1_reset_enable=0</TD>
-</TR><TR ALIGN='LEFT'>    <TD>pcw_i2c0_peripheral_enable=1</TD>
-    <TD>pcw_i2c0_i2c0_io=MIO 10 .. 11</TD>
+    <TD>pcw_i2c0_peripheral_enable=1</TD>
+</TR><TR ALIGN='LEFT'>    <TD>pcw_i2c0_i2c0_io=MIO 10 .. 11</TD>
     <TD>pcw_i2c0_grp_int_enable=0</TD>
     <TD>pcw_i2c0_reset_enable=0</TD>
-</TR><TR ALIGN='LEFT'>    <TD>pcw_i2c1_peripheral_enable=0</TD>
-    <TD>pcw_i2c1_grp_int_enable=0</TD>
+    <TD>pcw_i2c1_peripheral_enable=0</TD>
+</TR><TR ALIGN='LEFT'>    <TD>pcw_i2c1_grp_int_enable=0</TD>
     <TD>pcw_i2c1_reset_enable=0</TD>
     <TD>pcw_gpio_peripheral_enable=0</TD>
-</TR><TR ALIGN='LEFT'>    <TD>pcw_gpio_mio_gpio_enable=1</TD>
-    <TD>pcw_gpio_mio_gpio_io=MIO</TD>
+    <TD>pcw_gpio_mio_gpio_enable=1</TD>
+</TR><TR ALIGN='LEFT'>    <TD>pcw_gpio_mio_gpio_io=MIO</TD>
     <TD>pcw_gpio_emio_gpio_enable=0</TD>
     <TD>pcw_apu_clk_ratio_enable=6:2:1</TD>
-</TR><TR ALIGN='LEFT'>    <TD>pcw_enet0_peripheral_freqmhz=1000 Mbps</TD>
-    <TD>pcw_enet1_peripheral_freqmhz=1000 Mbps</TD>
+    <TD>pcw_enet0_peripheral_freqmhz=1000 Mbps</TD>
+</TR><TR ALIGN='LEFT'>    <TD>pcw_enet1_peripheral_freqmhz=1000 Mbps</TD>
     <TD>pcw_cpu_peripheral_clksrc=ARM PLL</TD>
     <TD>pcw_ddr_peripheral_clksrc=DDR PLL</TD>
-</TR><TR ALIGN='LEFT'>    <TD>pcw_smc_peripheral_clksrc=IO PLL</TD>
-    <TD>pcw_qspi_peripheral_clksrc=IO PLL</TD>
+    <TD>pcw_smc_peripheral_clksrc=IO PLL</TD>
+</TR><TR ALIGN='LEFT'>    <TD>pcw_qspi_peripheral_clksrc=IO PLL</TD>
     <TD>pcw_sdio_peripheral_clksrc=IO PLL</TD>
     <TD>pcw_uart_peripheral_clksrc=IO PLL</TD>
-</TR><TR ALIGN='LEFT'>    <TD>pcw_spi_peripheral_clksrc=IO PLL</TD>
-    <TD>pcw_can_peripheral_clksrc=IO PLL</TD>
+    <TD>pcw_spi_peripheral_clksrc=IO PLL</TD>
+</TR><TR ALIGN='LEFT'>    <TD>pcw_can_peripheral_clksrc=IO PLL</TD>
     <TD>pcw_fclk0_peripheral_clksrc=IO PLL</TD>
     <TD>pcw_fclk1_peripheral_clksrc=IO PLL</TD>
-</TR><TR ALIGN='LEFT'>    <TD>pcw_fclk2_peripheral_clksrc=IO PLL</TD>
-    <TD>pcw_fclk3_peripheral_clksrc=IO PLL</TD>
+    <TD>pcw_fclk2_peripheral_clksrc=IO PLL</TD>
+</TR><TR ALIGN='LEFT'>    <TD>pcw_fclk3_peripheral_clksrc=IO PLL</TD>
     <TD>pcw_enet0_peripheral_clksrc=IO PLL</TD>
     <TD>pcw_enet1_peripheral_clksrc=IO PLL</TD>
-</TR><TR ALIGN='LEFT'>    <TD>pcw_can0_peripheral_clksrc=External</TD>
-    <TD>pcw_can1_peripheral_clksrc=External</TD>
+    <TD>pcw_can0_peripheral_clksrc=External</TD>
+</TR><TR ALIGN='LEFT'>    <TD>pcw_can1_peripheral_clksrc=External</TD>
     <TD>pcw_tpiu_peripheral_clksrc=External</TD>
     <TD>pcw_ttc0_clk0_peripheral_clksrc=CPU_1X</TD>
-</TR><TR ALIGN='LEFT'>    <TD>pcw_ttc0_clk1_peripheral_clksrc=CPU_1X</TD>
-    <TD>pcw_ttc0_clk2_peripheral_clksrc=CPU_1X</TD>
+    <TD>pcw_ttc0_clk1_peripheral_clksrc=CPU_1X</TD>
+</TR><TR ALIGN='LEFT'>    <TD>pcw_ttc0_clk2_peripheral_clksrc=CPU_1X</TD>
     <TD>pcw_ttc1_clk0_peripheral_clksrc=CPU_1X</TD>
     <TD>pcw_ttc1_clk1_peripheral_clksrc=CPU_1X</TD>
-</TR><TR ALIGN='LEFT'>    <TD>pcw_ttc1_clk2_peripheral_clksrc=CPU_1X</TD>
-    <TD>pcw_wdt_peripheral_clksrc=CPU_1X</TD>
+    <TD>pcw_ttc1_clk2_peripheral_clksrc=CPU_1X</TD>
+</TR><TR ALIGN='LEFT'>    <TD>pcw_wdt_peripheral_clksrc=CPU_1X</TD>
     <TD>pcw_dci_peripheral_clksrc=DDR PLL</TD>
     <TD>pcw_pcap_peripheral_clksrc=IO PLL</TD>
-</TR><TR ALIGN='LEFT'>    <TD>pcw_usb_reset_polarity=Active Low</TD>
-    <TD>pcw_enet_reset_polarity=Active Low</TD>
+    <TD>pcw_usb_reset_polarity=Active Low</TD>
+</TR><TR ALIGN='LEFT'>    <TD>pcw_enet_reset_polarity=Active Low</TD>
     <TD>pcw_i2c_reset_polarity=Active Low</TD>
     <TD>pcw_fpga_fclk0_enable=1</TD>
-</TR><TR ALIGN='LEFT'>    <TD>pcw_fpga_fclk1_enable=0</TD>
-    <TD>pcw_fpga_fclk2_enable=0</TD>
+    <TD>pcw_fpga_fclk1_enable=0</TD>
+</TR><TR ALIGN='LEFT'>    <TD>pcw_fpga_fclk2_enable=0</TD>
     <TD>pcw_fpga_fclk3_enable=0</TD>
     <TD>pcw_nor_sram_cs0_t_tr=1</TD>
-</TR><TR ALIGN='LEFT'>    <TD>pcw_nor_sram_cs0_t_pc=1</TD>
-    <TD>pcw_nor_sram_cs0_t_wp=1</TD>
+    <TD>pcw_nor_sram_cs0_t_pc=1</TD>
+</TR><TR ALIGN='LEFT'>    <TD>pcw_nor_sram_cs0_t_wp=1</TD>
     <TD>pcw_nor_sram_cs0_t_ceoe=1</TD>
     <TD>pcw_nor_sram_cs0_t_wc=11</TD>
-</TR><TR ALIGN='LEFT'>    <TD>pcw_nor_sram_cs0_t_rc=11</TD>
-    <TD>pcw_nor_sram_cs0_we_time=0</TD>
+    <TD>pcw_nor_sram_cs0_t_rc=11</TD>
+</TR><TR ALIGN='LEFT'>    <TD>pcw_nor_sram_cs0_we_time=0</TD>
     <TD>pcw_nor_sram_cs1_t_tr=1</TD>
     <TD>pcw_nor_sram_cs1_t_pc=1</TD>
-</TR><TR ALIGN='LEFT'>    <TD>pcw_nor_sram_cs1_t_wp=1</TD>
-    <TD>pcw_nor_sram_cs1_t_ceoe=1</TD>
+    <TD>pcw_nor_sram_cs1_t_wp=1</TD>
+</TR><TR ALIGN='LEFT'>    <TD>pcw_nor_sram_cs1_t_ceoe=1</TD>
     <TD>pcw_nor_sram_cs1_t_wc=11</TD>
     <TD>pcw_nor_sram_cs1_t_rc=11</TD>
-</TR><TR ALIGN='LEFT'>    <TD>pcw_nor_sram_cs1_we_time=0</TD>
-    <TD>pcw_nor_cs0_t_tr=1</TD>
+    <TD>pcw_nor_sram_cs1_we_time=0</TD>
+</TR><TR ALIGN='LEFT'>    <TD>pcw_nor_cs0_t_tr=1</TD>
     <TD>pcw_nor_cs0_t_pc=1</TD>
     <TD>pcw_nor_cs0_t_wp=1</TD>
-</TR><TR ALIGN='LEFT'>    <TD>pcw_nor_cs0_t_ceoe=1</TD>
-    <TD>pcw_nor_cs0_t_wc=11</TD>
+    <TD>pcw_nor_cs0_t_ceoe=1</TD>
+</TR><TR ALIGN='LEFT'>    <TD>pcw_nor_cs0_t_wc=11</TD>
     <TD>pcw_nor_cs0_t_rc=11</TD>
     <TD>pcw_nor_cs0_we_time=0</TD>
-</TR><TR ALIGN='LEFT'>    <TD>pcw_nor_cs1_t_tr=1</TD>
-    <TD>pcw_nor_cs1_t_pc=1</TD>
+    <TD>pcw_nor_cs1_t_tr=1</TD>
+</TR><TR ALIGN='LEFT'>    <TD>pcw_nor_cs1_t_pc=1</TD>
     <TD>pcw_nor_cs1_t_wp=1</TD>
     <TD>pcw_nor_cs1_t_ceoe=1</TD>
-</TR><TR ALIGN='LEFT'>    <TD>pcw_nor_cs1_t_wc=11</TD>
-    <TD>pcw_nor_cs1_t_rc=11</TD>
+    <TD>pcw_nor_cs1_t_wc=11</TD>
+</TR><TR ALIGN='LEFT'>    <TD>pcw_nor_cs1_t_rc=11</TD>
     <TD>pcw_nor_cs1_we_time=0</TD>
     <TD>pcw_nand_cycles_t_rr=1</TD>
-</TR><TR ALIGN='LEFT'>    <TD>pcw_nand_cycles_t_ar=1</TD>
-    <TD>pcw_nand_cycles_t_clr=1</TD>
+    <TD>pcw_nand_cycles_t_ar=1</TD>
+</TR><TR ALIGN='LEFT'>    <TD>pcw_nand_cycles_t_clr=1</TD>
     <TD>pcw_nand_cycles_t_wp=1</TD>
     <TD>pcw_nand_cycles_t_rea=1</TD>
-</TR><TR ALIGN='LEFT'>    <TD>pcw_nand_cycles_t_wc=11</TD>
-    <TD>pcw_nand_cycles_t_rc=11</TD>
+    <TD>pcw_nand_cycles_t_wc=11</TD>
+</TR><TR ALIGN='LEFT'>    <TD>pcw_nand_cycles_t_rc=11</TD>
 </TR>   </TABLE>
    </TD></TR>
    <TR><TD>
@@ -692,170 +687,6 @@
     <TD>in31_width=1</TD>
     <TD>dout_width=2</TD>
     <TD>num_ports=2</TD>
-</TR>   </TABLE>
-   </TD></TR>
-  </TABLE><BR>
- <TABLE BORDER='1' CELLSPACING='0' WIDTH='100%'>
-  <TR ALIGN='CENTER' BGCOLOR='#A7BFDE'><TD COLSPAN='1'><B>report_power</B></TD></TR>
-   <TR><TD>
-   <TABLE BORDER='1' CELLSPACING='0' WIDTH='100%'>
-    <TR ALIGN='CENTER' BGCOLOR='#DBE5F1'><TD COLSPAN='4'><B>command_line_options</B></TD></TR>
-<TR ALIGN='LEFT'>    <TD>-verbose=default::[not_specified]</TD>
-    <TD>-hier=default::power</TD>
-    <TD>-no_propagation=default::[not_specified]</TD>
-    <TD>-format=default::text</TD>
-</TR><TR ALIGN='LEFT'>    <TD>-file=[specified]</TD>
-    <TD>-name=default::[not_specified]</TD>
-    <TD>-xpe=default::[not_specified]</TD>
-    <TD>-return_string=default::[not_specified]</TD>
-</TR><TR ALIGN='LEFT'>    <TD>-vid=default::[not_specified]</TD>
-    <TD>-append=default::[not_specified]</TD>
-    <TD>-l=default::[not_specified]</TD>
-</TR>   </TABLE>
-   </TD></TR>
-   <TR><TD>
-   <TABLE BORDER='1' CELLSPACING='0' WIDTH='100%'>
-    <TR ALIGN='CENTER' BGCOLOR='#DBE5F1'><TD COLSPAN='4'><B>usage</B></TD></TR>
-<TR ALIGN='LEFT'>    <TD>customer=TBD</TD>
-    <TD>customer_class=TBD</TD>
-    <TD>flow_state=routed</TD>
-    <TD>family=zynq</TD>
-</TR><TR ALIGN='LEFT'>    <TD>die=xc7z020clg484-1</TD>
-    <TD>package=clg484</TD>
-    <TD>speedgrade=-1</TD>
-    <TD>version=2015.3</TD>
-</TR><TR ALIGN='LEFT'>    <TD>platform=lin64</TD>
-    <TD>temp_grade=commercial</TD>
-    <TD>process=typical</TD>
-    <TD>simulation_file=None</TD>
-</TR><TR ALIGN='LEFT'>    <TD>netlist_net_matched=NA</TD>
-    <TD>pct_clock_constrained=1.140000</TD>
-    <TD>pct_inputs_defined=0</TD>
-    <TD>user_junc_temp=44.7 (C)</TD>
-</TR><TR ALIGN='LEFT'>    <TD>ambient_temp=25.0 (C)</TD>
-    <TD>user_effective_thetaja=11.5</TD>
-    <TD>airflow=250 (LFM)</TD>
-    <TD>heatsink=none</TD>
-</TR><TR ALIGN='LEFT'>    <TD>user_thetasa=0.0 (C/W)</TD>
-    <TD>board_selection=medium (10&quot;x10&quot;)</TD>
-    <TD>board_layers=8to11 (8 to 11 Layers)</TD>
-    <TD>user_thetajb=7.4 (C/W)</TD>
-</TR><TR ALIGN='LEFT'>    <TD>user_board_temp=25.0 (C)</TD>
-    <TD>junction_temp=44.7 (C)</TD>
-    <TD>input_toggle=12.500000</TD>
-    <TD>output_toggle=12.500000</TD>
-</TR><TR ALIGN='LEFT'>    <TD>bi-dir_toggle=12.500000</TD>
-    <TD>output_enable=1.000000</TD>
-    <TD>bidir_output_enable=1.000000</TD>
-    <TD>output_load=5.000000</TD>
-</TR><TR ALIGN='LEFT'>    <TD>ff_toggle=12.500000</TD>
-    <TD>ram_enable=50.000000</TD>
-    <TD>ram_write=50.000000</TD>
-    <TD>dsp_output_toggle=12.500000</TD>
-</TR><TR ALIGN='LEFT'>    <TD>set/reset_probability=0.000000</TD>
-    <TD>enable_probability=0.990000</TD>
-    <TD>toggle_rate=False</TD>
-    <TD>signal_rate=False</TD>
-</TR><TR ALIGN='LEFT'>    <TD>static_prob=False</TD>
-    <TD>read_saif=False</TD>
-    <TD>on-chip_power=1.704181</TD>
-    <TD>dynamic=1.543980</TD>
-</TR><TR ALIGN='LEFT'>    <TD>effective_thetaja=11.5</TD>
-    <TD>thetasa=0.0 (C/W)</TD>
-    <TD>thetajb=7.4 (C/W)</TD>
-    <TD>off-chip_power=0.000000</TD>
-</TR><TR ALIGN='LEFT'>    <TD>clocks=0.006593</TD>
-    <TD>logic=0.002904</TD>
-    <TD>signals=0.003273</TD>
-    <TD>i/o=0.001919</TD>
-</TR><TR ALIGN='LEFT'>    <TD>ps7=1.529290</TD>
-    <TD>devstatic=0.160202</TD>
-    <TD>vccint_voltage=1.000000</TD>
-    <TD>vccint_total_current=0.027683</TD>
-</TR><TR ALIGN='LEFT'>    <TD>vccint_dynamic_current=0.012791</TD>
-    <TD>vccint_static_current=0.014891</TD>
-    <TD>vccaux_voltage=1.800000</TD>
-    <TD>vccaux_total_current=0.020616</TD>
-</TR><TR ALIGN='LEFT'>    <TD>vccaux_dynamic_current=0.000070</TD>
-    <TD>vccaux_static_current=0.020546</TD>
-    <TD>vcco33_voltage=3.300000</TD>
-    <TD>vcco33_total_current=0.001537</TD>
-</TR><TR ALIGN='LEFT'>    <TD>vcco33_dynamic_current=0.000537</TD>
-    <TD>vcco33_static_current=0.001000</TD>
-    <TD>vcco25_voltage=2.500000</TD>
-    <TD>vcco25_total_current=0.001000</TD>
-</TR><TR ALIGN='LEFT'>    <TD>vcco25_dynamic_current=0.000000</TD>
-    <TD>vcco25_static_current=0.001000</TD>
-    <TD>vcco18_voltage=1.800000</TD>
-    <TD>vcco18_total_current=0.001000</TD>
-</TR><TR ALIGN='LEFT'>    <TD>vcco18_dynamic_current=0.000000</TD>
-    <TD>vcco18_static_current=0.001000</TD>
-    <TD>vcco15_voltage=1.500000</TD>
-    <TD>vcco15_total_current=0.001000</TD>
-</TR><TR ALIGN='LEFT'>    <TD>vcco15_dynamic_current=0.000000</TD>
-    <TD>vcco15_static_current=0.001000</TD>
-    <TD>vcco135_voltage=1.350000</TD>
-    <TD>vcco135_total_current=0.000000</TD>
-</TR><TR ALIGN='LEFT'>    <TD>vcco135_dynamic_current=0.000000</TD>
-    <TD>vcco135_static_current=0.000000</TD>
-    <TD>vcco12_voltage=1.200000</TD>
-    <TD>vcco12_total_current=0.000000</TD>
-</TR><TR ALIGN='LEFT'>    <TD>vcco12_dynamic_current=0.000000</TD>
-    <TD>vcco12_static_current=0.000000</TD>
-    <TD>vccaux_io_voltage=1.800000</TD>
-    <TD>vccaux_io_total_current=0.000000</TD>
-</TR><TR ALIGN='LEFT'>    <TD>vccaux_io_dynamic_current=0.000000</TD>
-    <TD>vccaux_io_static_current=0.000000</TD>
-    <TD>vccbram_voltage=1.000000</TD>
-    <TD>vccbram_total_current=0.000907</TD>
-</TR><TR ALIGN='LEFT'>    <TD>vccbram_dynamic_current=0.000000</TD>
-    <TD>vccbram_static_current=0.000907</TD>
-    <TD>mgtavcc_voltage=1.000000</TD>
-    <TD>mgtavcc_total_current=0.000000</TD>
-</TR><TR ALIGN='LEFT'>    <TD>mgtavcc_dynamic_current=0.000000</TD>
-    <TD>mgtavcc_static_current=0.000000</TD>
-    <TD>mgtavtt_voltage=1.200000</TD>
-    <TD>mgtavtt_total_current=0.000000</TD>
-</TR><TR ALIGN='LEFT'>    <TD>mgtavtt_dynamic_current=0.000000</TD>
-    <TD>mgtavtt_static_current=0.000000</TD>
-    <TD>mgtvccaux_voltage=1.800000</TD>
-    <TD>mgtvccaux_total_current=0.000000</TD>
-</TR><TR ALIGN='LEFT'>    <TD>mgtvccaux_dynamic_current=0.000000</TD>
-    <TD>mgtvccaux_static_current=0.000000</TD>
-    <TD>vccpint_voltage=1.000000</TD>
-    <TD>vccpint_total_current=0.748287</TD>
-</TR><TR ALIGN='LEFT'>    <TD>vccpint_dynamic_current=0.718061</TD>
-    <TD>vccpint_static_current=0.030226</TD>
-    <TD>vccpaux_voltage=1.800000</TD>
-    <TD>vccpaux_total_current=0.061444</TD>
-</TR><TR ALIGN='LEFT'>    <TD>vccpaux_dynamic_current=0.051114</TD>
-    <TD>vccpaux_static_current=0.010330</TD>
-    <TD>vccpll_voltage=1.800000</TD>
-    <TD>vccpll_total_current=0.016878</TD>
-</TR><TR ALIGN='LEFT'>    <TD>vccpll_dynamic_current=0.013878</TD>
-    <TD>vccpll_static_current=0.003000</TD>
-    <TD>vcco_ddr_voltage=1.500000</TD>
-    <TD>vcco_ddr_total_current=0.458904</TD>
-</TR><TR ALIGN='LEFT'>    <TD>vcco_ddr_dynamic_current=0.456904</TD>
-    <TD>vcco_ddr_static_current=0.002000</TD>
-    <TD>vcco_mio0_voltage=3.300000</TD>
-    <TD>vcco_mio0_total_current=0.002500</TD>
-</TR><TR ALIGN='LEFT'>    <TD>vcco_mio0_dynamic_current=0.001500</TD>
-    <TD>vcco_mio0_static_current=0.001000</TD>
-    <TD>vcco_mio1_voltage=1.800000</TD>
-    <TD>vcco_mio1_total_current=0.003187</TD>
-</TR><TR ALIGN='LEFT'>    <TD>vcco_mio1_dynamic_current=0.002187</TD>
-    <TD>vcco_mio1_static_current=0.001000</TD>
-    <TD>vccadc_voltage=1.800000</TD>
-    <TD>vccadc_total_current=0.020000</TD>
-</TR><TR ALIGN='LEFT'>    <TD>vccadc_dynamic_current=0.000000</TD>
-    <TD>vccadc_static_current=0.020000</TD>
-    <TD>confidence_level_design_state=High</TD>
-    <TD>confidence_level_clock_activity=High</TD>
-</TR><TR ALIGN='LEFT'>    <TD>confidence_level_io_activity=Low</TD>
-    <TD>confidence_level_internal_activity=Medium</TD>
-    <TD>confidence_level_device_models=High</TD>
-    <TD>confidence_level_overall=Low</TD>
 </TR>   </TABLE>
    </TD></TR>
   </TABLE><BR>
@@ -1138,9 +969,9 @@
 </TR><TR ALIGN='LEFT'>    <TD>global_clocks=1</TD>
     <TD>pll=0</TD>
     <TD>bufr=0</TD>
-    <TD>nets=5215</TD>
-</TR><TR ALIGN='LEFT'>    <TD>movable_instances=3892</TD>
-    <TD>pins=24033</TD>
+    <TD>nets=5212</TD>
+</TR><TR ALIGN='LEFT'>    <TD>movable_instances=3891</TD>
+    <TD>pins=24032</TD>
     <TD>bogomips=5320</TD>
     <TD>high_fanout_nets=3</TD>
 </TR><TR ALIGN='LEFT'>    <TD>effort=2</TD>
@@ -1150,7 +981,7 @@
 </TR><TR ALIGN='LEFT'>    <TD>congestion_level=0</TD>
     <TD>estimated_expansions=2093244</TD>
     <TD>actual_expansions=1411581</TD>
-    <TD>router_runtime=24.320000</TD>
+    <TD>router_runtime=23.890000</TD>
 </TR>   </TABLE>
    </TD></TR>
   </TABLE><BR>
@@ -1187,8 +1018,8 @@
    <TR><TD>
    <TABLE BORDER='1' CELLSPACING='0' WIDTH='100%'>
     <TR ALIGN='CENTER' BGCOLOR='#DBE5F1'><TD COLSPAN='4'><B>usage</B></TD></TR>
-<TR ALIGN='LEFT'>    <TD>elapsed=00:01:24s</TD>
-    <TD>memory_peak=1764.281MB</TD>
+<TR ALIGN='LEFT'>    <TD>elapsed=00:01:22s</TD>
+    <TD>memory_peak=1764.289MB</TD>
     <TD>memory_gain=683.098MB</TD>
     <TD>hls_ip=0</TD>
 </TR>   </TABLE>

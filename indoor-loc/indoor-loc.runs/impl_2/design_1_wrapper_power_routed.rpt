@@ -1,7 +1,7 @@
 Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2015.3 (lin64) Build 1368829 Mon Sep 28 20:06:39 MDT 2015
-| Date             : Tue Dec 15 15:24:10 2015
+| Date             : Wed Dec 16 10:55:06 2015
 | Host             : mp-akulapd.ziti.uni-heidelberg.de running 64-bit unknown
 | Command          : report_power -file design_1_wrapper_power_routed.rpt -pb design_1_wrapper_power_summary_routed.pb
 | Design           : design_1_wrapper
@@ -30,12 +30,12 @@ Table of Contents
 ----------
 
 +--------------------------+-------+
-| Total On-Chip Power (W)  | 1.704 |
-| Dynamic (W)              | 1.544 |
+| Total On-Chip Power (W)  | 1.702 |
+| Dynamic (W)              | 1.541 |
 | Device Static (W)        | 0.160 |
 | Effective TJA (C/W)      | 11.5  |
-| Max Ambient (C)          | 65.3  |
-| Junction Temperature (C) | 44.7  |
+| Max Ambient (C)          | 65.4  |
+| Junction Temperature (C) | 44.6  |
 | Confidence Level         | Low   |
 | Setting File             | ---   |
 | Simulation Activity File | ---   |
@@ -50,17 +50,17 @@ Table of Contents
 | On-Chip                 | Power (W) | Used     | Available | Utilization (%) |
 +-------------------------+-----------+----------+-----------+-----------------+
 | Clocks                  |     0.007 |        3 |       --- |             --- |
-| Slice Logic             |     0.003 |     3869 |       --- |             --- |
+| Slice Logic             |     0.003 |     3868 |       --- |             --- |
 |   LUT as Logic          |     0.003 |     1293 |     53200 |            2.43 |
 |   CARRY4                |    <0.001 |      155 |     13300 |            1.17 |
 |   Register              |    <0.001 |     1748 |    106400 |            1.64 |
 |   LUT as Shift Register |    <0.001 |       64 |     17400 |            0.37 |
-|   Others                |     0.000 |      261 |       --- |             --- |
+|   Others                |     0.000 |      260 |       --- |             --- |
 | Signals                 |     0.003 |     2757 |       --- |             --- |
 | I/O                     |     0.002 |       21 |       200 |           10.50 |
-| PS7                     |     1.529 |        1 |       --- |             --- |
+| PS7                     |     1.527 |        1 |       --- |             --- |
 | Static Power            |     0.160 |          |           |                 |
-| Total                   |     1.704 |          |           |                 |
+| Total                   |     1.702 |          |           |                 |
 +-------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -83,12 +83,12 @@ Table of Contents
 | MGTAVcc   |       1.000 |     0.000 |       0.000 |      0.000 |
 | MGTAVtt   |       1.200 |     0.000 |       0.000 |      0.000 |
 | MGTVccaux |       1.800 |     0.000 |       0.000 |      0.000 |
-| Vccpint   |       1.000 |     0.748 |       0.718 |      0.030 |
-| Vccpaux   |       1.800 |     0.061 |       0.051 |      0.010 |
+| Vccpint   |       1.000 |     0.750 |       0.719 |      0.030 |
+| Vccpaux   |       1.800 |     0.061 |       0.050 |      0.010 |
 | Vccpll    |       1.800 |     0.017 |       0.014 |      0.003 |
 | Vcco_ddr  |       1.500 |     0.459 |       0.457 |      0.002 |
 | Vcco_mio0 |       3.300 |     0.003 |       0.002 |      0.001 |
-| Vcco_mio1 |       1.800 |     0.003 |       0.002 |      0.001 |
+| Vcco_mio1 |       1.800 |     0.001 |       0.000 |      0.001 |
 | Vccadc    |       1.800 |     0.020 |       0.000 |      0.020 |
 +-----------+-------------+-----------+-------------+------------+
 
@@ -146,8 +146,8 @@ Table of Contents
 +--------------------------------------------------+-----------+
 | Name                                             | Power (W) |
 +--------------------------------------------------+-----------+
-| design_1_wrapper                                 |     1.544 |
-|   design_1_i                                     |     1.542 |
+| design_1_wrapper                                 |     1.541 |
+|   design_1_i                                     |     1.539 |
 |     axi_gpio_0                                   |    <0.001 |
 |       U0                                         |    <0.001 |
 |         AXI_LITE_IPIF_I                          |    <0.001 |
@@ -167,8 +167,8 @@ Table of Contents
 |           READ_MUX_I                             |     0.000 |
 |           TIMER_CONTROL_I                        |    <0.001 |
 |             INPUT_DOUBLE_REGS3                   |    <0.001 |
-|     processing_system7_0                         |     1.530 |
-|       inst                                       |     1.530 |
+|     processing_system7_0                         |     1.528 |
+|       inst                                       |     1.528 |
 |         xlnx_axi_wrshim_unwrap_inst_gp0          |     0.000 |
 |         xlnx_axi_wrshim_unwrap_inst_gp1          |     0.000 |
 |     processing_system7_0_axi_periph              |     0.006 |

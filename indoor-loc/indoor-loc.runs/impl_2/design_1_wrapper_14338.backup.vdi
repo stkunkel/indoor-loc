@@ -1,13 +1,14 @@
-
-*** Running vivado
-    with args -log design_1_wrapper.vdi -applog -m64 -messageDb vivado.pb -mode batch -source design_1_wrapper.tcl -notrace
-
-
-****** Vivado v2015.3 (64-bit)
-  **** SW Build 1368829 on Mon Sep 28 20:06:39 MDT 2015
-  **** IP Build 1367837 on Mon Sep 28 08:56:14 MDT 2015
-    ** Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
-
+#-----------------------------------------------------------
+# Vivado v2015.3 (64-bit)
+# SW Build 1368829 on Mon Sep 28 20:06:39 MDT 2015
+# IP Build 1367837 on Mon Sep 28 08:56:14 MDT 2015
+# Start of session at: Wed Dec 16 10:53:55 2015
+# Process ID: 14338
+# Current directory: /home/rupprich/Zynq/indoor-loc/indoor-loc.runs/impl_2
+# Command line: vivado -log design_1_wrapper.vdi -applog -messageDb vivado.pb -mode batch -source design_1_wrapper.tcl -notrace
+# Log file: /home/rupprich/Zynq/indoor-loc/indoor-loc.runs/impl_2/design_1_wrapper.vdi
+# Journal file: /home/rupprich/Zynq/indoor-loc/indoor-loc.runs/impl_2/vivado.jou
+#-----------------------------------------------------------
 source design_1_wrapper.tcl -notrace
 Design is defaulting to srcset: sources_1
 Design is defaulting to constrset: constrs_1
@@ -562,55 +563,3 @@ Running Vector-less Activity Propagation...
 
 Finished Running Vector-less Activity Propagation
 INFO: [Common 17-206] Exiting Vivado at Wed Dec 16 10:55:06 2015...
-
-*** Running vivado
-    with args -log design_1_wrapper.vdi -applog -m64 -messageDb vivado.pb -mode batch -source design_1_wrapper.tcl -notrace
-
-
-****** Vivado v2015.3 (64-bit)
-  **** SW Build 1368829 on Mon Sep 28 20:06:39 MDT 2015
-  **** IP Build 1367837 on Mon Sep 28 08:56:14 MDT 2015
-    ** Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
-
-source design_1_wrapper.tcl -notrace
-Command: open_checkpoint design_1_wrapper_routed.dcp
-INFO: [Netlist 29-17] Analyzing 160 Unisim elements for replacement
-INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
-INFO: [Project 1-479] Netlist was created with Vivado 2015.3
-INFO: [Device 21-403] Loading part xc7z020clg484-1
-INFO: [Project 1-570] Preparing netlist for logic optimization
-Parsing XDC File [/home/rupprich/Zynq/indoor-loc/indoor-loc.runs/impl_2/.Xil/Vivado-15486-mp-akulapd.ziti.uni-heidelberg.de/dcp/design_1_wrapper_early.xdc]
-Finished Parsing XDC File [/home/rupprich/Zynq/indoor-loc/indoor-loc.runs/impl_2/.Xil/Vivado-15486-mp-akulapd.ziti.uni-heidelberg.de/dcp/design_1_wrapper_early.xdc]
-Parsing XDC File [/home/rupprich/Zynq/indoor-loc/indoor-loc.runs/impl_2/.Xil/Vivado-15486-mp-akulapd.ziti.uni-heidelberg.de/dcp/design_1_wrapper.xdc]
-Finished Parsing XDC File [/home/rupprich/Zynq/indoor-loc/indoor-loc.runs/impl_2/.Xil/Vivado-15486-mp-akulapd.ziti.uni-heidelberg.de/dcp/design_1_wrapper.xdc]
-Reading XDEF placement.
-Reading placer database...
-Reading XDEF routing.
-Read XDEF File: Time (s): cpu = 00:00:00.37 ; elapsed = 00:00:00.45 . Memory (MB): peak = 1305.656 ; gain = 4.000 ; free physical = 1592 ; free virtual = 12702
-Restored from archive | CPU: 0.380000 secs | Memory: 3.208961 MB |
-Finished XDEF File Restore: Time (s): cpu = 00:00:00.37 ; elapsed = 00:00:00.45 . Memory (MB): peak = 1305.656 ; gain = 4.000 ; free physical = 1592 ; free virtual = 12702
-INFO: [Project 1-111] Unisim Transformation Summary:
-No Unisim elements were transformed.
-
-INFO: [Project 1-604] Checkpoint was created with Vivado v2015.3 (64-bit) build 1368829
-open_checkpoint: Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1305.656 ; gain = 285.285 ; free physical = 1598 ; free virtual = 12701
-Attempting to get a license for feature 'Implementation' and/or device 'xc7z020'
-INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7z020'
-INFO: [Common 17-1223] The version limit for your license is '2015.12' and will expire in 15 days. A version limit expiration means that, although you may be able to continue to use the current version of tools or IP with this license, you will not be eligible for any updates or new releases.
-Running DRC as a precondition to command write_bitstream
-INFO: [DRC 23-27] Running DRC with 4 threads
-INFO: [Vivado 12-3199] DRC finished with 0 Errors
-INFO: [Vivado 12-3200] Please refer to the DRC report (report_drc) for more information.
-Loading data files...
-Loading site data...
-Loading route data...
-Processing options...
-Creating bitmap...
-Creating bitstream...
-Writing bitstream ./design_1_wrapper.bit...
-INFO: [Vivado 12-1842] Bitgen Completed Successfully.
-INFO: [Project 1-118] WebTalk data collection is enabled (User setting is ON. Install Setting is ON.).
-INFO: [Common 17-186] '/home/rupprich/Zynq/indoor-loc/indoor-loc.runs/impl_2/usage_statistics_webtalk.xml' has been successfully sent to Xilinx on Wed Dec 16 10:56:14 2015. For additional details about this file, please refer to the WebTalk help file at /opt/Xilinx/Vivado/2015.3/doc/webtalk_introduction.html.
-INFO: [Common 17-83] Releasing license: Implementation
-write_bitstream: Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 1696.539 ; gain = 390.883 ; free physical = 1248 ; free virtual = 12355
-INFO: [Common 17-206] Exiting Vivado at Wed Dec 16 10:56:14 2015...
