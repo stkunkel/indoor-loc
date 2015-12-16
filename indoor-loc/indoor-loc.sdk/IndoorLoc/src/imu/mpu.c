@@ -90,6 +90,8 @@ int printforDisplay(char printQuaternion, char printPos) {
 	memcpy(&quat, &recentQuat, QUATERNION_AMOUNT * sizeof(long));
 	position = recentPosition;
 
+	myprintf("%fms | ", recent_ts * 1000.0 / COUNTS_PER_SECOND);
+
 	//Print Quaternion
 	if (printQuaternion) {
 
@@ -216,7 +218,7 @@ int getQuatDrift(float *quat_drift, char calibration, unsigned int time_min) {
 	long quat[QUATERNION_AMOUNT];
 	unsigned long timestamp;
 	short int sensors;
-	unsigned char* more = (unsigned char *) malloc(100);
+	unsigned char* more = (unsigned char *) malloc(100*sizeof(char));
 	float quat_init[QUATERNION_AMOUNT];
 
 //Calibrate if required
@@ -645,7 +647,7 @@ int updateData() {
 			sensors;
 	long quat[QUATERNION_AMOUNT], temperature;
 	unsigned long timestamp, temp_ts;
-	unsigned char* more = (unsigned char *) malloc(100);
+	unsigned char* more = (unsigned char *) malloc(100*sizeof(char));
 	float accel_conv[NUMBER_OF_AXES], quat_conv[QUATERNION_AMOUNT];
 
 	//Initialize if required
@@ -658,14 +660,10 @@ int updateData() {
 	}
 
 	//Get latest data
-	while (1) {
+	do {
 		status = readFromFifo(gyro, accel, quat, &timestamp, &sensors, more);
-		if (status != XST_SUCCESS){
-			usleep(100);
-		} else {
-			break;
-		}
-	}
+		usleep(100);
+	} while (status != XST_SUCCESS);
 
 	//Convert Accel
 	status = convertAccData(accel, accel_conv);
@@ -738,7 +736,7 @@ void updatePosition(float* accel_conv, float* quat_conv,
 
 	//Get time difference btw. timestamps in s
 	//time_diff = (float) (timestamp - recent_ts) / COUNTS_PER_SECOND;
-	time_diff = 1.0/DMP_FIFO_RATE;
+	time_diff = 1.0 / DMP_FIFO_RATE;
 
 	//Convert acceleration vector: 1g = 9.81m/s^2
 	accel_measuremt = multVectorByScalar(toVector(accel_conv), GRAVITY);
@@ -874,7 +872,7 @@ int calibrateGyrAcc(unsigned int samples) {
 	long int quat[4];
 	unsigned long timestamp;
 	short int sensors = INV_XYZ_GYRO | INV_XYZ_ACCEL;
-	unsigned char* more = (unsigned char *) malloc(100);
+	unsigned char* more = (unsigned char *) malloc(100*sizeof(char));
 	long gyro_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
 	long accel_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
 	float gyro_bias_conv[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 };
@@ -1044,15 +1042,15 @@ int readFromFifo(short *gyro, short *accel, long *quat,
 
 //Make sure the read command is not called too often
 //	if (count >= 500) { //was: 500
-		//Reset Count, increment read count
-		count = 0;
+	//Reset Count, increment read count
+	count = 0;
 
-		//Read FIFO
-		status = dmp_read_fifo(gyro, accel, quat, timestamp, sensors, more);
-		if (status != XST_SUCCESS) {
-			//usleep(1000); //sleep to prevent IIC bus from becoming busy (was: 100, worked ok with 10000)
-			//myprintf("mpu.c: Could not read DMP FIFO.\n\r");
-		}
+	//Read FIFO
+	status = dmp_read_fifo(gyro, accel, quat, timestamp, sensors, more);
+//		if (status != XST_SUCCESS) {
+	//usleep(1000); //sleep to prevent IIC bus from becoming busy (was: 100, worked ok with 10000)
+	//myprintf("mpu.c: Could not read DMP FIFO.\n\r");
+//		}
 //	}
 
 //Return
@@ -1066,7 +1064,7 @@ int readFromFifo(short *gyro, short *accel, long *quat,
 int getFifoCount() {
 	//Variables
 	int size;
-	unsigned char* data = (unsigned char*) malloc(sizeof(100));
+	unsigned char* data = (unsigned char*) malloc(100*sizeof(char));
 
 	//Read FIFO Count Registers
 	imuI2cRead(imuAddr, 0x72, 2, data);
