@@ -168,7 +168,7 @@ int setupMPUInt() {
  */
 void ImuIntrHandler(void *CallBackRef, u32 Bank, u32 Status) {
 	//Variables
-	XGpioPs *GpioInt = (XGpioPs *) CallBackRef;
+	//XGpioPs *GpioInt = (XGpioPs *) CallBackRef;
 	int status = XST_SUCCESS;
 	short irq;
 
@@ -190,6 +190,7 @@ void ImuIntrHandler(void *CallBackRef, u32 Bank, u32 Status) {
 /*
  * XGpioPS Interrupt Handler
  * Compared to the original Interrupt Handler, this one only handles an interrupt if it has been enabled.
+ * (Source: https://forums.xilinx.com/t5/Zynq-All-Programmable-SoC/GPIOPS-interrupt-problem/td-p/441640)
  * In: Instance Pointer
  */
 void myXGpioPs_IntrHandler(XGpioPs *InstancePtr) {
