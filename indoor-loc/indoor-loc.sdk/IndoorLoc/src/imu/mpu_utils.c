@@ -115,7 +115,7 @@ int imuLog_e(const char *format, ...) {
 int imuInit(u8 *imuAddr) {
 	//Variables
 	int status;
-	imuAddr_cp = (char *) malloc(8);
+	imuAddr_cp = (char *) malloc(8*sizeof(char));
 
 	//Abort old IIC transaction
 	status = iic_reset_init_abort(&IicPs, IIC_DEVICE_ID, IIC_SCLK_RATE);
