@@ -1,7 +1,7 @@
 --Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2015.3 (lin64) Build 1368829 Mon Sep 28 20:06:39 MDT 2015
---Date        : Tue Dec 15 15:21:07 2015
+--Date        : Wed Dec 16 10:51:52 2015
 --Host        : mp-akulapd.ziti.uni-heidelberg.de running 64-bit unknown
 --Command     : generate_target design_1_wrapper.bd
 --Design      : design_1_wrapper
@@ -66,11 +66,11 @@ architecture STRUCTURE of design_1_wrapper is
     FIXED_IO_ps_srstb : inout STD_LOGIC;
     FIXED_IO_ps_clk : inout STD_LOGIC;
     FIXED_IO_ps_porb : inout STD_LOGIC;
+    btns_5bits_tri_i : in STD_LOGIC_VECTOR ( 4 downto 0 );
+    leds_8bits_tri_o : out STD_LOGIC_VECTOR ( 7 downto 0 );
     pwmPulse : out STD_LOGIC_VECTOR ( 5 downto 0 );
     pwmDir : out STD_LOGIC_VECTOR ( 0 to 0 );
-    pwmOe : out STD_LOGIC_VECTOR ( 0 to 0 );
-    btns_5bits_tri_i : in STD_LOGIC_VECTOR ( 4 downto 0 );
-    leds_8bits_tri_o : out STD_LOGIC_VECTOR ( 7 downto 0 )
+    pwmOe : out STD_LOGIC_VECTOR ( 0 to 0 )
   );
   end component design_1;
 begin
