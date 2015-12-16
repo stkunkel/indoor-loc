@@ -51,10 +51,7 @@ static short recentGyro[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 },
 		recentAccel[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 },
 		recentCompass[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 }; //data in HW units
 static long recentQuat[QUATERNION_AMOUNT], recentTemp = 0;
-static unsigned long previous_ts = 0; //timestamp in ms
-static Vector previousVelocity = { .value[0] = 0.0, .value[1] = 0.0, .value[2
-		] = 0.0 };
-static Vector previousPosition = { .value[0] = 0.0, .value[1] = 0.0, .value[2
+static Vector recentAccelInertial = { .value[0] = 0.0, .value[1] = 0.0, .value[2
 		] = 0.0 };
 
 /*
@@ -90,8 +87,7 @@ int printforDisplay(char printQuaternion, char printPos) {
 	memcpy(&quat, &recentQuat, QUATERNION_AMOUNT * sizeof(long));
 	position = recentPosition;
 
-	myprintf("print TS: %dms | ", getElapsedRuntimeUS()/1000);
-	myprintf("recent TS: %dms | ", recent_ts);
+	myprintf("TS: %dms | ", recent_ts);
 
 	//Print Quaternion
 	if (printQuaternion) {
@@ -219,7 +215,7 @@ int getQuatDrift(float *quat_drift, char calibration, unsigned int time_min) {
 	long quat[QUATERNION_AMOUNT];
 	unsigned long timestamp;
 	short int sensors;
-	unsigned char* more = (unsigned char *) malloc(100*sizeof(char));
+	unsigned char* more = (unsigned char *) malloc(100 * sizeof(char));
 	float quat_init[QUATERNION_AMOUNT];
 
 //Calibrate if required
@@ -648,7 +644,7 @@ int updateData() {
 			sensors;
 	long quat[QUATERNION_AMOUNT], temperature;
 	unsigned long timestamp, temp_ts;
-	unsigned char* more = (unsigned char *) malloc(100*sizeof(char));
+	unsigned char* more = (unsigned char *) malloc(100 * sizeof(char));
 	float accel_conv[NUMBER_OF_AXES], quat_conv[QUATERNION_AMOUNT];
 
 	//Initialize if required
@@ -665,20 +661,6 @@ int updateData() {
 		status = readFromFifo(gyro, accel, quat, &timestamp, &sensors, more);
 		usleep(100);
 	} while (status != XST_SUCCESS);
-
-	//Convert Accel
-	status = convertAccData(accel, accel_conv);
-	if (status != XST_SUCCESS) {
-		free(more);
-		return status;
-	}
-
-	//Convert Quat
-	status = convertQuatenion(quat, quat_conv);
-	if (status != XST_SUCCESS) {
-		free(more);
-		return status;
-	}
 
 	//Get Compass //TODO: Handle unequal timestamp
 	status = mpu_get_compass_reg(compass, &temp_ts);
@@ -699,25 +681,33 @@ int updateData() {
 		temperature = -1;
 	}
 
+	//Convert recent Accel
+	status = convertAccData(recentAccel, accel_conv);
+	if (status != XST_SUCCESS) {
+		free(more);
+		return status;
+	}
+
+	//Convert recent Quat
+	status = convertQuatenion(recentQuat, quat_conv);
+	if (status != XST_SUCCESS) {
+		free(more);
+		return status;
+	}
+
 	//Update Position
 	updatePosition(accel_conv, quat_conv, timestamp);
 
 	//Update Sensor Data (Gyro, Accel, Quat)
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		recentGyro[i] = gyro[i];
-		recentAccel[i] = accel[i];
-		recentCompass[i] = compass[i];
-		recentQuat[i] = quat[i];
-	}
-	for (i = NUMBER_OF_AXES; i < QUATERNION_AMOUNT; i++) {
-		recentQuat[i] = quat[i];
-	}
+	memcpy(&recentGyro, &gyro, NUMBER_OF_AXES * sizeof(short));
+	memcpy(&recentAccel, &accel, NUMBER_OF_AXES * sizeof(short));
+	memcpy(&recentCompass, &compass, NUMBER_OF_AXES * sizeof(short));
+	memcpy(&recentQuat, &quat, QUATERNION_AMOUNT * sizeof(long));
 
 	//Update Temperature
 	recentTemp = temperature;
 
 	//Update Timestamp
-	previous_ts = recent_ts;
 	recent_ts = timestamp;
 
 	//Return
@@ -734,10 +724,7 @@ void updatePosition(float* accel_conv, float* quat_conv,
 	Vector accel_measuremt, accel_inertial, velocity, newPosition;
 	Matrix rotation;
 	float time_diff;
-
-	//Get time difference btw. timestamps in s
-	//time_diff = (float) (timestamp - recent_ts) / COUNTS_PER_SECOND;
-	time_diff = 1.0 / DMP_FIFO_RATE;
+	int i;
 
 	//Convert acceleration vector: 1g = 9.81m/s^2
 	accel_measuremt = multVectorByScalar(toVector(accel_conv), GRAVITY);
@@ -747,23 +734,31 @@ void updatePosition(float* accel_conv, float* quat_conv,
 
 	//Compute Inertial Acceleration Vector
 	accel_inertial = multMatrixAndVector(rotation, accel_measuremt);
-	accel_inertial = toVector(accel_conv);
 
 	//Handle first function call
 	if (recent_ts == 0) {
-		recent_ts = timestamp - 1;
+		//Set recent timestamp
+		recent_ts = timestamp - (1000 / DMP_FIFO_RATE);
+
+		//Set recent velocity and speed
+		for (i = 0; i < NUMBER_OF_AXES; i++) {
+			recentVelocity.value[i] = 0.0;
+			recentPosition.value[i] = 0.0;
+		}
 	}
 
+	//Get time difference in s
+	time_diff = (timestamp - recent_ts) / 1000.0;
+
 	//Compute Velocity
-	discreteIntegration(time_diff, &accel_inertial, &recentVelocity, &velocity);
+	discreteIntegration(time_diff, &recentAccelInertial, &recentVelocity, &velocity);
 
 	//Compute Position
-	discreteIntegration(time_diff, &velocity, &recentPosition, &newPosition);
+	discreteIntegration(time_diff, &recentVelocity, &recentPosition, &newPosition);
 
 	//Set new Values
-	previousVelocity = recentVelocity;
+	recentAccelInertial = accel_inertial;
 	recentVelocity = velocity;
-	previousPosition = recentPosition;
 	recentPosition = newPosition;
 }
 
@@ -872,7 +867,7 @@ int calibrateGyrAcc(unsigned int samples) {
 	short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
 	unsigned long timestamp;
 	short int sensors = INV_XYZ_GYRO | INV_XYZ_ACCEL;
-	unsigned char* more = (unsigned char *) malloc(100*sizeof(char));
+	unsigned char* more = (unsigned char *) malloc(100 * sizeof(char));
 	long gyro_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
 	long accel_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
 	float gyro_bias_conv[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 };
@@ -1059,7 +1054,7 @@ int readFromFifo(short *gyro, short *accel, long *quat,
 int getFifoCount() {
 	//Variables
 	int size;
-	unsigned char* data = (unsigned char*) malloc(100*sizeof(char));
+	unsigned char* data = (unsigned char*) malloc(100 * sizeof(char));
 
 	//Read FIFO Count Registers
 	imuI2cRead(imuAddr, 0x72, 2, data);
