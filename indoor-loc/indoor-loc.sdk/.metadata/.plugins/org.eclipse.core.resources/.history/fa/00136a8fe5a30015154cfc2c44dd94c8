@@ -1,0 +1,27 @@
+/*
+ * time_utils.c
+ * Author: Stephanie Kunkel
+ */
+
+/*
+ * Includes
+ */
+#include "time_utils.h"
+
+/*
+ * Convert Timestamp to s
+ */
+float timestampToSec(long timestamp) {
+	return timestamp / COUNTS_PER_US;
+}
+
+/*
+ * Convert Timestamp to ms
+ */
+
+/*
+ * Convert Timestamp to us
+ */
+float timestampToSec(long timestamp) {
+	return timestamp / COUNTS_PER_US;
+}

@@ -77,8 +77,8 @@ int main() {
 //	}
 
 	//Init
-	//initMPU();
-	//configureDMP(FEATURES_RAW, DMP_FIFO_RATE);
+//	initMPU();
+//	configureDMP(FEATURES_RAW, DMP_FIFO_RATE);
 	calibrateGyrAcc(CAL_SAMPLES);
 	setupMPUInt();
 

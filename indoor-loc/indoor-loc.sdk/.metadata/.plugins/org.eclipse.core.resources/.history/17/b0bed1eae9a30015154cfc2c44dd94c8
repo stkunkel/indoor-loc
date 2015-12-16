@@ -1,0 +1,47 @@
+/*
+ * time_utils.c
+ * Author: Stephanie Kunkel
+ */
+
+/*
+ * Includes
+ */
+#include "time_utils.h"
+
+/*
+ * Get elapsed runtime in s
+ * Returns elapsed runtime in s
+ */
+unsigned long getElapsedRuntimeS() {
+	XTime counts; //use global timer in Zynq SOC --> increases every 2 cycles
+	XTime_GetTime(&counts);
+	return xtimeToSec(time);
+}
+
+/*
+ * Get elapsed runtime in us
+ * Returns elapsed runtime in us
+ */
+unsigned long getElapsedRuntimeUS() {
+	XTime counts; //use global timer in Zynq SOC --> increases every 2 cycles
+		XTime_GetTime(&counts);
+	return xtimeToUSec(counts);
+}
+
+/*
+ * Convert Timestamp to s
+ * In: timestamp
+ * timestamp in s
+ */
+unsigned long xtimeToSec(XTime counts) {
+	return counts / COUNTS_PER_SECOND;
+}
+
+/*
+ * Convert Timestamp to us
+ * In: timestamp
+ * timestamp in us
+ */
+unsigned long xtimeToUSec(XTime counts) {
+	return counts / COUNTS_PER_USECOND;
+}
