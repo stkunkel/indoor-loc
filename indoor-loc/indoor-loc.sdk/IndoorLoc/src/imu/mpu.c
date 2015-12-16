@@ -90,6 +90,7 @@ int printforDisplay(char printQuaternion, char printPos) {
 	memcpy(&quat, &recentQuat, QUATERNION_AMOUNT * sizeof(long));
 	position = recentPosition;
 
+	myprintf("print TS: %dms | ", getElapsedRuntimeUS()/1000);
 	myprintf("recent TS: %dms | ", recent_ts);
 
 	//Print Quaternion
@@ -869,7 +870,6 @@ int calibrateGyrAcc(unsigned int samples) {
 	int status = XST_FAILURE;
 	unsigned int i = 0, sample = 0;
 	short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
-	long int quat[4];
 	unsigned long timestamp;
 	short int sensors = INV_XYZ_GYRO | INV_XYZ_ACCEL;
 	unsigned char* more = (unsigned char *) malloc(100*sizeof(char));
@@ -912,14 +912,6 @@ int calibrateGyrAcc(unsigned int samples) {
 		gyrAccIsCal = 0;
 		myprintf("mpu.c: Could not initially set accel bias.\r\n");
 		return XST_FAILURE;
-	}
-
-	//Clear FIFO
-	for (i = 0; i < 10; i++) {
-		status = readFromFifo(gyro, accel, quat, &timestamp, &sensors, more);
-		if (status == XST_SUCCESS) {
-			i--;
-		}
 	}
 
 	//Reset FIFO
@@ -1023,6 +1015,9 @@ int calibrateGyrAcc(unsigned int samples) {
 	} else {
 		myprintf("Calibration done.\r\n");
 	}
+
+	//Sleep
+	//sleep(1);
 
 //Free memory and return
 	free(more);
