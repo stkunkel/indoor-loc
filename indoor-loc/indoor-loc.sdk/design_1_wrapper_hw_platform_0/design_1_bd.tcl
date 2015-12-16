@@ -175,6 +175,7 @@ CONFIG.enable_timer2 {0} \
   # Create instance: processing_system7_0, and set properties
   set processing_system7_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:processing_system7:5.5 processing_system7_0 ]
   set_property -dict [ list \
+CONFIG.PCW_ENET0_PERIPHERAL_ENABLE {0} \
 CONFIG.PCW_I2C0_I2C0_IO {MIO 10 .. 11} \
 CONFIG.PCW_I2C0_PERIPHERAL_ENABLE {1} \
 CONFIG.PCW_IRQ_F2P_INTR {1} \
@@ -183,6 +184,8 @@ CONFIG.PCW_MIO_10_SLEW {slow} \
 CONFIG.PCW_MIO_11_PULLUP {enabled} \
 CONFIG.PCW_MIO_11_SLEW {slow} \
 CONFIG.PCW_QSPI_GRP_SINGLE_SS_ENABLE {1} \
+CONFIG.PCW_SD0_PERIPHERAL_ENABLE {0} \
+CONFIG.PCW_USB0_PERIPHERAL_ENABLE {0} \
 CONFIG.PCW_USE_FABRIC_INTERRUPT {1} \
 CONFIG.preset {ZedBoard} \
  ] $processing_system7_0
@@ -260,23 +263,23 @@ preplace inst processing_system7_0 -pg 1 -lvl 2 -y 680 -defaultsOSRD
 preplace inst processing_system7_0_axi_periph -pg 1 -lvl 3 -y 280 -defaultsOSRD
 preplace netloc processing_system7_0_DDR 1 2 3 NJ 570 NJ 570 NJ
 preplace netloc pwm_0_pwmPulse 1 4 1 NJ
-preplace netloc processing_system7_0_axi_periph_M00_AXI 1 3 1 1040
+preplace netloc processing_system7_0_axi_periph_M00_AXI 1 3 1 1050
 preplace netloc processing_system7_0_M_AXI_GP0 1 2 1 700
-preplace netloc processing_system7_0_FCLK_RESET0_N 1 1 2 230 280 690
-preplace netloc processing_system7_0_axi_periph_M02_AXI 1 3 1 1060
-preplace netloc rst_processing_system7_0_100M_peripheral_aresetn 1 2 2 730 450 1070
+preplace netloc processing_system7_0_FCLK_RESET0_N 1 1 2 220 280 660
+preplace netloc processing_system7_0_axi_periph_M02_AXI 1 3 1 1070
+preplace netloc rst_processing_system7_0_100M_peripheral_aresetn 1 2 2 680 120 1040
 preplace netloc xlconcat_0_dout 1 1 1 200
 preplace netloc axi_gpio_0_GPIO2 1 4 1 NJ
 preplace netloc processing_system7_0_FIXED_IO 1 2 3 NJ 590 NJ 590 NJ
 preplace netloc axi_gpio_0_GPIO 1 4 1 NJ
-preplace netloc axi_gpio_0_ip2intc_irpt 1 0 5 20 460 NJ 460 NJ 460 NJ 460 1330
+preplace netloc axi_gpio_0_ip2intc_irpt 1 0 5 10 450 NJ 470 NJ 470 NJ 470 1330
 preplace netloc pwm_dir_1_dout 1 4 1 NJ
-preplace netloc rst_processing_system7_0_100M_interconnect_aresetn 1 2 1 710
-preplace netloc processing_system7_0_FCLK_CLK0 1 1 3 220 270 720 440 1050
+preplace netloc rst_processing_system7_0_100M_interconnect_aresetn 1 2 1 690
+preplace netloc processing_system7_0_FCLK_CLK0 1 1 3 210 260 670 110 1060
 preplace netloc processing_system7_0_axi_periph_M01_AXI 1 3 1 1030
-preplace netloc axi_timer_0_interrupt 1 0 5 20 580 NJ 520 NJ 520 NJ 470 1340
+preplace netloc axi_timer_0_interrupt 1 0 5 20 460 NJ 460 NJ 460 NJ 460 1340
 preplace netloc pwm_oe_0_dout 1 4 1 NJ
-levelinfo -pg 1 0 110 460 880 1200 1360 -top 0 -bot 840
+levelinfo -pg 1 -10 110 460 880 1200 1360 -top 0 -bot 800
 ",
 }
 
