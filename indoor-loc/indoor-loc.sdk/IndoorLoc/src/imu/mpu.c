@@ -641,10 +641,10 @@ void printPosition(Vector* position) {
  */
 void testPositionUpdate() {
 	//Variables
-	const short accel_axis = 0;
-	const short rot_axis = 1;
+	const short accel_axis = 1;
+	const short rot_axis = 0;
 	int i;
-	float l_accel_conv[NUMBER_OF_AXES] = { 0.0, 0.0, 1.0 };
+	float l_accel_conv[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 };
 	float l_quat_conv[QUATERNION_AMOUNT] = { 1.0, 0.0, 0.0, 0.0 };
 	unsigned long l_timestamp = 0;
 	unsigned long l_recent_ts = 0;
@@ -658,6 +658,7 @@ void testPositionUpdate() {
 	//WITHOUT ROTATION
 	//Set gravity
 	gravity_calibrated.value[GRAVITY_AXIS] = 1.0;
+	l_accel_conv[GRAVITY_AXIS] = 1.0;
 
 	//Only gravity for two periods
 	for (i = 1; i <= 2; i++) {
@@ -709,17 +710,104 @@ void testPositionUpdate() {
 	}
 
 	//WITH ROTATION
-	myprintf("Rotation\r\n");
+	myprintf("Rotation: 180°\r\n");
 
-	//Rotate
+	//Rotate 180°
 	l_quat_conv[0] = 0;
 	l_quat_conv[rot_axis + 1] = 1;
 
-	//Set gravity (rotate gravity using rotation matrix)
-	gravity_calibrated = multMatrixAndVector(toRotationMatrix(l_quat_conv), gravity_calibrated);
+	//construct accel
+	for (i = 0; i < NUMBER_OF_AXES; i++) {
+		//gravity
+		if (i == GRAVITY_AXIS) {
+			l_accel_conv[i] = -1.0;
+		} else {
+			l_accel_conv[i] = 0.0;
+		}
+	}
 
 	//Reset data
 	l_recent_ts = 0;
+	l_timestamp = 0;
+	for (i = 0; i < NUMBER_OF_AXES; i++) {
+		l_recentAccelInertial.value[i] = 0.0;
+		l_recentPosition.value[i] = 0.0;
+		l_recentVelocity.value[i] = 0.0;
+	}
+
+	//Only gravity for two periods
+	for (i = 1; i <= 2; i++) {
+		l_timestamp += (1000 / DMP_FIFO_RATE);
+		updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
+				&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
+				&l_recent_ts);
+		printPosition(&l_recentPosition);
+		myprintf("\r\n");
+	}
+
+	//Acceleration of 1m/s^2
+	l_accel_conv[accel_axis] += 1.0;
+	l_timestamp += (1000 / DMP_FIFO_RATE);
+	updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
+			&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
+			&l_recent_ts);
+	printPosition(&l_recentPosition);
+	myprintf("\r\n");
+
+	//Only gravity for two periods
+	l_accel_conv[accel_axis] -= 1.0;
+	for (i = 1; i <= 2; i++) {
+		l_timestamp += (1000 / DMP_FIFO_RATE);
+		updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
+				&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
+				&l_recent_ts);
+		printPosition(&l_recentPosition);
+		myprintf("\r\n");
+	}
+	//Acceleration of -1m/s^2
+	l_accel_conv[accel_axis] += -1.0;
+	l_timestamp += (1000 / DMP_FIFO_RATE);
+	updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
+			&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
+			&l_recent_ts);
+	printPosition(&l_recentPosition);
+	myprintf("\r\n");
+
+	//Only gravity for two periods
+	l_accel_conv[accel_axis] += 1.0;
+	for (i = 1; i <= 2; i++) {
+		l_timestamp += (1000 / DMP_FIFO_RATE);
+		updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
+				&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
+				&l_recent_ts);
+		printPosition(&l_recentPosition);
+		myprintf("\r\n");
+	}
+
+	//WITH ROTATION
+	myprintf("Rotation: 90°\r\n");
+
+	//Rotate 90°
+	l_quat_conv[0] = 0.7071067811865475;
+	l_quat_conv[rot_axis + 1] = 0.7071067811865475;
+
+	//Construct accel
+	for (i = 0; i < NUMBER_OF_AXES; i++) {
+		//gravity
+		if (i == GRAVITY_AXIS) {
+			l_accel_conv[i] = 1.0;
+		} else {
+			l_accel_conv[i] = 0.0;
+		}
+	}
+
+	//Set accel (rotate using rotation matrix)
+	toFloatArray(multMatrixAndVector(toRotationMatrix(l_quat_conv),
+			toVector(l_accel_conv)), l_accel_conv);
+
+	//Reset data
+	l_recent_ts = 0;
+	l_timestamp = 0;
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
 		l_recentAccelInertial.value[i] = 0.0;
 		l_recentPosition.value[i] = 0.0;
@@ -874,7 +962,8 @@ void updatePosition(float* accel_conv, float* quat_conv,
 	accel_measuremt = toVector(accel_conv);
 
 	//Compute Inertial Acceleration Vector
-	accel_inertial = multMatrixAndVector(toRotationMatrix(quat_conv), accel_measuremt);
+	accel_inertial = multMatrixAndVector(toRotationMatrix(quat_conv),
+			accel_measuremt); //TODO use inverse of rotation matrix
 
 	//Remove gravity
 	accel_inertial = addVectors(accel_inertial,
