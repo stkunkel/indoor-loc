@@ -24,8 +24,9 @@ typedef struct {
 } Matrix;
 
 //Functions
-void discreteIntegration(float scalar, Vector* vector, Vector* recent, Vector* result);
-void toRotationMatrix(float quat[QUATERNION_AMOUNT], Matrix* rotationMatrix);
+void computePosition(Vector* x_old, Vector* v_old, Vector* a, float delta_t, Vector* x);
+void computeVelocity(Vector* v_old, Vector* a, float delta_t, Vector* v);
+Matrix toRotationMatrix(float quat[QUATERNION_AMOUNT]);
 void eulerGetSigma(float quat[QUATERNION_AMOUNT], float* sigma);
 void eulerGetTheta(float quat[QUATERNION_AMOUNT], float* theta);
 void eulerGetPsi(float quat[QUATERNION_AMOUNT], float* psi);

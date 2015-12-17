@@ -76,26 +76,28 @@ int main() {
 //		myprintf(".........Failure...........\n\r");
 //	}
 
+		testPositionUpdate();
+
 	//Init
 //	initMPU();
 //	configureDMP(FEATURES_RAW, DMP_FIFO_RATE);
-	calibrateGyrAcc(CAL_SAMPLES);
-	setupMPUInt();
-
-	//Stay in here
+//	calibrateGyrAcc(CAL_SAMPLES);
+//	setupMPUInt();
+//
+//	//Stay in here
 	while (1) {
-		//Update and print data if there is new data available
-		if (imuDataAvailable()) {
-			//Update Sensor Data
-			updateData();
-
-			//Print Data
-			status = printforDisplay(1, 1);
-			if (status == XST_SUCCESS) {
-				printf("\r\n");
-			}
-		}
-
+//		//Update and print data if there is new data available
+//		if (imuDataAvailable()) {
+//			//Update Sensor Data
+//			updateData();
+//
+//			//Print Data
+//			status = printforDisplay(1, 1);
+//			if (status == XST_SUCCESS) {
+//				printf("\r\n");
+//			}
+//		}
+		;
 	}
 
 	//Finish

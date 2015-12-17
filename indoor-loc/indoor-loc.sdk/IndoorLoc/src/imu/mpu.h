@@ -47,6 +47,7 @@
 #define INT_OPEN_BIT			0x40
 #define INT_RD_CLEAR_BIT		0x10
 #define LATCH_INT_EN_BIT		0x20
+#define GRAVITY_AXIS			2			//gravity along z axis
 
 
 //Constants
@@ -65,6 +66,7 @@ void printQuatDrift(unsigned int time_min);
 int getQuatDrift(float *quat_drift, char calibration, unsigned int time_min);
 int printDataWithDMP();
 int printDataNoDMP(short int *sensors);
+void testPositionUpdate();
 int updateData();
 int calibrateGyrAcc(unsigned int samples);
 int getFifoCount();

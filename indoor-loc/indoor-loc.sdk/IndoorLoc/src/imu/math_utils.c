@@ -6,13 +6,23 @@
 #include "math_utils.h"
 
 /*
- * Discrete Integration: result = recent + scalar * vector
- * In: scalar, vector, recent
- * Out: result
+ * Compute Position
+ * x = x_old + (v_old * delta_t) + (0.5 * a * (delta_t)^2)
+ * In: pointers to acceleration a and old velocity v_old; time difference delta_t
+ * Out: pointer to new velocity v
  */
-void discreteIntegration(float scalar, Vector* vector, Vector* recent,
-		Vector* result) {
-	*result = addVectors(*recent, multVectorByScalar(*vector, scalar));
+void computePosition(Vector* x_old, Vector* v_old, Vector* a, float delta_t, Vector* x) {
+	*x = addVectors(*x_old, addVectors(multVectorByScalar(*v_old, delta_t), multVectorByScalar(*a, 0.5*delta_t*delta_t)));
+}
+
+/*
+ * Compute Velocity
+ * v = v_old + (a * delta_t)
+ * In: pointers to acceleration a and old velocity v_old; time difference delta_t
+ * Out: pointer to new velocity v
+ */
+void computeVelocity(Vector* v_old, Vector* a, float delta_t, Vector* v) {
+	*v = addVectors(*v_old, multVectorByScalar(*a, delta_t));
 }
 
 /*
@@ -20,7 +30,11 @@ void discreteIntegration(float scalar, Vector* vector, Vector* recent,
  * In: Quaternion
  * Out: Rotation Matrix
  */
-void toRotationMatrix(float quat[QUATERNION_AMOUNT], Matrix* rotationMatrix) {
+Matrix toRotationMatrix(float quat[QUATERNION_AMOUNT]) {
+	//Variables
+	Matrix rotationMatrix;
+
+	//Helper computations
 	float w_w = quat[0] * quat[0];
 	float x_x = quat[1] * quat[1];
 	float y_y = quat[2] * quat[2];
@@ -32,15 +46,18 @@ void toRotationMatrix(float quat[QUATERNION_AMOUNT], Matrix* rotationMatrix) {
 	float x_z = quat[1] * quat[3];
 	float y_z = quat[2] * quat[3];
 
-	rotationMatrix->value[0] = w_w + x_x - y_y - z_z;
-	rotationMatrix->value[1] = 2 * x_y - 2 * w_z;
-	rotationMatrix->value[2] = 2 * x_z + 2 * w_y;
-	rotationMatrix->value[3] = 2 * x_y + 2 * w_z;
-	rotationMatrix->value[4] = w_w - x_x + y_y - z_z;
-	rotationMatrix->value[5] = 2 * y_z + 2 * w_x;
-	rotationMatrix->value[6] = 2 * x_z - 2 * w_y;
-	rotationMatrix->value[7] = 2 * y_z - 2 * w_x;
-	rotationMatrix->value[8] = w_w - x_x - y_y + z_z;
+	//Set values
+	rotationMatrix.value[0] = w_w + x_x - y_y - z_z;
+	rotationMatrix.value[1] = 2 * x_y - 2 * w_z;
+	rotationMatrix.value[2] = 2 * x_z + 2 * w_y;
+	rotationMatrix.value[3] = 2 * x_y + 2 * w_z;
+	rotationMatrix.value[4] = w_w - x_x + y_y - z_z;
+	rotationMatrix.value[5] = 2 * y_z + 2 * w_x;
+	rotationMatrix.value[6] = 2 * x_z - 2 * w_y;
+	rotationMatrix.value[7] = 2 * y_z - 2 * w_x;
+	rotationMatrix.value[8] = w_w - x_x - y_y + z_z;
+
+	return rotationMatrix;
 }
 
 /*
@@ -192,7 +209,7 @@ Vector multMatrixAndVector(Matrix matrix, Vector vector) {
 	Vector result;
 
 	//Multiply each element by scalar
-	for (i = 0; i < NUMBER_OF_AXES; i += NUMBER_OF_AXES) { //row index
+	for (i = 0; i < NUMBER_OF_AXES; i ++) { //row index
 		result.value[i] = 0.0;
 		for (j = 0; j < NUMBER_OF_AXES; j++) { //column index
 			result.value[i] += matrix.value[i * NUMBER_OF_AXES + j]
