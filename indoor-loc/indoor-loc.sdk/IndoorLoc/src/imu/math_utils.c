@@ -52,9 +52,9 @@ Matrix toRotationMatrix(float quat[QUATERNION_AMOUNT]) {
 	rotationMatrix.value[2] = 2 * x_z + 2 * w_y;
 	rotationMatrix.value[3] = 2 * x_y + 2 * w_z;
 	rotationMatrix.value[4] = w_w - x_x + y_y - z_z;
-	rotationMatrix.value[5] = 2 * y_z + 2 * w_x;
+	rotationMatrix.value[5] = 2 * y_z - 2 * w_x;//+-->-
 	rotationMatrix.value[6] = 2 * x_z - 2 * w_y;
-	rotationMatrix.value[7] = 2 * y_z - 2 * w_x;
+	rotationMatrix.value[7] = 2 * y_z + 2 * w_x;//--->+
 	rotationMatrix.value[8] = w_w - x_x - y_y + z_z;
 
 	return rotationMatrix;
@@ -213,7 +213,7 @@ Vector multMatrixAndVector(Matrix matrix, Vector vector) {
 		result.value[i] = 0.0;
 		for (j = 0; j < NUMBER_OF_AXES; j++) { //column index
 			result.value[i] += matrix.value[i * NUMBER_OF_AXES + j]
-					* vector.value[i];
+					* vector.value[j];
 		}
 	}
 
