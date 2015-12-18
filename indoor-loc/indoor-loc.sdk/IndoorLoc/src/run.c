@@ -57,7 +57,7 @@ int main() {
 	//Print Data with DMP with and DMP gyro calibration
 	//status = printDataUsingDMP(1, 1, DATA_WITH_DMP_RUNS);
 
-	//Print Quaternions to Serial Port
+	//Print Quaternions and Position to Serial Port
 	//status = printForImuViewer(1, 1, QUAT_DISPLAY_RUNS);
 
 	//Quaternion Drift
