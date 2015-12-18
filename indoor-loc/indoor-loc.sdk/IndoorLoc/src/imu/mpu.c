@@ -802,7 +802,7 @@ void testPositionUpdate() {
 	}
 
 	//Set accel (rotate using rotation matrix)
-	toFloatArray(multMatrixAndVector(toRotationMatrix(l_quat_conv),
+	vectorToFloatArray(multMatrixAndVector(toRotationMatrix(l_quat_conv),
 			toVector(l_accel_conv)), l_accel_conv);
 
 	//Reset data
@@ -955,15 +955,24 @@ void updatePosition(float* accel_conv, float* quat_conv,
 		unsigned long* p_recent_ts) {
 	//Variables
 	Vector accel_measuremt, accel_inertial, velocity, newPosition;
-	float time_diff;
+	Matrix rotation, rotation_inv;
+	float time_diff, rot_f[NUMBER_OF_AXES][NUMBER_OF_AXES], rot_inv_f[NUMBER_OF_AXES][NUMBER_OF_AXES];
 	int i;
 
 	//Create measured accel vextor
 	accel_measuremt = toVector(accel_conv);
 
+	//Create rotation matrix
+	rotation = toRotationMatrix(quat_conv);
+
+	//Get inverse of rotation matrix
+	matrixToFloatArray(rotation, rot_f);
+	cofactor(rot_f, NUMBER_OF_AXES, rot_inv_f);
+	rotation_inv = toMatrix(rot_inv_f);
+
 	//Compute Inertial Acceleration Vector
-	accel_inertial = multMatrixAndVector(toRotationMatrix(quat_conv),
-			accel_measuremt); //TODO use inverse of rotation matrix
+	accel_inertial = multMatrixAndVector(rotation_inv,
+			accel_measuremt);
 
 	//Remove gravity
 	accel_inertial = addVectors(accel_inertial,
