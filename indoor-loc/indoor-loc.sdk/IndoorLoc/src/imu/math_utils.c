@@ -32,7 +32,7 @@ void computeVelocity(Vector* v_old, Vector* a, float delta_t, Vector* v) {
  * Finding co-factor of a matrix
  * http://www.sanfoundry.com/c-program-find-inverse-matrix/
  * In: num, f
- * Out: result
+ * Out: cofactor
  */
 void cofactor(float num[NUMBER_OF_AXES][NUMBER_OF_AXES], float f,
 		float result[NUMBER_OF_AXES][NUMBER_OF_AXES]) {
@@ -68,7 +68,7 @@ void cofactor(float num[NUMBER_OF_AXES][NUMBER_OF_AXES], float f,
  *	Finding transpose of matrix
  *	http://www.sanfoundry.com/c-program-find-inverse-matrix/
  *	In: num, fac, r
- *	Out: inverse
+ *	Out: transpose
  *
  */
 void transpose(float num[NUMBER_OF_AXES][NUMBER_OF_AXES],
@@ -85,11 +85,18 @@ void transpose(float num[NUMBER_OF_AXES][NUMBER_OF_AXES],
 		}
 	}
 	d = determinant(num, r);
-	for (i = 0; i < r; i++) {
-		for (j = 0; j < r; j++) {
-			result[i][j] = b[i][j] / d;
+
+	if (d == 0) {
+		memcpy(result, b, NUMBER_OF_AXES * NUMBER_OF_AXES * sizeof(float));
+	} else {
+		for (i = 0; i < r; i++) {
+			for (j = 0; j < r; j++) {
+				result[i][j] = b[i][j] / d;
+			}
 		}
 	}
+
+	return;
 }
 
 /*
@@ -211,9 +218,9 @@ Matrix toMatrix(float array[NUMBER_OF_AXES][NUMBER_OF_AXES]) {
 	Matrix matrix;
 
 	//Create Matrix
-	for (i = 0; i < NUMBER_OF_AXES; i++){
-		for (j = 0; j < NUMBER_OF_AXES; j++){
-			matrix.value[i*NUMBER_OF_AXES+j] = array[i][j];
+	for (i = 0; i < NUMBER_OF_AXES; i++) {
+		for (j = 0; j < NUMBER_OF_AXES; j++) {
+			matrix.value[i * NUMBER_OF_AXES + j] = array[i][j];
 		}
 
 	}
@@ -227,14 +234,15 @@ Matrix toMatrix(float array[NUMBER_OF_AXES][NUMBER_OF_AXES]) {
  * In: Pointer to Matrix
  * Out: Float array with two indices
  */
-void matrixToFloatArray(Matrix matrix, float array[NUMBER_OF_AXES][NUMBER_OF_AXES]) {
+void matrixToFloatArray(Matrix matrix,
+		float array[NUMBER_OF_AXES][NUMBER_OF_AXES]) {
 	//Variables
 	int i, j;
 
 	//Create Vector
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
 		for (j = 0; j < NUMBER_OF_AXES; j++) {
-			array[i][j] = matrix.value[i*NUMBER_OF_AXES + j];
+			array[i][j] = matrix.value[i * NUMBER_OF_AXES + j];
 		}
 	}
 }
