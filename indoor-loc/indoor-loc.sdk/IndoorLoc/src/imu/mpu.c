@@ -529,7 +529,7 @@ void printPosition(Vector* position) {
  */
 void testPositionUpdate() {
 //Variables
-	const short accel_axis = 1;
+	const short accel_axis = 2;
 	const short rot_axis = 0;
 	int i;
 	float l_accel_conv[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 };
@@ -752,6 +752,86 @@ void testPositionUpdate() {
 		myprintf("\r\n");
 	}
 
+	//WITH ROTATION
+	myprintf("Rotation: 45°\r\n");
+
+	//Rotate 45°
+	l_quat_conv[0] = 0.9238795325112867;
+	l_quat_conv[rot_axis + 1] = 0.3826834323650897;
+
+	//Construct accel
+	for (i = 0; i < NUMBER_OF_AXES; i++) {
+		//gravity
+		if (i == GRAVITY_AXIS) {
+			l_accel_conv[i] = 1.0;
+		} else {
+			l_accel_conv[i] = 0.0;
+		}
+	}
+
+	//Set accel (rotate using rotation matrix)
+	vectorToFloatArray(
+			multMatrixAndVector(toRotationMatrix(l_quat_conv),
+					toVector(l_accel_conv)), l_accel_conv);
+
+	//Reset data
+	l_recent_ts = 0;
+	l_timestamp = 0;
+	for (i = 0; i < NUMBER_OF_AXES; i++) {
+		l_recentAccelInertial.value[i] = 0.0;
+		l_recentPosition.value[i] = 0.0;
+		l_recentVelocity.value[i] = 0.0;
+	}
+
+	//Only gravity for two periods
+	for (i = 1; i <= 2; i++) {
+		l_timestamp += (1000 / DMP_FIFO_RATE);
+		updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
+				&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
+				&l_recent_ts);
+		printPosition(&l_recentPosition);
+		myprintf("\r\n");
+	}
+
+	//Acceleration of 1m/s^2
+	l_accel_conv[accel_axis] += 1.0;
+	l_timestamp += (1000 / DMP_FIFO_RATE);
+	updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
+			&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
+			&l_recent_ts);
+	printPosition(&l_recentPosition);
+	myprintf("\r\n");
+
+	//Only gravity for two periods
+	l_accel_conv[accel_axis] -= 1.0;
+	for (i = 1; i <= 2; i++) {
+		l_timestamp += (1000 / DMP_FIFO_RATE);
+		updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
+				&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
+				&l_recent_ts);
+		printPosition(&l_recentPosition);
+		myprintf("\r\n");
+	}
+	//Acceleration of -1m/s^2
+	l_accel_conv[accel_axis] += -1.0;
+	l_timestamp += (1000 / DMP_FIFO_RATE);
+	updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
+			&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
+			&l_recent_ts);
+	printPosition(&l_recentPosition);
+	myprintf("\r\n");
+
+	//Only gravity for two periods
+	l_accel_conv[accel_axis] += 1.0;
+	for (i = 1; i <= 2; i++) {
+		l_timestamp += (1000 / DMP_FIFO_RATE);
+		updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
+				&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
+				&l_recent_ts);
+		printPosition(&l_recentPosition);
+		myprintf("\r\n");
+	}
+
 }
 
 /*
@@ -777,7 +857,7 @@ int updateData() {
 		usleep(100);
 	} while (status != XST_SUCCESS);
 
-	//Free memory
+//Free memory
 	free(more);
 
 //Get Compass //TODO: Handle unequal timestamp
@@ -856,8 +936,7 @@ void updatePosition(float* accel_conv, float* quat_conv,
 //Variables
 	Vector accel_measuremt, accel_inertial, velocity, newPosition;
 	Matrix rotation, rotation_inv;
-	float time_diff, rot_f[NUMBER_OF_AXES][NUMBER_OF_AXES],
-			rot_inv_f[NUMBER_OF_AXES][NUMBER_OF_AXES];
+	float time_diff;
 	int i;
 
 //Create measured accel vextor
@@ -867,9 +946,7 @@ void updatePosition(float* accel_conv, float* quat_conv,
 	rotation = toRotationMatrix(quat_conv);
 
 //Get inverse of rotation matrix
-	matrixToFloatArray(rotation, rot_f);
-	cofactor(rot_f, NUMBER_OF_AXES, rot_inv_f);
-	rotation_inv = toMatrix(rot_inv_f);
+	rotation_inv = getInverse(rotation);
 
 //Compute Inertial Acceleration Vector
 	accel_inertial = multMatrixAndVector(rotation_inv, accel_measuremt);
