@@ -29,6 +29,30 @@ void computeVelocity(Vector* v_old, Vector* a, float delta_t, Vector* v) {
 }
 
 /*
+ * Get Inverse
+ * In: Matrix
+ * Returns inverse of matrix
+ */
+Matrix getInverse(Matrix matrix) {
+	//Variables
+	Matrix result;
+	float temp[NUMBER_OF_AXES][NUMBER_OF_AXES];
+	float temp_inv[NUMBER_OF_AXES][NUMBER_OF_AXES];
+
+	//Convert matrix to float array for internal calculation
+	matrixToFloatArray(matrix, temp);
+
+	//get inverse
+	cofactor(temp, NUMBER_OF_AXES, temp_inv);
+
+	//convert back to matrix
+	result= toMatrix(temp_inv);
+
+	//Return
+	return result;
+}
+
+/*
  * Finding co-factor of a matrix
  * http://www.sanfoundry.com/c-program-find-inverse-matrix/
  * In: num, f
@@ -168,9 +192,9 @@ Matrix toRotationMatrix(float quat[QUATERNION_AMOUNT]) {
 	rotationMatrix.value[2] = 2 * x_z + 2 * w_y;
 	rotationMatrix.value[3] = 2 * x_y + 2 * w_z;
 	rotationMatrix.value[4] = w_w - x_x + y_y - z_z;
-	rotationMatrix.value[5] = 2 * y_z - 2 * w_x; //+-->-
+	rotationMatrix.value[5] = 2 * y_z + 2 * w_x; //+-->-
 	rotationMatrix.value[6] = 2 * x_z - 2 * w_y;
-	rotationMatrix.value[7] = 2 * y_z + 2 * w_x; //--->+
+	rotationMatrix.value[7] = 2 * y_z - 2 * w_x; //--->+
 	rotationMatrix.value[8] = w_w - x_x - y_y + z_z;
 
 	return rotationMatrix;
