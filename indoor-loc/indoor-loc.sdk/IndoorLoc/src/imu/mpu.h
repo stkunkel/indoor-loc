@@ -64,7 +64,7 @@ int getFifoCount();
 int printforDisplay(char printQuaternion, char printPos);
 void printQuatDrift(unsigned int time_min);
 int getQuatDrift(float *quat_drift, char calibration, unsigned int time_min);
-int printDataWithDMP();
+void printDataWithDMP();
 int printDataNoDMP(short int *sensors);
 void testPositionUpdate();
 int updateData();

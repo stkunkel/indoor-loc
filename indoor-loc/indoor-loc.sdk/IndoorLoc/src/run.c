@@ -46,25 +46,25 @@ int main() {
 	myprintf(".........Program Start...........\n\r");
 
 	//Print Data without DMP
-	//status |= printDataWithoutDMP(SENSORS_ALL, DATA_NO_DMP_RUNS);
+	//status = printDataWithoutDMP(SENSORS_ALL, DATA_NO_DMP_RUNS);
 
 	//Print Data with DMP without initial or DMP gyro calibration
-	//status |= printDataUsingDMP(0, 0, DATA_WITH_DMP_RUNS);
+	//status = printDataUsingDMP(0, 0, DATA_WITH_DMP_RUNS);
 
 	//Print Data with DMP with initial calibration but no DMP gyro calibration
-	//status |= printDataUsingDMP(1, 0, DATA_WITH_DMP_RUNS);
+	//status = printDataUsingDMP(1, 0, DATA_WITH_DMP_RUNS);
 
 	//Print Data with DMP with and DMP gyro calibration
-	//status |= printDataUsingDMP(1, 1, DATA_WITH_DMP_RUNS);
+	//status = printDataUsingDMP(1, 1, DATA_WITH_DMP_RUNS);
 
 	//Print Quaternions to Serial Port
-	//status |= printForImuViewer(1, 0, QUAT_DISPLAY_RUNS);
+	//status = printForImuViewer(1, 1, QUAT_DISPLAY_RUNS);
 
 	//Quaternion Drift
-	//status |= printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
+	//status = printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
 
 	//Print Quaternions and Position
-	//status |= printForImuViewer(1, 1, QUAT_DISPLAY_RUNS);
+	//status = printForImuViewer(1, 1, QUAT_DISPLAY_RUNS);
 
 	//PWM Test
 	//status = pwmTest();
@@ -76,27 +76,12 @@ int main() {
 //		myprintf(".........Failure...........\n\r");
 //	}
 
-		testPositionUpdate();
+	//Test position update
+	testPositionUpdate();
 
-	//Init
-//	initMPU();
-//	configureDMP(FEATURES_RAW, DMP_FIFO_RATE);
-//	calibrateGyrAcc(CAL_SAMPLES);
-//	setupMPUInt();
-//
-//	//Stay in here
+
+	//Stay in here
 	while (1) {
-//		//Update and print data if there is new data available
-//		if (imuDataAvailable()) {
-//			//Update Sensor Data
-//			updateData();
-//
-//			//Print Data
-//			status = printforDisplay(1, 1);
-//			if (status == XST_SUCCESS) {
-//				printf("\r\n");
-//			}
-//		}
 		;
 	}
 
@@ -142,6 +127,12 @@ int printForImuViewer(char printQuat, char printPos, unsigned int numberOfRuns) 
 		return status;
 	}
 
+	//Enable Interrupts
+	status = setupMPUInt();
+	if (status != XST_SUCCESS) {
+		return status;
+	}
+
 	//Print Quaternions to Serial Port
 	myprintf(".........Print for IMU Viewer...........\n\r");
 	for (cnt = 0; cnt <= numberOfRuns; cnt++) {
@@ -149,7 +140,7 @@ int printForImuViewer(char printQuat, char printPos, unsigned int numberOfRuns) 
 		status = XST_SUCCESS;
 
 		//Wait for Interrupt Interrupt
-		if (waitForInterrupt()) {
+		if (imuDataAvailable()) {
 			//Update Data
 			status = updateData();
 			if (status == XST_SUCCESS) {
@@ -182,6 +173,20 @@ int printDataUsingDMP(char initialCalibration, char dmpCalibration,
 		unsigned int numberOfRuns) {
 //Variables
 	int status, cnt;
+	short features;
+
+	if (initialCalibration){
+		features = FEATURES_CAL;
+	} else {
+		features = FEATURES_RAW;
+	}
+
+	//Init
+	myprintf(".........Configure MPU and DMP...........\n\r");
+	status = configureDMP(features, DMP_FIFO_RATE);
+	if (status != XST_SUCCESS) {
+		return status;
+	}
 
 //Calibrate if required
 	if (initialCalibration) {
@@ -198,17 +203,23 @@ int printDataUsingDMP(char initialCalibration, char dmpCalibration,
 		return status;
 	}
 
+	//Enable Interrupts
+	status = setupMPUInt();
+	if (status != XST_SUCCESS) {
+		return status;
+	}
+
 //Get Data with DMP
 	myprintf(".........With DMP...........\n\r");
 	for (cnt = 0; cnt <= numberOfRuns; cnt++) {
 		//Wait for Interrupt Interrupt
-		if (waitForInterrupt()) {
+		if (imuDataAvailable()) {
 			//Update Data
 			status = updateData();
-			if (status == XST_SUCCESS) {
 
-				//Print
-				status = printDataWithDMP();
+			//Print
+			if (status == XST_SUCCESS) {
+				printDataWithDMP();
 			}
 		}
 
