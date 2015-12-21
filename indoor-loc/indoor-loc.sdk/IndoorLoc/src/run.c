@@ -79,6 +79,8 @@ int main() {
 	//Test position update functionality
 	testPositionUpdate();
 
+	//Test Matrix Inverse
+	testMatrixInverse();
 
 	//Stay in here
 	while (1) {
