@@ -168,7 +168,7 @@ float determinant(float a[NUMBER_OF_AXES][NUMBER_OF_AXES], float k) {//TODO chec
 /*
  * Get Roation Matrix from Quaternion
  * In: Quaternion
- * Out: Rotation Matrix
+ * Out: Rotation Matrix for left-handed coordinate system
  */
 Matrix toRotationMatrix(float quat[QUATERNION_AMOUNT]) {
 	//Variables
@@ -192,9 +192,9 @@ Matrix toRotationMatrix(float quat[QUATERNION_AMOUNT]) {
 	rotationMatrix.value[2] = 2 * x_z + 2 * w_y;
 	rotationMatrix.value[3] = 2 * x_y + 2 * w_z;
 	rotationMatrix.value[4] = w_w - x_x + y_y - z_z;
-	rotationMatrix.value[5] = 2 * y_z + 2 * w_x; //+-->-
+	rotationMatrix.value[5] = 2 * y_z - 2 * w_x; //right handed: +
 	rotationMatrix.value[6] = 2 * x_z - 2 * w_y;
-	rotationMatrix.value[7] = 2 * y_z - 2 * w_x; //--->+
+	rotationMatrix.value[7] = 2 * y_z + 2 * w_x; //right-handed: -
 	rotationMatrix.value[8] = w_w - x_x - y_y + z_z;
 
 	return rotationMatrix;
