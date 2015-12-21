@@ -29,10 +29,6 @@ typedef struct {
 void computePosition(Vector* x_old, Vector* v_old, Vector* a, float delta_t,
 		Vector* x);
 void computeVelocity(Vector* v_old, Vector* a, float delta_t, Vector* v);
-Matrix getInverse(Matrix matrix);
-void cofactor(float num[NUMBER_OF_AXES][NUMBER_OF_AXES], float f, float result[NUMBER_OF_AXES][NUMBER_OF_AXES]);
-void transpose(float num[NUMBER_OF_AXES][NUMBER_OF_AXES],
-		float fac[NUMBER_OF_AXES][NUMBER_OF_AXES], float r, float result[NUMBER_OF_AXES][NUMBER_OF_AXES]);
 void testMatrixInverse();
 float determinant(float a[NUMBER_OF_AXES][NUMBER_OF_AXES], float k);
 int getInverseOfMatrix(Matrix* m, Matrix* result);
