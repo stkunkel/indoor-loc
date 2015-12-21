@@ -946,7 +946,7 @@ void updatePosition(float* accel_conv, float* quat_conv,
 	rotation = toRotationMatrix(quat_conv);
 
 //Get inverse of rotation matrix
-	rotation_inv = getInverse(rotation);
+	getInverseOfMatrix(&rotation, &rotation_inv);
 
 //Compute Inertial Acceleration Vector
 	accel_inertial = multMatrixAndVector(rotation_inv, accel_measuremt);

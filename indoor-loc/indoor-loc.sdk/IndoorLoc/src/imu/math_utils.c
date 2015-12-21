@@ -171,8 +171,9 @@ float determinant(float a[NUMBER_OF_AXES][NUMBER_OF_AXES], float k) {//TODO chec
 void testMatrixInverse() {
 	//Variables
 	Matrix a, a_inv, a_inv_inv;
-	int i, status = 0;
+	int i, status = 0, result[4] = { 0, 0, 0, 0 };
 
+	//TEST 1
 	//Inizialize Matrix
 	a.value[0] = 3.0;
 	a.value[1] = 0.0;
@@ -194,13 +195,95 @@ void testMatrixInverse() {
 		//Compare
 		for (i = 0; i < (NUMBER_OF_AXES * NUMBER_OF_AXES); i++) {
 			if (!equal_f(a_inv_inv.value[i], a.value[i])) {
-				status++;
+				result[0]++;
+			}
+		}
+	}
+
+	// TEST 2
+	//Inizialize Matrix
+	a.value[0] = 1.0;
+	a.value[1] = 0.0;
+	a.value[2] = 0.0;
+	a.value[3] = 0.0;
+	a.value[4] = 1.0;
+	a.value[5] = 0.0;
+	a.value[6] = 0.0;
+	a.value[7] = 0.0;
+	a.value[8] = 1.0;
+
+	//Get Inverse
+	status = getInverseOfMatrix(&a, &a_inv);
+
+	//Get Inverse of inverse
+	status = getInverseOfMatrix(&a_inv, &a_inv_inv);
+
+	if (status == 0) {
+		//Compare
+		for (i = 0; i < (NUMBER_OF_AXES * NUMBER_OF_AXES); i++) {
+			if (!equal_f(a_inv_inv.value[i], a.value[i])) {
+				result[1]++;
+			}
+		}
+	}
+
+	// TEST 3
+	//Inizialize Matrix
+	a.value[0] = -21.0;
+	a.value[1] = 53.0;
+	a.value[2] = 0.65;
+	a.value[3] = 103.0;
+	a.value[4] = 0.000012;
+	a.value[5] = -0.123;
+	a.value[6] = -105430.0;
+	a.value[7] = 534.0;
+	a.value[8] = -35.0;
+
+	//Get Inverse
+	status = getInverseOfMatrix(&a, &a_inv);
+
+	//Get Inverse of inverse
+	status = getInverseOfMatrix(&a_inv, &a_inv_inv);
+
+	if (status == 0) {
+		//Compare
+		for (i = 0; i < (NUMBER_OF_AXES * NUMBER_OF_AXES); i++) {
+			if (!equal_f(a_inv_inv.value[i], a.value[i])) {
+				result[2]++;
+			}
+		}
+	}
+
+	// TEST 4
+	//Inizialize Matrix
+	a.value[0] = -1.0;
+	a.value[1] = -2.0;
+	a.value[2] = 2.0;
+	a.value[3] = 2.0;
+	a.value[4] = 1.0;
+	a.value[5] = 1.0;
+	a.value[6] = 3.0;
+	a.value[7] = 4.0;
+	a.value[8] = 5.0;
+
+	//Get Inverse
+	status = getInverseOfMatrix(&a, &a_inv);
+
+	//Get Inverse of inverse
+	status = getInverseOfMatrix(&a_inv, &a_inv_inv);
+
+	if (status == 0) {
+		//Compare
+		for (i = 0; i < (NUMBER_OF_AXES * NUMBER_OF_AXES); i++) {
+			if (!equal_f(a_inv_inv.value[i], a.value[i])) {
+				result[3]++;
 			}
 		}
 	}
 
 	//Print status
-	myprintf("Matrix Inverse Test Result: %d\r\n", status);
+	myprintf("Matrix Inverse Test Result: %d %d %d %d\r\n", result[0],
+			result[1], result[2], result[3]);
 
 }
 
@@ -216,8 +299,8 @@ int getInverseOfMatrix(Matrix* m, Matrix* result) {
 	float matrixArray[NUMBER_OF_AXES * NUMBER_OF_AXES];
 	float d;
 
-//Get Cofactors
-	cofactors = getCofactorMatrix(*m);
+	//Get Adj
+	cofactors = getAdj(*m);
 
 //Transpose
 	*result = getTranspose(cofactors);
@@ -232,7 +315,7 @@ int getInverseOfMatrix(Matrix* m, Matrix* result) {
 		return 1;
 	}
 
-//Multiply cofactors with determinant
+//Multiply cofactors with 1 / determinant
 	*result = multMatrixByScalar(cofactors, 1.0 / d);
 
 //Return
@@ -240,94 +323,6 @@ int getInverseOfMatrix(Matrix* m, Matrix* result) {
 
 }
 
-/*
- * Get Cofactors of matrix
- * In: Matrix
- * Returns: Matrix of cofactors
- */
-Matrix getCofactorMatrix(Matrix m) {
-//Variables
-	Matrix result;
-
-//Get Matrix of minors
-	result = getMinors(m);
-
-//Apply Chess Board
-	applyChessBoard(&result);
-
-//Return
-	return result;
-}
-
-/*
- * Apply "Chess board" to matrix
- * (Change sign of every second value -> used to get cofactors from minors)
- * In/Out: Matrix
- */
-void applyChessBoard(Matrix* m) {
-//Variables
-	int i;
-
-//Go through matrix
-	for (i = 0; i < NUMBER_OF_AXES * NUMBER_OF_AXES; i++) {
-		//odd index -> change sign
-		if (i % 2 != 0) {
-			//odd index -> change sign
-			m->value[i] = -m->value[i];
-		}
-	}
-}
-
-/*
- * Get Matrix of "Minors"
- * In: Matrix
- * Returns matrix of minors
- */
-Matrix getMinors(Matrix m) {
-//Variables
-	unsigned int a, b, i, j, subindex, sub_num_of_axes = NUMBER_OF_AXES - 1;
-	Matrix result;
-	float subMatrix[sub_num_of_axes * sub_num_of_axes];
-
-//Go through rows of resulting matrix
-	for (a = 0; a < NUMBER_OF_AXES; a++) {
-
-		//Go through columns of resulting matrix
-		for (b = 0; b < NUMBER_OF_AXES; b++) {
-			//Reset sub-index
-			subindex = 0;
-
-			//Go through rows
-			for (i = 0; i < NUMBER_OF_AXES; i++) {
-				//Only take rows different from a
-				if (i != a) {
-
-					//Go through columns
-					for (j = 0; j < NUMBER_OF_AXES; j++) {
-
-						//Only take columns different from b
-						if (j != b) {
-
-							//Set sub-matrices
-							subMatrix[subindex] =
-									m.value[i * NUMBER_OF_AXES + j];
-
-							//Increase sub-index
-							subindex++;
-						}
-					}
-				}
-			}
-
-			//Compute minor
-			result.value[a * NUMBER_OF_AXES + b] = getDeterminantRecursive(
-					subMatrix, sub_num_of_axes);
-		}
-	}
-
-//Return
-	return result;
-}
 
 /*
  * Get Determinant of a Matrix (as float array) -- Laplace Expansion
@@ -386,271 +381,322 @@ float getDeterminantRecursive(float* m, unsigned int degree) {
 }
 
 /*
- * Get Transpose of Matrix
+ * Get adj of Matrix
  * In: Matrix
- * Returns transpose of matrix
+ * Returns adj. of matrix
  */
-Matrix getTranspose(Matrix m) {
-//Variables
-	int i, j;
+Matrix getAdj(Matrix m) {
+	//Variables
 	Matrix result;
+	unsigned int g, h, i, j, subindex;
+	float subMatrix[(NUMBER_OF_AXES - 1) * (NUMBER_OF_AXES - 1)];
+
+	//Go through rows
+	for (g = 0; g < NUMBER_OF_AXES; g++) {
+
+		//Go through columns
+		for (h = 0; h < NUMBER_OF_AXES; h++) {
+			//Reset sub-index
+			subindex = 0;
+
+			//Go through rows
+			for (i = 0; i < NUMBER_OF_AXES; i++) {
+				//Only take rows different from factor
+				if (i != g) {	//factor
+
+					//Go through columns
+					for (j = 0; j < NUMBER_OF_AXES; j++) {
+
+						//Only take columns different from h
+						if (j != h) {
+
+							//Set sub-matrices
+							subMatrix[subindex] =
+									m.value[i * NUMBER_OF_AXES + j];
+
+							//Increase sub-index
+							subindex++;
+						}
+					}
+				}
+			}
+
+			//Get Adj
+			result.value[g*NUMBER_OF_AXES+h] = pow(-1.0, h+h) * getDeterminantRecursive(subMatrix, NUMBER_OF_AXES-1);
+		}
+	}
+
+	//Return
+	return result;
+}
+
+	/*
+	 * Get Transpose of Matrix
+	 * In: Matrix
+	 * Returns transpose of matrix
+	 */
+	Matrix getTranspose(Matrix m) {
+//Variables
+		int i, j;
+		Matrix result;
 
 //Generate Transpose
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		for (j = 0; j < NUMBER_OF_AXES; j++) {
-			result.value[j * NUMBER_OF_AXES + i] = m.value[i * NUMBER_OF_AXES
-					+ j];
+		for (i = 0; i < NUMBER_OF_AXES; i++) {
+			for (j = 0; j < NUMBER_OF_AXES; j++) {
+				result.value[j * NUMBER_OF_AXES + i] = m.value[i
+						* NUMBER_OF_AXES + j];
+			}
 		}
-	}
 
 //Return
-	return result;
-}
+		return result;
+	}
 
-/*
- * Get Roation Matrix from Quaternion
- * In: Quaternion
- * Out: Rotation Matrix for left-handed coordinate system
- */
-Matrix toRotationMatrix(float quat[QUATERNION_AMOUNT]) {
+	/*
+	 * Get Roation Matrix from Quaternion
+	 * In: Quaternion
+	 * Out: Rotation Matrix for left-handed coordinate system
+	 */
+	Matrix toRotationMatrix(float quat[QUATERNION_AMOUNT]) {
 //Variables
-	Matrix rotationMatrix;
+		Matrix rotationMatrix;
 
 //Helper computations
-	float w_w = quat[0] * quat[0];
-	float x_x = quat[1] * quat[1];
-	float y_y = quat[2] * quat[2];
-	float z_z = quat[3] * quat[3];
-	float w_x = quat[0] * quat[1];
-	float w_y = quat[0] * quat[2];
-	float w_z = quat[0] * quat[3];
-	float x_y = quat[1] * quat[2];
-	float x_z = quat[1] * quat[3];
-	float y_z = quat[2] * quat[3];
+		float w_w = quat[0] * quat[0];
+		float x_x = quat[1] * quat[1];
+		float y_y = quat[2] * quat[2];
+		float z_z = quat[3] * quat[3];
+		float w_x = quat[0] * quat[1];
+		float w_y = quat[0] * quat[2];
+		float w_z = quat[0] * quat[3];
+		float x_y = quat[1] * quat[2];
+		float x_z = quat[1] * quat[3];
+		float y_z = quat[2] * quat[3];
 
 //Set values
-	rotationMatrix.value[0] = w_w + x_x - y_y - z_z;
-	rotationMatrix.value[1] = 2 * x_y - 2 * w_z;
-	rotationMatrix.value[2] = 2 * x_z + 2 * w_y;
-	rotationMatrix.value[3] = 2 * x_y + 2 * w_z;
-	rotationMatrix.value[4] = w_w - x_x + y_y - z_z;
-	rotationMatrix.value[5] = 2 * y_z - 2 * w_x; //right handed: +
-	rotationMatrix.value[6] = 2 * x_z - 2 * w_y;
-	rotationMatrix.value[7] = 2 * y_z + 2 * w_x; //right-handed: -
-	rotationMatrix.value[8] = w_w - x_x - y_y + z_z;
+		rotationMatrix.value[0] = w_w + x_x - y_y - z_z;
+		rotationMatrix.value[1] = 2 * x_y - 2 * w_z;
+		rotationMatrix.value[2] = 2 * x_z + 2 * w_y;
+		rotationMatrix.value[3] = 2 * x_y + 2 * w_z;
+		rotationMatrix.value[4] = w_w - x_x + y_y - z_z;
+		rotationMatrix.value[5] = 2 * y_z - 2 * w_x; //right handed: +
+		rotationMatrix.value[6] = 2 * x_z - 2 * w_y;
+		rotationMatrix.value[7] = 2 * y_z + 2 * w_x; //right-handed: -
+		rotationMatrix.value[8] = w_w - x_x - y_y + z_z;
 
-	return rotationMatrix;
-}
-
-/*
- * Euler Angles
- */
-void eulerGetSigma(float quat[QUATERNION_AMOUNT], float* sigma) {
-	*sigma = atan2((quat[2] * quat[3] + quat[0] * quat[1]),
-			0.5 - (quat[1] * quat[1] + quat[2] * quat[2])) * 180 / M_PI;
-}
-
-void eulerGetTheta(float quat[QUATERNION_AMOUNT], float* theta) {
-	*theta = asin(-2.0 * (quat[1] * quat[3] + quat[0] * quat[2])) * 180 / M_PI;
-}
-
-void eulerGetPsi(float quat[QUATERNION_AMOUNT], float* psi) {
-	*psi = atan2((quat[1] * quat[2] + quat[0] * quat[3]),
-			0.5 - (quat[2] * quat[2] + quat[3] * quat[3])) * 180 / M_PI;
-}
-
-/*
- * Comparison of Floats
- * In: two floats
- * Returns 1 if floats are (nearly) equal and 0 if not
- */
-char equal_f(float f1, float f2) {
-	if (fabs(f1 - f2) < 0.00001) {
-		return 1;
-	} else {
-		return 0;
+		return rotationMatrix;
 	}
-}
-/*
- * Convert float to Q16
- */
-long floatToQ16(float x) {
-	return (long) ((1L << 16) * x);
-}
 
-/*
- * Convert Q16 to float
- */
-float q16ToFloat(long q16) {
-	return (float) q16 / (1L << 16);
-}
+	/*
+	 * Euler Angles
+	 */
+	void eulerGetSigma(float quat[QUATERNION_AMOUNT], float* sigma) {
+		*sigma = atan2((quat[2] * quat[3] + quat[0] * quat[1]),
+				0.5 - (quat[1] * quat[1] + quat[2] * quat[2])) * 180 / M_PI;
+	}
 
-/*
- * Convert float array to Matrix
- * In: Pointer to float array
- * Returns Matrix
- */
-Matrix toMatrix(float array[NUMBER_OF_AXES][NUMBER_OF_AXES]) {
+	void eulerGetTheta(float quat[QUATERNION_AMOUNT], float* theta) {
+		*theta = asin(-2.0 * (quat[1] * quat[3] + quat[0] * quat[2]))
+				* 180/ M_PI;
+	}
+
+	void eulerGetPsi(float quat[QUATERNION_AMOUNT], float* psi) {
+		*psi = atan2((quat[1] * quat[2] + quat[0] * quat[3]),
+				0.5 - (quat[2] * quat[2] + quat[3] * quat[3])) * 180 / M_PI;
+	}
+
+	/*
+	 * Comparison of Floats
+	 * In: two floats
+	 * Returns 1 if floats are (nearly) equal and 0 if not
+	 */
+	char equal_f(float f1, float f2) {
+		if (fabs(f1 - f2) < EPSILON) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+	/*
+	 * Convert float to Q16
+	 */
+	long floatToQ16(float x) {
+		return (long) ((1L << 16) * x);
+	}
+
+	/*
+	 * Convert Q16 to float
+	 */
+	float q16ToFloat(long q16) {
+		return (float) q16 / (1L << 16);
+	}
+
+	/*
+	 * Convert float array to Matrix
+	 * In: Pointer to float array
+	 * Returns Matrix
+	 */
+	Matrix toMatrix(float array[NUMBER_OF_AXES][NUMBER_OF_AXES]) {
 //Variables
-	int i, j;
-	Matrix matrix;
+		int i, j;
+		Matrix matrix;
 
 //Create Matrix
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		for (j = 0; j < NUMBER_OF_AXES; j++) {
-			matrix.value[i * NUMBER_OF_AXES + j] = array[i][j];
+		for (i = 0; i < NUMBER_OF_AXES; i++) {
+			for (j = 0; j < NUMBER_OF_AXES; j++) {
+				matrix.value[i * NUMBER_OF_AXES + j] = array[i][j];
+			}
+
 		}
 
+//Return
+		return matrix;
 	}
 
-//Return
-	return matrix;
-}
-
-/*
- * Convert Matrix to float array
- * In: Pointer to Matrix
- * Out: Float array with two indices
- */
-void matrixToFloatArray(Matrix matrix,
-		float array[NUMBER_OF_AXES][NUMBER_OF_AXES]) {
+	/*
+	 * Convert Matrix to float array
+	 * In: Pointer to Matrix
+	 * Out: Float array with two indices
+	 */
+	void matrixToFloatArray(Matrix matrix,
+			float array[NUMBER_OF_AXES][NUMBER_OF_AXES]) {
 //Variables
-	int i, j;
+		int i, j;
 
 //Create Vector
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		for (j = 0; j < NUMBER_OF_AXES; j++) {
-			array[i][j] = matrix.value[i * NUMBER_OF_AXES + j];
+		for (i = 0; i < NUMBER_OF_AXES; i++) {
+			for (j = 0; j < NUMBER_OF_AXES; j++) {
+				array[i][j] = matrix.value[i * NUMBER_OF_AXES + j];
+			}
 		}
 	}
-}
 
-/*
- * Convert float array to Vector
- * In: Pointer to float array
- * Returns Vector
- */
-Vector toVector(float* array) {
+	/*
+	 * Convert float array to Vector
+	 * In: Pointer to float array
+	 * Returns Vector
+	 */
+	Vector toVector(float* array) {
 //Variables
-	Vector vector;
+		Vector vector;
 
 //Create Vector
-	memcpy(&(vector.value[0]), array, NUMBER_OF_AXES * sizeof(float));
+		memcpy(&(vector.value[0]), array, NUMBER_OF_AXES * sizeof(float));
 
 //Return
-	return vector;
-}
+		return vector;
+	}
 
-/*
- * Convert Vector to float array
- * In: Pointer to Vector
- * Out: Float array
- */
-void vectorToFloatArray(Vector vector, float* array) {
+	/*
+	 * Convert Vector to float array
+	 * In: Pointer to Vector
+	 * Out: Float array
+	 */
+	void vectorToFloatArray(Vector vector, float* array) {
 //Variables
-	int i;
+		int i;
 
 //Create Vector
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		array[i] = vector.value[i];
+		for (i = 0; i < NUMBER_OF_AXES; i++) {
+			array[i] = vector.value[i];
+		}
 	}
-}
 
-/*
- * Multiply Vector by Scalar
- * In: Vector, Scalar
- * Returns Vector
- */
-Vector multVectorByScalar(Vector vector, float scalar) {
+	/*
+	 * Multiply Vector by Scalar
+	 * In: Vector, Scalar
+	 * Returns Vector
+	 */
+	Vector multVectorByScalar(Vector vector, float scalar) {
 //Variables
-	int i;
-	Vector result;
+		int i;
+		Vector result;
 
 //Multiply each element by scalar
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		result.value[i] = vector.value[i] * scalar;
-	}
+		for (i = 0; i < NUMBER_OF_AXES; i++) {
+			result.value[i] = vector.value[i] * scalar;
+		}
 
 //Return
-	return result;
-}
+		return result;
+	}
 
-/*
- * Vector Addition
- * In: two Vectors
- * Returns Vector
- */
-Vector addVectors(Vector vector1, Vector vector2) {
+	/*
+	 * Vector Addition
+	 * In: two Vectors
+	 * Returns Vector
+	 */
+	Vector addVectors(Vector vector1, Vector vector2) {
 //Variables
-	int i;
-	Vector result;
+		int i;
+		Vector result;
 
 //Add each element
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		result.value[i] = vector1.value[i] + vector2.value[i];
-	}
+		for (i = 0; i < NUMBER_OF_AXES; i++) {
+			result.value[i] = vector1.value[i] + vector2.value[i];
+		}
 
 //Return
-	return result;
-}
+		return result;
+	}
 
-/*
- * Vector Subtraction
- * In: two Vectors
- * Returns Vector result
- */
-Vector substractVectors(Vector minuend, Vector substrahend) {
+	/*
+	 * Vector Subtraction
+	 * In: two Vectors
+	 * Returns Vector result
+	 */
+	Vector substractVectors(Vector minuend, Vector substrahend) {
 //Variables
-	int i;
-	Vector result;
+		int i;
+		Vector result;
 
 //Add each element
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		result.value[i] = minuend.value[i] - substrahend.value[i];
-	}
-
-//Return
-	return result;
-}
-
-/*
- * Multiplication: Scalar * Matrix
- * In: Matrix, Scalar
- * Returns Matrix
- */
-Matrix multMatrixByScalar(Matrix matrix, float scalar) {
-//Variables
-	int i;
-	Matrix result;
-
-//Multiply each element by scalar
-	for (i = 0; i < NUMBER_OF_AXES * NUMBER_OF_AXES; i++) {
-		result.value[i] = matrix.value[i] * scalar;
-	}
-
-//Return
-	return result;
-}
-
-/*
- * Multiplication: Matrix * Vector
- * In: Matrix, Vector
- * Returns Vector
- */
-Vector multMatrixAndVector(Matrix matrix, Vector vector) {
-//Variables
-	int i, j;
-	Vector result;
-
-//Multiply each element by scalar
-	for (i = 0; i < NUMBER_OF_AXES; i++) { //row index
-		result.value[i] = 0.0;
-		for (j = 0; j < NUMBER_OF_AXES; j++) { //column index
-			result.value[i] += matrix.value[i * NUMBER_OF_AXES + j]
-					* vector.value[j];
+		for (i = 0; i < NUMBER_OF_AXES; i++) {
+			result.value[i] = minuend.value[i] - substrahend.value[i];
 		}
-	}
 
 //Return
-	return result;
-}
+		return result;
+	}
+
+	/*
+	 * Multiplication: Scalar * Matrix
+	 * In: Matrix, Scalar
+	 * Returns Matrix
+	 */
+	Matrix multMatrixByScalar(Matrix matrix, float scalar) {
+//Variables
+		int i;
+		Matrix result;
+
+//Multiply each element by scalar
+		for (i = 0; i < NUMBER_OF_AXES * NUMBER_OF_AXES; i++) {
+			result.value[i] = matrix.value[i] * scalar;
+		}
+
+//Return
+		return result;
+	}
+
+	/*
+	 * Multiplication: Matrix * Vector
+	 * In: Matrix, Vector
+	 * Returns Vector
+	 */
+	Vector multMatrixAndVector(Matrix matrix, Vector vector) {
+//Variables
+		int i, j;
+		Vector result;
+
+//Multiply each element by scalar
+		for (i = 0; i < NUMBER_OF_AXES; i++) { //row index
+			result.value[i] = 0.0;
+			for (j = 0; j < NUMBER_OF_AXES; j++) { //column index
+				result.value[i] += matrix.value[i * NUMBER_OF_AXES + j]
+						* vector.value[j];
+			}
+		}
+
+//Return
+		return result;
+	}
