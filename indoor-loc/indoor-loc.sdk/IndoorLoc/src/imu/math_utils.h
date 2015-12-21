@@ -1,5 +1,5 @@
 /*
- * math_utils.h
+ * math_utils.h: Vector, Matrix and position/rotation helper functions
  * Author: Stephanie Kunkel
  */
 

@@ -49,11 +49,11 @@ static Vector recentVelocity = { .value[0] = 0.0, .value[1] = 0.0, .value[2
 static Vector recentPosition = { .value[0] = 0.0, .value[1] = 0.0, .value[2
 		] = 0.0 };
 static unsigned long recent_ts = 0; //timestamp in ms
-static float recentGyro[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 },
-		recentAccel[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 },
-		recentCompass[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 },
-		recentQuat[QUATERNION_AMOUNT] = { 1.0, 0.0, 0.0, 0.0 };
-static float recentTemp = 0.0;
+static float recentGyro[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 }, 		//dgr/s
+		recentAccel[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 },			//g
+		recentCompass[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 },			//uT
+		recentQuat[QUATERNION_AMOUNT] = { 1.0, 0.0, 0.0, 0.0 };		//normalized
+static float recentTemp = 0.0;										//dgrC
 static Vector recentAccelInertial = { .value[0] = 0.0, .value[1] = 0.0, .value[2
 		] = 0.0 };
 static Vector gravity_calibrated = { .value[0] = 0.0, .value[1] = 0.0, .value[2

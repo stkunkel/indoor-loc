@@ -1,5 +1,5 @@
 /*
- * math_utils.c: Math utilities for Euler angles, number conversions, etc.
+ * math_utils.c: Vector, Matrix and position/rotation helper functions
  * Author: Stephanie Kunkel
  */
 
@@ -33,7 +33,7 @@ void computeVelocity(Vector* v_old, Vector* a, float delta_t, Vector* v) {
  * In: Matrix
  * Returns inverse of matrix
  */
-Matrix getInverse(Matrix matrix) {
+Matrix getInverse(Matrix matrix) {//TODO check
 	//Variables
 	Matrix result;
 	float temp[NUMBER_OF_AXES][NUMBER_OF_AXES];
@@ -59,7 +59,7 @@ Matrix getInverse(Matrix matrix) {
  * Out: cofactor
  */
 void cofactor(float num[NUMBER_OF_AXES][NUMBER_OF_AXES], float f,
-		float result[NUMBER_OF_AXES][NUMBER_OF_AXES]) {
+		float result[NUMBER_OF_AXES][NUMBER_OF_AXES]) {//TODO check
 	//Variables
 	float b[NUMBER_OF_AXES][NUMBER_OF_AXES],
 			fac[NUMBER_OF_AXES][NUMBER_OF_AXES];
@@ -97,7 +97,7 @@ void cofactor(float num[NUMBER_OF_AXES][NUMBER_OF_AXES], float f,
  */
 void transpose(float num[NUMBER_OF_AXES][NUMBER_OF_AXES],
 		float fac[NUMBER_OF_AXES][NUMBER_OF_AXES], float r,
-		float result[NUMBER_OF_AXES][NUMBER_OF_AXES]) {
+		float result[NUMBER_OF_AXES][NUMBER_OF_AXES]) {//TODO check
 	//Variables
 	int i, j;
 	float b[NUMBER_OF_AXES][NUMBER_OF_AXES], d;
@@ -129,7 +129,7 @@ void transpose(float num[NUMBER_OF_AXES][NUMBER_OF_AXES],
  * In: a, k
  * Returns determinant
  */
-float determinant(float a[NUMBER_OF_AXES][NUMBER_OF_AXES], float k) {
+float determinant(float a[NUMBER_OF_AXES][NUMBER_OF_AXES], float k) {//TODO check
 	//Variables
 	float s = 1, det = 0, b[NUMBER_OF_AXES][NUMBER_OF_AXES];
 	int i, j, m, n, c;

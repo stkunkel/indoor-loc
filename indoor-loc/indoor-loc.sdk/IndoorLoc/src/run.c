@@ -76,7 +76,7 @@ int main() {
 //		myprintf(".........Failure...........\n\r");
 //	}
 
-	//Test position update
+	//Test position update functionality
 	testPositionUpdate();
 
 
