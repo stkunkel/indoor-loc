@@ -2866,7 +2866,7 @@ int mpu_load_firmware(unsigned short length, const unsigned char *firmware,
 #define LOAD_CHUNK  (16)
     unsigned char cur[LOAD_CHUNK], tmp[2];
     unsigned char firmwarecpy[3062];
-    memcpy(firmwarecpy, firmware, 3062);
+    memcpy(firmwarecpy, firmware, 3062);//TODO: remove
     int status;
 
 

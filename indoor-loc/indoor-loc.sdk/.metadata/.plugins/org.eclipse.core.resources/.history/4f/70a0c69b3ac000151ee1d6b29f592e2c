@@ -939,7 +939,7 @@ void updatePosition(float* accel_conv, float* quat_conv,
 	float time_diff;
 	int i;
 
-//Create measured accel vector
+//Create measured accel vextor
 	accel_measuremt = toVector(accel_conv);
 
 //Create rotation matrix
@@ -1256,12 +1256,12 @@ int readFromFifo(short *gyro, short *accel, long *quat,
 	int status = XST_FAILURE;
 
 //Increase count
-//	count++;
+	count++;
 
 //Make sure the read command is not called too often
 //	if (count >= 500) { //was: 500
 //Reset Count, increment read count
-//	count = 0;
+	count = 0;
 
 //Read FIFO
 	status = dmp_read_fifo(gyro, accel, quat, timestamp, sensors, more);
