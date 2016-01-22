@@ -80,10 +80,10 @@ int setupMPUInt() {
 	if (status != XST_SUCCESS) {
 		return XST_FAILURE;
 	}
-	data &= (~INT_LEVEL_BIT); //Clear bit
-	data &= (~INT_OPEN_BIT); //Clear bit
-	data &= (~INT_RD_CLEAR_BIT); //Clear bit
-	data |= LATCH_INT_EN_BIT; //Set bit
+	data &= (~INT_LEVEL_BIT); //Clear bit --> active high
+	data &= (~INT_OPEN_BIT); //Clear bit --> push-pull
+	data &= (~INT_RD_CLEAR_BIT); //Clear bit --> interrupt status bits are cleared only by reading INT_STATUS (Register 58)
+	data |= LATCH_INT_EN_BIT; //Set bit --> INT pin is held high until the interrupt is cleared
 	//data = 0x24; //debug
 	do {
 		status = imuI2cWrite(0x68, 0x37, 1, &data); //Write Register
