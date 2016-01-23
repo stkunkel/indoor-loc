@@ -14,6 +14,13 @@
 //Defines
 #define NUMBER_OF_AXES			3					//x, y, z
 #define QUATERNION_AMOUNT		(NUMBER_OF_AXES + 1)//w, x, y, z rotational angles
+#define X_AXIS					0
+#define Y_AXIS					1
+#define Z_AXIS					2
+#define QUAT_W					0
+#define QUAT_X					1
+#define QUAT_Y					2
+#define QUAT_Z					3
 #define EPSILON					0.0001				//max. difference of two floats to be equal
 
 //Typedefs
