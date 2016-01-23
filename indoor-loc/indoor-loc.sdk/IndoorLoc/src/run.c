@@ -58,7 +58,7 @@ int main() {
 	//status = printDataUsingDMP(1, 1, DATA_WITH_DMP_RUNS);
 
 	//Print Quaternions and Position to Serial Port
-	//status = printForImuViewer(1, 1, QUAT_DISPLAY_RUNS);
+//	status = printForImuViewer(1, 1, 10);
 
 	//Quaternion Drift
 	//status = printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
@@ -80,7 +80,7 @@ int main() {
 	testPositionUpdate();
 
 	//Test Matrix Inverse
-	testMatrixInverse();
+//	testMatrixInverse();
 
 	//Stay in here
 	while (1) {
@@ -153,12 +153,16 @@ int printForImuViewer(char printQuat, char printPos, unsigned int numberOfRuns) 
 				//Print new line
 				if (status == XST_SUCCESS) {
 					printf("\n\r");
+				} else {
+					cnt--;
 				}
+			} else {
+				cnt--;
 			}
 		}
 
 		//Make sure only successful prints count
-		if (status != XST_SUCCESS || numberOfRuns < 1) {
+		if (numberOfRuns < 1) {
 			cnt--;
 		}
 	}
