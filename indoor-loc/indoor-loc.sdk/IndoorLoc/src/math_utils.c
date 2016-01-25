@@ -318,7 +318,7 @@ Matrix getTranspose(Matrix m) {
 /*
  * Get Roation Matrix from Quaternion
  * In: Quaternion
- * Out: Rotation Matrix for left-handed coordinate system
+ * Out: Rotation Matrix for right-handed coordinate system
  */
 Matrix toRotationMatrix(float quat[QUATERNION_AMOUNT]) {
 //Variables
@@ -338,13 +338,13 @@ Matrix toRotationMatrix(float quat[QUATERNION_AMOUNT]) {
 
 //Set values
 	rotationMatrix.value[0] = w_w + x_x - y_y - z_z;
-	rotationMatrix.value[1] = 2 * x_y - 2 * w_z;
-	rotationMatrix.value[2] = 2 * x_z + 2 * w_y;
-	rotationMatrix.value[3] = 2 * x_y + 2 * w_z;
+	rotationMatrix.value[1] = 2 * x_y + 2 * w_z; //lhcs: -
+	rotationMatrix.value[2] = 2 * x_z - 2 * w_y; //lhcs: +
+	rotationMatrix.value[3] = 2 * x_y - 2 * w_z; //lhcs: +
 	rotationMatrix.value[4] = w_w - x_x + y_y - z_z;
-	rotationMatrix.value[5] = 2 * y_z - 2 * w_x; //right handed: +
-	rotationMatrix.value[6] = 2 * x_z - 2 * w_y;
-	rotationMatrix.value[7] = 2 * y_z + 2 * w_x; //right-handed: -
+	rotationMatrix.value[5] = 2 * y_z + 2 * w_x; //lhcs: -
+	rotationMatrix.value[6] = 2 * x_z + 2 * w_y; //lhcs: -
+	rotationMatrix.value[7] = 2 * y_z - 2 * w_x; //lhcs: +
 	rotationMatrix.value[8] = w_w - x_x - y_y + z_z;
 
 	return rotationMatrix;

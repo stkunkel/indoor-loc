@@ -3,7 +3,15 @@
  * Author: Stephanie Kunkel
  */
 
+/*
+ * Includes
+ */
 #include "print_utils.h"
+
+/*
+ * Global Variables
+ */
+int cnt = 0;
 
 /*
  * Like printf

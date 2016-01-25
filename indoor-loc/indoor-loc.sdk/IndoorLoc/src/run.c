@@ -58,7 +58,7 @@ int main() {
 	//status = printDataUsingDMP(1, 1, DATA_WITH_DMP_RUNS);
 
 	//Print Quaternions and Position to Serial Port
-//	status = printForImuViewer(1, 1, 10);
+	status = printForImuViewer(1, 1, 0);
 
 	//Quaternion Drift
 	//status = printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
@@ -77,7 +77,7 @@ int main() {
 //	}
 
 	//Test position update functionality
-	testPositionUpdate();
+//	testPositionUpdate();
 
 	//Test Matrix Inverse
 //	testMatrixInverse();
@@ -113,7 +113,7 @@ int printQuaternionDriftAfterXMin(unsigned int time_min) {
  */
 int printForImuViewer(char printQuat, char printPos, unsigned int numberOfRuns) {
 	//Variables
-	int cnt = 0, status;
+	int cnt = 0, printcnt = 0, status;
 
 	//Init
 	myprintf(".........Configure MPU and DMP...........\n\r");
@@ -145,16 +145,23 @@ int printForImuViewer(char printQuat, char printPos, unsigned int numberOfRuns) 
 		if (imuDataAvailable()) {
 			//Update Data
 			status = updateData();
+
+			//Check wheter data should be printed
+			printcnt++;
 			if (status == XST_SUCCESS) {
+				if (printcnt % (DMP_FIFO_RATE / 10) == 0) {
+					//Reset printcnt
+					printcnt = 0;
 
-				//Print
-				status = printforDisplay(printQuat, printPos);
+					//Print
+					status = printforDisplay(printQuat, printPos);
 
-				//Print new line
-				if (status == XST_SUCCESS) {
-					printf("\n\r");
-				} else {
-					cnt--;
+					//Print new line
+					if (status == XST_SUCCESS) {
+						printf("\n\r");
+					} else {
+						cnt--;
+					}
 				}
 			} else {
 				cnt--;
@@ -181,7 +188,7 @@ int printDataUsingDMP(char initialCalibration, char dmpCalibration,
 	int status, cnt;
 	short features;
 
-	if (initialCalibration){
+	if (initialCalibration) {
 		features = FEATURES_CAL;
 	} else {
 		features = FEATURES_RAW;

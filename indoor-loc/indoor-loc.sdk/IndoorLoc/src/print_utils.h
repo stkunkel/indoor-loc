@@ -11,7 +11,7 @@
 #include <stdarg.h>
 #include <unistd.h>
 
-#define DEBUG //UNComment for DEBUG prints, COMMENT for print only for IMU viewer
+//#define DEBUG //UNComment for DEBUG prints, COMMENT for print only for IMU viewer
 
 int myprintf(const char *format, ...);
 
