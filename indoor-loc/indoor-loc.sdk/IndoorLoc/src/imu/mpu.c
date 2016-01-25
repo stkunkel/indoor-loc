@@ -567,9 +567,9 @@ void testPositionUpdate() {
 
 		//Set measured gravity
 		memcpy(&measured_gravity, &gravity_calibrated,
-				NUMBER_OF_AXES * sizeof(float));
+		NUMBER_OF_AXES * sizeof(float));
 		memcpy(&l_accel_conv, &measured_gravity,
-				NUMBER_OF_AXES * sizeof(float));
+		NUMBER_OF_AXES * sizeof(float));
 
 		//Reset Values
 		l_recentAccelInertial.value[0] = 0.0;
@@ -678,8 +678,8 @@ void testPositionUpdate() {
 		myprintf("\r\n");
 	}
 
-	// Test 3: Rotation: 45dgr
-	myprintf("Test 3: Rotation 45dgr:\r\n");
+	// Test 3a: Rotation: 45dgr
+	myprintf("Test 3a: Rotation 45dgr:\r\n");
 	l_quat_conv[0] = 0.9238795325112867;
 	l_quat_conv[1] = 0.3826834323650897;
 	l_quat_conv[2] = 0.0;
@@ -689,6 +689,47 @@ void testPositionUpdate() {
 	measured_gravity[X_AXIS] = 0.0;
 	measured_gravity[Y_AXIS] = -0.7071067811865475;
 	measured_gravity[Z_AXIS] = 0.7071067811865475;
+	memcpy(&l_accel_conv, &measured_gravity, NUMBER_OF_AXES * sizeof(float));
+
+	//Reset Values
+	l_recentAccelInertial.value[0] = 0.0;
+	l_recentAccelInertial.value[1] = 0.0;
+	l_recentAccelInertial.value[2] = 0.0;
+	l_recentVelocity.value[0] = 0.0;
+	l_recentVelocity.value[1] = 0.0;
+	l_recentVelocity.value[2] = 0.0;
+	l_recentPosition.value[0] = 0.0;
+	l_recentPosition.value[1] = 0.0;
+	l_recentPosition.value[2] = 0.0;
+
+	//Acc in Y_AXIS
+	i = Y_AXIS;
+	myprintf("Axis: %d:\r\n", i);
+
+	// Move
+	for (cnt = 0; cnt < acc_number; cnt++) {
+		l_accel_conv[i] = measured_gravity[i] + test_acc[cnt];
+		l_timestamp += 1000 / DMP_FIFO_RATE;
+
+		//Update and Print
+		updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
+				&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
+				&l_recent_ts);
+		printPosition(&l_recentPosition);
+		myprintf("\r\n");
+	}
+
+	// Test 3b: Rotation: 1dgr
+	myprintf("Test 3: Rotation 1dgr:\r\n");
+	l_quat_conv[0] = 0.9999619230641712;
+	l_quat_conv[1] = 0.008726535498373935;
+	l_quat_conv[2] = 0.0;
+	l_quat_conv[3] = 0.0;
+
+	//Set measured gravity
+	measured_gravity[X_AXIS] = 0.0;
+	measured_gravity[Y_AXIS] = -sin(degToRad(1.0));
+	measured_gravity[Z_AXIS] = cos(degToRad(1.0));
 	memcpy(&l_accel_conv, &measured_gravity, NUMBER_OF_AXES * sizeof(float));
 
 	//Reset Values
@@ -839,14 +880,22 @@ void updatePosition(float* accel_conv, float* quat_conv,
 	rotation = toRotationMatrix(quat_conv);
 
 //Get inverse of rotation matrix
-	getInverseOfMatrix(&rotation, &rotation_inv);
+	//rotation_inv = multMatrixByScalar(rotation, 1);
+	//rotation_inv = multMatrixByScalar(rotation, -1);
+	rotation_inv = getTranspose(rotation);
+	//getInverseOfMatrix(&rotation, &rotation_inv);
+
+	//Rotate gravity
+	Vector gravity_rot = multMatrixAndVector(rotation, gravity_calibrated);
+
+	//Remove gravity
+	accel_measuremt = addVectors(accel_measuremt, multVectorByScalar(gravity_rot, -1));
 
 //Compute Inertial Acceleration Vector
-	accel_inertial = multMatrixAndVector(rotation_inv, accel_measuremt);
+	accel_inertial = multMatrixAndVector(rotation, accel_measuremt); //rotation_inv
 
 //Remove gravity
-	accel_inertial = addVectors(accel_inertial,
-			multVectorByScalar(gravity_calibrated, -1));
+//	accel_inertial = addVectors(accel_inertial, multVectorByScalar(gravity_calibrated, -1));
 
 //Convert 1g to 9.81 m/s^2
 	accel_inertial = multVectorByScalar(accel_inertial, GRAVITY);
