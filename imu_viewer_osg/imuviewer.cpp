@@ -131,7 +131,7 @@ int main(){
 		viewer.frame();
 		updateScene(tty_fd);
 		//sleep(1);
-		usleep(100);
+		//usleep(100);
 	}
 	
 	//Close UART Connection
@@ -173,8 +173,6 @@ void updateScene(int tty_fd){
 		//printf("Could not get Quaternion (%d).\r\n", status);
 		return;
 	}
-	
-	y = -y;//Invert Y due to inverted axis of OSG compared to IMU
 	
 	printf("%f %f %f %f\n\r", w, x, y, z); 
 	
