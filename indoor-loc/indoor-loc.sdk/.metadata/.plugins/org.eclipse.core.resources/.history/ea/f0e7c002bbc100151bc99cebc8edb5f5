@@ -68,7 +68,7 @@ static Vector gravity_calibrated = { .value[0] = 0.0, .value[1] = 0.0, .value[2
  */
 int printforDisplay(char printQuaternion, char printPos) {
 	//Variables
-	int status = XST_FAILURE;
+	int status = XST_SUCCESS;
 	float quat[QUATERNION_AMOUNT];
 	Vector position;
 
@@ -529,9 +529,7 @@ void printPosition(Vector* position) {
  */
 void testPositionUpdate() {
 //Variables
-	const short accel_axis = 2;
-	const short rot_axis = 0;
-	int i;
+	int i, cnt = 0;
 	float l_accel_conv[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 };
 	float l_quat_conv[QUATERNION_AMOUNT] = { 1.0, 0.0, 0.0, 0.0 };
 	unsigned long l_timestamp = 0;
@@ -540,92 +538,57 @@ void testPositionUpdate() {
 			] = 0.0 };
 	Vector l_recentVelocity = { .value[0] = 0.0, .value[1] = 0.0, .value[2
 			] = 0.0 };
-	Vector l_recentPosition = { .value[0] = 0.0, .value[1 ] = 0.0, .value[2
+	Vector l_recentPosition = { .value[0] = 0.0, .value[1] = 0.0, .value[2
 			] = 0.0 };
 
-//WITHOUT ROTATION
-//Set gravity
-	gravity_calibrated.value[GRAVITY_AXIS] = 1.0;
-	l_accel_conv[GRAVITY_AXIS] = 1.0;
+	// Test Parameters
+	// Acceleration in Y_AXIS;
+	// Rotation around X_AXIS;
+	// Gravity in Z_AXIS
+	const short acc_number = 4;
+	float test_acc[] = { 0.0, 1.0, -1.0, 0.0 };
 
-//Only gravity for two periods
-	for (i = 1; i <= 2; i++) {
-		l_timestamp += (1000 / DMP_FIFO_RATE);
-		updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
-				&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
-				&l_recent_ts);
-		printPosition(&l_recentPosition);
-		myprintf("\r\n");
-	}
+	// Set gravity after calibration
+	gravity_calibrated.value[X_AXIS] = 0.0;
+	gravity_calibrated.value[Y_AXIS] = 0.0;
+	gravity_calibrated.value[Z_AXIS] = 1.0;
 
-//Acceleration of 1m/s^2
-	l_accel_conv[accel_axis] += 1.0;
-	l_timestamp += (1000 / DMP_FIFO_RATE);
-	updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
-			&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
-			&l_recent_ts);
-	printPosition(&l_recentPosition);
-	myprintf("\r\n");
+	//Set measured gravity
+	l_accel_conv[X_AXIS] = 0.0;
+	l_accel_conv[Y_AXIS] = 0.0;
+	l_accel_conv[Z_AXIS] = 1.0;
 
-//Only gravity for two periods
-	l_accel_conv[accel_axis] -= 1.0;
-	for (i = 1; i <= 2; i++) {
-		l_timestamp += (1000 / DMP_FIFO_RATE);
-		updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
-				&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
-				&l_recent_ts);
-		printPosition(&l_recentPosition);
-		myprintf("\r\n");
-	}
-//Acceleration of -1m/s^2
-	l_accel_conv[accel_axis] += -1.0;
-	l_timestamp += (1000 / DMP_FIFO_RATE);
-	updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
-			&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
-			&l_recent_ts);
-	printPosition(&l_recentPosition);
-	myprintf("\r\n");
-
-//Only gravity for two periods
-	l_accel_conv[accel_axis] += 1.0;
-	for (i = 1; i <= 2; i++) {
-		l_timestamp += (1000 / DMP_FIFO_RATE);
-		updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
-				&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
-				&l_recent_ts);
-		printPosition(&l_recentPosition);
-		myprintf("\r\n");
-	}
-
-//WITH ROTATION
-	myprintf("Rotation: 180°\r\n");
-
-//Rotate 180°
-	l_quat_conv[0] = 0;
-	l_quat_conv[rot_axis + 1] = 1;
-
-//construct accel
+	// Test 1: No Rotation
+	myprintf("Test 1: No Rotation:\r\n");
+	// Acc in all axes
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		//gravity
-		if (i == GRAVITY_AXIS) {
-			l_accel_conv[i] = -1.0;
-		} else {
-			l_accel_conv[i] = 0.0;
+		myprintf("Axis: %d:\r\n", i);
+		for (cnt = 0; cnt < acc_number; cnt++) {
+			l_accel_conv[i] += test_acc[cnt];
+			updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
+					&l_recentAccelInertial, &l_recentVelocity,
+					&l_recentPosition, &l_recent_ts);
+			printPosition(&l_recentPosition);
+			myprintf("\r\n");
 		}
 	}
 
-//Reset data
-	l_recent_ts = 0;
-	l_timestamp = 0;
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		l_recentAccelInertial.value[i] = 0.0;
-		l_recentPosition.value[i] = 0.0;
-		l_recentVelocity.value[i] = 0.0;
-	}
+	// Test 2: Rotation: 90 and 180dgr
+	myprintf("Test 2a: Rotation 90dgr:\r\n");
+	// Set gravity  after calibration for 90dgr rotation
+	gravity_calibrated.value[X_AXIS] = 0.0;
+	gravity_calibrated.value[Y_AXIS] = -1.0;
+	gravity_calibrated.value[Z_AXIS] = 0.0;
 
-//Only gravity for two periods
-	for (i = 1; i <= 2; i++) {
-		l_timestamp += (1000 / DMP_FIFO_RATE);
+	//Set measured gravity
+	l_accel_conv[X_AXIS] = gravity_calibrated.value[X_AXIS];
+	l_accel_conv[Y_AXIS] = gravity_calibrated.value[Y_AXIS];
+	l_accel_conv[Z_AXIS] = gravity_calibrated.value[Z_AXIS];
+
+	//Acc in Y_AXIS
+	myprintf("Axis: %d:\r\n", Y_AXIS);
+	for (cnt = 0; cnt < acc_number; cnt++) {
+		l_accel_conv[Y_AXIS] += test_acc[cnt];
 		updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
 				&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
 				&l_recent_ts);
@@ -633,38 +596,21 @@ void testPositionUpdate() {
 		myprintf("\r\n");
 	}
 
-//Acceleration of 1m/s^2
-	l_accel_conv[accel_axis] += 1.0;
-	l_timestamp += (1000 / DMP_FIFO_RATE);
-	updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
-			&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
-			&l_recent_ts);
-	printPosition(&l_recentPosition);
-	myprintf("\r\n");
+	myprintf("Test 2b: Rotation 180dgr:\r\n");
+	// Set gravity  after calibration for 180dgr rotation
+	gravity_calibrated.value[X_AXIS] = gravity_calibrated.value[X_AXIS];
+	gravity_calibrated.value[Y_AXIS] = gravity_calibrated.value[Y_AXIS];
+	gravity_calibrated.value[Z_AXIS] = gravity_calibrated.value[Z_AXIS];
 
-//Only gravity for two periods
-	l_accel_conv[accel_axis] -= 1.0;
-	for (i = 1; i <= 2; i++) {
-		l_timestamp += (1000 / DMP_FIFO_RATE);
-		updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
-				&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
-				&l_recent_ts);
-		printPosition(&l_recentPosition);
-		myprintf("\r\n");
-	}
-//Acceleration of -1m/s^2
-	l_accel_conv[accel_axis] += -1.0;
-	l_timestamp += (1000 / DMP_FIFO_RATE);
-	updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
-			&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
-			&l_recent_ts);
-	printPosition(&l_recentPosition);
-	myprintf("\r\n");
+	//Set measured gravity
+	l_accel_conv[X_AXIS] = 0.0;
+	l_accel_conv[Y_AXIS] = 0.0;
+	l_accel_conv[Z_AXIS] = -1.0;
 
-//Only gravity for two periods
-	l_accel_conv[accel_axis] += 1.0;
-	for (i = 1; i <= 2; i++) {
-		l_timestamp += (1000 / DMP_FIFO_RATE);
+	//Acc in Y_AXIS
+	myprintf("Axis: %d:\r\n", Y_AXIS);
+	for (cnt = 0; cnt < acc_number; cnt++) {
+		l_accel_conv[Y_AXIS] += test_acc[cnt];
 		updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
 				&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
 				&l_recent_ts);
@@ -672,166 +618,28 @@ void testPositionUpdate() {
 		myprintf("\r\n");
 	}
 
-//WITH ROTATION
-	myprintf("Rotation: 90°\r\n");
+	// Test 3: Rotation: 45dgr
+	myprintf("Test 3: Rotation 45dgr:\r\n");
+	// Set gravity
+	gravity_calibrated.value[X_AXIS] = 0.0;
+	gravity_calibrated.value[Y_AXIS] = -sqrt(2);
+	gravity_calibrated.value[Z_AXIS] = sqrt(2);
 
-//Rotate 90°
-	l_quat_conv[0] = 0.7071067811865475;
-	l_quat_conv[rot_axis + 1] = 0.7071067811865475;
+	//Set measured gravity
+	l_accel_conv[X_AXIS] = gravity_calibrated.value[X_AXIS];
+	l_accel_conv[Y_AXIS] = gravity_calibrated.value[Y_AXIS];
+	l_accel_conv[Z_AXIS] = gravity_calibrated.value[Z_AXIS];
 
-//Construct accel
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		//gravity
-		if (i == GRAVITY_AXIS) {
-			l_accel_conv[i] = 1.0;
-		} else {
-			l_accel_conv[i] = 0.0;
-		}
-	}
-
-//Set accel (rotate using rotation matrix)
-	vectorToFloatArray(
-			multMatrixAndVector(toRotationMatrix(l_quat_conv),
-					toVector(l_accel_conv)), l_accel_conv);
-
-//Reset data
-	l_recent_ts = 0;
-	l_timestamp = 0;
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		l_recentAccelInertial.value[i] = 0.0;
-		l_recentPosition.value[i] = 0.0;
-		l_recentVelocity.value[i] = 0.0;
-	}
-
-//Only gravity for two periods
-	for (i = 1; i <= 2; i++) {
-		l_timestamp += (1000 / DMP_FIFO_RATE);
+	//Acc in Y_AXIS
+	myprintf("Axis: %d:\r\n", Y_AXIS);
+	for (cnt = 0; cnt < acc_number; cnt++) {
+		l_accel_conv[Y_AXIS] += test_acc[cnt];
 		updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
 				&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
 				&l_recent_ts);
 		printPosition(&l_recentPosition);
 		myprintf("\r\n");
 	}
-
-//Acceleration of 1m/s^2
-	l_accel_conv[accel_axis] += 1.0;
-	l_timestamp += (1000 / DMP_FIFO_RATE);
-	updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
-			&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
-			&l_recent_ts);
-	printPosition(&l_recentPosition);
-	myprintf("\r\n");
-
-//Only gravity for two periods
-	l_accel_conv[accel_axis] -= 1.0;
-	for (i = 1; i <= 2; i++) {
-		l_timestamp += (1000 / DMP_FIFO_RATE);
-		updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
-				&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
-				&l_recent_ts);
-		printPosition(&l_recentPosition);
-		myprintf("\r\n");
-	}
-//Acceleration of -1m/s^2
-	l_accel_conv[accel_axis] += -1.0;
-	l_timestamp += (1000 / DMP_FIFO_RATE);
-	updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
-			&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
-			&l_recent_ts);
-	printPosition(&l_recentPosition);
-	myprintf("\r\n");
-
-//Only gravity for two periods
-	l_accel_conv[accel_axis] += 1.0;
-	for (i = 1; i <= 2; i++) {
-		l_timestamp += (1000 / DMP_FIFO_RATE);
-		updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
-				&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
-				&l_recent_ts);
-		printPosition(&l_recentPosition);
-		myprintf("\r\n");
-	}
-
-	//WITH ROTATION
-	myprintf("Rotation: 45°\r\n");
-
-	//Rotate 45°
-	l_quat_conv[0] = 0.9238795325112867;
-	l_quat_conv[rot_axis + 1] = 0.3826834323650897;
-
-	//Construct accel
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		//gravity
-		if (i == GRAVITY_AXIS) {
-			l_accel_conv[i] = 1.0;
-		} else {
-			l_accel_conv[i] = 0.0;
-		}
-	}
-
-	//Set accel (rotate using rotation matrix)
-	vectorToFloatArray(
-			multMatrixAndVector(toRotationMatrix(l_quat_conv),
-					toVector(l_accel_conv)), l_accel_conv);
-
-	//Reset data
-	l_recent_ts = 0;
-	l_timestamp = 0;
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		l_recentAccelInertial.value[i] = 0.0;
-		l_recentPosition.value[i] = 0.0;
-		l_recentVelocity.value[i] = 0.0;
-	}
-
-	//Only gravity for two periods
-	for (i = 1; i <= 2; i++) {
-		l_timestamp += (1000 / DMP_FIFO_RATE);
-		updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
-				&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
-				&l_recent_ts);
-		printPosition(&l_recentPosition);
-		myprintf("\r\n");
-	}
-
-	//Acceleration of 1m/s^2
-	l_accel_conv[accel_axis] += 1.0;
-	l_timestamp += (1000 / DMP_FIFO_RATE);
-	updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
-			&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
-			&l_recent_ts);
-	printPosition(&l_recentPosition);
-	myprintf("\r\n");
-
-	//Only gravity for two periods
-	l_accel_conv[accel_axis] -= 1.0;
-	for (i = 1; i <= 2; i++) {
-		l_timestamp += (1000 / DMP_FIFO_RATE);
-		updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
-				&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
-				&l_recent_ts);
-		printPosition(&l_recentPosition);
-		myprintf("\r\n");
-	}
-	//Acceleration of -1m/s^2
-	l_accel_conv[accel_axis] += -1.0;
-	l_timestamp += (1000 / DMP_FIFO_RATE);
-	updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
-			&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
-			&l_recent_ts);
-	printPosition(&l_recentPosition);
-	myprintf("\r\n");
-
-	//Only gravity for two periods
-	l_accel_conv[accel_axis] += 1.0;
-	for (i = 1; i <= 2; i++) {
-		l_timestamp += (1000 / DMP_FIFO_RATE);
-		updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
-				&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
-				&l_recent_ts);
-		printPosition(&l_recentPosition);
-		myprintf("\r\n");
-	}
-
 }
 
 /*
@@ -939,7 +747,14 @@ void updatePosition(float* accel_conv, float* quat_conv,
 	float time_diff;
 	int i;
 
-//Create measured accel vextor
+	//DEBUG
+	quat_conv[0] = 1.0;
+	quat_conv[1] = 0.0;
+	quat_conv[2] = 0.0;
+	quat_conv[3] = 0.0;
+	//DEBUG END
+
+//Create measured accel vector
 	accel_measuremt = toVector(accel_conv);
 
 //Create rotation matrix
