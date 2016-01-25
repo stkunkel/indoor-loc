@@ -164,24 +164,6 @@ float getAbsAngle(Joint joint) {
 }
 
 /*
- * Convert Degrees to Radians
- * In: Degrees
- * Returns Radians
- */
-float degToRad(float deg) {
-	return deg / 180.0 * M_PI;
-}
-
-/*
- * Convert Radians to Degrees
- * In: Radians
- * Returns Degrees
- */
-float radToDeg(float rad) {
-	return rad * 180.0 / M_PI;
-}
-
-/*
  * Convert Absolute Step Value to Absolute Angle
  * In: Joint, step value
  * Returns Angle in Degrees

@@ -76,7 +76,5 @@ typedef enum {
  * Functions
  */
 int pwmTest();
-float degToRad(float deg);
-float radToDeg(float rad);
 
 #endif
