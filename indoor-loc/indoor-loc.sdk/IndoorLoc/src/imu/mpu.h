@@ -16,7 +16,7 @@
 #include "mpu9150/inv_mpu_dmp_motion_driver.h"
 #include "mpu9150/mpl/invensense_adv.h"
 #include "mpu9150/mpl/ml_math_func.h"
-#include "math_utils.h"
+#include "../math_utils.h"
 #include "../print_utils.h"
 #include "../zedboard/time_utils.h"
 
