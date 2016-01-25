@@ -44,6 +44,8 @@ static char dmpReady = 0;
 static int count = 0;
 static char gyrAccIsCal = 0;
 static char gyroCalEnabled = 0;
+static long glob_gyro_bias = { 0, 0, 0 };
+static long glob_accel_bias = { 0, 0, 0 };
 static Vector recentVelocity = { .value[0] = 0.0, .value[1] = 0.0, .value[2
 		] = 0.0 };
 static Vector recentPosition = { .value[0] = 0.0, .value[1] = 0.0, .value[2
@@ -607,7 +609,8 @@ void testPositionUpdate() {
 	normal_force_measured[X_AXIS] = 0.0;
 	normal_force_measured[Y_AXIS] = 1.0;
 	normal_force_measured[Z_AXIS] = 0.0;
-	memcpy(&l_accel_conv, &normal_force_measured, NUMBER_OF_AXES * sizeof(float));
+	memcpy(&l_accel_conv, &normal_force_measured,
+	NUMBER_OF_AXES * sizeof(float));
 
 	//Reset Values
 	l_recentAccelInertial.value[0] = 0.0;
@@ -648,7 +651,8 @@ void testPositionUpdate() {
 	normal_force_measured[X_AXIS] = 0.0;
 	normal_force_measured[Y_AXIS] = 0.0;
 	normal_force_measured[Z_AXIS] = -1.0;
-	memcpy(&l_accel_conv, &normal_force_measured, NUMBER_OF_AXES * sizeof(float));
+	memcpy(&l_accel_conv, &normal_force_measured,
+	NUMBER_OF_AXES * sizeof(float));
 
 	//Reset Values
 	l_recentAccelInertial.value[0] = 0.0;
@@ -689,7 +693,8 @@ void testPositionUpdate() {
 	normal_force_measured[X_AXIS] = 0.0;
 	normal_force_measured[Y_AXIS] = 0.7071067811865475;
 	normal_force_measured[Z_AXIS] = 0.7071067811865475;
-	memcpy(&l_accel_conv, &normal_force_measured, NUMBER_OF_AXES * sizeof(float));
+	memcpy(&l_accel_conv, &normal_force_measured,
+	NUMBER_OF_AXES * sizeof(float));
 
 	//Reset Values
 	l_recentAccelInertial.value[0] = 0.0;
@@ -730,7 +735,8 @@ void testPositionUpdate() {
 	normal_force_measured[X_AXIS] = 0.0;
 	normal_force_measured[Y_AXIS] = sin(degToRad(1.0));
 	normal_force_measured[Z_AXIS] = cos(degToRad(1.0));
-	memcpy(&l_accel_conv, &normal_force_measured, NUMBER_OF_AXES * sizeof(float));
+	memcpy(&l_accel_conv, &normal_force_measured,
+	NUMBER_OF_AXES * sizeof(float));
 
 	//Reset Values
 	l_recentAccelInertial.value[0] = 0.0;
@@ -1115,10 +1121,14 @@ int calibrateGyrAcc(unsigned int samples) {
 	}
 
 //Save gravity for later
-	normal_force.value[GRAVITY_AXIS] = accel_bias_f[GRAVITY_AXIS];
+	normal_force.value[GRAVITY_AXIS] = 1.0; //accel_bias_f[GRAVITY_AXIS];
+
+	//Save biases for later
+	memcpy(&glob_gyro_bias, &gyro_bias, NUMBER_OF_AXES * sizeof(long));
+	memcpy(&glob_accel_bias, &accel_bias, NUMBER_OF_AXES * sizeof(long));
 
 //Make sure gravity is not cancelled
-	accel_bias_f[GRAVITY_AXIS] = 0.0;
+	accel_bias_f[GRAVITY_AXIS] = -1.0 + accel_bias_f[GRAVITY_AXIS]; //0.0;
 
 //Convert biases
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
@@ -1288,6 +1298,18 @@ int configureDMP(unsigned short int features, unsigned short fifoRate) {
 		return XST_FAILURE;
 	}
 
+	//Set Gyro and Accel Bias
+	status = dmp_set_gyro_bias(&glob_gyro_bias);
+	if (status != XST_SUCCESS) {
+		myprintf("mpu.c: Could not initially set gyro bias.\r\n");
+	}
+
+	status = dmp_set_accel_bias(&glob_accel_bias);
+	if (status != XST_SUCCESS) {
+		myprintf("mpu.c: Could not initially set accel bias.\r\n");
+		return XST_FAILURE;
+	}
+
 //Enable Features
 	status = dmp_enable_feature(features);
 	if (status != XST_SUCCESS) {
@@ -1346,18 +1368,6 @@ int initDMP() {
 			myprintf("mpu.c: Error loading firmware of DMP.\r\n");
 			return XST_FAILURE;
 		}
-	}
-
-//Set Gyro and Accel Bias to 0
-	status = dmp_set_gyro_bias(gyro_bias);
-	if (status != XST_SUCCESS) {
-		myprintf("mpu.c: Could not initially set gyro bias.\r\n");
-	}
-
-	status = dmp_set_accel_bias(accel_bias);
-	if (status != XST_SUCCESS) {
-		myprintf("mpu.c: Could not initially set accel bias.\r\n");
-		return XST_FAILURE;
 	}
 
 //Enable DMP
@@ -1479,7 +1489,21 @@ int initMPU() {
 //4. Set Sample Rate
 	status = mpu_set_sample_rate(MPU_SAMPLE_RATE);
 	if (status != 0) {
-		myprintf("mpu.c: Error MPU sample rate.\r\n");
+		myprintf("mpu.c: Error setting MPU sample rate.\r\n");
+		return XST_FAILURE;
+	}
+
+//5. Set sensitivities
+	//Gyro
+	status = mpu_set_gyro_fsr(GYRO_SENS);
+	if (status != 0) {
+		myprintf("mpu.c: Error setting gyroscope FRS.\r\n");
+		return XST_FAILURE;
+	}
+	//Accel
+	status = mpu_set_accel_fsr(ACCEL_SENS);
+	if (status != 0) {
+		myprintf("mpu.c: Error setting gyroscope FRS.\r\n");
 		return XST_FAILURE;
 	}
 

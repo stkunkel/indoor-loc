@@ -52,19 +52,19 @@ int main() {
 	//status = printDataUsingDMP(0, 0, DATA_WITH_DMP_RUNS);
 
 	//Print Data with DMP with initial calibration but no DMP gyro calibration
-	//status = printDataUsingDMP(1, 0, DATA_WITH_DMP_RUNS);
+//	status = printDataUsingDMP(1, 0, DATA_WITH_DMP_RUNS);
 
 	//Print Data with DMP with and DMP gyro calibration
 	//status = printDataUsingDMP(1, 1, DATA_WITH_DMP_RUNS);
 
 	//Print Quaternions and Position to Serial Port
-	status = printForImuViewer(1, 1, 0);
+//	status = printForImuViewer(1, 1, 0);
 
 	//Quaternion Drift
 	//status = printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
 
 	//Print Quaternions and Position
-	//status = printForImuViewer(1, 1, QUAT_DISPLAY_RUNS);
+	status = printForImuViewer(1, 1, QUAT_DISPLAY_RUNS);
 
 	//PWM Test
 	//status = pwmTest();
@@ -146,7 +146,7 @@ int printForImuViewer(char printQuat, char printPos, unsigned int numberOfRuns) 
 			//Update Data
 			status = updateData();
 
-			//Check wheter data should be printed
+			//Check whether data should be printed
 			printcnt++;
 			if (status == XST_SUCCESS) {
 				if (printcnt % (DMP_FIFO_RATE / 10) == 0) {
