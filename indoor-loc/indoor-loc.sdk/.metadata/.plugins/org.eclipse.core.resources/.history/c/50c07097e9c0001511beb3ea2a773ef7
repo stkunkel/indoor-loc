@@ -22,9 +22,7 @@ void printRotationAngle(long quat[QUATERNION_AMOUNT]);
 void printEulerAngles(float* sigma, float* theta, float* psi);
 void printPosition(Vector* position);
 void updatePosition(float* accel_conv, float* quat_conv,
-		unsigned long* p_timestamp, Vector* p_recentAccelInertial,
-		Vector* p_recentVelocity, Vector* p_recentPosition,
-		unsigned long* p_recent_ts);
+		unsigned long timestamp);
 int convertGyroData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
 int convertAccData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
 int convertCompassData(short raw[NUMBER_OF_AXES],
@@ -49,15 +47,12 @@ static Vector recentVelocity = { .value[0] = 0.0, .value[1] = 0.0, .value[2
 static Vector recentPosition = { .value[0] = 0.0, .value[1] = 0.0, .value[2
 		] = 0.0 };
 static unsigned long recent_ts = 0; //timestamp in ms
-static float recentGyro[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 }, 		//dgr/s
-		recentAccel[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 },			//g
-		recentCompass[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 },			//uT
-		recentQuat[QUATERNION_AMOUNT] = { 1.0, 0.0, 0.0, 0.0 };		//normalized
-static float recentTemp = 0.0;										//dgrC
+static short recentGyro[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 },
+		recentAccel[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 },
+		recentCompass[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 }; //data in HW units
+static long recentQuat[QUATERNION_AMOUNT], recentTemp = 0;
 static Vector recentAccelInertial = { .value[0] = 0.0, .value[1] = 0.0, .value[2
 		] = 0.0 };
-static Vector gravity_calibrated = { .value[0] = 0.0, .value[1] = 0.0, .value[2
-		] = 0.0 }; //measure in G
 
 /*
  * Print for Display
@@ -68,12 +63,28 @@ static Vector gravity_calibrated = { .value[0] = 0.0, .value[1] = 0.0, .value[2
  */
 int printforDisplay(char printQuaternion, char printPos) {
 	//Variables
-	int status = XST_SUCCESS;
-	float quat[QUATERNION_AMOUNT];
+	int status = XST_FAILURE;
+	long quat[QUATERNION_AMOUNT];
+	float quat_conv[QUATERNION_AMOUNT];
 	Vector position;
 
+	//Initialize if required
+	if (!dmpReady) {
+		//init and configure DMP
+		status = configureDMP(FEATURES_CAL, DMP_FIFO_RATE);
+		if (status != XST_SUCCESS) {
+			return status;
+		}
+
+		//Update Data
+//		updateData();
+//		if (status != XST_SUCCESS) {
+//			return status;
+//		}
+	}
+
 	//Create Copy of recent data
-	memcpy(&quat, &recentQuat, QUATERNION_AMOUNT * sizeof(float));
+	memcpy(&quat, &recentQuat, QUATERNION_AMOUNT * sizeof(long));
 	position = recentPosition;
 
 	myprintf("TS: %dms | ", recent_ts);
@@ -81,21 +92,28 @@ int printforDisplay(char printQuaternion, char printPos) {
 	//Print Quaternion
 	if (printQuaternion) {
 
-		printQuat(quat);
+		//Convert Quaternion
+		status = convertQuatenion(quat, quat_conv);
+		if (status == XST_SUCCESS) {
 
-		//Print separator
-		if (printPos) {
-			printf(" | ");
+			//Print Quaternion
+			printQuat(quat_conv);
+
+			//Print separator
+			if (printPos) {
+				printf(" | ");
+			}
+		} else {
+			return status;
 		}
 	}
 
-//Print Position
+	//Print Position
 	if (printPos) {
 		printPosition(&position);
 	}
-	printf("\r\n");
 
-//Return
+	//Return
 	return status;
 }
 
@@ -104,20 +122,35 @@ int printforDisplay(char printQuaternion, char printPos) {
  * (You have to call updateData() to get most recent value.)
  */
 int printCurrentPositionForDisplay() {
-//Variables
+	//Variables
 	int status = XST_SUCCESS;
 	Vector position;
 
-//Create copy of recent position
+	//Initialize if required
+	if (!dmpReady) {
+		//init and configure DMP
+		status = configureDMP(FEATURES_CAL, DMP_FIFO_RATE);
+		if (status != XST_SUCCESS) {
+			return status;
+		}
+
+//		//Update Data
+//		updateData();
+//		if (status != XST_SUCCESS) {
+//			return status;
+//		}
+	}
+
+	//Create copy of recent position
 	position = recentPosition;
 
-//Print
+	//Print
 	if (status == XST_SUCCESS) {
 		printPosition(&position);
 		printf("\n\r");
 	}
 
-//Return
+	//Return
 	return status;
 }
 
@@ -125,12 +158,12 @@ int printCurrentPositionForDisplay() {
  * Print Drift w/o and with Calibration
  */
 void printQuatDrift(unsigned int time_min) {
-//Variables
+	//Variables
 	int status;
 	float quat_drift[4] = { 0.0, 0.0, 0.0, 0.0 };
 	char calibration = 0;
 
-//w/o initial calibration
+	//w/o initial calibration
 	status = getQuatDrift(quat_drift, calibration, time_min);
 	if (status != XST_SUCCESS) {
 		myprintf("Error in drift calculation without calibration\r\n.");
@@ -141,7 +174,7 @@ void printQuatDrift(unsigned int time_min) {
 				quat_drift[3]);
 	}
 
-//w/ initial calibration
+	//w/ initial calibration
 	calibration = 1;
 	status = getQuatDrift(quat_drift, calibration, time_min);
 	if (status != XST_SUCCESS) {
@@ -153,7 +186,7 @@ void printQuatDrift(unsigned int time_min) {
 				quat_drift[3]);
 	}
 
-//also enable dynamic calibration in DMP TODO: does it work?
+	//also enable dynamic calibration in DMP TODO: does it work?
 	dmpGyroCalibration(1);
 	status = getQuatDrift(quat_drift, calibration, time_min);
 	if (status != XST_SUCCESS) {
@@ -203,12 +236,12 @@ int getQuatDrift(float *quat_drift, char calibration, unsigned int time_min) {
 		}
 	}
 
-//Get initial quaternion
+	//Get initial quaternion
 	do {
 		status = readFromFifo(gyro, accel, quat, &timestamp, &sensors, more);
 	} while (status != XST_SUCCESS);
 
-//Convert initial quaternion
+	//Convert initial quaternion
 	status = convertQuatenion(quat, quat_init);
 	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Could not convert initial quaternion.\r\n");
@@ -232,19 +265,19 @@ int getQuatDrift(float *quat_drift, char calibration, unsigned int time_min) {
 
 	} while (now < start + time_s * COUNTS_PER_SECOND);
 
-//Convert quaternion drift
+	//Convert quaternion drift
 	status = convertQuatenion(quat, quat_drift);
 	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Could not convert final quaternion.\r\n");
 		return XST_FAILURE;
 	}
 
-//Compute difference
+	//Compute difference
 	for (i = 0; i < QUATERNION_AMOUNT; i++) {
 		quat_drift[i] = quat_drift[i] - quat_init[i];
 	}
 
-//Return
+	//Return
 	free(more);
 	return XST_SUCCESS;
 }
@@ -256,16 +289,37 @@ int getQuatDrift(float *quat_drift, char calibration, unsigned int time_min) {
 int printQuatForDisplay() {
 //Variables
 	int status = XST_FAILURE, i = 0;
-	float quat[QUATERNION_AMOUNT];
+	long quat[QUATERNION_AMOUNT];
+	float quat_conv[QUATERNION_AMOUNT];
 
-//Create Copy of recent Quat
-	memcpy(&quat, &recentQuat, QUATERNION_AMOUNT * sizeof(float));
+	//Initialize
+	if (!dmpReady) {
+		//init and configre DMP
+		status = configureDMP(FEATURES_CAL, DMP_FIFO_RATE);
+		if (status != XST_SUCCESS) {
+			myprintf("mpu.c Error initializing DMP.\r\n");
+			return status;
+		}
+
+		//Get latest Data
+//		status = updateData();
+//		if (status != XST_SUCCESS) {
+//			myprintf("mpu.c Could not update data.\r\n");
+//			return status;
+//		}
+	}
+
+	//Create Copy of recent Quat
+	memcpy(&quat, &recentQuat, QUATERNION_AMOUNT * sizeof(long));
+
+//Convert Quaternion
+	status = convertQuatenion(quat, quat_conv);
 
 //Print Quaternion
 	myprintf("Quat: ");
 	if (status == XST_SUCCESS) {
 		for (i = 0; i < QUATERNION_AMOUNT; i++) {
-			printf("%f ", quat[i]);
+			printf("%f ", quat_conv[i]);
 		}
 	}
 
@@ -276,31 +330,85 @@ int printQuatForDisplay() {
 /*
  * Print Data using DMP
  */
-void printDataWithDMP() {
-	//Variables
-	float gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
-	float temp;
+int printDataWithDMP() { //TODO: Handle invalid temperature and compass data
+//Variables
+	int status, return_val = XST_SUCCESS;
+	float conv[NUMBER_OF_AXES], temp_conv;
+	short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
+	long temp;
+
+//Initialize
+	if (!dmpReady) {
+		//init and configre DMP
+		status = configureDMP(FEATURES_CAL, DMP_FIFO_RATE);
+		if (status != XST_SUCCESS) {
+			myprintf("mpu.c Error initializing DMP.\r\n");
+			return status;
+		}
+
+//		//Get latest Data
+//		status = updateData();
+//		if (status != XST_SUCCESS) {
+//			myprintf("mpu.c Could not update data.\r\n");
+//			return status;
+//		}
+	}
 
 	//Create Copy of recent values
-	memcpy(&gyro, &recentGyro, NUMBER_OF_AXES * sizeof(float));
-	memcpy(&accel, &recentAccel, NUMBER_OF_AXES * sizeof(float));
-	memcpy(&compass, &recentCompass, NUMBER_OF_AXES * sizeof(float));
+	memcpy(&gyro, &recentGyro, NUMBER_OF_AXES * sizeof(short));
+	memcpy(&accel, &recentAccel, NUMBER_OF_AXES * sizeof(short));
+	memcpy(&compass, &recentCompass, NUMBER_OF_AXES * sizeof(short));
 	temp = recentTemp;
 
-	//Print Gyro
-	printGyro(gyro);
+//Convert Gyro
+	status = convertGyroData(gyro, conv);
+	if (status != 0) {
+		myprintf("mpu.c Error converting Gyroscope data.");
+		return_val = XST_FAILURE;
+	} else {
+
+		//Print Gyro
+		printGyro(conv);
+	}
 	printf(" | ");
 
-	//Print Acc
-	printAccel(accel);
+//Convert Acc
+	status = convertAccData(accel, conv);
+	if (status != 0) {
+		myprintf("mpu.c Error converting Acc data.");
+		return_val = XST_FAILURE;
+	} else {
+
+		//Print Acc
+		printAccel(conv);
+	}
 	printf(" | ");
 
-	//Print Compass
-	printCompass(compass);
+	//Convert Compass
+	status = convertCompassData(compass, conv);
+	if (status != 0) {
+		myprintf("mpu.c Error converting Compass data.");
+		return_val = XST_FAILURE;
+	} else {
+
+		//Print Compass
+		printCompass(conv);
+	}
 	printf(" | ");
 
-	//Print Temperature
-	printTemp(&temp);
+	//Convert Temperature
+	status = convertTemperaturetoC(&temp, &temp_conv);
+	if (status != 0) {
+		myprintf("mpu.c Error converting Temperature data.");
+		return_val = XST_FAILURE;
+	} else {
+
+		//Print Temperature
+		printTemp(&temp_conv);
+	}
+
+//Return
+	return return_val;
 }
 
 /*
@@ -517,247 +625,11 @@ void printPosition(Vector* position) {
 //Print
 	myprintf("Pos: ");
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		printf("%f", position->value[i] * 100);
-		myprintf("cm");
+		printf("%f", position->value[i]);
+		myprintf("m");
 		if (i < NUMBER_OF_AXES - 1) {
 			printf(" ");
 		}
-	}
-}
-/*
- * Test Position Update function
- */
-void testPositionUpdate() {
-//Variables
-	int i, cnt = 0;
-	float l_accel_conv[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 };
-	float l_quat_conv[QUATERNION_AMOUNT] = { 1.0, 0.0, 0.0, 0.0 };
-	unsigned long l_timestamp = 0;
-	unsigned long l_recent_ts = 0;
-	Vector l_recentAccelInertial = { .value[0] = 0.0, .value[1] = 0.0, .value[2
-			] = 0.0 };
-	Vector l_recentVelocity = { .value[0] = 0.0, .value[1] = 0.0, .value[2
-			] = 0.0 };
-	Vector l_recentPosition = { .value[0] = 0.0, .value[1] = 0.0, .value[2
-			] = 0.0 };
-	float measured_gravity[NUMBER_OF_AXES] = { 0.0, 0.0, 1.0 };
-
-	// Test Parameters
-	// Acceleration in Y_AXIS;
-	// Rotation around X_AXIS;
-	// Gravity in Z_AXIS
-	const short acc_number = 5;
-	float test_acc[] = { 0.0, 1.0, -1.0, 0.0, 0.0 };
-
-	// Set gravity after calibration
-	gravity_calibrated.value[X_AXIS] = 0.0;
-	gravity_calibrated.value[Y_AXIS] = 0.0;
-	gravity_calibrated.value[Z_AXIS] = 1.0;
-
-	// Test 1: No Rotation
-	myprintf("Test 1: No Rotation:\r\n");
-	l_quat_conv[0] = 1.0;
-	l_quat_conv[1] = 0.0;
-	l_quat_conv[2] = 0.0;
-	l_quat_conv[3] = 0.0;
-
-	// Acc in all axes
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		myprintf("Axis: %d:\r\n", i);
-
-		//Set measured gravity
-		memcpy(&measured_gravity, &gravity_calibrated,
-		NUMBER_OF_AXES * sizeof(float));
-		memcpy(&l_accel_conv, &measured_gravity,
-		NUMBER_OF_AXES * sizeof(float));
-
-		//Reset Values
-		l_recentAccelInertial.value[0] = 0.0;
-		l_recentAccelInertial.value[1] = 0.0;
-		l_recentAccelInertial.value[2] = 0.0;
-		l_recentVelocity.value[0] = 0.0;
-		l_recentVelocity.value[1] = 0.0;
-		l_recentVelocity.value[2] = 0.0;
-		l_recentPosition.value[0] = 0.0;
-		l_recentPosition.value[1] = 0.0;
-		l_recentPosition.value[2] = 0.0;
-
-		//Move
-		for (cnt = 0; cnt < acc_number; cnt++) {
-			l_accel_conv[i] = measured_gravity[i] + test_acc[cnt];
-			l_timestamp += 1000 / DMP_FIFO_RATE;
-
-			//Update and Print
-			updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
-					&l_recentAccelInertial, &l_recentVelocity,
-					&l_recentPosition, &l_recent_ts);
-			printPosition(&l_recentPosition);
-			myprintf("\r\n");
-		}
-	}
-
-	// Test 2: Rotation: 90 and 180dgr
-	myprintf("Test 2a: Rotation 90dgr:\r\n");
-	l_quat_conv[0] = 0.7071067811865475;
-	l_quat_conv[1] = 0.7071067811865475;
-	l_quat_conv[2] = 0.0;
-	l_quat_conv[3] = 0.0;
-
-	//Set measured gravity
-	measured_gravity[X_AXIS] = 0.0;
-	measured_gravity[Y_AXIS] = -1.0;
-	measured_gravity[Z_AXIS] = 0.0;
-	memcpy(&l_accel_conv, &measured_gravity, NUMBER_OF_AXES * sizeof(float));
-
-	//Reset Values
-	l_recentAccelInertial.value[0] = 0.0;
-	l_recentAccelInertial.value[1] = 0.0;
-	l_recentAccelInertial.value[2] = 0.0;
-	l_recentVelocity.value[0] = 0.0;
-	l_recentVelocity.value[1] = 0.0;
-	l_recentVelocity.value[2] = 0.0;
-	l_recentPosition.value[0] = 0.0;
-	l_recentPosition.value[1] = 0.0;
-	l_recentPosition.value[2] = 0.0;
-
-	//Acc in Y_AXIS
-	i = Y_AXIS;
-	myprintf("Axis: %d:\r\n", i);
-
-	// Move
-	for (cnt = 0; cnt < acc_number; cnt++) {
-		l_accel_conv[i] = measured_gravity[i] + test_acc[cnt];
-		l_timestamp += 1000 / DMP_FIFO_RATE;
-
-		// Update and print
-		updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
-				&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
-				&l_recent_ts);
-		printPosition(&l_recentPosition);
-		myprintf("\r\n");
-	}
-
-	//2b: Rotation 180dgr
-	myprintf("Test 2b: Rotation 180dgr:\r\n");
-	l_quat_conv[0] = 0.0;
-	l_quat_conv[1] = 1.0;
-	l_quat_conv[2] = 0.0;
-	l_quat_conv[3] = 0.0;
-
-	//Set measured gravity
-	measured_gravity[X_AXIS] = 0.0;
-	measured_gravity[Y_AXIS] = 0.0;
-	measured_gravity[Z_AXIS] = -1.0;
-	memcpy(&l_accel_conv, &measured_gravity, NUMBER_OF_AXES * sizeof(float));
-
-	//Reset Values
-	l_recentAccelInertial.value[0] = 0.0;
-	l_recentAccelInertial.value[1] = 0.0;
-	l_recentAccelInertial.value[2] = 0.0;
-	l_recentVelocity.value[0] = 0.0;
-	l_recentVelocity.value[1] = 0.0;
-	l_recentVelocity.value[2] = 0.0;
-	l_recentPosition.value[0] = 0.0;
-	l_recentPosition.value[1] = 0.0;
-	l_recentPosition.value[2] = 0.0;
-
-	//Acc in Y_AXIS
-	i = Y_AXIS;
-	myprintf("Axis: %d:\r\n", i);
-
-	// Move
-	for (cnt = 0; cnt < acc_number; cnt++) {
-		l_accel_conv[i] = measured_gravity[i] + test_acc[cnt];
-		l_timestamp += 1000 / DMP_FIFO_RATE;
-
-		//Update and Print
-		updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
-				&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
-				&l_recent_ts);
-		printPosition(&l_recentPosition);
-		myprintf("\r\n");
-	}
-
-	// Test 3a: Rotation: 45dgr
-	myprintf("Test 3a: Rotation 45dgr:\r\n");
-	l_quat_conv[0] = 0.9238795325112867;
-	l_quat_conv[1] = 0.3826834323650897;
-	l_quat_conv[2] = 0.0;
-	l_quat_conv[3] = 0.0;
-
-	//Set measured gravity
-	measured_gravity[X_AXIS] = 0.0;
-	measured_gravity[Y_AXIS] = -0.7071067811865475;
-	measured_gravity[Z_AXIS] = 0.7071067811865475;
-	memcpy(&l_accel_conv, &measured_gravity, NUMBER_OF_AXES * sizeof(float));
-
-	//Reset Values
-	l_recentAccelInertial.value[0] = 0.0;
-	l_recentAccelInertial.value[1] = 0.0;
-	l_recentAccelInertial.value[2] = 0.0;
-	l_recentVelocity.value[0] = 0.0;
-	l_recentVelocity.value[1] = 0.0;
-	l_recentVelocity.value[2] = 0.0;
-	l_recentPosition.value[0] = 0.0;
-	l_recentPosition.value[1] = 0.0;
-	l_recentPosition.value[2] = 0.0;
-
-	//Acc in Y_AXIS
-	i = Y_AXIS;
-	myprintf("Axis: %d:\r\n", i);
-
-	// Move
-	for (cnt = 0; cnt < acc_number; cnt++) {
-		l_accel_conv[i] = measured_gravity[i] + test_acc[cnt];
-		l_timestamp += 1000 / DMP_FIFO_RATE;
-
-		//Update and Print
-		updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
-				&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
-				&l_recent_ts);
-		printPosition(&l_recentPosition);
-		myprintf("\r\n");
-	}
-
-	// Test 3b: Rotation: 1dgr
-	myprintf("Test 3: Rotation 1dgr:\r\n");
-	l_quat_conv[0] = 0.9999619230641712;
-	l_quat_conv[1] = 0.008726535498373935;
-	l_quat_conv[2] = 0.0;
-	l_quat_conv[3] = 0.0;
-
-	//Set measured gravity
-	measured_gravity[X_AXIS] = 0.0;
-	measured_gravity[Y_AXIS] = -sin(degToRad(1.0));
-	measured_gravity[Z_AXIS] = cos(degToRad(1.0));
-	memcpy(&l_accel_conv, &measured_gravity, NUMBER_OF_AXES * sizeof(float));
-
-	//Reset Values
-	l_recentAccelInertial.value[0] = 0.0;
-	l_recentAccelInertial.value[1] = 0.0;
-	l_recentAccelInertial.value[2] = 0.0;
-	l_recentVelocity.value[0] = 0.0;
-	l_recentVelocity.value[1] = 0.0;
-	l_recentVelocity.value[2] = 0.0;
-	l_recentPosition.value[0] = 0.0;
-	l_recentPosition.value[1] = 0.0;
-	l_recentPosition.value[2] = 0.0;
-
-	//Acc in Y_AXIS
-	i = Y_AXIS;
-	myprintf("Axis: %d:\r\n", i);
-
-	// Move
-	for (cnt = 0; cnt < acc_number; cnt++) {
-		l_accel_conv[i] = measured_gravity[i] + test_acc[cnt];
-		l_timestamp += 1000 / DMP_FIFO_RATE;
-
-		//Update and Print
-		updatePosition(l_accel_conv, l_quat_conv, &l_timestamp,
-				&l_recentAccelInertial, &l_recentVelocity, &l_recentPosition,
-				&l_recent_ts);
-		printPosition(&l_recentPosition);
-		myprintf("\r\n");
 	}
 }
 
@@ -766,28 +638,31 @@ void testPositionUpdate() {
  * Returns 0 if successful
  */
 int updateData() {
-//Variables
+	//Variables
 	int i, status = XST_SUCCESS;
 	short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES],
 			sensors;
 	long quat[QUATERNION_AMOUNT], temperature;
 	unsigned long timestamp, temp_ts;
 	unsigned char* more = (unsigned char *) malloc(100 * sizeof(char));
-	float gyro_conv[NUMBER_OF_AXES], accel_conv[NUMBER_OF_AXES],
-			compass_conv[NUMBER_OF_AXES], quat_conv[QUATERNION_AMOUNT],
-			temp_conv;
-	;
+	float accel_conv[NUMBER_OF_AXES], quat_conv[QUATERNION_AMOUNT];
 
-//Get latest data
+	//Initialize if required
+	if (!dmpReady) {
+		//init and configure DMP
+		status = configureDMP(FEATURES_CAL, DMP_FIFO_RATE);
+		if (status != XST_SUCCESS) {
+			return status;
+		}
+	}
+
+	//Get latest data
 	do {
 		status = readFromFifo(gyro, accel, quat, &timestamp, &sensors, more);
 		usleep(100);
 	} while (status != XST_SUCCESS);
 
-//Free memory
-	free(more);
-
-//Get Compass //TODO: Handle unequal timestamp
+	//Get Compass //TODO: Handle unequal timestamp
 	status = mpu_get_compass_reg(compass, &temp_ts);
 	if (status != 0) {
 		//Print
@@ -799,134 +674,92 @@ int updateData() {
 		}
 	}
 
-//Get Temperature //TODO: Handle unequal timestamp
+	//Get Temperature //TODO: Handle unequal timestamp
 	status = mpu_get_temperature(&temperature, &temp_ts);
 	if (status != 0) {
 		myprintf("mpu.c Error getting Temperature data.");
 		temperature = -1;
 	}
 
-//Convert Gyro
-	status = convertGyroData(gyro, gyro_conv);
+	//Convert recent Accel
+	status = convertAccData(recentAccel, accel_conv);
 	if (status != XST_SUCCESS) {
+		free(more);
 		return status;
 	}
 
-//Convert Accel
-	status = convertAccData(accel, accel_conv);
+	//Convert recent Quat
+	status = convertQuatenion(recentQuat, quat_conv);
 	if (status != XST_SUCCESS) {
+		free(more);
 		return status;
 	}
 
-//Convert Compass
-	status = convertCompassData(compass, compass_conv);
-	if (status != XST_SUCCESS) {
-		return status;
-	}
+	//Update Position
+	updatePosition(accel_conv, quat_conv, timestamp);
 
-//Convert Quat
-	status = convertQuatenion(quat, quat_conv);
-	if (status != XST_SUCCESS) {
-		return status;
-	}
+	//Update Sensor Data (Gyro, Accel, Quat)
+	memcpy(&recentGyro, &gyro, NUMBER_OF_AXES * sizeof(short));
+	memcpy(&recentAccel, &accel, NUMBER_OF_AXES * sizeof(short));
+	memcpy(&recentCompass, &compass, NUMBER_OF_AXES * sizeof(short));
+	memcpy(&recentQuat, &quat, QUATERNION_AMOUNT * sizeof(long));
 
-//Convert Temp
-	status = convertTemperaturetoC(&temperature, &temp_conv);
-	if (status != XST_SUCCESS) {
-		return status;
-	}
+	//Update Temperature
+	recentTemp = temperature;
 
-//Update Position and timestamps
-	updatePosition(accel_conv, quat_conv, &timestamp, &recentAccelInertial,
-			&recentVelocity, &recentPosition, &recent_ts);
+	//Update Timestamp
+	recent_ts = timestamp;
 
-//Update Sensor Data
-	memcpy(&recentGyro, &gyro_conv, NUMBER_OF_AXES * sizeof(float));
-	memcpy(&recentAccel, &accel_conv, NUMBER_OF_AXES * sizeof(float));
-	memcpy(&recentCompass, &compass_conv, NUMBER_OF_AXES * sizeof(float));
-	memcpy(&recentQuat, &quat_conv, QUATERNION_AMOUNT * sizeof(float));
-
-//Update Temperature
-	recentTemp = temp_conv;
-
-//Return
+	//Return
+	free(more);
 	return status;
 }
 
 /*
- * Update Position (also updates timestamps)
+ * Update Position
  */
 void updatePosition(float* accel_conv, float* quat_conv,
-		unsigned long* p_timestamp, Vector* p_recentAccelInertial,
-		Vector* p_recentVelocity, Vector* p_recentPosition,
-		unsigned long* p_recent_ts) {
-//Variables
+		unsigned long timestamp) {
+	//Variables
 	Vector accel_measuremt, accel_inertial, velocity, newPosition;
-	Matrix rotation, rotation_inv;
+	Matrix rotation;
 	float time_diff;
 	int i;
 
-//	//DEBUG
-//	quat_conv[0] = 1.0;
-//	quat_conv[1] = 0.0;
-//	quat_conv[2] = 0.0;
-//	quat_conv[3] = 0.0;
-//	//DEBUG END
+	//Convert acceleration vector: 1g = 9.81m/s^2
+	accel_measuremt = multVectorByScalar(toVector(accel_conv), GRAVITY);
 
-//Create measured accel vector
-	accel_measuremt = toVector(accel_conv);
+	//Compute Rotational Matrix
+	toRotationMatrix(quat_conv, &rotation);
 
-//Create rotation matrix
-	rotation = toRotationMatrix(quat_conv);
+	//Compute Inertial Acceleration Vector
+	accel_inertial = multMatrixAndVector(rotation, accel_measuremt);
 
-//Get inverse of rotation matrix
-	//rotation_inv = multMatrixByScalar(rotation, 1);
-	//rotation_inv = multMatrixByScalar(rotation, -1);
-	rotation_inv = getTranspose(rotation);
-	//getInverseOfMatrix(&rotation, &rotation_inv);
-
-	//Rotate gravity
-	Vector gravity_rot = multMatrixAndVector(rotation, gravity_calibrated);
-
-	//Remove gravity
-	accel_measuremt = addVectors(accel_measuremt, multVectorByScalar(gravity_rot, -1));
-
-//Compute Inertial Acceleration Vector
-	accel_inertial = multMatrixAndVector(rotation_inv, accel_measuremt); //rotation_inv
-
-//Remove gravity
-//	accel_inertial = addVectors(accel_inertial, multVectorByScalar(gravity_calibrated, -1));
-
-//Convert 1g to 9.81 m/s^2
-	accel_inertial = multVectorByScalar(accel_inertial, GRAVITY);
-
-//Handle first function call
-	if (*p_recent_ts == 0) {
+	//Handle first function call
+	if (recent_ts == 0) {
 		//Set recent timestamp
-		*p_recent_ts = *p_timestamp - (1000 / DMP_FIFO_RATE);
+		recent_ts = timestamp - (1000 / DMP_FIFO_RATE);
 
 		//Set recent velocity and speed
 		for (i = 0; i < NUMBER_OF_AXES; i++) {
-			p_recentVelocity->value[i] = 0.0;
-			p_recentPosition->value[i] = 0.0;
+			recentVelocity.value[i] = 0.0;
+			recentPosition.value[i] = 0.0;
 		}
 	}
 
-//Get time difference in s
-	time_diff = (*p_timestamp - *p_recent_ts) / 1000.0;
+	//Get time difference in s
+	time_diff = (timestamp - recent_ts) / 1000.0;
 
-//Compute Velocity
-	computeVelocity(p_recentVelocity, &accel_inertial, time_diff, &velocity);
+	//Compute Velocity
+	discreteIntegration(time_diff, &recentAccelInertial, &recentVelocity, &velocity);
 
-//Compute Position
-	computePosition(p_recentPosition, p_recentVelocity, &accel_inertial,
-			time_diff, &newPosition);
+	//Compute Position
+	discreteIntegration(time_diff, &recentVelocity, &recentPosition, &newPosition);
 
-//Set new Values
-	*p_recentAccelInertial = accel_inertial;
-	*p_recentVelocity = velocity;
-	*p_recentPosition = newPosition;
-	*p_recent_ts = *p_timestamp;
+	//Set new Values
+	recentAccelInertial = accel_inertial;
+	recentVelocity = velocity;
+	recentPosition = newPosition;
 }
 
 /*
@@ -945,7 +778,7 @@ int convertGyroData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]) 
 	}
 
 //convert data
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
+	for (i = 0; i <= NUMBER_OF_AXES; i++) {
 		converted[i] = raw[i] / sensitivity;
 	}
 
@@ -969,7 +802,7 @@ int convertAccData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]) {
 	}
 
 //convert data
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
+	for (i = 0; i <= NUMBER_OF_AXES; i++) {
 		converted[i] = raw[i] * 1.0 / sensitivity;
 	}
 
@@ -986,7 +819,7 @@ int convertCompassData(short raw[NUMBER_OF_AXES],
 	int i;
 
 //convert data
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
+	for (i = 0; i <= NUMBER_OF_AXES; i++) {
 		converted[i] = raw[i] * MAG_SENS_FRS_1200;
 	}
 
@@ -1043,7 +876,7 @@ int calibrateGyrAcc(unsigned int samples) {
 	float accel_bias_f[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 };
 
 //Init MPU
-//Initialize IMU first if required
+	//Initialize IMU first if required
 	if (imuAddr == 0) {
 		status = initMPU();
 		if (status != XST_SUCCESS) {
@@ -1076,7 +909,7 @@ int calibrateGyrAcc(unsigned int samples) {
 		return XST_FAILURE;
 	}
 
-//Reset FIFO
+	//Reset FIFO
 	status = mpu_reset_fifo();
 	if (status != XST_SUCCESS) {
 		gyrAccIsCal = 0;
@@ -1115,11 +948,8 @@ int calibrateGyrAcc(unsigned int samples) {
 		}
 	}
 
-//Save gravity for later
-	gravity_calibrated.value[GRAVITY_AXIS] = accel_bias_f[GRAVITY_AXIS];
-
-//Make sure gravity is not cancelled
-	accel_bias_f[GRAVITY_AXIS] = 0.0;
+//Make sure z axis acceleration (gravity) is not cancelled
+	accel_bias_f[2] = 0.0;
 
 //Convert biases
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
@@ -1173,7 +1003,7 @@ int calibrateGyrAcc(unsigned int samples) {
 		status = XST_FAILURE;
 	}
 
-//Print Success
+	//Print Success
 	if (status != XST_SUCCESS) {
 		myprintf("Calibration failed.\r\n");
 		return status;
@@ -1181,8 +1011,8 @@ int calibrateGyrAcc(unsigned int samples) {
 		myprintf("Calibration done.\r\n");
 	}
 
-//Sleep
-//sleep(1);
+	//Sleep
+	//sleep(1);
 
 //Free memory and return
 	free(more);
@@ -1198,18 +1028,18 @@ int readFromFifo(short *gyro, short *accel, long *quat,
 	int status = XST_FAILURE;
 
 //Increase count
-//	count++;
+	count++;
 
 //Make sure the read command is not called too often
 //	if (count >= 500) { //was: 500
-//	Reset Count, increment read count
-//	count = 0;
+	//Reset Count, increment read count
+	count = 0;
 
-//Read FIFO
+	//Read FIFO
 	status = dmp_read_fifo(gyro, accel, quat, timestamp, sensors, more);
 //		if (status != XST_SUCCESS) {
-//	usleep(1000); //sleep to prevent IIC bus from becoming busy (was: 100, worked ok with 10000)
-//	myprintf("mpu.c: Could not read DMP FIFO.\n\r");
+	//usleep(1000); //sleep to prevent IIC bus from becoming busy (was: 100, worked ok with 10000)
+	//myprintf("mpu.c: Could not read DMP FIFO.\n\r");
 //		}
 //	}
 
@@ -1222,17 +1052,17 @@ int readFromFifo(short *gyro, short *accel, long *quat,
  * Returns DMP FIFO Count
  */
 int getFifoCount() {
-//Variables
+	//Variables
 	int size;
 	unsigned char* data = (unsigned char*) malloc(100 * sizeof(char));
 
-//Read FIFO Count Registers
+	//Read FIFO Count Registers
 	imuI2cRead(imuAddr, 0x72, 2, data);
 
-//Convert
+	//Convert
 	size = (data[0] << 8) | data[1];
 
-//Free memory and return
+	//Free memory and return
 	free(data);
 	return size;
 }
@@ -1325,7 +1155,7 @@ int configureDMP(unsigned short int features, unsigned short fifoRate) {
 
 //Set flag, sleep and return
 	dmpReady = 1;
-//sleep(1); //don't remove or readings will be weird
+	//sleep(1); //don't remove or readings will be weird
 	return XST_SUCCESS;
 }
 
@@ -1368,7 +1198,7 @@ int initDMP() {
 		return XST_FAILURE;
 	}
 
-//Enable Interrupt
+	//Enable Interrupt
 //	status = setupMPUInt();
 //	if (status != XST_SUCCESS) {
 //		myprintf("mpu.c: Could not set up MPU interrupt.\r\n");

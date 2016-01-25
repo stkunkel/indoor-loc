@@ -169,7 +169,7 @@ void updateScene(int tty_fd){
 	
 	//Get Quaternions
 	status = sscanf(line, "%f %f %f %f", &w, &x, &y, &z);
-	if (status != 4 || w > 1.0 || x > 1.0 || y > 1.0 || z > 1.0){
+	if (status != 4 || std::abs(w) > 1.0 || std::abs(x) > 1.0 || std::abs(y) > 1.0 || std::abs(z) > 1.0){
 		//printf("Could not get Quaternion (%d).\r\n", status);
 		return;
 	}
