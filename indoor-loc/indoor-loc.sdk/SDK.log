@@ -8773,3 +8773,85 @@ con
 ----------------End of Script----------------
 
 16:01:28 INFO  : Launching XSDB server: xsdb -n /opt/Xilinx2/SDK/2015.3/scripts/xsdb/xsdb/xsdb-server.tcl
+07:37:28 INFO  : Launching XSDB server: xsdb -n /opt/Xilinx2/SDK/2015.3/scripts/xsdb/xsdb/xsdb-server.tcl
+07:37:31 INFO  : XSDB server has started successfully.
+11:39:46 INFO  : Launching XSDB server: xsdb -n /opt/Xilinx/SDK/2015.3/scripts/xsdb/xsdb/xsdb-server.tcl
+11:39:48 INFO  : XSDB server has started successfully.
+11:40:21 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+11:40:21 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent Zed 210248492852" && level==0} -index 1' command is executed.
+11:40:28 INFO  : FPGA configured successfully with bitstream "/home/rupprich/Documents/copy/Zynq_work/indoor-loc/indoor-loc/indoor-loc.sdk/design_1_wrapper_hw_platform_0/design_1_wrapper.bit"
+11:44:05 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent Zed 210248492852" && level==0} -index 1' command is executed.
+11:44:05 INFO  : 'fpga -state' command is executed.
+11:44:06 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+11:44:06 INFO  : Sourcing of '/home/rupprich/Documents/copy/Zynq_work/indoor-loc/indoor-loc/indoor-loc.sdk/design_1_wrapper_hw_platform_0/ps7_init.tcl' is done.
+11:44:06 INFO  : 'targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent Zed 210248492852"} -index 0' command is executed.
+11:44:06 INFO  : Hardware design information is loaded from '/home/rupprich/Documents/copy/Zynq_work/indoor-loc/indoor-loc/indoor-loc.sdk/design_1_wrapper_hw_platform_0/system.hdf'.
+11:44:06 INFO  : 'targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent Zed 210248492852"} -index 0' command is executed.
+11:44:08 INFO  : 'ps7_init' command is executed.
+11:44:08 INFO  : 'ps7_post_config' command is executed.
+11:44:08 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+11:44:08 INFO  : Processor reset is completed for 'ps7_cortexa9_0'.
+11:44:09 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+11:44:09 INFO  : The application '/home/rupprich/Documents/copy/Zynq_work/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/IndoorLoc.elf' is downloaded to processor 'ps7_cortexa9_0'.
+11:44:09 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+source /home/rupprich/Documents/copy/Zynq_work/indoor-loc/indoor-loc/indoor-loc.sdk/design_1_wrapper_hw_platform_0/ps7_init.tcl
+targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent Zed 210248492852"} -index 0
+loadhw /home/rupprich/Documents/copy/Zynq_work/indoor-loc/indoor-loc/indoor-loc.sdk/design_1_wrapper_hw_platform_0/system.hdf
+targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent Zed 210248492852"} -index 0
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent Zed 210248492852"} -index 0
+rst -processor
+targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent Zed 210248492852"} -index 0
+dow /home/rupprich/Documents/copy/Zynq_work/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/IndoorLoc.elf
+----------------End of Script----------------
+
+11:44:09 INFO  : Memory regions updated for context APU
+11:44:10 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+11:44:10 INFO  : 'con' command is executed.
+11:44:10 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent Zed 210248492852"} -index 0
+con
+----------------End of Script----------------
+
+11:45:24 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+11:45:25 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent Zed 210248492852" && level==0} -index 1' command is executed.
+11:45:29 INFO  : FPGA configured successfully with bitstream "/home/rupprich/Documents/copy/Zynq_work/indoor-loc/indoor-loc/indoor-loc.sdk/design_1_wrapper_hw_platform_0/design_1_wrapper.bit"
+11:46:31 INFO  : Disconnected from the channel tcfchan#1.
+11:46:32 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent Zed 210248492852" && level==0} -index 1' command is executed.
+11:46:32 INFO  : 'fpga -state' command is executed.
+11:46:32 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+11:46:32 INFO  : Sourcing of '/home/rupprich/Documents/copy/Zynq_work/indoor-loc/indoor-loc/indoor-loc.sdk/design_1_wrapper_hw_platform_0/ps7_init.tcl' is done.
+11:46:32 INFO  : 'targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent Zed 210248492852"} -index 0' command is executed.
+11:46:33 INFO  : Hardware design information is loaded from '/home/rupprich/Documents/copy/Zynq_work/indoor-loc/indoor-loc/indoor-loc.sdk/design_1_wrapper_hw_platform_0/system.hdf'.
+11:46:33 INFO  : 'targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent Zed 210248492852"} -index 0' command is executed.
+11:46:34 INFO  : 'ps7_init' command is executed.
+11:46:35 INFO  : 'ps7_post_config' command is executed.
+11:46:35 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+11:46:35 INFO  : Processor reset is completed for 'ps7_cortexa9_0'.
+11:46:35 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+11:46:36 INFO  : The application '/home/rupprich/Documents/copy/Zynq_work/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/IndoorLoc.elf' is downloaded to processor 'ps7_cortexa9_0'.
+11:46:36 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+source /home/rupprich/Documents/copy/Zynq_work/indoor-loc/indoor-loc/indoor-loc.sdk/design_1_wrapper_hw_platform_0/ps7_init.tcl
+targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent Zed 210248492852"} -index 0
+loadhw /home/rupprich/Documents/copy/Zynq_work/indoor-loc/indoor-loc/indoor-loc.sdk/design_1_wrapper_hw_platform_0/system.hdf
+targets -set -filter {name =~"APU" && jtag_cable_name =~ "Digilent Zed 210248492852"} -index 0
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent Zed 210248492852"} -index 0
+rst -processor
+targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent Zed 210248492852"} -index 0
+dow /home/rupprich/Documents/copy/Zynq_work/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/IndoorLoc.elf
+----------------End of Script----------------
+
+11:46:36 INFO  : Memory regions updated for context APU
+11:46:36 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+11:46:36 INFO  : 'con' command is executed.
+11:46:36 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "ARM*#0" && jtag_cable_name =~ "Digilent Zed 210248492852"} -index 0
+con
+----------------End of Script----------------
+
+11:47:37 INFO  : Launching XSDB server: xsdb -n /opt/Xilinx/SDK/2015.3/scripts/xsdb/xsdb/xsdb-server.tcl

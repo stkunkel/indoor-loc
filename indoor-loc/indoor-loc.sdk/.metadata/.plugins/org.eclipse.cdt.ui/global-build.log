@@ -5628,3 +5628,197 @@ Finished building: IndoorLoc.elf.size
 16:00:04 **** Incremental Build of configuration Debug for project IndoorLoc ****
 make all 
 make: Nothing to be done for 'all'.
+11:43:53 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/zedboard/iic_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/zedboard/iic_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/zedboard/iic_utils.d" -MT"src/zedboard/iic_utils.d" -o "src/zedboard/iic_utils.o" "../src/zedboard/iic_utils.c"
+Finished building: ../src/zedboard/iic_utils.c
+ 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_gpio_timer_minimal_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'pwmTest':
+../src/robot/pwmsw.c:95:5: warning: implicit declaration of function 'radToDeg' [-Wimplicit-function-declaration]
+     radToDeg(valToAngle(jointVal[reg], val)));
+     ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building file: ../src/imu/mpu9150/inv_mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu9150/inv_mpu.o" -I../../IndoorLoc_gpio_timer_minimal_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu9150/inv_mpu.d" -MT"src/imu/mpu9150/inv_mpu.d" -o "src/imu/mpu9150/inv_mpu.o" "../src/imu/mpu9150/inv_mpu.c"
+Finished building: ../src/imu/mpu9150/inv_mpu.c
+ 
+Building file: ../src/imu/mpu9150/inv_mpu_dmp_motion_driver.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu9150/inv_mpu_dmp_motion_driver.o" -I../../IndoorLoc_gpio_timer_minimal_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu9150/inv_mpu_dmp_motion_driver.d" -MT"src/imu/mpu9150/inv_mpu_dmp_motion_driver.d" -o "src/imu/mpu9150/inv_mpu_dmp_motion_driver.o" "../src/imu/mpu9150/inv_mpu_dmp_motion_driver.c"
+Finished building: ../src/imu/mpu9150/inv_mpu_dmp_motion_driver.c
+ 
+Building file: ../src/imu/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu.o" -I../../IndoorLoc_gpio_timer_minimal_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu.d" -MT"src/imu/mpu.d" -o "src/imu/mpu.o" "../src/imu/mpu.c"
+../src/imu/mpu.c:47:1: warning: excess elements in scalar initializer
+ static long glob_gyro_bias = { 0, 0, 0 };
+ ^
+../src/imu/mpu.c:47:1: warning: (near initialization for 'glob_gyro_bias')
+../src/imu/mpu.c:47:1: warning: excess elements in scalar initializer
+../src/imu/mpu.c:47:1: warning: (near initialization for 'glob_gyro_bias')
+../src/imu/mpu.c:48:1: warning: excess elements in scalar initializer
+ static long glob_accel_bias = { 0, 0, 0 };
+ ^
+../src/imu/mpu.c:48:1: warning: (near initialization for 'glob_accel_bias')
+../src/imu/mpu.c:48:1: warning: excess elements in scalar initializer
+../src/imu/mpu.c:48:1: warning: (near initialization for 'glob_accel_bias')
+../src/imu/mpu.c: In function 'initDMP':
+../src/imu/mpu.c:1360:7: warning: unused variable 'accel_bias' [-Wunused-variable]
+  long accel_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
+       ^
+../src/imu/mpu.c:1359:7: warning: unused variable 'gyro_bias' [-Wunused-variable]
+  long gyro_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
+       ^
+../src/imu/mpu.c: At top level:
+../src/imu/mpu.c:44:12: warning: 'count' defined but not used [-Wunused-variable]
+ static int count = 0;
+            ^
+Finished building: ../src/imu/mpu.c
+ 
+Building file: ../src/imu/mpu_int.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu_int.o" -I../../IndoorLoc_gpio_timer_minimal_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu_int.d" -MT"src/imu/mpu_int.d" -o "src/imu/mpu_int.o" "../src/imu/mpu_int.c"
+Finished building: ../src/imu/mpu_int.c
+ 
+Building file: ../src/imu/mpu_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu_utils.d" -MT"src/imu/mpu_utils.d" -o "src/imu/mpu_utils.o" "../src/imu/mpu_utils.c"
+Finished building: ../src/imu/mpu_utils.c
+ 
+Building file: ../src/math_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/math_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/math_utils.d" -MT"src/math_utils.d" -o "src/math_utils.o" "../src/math_utils.c"
+Finished building: ../src/math_utils.c
+ 
+Building file: ../src/print_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/print_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/print_utils.d" -MT"src/print_utils.d" -o "src/print_utils.o" "../src/print_utils.c"
+Finished building: ../src/print_utils.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_gpio_timer_minimal_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:40:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
+  int status = XST_SUCCESS;
+      ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Documents/copy/Zynq_work/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 192588	   3240	  24616	 220444	  35d1c	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+11:44:02 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+11:45:14 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/zedboard/iic_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/zedboard/iic_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/zedboard/iic_utils.d" -MT"src/zedboard/iic_utils.d" -o "src/zedboard/iic_utils.o" "../src/zedboard/iic_utils.c"
+Finished building: ../src/zedboard/iic_utils.c
+ 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_gpio_timer_minimal_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'pwmTest':
+../src/robot/pwmsw.c:95:5: warning: implicit declaration of function 'radToDeg' [-Wimplicit-function-declaration]
+     radToDeg(valToAngle(jointVal[reg], val)));
+     ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building file: ../src/imu/mpu9150/inv_mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu9150/inv_mpu.o" -I../../IndoorLoc_gpio_timer_minimal_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu9150/inv_mpu.d" -MT"src/imu/mpu9150/inv_mpu.d" -o "src/imu/mpu9150/inv_mpu.o" "../src/imu/mpu9150/inv_mpu.c"
+Finished building: ../src/imu/mpu9150/inv_mpu.c
+ 
+Building file: ../src/imu/mpu9150/inv_mpu_dmp_motion_driver.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu9150/inv_mpu_dmp_motion_driver.o" -I../../IndoorLoc_gpio_timer_minimal_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu9150/inv_mpu_dmp_motion_driver.d" -MT"src/imu/mpu9150/inv_mpu_dmp_motion_driver.d" -o "src/imu/mpu9150/inv_mpu_dmp_motion_driver.o" "../src/imu/mpu9150/inv_mpu_dmp_motion_driver.c"
+Finished building: ../src/imu/mpu9150/inv_mpu_dmp_motion_driver.c
+ 
+Building file: ../src/imu/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu.o" -I../../IndoorLoc_gpio_timer_minimal_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu.d" -MT"src/imu/mpu.d" -o "src/imu/mpu.o" "../src/imu/mpu.c"
+../src/imu/mpu.c:47:1: warning: excess elements in scalar initializer
+ static long glob_gyro_bias = { 0, 0, 0 };
+ ^
+../src/imu/mpu.c:47:1: warning: (near initialization for 'glob_gyro_bias')
+../src/imu/mpu.c:47:1: warning: excess elements in scalar initializer
+../src/imu/mpu.c:47:1: warning: (near initialization for 'glob_gyro_bias')
+../src/imu/mpu.c:48:1: warning: excess elements in scalar initializer
+ static long glob_accel_bias = { 0, 0, 0 };
+ ^
+../src/imu/mpu.c:48:1: warning: (near initialization for 'glob_accel_bias')
+../src/imu/mpu.c:48:1: warning: excess elements in scalar initializer
+../src/imu/mpu.c:48:1: warning: (near initialization for 'glob_accel_bias')
+../src/imu/mpu.c: In function 'initDMP':
+../src/imu/mpu.c:1360:7: warning: unused variable 'accel_bias' [-Wunused-variable]
+  long accel_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
+       ^
+../src/imu/mpu.c:1359:7: warning: unused variable 'gyro_bias' [-Wunused-variable]
+  long gyro_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
+       ^
+../src/imu/mpu.c: At top level:
+../src/imu/mpu.c:44:12: warning: 'count' defined but not used [-Wunused-variable]
+ static int count = 0;
+            ^
+Finished building: ../src/imu/mpu.c
+ 
+Building file: ../src/imu/mpu_int.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu_int.o" -I../../IndoorLoc_gpio_timer_minimal_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu_int.d" -MT"src/imu/mpu_int.d" -o "src/imu/mpu_int.o" "../src/imu/mpu_int.c"
+Finished building: ../src/imu/mpu_int.c
+ 
+Building file: ../src/imu/mpu_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu_utils.d" -MT"src/imu/mpu_utils.d" -o "src/imu/mpu_utils.o" "../src/imu/mpu_utils.c"
+Finished building: ../src/imu/mpu_utils.c
+ 
+Building file: ../src/math_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/math_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/math_utils.d" -MT"src/math_utils.d" -o "src/math_utils.o" "../src/math_utils.c"
+Finished building: ../src/math_utils.c
+ 
+Building file: ../src/print_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/print_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/print_utils.d" -MT"src/print_utils.d" -o "src/print_utils.o" "../src/print_utils.c"
+Finished building: ../src/print_utils.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_gpio_timer_minimal_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:40:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
+  int status = XST_SUCCESS;
+      ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Documents/copy/Zynq_work/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 192908	   3240	  24616	 220764	  35e5c	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+11:46:30 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
