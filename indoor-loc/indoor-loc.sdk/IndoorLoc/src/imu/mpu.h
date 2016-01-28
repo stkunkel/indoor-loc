@@ -37,10 +37,10 @@
 #define QUATERNION_SCALING		1073741824	//Internal values: 1.0 is scaled to 2^30 = 1073741824 (msp430/eMD-6.0/core/mllite/results_holder.c --> inv_get_6axis_quaternion)
 #define SENSOR_TEMP				0x80		//my define
 #define SENSORS_ALL				INV_XYZ_GYRO | INV_XYZ_ACCEL | INV_XYZ_COMPASS | SENSOR_TEMP//all sensors
-#define FEATURES_CAL			DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_SEND_CAL_GYRO | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_TAP //DMP_FEATURE_TAP for ensure DMP sends interrupts at specified rate
-#define FEATURES_RAW			DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_SEND_RAW_GYRO | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_TAP //DMP_FEATURE_TAP for ensure DMP sends interrupts at specified rate
+#define FEATURES_CAL			(DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_SEND_CAL_GYRO | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_TAP) //DMP_FEATURE_TAP for ensure DMP sends interrupts at specified rate
+#define FEATURES_RAW			(DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_SEND_RAW_GYRO | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_TAP) //DMP_FEATURE_TAP for ensure DMP sends interrupts at specified rate
 #define MPU_SAMPLE_RATE			200			//Hz
-#define DMP_FIFO_RATE			100			//Hz (100)
+#define DMP_FIFO_RATE			200			//Hz (190 for IMU Viewer and kermit)
 #define CAL_SAMPLES				1000		//TODO: increase to 10000
 #define GYRO_CAL_MASK			0x01
 #define ACCEL_CAL_MASK			0x02

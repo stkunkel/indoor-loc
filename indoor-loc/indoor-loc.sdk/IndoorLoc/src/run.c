@@ -53,13 +53,13 @@ int main() {
 	//status = printDataUsingDMP(0, 0, DATA_WITH_DMP_RUNS);
 
 	//Print Data with DMP with initial calibration but no DMP gyro calibration
-//	status = printDataUsingDMP(1, 0, DATA_WITH_DMP_RUNS);
+	status = printDataUsingDMP(1, 0, DATA_WITH_DMP_RUNS);
 
 	//Print Data with DMP with and DMP gyro calibration
 	//status = printDataUsingDMP(1, 1, DATA_WITH_DMP_RUNS);
 
 	//Print Quaternions and Position to Serial Port
-	status = printForImuViewer(1, 1, QUAT_DISPLAY_RUNS);
+//	status = printForImuViewer(1, 1, QUAT_DISPLAY_RUNS);
 
 	//Quaternion Drift
 	//status = printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
@@ -150,23 +150,22 @@ int printForImuViewer(char printQuat, char printPos, unsigned int numberOfRuns) 
 			//Check whether data should be printed
 			printcnt++;
 			if (status == XST_SUCCESS) {
-				//Toggle LED
-				//toggleLed(LED_MASK);
+				//LED Run
 				ledRun();
 
-				if ((printcnt % (DMP_FIFO_RATE / 10)) == 0) {
+				if ((printcnt % (DMP_FIFO_RATE / IMUVIEWER_FREQ)) == 0) {
 					//Reset printcnt
 					printcnt = 0;
 
-//					//Print
-//					status = printforDisplay(printQuat, printPos);
-//
-//					//Print new line
-//					if (status == XST_SUCCESS) {
-//						printf("\n\r");
-//					} else {
-//						cnt--;
-//					}
+					//Print
+					status = printforDisplay(printQuat, printPos);
+
+					//Print new line
+					if (status == XST_SUCCESS) {
+						printf("\n\r");
+					} else {
+						cnt--;
+					}
 				}
 			} else {
 				cnt--;
@@ -241,7 +240,7 @@ int printDataUsingDMP(char initialCalibration, char dmpCalibration,
 			//Check whether data should be printed
 			printcnt++;
 			if (status == XST_SUCCESS) {
-				if ((printcnt % (DMP_FIFO_RATE / 10)) == 0) {
+				if ((printcnt % (DMP_FIFO_RATE / IMUVIEWER_FREQ)) == 0) {
 					//Reset printcnt
 					printcnt = 0;
 
