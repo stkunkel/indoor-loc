@@ -1,11 +1,11 @@
-14:40:53 **** Clean-only build of configuration Debug for project IndoorLoc ****
+16:00:11 **** Clean-only build of configuration Debug for project IndoorLoc ****
 make clean 
 rm -rf  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o  ./src/zedboard/gpio_utils.d ./src/zedboard/iic_utils.d ./src/zedboard/time_utils.d  ./src/robot/pwmsw.d  ./src/imu/mpu9150/mpl/data_builder.d ./src/imu/mpu9150/mpl/eMPL_outputs.d ./src/imu/mpu9150/mpl/hal_outputs.d ./src/imu/mpu9150/mpl/message_layer.d ./src/imu/mpu9150/mpl/ml_math_func.d ./src/imu/mpu9150/mpl/mlmath.d ./src/imu/mpu9150/mpl/mpl.d ./src/imu/mpu9150/mpl/results_holder.d ./src/imu/mpu9150/mpl/start_manager.d ./src/imu/mpu9150/mpl/storage_manager.d  ./src/imu/mpu9150/inv_mpu.d ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.d  ./src/imu/mpu.d ./src/imu/mpu_int.d ./src/imu/mpu_utils.d  ./src/math_utils.d ./src/platform.d ./src/print_utils.d ./src/run.d  IndoorLoc.elf.size  IndoorLoc.elf
  
-14:40:53 **** Clean-only build of project IndoorLoc_gpio_timer_minimal_bsp_1 ****
+16:00:11 **** Clean-only build of project IndoorLoc_gpio_timer_minimal_bsp_1 ****
 make -k clean 
 rm -f ps7_cortexa9_0/lib/libxil.a
-14:40:53 **** Build of project IndoorLoc_gpio_timer_minimal_bsp_1 ****
+16:00:11 **** Build of project IndoorLoc_gpio_timer_minimal_bsp_1 ****
 make -k all 
 Running Make include in ps7_cortexa9_0/libsrc/ddrps_v1_0/src
 make -C ps7_cortexa9_0/libsrc/ddrps_v1_0/src -s include  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
@@ -99,11 +99,19 @@ Running Make libs in ps7_cortexa9_0/libsrc/qspips_v3_2/src
 make -C ps7_cortexa9_0/libsrc/qspips_v3_2/src -s libs  "SHELL=/bin/sh" "COMPILER=arm-xilinx-eabi-gcc" "ARCHIVER=arm-xilinx-eabi-ar" "COMPILER_FLAGS=  -O2 -c" "EXTRA_COMPILER_FLAGS=-g"
 Compiling qspips
 Finished building libraries
-14:41:01 **** Build of configuration Debug for project IndoorLoc ****
+16:00:19 **** Build of configuration Debug for project IndoorLoc ****
 make all 
 Building file: ../src/zedboard/gpio_utils.c
 Invoking: ARM gcc compiler
 arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/zedboard/gpio_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/zedboard/gpio_utils.d" -MT"src/zedboard/gpio_utils.d" -o "src/zedboard/gpio_utils.o" "../src/zedboard/gpio_utils.c"
+../src/zedboard/gpio_utils.c: In function 'testLedRun':
+../src/zedboard/gpio_utils.c:23:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
+  int status;
+      ^
+../src/zedboard/gpio_utils.c: In function 'testToggleLed':
+../src/zedboard/gpio_utils.c:40:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
+  int status;
+      ^
 Finished building: ../src/zedboard/gpio_utils.c
  
 Building file: ../src/zedboard/iic_utils.c
@@ -301,7 +309,7 @@ Building file: ../src/run.c
 Invoking: ARM gcc compiler
 arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
 ../src/run.c: In function 'main':
-../src/run.c:40:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
+../src/run.c:41:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
   int status = XST_SUCCESS;
       ^
 Finished building: ../src/run.c
@@ -309,355 +317,29 @@ Finished building: ../src/run.c
 Building target: IndoorLoc.elf
 Invoking: ARM gcc linker
 arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-./src/zedboard/gpio_utils.o: In function `initGpio':
-/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/zedboard/gpio_utils.c:32: undefined reference to `XGpio_Initialize'
-/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/zedboard/gpio_utils.c:36: undefined reference to `XGpio_DiscreteWrite'
-collect2: error: ld returned 1 exit status
-make: *** [IndoorLoc.elf] Error 1
-14:42:17 **** Build of configuration Debug for project test ****
-make all 
-Building file: ../src/testperiph.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/testperiph.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/testperiph.d" -MT"src/testperiph.d" -o "src/testperiph.o" "../src/testperiph.c"
-Finished building: ../src/testperiph.c
- 
-Building file: ../src/xdevcfg_selftest_example.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/xdevcfg_selftest_example.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/xdevcfg_selftest_example.d" -MT"src/xdevcfg_selftest_example.d" -o "src/xdevcfg_selftest_example.o" "../src/xdevcfg_selftest_example.c"
-Finished building: ../src/xdevcfg_selftest_example.c
- 
-Building file: ../src/xdmaps_example_w_intr.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/xdmaps_example_w_intr.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/xdmaps_example_w_intr.d" -MT"src/xdmaps_example_w_intr.d" -o "src/xdmaps_example_w_intr.o" "../src/xdmaps_example_w_intr.c"
-Finished building: ../src/xdmaps_example_w_intr.c
- 
-Building file: ../src/xgpio_intr_tapp_example.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/xgpio_intr_tapp_example.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/xgpio_intr_tapp_example.d" -MT"src/xgpio_intr_tapp_example.d" -o "src/xgpio_intr_tapp_example.o" "../src/xgpio_intr_tapp_example.c"
-Finished building: ../src/xgpio_intr_tapp_example.c
- 
-Building file: ../src/xgpio_tapp_example.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/xgpio_tapp_example.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/xgpio_tapp_example.d" -MT"src/xgpio_tapp_example.d" -o "src/xgpio_tapp_example.o" "../src/xgpio_tapp_example.c"
-../src/xgpio_tapp_example.c: In function 'GpioOutputExample':
-../src/xgpio_tapp_example.c:172:6: warning: unused variable 'Data' [-Wunused-variable]
-  u32 Data;
-      ^
-Finished building: ../src/xgpio_tapp_example.c
- 
-Building file: ../src/xiicps_selftest_example.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/xiicps_selftest_example.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/xiicps_selftest_example.d" -MT"src/xiicps_selftest_example.d" -o "src/xiicps_selftest_example.o" "../src/xiicps_selftest_example.c"
-Finished building: ../src/xiicps_selftest_example.c
- 
-Building file: ../src/xqspips_selftest_example.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/xqspips_selftest_example.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/xqspips_selftest_example.d" -MT"src/xqspips_selftest_example.d" -o "src/xqspips_selftest_example.o" "../src/xqspips_selftest_example.c"
-Finished building: ../src/xqspips_selftest_example.c
- 
-Building file: ../src/xscugic_tapp_example.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/xscugic_tapp_example.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/xscugic_tapp_example.d" -MT"src/xscugic_tapp_example.d" -o "src/xscugic_tapp_example.o" "../src/xscugic_tapp_example.c"
-Finished building: ../src/xscugic_tapp_example.c
- 
-Building file: ../src/xscutimer_intr_example.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/xscutimer_intr_example.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/xscutimer_intr_example.d" -MT"src/xscutimer_intr_example.d" -o "src/xscutimer_intr_example.o" "../src/xscutimer_intr_example.c"
-Finished building: ../src/xscutimer_intr_example.c
- 
-Building file: ../src/xscutimer_polled_example.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/xscutimer_polled_example.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/xscutimer_polled_example.d" -MT"src/xscutimer_polled_example.d" -o "src/xscutimer_polled_example.o" "../src/xscutimer_polled_example.c"
-Finished building: ../src/xscutimer_polled_example.c
- 
-Building file: ../src/xscuwdt_intr_example.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/xscuwdt_intr_example.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/xscuwdt_intr_example.d" -MT"src/xscuwdt_intr_example.d" -o "src/xscuwdt_intr_example.o" "../src/xscuwdt_intr_example.c"
-Finished building: ../src/xscuwdt_intr_example.c
- 
-Building file: ../src/xtmrctr_intr_example.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/xtmrctr_intr_example.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/xtmrctr_intr_example.d" -MT"src/xtmrctr_intr_example.d" -o "src/xtmrctr_intr_example.o" "../src/xtmrctr_intr_example.c"
-Finished building: ../src/xtmrctr_intr_example.c
- 
-Building file: ../src/xtmrctr_selftest_example.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/xtmrctr_selftest_example.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/xtmrctr_selftest_example.d" -MT"src/xtmrctr_selftest_example.d" -o "src/xtmrctr_selftest_example.o" "../src/xtmrctr_selftest_example.c"
-Finished building: ../src/xtmrctr_selftest_example.c
- 
-Building file: ../src/xttcps_tapp_example.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/xttcps_tapp_example.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/xttcps_tapp_example.d" -MT"src/xttcps_tapp_example.d" -o "src/xttcps_tapp_example.o" "../src/xttcps_tapp_example.c"
-Finished building: ../src/xttcps_tapp_example.c
- 
-Building target: test.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "test.elf"  ./src/testperiph.o ./src/xdevcfg_selftest_example.o ./src/xdmaps_example_w_intr.o ./src/xgpio_intr_tapp_example.o ./src/xgpio_tapp_example.o ./src/xiicps_selftest_example.o ./src/xqspips_selftest_example.o ./src/xscugic_tapp_example.o ./src/xscutimer_intr_example.o ./src/xscutimer_polled_example.o ./src/xscuwdt_intr_example.o ./src/xtmrctr_intr_example.o ./src/xtmrctr_selftest_example.o ./src/xttcps_tapp_example.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: test.elf
+Finished building target: IndoorLoc.elf
  
 Invoking: ARM Print Size
-arm-xilinx-eabi-size test.elf  |tee "test.elf.size"
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
    text	   data	    bss	    dec	    hex	filename
-  69016	   2152	  33680	 104848	  19990	test.elf
-Finished building: test.elf.size
+ 194312	   3256	  24648	 222216	  36408	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
  
-14:42:18 **** Auto Build of configuration Debug for project test ****
+16:00:32 **** Incremental Build of configuration Debug for project IndoorLoc ****
 make all 
 make: Nothing to be done for `all'.
-14:42:52 **** Auto Build of configuration Debug for project IndoorLoc ****
+16:02:34 **** Auto Build of configuration Debug for project IndoorLoc ****
 make all 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-./src/zedboard/gpio_utils.o: In function `initGpio':
-/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/zedboard/gpio_utils.c:32: undefined reference to `XGpio_Initialize'
-/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/zedboard/gpio_utils.c:36: undefined reference to `XGpio_DiscreteWrite'
-collect2: error: ld returned 1 exit status
-make: *** [IndoorLoc.elf] Error 1
-14:43:08 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-./src/zedboard/gpio_utils.o: In function `initGpio':
-/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/zedboard/gpio_utils.c:32: undefined reference to `XGpio_Initialize'
-/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/Debug/../src/zedboard/gpio_utils.c:36: undefined reference to `XGpio_DiscreteWrite'
-collect2: error: ld returned 1 exit status
-make: *** [IndoorLoc.elf] Error 1
-14:45:46 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 193992	   3256	  24648	 221896	  362c8	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-14:46:52 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/zedboard/gpio_utils.c
+Building file: ../src/imu/mpu.c
 Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/zedboard/gpio_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/zedboard/gpio_utils.d" -MT"src/zedboard/gpio_utils.d" -o "src/zedboard/gpio_utils.o" "../src/zedboard/gpio_utils.c"
-Finished building: ../src/zedboard/gpio_utils.c
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu.d" -MT"src/imu/mpu.d" -o "src/imu/mpu.o" "../src/imu/mpu.c"
+Finished building: ../src/imu/mpu.c
  
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 193992	   3256	  24648	 221896	  362c8	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-14:48:36 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/run.c
+Building file: ../src/imu/mpu_int.c
 Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
-../src/run.c:17:24: fatal error: gpio_utils.h: No such file or directory
- #include "gpio_utils.h"
-                        ^
-compilation terminated.
-make: *** [src/run.o] Error 1
-14:48:41 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/run.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
-../src/run.c:17:27: fatal error: ../gpio_utils.h: No such file or directory
- #include "../gpio_utils.h"
-                           ^
-compilation terminated.
-make: *** [src/run.o] Error 1
-14:48:53 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/run.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
-In file included from ../src/run.c:17:0:
-../src/zedboard/gpio_utils.h:19:0: warning: "GPIO_DEVICE_ID" redefined
- #define GPIO_DEVICE_ID XPAR_AXI_GPIO_0_DEVICE_ID
- ^
-In file included from ../src/imu/mpu.h:14:0,
-                 from ../src/run.c:14:
-../src/imu/mpu_int.h:23:0: note: this is the location of the previous definition
- #define GPIO_DEVICE_ID  XPAR_XGPIOPS_0_DEVICE_ID
- ^
-../src/run.c: In function 'main':
-../src/run.c:81:3: warning: implicit declaration of function 'toggleLed' [-Wimplicit-function-declaration]
-   toggleLed();
-   ^
-../src/run.c:41:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
-  int status = XST_SUCCESS;
-      ^
-Finished building: ../src/run.c
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu_int.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu_int.d" -MT"src/imu/mpu_int.d" -o "src/imu/mpu_int.o" "../src/imu/mpu_int.c"
+Finished building: ../src/imu/mpu_int.c
  
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 193992	   3256	  24648	 221896	  362c8	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-14:49:19 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/zedboard/gpio_utils.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/zedboard/gpio_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/zedboard/gpio_utils.d" -MT"src/zedboard/gpio_utils.d" -o "src/zedboard/gpio_utils.o" "../src/zedboard/gpio_utils.c"
-../src/zedboard/gpio_utils.c: In function 'initGpio':
-../src/zedboard/gpio_utils.c:33:35: error: 'GPIO_DEVICE_ID' undeclared (first use in this function)
-  status = XGpio_Initialize(&gpio, GPIO_DEVICE_ID);
-                                   ^
-../src/zedboard/gpio_utils.c:33:35: note: each undeclared identifier is reported only once for each function it appears in
-make: *** [src/zedboard/gpio_utils.o] Error 1
-14:49:25 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/zedboard/gpio_utils.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/zedboard/gpio_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/zedboard/gpio_utils.d" -MT"src/zedboard/gpio_utils.d" -o "src/zedboard/gpio_utils.o" "../src/zedboard/gpio_utils.c"
-Finished building: ../src/zedboard/gpio_utils.c
- 
-Building file: ../src/run.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
-../src/run.c: In function 'main':
-../src/run.c:81:3: warning: implicit declaration of function 'toggleLed' [-Wimplicit-function-declaration]
-   toggleLed();
-   ^
-../src/run.c:41:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
-  int status = XST_SUCCESS;
-      ^
-Finished building: ../src/run.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 193992	   3256	  24648	 221896	  362c8	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-14:49:55 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/zedboard/gpio_utils.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/zedboard/gpio_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/zedboard/gpio_utils.d" -MT"src/zedboard/gpio_utils.d" -o "src/zedboard/gpio_utils.o" "../src/zedboard/gpio_utils.c"
-../src/zedboard/gpio_utils.c: In function 'testToggleLed':
-../src/zedboard/gpio_utils.c:22:3: warning: implicit declaration of function 'toggleLed' [-Wimplicit-function-declaration]
-   toggleLed();
-   ^
-../src/zedboard/gpio_utils.c: At top level:
-../src/zedboard/gpio_utils.c:29:6: warning: conflicting types for 'toggleLed'
- void toggleLed(){
-      ^
-../src/zedboard/gpio_utils.c:22:3: note: previous implicit declaration of 'toggleLed' was here
-   toggleLed();
-   ^
-Finished building: ../src/zedboard/gpio_utils.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 193992	   3256	  24648	 221896	  362c8	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-14:50:16 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/zedboard/gpio_utils.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/zedboard/gpio_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/zedboard/gpio_utils.d" -MT"src/zedboard/gpio_utils.d" -o "src/zedboard/gpio_utils.o" "../src/zedboard/gpio_utils.c"
-Finished building: ../src/zedboard/gpio_utils.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 193992	   3256	  24648	 221896	  362c8	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-14:51:21 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/zedboard/gpio_utils.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/zedboard/gpio_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/zedboard/gpio_utils.d" -MT"src/zedboard/gpio_utils.d" -o "src/zedboard/gpio_utils.o" "../src/zedboard/gpio_utils.c"
-../src/zedboard/gpio_utils.c: In function 'testToggleLed':
-../src/zedboard/gpio_utils.c:30:2: warning: implicit declaration of function 'initGpio' [-Wimplicit-function-declaration]
-  status = initGpio();
-  ^
-../src/zedboard/gpio_utils.c:27:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
-  int status;
-      ^
-Finished building: ../src/zedboard/gpio_utils.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 194056	   3256	  24648	 221960	  36308	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-14:51:22 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/zedboard/gpio_utils.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/zedboard/gpio_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/zedboard/gpio_utils.d" -MT"src/zedboard/gpio_utils.d" -o "src/zedboard/gpio_utils.o" "../src/zedboard/gpio_utils.c"
-../src/zedboard/gpio_utils.c: In function 'testToggleLed':
-../src/zedboard/gpio_utils.c:27:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
-  int status;
-      ^
-Finished building: ../src/zedboard/gpio_utils.c
- 
-Building file: ../src/run.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
-../src/run.c: In function 'main':
-../src/run.c:81:3: warning: implicit declaration of function 'toggleLed' [-Wimplicit-function-declaration]
-   toggleLed();
-   ^
-../src/run.c:41:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
-  int status = XST_SUCCESS;
-      ^
-Finished building: ../src/run.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 194056	   3256	  24648	 221960	  36308	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-14:51:57 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
 Building file: ../src/run.c
 Invoking: ARM gcc compiler
 arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
@@ -675,116 +357,500 @@ Finished building target: IndoorLoc.elf
 Invoking: ARM Print Size
 arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
    text	   data	    bss	    dec	    hex	filename
- 194056	   3256	  24648	 221960	  36308	IndoorLoc.elf
+ 194312	   3256	  24648	 222216	  36408	IndoorLoc.elf
 Finished building: IndoorLoc.elf.size
  
-14:52:05 **** Auto Build of configuration Debug for project IndoorLoc ****
+16:03:57 **** Incremental Build of configuration Debug for project IndoorLoc ****
 make all 
-Building file: ../src/zedboard/gpio_utils.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/zedboard/gpio_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/zedboard/gpio_utils.d" -MT"src/zedboard/gpio_utils.d" -o "src/zedboard/gpio_utils.o" "../src/zedboard/gpio_utils.c"
-../src/zedboard/gpio_utils.c: In function 'testToggleLed':
-../src/zedboard/gpio_utils.c:35:3: warning: implicit declaration of function 'usleep' [-Wimplicit-function-declaration]
-   usleep(100);
-   ^
-../src/zedboard/gpio_utils.c:27:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
-  int status;
-      ^
-Finished building: ../src/zedboard/gpio_utils.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 194056	   3256	  24648	 221960	  36308	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-14:52:23 **** Auto Build of configuration Debug for project IndoorLoc ****
+make: Nothing to be done for `all'.
+16:04:51 **** Auto Build of configuration Debug for project IndoorLoc ****
 make all 
-Building file: ../src/zedboard/gpio_utils.c
+Building file: ../src/zedboard/iic_utils.c
 Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/zedboard/gpio_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/zedboard/gpio_utils.d" -MT"src/zedboard/gpio_utils.d" -o "src/zedboard/gpio_utils.o" "../src/zedboard/gpio_utils.c"
-../src/zedboard/gpio_utils.c: In function 'testToggleLed':
-../src/zedboard/gpio_utils.c:27:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
-  int status;
-      ^
-Finished building: ../src/zedboard/gpio_utils.c
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/zedboard/iic_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/zedboard/iic_utils.d" -MT"src/zedboard/iic_utils.d" -o "src/zedboard/iic_utils.o" "../src/zedboard/iic_utils.c"
+Finished building: ../src/zedboard/iic_utils.c
  
-Building file: ../src/run.c
+Building file: ../src/robot/pwmsw.c
 Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
-In file included from ../src/zedboard/gpio_utils.h:14:0,
-                 from ../src/run.c:17:
-../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include/sleep.h:42:5: error: conflicting types for 'usleep'
- s32 usleep(u32 useconds);
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'pwmTest':
+../src/robot/pwmsw.c:88:5: warning: implicit declaration of function 'radToDeg' [-Wimplicit-function-declaration]
+     radToDeg(valToAngle(jointVal[reg], val)));
      ^
-In file included from /opt/Xilinx/SDK/2015.3/gnu/arm/lin/arm-xilinx-eabi/include/stdio.h:29:0,
-                 from ../src/run.c:9:
-/opt/Xilinx/SDK/2015.3/gnu/arm/lin/arm-xilinx-eabi/include/sys/unistd.h:192:6: note: previous declaration of 'usleep' was here
- int  _EXFUN(usleep, (useconds_t __useconds));
+Finished building: ../src/robot/pwmsw.c
+ 
+Building file: ../src/imu/mpu9150/inv_mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu9150/inv_mpu.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu9150/inv_mpu.d" -MT"src/imu/mpu9150/inv_mpu.d" -o "src/imu/mpu9150/inv_mpu.o" "../src/imu/mpu9150/inv_mpu.c"
+Finished building: ../src/imu/mpu9150/inv_mpu.c
+ 
+Building file: ../src/imu/mpu9150/inv_mpu_dmp_motion_driver.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu9150/inv_mpu_dmp_motion_driver.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu9150/inv_mpu_dmp_motion_driver.d" -MT"src/imu/mpu9150/inv_mpu_dmp_motion_driver.d" -o "src/imu/mpu9150/inv_mpu_dmp_motion_driver.o" "../src/imu/mpu9150/inv_mpu_dmp_motion_driver.c"
+Finished building: ../src/imu/mpu9150/inv_mpu_dmp_motion_driver.c
+ 
+Building file: ../src/imu/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu.d" -MT"src/imu/mpu.d" -o "src/imu/mpu.o" "../src/imu/mpu.c"
+Finished building: ../src/imu/mpu.c
+ 
+Building file: ../src/imu/mpu_int.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu_int.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu_int.d" -MT"src/imu/mpu_int.d" -o "src/imu/mpu_int.o" "../src/imu/mpu_int.c"
+Finished building: ../src/imu/mpu_int.c
+ 
+Building file: ../src/imu/mpu_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu_utils.d" -MT"src/imu/mpu_utils.d" -o "src/imu/mpu_utils.o" "../src/imu/mpu_utils.c"
+Finished building: ../src/imu/mpu_utils.c
+ 
+Building file: ../src/math_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/math_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/math_utils.d" -MT"src/math_utils.d" -o "src/math_utils.o" "../src/math_utils.c"
+Finished building: ../src/math_utils.c
+ 
+Building file: ../src/print_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/print_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/print_utils.d" -MT"src/print_utils.d" -o "src/print_utils.o" "../src/print_utils.c"
+Finished building: ../src/print_utils.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:41:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
+  int status = XST_SUCCESS;
       ^
-In file included from ../src/zedboard/gpio_utils.h:14:0,
-                 from ../src/run.c:17:
-../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include/sleep.h:43:5: error: conflicting types for 'sleep'
- s32 sleep(u32 seconds);
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 194632	   3256	  24648	 222536	  36548	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:05:53 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+16:07:49 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+16:09:36 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:41:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
+  int status = XST_SUCCESS;
+      ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 194632	   3256	  24648	 222536	  36548	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:12:40 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+16:13:30 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/imu/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu.d" -MT"src/imu/mpu.d" -o "src/imu/mpu.o" "../src/imu/mpu.c"
+Finished building: ../src/imu/mpu.c
+ 
+Building file: ../src/imu/mpu_int.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu_int.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu_int.d" -MT"src/imu/mpu_int.d" -o "src/imu/mpu_int.o" "../src/imu/mpu_int.c"
+Finished building: ../src/imu/mpu_int.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:41:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
+  int status = XST_SUCCESS;
+      ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 194632	   3256	  24648	 222536	  36548	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:13:33 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/imu/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu.d" -MT"src/imu/mpu.d" -o "src/imu/mpu.o" "../src/imu/mpu.c"
+Finished building: ../src/imu/mpu.c
+ 
+Building file: ../src/imu/mpu_int.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu_int.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu_int.d" -MT"src/imu/mpu_int.d" -o "src/imu/mpu_int.o" "../src/imu/mpu_int.c"
+Finished building: ../src/imu/mpu_int.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:41:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
+  int status = XST_SUCCESS;
+      ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 194632	   3256	  24648	 222536	  36548	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:15:14 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/zedboard/iic_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/zedboard/iic_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/zedboard/iic_utils.d" -MT"src/zedboard/iic_utils.d" -o "src/zedboard/iic_utils.o" "../src/zedboard/iic_utils.c"
+Finished building: ../src/zedboard/iic_utils.c
+ 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'pwmTest':
+../src/robot/pwmsw.c:88:5: warning: implicit declaration of function 'radToDeg' [-Wimplicit-function-declaration]
+     radToDeg(valToAngle(jointVal[reg], val)));
      ^
-In file included from /opt/Xilinx/SDK/2015.3/gnu/arm/lin/arm-xilinx-eabi/include/stdio.h:29:0,
-                 from ../src/run.c:9:
-/opt/Xilinx/SDK/2015.3/gnu/arm/lin/arm-xilinx-eabi/include/sys/unistd.h:182:10: note: previous declaration of 'sleep' was here
- unsigned _EXFUN(sleep, (unsigned int __seconds ));
-          ^
+Finished building: ../src/robot/pwmsw.c
+ 
+Building file: ../src/imu/mpu9150/inv_mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu9150/inv_mpu.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu9150/inv_mpu.d" -MT"src/imu/mpu9150/inv_mpu.d" -o "src/imu/mpu9150/inv_mpu.o" "../src/imu/mpu9150/inv_mpu.c"
+Finished building: ../src/imu/mpu9150/inv_mpu.c
+ 
+Building file: ../src/imu/mpu9150/inv_mpu_dmp_motion_driver.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu9150/inv_mpu_dmp_motion_driver.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu9150/inv_mpu_dmp_motion_driver.d" -MT"src/imu/mpu9150/inv_mpu_dmp_motion_driver.d" -o "src/imu/mpu9150/inv_mpu_dmp_motion_driver.o" "../src/imu/mpu9150/inv_mpu_dmp_motion_driver.c"
+Finished building: ../src/imu/mpu9150/inv_mpu_dmp_motion_driver.c
+ 
+Building file: ../src/imu/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu.d" -MT"src/imu/mpu.d" -o "src/imu/mpu.o" "../src/imu/mpu.c"
+Finished building: ../src/imu/mpu.c
+ 
+Building file: ../src/imu/mpu_int.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu_int.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu_int.d" -MT"src/imu/mpu_int.d" -o "src/imu/mpu_int.o" "../src/imu/mpu_int.c"
+Finished building: ../src/imu/mpu_int.c
+ 
+Building file: ../src/imu/mpu_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu_utils.d" -MT"src/imu/mpu_utils.d" -o "src/imu/mpu_utils.o" "../src/imu/mpu_utils.c"
+Finished building: ../src/imu/mpu_utils.c
+ 
+Building file: ../src/math_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/math_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/math_utils.d" -MT"src/math_utils.d" -o "src/math_utils.o" "../src/math_utils.c"
+Finished building: ../src/math_utils.c
+ 
+Building file: ../src/print_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/print_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/print_utils.d" -MT"src/print_utils.d" -o "src/print_utils.o" "../src/print_utils.c"
+Finished building: ../src/print_utils.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
 ../src/run.c: In function 'main':
 ../src/run.c:41:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
   int status = XST_SUCCESS;
       ^
-make: *** [src/run.o] Error 1
-14:52:28 **** Incremental Build of configuration Debug for project IndoorLoc ****
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 194632	   3256	  24648	 222536	  36548	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:15:44 **** Auto Build of configuration Debug for project IndoorLoc ****
 make all 
 Building file: ../src/run.c
 Invoking: ARM gcc compiler
 arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
-In file included from ../src/zedboard/gpio_utils.h:14:0,
-                 from ../src/run.c:17:
-../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include/sleep.h:42:5: error: conflicting types for 'usleep'
- s32 usleep(u32 useconds);
+../src/run.c: In function 'main':
+../src/run.c:41:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
+  int status = XST_SUCCESS;
+      ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 194632	   3256	  24648	 222536	  36548	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:16:29 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+16:17:15 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/zedboard/iic_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/zedboard/iic_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/zedboard/iic_utils.d" -MT"src/zedboard/iic_utils.d" -o "src/zedboard/iic_utils.o" "../src/zedboard/iic_utils.c"
+Finished building: ../src/zedboard/iic_utils.c
+ 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'pwmTest':
+../src/robot/pwmsw.c:88:5: warning: implicit declaration of function 'radToDeg' [-Wimplicit-function-declaration]
+     radToDeg(valToAngle(jointVal[reg], val)));
      ^
-In file included from /opt/Xilinx/SDK/2015.3/gnu/arm/lin/arm-xilinx-eabi/include/stdio.h:29:0,
-                 from ../src/run.c:9:
-/opt/Xilinx/SDK/2015.3/gnu/arm/lin/arm-xilinx-eabi/include/sys/unistd.h:192:6: note: previous declaration of 'usleep' was here
- int  _EXFUN(usleep, (useconds_t __useconds));
+Finished building: ../src/robot/pwmsw.c
+ 
+Building file: ../src/imu/mpu9150/inv_mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu9150/inv_mpu.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu9150/inv_mpu.d" -MT"src/imu/mpu9150/inv_mpu.d" -o "src/imu/mpu9150/inv_mpu.o" "../src/imu/mpu9150/inv_mpu.c"
+Finished building: ../src/imu/mpu9150/inv_mpu.c
+ 
+Building file: ../src/imu/mpu9150/inv_mpu_dmp_motion_driver.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu9150/inv_mpu_dmp_motion_driver.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu9150/inv_mpu_dmp_motion_driver.d" -MT"src/imu/mpu9150/inv_mpu_dmp_motion_driver.d" -o "src/imu/mpu9150/inv_mpu_dmp_motion_driver.o" "../src/imu/mpu9150/inv_mpu_dmp_motion_driver.c"
+Finished building: ../src/imu/mpu9150/inv_mpu_dmp_motion_driver.c
+ 
+Building file: ../src/imu/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu.d" -MT"src/imu/mpu.d" -o "src/imu/mpu.o" "../src/imu/mpu.c"
+Finished building: ../src/imu/mpu.c
+ 
+Building file: ../src/imu/mpu_int.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu_int.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu_int.d" -MT"src/imu/mpu_int.d" -o "src/imu/mpu_int.o" "../src/imu/mpu_int.c"
+Finished building: ../src/imu/mpu_int.c
+ 
+Building file: ../src/imu/mpu_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu_utils.d" -MT"src/imu/mpu_utils.d" -o "src/imu/mpu_utils.o" "../src/imu/mpu_utils.c"
+Finished building: ../src/imu/mpu_utils.c
+ 
+Building file: ../src/math_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/math_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/math_utils.d" -MT"src/math_utils.d" -o "src/math_utils.o" "../src/math_utils.c"
+Finished building: ../src/math_utils.c
+ 
+Building file: ../src/print_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/print_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/print_utils.d" -MT"src/print_utils.d" -o "src/print_utils.o" "../src/print_utils.c"
+Finished building: ../src/print_utils.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:41:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
+  int status = XST_SUCCESS;
       ^
-In file included from ../src/zedboard/gpio_utils.h:14:0,
-                 from ../src/run.c:17:
-../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include/sleep.h:43:5: error: conflicting types for 'sleep'
- s32 sleep(u32 seconds);
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 194312	   3256	  24648	 222216	  36408	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:18:14 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+16:18:37 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/imu/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu.d" -MT"src/imu/mpu.d" -o "src/imu/mpu.o" "../src/imu/mpu.c"
+Finished building: ../src/imu/mpu.c
+ 
+Building file: ../src/imu/mpu_int.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu_int.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu_int.d" -MT"src/imu/mpu_int.d" -o "src/imu/mpu_int.o" "../src/imu/mpu_int.c"
+Finished building: ../src/imu/mpu_int.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:41:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
+  int status = XST_SUCCESS;
+      ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 194312	   3256	  24648	 222216	  36408	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:19:53 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+16:20:56 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/imu/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu.d" -MT"src/imu/mpu.d" -o "src/imu/mpu.o" "../src/imu/mpu.c"
+Finished building: ../src/imu/mpu.c
+ 
+Building file: ../src/imu/mpu_int.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu_int.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu_int.d" -MT"src/imu/mpu_int.d" -o "src/imu/mpu_int.o" "../src/imu/mpu_int.c"
+Finished building: ../src/imu/mpu_int.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:41:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
+  int status = XST_SUCCESS;
+      ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 194312	   3256	  24648	 222216	  36408	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:20:59 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/imu/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu.d" -MT"src/imu/mpu.d" -o "src/imu/mpu.o" "../src/imu/mpu.c"
+Finished building: ../src/imu/mpu.c
+ 
+Building file: ../src/imu/mpu_int.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu_int.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu_int.d" -MT"src/imu/mpu_int.d" -o "src/imu/mpu_int.o" "../src/imu/mpu_int.c"
+Finished building: ../src/imu/mpu_int.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:41:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
+  int status = XST_SUCCESS;
+      ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 194312	   3256	  24648	 222216	  36408	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:22:28 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+16:23:11 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/zedboard/iic_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/zedboard/iic_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/zedboard/iic_utils.d" -MT"src/zedboard/iic_utils.d" -o "src/zedboard/iic_utils.o" "../src/zedboard/iic_utils.c"
+Finished building: ../src/zedboard/iic_utils.c
+ 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+../src/robot/pwmsw.c: In function 'pwmTest':
+../src/robot/pwmsw.c:88:5: warning: implicit declaration of function 'radToDeg' [-Wimplicit-function-declaration]
+     radToDeg(valToAngle(jointVal[reg], val)));
      ^
-In file included from /opt/Xilinx/SDK/2015.3/gnu/arm/lin/arm-xilinx-eabi/include/stdio.h:29:0,
-                 from ../src/run.c:9:
-/opt/Xilinx/SDK/2015.3/gnu/arm/lin/arm-xilinx-eabi/include/sys/unistd.h:182:10: note: previous declaration of 'sleep' was here
- unsigned _EXFUN(sleep, (unsigned int __seconds ));
-          ^
-../src/run.c: In function 'main':
-../src/run.c:41:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
-  int status = XST_SUCCESS;
-      ^
-make: *** [src/run.o] Error 1
-14:52:55 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/zedboard/gpio_utils.c
+Finished building: ../src/robot/pwmsw.c
+ 
+Building file: ../src/imu/mpu9150/inv_mpu.c
 Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/zedboard/gpio_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/zedboard/gpio_utils.d" -MT"src/zedboard/gpio_utils.d" -o "src/zedboard/gpio_utils.o" "../src/zedboard/gpio_utils.c"
-../src/zedboard/gpio_utils.c: In function 'testToggleLed':
-../src/zedboard/gpio_utils.c:35:3: warning: implicit declaration of function 'usleep' [-Wimplicit-function-declaration]
-   usleep(100);
-   ^
-../src/zedboard/gpio_utils.c:27:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
-  int status;
-      ^
-Finished building: ../src/zedboard/gpio_utils.c
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu9150/inv_mpu.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu9150/inv_mpu.d" -MT"src/imu/mpu9150/inv_mpu.d" -o "src/imu/mpu9150/inv_mpu.o" "../src/imu/mpu9150/inv_mpu.c"
+Finished building: ../src/imu/mpu9150/inv_mpu.c
+ 
+Building file: ../src/imu/mpu9150/inv_mpu_dmp_motion_driver.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu9150/inv_mpu_dmp_motion_driver.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu9150/inv_mpu_dmp_motion_driver.d" -MT"src/imu/mpu9150/inv_mpu_dmp_motion_driver.d" -o "src/imu/mpu9150/inv_mpu_dmp_motion_driver.o" "../src/imu/mpu9150/inv_mpu_dmp_motion_driver.c"
+Finished building: ../src/imu/mpu9150/inv_mpu_dmp_motion_driver.c
+ 
+Building file: ../src/imu/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu.d" -MT"src/imu/mpu.d" -o "src/imu/mpu.o" "../src/imu/mpu.c"
+Finished building: ../src/imu/mpu.c
+ 
+Building file: ../src/imu/mpu_int.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu_int.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu_int.d" -MT"src/imu/mpu_int.d" -o "src/imu/mpu_int.o" "../src/imu/mpu_int.c"
+Finished building: ../src/imu/mpu_int.c
+ 
+Building file: ../src/imu/mpu_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu_utils.d" -MT"src/imu/mpu_utils.d" -o "src/imu/mpu_utils.o" "../src/imu/mpu_utils.c"
+Finished building: ../src/imu/mpu_utils.c
+ 
+Building file: ../src/math_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/math_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/math_utils.d" -MT"src/math_utils.d" -o "src/math_utils.o" "../src/math_utils.c"
+Finished building: ../src/math_utils.c
+ 
+Building file: ../src/print_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/print_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/print_utils.d" -MT"src/print_utils.d" -o "src/print_utils.o" "../src/print_utils.c"
+Finished building: ../src/print_utils.c
  
 Building file: ../src/run.c
 Invoking: ARM gcc compiler
@@ -803,20 +869,17 @@ Finished building target: IndoorLoc.elf
 Invoking: ARM Print Size
 arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
    text	   data	    bss	    dec	    hex	filename
- 194056	   3256	  24648	 221960	  36308	IndoorLoc.elf
+ 194632	   3256	  24648	 222536	  36548	IndoorLoc.elf
 Finished building: IndoorLoc.elf.size
  
-14:53:22 **** Auto Build of configuration Debug for project IndoorLoc ****
+16:24:09 **** Incremental Build of configuration Debug for project IndoorLoc ****
 make all 
-Building file: ../src/zedboard/gpio_utils.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/zedboard/gpio_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/zedboard/gpio_utils.d" -MT"src/zedboard/gpio_utils.d" -o "src/zedboard/gpio_utils.o" "../src/zedboard/gpio_utils.c"
-../src/zedboard/gpio_utils.c: In function 'testToggleLed':
-../src/zedboard/gpio_utils.c:27:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
-  int status;
-      ^
-Finished building: ../src/zedboard/gpio_utils.c
- 
+make: Nothing to be done for `all'.
+16:27:40 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+16:31:57 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
 Building file: ../src/run.c
 Invoking: ARM gcc compiler
 arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
@@ -834,305 +897,12 @@ Finished building target: IndoorLoc.elf
 Invoking: ARM Print Size
 arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
    text	   data	    bss	    dec	    hex	filename
- 194056	   3256	  24648	 221960	  36308	IndoorLoc.elf
+ 194632	   3256	  24648	 222536	  36548	IndoorLoc.elf
 Finished building: IndoorLoc.elf.size
  
-14:53:40 **** Incremental Build of configuration Debug for project IndoorLoc ****
+16:32:29 **** Incremental Build of configuration Debug for project IndoorLoc ****
 make all 
 make: Nothing to be done for `all'.
-14:54:12 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/run.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
-../src/run.c: In function 'main':
-../src/run.c:41:6: warning: unused variable 'status' [-Wunused-variable]
-  int status = XST_SUCCESS;
-      ^
-Finished building: ../src/run.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 193992	   3256	  24648	 221896	  362c8	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-14:54:33 **** Incremental Build of configuration Debug for project IndoorLoc ****
-make all 
-make: Nothing to be done for `all'.
-14:54:56 **** Incremental Build of configuration Debug for project IndoorLoc ****
-make all 
-make: Nothing to be done for `all'.
-14:55:23 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/zedboard/gpio_utils.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/zedboard/gpio_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/zedboard/gpio_utils.d" -MT"src/zedboard/gpio_utils.d" -o "src/zedboard/gpio_utils.o" "../src/zedboard/gpio_utils.c"
-../src/zedboard/gpio_utils.c: In function 'testToggleLed':
-../src/zedboard/gpio_utils.c:27:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
-  int status;
-      ^
-Finished building: ../src/zedboard/gpio_utils.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 193992	   3256	  24648	 221896	  362c8	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-14:55:26 **** Incremental Build of configuration Debug for project IndoorLoc ****
-make all 
-make: Nothing to be done for `all'.
-14:57:57 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/zedboard/gpio_utils.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/zedboard/gpio_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/zedboard/gpio_utils.d" -MT"src/zedboard/gpio_utils.d" -o "src/zedboard/gpio_utils.o" "../src/zedboard/gpio_utils.c"
-../src/zedboard/gpio_utils.c: In function 'testToggleLed':
-../src/zedboard/gpio_utils.c:27:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
-  int status;
-      ^
-Finished building: ../src/zedboard/gpio_utils.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 194056	   3256	  24648	 221960	  36308	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-14:58:19 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/zedboard/gpio_utils.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/zedboard/gpio_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/zedboard/gpio_utils.d" -MT"src/zedboard/gpio_utils.d" -o "src/zedboard/gpio_utils.o" "../src/zedboard/gpio_utils.c"
-../src/zedboard/gpio_utils.c: In function 'testToggleLed':
-../src/zedboard/gpio_utils.c:27:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
-  int status;
-      ^
-Finished building: ../src/zedboard/gpio_utils.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 194056	   3256	  24648	 221960	  36308	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-14:58:24 **** Incremental Build of configuration Debug for project IndoorLoc ****
-make all 
-make: Nothing to be done for `all'.
-14:58:48 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/zedboard/gpio_utils.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/zedboard/gpio_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/zedboard/gpio_utils.d" -MT"src/zedboard/gpio_utils.d" -o "src/zedboard/gpio_utils.o" "../src/zedboard/gpio_utils.c"
-../src/zedboard/gpio_utils.c: In function 'testToggleLed':
-../src/zedboard/gpio_utils.c:27:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
-  int status;
-      ^
-Finished building: ../src/zedboard/gpio_utils.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 194056	   3256	  24648	 221960	  36308	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-14:58:53 **** Incremental Build of configuration Debug for project IndoorLoc ****
-make all 
-make: Nothing to be done for `all'.
-14:59:42 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/zedboard/gpio_utils.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/zedboard/gpio_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/zedboard/gpio_utils.d" -MT"src/zedboard/gpio_utils.d" -o "src/zedboard/gpio_utils.o" "../src/zedboard/gpio_utils.c"
-../src/zedboard/gpio_utils.c: In function 'testToggleLed':
-../src/zedboard/gpio_utils.c:27:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
-  int status;
-      ^
-Finished building: ../src/zedboard/gpio_utils.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 194056	   3256	  24648	 221960	  36308	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-14:59:45 **** Incremental Build of configuration Debug for project IndoorLoc ****
-make all 
-make: Nothing to be done for `all'.
-14:59:58 **** Incremental Build of configuration Debug for project IndoorLoc ****
-make all 
-make: Nothing to be done for `all'.
-15:03:50 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/zedboard/gpio_utils.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/zedboard/gpio_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/zedboard/gpio_utils.d" -MT"src/zedboard/gpio_utils.d" -o "src/zedboard/gpio_utils.o" "../src/zedboard/gpio_utils.c"
-../src/zedboard/gpio_utils.c: In function 'testToggleLed':
-../src/zedboard/gpio_utils.c:27:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
-  int status;
-      ^
-Finished building: ../src/zedboard/gpio_utils.c
- 
-Building file: ../src/run.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
-../src/run.c: In function 'main':
-../src/run.c:41:6: warning: unused variable 'status' [-Wunused-variable]
-  int status = XST_SUCCESS;
-      ^
-Finished building: ../src/run.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 194056	   3256	  24648	 221960	  36308	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-15:03:52 **** Incremental Build of configuration Debug for project IndoorLoc ****
-make all 
-make: Nothing to be done for `all'.
-15:04:08 **** Incremental Build of configuration Debug for project IndoorLoc ****
-make all 
-make: Nothing to be done for `all'.
-15:04:59 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/zedboard/gpio_utils.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/zedboard/gpio_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/zedboard/gpio_utils.d" -MT"src/zedboard/gpio_utils.d" -o "src/zedboard/gpio_utils.o" "../src/zedboard/gpio_utils.c"
-../src/zedboard/gpio_utils.c: In function 'testToggleLed':
-../src/zedboard/gpio_utils.c:27:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
-  int status;
-      ^
-Finished building: ../src/zedboard/gpio_utils.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 194120	   3256	  24648	 222024	  36348	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-15:05:01 **** Incremental Build of configuration Debug for project IndoorLoc ****
-make all 
-make: Nothing to be done for `all'.
-15:05:24 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/zedboard/gpio_utils.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/zedboard/gpio_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/zedboard/gpio_utils.d" -MT"src/zedboard/gpio_utils.d" -o "src/zedboard/gpio_utils.o" "../src/zedboard/gpio_utils.c"
-../src/zedboard/gpio_utils.c: In function 'testToggleLed':
-../src/zedboard/gpio_utils.c:27:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
-  int status;
-      ^
-Finished building: ../src/zedboard/gpio_utils.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 194120	   3256	  24648	 222024	  36348	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-15:05:25 **** Incremental Build of configuration Debug for project IndoorLoc ****
-make all 
-make: Nothing to be done for `all'.
-15:06:14 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/zedboard/gpio_utils.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/zedboard/gpio_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/zedboard/gpio_utils.d" -MT"src/zedboard/gpio_utils.d" -o "src/zedboard/gpio_utils.o" "../src/zedboard/gpio_utils.c"
-../src/zedboard/gpio_utils.c: In function 'testToggleLed':
-../src/zedboard/gpio_utils.c:27:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
-  int status;
-      ^
-Finished building: ../src/zedboard/gpio_utils.c
- 
-Building file: ../src/run.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
-../src/run.c: In function 'main':
-../src/run.c:41:6: warning: unused variable 'status' [-Wunused-variable]
-  int status = XST_SUCCESS;
-      ^
-Finished building: ../src/run.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 194120	   3256	  24648	 222024	  36348	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-15:06:51 **** Auto Build of configuration Debug for project IndoorLoc ****
-make all 
-Building file: ../src/zedboard/gpio_utils.c
-Invoking: ARM gcc compiler
-arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/zedboard/gpio_utils.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/zedboard/gpio_utils.d" -MT"src/zedboard/gpio_utils.d" -o "src/zedboard/gpio_utils.o" "../src/zedboard/gpio_utils.c"
-../src/zedboard/gpio_utils.c: In function 'testToggleLed':
-../src/zedboard/gpio_utils.c:27:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
-  int status;
-      ^
-Finished building: ../src/zedboard/gpio_utils.c
- 
-Building target: IndoorLoc.elf
-Invoking: ARM gcc linker
-arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-Finished building target: IndoorLoc.elf
- 
-Invoking: ARM Print Size
-arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 194120	   3256	  24648	 222024	  36348	IndoorLoc.elf
-Finished building: IndoorLoc.elf.size
- 
-15:06:53 **** Incremental Build of configuration Debug for project IndoorLoc ****
+16:32:33 **** Incremental Build of configuration Debug for project IndoorLoc ****
 make all 
 make: Nothing to be done for `all'.
