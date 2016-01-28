@@ -5,6 +5,7 @@
  * http://trac.openscenegraph.org/projects/osg/attachment/wiki/Support/Tutorials/Tuto2.zip
  * http://trac.openscenegraph.org/projects/osg/attachment/wiki/Support/Tutorials/Tuto9.zip
  * https://en.wikibooks.org/wiki/Serial_Programming/termios
+ * Openscenegraph 3.0: Beginner's Guide: Right-hand coordinate system
  */
 
 #include <stdlib.h>
@@ -33,8 +34,9 @@
 #define HEIGHT		0.1
 #define DEVICE0		"/dev/ttyACM0"
 #define DEVICE1		"/dev/ttyACM1"
-#define DEVICE2		"quat.txt"
+#define FILE		"quat.txt"
 #define BAUDRATE 	B115200
+#define DELTA		0.01
 
 /*
  * Function Prototypes
@@ -74,13 +76,15 @@ int main(){
 	
 	//Transform
 	transform->setPosition(osg::Vec3(0.0f, 0.0f, 0.0f));
+	transform->setAttitude(osg::Vec4(1.0, 0.0, 0.0, 0.0));
 	transform->addChild(imuGeode);
 	
 	//Root
-	rootnode->setPosition(osg::Vec3(0.0f, -5.0f, 1.0f));
-	//rootnode->setAttitude(osg::Quat(0.5, 0.5, 0.5, 0.5)); view IMU from above
+	//rootnode->setPosition(osg::Vec3(0.0f, 5.0f, 1.0f));
+	//rootnode->setAttitude(osg::Quat(0.5, 0.5, 0.5, 0.5)); //view IMU from above
 	rootnode->setAttitude(osg::Quat(0.35355339059327384, 0.6123724356957946, 0.35355339059327384, 0.6123724356957945));
-    rootnode->addChild(transform);
+	//rootnode->setAttitude(osg::Quat(0.9659258262890683, 0.0, 0.0, -0.25881904510252074)); //view IMU from above, rotate view 30° around x axis
+	rootnode->addChild(transform);
 	
 	//Viewer
 	viewer.setSceneData(rootnode); 
@@ -109,11 +113,11 @@ int main(){
 		  //DEVICE1
 		  tty_fd = open(DEVICE1,  O_RDWR | O_NOCTTY | O_NDELAY);
 		  if (tty_fd == -1){
-		    printf("Could not open port %s, trying %s.\r\n", DEVICE1, DEVICE2);
-		    //DEVICE2
-		    tty_fd = open(DEVICE2,  O_RDWR | O_NOCTTY | O_NDELAY);
+		    printf("Could not open port %s, trying %s.\r\n", DEVICE1, FILE);
+		    //FILE
+		    tty_fd = open(FILE,  O_RDWR | O_NOCTTY | O_NDELAY);
 		    if (tty_fd == -1){
-		      printf("Could not open port %s.\r\n", DEVICE2);
+		      printf("Could not open port %s.\r\n", FILE);
 		      return 0;
 		    } else {
 		      printf("Using Sample Data.\r\n");
@@ -174,10 +178,16 @@ void updateScene(int tty_fd){
 		return;
 	}
 	
+	y = -y;
+	
+	//Print Quaternion
 	printf("%f %f %f %f\n\r", w, x, y, z); 
 	
 	//Update Scene
 	transform->setAttitude(osg::Quat(w, x, y, z));
+	
+	//Free memory
+	free(line);
 }
 
 
@@ -279,24 +289,32 @@ osg::ref_ptr<osg::Group> createLight(){
 	osg::ref_ptr<osg::LightSource> lightSource2 = new osg::LightSource;
 	
 	// create a local light.
-	osg::Vec4f lightPosition (osg::Vec4f(-5.0,-5.0,5.0,5.0f));
+	//osg::Vec4f lightPosition (osg::Vec4f(-5.0,-5.0,5.0,5.0f));
+	osg::Vec4f lightPosition (osg::Vec4f(0.0,0.0,1.0,1.0f));
   	osg::ref_ptr<osg::Light> myLight = new osg::Light;
 	myLight->setLightNum(1);
 	myLight->setPosition(lightPosition);
-        myLight->setAmbient(osg::Vec4(0.2f,0.2f,0.2f,1.0f));
-        myLight->setDiffuse(osg::Vec4(0.1f,0.4f,0.1f,1.0f));
+        //myLight->setAmbient(osg::Vec4(0.2f,0.2f,0.2f,1.0f));
+        //myLight->setDiffuse(osg::Vec4(0.1f,0.4f,0.1f,1.0f));
+	myLight->setAmbient(osg::Vec4(1.0,1.0,1.0,1.0));
+	myLight->setDiffuse(osg::Vec4(1.0,1.0,1.0,1.0));
+	myLight->setSpecular(osg::Vec4(1,1,1,1));
         myLight->setConstantAttenuation(1.0f);
 	lightSource1->setLight(myLight.get());
 
 	lightSource1->setLocalStateSetModes(osg::StateAttribute::ON); 
        
 	// create a local light
-	osg::Vec4f lightPosition2 (osg::Vec4f(5.0,5.0,-5.0,-5.0f));
+	//osg::Vec4f lightPosition2 (osg::Vec4f(5.0,5.0,-5.0,-5.0f));
+	osg::Vec4f lightPosition2 (osg::Vec4f(0.0,0.0,-1.0,1.0f));
   	osg::ref_ptr<osg::Light> myLight2 = new osg::Light;
 	myLight2->setLightNum(0);
 	myLight2->setPosition(lightPosition2);
-        myLight2->setAmbient(osg::Vec4(0.2f,0.2f,0.2f,1.0f));
-        myLight2->setDiffuse(osg::Vec4(0.4f,0.1f,0.1f,1.0f));
+        //myLight->setAmbient(osg::Vec4(0.2f,0.2f,0.2f,1.0f));
+        //myLight->setDiffuse(osg::Vec4(0.1f,0.4f,0.1f,1.0f));
+	myLight2->setAmbient(osg::Vec4(1.0,1.0,1.0,1.0));
+	myLight2->setDiffuse(osg::Vec4(1.0,1.0,1.0,1.0));
+	myLight2->setSpecular(osg::Vec4(1,1,1,1));
         myLight2->setConstantAttenuation(1.0f);
 	            
         lightSource2->setLight(myLight2.get());

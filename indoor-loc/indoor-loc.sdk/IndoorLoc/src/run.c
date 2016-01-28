@@ -58,13 +58,10 @@ int main() {
 	//status = printDataUsingDMP(1, 1, DATA_WITH_DMP_RUNS);
 
 	//Print Quaternions and Position to Serial Port
-//	status = printForImuViewer(1, 1, 0);
+//	status = printForImuViewer(1, 1, QUAT_DISPLAY_RUNS);
 
 	//Quaternion Drift
 	//status = printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
-
-	//Print Quaternions and Position
-	status = printForImuViewer(1, 1, QUAT_DISPLAY_RUNS);
 
 	//PWM Test
 	//status = pwmTest();
@@ -81,6 +78,9 @@ int main() {
 
 	//Test Matrix Inverse
 //	testMatrixInverse();
+
+	//Test Quaternions for IMU Viewer
+	quaternionTest();
 
 	//Stay in here
 	while (1) {
@@ -122,12 +122,12 @@ int printForImuViewer(char printQuat, char printPos, unsigned int numberOfRuns) 
 		return status;
 	}
 
-	//Calibrate
-	myprintf(".........Calibrate...........\n\r");
-	status = calibrateGyrAcc(CAL_SAMPLES);
-	if (status != XST_SUCCESS) {
-		return status;
-	}
+//	//Calibrate
+//	myprintf(".........Calibrate...........\n\r");
+//	status = calibrateGyrAcc(CAL_SAMPLES);
+//	if (status != XST_SUCCESS) {
+//		return status;
+//	}
 
 	//Enable Interrupts
 	status = setupMPUInt();
@@ -149,7 +149,7 @@ int printForImuViewer(char printQuat, char printPos, unsigned int numberOfRuns) 
 			//Check whether data should be printed
 			printcnt++;
 			if (status == XST_SUCCESS) {
-				if (printcnt % (DMP_FIFO_RATE / 10) == 0) {
+				if ((printcnt % (DMP_FIFO_RATE / 10)) == 0) {
 					//Reset printcnt
 					printcnt = 0;
 

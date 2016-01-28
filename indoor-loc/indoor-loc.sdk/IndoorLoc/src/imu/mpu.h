@@ -21,7 +21,7 @@
 #include "../zedboard/time_utils.h"
 
 //IMU Parameters
-#define GYRO_SENS				250			//°/s
+#define GYRO_SENS				500			//°/s (250 would be more accurate, but 500 works more stable with IMU Viewer)
 #define ACCEL_SENS				2			//G
 #define GYRO_SENS_FRS_0			131			//LSB/(°/s) for FS_SEL = 0, 16-bit
 #define GYRO_SENS_FRS_1			65.5		//LSB/(°/s) for FS_SEL = 1
@@ -40,7 +40,7 @@
 #define FEATURES_CAL			DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_SEND_CAL_GYRO | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_TAP //DMP_FEATURE_TAP for ensure DMP sends interrupts at specified rate
 #define FEATURES_RAW			DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_SEND_RAW_GYRO | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_TAP //DMP_FEATURE_TAP for ensure DMP sends interrupts at specified rate
 #define MPU_SAMPLE_RATE			200			//Hz
-#define DMP_FIFO_RATE			10			//Hz (100)
+#define DMP_FIFO_RATE			100			//Hz (100)
 #define CAL_SAMPLES				1000		//TODO: increase to 10000
 #define GYRO_CAL_MASK			0x01
 #define ACCEL_CAL_MASK			0x02
@@ -69,6 +69,7 @@ int getQuatDrift(float *quat_drift, char calibration, unsigned int time_min);
 void printDataWithDMP();
 int printDataNoDMP(short int *sensors);
 void testPositionUpdate();
+void quaternionTest();
 int updateData();
 int calibrateGyrAcc(unsigned int samples);
 int getFifoCount();

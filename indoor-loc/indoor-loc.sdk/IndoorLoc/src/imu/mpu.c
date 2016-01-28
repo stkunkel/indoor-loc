@@ -44,8 +44,8 @@ static char dmpReady = 0;
 static int count = 0;
 static char gyrAccIsCal = 0;
 static char gyroCalEnabled = 0;
-static long glob_gyro_bias = { 0, 0, 0 };
-static long glob_accel_bias = { 0, 0, 0 };
+static long glob_gyro_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
+static long glob_accel_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
 static Vector recentVelocity = { .value[0] = 0.0, .value[1] = 0.0, .value[2
 		] = 0.0 };
 static Vector recentPosition = { .value[0] = 0.0, .value[1] = 0.0, .value[2
@@ -484,10 +484,10 @@ void printQuat(float quat[QUATERNION_AMOUNT]) {
 //Print
 	myprintf("Quat: ");
 	for (i = 0; i < QUATERNION_AMOUNT; i++) {
-		printf("%f", quat[i]);
-		if (i < QUATERNION_AMOUNT - 1) {
-			printf(" ");
-		}
+		printf(" %f", quat[i]); //Print space so IMU Viewer can distinguish negative sign of first value from other characters
+//		if (i < QUATERNION_AMOUNT - 1) {
+//			printf(" ");
+//		}
 	}
 }
 
@@ -935,6 +935,37 @@ void updatePosition(float* accel_conv, float* quat_conv,
 }
 
 /*
+ * Quaternion Test
+ */
+void quaternionTest(){
+	//Variables
+	int i;
+	float quat[17*QUATERNION_AMOUNT] = {1.000000000, 0.000000000, 0.000000000, 0.000000000,
+										0.923879533, 0.382683432, 0.000000000, 0.000000000,
+										0.707106781, 0.707106781, 0.000000000, 0.000000000,
+										0.923879533, 0.382683432, 0.000000000, 0.000000000,
+										1.000000000, 0.000000000, 0.000000000, 0.000000000,
+										0.923879533, 0.000000000, 0.382683432, 0.000000000,
+										0.707106781, 0.000000000, 0.707106781, 0.000000000,
+										0.923879533, 0.000000000, 0.382683432, 0.000000000,
+										1.000000000, 0.000000000, 0.000000000, 0.000000000,
+										0.923879533, 0.000000000, 0.000000000, 0.382683432,
+										0.707106781, 0.000000000, 0.000000000, 0.707106781,
+										0.923879533, 0.000000000, 0.000000000, 0.382683432,
+										1.000000000, 0.000000000, 0.000000000, 0.000000000,
+										0.923879533, 0.270598050, 0.270598050, 0.000000000,
+										0.707106781, 0.500000000, 0.500000000, 0.000000000,
+										0.923879533, 0.270598050, 0.270598050, 0.000000000,
+										1.000000000, 0.000000000, 0.000000000, 0.000000000};
+
+	//Print
+	for (i = 0; i < 17; i++){
+		printQuat(&quat[i*QUATERNION_AMOUNT]);
+		printf("\r\n");
+	}
+}
+
+/*
  * Convert Gyroscope Data using Sensitivity
  */
 int convertGyroData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]) {
@@ -1123,10 +1154,6 @@ int calibrateGyrAcc(unsigned int samples) {
 //Save gravity for later
 	normal_force.value[GRAVITY_AXIS] = 1.0; //accel_bias_f[GRAVITY_AXIS];
 
-	//Save biases for later
-	memcpy(&glob_gyro_bias, &gyro_bias, NUMBER_OF_AXES * sizeof(long));
-	memcpy(&glob_accel_bias, &accel_bias, NUMBER_OF_AXES * sizeof(long));
-
 //Make sure gravity is not cancelled
 	accel_bias_f[GRAVITY_AXIS] = -1.0 + accel_bias_f[GRAVITY_AXIS]; //0.0;
 
@@ -1135,6 +1162,10 @@ int calibrateGyrAcc(unsigned int samples) {
 		gyro_bias[i] = (long) (gyro_bias_f[i] * GYRO_SENS_FRS_2);
 		accel_bias[i] = (long) (accel_bias_f[i] / 2 * ACC_SENS_FRS_2);
 	}
+
+	//Save biases for later
+	memcpy(&glob_gyro_bias, &gyro_bias, NUMBER_OF_AXES * sizeof(long));
+	memcpy(&glob_accel_bias, &accel_bias, NUMBER_OF_AXES * sizeof(long));
 
 //Configure and enable DMP
 	status = configureDMP(FEATURES_CAL, DMP_FIFO_RATE);
@@ -1298,17 +1329,17 @@ int configureDMP(unsigned short int features, unsigned short fifoRate) {
 		return XST_FAILURE;
 	}
 
-	//Set Gyro and Accel Bias
-	status = dmp_set_gyro_bias(&glob_gyro_bias);
-	if (status != XST_SUCCESS) {
-		myprintf("mpu.c: Could not initially set gyro bias.\r\n");
-	}
-
-	status = dmp_set_accel_bias(&glob_accel_bias);
-	if (status != XST_SUCCESS) {
-		myprintf("mpu.c: Could not initially set accel bias.\r\n");
-		return XST_FAILURE;
-	}
+//	//Set Gyro and Accel Bias
+//	status = dmp_set_gyro_bias(glob_gyro_bias);
+//	if (status != XST_SUCCESS) {
+//		myprintf("mpu.c: Could not initially set gyro bias.\r\n");
+//	}
+//
+//	status = dmp_set_accel_bias(glob_accel_bias);
+//	if (status != XST_SUCCESS) {
+//		myprintf("mpu.c: Could not initially set accel bias.\r\n");
+//		return XST_FAILURE;
+//	}
 
 //Enable Features
 	status = dmp_enable_feature(features);
