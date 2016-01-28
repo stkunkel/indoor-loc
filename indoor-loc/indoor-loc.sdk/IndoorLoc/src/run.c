@@ -178,7 +178,7 @@ int printForImuViewer(char printQuat, char printPos, unsigned int numberOfRuns) 
 int printDataUsingDMP(char initialCalibration, char dmpCalibration,
 		unsigned int numberOfRuns) {
 //Variables
-	int status, cnt;
+	int cnt = 0, printcnt = 0, status;
 	short features;
 
 	if (initialCalibration) {
@@ -218,19 +218,35 @@ int printDataUsingDMP(char initialCalibration, char dmpCalibration,
 //Get Data with DMP
 	myprintf(".........With DMP...........\n\r");
 	for (cnt = 0; cnt <= numberOfRuns; cnt++) {
+		//Reset Status
+		status = XST_SUCCESS;
+
 		//Wait for Interrupt Interrupt
 		if (imuDataAvailable()) {
 			//Update Data
 			status = updateData();
 
-			//Print
+			//Check whether data should be printed
+			printcnt++;
 			if (status == XST_SUCCESS) {
-				printDataWithDMP();
+				if ((printcnt % (DMP_FIFO_RATE / 10)) == 0) {
+					//Reset printcnt
+					printcnt = 0;
+
+					//Print
+					printDataWithDMP();
+
+					//Print new line
+					printf("\n\r");
+
+				}
+			} else {
+				cnt--;
 			}
 		}
 
-		//Decrease count if not successful
-		if (status != XST_SUCCESS || numberOfRuns == 0) {
+		//Make sure only successful prints count
+		if (numberOfRuns < 1) {
 			cnt--;
 		}
 	}
