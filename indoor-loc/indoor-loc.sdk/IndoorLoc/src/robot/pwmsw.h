@@ -7,6 +7,17 @@
 #define __PWMSW_H_
 
 /*
+ * Includes
+ */
+#include <stdio.h>
+#include <xil_io.h>
+#include <unistd.h>
+#include <math.h>
+#include "../platform.h"
+#include "../print_utils.h"
+#include "pwm.h"
+
+/*
  * Error Codes
  */
 #define PWM_SUCCESS				0

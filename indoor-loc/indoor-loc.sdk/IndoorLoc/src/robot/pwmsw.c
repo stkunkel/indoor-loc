@@ -6,13 +6,6 @@
 /*
  * Includes
  */
-#include <stdio.h>
-#include <xil_io.h>
-#include <unistd.h>
-#include <math.h>
-#include "../platform.h"
-#include "../print_utils.h"
-#include "pwm.h"
 #include "pwmsw.h"
 
 /*
