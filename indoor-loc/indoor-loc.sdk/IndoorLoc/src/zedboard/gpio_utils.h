@@ -19,7 +19,7 @@
  */
 #define AXI_GPIO_DEVICE_ID	XPAR_AXI_GPIO_0_DEVICE_ID
 #define LED_CHANNEL			2
-#define LED					0x00000001
+#define LED					0x55
 
 /*
  * Functions

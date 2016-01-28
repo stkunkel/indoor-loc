@@ -12,12 +12,12 @@
  * Variables
  */
 static XGpio gpio;
-static u32 toggle = 0x00000000;
+static u8 toggle = 0x00;
 
 /*
  * Function Prototypes
  */
-void toggleLed();
+void toggleLed(u8 ledMask);
 
 /*
  * Test Toggle LED
@@ -31,7 +31,7 @@ void testToggleLed(){
 
 	//Toggle
 	while (1){
-		toggleLed();
+		toggleLed(LED);
 		sleep(1);
 	}
 }
@@ -39,8 +39,8 @@ void testToggleLed(){
 /*
  * Toggle LED
  */
-void toggleLed(){
-	toggle = (~toggle) & LED;
+void toggleLed(u8 ledMask){
+	toggle = (~toggle) & ledMask;
 	XGpio_DiscreteWrite(&gpio, LED_CHANNEL, toggle);
 }
 
