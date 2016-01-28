@@ -20,7 +20,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD=/home/rupprich/Zynq/indoor-loc/indoor-loc.runs/synth_2
+HD_PWD=/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.runs/synth_2
 cd "$HD_PWD"
 
 HD_LOG=runme.log

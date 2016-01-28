@@ -14,6 +14,7 @@
 #include "imu/mpu.h"
 #include "imu/mpu_int.h"
 #include "robot/pwmsw.h"
+#include "zedboard/gpio_utils.h"
 
 /*
  * Defines
@@ -58,7 +59,7 @@ int main() {
 	//status = printDataUsingDMP(1, 1, DATA_WITH_DMP_RUNS);
 
 	//Print Quaternions and Position to Serial Port
-	status = printForImuViewer(1, 1, QUAT_DISPLAY_RUNS);
+//	status = printForImuViewer(1, 1, QUAT_DISPLAY_RUNS);
 
 	//Quaternion Drift
 	//status = printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
@@ -73,7 +74,10 @@ int main() {
 //	testMatrixInverse();
 
 	//Test Quaternions for IMU Viewer
-	quaternionTest();
+//	quaternionTest();
+
+	//Test Toggle LED
+	testToggleLed();
 
 	//Stay in here
 	while (1) {
