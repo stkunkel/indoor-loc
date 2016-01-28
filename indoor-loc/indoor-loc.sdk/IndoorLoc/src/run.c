@@ -58,20 +58,13 @@ int main() {
 	//status = printDataUsingDMP(1, 1, DATA_WITH_DMP_RUNS);
 
 	//Print Quaternions and Position to Serial Port
-//	status = printForImuViewer(1, 1, QUAT_DISPLAY_RUNS);
+	status = printForImuViewer(1, 1, QUAT_DISPLAY_RUNS);
 
 	//Quaternion Drift
 	//status = printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
 
 	//PWM Test
 	//status = pwmTest();
-
-	//Done?
-//	if (status == XST_SUCCESS) {
-//		myprintf(".........Success...........\n\r");
-//	} else {
-//		myprintf(".........Failure...........\n\r");
-//	}
 
 	//Test position update functionality
 //	testPositionUpdate();
@@ -122,12 +115,12 @@ int printForImuViewer(char printQuat, char printPos, unsigned int numberOfRuns) 
 		return status;
 	}
 
-//	//Calibrate
-//	myprintf(".........Calibrate...........\n\r");
-//	status = calibrateGyrAcc(CAL_SAMPLES);
-//	if (status != XST_SUCCESS) {
-//		return status;
-//	}
+	//Calibrate
+	myprintf(".........Calibrate...........\n\r");
+	status = calibrateGyrAcc(CAL_SAMPLES);
+	if (status != XST_SUCCESS) {
+		return status;
+	}
 
 	//Enable Interrupts
 	status = setupMPUInt();
