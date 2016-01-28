@@ -31,6 +31,7 @@ int convertCompassData(short raw[NUMBER_OF_AXES],
 		float converted[NUMBER_OF_AXES]);
 int convertTemperaturetoC(long* raw, float* converted);
 int convertQuatenion(long raw[QUATERNION_AMOUNT], float conv[QUATERNION_AMOUNT]);
+int pushBiasesToDMP(long* gyro_bias, long* accel_bias);
 int readFromFifo(short *gyro, short *accel, long *quat,
 		unsigned long *timestamp, short *sensors, unsigned char *more);
 int readFromRegs(short *gyro, short *accel, short* comp,
@@ -41,7 +42,6 @@ int readFromRegs(short *gyro, short *accel, short* comp,
  */
 static u8 imuAddr = 0;
 static char dmpReady = 0;
-static int count = 0;
 static char gyrAccIsCal = 0;
 static char gyroCalEnabled = 0;
 static long glob_gyro_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
@@ -937,30 +937,28 @@ void updatePosition(float* accel_conv, float* quat_conv,
 /*
  * Quaternion Test
  */
-void quaternionTest(){
+void quaternionTest() {
 	//Variables
 	int i;
-	float quat[17*QUATERNION_AMOUNT] = {1.000000000, 0.000000000, 0.000000000, 0.000000000,
-										0.923879533, 0.382683432, 0.000000000, 0.000000000,
-										0.707106781, 0.707106781, 0.000000000, 0.000000000,
-										0.923879533, 0.382683432, 0.000000000, 0.000000000,
-										1.000000000, 0.000000000, 0.000000000, 0.000000000,
-										0.923879533, 0.000000000, 0.382683432, 0.000000000,
-										0.707106781, 0.000000000, 0.707106781, 0.000000000,
-										0.923879533, 0.000000000, 0.382683432, 0.000000000,
-										1.000000000, 0.000000000, 0.000000000, 0.000000000,
-										0.923879533, 0.000000000, 0.000000000, 0.382683432,
-										0.707106781, 0.000000000, 0.000000000, 0.707106781,
-										0.923879533, 0.000000000, 0.000000000, 0.382683432,
-										1.000000000, 0.000000000, 0.000000000, 0.000000000,
-										0.923879533, 0.270598050, 0.270598050, 0.000000000,
-										0.707106781, 0.500000000, 0.500000000, 0.000000000,
-										0.923879533, 0.270598050, 0.270598050, 0.000000000,
-										1.000000000, 0.000000000, 0.000000000, 0.000000000};
+	float quat[17 * QUATERNION_AMOUNT] = { 1.000000000, 0.000000000,
+			0.000000000, 0.000000000, 0.923879533, 0.382683432, 0.000000000,
+			0.000000000, 0.707106781, 0.707106781, 0.000000000, 0.000000000,
+			0.923879533, 0.382683432, 0.000000000, 0.000000000, 1.000000000,
+			0.000000000, 0.000000000, 0.000000000, 0.923879533, 0.000000000,
+			0.382683432, 0.000000000, 0.707106781, 0.000000000, 0.707106781,
+			0.000000000, 0.923879533, 0.000000000, 0.382683432, 0.000000000,
+			1.000000000, 0.000000000, 0.000000000, 0.000000000, 0.923879533,
+			0.000000000, 0.000000000, 0.382683432, 0.707106781, 0.000000000,
+			0.000000000, 0.707106781, 0.923879533, 0.000000000, 0.000000000,
+			0.382683432, 1.000000000, 0.000000000, 0.000000000, 0.000000000,
+			0.923879533, 0.270598050, 0.270598050, 0.000000000, 0.707106781,
+			0.500000000, 0.500000000, 0.000000000, 0.923879533, 0.270598050,
+			0.270598050, 0.000000000, 1.000000000, 0.000000000, 0.000000000,
+			0.000000000 };
 
 	//Print
-	for (i = 0; i < 17; i++){
-		printQuat(&quat[i*QUATERNION_AMOUNT]);
+	for (i = 0; i < 17; i++) {
+		printQuat(&quat[i * QUATERNION_AMOUNT]);
 		printf("\r\n");
 	}
 }
@@ -1167,13 +1165,6 @@ int calibrateGyrAcc(unsigned int samples) {
 	memcpy(&glob_gyro_bias, &gyro_bias, NUMBER_OF_AXES * sizeof(long));
 	memcpy(&glob_accel_bias, &accel_bias, NUMBER_OF_AXES * sizeof(long));
 
-//Configure and enable DMP
-	status = configureDMP(FEATURES_CAL, DMP_FIFO_RATE);
-	if (status != XST_SUCCESS) {
-		gyrAccIsCal = 0;
-		return status;
-	}
-
 //Set status mask
 	status = GYRO_CAL_MASK | ACCEL_CAL_MASK;
 
@@ -1213,6 +1204,12 @@ int calibrateGyrAcc(unsigned int samples) {
 		status = XST_FAILURE;
 	}
 
+	//Configure and enable DMP
+	status = configureDMP(FEATURES_CAL, DMP_FIFO_RATE);
+	if (status != XST_SUCCESS) {
+		return status;
+	}
+
 //Print Success
 	if (status != XST_SUCCESS) {
 		myprintf("Calibration failed.\r\n");
@@ -1227,6 +1224,30 @@ int calibrateGyrAcc(unsigned int samples) {
 //Free memory and return
 	free(more);
 	return status;
+}
+
+/*
+ * Push calibration results to DMP
+ * In: gyro and accel biases in q1 format
+ * Returns 0 if successful
+ */
+int pushBiasesToDMP(long* gyro_bias, long* accel_bias) {
+	//Variables
+	int status;
+
+	//Set Gyro and Accel Bias
+	status = dmp_set_gyro_bias(gyro_bias);
+	if (status != XST_SUCCESS) {
+		myprintf("mpu.c: Could not initially set gyro bias.\r\n");
+	}
+
+	status = dmp_set_accel_bias(accel_bias);
+	if (status != XST_SUCCESS) {
+		myprintf("mpu.c: Could not initially set accel bias.\r\n");
+		return XST_FAILURE;
+	}
+
+	return XST_SUCCESS;
 }
 
 /*
@@ -1322,24 +1343,20 @@ int configureDMP(unsigned short int features, unsigned short fifoRate) {
 		}
 	}
 
+	//Push Biases to DMP
+	if (gyrAccIsCal != 0) {
+		status = pushBiasesToDMP(glob_gyro_bias, glob_accel_bias);
+		if (status != XST_SUCCESS) {
+			myprintf("mpu.c: Unable to push biases to DMP.\r\n");
+		}
+	}
+
 //Enable DMP
 	status = mpu_set_dmp_state(1);
 	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Could not enable DMP.\r\n");
 		return XST_FAILURE;
 	}
-
-//	//Set Gyro and Accel Bias
-//	status = dmp_set_gyro_bias(glob_gyro_bias);
-//	if (status != XST_SUCCESS) {
-//		myprintf("mpu.c: Could not initially set gyro bias.\r\n");
-//	}
-//
-//	status = dmp_set_accel_bias(glob_accel_bias);
-//	if (status != XST_SUCCESS) {
-//		myprintf("mpu.c: Could not initially set accel bias.\r\n");
-//		return XST_FAILURE;
-//	}
 
 //Enable Features
 	status = dmp_enable_feature(features);
@@ -1387,8 +1404,6 @@ int configureDMP(unsigned short int features, unsigned short fifoRate) {
 int initDMP() {
 //Variables
 	int status;
-	long gyro_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
-	long accel_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
 
 //Check wheter DMP has already been initialized
 	if (!dmpReady) {
