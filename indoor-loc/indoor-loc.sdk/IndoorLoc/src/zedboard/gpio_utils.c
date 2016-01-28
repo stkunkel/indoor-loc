@@ -13,16 +13,29 @@
  */
 static XGpio gpio;
 static u8 toggle = 0x00;
+static u8 run = 0x01;
 
 /*
- * Function Prototypes
+ * Test LED Run
  */
-void toggleLed(u8 ledMask);
+void testLedRun() {
+	//Variables
+	int status;
+
+	//Initialize
+	status = initGpio();
+
+	//Run
+	while (1) {
+		ledRun();
+		sleep(1);
+	}
+}
 
 /*
  * Test Toggle LED
  */
-void testToggleLed(){
+void testToggleLed() {
 	//Variables
 	int status;
 
@@ -30,16 +43,31 @@ void testToggleLed(){
 	status = initGpio();
 
 	//Toggle
-	while (1){
-		toggleLed(LED);
+	while (1) {
+		toggleLed(LED_MASK);
 		sleep(1);
 	}
 }
 
 /*
+ * LED Run
+ */
+void ledRun() {
+	//Get next LED configuration
+	if (run == 0x80) {//If LED7 lights up, LED0 is next
+		run = 0x01;
+	} else { //Next LED is one to the left
+		run = (run << 1);
+	}
+
+	//Go
+	XGpio_DiscreteWrite(&gpio, LED_CHANNEL, run);
+}
+
+/*
  * Toggle LED
  */
-void toggleLed(u8 ledMask){
+void toggleLed(u8 ledMask) {
 	toggle = (~toggle) & ledMask;
 	XGpio_DiscreteWrite(&gpio, LED_CHANNEL, toggle);
 }

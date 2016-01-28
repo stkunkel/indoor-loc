@@ -59,7 +59,7 @@ int main() {
 	//status = printDataUsingDMP(1, 1, DATA_WITH_DMP_RUNS);
 
 	//Print Quaternions and Position to Serial Port
-//	status = printForImuViewer(1, 1, QUAT_DISPLAY_RUNS);
+	status = printForImuViewer(1, 1, QUAT_DISPLAY_RUNS);
 
 	//Quaternion Drift
 	//status = printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
@@ -76,8 +76,9 @@ int main() {
 	//Test Quaternions for IMU Viewer
 //	quaternionTest();
 
-	//Test Toggle LED
-	testToggleLed();
+	//Test LED
+//	testToggleLed();
+	testLedRun();
 
 	//Stay in here
 	while (1) {
@@ -132,6 +133,9 @@ int printForImuViewer(char printQuat, char printPos, unsigned int numberOfRuns) 
 		return status;
 	}
 
+	//Init GPIO
+	initGpio();
+
 	//Print Quaternions to Serial Port
 	myprintf(".........Print for IMU Viewer...........\n\r");
 	for (cnt = 0; cnt <= numberOfRuns; cnt++) {
@@ -146,19 +150,23 @@ int printForImuViewer(char printQuat, char printPos, unsigned int numberOfRuns) 
 			//Check whether data should be printed
 			printcnt++;
 			if (status == XST_SUCCESS) {
+				//Toggle LED
+				//toggleLed(LED_MASK);
+				ledRun();
+
 				if ((printcnt % (DMP_FIFO_RATE / 10)) == 0) {
 					//Reset printcnt
 					printcnt = 0;
 
-					//Print
-					status = printforDisplay(printQuat, printPos);
-
-					//Print new line
-					if (status == XST_SUCCESS) {
-						printf("\n\r");
-					} else {
-						cnt--;
-					}
+//					//Print
+//					status = printforDisplay(printQuat, printPos);
+//
+//					//Print new line
+//					if (status == XST_SUCCESS) {
+//						printf("\n\r");
+//					} else {
+//						cnt--;
+//					}
 				}
 			} else {
 				cnt--;
