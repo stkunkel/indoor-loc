@@ -178,6 +178,7 @@ void updateScene(int tty_fd){
 		return;
 	}
 	
+	//Invert y to fit IMUs coordinate system to OSG
 	y = -y;
 	
 	//Print Quaternion
