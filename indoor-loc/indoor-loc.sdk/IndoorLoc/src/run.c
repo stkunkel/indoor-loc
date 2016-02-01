@@ -22,7 +22,7 @@
  */
 #define DATA_NO_DMP_RUNS 	0
 #define DATA_WITH_DMP_RUNS 	0
-#define QUAT_DISPLAY_RUNS	0
+#define DISPLAY_RUNS		100000
 #define QUAT_DRIFT_MIN		1
 #define SEPARATOR			" | "
 
@@ -65,7 +65,7 @@ int main() {
 //	status = printDataUsingDMP(SENSORS_ALL, 1, 1, SEPARATOR, DATA_WITH_DMP_RUNS);
 
 //Print Quaternions and Position to Serial Port
-	status = printForImuViewer((PRINT_POS | PRINT_VEL), SEPARATOR, QUAT_DISPLAY_RUNS);
+	status = printForImuViewer(PRINT_ALL, SEPARATOR, DISPLAY_RUNS);
 
 //Quaternion Drift
 //status = printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);

@@ -70,61 +70,132 @@ static Vector normal_force = { .value[0] = 0.0, .value[1] = 0.0, .value[2
  */
 int printforDisplay(short int *printMask, char* separator) {
 	//Variables
-	int status = XST_SUCCESS;
-	float quat[QUATERNION_AMOUNT], accel[NUMBER_OF_AXES];
+	float gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], comp[NUMBER_OF_AXES],
+			quat[QUATERNION_AMOUNT], temp;
 	Vector velocity, position;
+	short l_printMask;
 
 	//Create Copy of recent data
-	memcpy(&quat, &recentQuat, QUATERNION_AMOUNT * sizeof(float));
+	memcpy(&gyro, &recentGyro, NUMBER_OF_AXES * sizeof(float));
 	memcpy(&accel, &recentAccel, NUMBER_OF_AXES * sizeof(float));
+	memcpy(&comp, &recentCompass, NUMBER_OF_AXES * sizeof(float));
+	memcpy(&quat, &recentQuat, QUATERNION_AMOUNT * sizeof(float));
+	temp = recentTemp;
 	velocity = recentVelocity;
 	position = recentPosition;
+
+	//Create Copy of Print Mask
+	memcpy(&l_printMask, printMask, sizeof(short));
 
 	//Print Timestamp
 	myprintf("TS: %dms", recent_ts);
 	myprintf(separator);
 
-	//Print Quaternion
-	if (printMask[0] & PRINT_QUAT) {
-		//Print Quat
-		printQuat(quat);
+	//Print Gyroscope
+	if (l_printMask & PRINT_GYRO) {
+		//Print Velocity
+		printGyro(gyro);
+
+		//Adjust Print Mask
+		l_printMask = l_printMask & ~PRINT_GYRO;
 
 		//Print separator
-		if ((printMask[0] & PRINT_POS) || (printMask[0] & PRINT_VEL)) {
+		if (l_printMask != 0x00) {
 			printf(separator);
+		} else {
+			return XST_SUCCESS;
 		}
 	}
 
 	//Print Acceleration
-	if (printMask[0] & PRINT_ACCEL) {
+	if (l_printMask & PRINT_ACCEL) {
 		//Print Velocity
 		printAccel(accel);
 
+		//Adjust Print Mask
+		l_printMask = l_printMask & ~PRINT_ACCEL;
+
 		//Print separator
-		if ((printMask[0] & PRINT_VEL) || (printMask[0] & PRINT_POS)) {
+		if (l_printMask != 0x00) {
 			printf(separator);
+		} else {
+			return XST_SUCCESS;
+		}
+	}
+
+	//Print Compass
+	if (l_printMask & PRINT_COMP) {
+		//Print Velocity
+		printCompass(comp);
+
+		//Adjust Print Mask
+		l_printMask = l_printMask & ~PRINT_COMP;
+
+		//Print separator
+		if (l_printMask != 0x00) {
+			printf(separator);
+		} else {
+			return XST_SUCCESS;
+		}
+	}
+
+	//Print Temperature
+	if (l_printMask & PRINT_TEMP) {
+		//Print Velocity
+		printTemp(&temp);
+
+		//Adjust Print Mask
+		l_printMask = l_printMask & ~PRINT_TEMP;
+
+		//Print separator
+		if (l_printMask != 0x00) {
+			printf(separator);
+		} else {
+			return XST_SUCCESS;
+		}
+	}
+
+	//Print Quaternion
+	if (l_printMask & PRINT_QUAT) {
+		//Print Quat
+		printQuat(quat);
+
+		//Adjust Print Mask
+		l_printMask = l_printMask & ~PRINT_QUAT;
+
+		//Print separator
+		if (l_printMask != 0x00) {
+			printf(separator);
+		} else {
+			return XST_SUCCESS;
 		}
 	}
 
 	//Print Velocity
-	if (printMask[0] & PRINT_VEL) {
+	if (l_printMask & PRINT_VEL) {
 		//Print Velocity
 		printVelocity(&velocity);
 
+		//Adjust Print Mask
+		l_printMask = l_printMask & ~PRINT_VEL;
+
 		//Print separator
-		if ((printMask[0] & PRINT_POS)) {
+		if (l_printMask != 0x00) {
 			printf(separator);
+		} else {
+			return XST_SUCCESS;
 		}
 	}
 
 	//Print Position
-	if (printMask[0] & PRINT_POS) {
+	if (l_printMask & PRINT_POS) {
 		printPosition(&position);
+	} else {
+		return XST_SUCCESS;
 	}
-	printf("\r\n");
 
-	//Return
-	return status;
+	//Didnt print anything
+	return XST_FAILURE;
 }
 
 /*
@@ -1562,7 +1633,7 @@ int initDMP() {
 int readFromRegs(short *gyro, short *accel, short* comp,
 		unsigned long *timestamp, short *sensors) {
 //Variables
-	int status, i;
+	int status;
 	unsigned long ts_gyro = 0, ts_accel = 0, ts_comp = 0;
 
 //Get Gyro

@@ -53,11 +53,14 @@
 #define GRAVITY_AXIS			2			//gravity along z axis
 
 //Print Parameters
-#define PRINT_QUAT				0x01
+#define PRINT_GYRO				0x01
 #define PRINT_ACCEL				0x02
-#define PRINT_VEL				0x04
-#define PRINT_POS				0x08
-#define PRINT_ALL				(PRINT_QUAT | PRINT_ACCEL | PRINT_VEL | PRINT_POS)
+#define PRINT_COMP				0x04
+#define PRINT_TEMP				0x08
+#define PRINT_QUAT				0x10
+#define PRINT_VEL				0x20
+#define PRINT_POS				0x40
+#define PRINT_ALL				(PRINT_GYRO | PRINT_ACCEL | PRINT_QUAT |  PRINT_VEL)
 
 //Constants
 #define GRAVITY					9.80665		//m/s^2
