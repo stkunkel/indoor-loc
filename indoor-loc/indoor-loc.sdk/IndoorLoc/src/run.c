@@ -45,6 +45,9 @@ int main() {
 	//Init Platform
 	init_platform();
 
+	//Init GPIO (for LEDs)
+	initGpio();
+
 	//Print Output Separator
 	myprintf(".........Program Start...........\n\r");
 
@@ -61,7 +64,7 @@ int main() {
 //	status = printDataUsingDMP(SENSORS_ALL, 1, 1, DATA_WITH_DMP_RUNS);
 
 //Print Quaternions and Position to Serial Port
-	status = printForImuViewer(PRINT_VEL, QUAT_DISPLAY_RUNS);
+	status = printForImuViewer(PRINT_VEL, 0);
 
 //Quaternion Drift
 //status = printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
@@ -131,9 +134,6 @@ int printDataForAnalysis(short sensors, short printMask,
 		return status;
 	}
 
-	//Init GPIO
-	initGpio();
-
 	//Print Quaternions to Serial Port
 	myprintf(".........Print for IMU Viewer...........\n\r");
 	for (cnt = 0; cnt <= numberOfRuns; cnt++) {
@@ -171,11 +171,6 @@ int printDataForAnalysis(short sensors, short printMask,
 				cnt--;
 			}
 		}
-
-		//Make sure only successful prints count
-		if (numberOfRuns < 1) {
-			cnt--;
-		}
 	}
 
 	//Return
@@ -190,6 +185,13 @@ int printDataForAnalysis(short sensors, short printMask,
 int printForImuViewer(short int printMask, unsigned int numberOfRuns) {
 	//Variables
 	int cnt = 0, printcnt = 0, status;
+	bool endless = BOOL_FALSE;
+
+	//Set number of runs, if endless print
+	if (numberOfRuns == 0) {
+		numberOfRuns = 10;
+		endless = BOOL_TRUE;
+	}
 
 	//Init
 	myprintf(".........Configure MPU and DMP...........\n\r");
@@ -210,9 +212,6 @@ int printForImuViewer(short int printMask, unsigned int numberOfRuns) {
 	if (status != XST_SUCCESS) {
 		return status;
 	}
-
-	//Init GPIO
-	initGpio();
 
 	//Adjust Number of Runs
 	numberOfRuns *= (DMP_FIFO_RATE / IMUVIEWER_FREQ);
@@ -249,6 +248,12 @@ int printForImuViewer(short int printMask, unsigned int numberOfRuns) {
 					} else {
 						cnt--;
 					}
+
+					//For endless prints
+					if (endless == BOOL_TRUE) {
+						cnt = 0;
+					}
+
 				}
 			} else {
 				cnt--;
@@ -260,7 +265,7 @@ int printForImuViewer(short int printMask, unsigned int numberOfRuns) {
 
 		//Make sure only successful prints count
 		if (numberOfRuns < 1) {
-			cnt--;
+			cnt = 0;
 		}
 	}
 
@@ -278,11 +283,18 @@ int printDataUsingDMP(short sensors, bool initialCalibration,
 	int cnt = 0, printcnt = 0, status;
 	short features;
 	char calibrateDmp = 0;
+	bool endless = BOOL_FALSE;
 
 	if (initialCalibration) {
 		features = FEATURES_CAL;
 	} else {
 		features = FEATURES_RAW;
+	}
+
+	//Set number of runs, if endless print
+	if (numberOfRuns == 0) {
+		numberOfRuns = 10;
+		endless = BOOL_TRUE;
 	}
 
 	//Init
@@ -334,6 +346,9 @@ int printDataUsingDMP(short sensors, bool initialCalibration,
 			//Update Data
 			status = updateData();
 
+			//LEDs
+			ledRun();
+
 			//Check whether data should be printed
 			if (status == XST_SUCCESS) {
 				//Increase print counter
@@ -349,17 +364,17 @@ int printDataUsingDMP(short sensors, bool initialCalibration,
 
 					//Print new line
 					printf("\n\r");
+
+					//For endless prints
+					if (endless == BOOL_TRUE) {
+						cnt = 0;
+					}
 				}
 			} else {
 				cnt--;
 				printcnt--;
 			}
 		} else {
-			cnt--;
-		}
-
-		//Make sure only successful prints count
-		if (numberOfRuns < 1) {
 			cnt--;
 		}
 	}
@@ -374,7 +389,7 @@ int printDataUsingDMP(short sensors, bool initialCalibration,
  */
 int printDataWithoutDMP(short int sensors, unsigned int numberOfRuns) {
 //Variables
-	int i, cnt, status;
+	int cnt, status;
 
 //Get Data without DMP
 	myprintf(".........Without DMP...........\n\r");
