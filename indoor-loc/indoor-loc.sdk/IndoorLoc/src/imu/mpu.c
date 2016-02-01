@@ -470,13 +470,11 @@ void printGyro(float conv[NUMBER_OF_AXES]) {
 	int i;
 
 //Print Gyro
-	printf("Gyro: (");
+	printf("Gyro: ");
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
 		printf("%.2fdgr/s", conv[i]);
 		if (i < NUMBER_OF_AXES - 1) {
 			printf(", ");
-		} else {
-			printf(")");
 		}
 	}
 
@@ -490,13 +488,11 @@ void printAccel(float conv[NUMBER_OF_AXES]) {
 	int i;
 
 //Print Acc
-	printf("Acc: (");
+	printf("Acc: ");
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
 		printf("%.2fg", conv[i]);
 		if (i < NUMBER_OF_AXES - 1) {
 			printf(", ");
-		} else {
-			printf(")");
 		}
 	}
 
@@ -510,13 +506,11 @@ void printCompass(float conv[NUMBER_OF_AXES]) {
 	int i;
 
 //Print Compass
-	printf("Comp: (");
+	printf("Comp: ");
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
 		printf("%.1fuT", conv[i]);
 		if (i < NUMBER_OF_AXES - 1) {
 			printf(", ");
-		} else {
-			printf(")");
 		}
 	}
 }
