@@ -49,7 +49,7 @@ int main() {
 	myprintf(".........Program Start...........\n\r");
 
 	//Print Data without DMP
-//	status = printDataWithoutDMP(SENSORS_ALL, DATA_NO_DMP_RUNS);
+	status = printDataWithoutDMP(SENSORS_ALL, DATA_NO_DMP_RUNS);
 
 //Print Data with DMP without initial or DMP gyro calibration
 //	status = printDataUsingDMP(SENSORS_ALL, 0, 0, DATA_WITH_DMP_RUNS);
@@ -61,7 +61,7 @@ int main() {
 //	status = printDataUsingDMP(SENSORS_ALL, 1, 1, DATA_WITH_DMP_RUNS);
 
 //Print Quaternions and Position to Serial Port
-	status = printForImuViewer(PRINT_ALL, QUAT_DISPLAY_RUNS);
+//	status = printForImuViewer(PRINT_ALL, QUAT_DISPLAY_RUNS);
 
 	//Quaternion Drift
 	//status = printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
@@ -380,10 +380,7 @@ int printDataWithoutDMP(short int sensors, unsigned int numberOfRuns) {
 		}
 
 		//Wait
-//		for (i = 0; i <= 10000; i++) {
-//			;
-//		}
-		usleep(1000);
+		usleep(1000000 / IMUVIEWER_FREQ); //100ms
 	}
 	return XST_SUCCESS;
 }
