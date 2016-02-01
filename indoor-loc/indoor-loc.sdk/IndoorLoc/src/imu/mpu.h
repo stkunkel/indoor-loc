@@ -54,9 +54,10 @@
 
 //Print Parameters
 #define PRINT_QUAT				0x01
-#define PRINT_VEL				0x02
-#define PRINT_POS				0x04
-#define PRINT_ALL				(PRINT_QUAT | PRINT_VEL | PRINT_POS)
+#define PRINT_ACCEL				0x02
+#define PRINT_VEL				0x04
+#define PRINT_POS				0x08
+#define PRINT_ALL				(PRINT_QUAT | PRINT_ACCEL | PRINT_VEL | PRINT_POS)
 
 //Constants
 #define GRAVITY					9.80665		//m/s^2
@@ -73,7 +74,7 @@ int printforDisplay(short int *printMask, char* separator);
 void printQuatDrift(unsigned int time_min);
 int getQuatDrift(float *quat_drift, char calibration, unsigned int time_min);
 void printDataWithDMP(short int *sensors, char* separator);
-int printDataNoDMP(short int *sensors);
+int printDataNoDMP(short int *sensors, char* separator);
 void testPositionUpdate();
 void quaternionTest();
 int updateData();

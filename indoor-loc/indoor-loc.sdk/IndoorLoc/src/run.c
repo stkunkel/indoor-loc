@@ -20,20 +20,21 @@
 /*
  * Defines
  */
-#define DATA_NO_DMP_RUNS 	10
-#define DATA_WITH_DMP_RUNS 	10
-#define QUAT_DISPLAY_RUNS	10
+#define DATA_NO_DMP_RUNS 	0
+#define DATA_WITH_DMP_RUNS 	0
+#define QUAT_DISPLAY_RUNS	0
 #define QUAT_DRIFT_MIN		1
+#define SEPARATOR			" | "
 
 /*
  * Function Prototypes
  */
 int printQuaternionDriftAfterXMin(unsigned int time_min);
 int printDataForAnalysis(short sensors, short data, unsigned int numberOfRuns);
-int printForImuViewer(short int printMask, unsigned int numberOfRuns);
-int printDataWithoutDMP(short int sensors, unsigned int numberOfRuns);
+int printForImuViewer(short int printMask, char* separator, unsigned int numberOfRuns);
 int printDataUsingDMP(short sensors, bool initialCalibration,
-		bool dmpCalibration, unsigned int numberOfRuns);
+		bool dmpCalibration, char* separator, unsigned int numberOfRuns);
+int printDataWithoutDMP(short int sensors, char* separator, unsigned int numberOfRuns);
 
 /*
  * Main
@@ -52,19 +53,19 @@ int main() {
 	myprintf(".........Program Start...........\n\r");
 
 	//Print Data without DMP
-//	status = printDataWithoutDMP(SENSORS_ALL, DATA_NO_DMP_RUNS);
+//	status = printDataWithoutDMP(SENSORS_ALL, SEPARATOR, DATA_NO_DMP_RUNS);
 
 //Print Data with DMP without initial or DMP gyro calibration
-//	status = printDataUsingDMP(SENSORS_ALL, 0, 0, DATA_WITH_DMP_RUNS);
+//	status = printDataUsingDMP(SENSORS_ALL, 0, 0, SEPARATOR, DATA_WITH_DMP_RUNS);
 
 //Print Data with DMP with initial calibration but no DMP gyro calibration
-//	status = printDataUsingDMP(SENSORS_ALL, 1, 0, DATA_WITH_DMP_RUNS);
+//	status = printDataUsingDMP(SENSORS_ALL, 1, 0, SEPARATOR, DATA_WITH_DMP_RUNS);
 
 //Print Data with DMP with and DMP gyro calibration
-//	status = printDataUsingDMP(SENSORS_ALL, 1, 1, DATA_WITH_DMP_RUNS);
+//	status = printDataUsingDMP(SENSORS_ALL, 1, 1, SEPARATOR, DATA_WITH_DMP_RUNS);
 
 //Print Quaternions and Position to Serial Port
-	status = printForImuViewer(PRINT_VEL, 0);
+	status = printForImuViewer((PRINT_POS | PRINT_VEL), SEPARATOR, QUAT_DISPLAY_RUNS);
 
 //Quaternion Drift
 //status = printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
@@ -182,14 +183,14 @@ int printDataForAnalysis(short sensors, short printMask,
  * In: number of runs (if 0 --> print forever)
  * Returns 0 if successful
  */
-int printForImuViewer(short int printMask, unsigned int numberOfRuns) {
+int printForImuViewer(short int printMask, char* separator, unsigned int numberOfRuns) {
 	//Variables
 	int cnt = 0, printcnt = 0, status;
 	bool endless = BOOL_FALSE;
 
 	//Set number of runs, if endless print
 	if (numberOfRuns == 0) {
-		numberOfRuns = 10;
+		numberOfRuns = IMUVIEWER_FREQ;
 		endless = BOOL_TRUE;
 	}
 
@@ -240,7 +241,7 @@ int printForImuViewer(short int printMask, unsigned int numberOfRuns) {
 					printcnt = 0;
 
 					//Print
-					status = printforDisplay(&printMask, " | ");
+					status = printforDisplay(&printMask, separator);
 
 					//Print new line
 					if (status == XST_SUCCESS) {
@@ -278,7 +279,7 @@ int printForImuViewer(short int printMask, unsigned int numberOfRuns) {
  * In: bool for initial calibration and dmp calibration, number of runs (if 0 --> endless loop)
  */
 int printDataUsingDMP(short sensors, bool initialCalibration,
-		bool dmpCalibration, unsigned int numberOfRuns) {
+		bool dmpCalibration, char* separator, unsigned int numberOfRuns) {
 //Variables
 	int cnt = 0, printcnt = 0, status;
 	short features;
@@ -293,7 +294,7 @@ int printDataUsingDMP(short sensors, bool initialCalibration,
 
 	//Set number of runs, if endless print
 	if (numberOfRuns == 0) {
-		numberOfRuns = 10;
+		numberOfRuns = IMUVIEWER_FREQ;
 		endless = BOOL_TRUE;
 	}
 
@@ -360,7 +361,7 @@ int printDataUsingDMP(short sensors, bool initialCalibration,
 					printcnt = 0;
 
 					//Print
-					printDataWithDMP(&sensors, " | ");
+					printDataWithDMP(&sensors, separator);
 
 					//Print new line
 					printf("\n\r");
@@ -387,7 +388,7 @@ int printDataUsingDMP(short sensors, bool initialCalibration,
  * Print Data without DMP
  * In: sensors, number of runs (if 0 --> endless loop)
  */
-int printDataWithoutDMP(short int sensors, unsigned int numberOfRuns) {
+int printDataWithoutDMP(short int sensors, char* separator, unsigned int numberOfRuns) {
 //Variables
 	int cnt, status;
 
@@ -395,7 +396,7 @@ int printDataWithoutDMP(short int sensors, unsigned int numberOfRuns) {
 	myprintf(".........Without DMP...........\n\r");
 	for (cnt = 0; cnt <= numberOfRuns; cnt++) {
 		//Print
-		status = printDataNoDMP(&sensors);
+		status = printDataNoDMP(&sensors, separator);
 
 		//Decrease count if not successful
 		if (status != XST_SUCCESS || numberOfRuns < 1) {

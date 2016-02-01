@@ -71,11 +71,12 @@ static Vector normal_force = { .value[0] = 0.0, .value[1] = 0.0, .value[2
 int printforDisplay(short int *printMask, char* separator) {
 	//Variables
 	int status = XST_SUCCESS;
-	float quat[QUATERNION_AMOUNT];
+	float quat[QUATERNION_AMOUNT], accel[NUMBER_OF_AXES];
 	Vector velocity, position;
 
 	//Create Copy of recent data
 	memcpy(&quat, &recentQuat, QUATERNION_AMOUNT * sizeof(float));
+	memcpy(&accel, &recentAccel, NUMBER_OF_AXES * sizeof(float));
 	velocity = recentVelocity;
 	position = recentPosition;
 
@@ -90,6 +91,17 @@ int printforDisplay(short int *printMask, char* separator) {
 
 		//Print separator
 		if ((printMask[0] & PRINT_POS) || (printMask[0] & PRINT_VEL)) {
+			printf(separator);
+		}
+	}
+
+	//Print Acceleration
+	if (printMask[0] & PRINT_ACCEL) {
+		//Print Velocity
+		printAccel(accel);
+
+		//Print separator
+		if ((printMask[0] & PRINT_VEL) || (printMask[0] & PRINT_POS)) {
 			printf(separator);
 		}
 	}
@@ -151,6 +163,27 @@ int printCurrentVelocityForDisplay() {
 //Print
 	if (status == XST_SUCCESS) {
 		printVelocity(&velocity);
+	}
+
+//Return
+	return status;
+}
+
+/*
+ * Print Current Acceleration for Display
+ * (You have to call updateData() to get most recent value.)
+ */
+int printCurrentAccelForDisplay() {
+//Variables
+	int status = XST_SUCCESS;
+	float accel[NUMBER_OF_AXES];
+
+//Create copy of recent position
+	memcpy(accel, recentAccel, NUMBER_OF_AXES * sizeof(float));
+
+//Print
+	if (status == XST_SUCCESS) {
+		printAccel(accel);
 	}
 
 //Return
@@ -363,7 +396,7 @@ void printDataWithDMP(short int *sensors, char* separator) {
 /*
  * Print Data and don't use DMP
  */
-int printDataNoDMP(short int *sensors) {
+int printDataNoDMP(short int *sensors, char* separator) {
 //Variables
 	int status, return_val = XST_SUCCESS;
 	short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
@@ -399,7 +432,7 @@ int printDataNoDMP(short int *sensors) {
 
 				//Print Gyro
 				printGyro(conv);
-				printf(" | ");
+				printf(separator);
 			}
 		}
 
@@ -414,7 +447,7 @@ int printDataNoDMP(short int *sensors) {
 
 				//Print Acc
 				printAccel(conv);
-				printf(" | ");
+				printf(separator);
 			}
 		}
 
@@ -429,7 +462,7 @@ int printDataNoDMP(short int *sensors) {
 
 				//Print Compass
 				printCompass(conv);
-				printf(" | ");
+				printf(separator);
 			}
 		}
 	}
@@ -470,11 +503,12 @@ void printGyro(float conv[NUMBER_OF_AXES]) {
 	int i;
 
 //Print Gyro
-	printf("Gyro: ");
+	myprintf("Gyro: ");
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		printf("%.2fdgr/s", conv[i]);
+		printf("%+.2f", conv[i]);
+		myprintf("dgr/s");
 		if (i < NUMBER_OF_AXES - 1) {
-			printf(", ");
+			printf(" ");
 		}
 	}
 
@@ -488,11 +522,12 @@ void printAccel(float conv[NUMBER_OF_AXES]) {
 	int i;
 
 //Print Acc
-	printf("Acc: ");
+	myprintf("Acc: ");
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		printf("%.2fg", conv[i]);
+		printf("%+.2f", conv[i]);
+		myprintf("g");
 		if (i < NUMBER_OF_AXES - 1) {
-			printf(", ");
+			printf(" ");
 		}
 	}
 
@@ -506,11 +541,12 @@ void printCompass(float conv[NUMBER_OF_AXES]) {
 	int i;
 
 //Print Compass
-	printf("Comp: ");
+	myprintf("Comp: ");
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		printf("%.1fuT", conv[i]);
+		printf("%+.1f", conv[i]);
+		myprintf("uT");
 		if (i < NUMBER_OF_AXES - 1) {
-			printf(", ");
+			printf(" ");
 		}
 	}
 }
@@ -520,7 +556,9 @@ void printCompass(float conv[NUMBER_OF_AXES]) {
  */
 void printTemp(float* temp_conv) {
 //Print Temperature
-	printf("Temp: %.2fdgrC\r\n", *temp_conv);
+	myprintf("Temp: ");
+	printf("%+.2f", *temp_conv);
+	myprintf("dgrC");
 }
 
 /*
@@ -533,7 +571,7 @@ void printQuat(float quat[QUATERNION_AMOUNT]) {
 //Print
 	myprintf("Quat: ");
 	for (i = 0; i < QUATERNION_AMOUNT; i++) {
-		printf(" %f", quat[i]); //Print space so IMU Viewer can distinguish negative sign of first value from other characters
+		printf(" %+.6f", quat[i]); //Print space so IMU Viewer can distinguish negative sign of first value from other characters
 //		if (i < QUATERNION_AMOUNT - 1) {
 //			printf(" ");
 //		}
@@ -568,7 +606,7 @@ void printPosition(Vector* position) {
 //Print
 	myprintf("Pos: ");
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		printf("%f", position->value[i]);
+		printf("%+.1f", position->value[i]);
 		myprintf("m");
 		if (i < NUMBER_OF_AXES - 1) {
 			printf(" ");
@@ -586,7 +624,7 @@ void printVelocity(Vector* velocity) {
 //Print
 	myprintf("Vel: ");
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		printf("%f", velocity->value[i] * 100);
+		printf("%+.2f", velocity->value[i] * 100);
 		myprintf("m/s");
 		if (i < NUMBER_OF_AXES - 1) {
 			printf(" ");
