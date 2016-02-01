@@ -19,6 +19,7 @@
 #include "../math_utils.h"
 #include "../print_utils.h"
 #include "../zedboard/time_utils.h"
+#include "../bool.h"
 
 //IMU Parameters
 #define GYRO_SENS				250//500			//°/s (250 would be more accurate, but 500 works more stable with IMU Viewer)
@@ -35,8 +36,8 @@
 #define TEMP_SENS_UNTRIMMED		340			//LSB/°C
 #define TEMP_OFFSET_35C			-521		//LSB
 #define QUATERNION_SCALING		1073741824	//Internal values: 1.0 is scaled to 2^30 = 1073741824 (msp430/eMD-6.0/core/mllite/results_holder.c --> inv_get_6axis_quaternion)
-#define SENSOR_TEMP				0x80		//my define
-#define SENSORS_ALL				INV_XYZ_GYRO | INV_XYZ_ACCEL | INV_XYZ_COMPASS | SENSOR_TEMP//all sensors
+#define SENSOR_TEMP				0x80		//my define: works together with INV_XYZ_GYRO, etc.
+#define SENSORS_ALL				(INV_XYZ_GYRO | INV_XYZ_ACCEL | INV_XYZ_COMPASS | SENSOR_TEMP)//all sensors
 #define FEATURES_CAL			(DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_SEND_CAL_GYRO | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_TAP) //DMP_FEATURE_TAP for ensure DMP sends interrupts at specified rate
 #define FEATURES_RAW			(DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_SEND_RAW_GYRO | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_TAP) //DMP_FEATURE_TAP for ensure DMP sends interrupts at specified rate
 #define MPU_SAMPLE_RATE			200			//Hz
@@ -51,29 +52,34 @@
 #define LATCH_INT_EN_BIT		0x20
 #define GRAVITY_AXIS			2			//gravity along z axis
 
+//Print Parameters
+#define PRINT_QUAT				0x01
+#define PRINT_VEL				0x02
+#define PRINT_POS				0x04
+#define PRINT_ALL				(PRINT_QUAT | PRINT_VEL | PRINT_POS)
 
 //Constants
 #define GRAVITY					9.80665		//m/s^2
 
 //Typedefs
-typedef struct{
+typedef struct {
 	Vector coordinates;
 	unsigned long timestamp;
 } Position;
 
 //Functions
 int getFifoCount();
-int printforDisplay(char printQuaternion, char printPos);
+int printforDisplay(short int *printMask, char* separator);
 void printQuatDrift(unsigned int time_min);
 int getQuatDrift(float *quat_drift, char calibration, unsigned int time_min);
-void printDataWithDMP();
+void printDataWithDMP(short int *sensors, char* separator);
 int printDataNoDMP(short int *sensors);
 void testPositionUpdate();
 void quaternionTest();
 int updateData();
 int calibrateGyrAcc(unsigned int samples);
 int getFifoCount();
-int dmpGyroCalibration(char enable);
+int dmpGyroCalibration(bool enable);
 int configureDMP(unsigned short int features, unsigned short fifoRate);
 int initDMP();
 int getImuAddr(u8* addr);

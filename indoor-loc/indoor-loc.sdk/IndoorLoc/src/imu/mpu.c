@@ -41,9 +41,9 @@ int readFromRegs(short *gyro, short *accel, short* comp,
  * Variables
  */
 static u8 imuAddr = 0;
-static char dmpReady = 0;
-static char gyrAccIsCal = 0;
-static char gyroCalEnabled = 0;
+static bool dmpReady = BOOL_FALSE;
+static bool gyrAccIsCal = BOOL_FALSE;
+static bool gyroCalEnabled = BOOL_FALSE;
 static long glob_gyro_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
 static long glob_accel_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
 static Vector recentVelocity = { .value[0] = 0.0, .value[1] = 0.0, .value[2
@@ -65,10 +65,10 @@ static Vector normal_force = { .value[0] = 0.0, .value[1] = 0.0, .value[2
  * Print for Display
  * Format: "<quat: w> <quat: x> <quat: y> <quat: z> | <pos: x> <pos: y> <pos: z>" (no new line)
  * You have to call updateData() first to get most recent value.
- * In: print quat? print pos?
+ * In: print mask
  * Returns 0 if successful
  */
-int printforDisplay(char printQuaternion, char printPos) {
+int printforDisplay(short int *printMask, char* separator) {
 	//Variables
 	int status = XST_SUCCESS;
 	float quat[QUATERNION_AMOUNT];
@@ -78,21 +78,23 @@ int printforDisplay(char printQuaternion, char printPos) {
 	memcpy(&quat, &recentQuat, QUATERNION_AMOUNT * sizeof(float));
 	position = recentPosition;
 
-	myprintf("TS: %dms | ", recent_ts);
+	//Print Timestamp
+	myprintf("TS: %dms", recent_ts);
+	myprintf(separator);
 
 	//Print Quaternion
-	if (printQuaternion) {
+	if (printMask[0] & PRINT_QUAT) {
 
 		printQuat(quat);
 
 		//Print separator
-		if (printPos) {
-			printf(" | ");
+		if (printMask[0] & PRINT_POS) {
+			printf(separator);
 		}
 	}
 
 //Print Position
-	if (printPos) {
+	if (printMask[0] & PRINT_POS) {
 		printPosition(&position);
 	}
 	printf("\r\n");
@@ -278,7 +280,7 @@ int printQuatForDisplay() {
 /*
  * Print Data using DMP
  */
-void printDataWithDMP() {
+void printDataWithDMP(short int *sensors, char* separator) {
 	//Variables
 	float gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
 	float temp;
@@ -290,19 +292,40 @@ void printDataWithDMP() {
 	temp = recentTemp;
 
 	//Print Gyro
-	printGyro(gyro);
-	printf(" | ");
+	if (sensors[0] & INV_XYZ_GYRO) {
+		printGyro(gyro);
+
+		//Print Separator
+		if ((sensors[0] & INV_XYZ_ACCEL) || (sensors[0] & INV_XYZ_COMPASS)
+				|| (sensors[0] & SENSOR_TEMP)) {
+			printf(separator);
+		}
+	}
 
 	//Print Acc
-	printAccel(accel);
-	printf(" | ");
+	if (sensors[0] & INV_XYZ_ACCEL) {
+		printAccel(accel);
+
+		//Print Separator
+		if ((sensors[0] & INV_XYZ_COMPASS)|| (sensors[0] & SENSOR_TEMP)) {
+			printf(separator);
+		}
+	}
 
 	//Print Compass
-	printCompass(compass);
-	printf(" | ");
+	if (sensors[0] & INV_XYZ_COMPASS) {
+		printCompass(compass);
+
+		//Print Separator
+		if (sensors[0] & SENSOR_TEMP) {
+			printf(separator);
+		}
+	}
 
 	//Print Temperature
-	printTemp(&temp);
+	if (sensors[0] & SENSOR_TEMP) {
+		printTemp(&temp);
+	}
 }
 
 /*
@@ -1149,11 +1172,19 @@ int calibrateGyrAcc(unsigned int samples) {
 		}
 	}
 
-//Save gravity for later
-	normal_force.value[GRAVITY_AXIS] = 1.0; //accel_bias_f[GRAVITY_AXIS];
+	//Make sure gravity is 1.0
+////Save gravity for later
+//	normal_force.value[GRAVITY_AXIS] = 1.0;
+//
+////Make sure gravity is not cancelled
+//	accel_bias_f[GRAVITY_AXIS] = -1.0 + accel_bias_f[GRAVITY_AXIS];
 
-//Make sure gravity is not cancelled
-	accel_bias_f[GRAVITY_AXIS] = -1.0 + accel_bias_f[GRAVITY_AXIS]; //0.0;
+	//Use gravity as it is
+	//Save gravity for later
+	normal_force.value[GRAVITY_AXIS] = accel_bias_f[GRAVITY_AXIS];
+
+	//Make sure gravity is not cancelled
+	accel_bias_f[GRAVITY_AXIS] = 0.0;
 
 //Convert biases
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
@@ -1301,20 +1332,26 @@ int getFifoCount() {
 /*
  * Enable Gyro Calibration
  */
-int dmpGyroCalibration(char enable) {
+int dmpGyroCalibration(bool enable) {
 //Variables
 	int status = XST_SUCCESS;
+	char enableCal = 0;
 
-//Enable gyro cal if requested
-	if (enable != gyroCalEnabled) {
-		status = dmp_enable_gyro_cal(enable);
-		if (status != XST_SUCCESS) {
-			myprintf(
-					"mpu.c: Could not enable/disable Gyroscope Calibration.\n\r");
-		} else {
-			gyroCalEnabled = enable;
-		}
+	//Set Enable Variable
+	if (enable == BOOL_TRUE) {
+		enableCal = 1;
+	} else {
+		enableCal = 0;
 	}
+
+	//Enable gyro cal if requested
+	status = dmp_enable_gyro_cal(enableCal);
+
+	if (status != XST_SUCCESS) {
+		myprintf("mpu.c: Could not enable/disable Gyroscope Calibration.\n\r");
+	}
+
+	//Return
 	return status;
 }
 
@@ -1343,7 +1380,7 @@ int configureDMP(unsigned short int features, unsigned short fifoRate) {
 		}
 	}
 
-	//Push Biases to DMP
+//Push Biases to DMP
 	if (gyrAccIsCal != 0) {
 		status = pushBiasesToDMP(glob_gyro_bias, glob_accel_bias);
 		if (status != XST_SUCCESS) {
@@ -1447,13 +1484,13 @@ int readFromRegs(short *gyro, short *accel, short* comp,
 
 //Get Gyro
 	if (sensors[0] & INV_XYZ_GYRO) {
-		for (i = 0; i < NUMBER_OF_AXES; i++) {
+//		for (i = 0; i < NUMBER_OF_AXES; i++) {
 			status = mpu_get_gyro_reg(gyro, &ts_gyro);
 			if (status != XST_SUCCESS) {
 				myprintf("mpu.c Error getting Gyroscope data.");
 				return XST_FAILURE;
 			}
-		}
+//		}
 	}
 
 //Get Acc
@@ -1474,18 +1511,18 @@ int readFromRegs(short *gyro, short *accel, short* comp,
 		}
 	}
 
-//Make sure timestamp is the same
-	if (ts_gyro) {
+//Make sure timestamp is the same TODO
+	if (ts_gyro != 0) {
 		*timestamp = ts_gyro;
 	}
-
-	if (ts_accel && *timestamp != ts_accel) {
-		return XST_FAILURE;
-	}
-
-	if (ts_comp && *timestamp != ts_comp) {
-		return XST_FAILURE;
-	}
+//
+//	if ((ts_accel != 0) && (*timestamp != ts_accel)) {
+//		return XST_FAILURE;
+//	}
+//
+//	if ((ts_comp) && (*timestamp != ts_comp)) {
+//		return XST_FAILURE;
+//	}
 
 //Return
 	return XST_SUCCESS;
@@ -1540,13 +1577,13 @@ int initMPU() {
 	}
 
 //5. Set sensitivities
-	//Gyro
+//Gyro
 	status = mpu_set_gyro_fsr(GYRO_SENS);
 	if (status != 0) {
 		myprintf("mpu.c: Error setting gyroscope FRS.\r\n");
 		return XST_FAILURE;
 	}
-	//Accel
+//Accel
 	status = mpu_set_accel_fsr(ACCEL_SENS);
 	if (status != 0) {
 		myprintf("mpu.c: Error setting gyroscope FRS.\r\n");
