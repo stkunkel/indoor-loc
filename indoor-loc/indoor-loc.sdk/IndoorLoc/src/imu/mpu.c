@@ -21,6 +21,7 @@ void printQuat(float quat[QUATERNION_AMOUNT]);
 void printRotationAngle(long quat[QUATERNION_AMOUNT]);
 void printEulerAngles(float* sigma, float* theta, float* psi);
 void printPosition(Vector* position);
+void printVelocity(Vector* velocity);
 void updatePosition(float* accel_conv, float* quat_conv,
 		unsigned long* p_timestamp, Vector* p_recentAccelInertial,
 		Vector* p_recentVelocity, Vector* p_recentPosition,
@@ -43,7 +44,6 @@ int readFromRegs(short *gyro, short *accel, short* comp,
 static u8 imuAddr = 0;
 static bool dmpReady = BOOL_FALSE;
 static bool gyrAccIsCal = BOOL_FALSE;
-static bool gyroCalEnabled = BOOL_FALSE;
 static long glob_gyro_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
 static long glob_accel_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
 static Vector recentVelocity = { .value[0] = 0.0, .value[1] = 0.0, .value[2
@@ -72,10 +72,11 @@ int printforDisplay(short int *printMask, char* separator) {
 	//Variables
 	int status = XST_SUCCESS;
 	float quat[QUATERNION_AMOUNT];
-	Vector position;
+	Vector velocity, position;
 
 	//Create Copy of recent data
 	memcpy(&quat, &recentQuat, QUATERNION_AMOUNT * sizeof(float));
+	velocity = recentVelocity;
 	position = recentPosition;
 
 	//Print Timestamp
@@ -84,22 +85,33 @@ int printforDisplay(short int *printMask, char* separator) {
 
 	//Print Quaternion
 	if (printMask[0] & PRINT_QUAT) {
-
+		//Print Quat
 		printQuat(quat);
 
 		//Print separator
-		if (printMask[0] & PRINT_POS) {
+		if ((printMask[0] & PRINT_POS) || (printMask[0] & PRINT_VEL)) {
 			printf(separator);
 		}
 	}
 
-//Print Position
+	//Print Velocity
+	if (printMask[0] & PRINT_VEL) {
+		//Print Velocity
+		printVelocity(&velocity);
+
+		//Print separator
+		if ((printMask[0] & PRINT_POS)) {
+			printf(separator);
+		}
+	}
+
+	//Print Position
 	if (printMask[0] & PRINT_POS) {
 		printPosition(&position);
 	}
 	printf("\r\n");
 
-//Return
+	//Return
 	return status;
 }
 
@@ -118,7 +130,27 @@ int printCurrentPositionForDisplay() {
 //Print
 	if (status == XST_SUCCESS) {
 		printPosition(&position);
-		printf("\n\r");
+	}
+
+//Return
+	return status;
+}
+
+/*
+ * Print Current Velocity for Display
+ * (You have to call updateData() to get most recent value.)
+ */
+int printCurrentVelocityForDisplay() {
+//Variables
+	int status = XST_SUCCESS;
+	Vector velocity;
+
+//Create copy of recent position
+	velocity = recentVelocity;
+
+//Print
+	if (status == XST_SUCCESS) {
+		printVelocity(&velocity);
 	}
 
 //Return
@@ -307,7 +339,7 @@ void printDataWithDMP(short int *sensors, char* separator) {
 		printAccel(accel);
 
 		//Print Separator
-		if ((sensors[0] & INV_XYZ_COMPASS)|| (sensors[0] & SENSOR_TEMP)) {
+		if ((sensors[0] & INV_XYZ_COMPASS) || (sensors[0] & SENSOR_TEMP)) {
 			printf(separator);
 		}
 	}
@@ -542,13 +574,32 @@ void printPosition(Vector* position) {
 //Print
 	myprintf("Pos: ");
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		printf("%f", position->value[i] * 100);
-		myprintf("cm");
+		printf("%f", position->value[i]);
+		myprintf("m");
 		if (i < NUMBER_OF_AXES - 1) {
 			printf(" ");
 		}
 	}
 }
+
+/*
+ * Print Velocity
+ */
+void printVelocity(Vector* velocity) {
+//Variables
+	int i;
+
+//Print
+	myprintf("Vel: ");
+	for (i = 0; i < NUMBER_OF_AXES; i++) {
+		printf("%f", velocity->value[i] * 100);
+		myprintf("m/s");
+		if (i < NUMBER_OF_AXES - 1) {
+			printf(" ");
+		}
+	}
+}
+
 /*
  * Test Position Update function
  */
@@ -1104,7 +1155,7 @@ int calibrateGyrAcc(unsigned int samples) {
 	if (imuAddr == 0) {
 		status = initMPU();
 		if (status != XST_SUCCESS) {
-			gyrAccIsCal = 0;
+			gyrAccIsCal = BOOL_FALSE;
 			return status;
 		}
 	}
@@ -1112,7 +1163,7 @@ int calibrateGyrAcc(unsigned int samples) {
 //Disable DMP
 	status = mpu_set_dmp_state(0);
 	if (status != XST_SUCCESS) {
-		gyrAccIsCal = 0;
+		gyrAccIsCal = BOOL_FALSE;
 		myprintf("mpu.c: Could not disable DMP.\r\n");
 		return status;
 	}
@@ -1120,7 +1171,7 @@ int calibrateGyrAcc(unsigned int samples) {
 //Set Gyro Bias to 0
 	status = mpu_set_gyro_bias_reg(gyro_bias);
 	if (status != XST_SUCCESS) {
-		gyrAccIsCal = 0;
+		gyrAccIsCal = BOOL_FALSE;
 		myprintf("mpu.c: Could not initially set gyro bias.\r\n");
 		return XST_FAILURE;
 	}
@@ -1128,7 +1179,7 @@ int calibrateGyrAcc(unsigned int samples) {
 //Set Accel Bias to 0
 	status = mpu_set_accel_bias_6050_reg(accel_bias);
 	if (status != XST_SUCCESS) {
-		gyrAccIsCal = 0;
+		gyrAccIsCal = BOOL_FALSE;
 		myprintf("mpu.c: Could not initially set accel bias.\r\n");
 		return XST_FAILURE;
 	}
@@ -1136,7 +1187,7 @@ int calibrateGyrAcc(unsigned int samples) {
 //Reset FIFO
 	status = mpu_reset_fifo();
 	if (status != XST_SUCCESS) {
-		gyrAccIsCal = 0;
+		gyrAccIsCal = BOOL_FALSE;
 		myprintf("mpu.c: Could not reset FIFO.\r\n");
 		return status;
 	}
@@ -1153,14 +1204,14 @@ int calibrateGyrAcc(unsigned int samples) {
 			//Convert accel
 			status = convertAccData(accel, accel_bias_conv);
 			if (status != XST_SUCCESS) {
-				gyrAccIsCal = 0;
+				gyrAccIsCal = BOOL_FALSE;
 				return status;
 			}
 
 			//Convert gyro
 			status = convertGyroData(gyro, gyro_bias_conv);
 			if (status != XST_SUCCESS) {
-				gyrAccIsCal = 0;
+				gyrAccIsCal = BOOL_FALSE;
 				return status;
 			}
 
@@ -1215,23 +1266,23 @@ int calibrateGyrAcc(unsigned int samples) {
 		//Push accel bias to register
 		status = mpu_set_accel_bias_6050_reg(accel_bias);
 		if (status != XST_SUCCESS) {
-			gyrAccIsCal = 0;
+			gyrAccIsCal = BOOL_FALSE;
 			return XST_FAILURE;
 		}
 
 		//Push Gyro Bias to register
 		status = mpu_set_gyro_bias_reg(gyro_bias);
 		if (status != XST_SUCCESS) {
-			gyrAccIsCal = 0;
+			gyrAccIsCal = BOOL_FALSE;
 			return XST_FAILURE;
 		}
 
 		//Calibration successful --> set flag
-		gyrAccIsCal = 1;
+		gyrAccIsCal = BOOL_TRUE;
 		status = XST_SUCCESS;
 	} else {
 		//Calibration successful --> set flag
-		gyrAccIsCal = 0;
+		gyrAccIsCal = BOOL_FALSE;
 		status = XST_FAILURE;
 	}
 
@@ -1380,8 +1431,8 @@ int configureDMP(unsigned short int features, unsigned short fifoRate) {
 		}
 	}
 
-//Push Biases to DMP
-	if (gyrAccIsCal != 0) {
+//Push Biases to DMP if calibration is finished
+	if (gyrAccIsCal == BOOL_TRUE) {
 		status = pushBiasesToDMP(glob_gyro_bias, glob_accel_bias);
 		if (status != XST_SUCCESS) {
 			myprintf("mpu.c: Unable to push biases to DMP.\r\n");
@@ -1485,11 +1536,11 @@ int readFromRegs(short *gyro, short *accel, short* comp,
 //Get Gyro
 	if (sensors[0] & INV_XYZ_GYRO) {
 //		for (i = 0; i < NUMBER_OF_AXES; i++) {
-			status = mpu_get_gyro_reg(gyro, &ts_gyro);
-			if (status != XST_SUCCESS) {
-				myprintf("mpu.c Error getting Gyroscope data.");
-				return XST_FAILURE;
-			}
+		status = mpu_get_gyro_reg(gyro, &ts_gyro);
+		if (status != XST_SUCCESS) {
+			myprintf("mpu.c Error getting Gyroscope data.");
+			return XST_FAILURE;
+		}
 //		}
 	}
 

@@ -32,8 +32,8 @@ int printQuaternionDriftAfterXMin(unsigned int time_min);
 int printDataForAnalysis(short sensors, short data, unsigned int numberOfRuns);
 int printForImuViewer(short int printMask, unsigned int numberOfRuns);
 int printDataWithoutDMP(short int sensors, unsigned int numberOfRuns);
-int printDataUsingDMP(short sensors, char initialCalibration,
-		char dmpCalibration, unsigned int numberOfRuns);
+int printDataUsingDMP(short sensors, bool initialCalibration,
+		bool dmpCalibration, unsigned int numberOfRuns);
 
 /*
  * Main
@@ -49,7 +49,7 @@ int main() {
 	myprintf(".........Program Start...........\n\r");
 
 	//Print Data without DMP
-	status = printDataWithoutDMP(SENSORS_ALL, DATA_NO_DMP_RUNS);
+//	status = printDataWithoutDMP(SENSORS_ALL, DATA_NO_DMP_RUNS);
 
 //Print Data with DMP without initial or DMP gyro calibration
 //	status = printDataUsingDMP(SENSORS_ALL, 0, 0, DATA_WITH_DMP_RUNS);
@@ -61,28 +61,28 @@ int main() {
 //	status = printDataUsingDMP(SENSORS_ALL, 1, 1, DATA_WITH_DMP_RUNS);
 
 //Print Quaternions and Position to Serial Port
-//	status = printForImuViewer(PRINT_ALL, QUAT_DISPLAY_RUNS);
+	status = printForImuViewer(PRINT_VEL, QUAT_DISPLAY_RUNS);
 
-	//Quaternion Drift
-	//status = printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
+//Quaternion Drift
+//status = printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
 
-	//PWM Test
-	//status = pwmTest();
+//PWM Test
+//status = pwmTest();
 
-	//Test position update functionality
+//Test position update functionality
 //	testPositionUpdate();
 
-	//Test Matrix Inverse
+//Test Matrix Inverse
 //	testMatrixInverse();
 
-	//Test Quaternions for IMU Viewer
+//Test Quaternions for IMU Viewer
 //	quaternionTest();
 
-	//Test LED
+//Test LED
 //	testToggleLed();
 //	testLedRun();
 
-	//Stay in here
+//Stay in here
 	while (1) {
 		;
 	}
@@ -270,13 +270,14 @@ int printForImuViewer(short int printMask, unsigned int numberOfRuns) {
 
 /*
  * Print Data using DMP
- * In: calibration, number of runs (if 0 --> endless loop)
+ * In: bool for initial calibration and dmp calibration, number of runs (if 0 --> endless loop)
  */
-int printDataUsingDMP(short sensors, char initialCalibration,
-		char dmpCalibration, unsigned int numberOfRuns) {
+int printDataUsingDMP(short sensors, bool initialCalibration,
+		bool dmpCalibration, unsigned int numberOfRuns) {
 //Variables
 	int cnt = 0, printcnt = 0, status;
 	short features;
+	char calibrateDmp = 0;
 
 	if (initialCalibration) {
 		features = FEATURES_CAL;
@@ -292,7 +293,7 @@ int printDataUsingDMP(short sensors, char initialCalibration,
 	}
 
 //Calibrate if required
-	if (initialCalibration) {
+	if (initialCalibration == BOOL_TRUE) {
 		myprintf(".........Calibration...........\n\r");
 		status = calibrateGyrAcc(CAL_SAMPLES);
 		if (status != XST_SUCCESS) {
@@ -300,19 +301,26 @@ int printDataUsingDMP(short sensors, char initialCalibration,
 		}
 	}
 
-//En- or disable dynamic gyro calibration
-	status = dmpGyroCalibration(dmpCalibration);
+	//Set char for DMP Calibration
+	if (dmpCalibration == BOOL_TRUE) {
+		calibrateDmp = 1;
+	} else {
+		calibrateDmp = 0;
+	}
+
+	//En- or disable dynamic gyro calibration
+	status = dmpGyroCalibration(calibrateDmp);
 	if (status != XST_SUCCESS) {
 		return status;
 	}
 
-	//Enable Interrupts
+//Enable Interrupts
 	status = setupMPUInt();
 	if (status != XST_SUCCESS) {
 		return status;
 	}
 
-	//Adjust Number of Runs
+//Adjust Number of Runs
 	numberOfRuns *= (DMP_FIFO_RATE / IMUVIEWER_FREQ);
 
 //Get Data with DMP
