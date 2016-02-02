@@ -19,7 +19,9 @@
 #include "../math_utils.h"
 #include "../print_utils.h"
 #include "../zedboard/time_utils.h"
+#include "../zedboard/gpio_utils.h"
 #include "../bool.h"
+#include "../program_parameters.h"
 
 //IMU Parameters
 #define GYRO_SENS				250//500			//°/s (250 would be more accurate, but 500 works more stable with IMU Viewer)
@@ -42,17 +44,10 @@
 #define FEATURES_RAW			(DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_SEND_RAW_GYRO | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_TAP) //DMP_FEATURE_TAP for ensure DMP sends interrupts at specified rate
 #define MPU_SAMPLE_RATE			200			//Hz
 #define DMP_FIFO_RATE			200			//Hz (190 for IMU Viewer and kermit)
-#define CAL_SAMPLES				1000		//TODO: increase to 10000
 #define GYRO_CAL_MASK			0x01
 #define ACCEL_CAL_MASK			0x02
 #define MAG_CAL_MASK			0x04
-#define INT_LEVEL_BIT			0x80
-#define INT_OPEN_BIT			0x40
-#define INT_RD_CLEAR_BIT		0x10
-#define LATCH_INT_EN_BIT		0x20
 #define GRAVITY_AXIS			2			//gravity along z axis
-#define UPDATE_NO_DMP			0x01
-#define UPDATE_WITH_DMP			0x02
 
 //Print Parameters
 #define PRINT_GYRO				0x01
@@ -82,13 +77,12 @@ void printDataWithDMP(short int *sensors, char* separator);
 int printDataNoDMP(short int *sensors, char* separator);
 void testPositionUpdate();
 void quaternionTest();
-int updateData(short updateMask);
+int updateData();
 int calibrateGyrAcc(unsigned int samples);
 int getFifoCount();
 int dmpGyroCalibration(bool enable);
+int init();
 int configureDMP(unsigned short int features, unsigned short fifoRate);
-int initDMP();
 int getImuAddr(u8* addr);
-int initMPU();
 
 #endif /* MPU_H_ */

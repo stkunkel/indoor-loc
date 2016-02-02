@@ -37,6 +37,8 @@ int readFromFifo(short *gyro, short *accel, long *quat,
 void computeQuaternion(float* gyro, float* quat, float* delta_t);
 int readFromRegs(short *gyro, short *accel, short* comp,
 		unsigned long *timestamp, short *sensors);
+int initDMP();
+int initMPU();
 
 /*
  * Variables
@@ -334,10 +336,16 @@ int getQuatDrift(float *quat_drift, char calibration, unsigned int time_min) {
 		}
 	} else {
 		//init and configure DMP
-		if (!dmpReady) {
+		if (dmpReady == BOOL_FALSE) {
+			status = initDMP(FEATURES_RAW, DMP_FIFO_RATE);
+			if (status != XST_SUCCESS) {
+				myprintf("mpu.c Could not initialize DMP.\r\n");
+				return status;
+			}
+
 			status = configureDMP(FEATURES_RAW, DMP_FIFO_RATE);
 			if (status != XST_SUCCESS) {
-				myprintf("mpu.c Could initialize and configure DMP.\r\n");
+				myprintf("mpu.c Could not configure DMP.\r\n");
 				return status;
 			}
 		}
@@ -937,55 +945,51 @@ void testPositionUpdate() {
  * Update Sensor Data and Position
  * Returns 0 if successful
  */
-int updateData(short updateMask) {
+int updateData() {
 //Variables
 	int i, status = XST_SUCCESS;
 	short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES],
 			sensors;
-	long quat[QUATERNION_AMOUNT], temperature;
+	long temperature;
 	unsigned long timestamp, temp_ts;
-	unsigned char* more = (unsigned char *) malloc(100 * sizeof(char));
 	float gyro_conv[NUMBER_OF_AXES], accel_conv[NUMBER_OF_AXES],
 			compass_conv[NUMBER_OF_AXES], quat_conv[QUATERNION_AMOUNT],
 			temp_conv;
 	float time_diff = 1.0 / DMP_FIFO_RATE;
 
+//Variables for DMP only
+#ifdef USE_DMP
+	long quat[QUATERNION_AMOUNT];
+	unsigned char* more = (unsigned char *) malloc(100 * sizeof(char));
+#endif
+
 //Get latest data
-	//Without DMP
-	if (updateMask & UPDATE_NO_DMP) {
-		//Read Data frmo Registers
-		readFromRegs(gyro, accel, compass, &timestamp, &sensors);
-	}
+// With DMP
+#ifdef USE_DMP
+	do {
+		status = readFromFifo(gyro, accel, quat, &timestamp, &sensors, more);
+		usleep(100);
+	} while (status != XST_SUCCESS);
 
-	//With DMP
-	else if (updateMask & UPDATE_WITH_DMP) {
-		do {
-			status = readFromFifo(gyro, accel, quat, &timestamp, &sensors,
-					more);
-			usleep(100);
-		} while (status != XST_SUCCESS);
+	//Free memory
+	free(more);
 
-//Free memory
-		free(more);
+	//Get Compass //TODO: Handle unequal timestamp
+	status = mpu_get_compass_reg(compass, &temp_ts);
+	if (status != 0) {
+		//Print
+		myprintf("mpu.c Error getting Compass data.");
 
-//Get Compass //TODO: Handle unequal timestamp
-		status = mpu_get_compass_reg(compass, &temp_ts);
-		if (status != 0) {
-			//Print
-			myprintf("mpu.c Error getting Compass data.");
-
-			//Set compass data invalid
-			for (i = 0; i < NUMBER_OF_AXES; i++) {
-				compass[i] = -1;
-			}
+		//Set compass data invalid
+		for (i = 0; i < NUMBER_OF_AXES; i++) {
+			compass[i] = -1;
 		}
 	}
-
-	// Unknown Update Mask
-	else {
-		myprintf("mpu.c Could not update data due to unknown update mask.\r\n");
-		return XST_FAILURE;
-	}
+//Without DMP
+#else
+	//Read Data from Registers
+	readFromRegs(gyro, accel, compass, &timestamp, &sensors);
+#endif
 
 	//Update time difference
 	time_diff = (timestamp - recent_ts) / 1000.0;
@@ -1033,22 +1037,18 @@ int updateData(short updateMask) {
 		return status;
 	}
 
-//Compute Quaternion of not using DMP
-	if (updateMask & UPDATE_NO_DMP) {
-		computeQuaternion(gyro_conv, quat_conv, &time_diff);
-
-		//Update rotation (new rotation = recentQuat * quat_conv)
-		multiplyQuaternions(recentQuat, quat_conv, quat_conv);
+#ifdef USE_DMP
+	status = convertQuatenion(quat, quat_conv);
+	if (status != XST_SUCCESS) {
+		return status;
 	}
+#else
+	//Compute Quaternion of not using DMP
+	computeQuaternion(gyro_conv, quat_conv, &time_diff);
 
-//Convert Quaternion if using DMP
-	else if (updateMask & UPDATE_WITH_DMP) {
-
-		status = convertQuatenion(quat, quat_conv);
-		if (status != XST_SUCCESS) {
-			return status;
-		}
-	}
+	//Update rotation (new rotation = recentQuat * quat_conv)
+	multiplyQuaternions(recentQuat, quat_conv, quat_conv);
+#endif
 
 //Update Position and Velocity
 	updatePosition(accel_conv, quat_conv, &recentAccelInertial, &recentVelocity,
@@ -1065,6 +1065,9 @@ int updateData(short updateMask) {
 
 //Update Temperature
 	recentTemp = temp_conv;
+
+//LED Run
+	ledRun();
 
 //Return
 	return status;
@@ -1404,12 +1407,13 @@ int calibrateGyrAcc(unsigned int samples) {
 		gyrAccIsCal = BOOL_FALSE;
 		status = XST_FAILURE;
 	}
-
+#ifdef USE_DMP
 	//Configure and enable DMP
 	status = configureDMP(FEATURES_CAL, DMP_FIFO_RATE);
 	if (status != XST_SUCCESS) {
 		return status;
 	}
+#endif
 
 //Print Success
 	if (status != XST_SUCCESS) {
@@ -1526,6 +1530,56 @@ int dmpGyroCalibration(bool enable) {
 }
 
 /*
+ * Init
+ */
+int init() {
+	//Variables
+	int status;
+
+	//Init MPU
+	myprintf(".........Initialize MPU...........\n\r");
+	status = initMPU();
+	if (status != XST_SUCCESS) {
+		return status;
+	}
+
+#ifdef USE_DMP
+	//Init DMP
+	myprintf(".........Initialize DMP...........\n\r");
+	status = initDMP();
+	if (status != XST_SUCCESS) {
+		return status;
+	}
+
+	//Configure DMP
+	myprintf(".........Configure DMP...........\n\r");
+	status = configureDMP(FEATURES_RAW, DMP_FIFO_RATE);
+	if (status != XST_SUCCESS) {
+		return status;
+	}
+#endif
+
+	//Calibrate
+#ifdef INITIAL_CALIBRATION
+	myprintf(".........Calibrate...........\n\r");
+	status = calibrateGyrAcc(CAL_SAMPLES);
+	if (status != XST_SUCCESS) {
+		return status;
+	}
+
+#endif
+
+	//Enable Interrupts
+	status = setupMPUInt();
+	if (status != XST_SUCCESS) {
+		return status;
+	}
+
+	//Return
+	return status;
+}
+
+/*
  * Configure DMP
  */
 int configureDMP(unsigned short int features, unsigned short fifoRate) {
@@ -1542,7 +1596,7 @@ int configureDMP(unsigned short int features, unsigned short fifoRate) {
 	}
 
 //Initialize DMP
-	if (!dmpReady) {
+	if (dmpReady == BOOL_FALSE) {
 		status = initDMP();
 		if (status != XST_SUCCESS) {
 			myprintf("mpu.c: Error initializing DMP.\r\n");
@@ -1550,6 +1604,7 @@ int configureDMP(unsigned short int features, unsigned short fifoRate) {
 		}
 	}
 
+#ifdef INITIAL_CALIBRATION
 //Push Biases to DMP if calibration is finished
 	if (gyrAccIsCal == BOOL_TRUE) {
 		status = pushBiasesToDMP(glob_gyro_bias, glob_accel_bias);
@@ -1557,6 +1612,7 @@ int configureDMP(unsigned short int features, unsigned short fifoRate) {
 			myprintf("mpu.c: Unable to push biases to DMP.\r\n");
 		}
 	}
+#endif
 
 //Enable DMP
 	status = mpu_set_dmp_state(1);
@@ -1599,9 +1655,7 @@ int configureDMP(unsigned short int features, unsigned short fifoRate) {
 		myprintf("mpu.c: Could not reset FIFO.\n\r");
 	}
 
-//Set flag, sleep and return
-	dmpReady = 1;
-//sleep(1); //don't remove or readings will be weird
+//Return
 	return XST_SUCCESS;
 }
 
@@ -1613,11 +1667,11 @@ int initDMP() {
 	int status;
 
 //Check wheter DMP has already been initialized
-	if (!dmpReady) {
+	if (dmpReady == BOOL_FALSE) {
 		//Load Firmware and set flag
 		status = dmp_load_motion_driver_firmware();
 		if (status != XST_SUCCESS) {
-			dmpReady = 0;
+			dmpReady = BOOL_FALSE;
 			myprintf("mpu.c: Error loading firmware of DMP.\r\n");
 			return XST_FAILURE;
 		}
@@ -1630,12 +1684,8 @@ int initDMP() {
 		return XST_FAILURE;
 	}
 
-//Enable Interrupt
-//	status = setupMPUInt();
-//	if (status != XST_SUCCESS) {
-//		myprintf("mpu.c: Could not set up MPU interrupt.\r\n");
-//		return XST_FAILURE;
-//	}
+//Set flag
+	dmpReady = BOOL_TRUE;
 
 //Return
 	return XST_SUCCESS;

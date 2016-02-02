@@ -11,10 +11,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <unistd.h>
-
-//Defines
-#define DEBUG 				//UNComment for DEBUG prints, COMMENT for print only for IMU viewer
-#define IMUVIEWER_FREQ	10 	//Hz
+#include "program_parameters.h"
 
 //Functions
 int myprintf(const char *format, ...);

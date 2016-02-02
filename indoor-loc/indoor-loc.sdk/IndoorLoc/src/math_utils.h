@@ -10,6 +10,7 @@
 #include "print_utils.h"
 #include "math.h"
 #include <string.h>
+#include "program_parameters.h"
 
 //Defines
 #define NUMBER_OF_AXES			3					//x, y, z

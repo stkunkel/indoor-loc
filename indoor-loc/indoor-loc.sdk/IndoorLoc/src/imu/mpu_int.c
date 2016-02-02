@@ -103,12 +103,26 @@ int setupMPUInt() {
 		return XST_FAILURE;
 	}
 
-	//Set Interrupt Mode
-	status = dmp_set_interrupt_mode(DMP_INT_CONTINUOUS); //Interrupt when one FIFO period has elapsed
+#ifdef USE_DMP
+	//Set DMP Interrupt Mode
+	status = dmp_set_interrupt_mode(DMP_INT_CONTINUOUS);//Interrupt when one FIFO period has elapsed
 	if (status != XST_SUCCESS) {
 		myprintf("mpu_int.c: Could not set interrupt mode.\r\n");
 		return XST_FAILURE;
 	}
+#else
+	//Enable MPU Data Ready Interrupt
+	status = imuI2cRead(0x68, 0x3A, 2, &data);	//Read Register
+	if (status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+	data &= (~FIFO_OFLOW_INT_BIT); //Clear bit --> No FIFO Overflow Interrupt
+	data &= (~IIC_MST_INT_BIT); //Clear bit --> No I2C MST Interrupt
+	data |= DATA_RDY__INT_BIT; //Set bit --> Data Ready Interrupt
+	do {
+		status = imuI2cWrite(0x68, 0x37, 1, &data); //Write Register
+	} while (status != XST_SUCCESS);
+#endif
 
 	//Initialize Xil Exceptions
 	Xil_ExceptionInit();
