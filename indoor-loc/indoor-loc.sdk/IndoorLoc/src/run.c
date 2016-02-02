@@ -31,7 +31,8 @@
  */
 int printQuaternionDriftAfterXMin(unsigned int time_min);
 int printDataForAnalysis(short sensors, short data, unsigned int numberOfRuns);
-int printForImuViewer(short int printMask, char* separator, unsigned int numberOfRuns);
+int printForImuViewer(short int printMask, char* separator,
+		unsigned int numberOfRuns);
 int printDataUsingDMP(short sensors, bool initialCalibration,
 		bool dmpCalibration, char* separator, unsigned int numberOfRuns);
 int printDataWithoutDMP(short int sensors, char* separator, unsigned int numberOfRuns);
@@ -53,7 +54,7 @@ int main() {
 	myprintf(".........Program Start...........\n\r");
 
 	//Print Data without DMP
-//	status = printDataWithoutDMP(SENSORS_ALL, SEPARATOR, DATA_NO_DMP_RUNS);
+	status = printDataWithoutDMP(SENSORS_ALL, SEPARATOR, DATA_NO_DMP_RUNS);
 
 //Print Data with DMP without initial or DMP gyro calibration
 //	status = printDataUsingDMP(SENSORS_ALL, 0, 0, SEPARATOR, DATA_WITH_DMP_RUNS);
@@ -65,7 +66,7 @@ int main() {
 //	status = printDataUsingDMP(SENSORS_ALL, 1, 1, SEPARATOR, DATA_WITH_DMP_RUNS);
 
 //Print Quaternions and Position to Serial Port
-	status = printForImuViewer(PRINT_ALL, SEPARATOR, DISPLAY_RUNS);
+//	status = printForImuViewer(PRINT_ALL, SEPARATOR, DISPLAY_RUNS);
 
 //Quaternion Drift
 //status = printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
@@ -144,7 +145,7 @@ int printDataForAnalysis(short sensors, short printMask,
 		//Wait for Interrupt Interrupt
 		if (imuDataAvailable()) {
 			//Update Data
-			status = updateData();
+			status = updateData(UPDATE_WITH_DMP);
 
 			//Check whether data should be printed
 			printcnt++;
@@ -183,7 +184,8 @@ int printDataForAnalysis(short sensors, short printMask,
  * In: number of runs (if 0 --> print forever)
  * Returns 0 if successful
  */
-int printForImuViewer(short int printMask, char* separator, unsigned int numberOfRuns) {
+int printForImuViewer(short int printMask, char* separator,
+		unsigned int numberOfRuns) {
 	//Variables
 	int cnt = 0, printcnt = 0, status;
 	bool endless = BOOL_FALSE;
@@ -226,7 +228,7 @@ int printForImuViewer(short int printMask, char* separator, unsigned int numberO
 		//Wait for Interrupt Interrupt
 		if (imuDataAvailable()) {
 			//Update Data
-			status = updateData();
+			status = updateData(UPDATE_WITH_DMP);
 
 			//Check whether data should be printed
 			if (status == XST_SUCCESS) {
@@ -345,7 +347,7 @@ int printDataUsingDMP(short sensors, bool initialCalibration,
 		//Wait for Interrupt Interrupt
 		if (imuDataAvailable()) {
 			//Update Data
-			status = updateData();
+			status = updateData(UPDATE_WITH_DMP);
 
 			//LEDs
 			ledRun();

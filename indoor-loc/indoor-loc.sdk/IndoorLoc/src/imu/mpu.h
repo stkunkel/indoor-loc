@@ -51,6 +51,8 @@
 #define INT_RD_CLEAR_BIT		0x10
 #define LATCH_INT_EN_BIT		0x20
 #define GRAVITY_AXIS			2			//gravity along z axis
+#define UPDATE_NO_DMP			0x01
+#define UPDATE_WITH_DMP			0x02
 
 //Print Parameters
 #define PRINT_GYRO				0x01
@@ -80,7 +82,7 @@ void printDataWithDMP(short int *sensors, char* separator);
 int printDataNoDMP(short int *sensors, char* separator);
 void testPositionUpdate();
 void quaternionTest();
-int updateData();
+int updateData(short updateMask);
 int calibrateGyrAcc(unsigned int samples);
 int getFifoCount();
 int dmpGyroCalibration(bool enable);
