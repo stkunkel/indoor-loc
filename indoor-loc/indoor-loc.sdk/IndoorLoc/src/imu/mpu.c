@@ -1335,7 +1335,8 @@ int calibrateGyrAcc(unsigned int samples) {
 
 	//Use gravity as it is
 	//Save gravity for later
-	normal_force.value[GRAVITY_AXIS] = accel_bias_f[GRAVITY_AXIS];
+	//normal_force.value[GRAVITY_AXIS] = accel_bias_f[GRAVITY_AXIS];
+	memcpy(&normal_force, &accel_bias_f, NUMBER_OF_AXES * sizeof(float));
 
 	//Make sure gravity is not cancelled
 	accel_bias_f[GRAVITY_AXIS] = 0.0;
