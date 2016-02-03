@@ -35,7 +35,6 @@
 
 //Functions
 bool imuDataAvailable();
-int waitForInterrupt();
 int setupDMPInt();
 
 
