@@ -25,12 +25,11 @@
 #define DATA_WITH_DMP_RUNS 	0
 #define DISPLAY_RUNS		100000
 #define QUAT_DRIFT_MIN		1
-#define SEPARATOR			" | "
+#define SEPARATOR			" "
 
 /*
  * Function Prototypes
  */
-int formattedPrint(short int printMask, char* separator, unsigned int numberOfRuns);
 int printQuaternionDriftAfterXMin(unsigned int time_min);
 int printDataForAnalysis(short sensors, short data, unsigned int numberOfRuns);
 int printForImuViewer(short int printMask, char* separator,
@@ -60,8 +59,7 @@ int main() {
 //	status = printDataWithoutDMP(SENSORS_ALL, SEPARATOR, DATA_NO_DMP_RUNS);
 
 //Print Data with DMP without initial or DMP gyro calibration
-//	status = printDataUsingDMP(SENSORS_ALL, 0, 0, SEPARATOR,
-//	DATA_WITH_DMP_RUNS);
+	status = printDataUsingDMP(SENSORS_ALL, 0, 0, SEPARATOR, DATA_WITH_DMP_RUNS);
 
 //Print Data with DMP with initial calibration but no DMP gyro calibration
 //	status = printDataUsingDMP(SENSORS_ALL, 1, 0, SEPARATOR, DATA_WITH_DMP_RUNS);
@@ -71,9 +69,6 @@ int main() {
 
 //Print Quaternions and Position to Serial Port
 //	status = printForImuViewer(PRINT_ALL, SEPARATOR, DISPLAY_RUNS);
-
-//Print desired data to Serial Port
-	status = formattedPrint(PRINT_ALL, SEPARATOR, DISPLAY_RUNS);
 
 //Quaternion Drift
 //status = printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
@@ -119,82 +114,6 @@ int printQuaternionDriftAfterXMin(unsigned int time_min) {
 }
 
 /*
- * Print Method
- * In: print mask, separator between sensors, number of runs (if 0 --> print forever)
- * Returns: status
- */
-int formattedPrint(short int printMask, char* separator, unsigned int numberOfRuns) {
-	//Variables
-	int cnt = 0, printcnt = 0, status;
-	bool endless = BOOL_FALSE;
-
-	//Set number of runs, if endless print
-	if (numberOfRuns == 0) {
-		numberOfRuns = IMUVIEWER_FREQ;
-		endless = BOOL_TRUE;
-	}
-
-	//Adjust Number of Runs
-	numberOfRuns *= (DMP_FIFO_RATE / IMUVIEWER_FREQ);
-
-	//Init and calibrate if required
-	init();
-
-	//Print Desired Data to Serial Port
-	myprintf(".........Print for IMU Viewer...........\n\r");
-	for (cnt = 0; cnt <= numberOfRuns; cnt++) {
-		//Reset Status
-		status = XST_SUCCESS;
-
-		//Wait for Interrupt Interrupt
-		if (imuDataAvailable()) {
-			//Update Data
-			status = updateData();
-
-			//Check whether data should be printed
-			if (status == XST_SUCCESS) {
-				//Increase print counter
-				printcnt++;
-
-				if ((printcnt % (DMP_FIFO_RATE / IMUVIEWER_FREQ)) == 0) {
-					//Reset printcnt
-					printcnt = 0;
-
-					//Print
-					status = printforDisplay(&printMask, separator);
-
-					//Print new line
-					if (status == XST_SUCCESS) {
-						printf("\n\r");
-					} else {
-						cnt--;
-					}
-
-					//For endless prints
-					if (endless == BOOL_TRUE) {
-						cnt = 0;
-					}
-
-				}
-			} else {
-				cnt--;
-				printcnt--;
-			}
-		} else {
-			cnt--;
-		}
-
-		//Make sure only successful prints count
-		if (numberOfRuns < 1) {
-			cnt = 0;
-		}
-	}
-
-	//Return
-	return status;
-}
-
-/*
  * Prints Quaternions and/or Position for IMU Viewer
  * In: print mask, separator between sensors, number of runs (if 0 --> print forever)
  * Returns 0 if successful
@@ -213,7 +132,7 @@ int printForImuViewer(short int printMask, char* separator,
 
 	//Init
 	myprintf(".........Configure MPU and DMP...........\n\r");
-	status = configureDMP(FEATURES_CAL, DMP_FIFO_RATE);
+	status = configureDMP(FEATURES_CAL);
 	if (status != XST_SUCCESS) {
 		return status;
 	}
@@ -232,7 +151,7 @@ int printForImuViewer(short int printMask, char* separator,
 	}
 
 	//Adjust Number of Runs
-	numberOfRuns *= (DMP_FIFO_RATE / IMUVIEWER_FREQ);
+	numberOfRuns *= (FIFO_RATE / IMUVIEWER_FREQ);
 
 	//Print Quaternions to Serial Port
 	myprintf(".........Print for IMU Viewer...........\n\r");
@@ -241,7 +160,7 @@ int printForImuViewer(short int printMask, char* separator,
 		status = XST_SUCCESS;
 
 		//Wait for Interrupt Interrupt
-		if (imuDataAvailable()) {
+		if (imuDataAvailable() == BOOL_TRUE) {
 			//Update Data
 			status = updateData();
 
@@ -250,7 +169,7 @@ int printForImuViewer(short int printMask, char* separator,
 				//Increase print counter
 				printcnt++;
 
-				if ((printcnt % (DMP_FIFO_RATE / IMUVIEWER_FREQ)) == 0) {
+				if ((printcnt % (FIFO_RATE / IMUVIEWER_FREQ)) == 0) {
 					//Reset printcnt
 					printcnt = 0;
 
@@ -314,7 +233,7 @@ int printDataUsingDMP(short sensors, bool initialCalibration,
 
 	//Init
 	myprintf(".........Configure MPU and DMP...........\n\r");
-	status = configureDMP(features, DMP_FIFO_RATE);
+	status = configureDMP(features);
 	if (status != XST_SUCCESS) {
 		return status;
 	}
@@ -348,7 +267,7 @@ int printDataUsingDMP(short sensors, bool initialCalibration,
 	}
 
 //Adjust Number of Runs
-	numberOfRuns *= (DMP_FIFO_RATE / IMUVIEWER_FREQ);
+	numberOfRuns *= (FIFO_RATE / IMUVIEWER_FREQ);
 
 //Get Data with DMP
 	myprintf(".........With DMP...........\n\r");
@@ -357,7 +276,7 @@ int printDataUsingDMP(short sensors, bool initialCalibration,
 		status = XST_SUCCESS;
 
 		//Wait for Interrupt Interrupt
-		if (imuDataAvailable()) {
+		if (imuDataAvailable() == BOOL_TRUE) {
 			//Update Data
 			status = updateData();
 
@@ -367,7 +286,7 @@ int printDataUsingDMP(short sensors, bool initialCalibration,
 				printcnt++;
 
 				//Dont print every data set
-				if ((printcnt % (DMP_FIFO_RATE / IMUVIEWER_FREQ)) == 0) {
+				if ((printcnt % (FIFO_RATE / IMUVIEWER_FREQ)) == 0) {
 					//Reset printcnt
 					printcnt = 0;
 
