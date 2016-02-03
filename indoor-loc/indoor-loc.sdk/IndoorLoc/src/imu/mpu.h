@@ -39,15 +39,16 @@
 #define TEMP_OFFSET_35C			-521		//LSB
 #define QUATERNION_SCALING		1073741824	//Internal values: 1.0 is scaled to 2^30 = 1073741824 (msp430/eMD-6.0/core/mllite/results_holder.c --> inv_get_6axis_quaternion)
 #define SENSOR_TEMP				0x80		//my define: works together with INV_XYZ_GYRO, etc.
-#define SENSORS_ALL				(INV_XYZ_GYRO | INV_XYZ_ACCEL | INV_XYZ_COMPASS | SENSOR_TEMP)//all sensors
+#define SENSORS_INV				(INV_XYZ_GYRO | INV_XYZ_ACCEL | INV_XYZ_COMPASS)
+#define SENSORS_ALL				(SENSORS_INV | SENSOR_TEMP)//all sensors
 #define FEATURES_CAL			(DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_SEND_CAL_GYRO | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_TAP) //DMP_FEATURE_TAP for ensure DMP sends interrupts at specified rate
 #define FEATURES_RAW			(DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_SEND_RAW_GYRO | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_TAP) //DMP_FEATURE_TAP for ensure DMP sends interrupts at specified rate
 #define MPU_SAMPLE_RATE			200			//Hz
-#define DMP_FIFO_RATE			200			//Hz (190 for IMU Viewer and kermit)
 #define GYRO_CAL_MASK			0x01
 #define ACCEL_CAL_MASK			0x02
 #define MAG_CAL_MASK			0x04
 #define GRAVITY_AXIS			2			//gravity along z axis
+#define FIFO_RATE				200
 
 //Print Parameters
 #define PRINT_GYRO				0x01
@@ -82,7 +83,7 @@ int calibrateGyrAcc(unsigned int samples);
 int getFifoCount();
 int dmpGyroCalibration(bool enable);
 int init();
-int configureDMP(unsigned short int features, unsigned short fifoRate);
+int configureDMP(unsigned short int features);
 int getImuAddr(u8* addr);
 
 #endif /* MPU_H_ */

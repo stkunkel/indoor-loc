@@ -38,6 +38,7 @@ void computeQuaternion(float* gyro, float* quat, float* delta_t);
 int readFromRegs(short *gyro, short *accel, short* comp,
 		unsigned long *timestamp, short *sensors);
 int initDMP();
+int configureMPU(unsigned char fifoMask);
 int initMPU();
 
 /*
@@ -192,12 +193,20 @@ int printforDisplay(short int *printMask, char* separator) {
 	//Print Position
 	if (l_printMask & PRINT_POS) {
 		printPosition(&position);
-	} else {
-		return XST_SUCCESS;
+
+		//Adjust Print Mask
+		l_printMask = l_printMask & ~PRINT_POS;
+
+		//Print separator
+
 	}
 
 	//Didnt print anything
-	return XST_FAILURE;
+	if (l_printMask == 0x00) {
+		return XST_SUCCESS;
+	} else {
+		return XST_FAILURE;
+	}
 }
 
 /*
@@ -337,13 +346,13 @@ int getQuatDrift(float *quat_drift, char calibration, unsigned int time_min) {
 	} else {
 		//init and configure DMP
 		if (dmpReady == BOOL_FALSE) {
-			status = initDMP(FEATURES_RAW, DMP_FIFO_RATE);
+			status = initDMP(FEATURES_RAW);
 			if (status != XST_SUCCESS) {
 				myprintf("mpu.c Could not initialize DMP.\r\n");
 				return status;
 			}
 
-			status = configureDMP(FEATURES_RAW, DMP_FIFO_RATE);
+			status = configureDMP(FEATURES_RAW);
 			if (status != XST_SUCCESS) {
 				myprintf("mpu.c Could not configure DMP.\r\n");
 				return status;
@@ -650,7 +659,7 @@ void printQuat(float quat[QUATERNION_AMOUNT]) {
 //Print
 	myprintf("Quat: ");
 	for (i = 0; i < QUATERNION_AMOUNT; i++) {
-		printf(" %+.6f", quat[i]); //Print space so IMU Viewer can distinguish negative sign of first value from other characters
+		printf(" %+1.6f", quat[i]); //Print space so IMU Viewer can distinguish negative sign of first value from other characters
 //		if (i < QUATERNION_AMOUNT - 1) {
 //			printf(" ");
 //		}
@@ -685,7 +694,7 @@ void printPosition(Vector* position) {
 //Print
 	myprintf("Pos: ");
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		printf("%+.4f", position->value[i]);
+		printf("%+2.4f", position->value[i]);
 		myprintf("m");
 		if (i < NUMBER_OF_AXES - 1) {
 			printf(" ");
@@ -719,7 +728,7 @@ void testPositionUpdate() {
 	int i, cnt = 0;
 	float l_accel_conv[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 };
 	float l_quat_conv[QUATERNION_AMOUNT] = { 1.0, 0.0, 0.0, 0.0 };
-	float time_diff = 1.0 / DMP_FIFO_RATE; //in s
+	float time_diff = 1.0 / FIFO_RATE; //in s
 	Vector l_recentAccelInertial = { .value[0] = 0.0, .value[1] = 0.0, .value[2
 			] = 0.0 };
 	Vector l_recentVelocity = { .value[0] = 0.0, .value[1] = 0.0, .value[2
@@ -955,17 +964,17 @@ int updateData() {
 	float gyro_conv[NUMBER_OF_AXES], accel_conv[NUMBER_OF_AXES],
 			compass_conv[NUMBER_OF_AXES], quat_conv[QUATERNION_AMOUNT],
 			temp_conv;
-	float time_diff = 1.0 / DMP_FIFO_RATE;
+	float time_diff = 1.0 / FIFO_RATE;
 
 //Variables for DMP only
-#ifdef USE_DMP
+//#ifdef USE_DMP
 	long quat[QUATERNION_AMOUNT];
 	unsigned char* more = (unsigned char *) malloc(100 * sizeof(char));
-#endif
+//#endif
 
 //Get latest data
-// With DMP
-#ifdef USE_DMP
+//// With DMP
+//#ifdef USE_DMP
 	do {
 		status = readFromFifo(gyro, accel, quat, &timestamp, &sensors, more);
 		usleep(100);
@@ -976,7 +985,7 @@ int updateData() {
 
 	//Get Compass //TODO: Handle unequal timestamp
 	status = mpu_get_compass_reg(compass, &temp_ts);
-	if (status != 0) {
+	if (status != XST_SUCCESS) {
 		//Print
 		myprintf("mpu.c Error getting Compass data.");
 
@@ -986,17 +995,17 @@ int updateData() {
 		}
 	}
 //Without DMP
-#else
-	//Read Data from Registers
-	readFromRegs(gyro, accel, compass, &timestamp, &sensors);
-#endif
+//#else
+//	//Read Data from Registers
+//	readFromRegs(gyro, accel, compass, &timestamp, &sensors);
+//#endif
 
 	//Update time difference
 	time_diff = (timestamp - recent_ts) / 1000.0;
 
 //Get Temperature //TODO: Handle unequal timestamp
 	status = mpu_get_temperature(&temperature, &temp_ts);
-	if (status != 0) {
+	if (status != XST_SUCCESS) {
 		myprintf("mpu.c Error getting Temperature data.");
 		temperature = -1;
 	}
@@ -1353,8 +1362,8 @@ int calibrateGyrAcc(unsigned int samples) {
 
 	//Use gravity as it is
 	//Save gravity for later
-	//normal_force.value[GRAVITY_AXIS] = accel_bias_f[GRAVITY_AXIS];
-	memcpy(&normal_force, &accel_bias_f, NUMBER_OF_AXES * sizeof(float));
+	normal_force.value[GRAVITY_AXIS] = accel_bias_f[GRAVITY_AXIS];
+//	memcpy(&normal_force, &accel_bias_f, NUMBER_OF_AXES * sizeof(float));
 
 	//Make sure gravity is not cancelled
 	accel_bias_f[GRAVITY_AXIS] = 0.0;
@@ -1409,7 +1418,7 @@ int calibrateGyrAcc(unsigned int samples) {
 	}
 #ifdef USE_DMP
 	//Configure and enable DMP
-	status = configureDMP(FEATURES_CAL, DMP_FIFO_RATE);
+	status = configureDMP(FEATURES_CAL);
 	if (status != XST_SUCCESS) {
 		return status;
 	}
@@ -1553,7 +1562,7 @@ int init() {
 
 	//Configure DMP
 	myprintf(".........Configure DMP...........\n\r");
-	status = configureDMP(FEATURES_RAW, DMP_FIFO_RATE);
+	status = configureDMP(FEATURES_RAW);
 	if (status != XST_SUCCESS) {
 		return status;
 	}
@@ -1569,11 +1578,22 @@ int init() {
 
 #endif
 
+#ifndef USE_DMP
+	//Configure MPU
+	status = configureMPU(SENSORS_INV);
+	if (status != XST_SUCCESS) {
+		return status;
+	}
+#endif
+
+	//No interrupts if not using DMP TODO
+#ifdef USE_DMP
 	//Enable Interrupts
 	status = setupMPUInt();
 	if (status != XST_SUCCESS) {
 		return status;
 	}
+#endif
 
 	//Return
 	return status;
@@ -1582,10 +1602,10 @@ int init() {
 /*
  * Configure DMP
  */
-int configureDMP(unsigned short int features, unsigned short fifoRate) {
+int configureDMP(unsigned short int features) {
 //Variables
 	int status;
-	unsigned short fifo_mask = 0;
+	unsigned short fifoMask = 0;
 
 //Initialize IMU first if required
 	if (imuAddr == 0) {
@@ -1628,31 +1648,30 @@ int configureDMP(unsigned short int features, unsigned short fifoRate) {
 		return XST_FAILURE;
 	}
 
+	//Set LPF
+//	mpu_set_lpf(5);
+
 //Set fifo mask according to features
 	if (features & DMP_FEATURE_SEND_CAL_GYRO
 			|| features & DMP_FEATURE_SEND_RAW_GYRO) {
-		fifo_mask |= INV_XYZ_GYRO;
+		fifoMask |= INV_XYZ_GYRO;
 	}
 	if (features & DMP_FEATURE_SEND_RAW_ACCEL) {
-		fifo_mask |= INV_XYZ_ACCEL;
+		fifoMask |= INV_XYZ_ACCEL;
 	}
 
-//Enable MPU FIFO
-	status = mpu_configure_fifo(fifo_mask);
-	if (status != XST_SUCCESS) {
-		myprintf("mpu.c: Error configuring FIFO.\n\r");
-	}
-
-//Set FIFO rate
-	status = dmp_set_fifo_rate(fifoRate);
+	//Set FIFO rate
+	status = dmp_set_fifo_rate(FIFO_RATE);
 	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Error Setting FIFO rate.\n\r");
+		return XST_FAILURE;
 	}
 
-//Reset FIFO
-	status = mpu_reset_fifo();
+	//Enable MPU FIFO
+	status = configureMPU(fifoMask);
 	if (status != XST_SUCCESS) {
-		myprintf("mpu.c: Could not reset FIFO.\n\r");
+		myprintf("mpu.c: Error configuring FIFO.\n\r");
+		return XST_FAILURE;
 	}
 
 //Return
@@ -1795,6 +1814,31 @@ int getImuAddr(u8* addr) {
 		initMPU();
 	}
 	*addr = imuAddr;
+	return XST_SUCCESS;
+}
+
+/*
+ * Configure MPU
+ */
+int configureMPU(unsigned char fifoMask) {
+	//Variables
+	int status;
+
+	//Enable MPU FIFO
+	status = mpu_configure_fifo(fifoMask);
+	if (status != XST_SUCCESS) {
+		myprintf("mpu.c: Error configuring FIFO.\n\r");
+		return XST_FAILURE;
+	}
+
+	//Reset FIFO
+	status = mpu_reset_fifo();
+	if (status != XST_SUCCESS) {
+		myprintf("mpu.c: Could not reset FIFO.\n\r");
+		return XST_FAILURE;
+	}
+
+	//Return
 	return XST_SUCCESS;
 }
 
