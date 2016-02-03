@@ -38,7 +38,7 @@ void computeQuaternion(float* gyro, float* quat, float* delta_t);
 int readFromRegs(short *gyro, short *accel, short* comp,
 		unsigned long *timestamp, short *sensors);
 int initDMP();
-int configureMPU(unsigned char fifoMask);
+int configureMpuFifo(unsigned char fifoMask);
 int initMPU();
 
 /*
@@ -967,14 +967,14 @@ int updateData() {
 	float time_diff = 1.0 / FIFO_RATE;
 
 //Variables for DMP only
-//#ifdef USE_DMP
+#ifdef USE_DMP
 	long quat[QUATERNION_AMOUNT];
 	unsigned char* more = (unsigned char *) malloc(100 * sizeof(char));
-//#endif
+#endif
 
 //Get latest data
-//// With DMP
-//#ifdef USE_DMP
+// With DMP
+#ifdef USE_DMP
 	do {
 		status = readFromFifo(gyro, accel, quat, &timestamp, &sensors, more);
 		usleep(100);
@@ -994,11 +994,15 @@ int updateData() {
 			compass[i] = -1;
 		}
 	}
-//Without DMP
-//#else
-//	//Read Data from Registers
-//	readFromRegs(gyro, accel, compass, &timestamp, &sensors);
-//#endif
+// Without DMP
+#else
+	//Read Data from Registers
+	sensors = SENSORS_ALL;
+	status = readFromRegs(gyro, accel, compass, &timestamp, &sensors);
+	if (status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+#endif
 
 	//Update time difference
 	time_diff = (timestamp - recent_ts) / 1000.0;
@@ -1047,6 +1051,7 @@ int updateData() {
 	}
 
 #ifdef USE_DMP
+	//Convert Quaternion if using DMP
 	status = convertQuatenion(quat, quat_conv);
 	if (status != XST_SUCCESS) {
 		return status;
@@ -1539,9 +1544,9 @@ int dmpGyroCalibration(bool enable) {
 }
 
 /*
- * Init
+ * Initialize IMU
  */
-int init() {
+int initIMU() {
 	//Variables
 	int status;
 
@@ -1578,22 +1583,20 @@ int init() {
 
 #endif
 
-#ifndef USE_DMP
-	//Configure MPU
-	status = configureMPU(SENSORS_INV);
+	//Setup Interrupt
+	status = setupInt();
 	if (status != XST_SUCCESS) {
 		return status;
 	}
-#endif
 
-	//No interrupts if not using DMP TODO
-#ifdef USE_DMP
-	//Enable Interrupts
-	status = setupDMPInt();
-	if (status != XST_SUCCESS) {
-		return status;
-	}
-#endif
+//	//No interrupts if not using DMP TODO
+//#ifdef USE_DMP
+//	//Enable Interrupts
+//	status = setupDMPInt();
+//	if (status != XST_SUCCESS) {
+//		return status;
+//	}
+//#endif
 
 	//Return
 	return status;
@@ -1668,7 +1671,7 @@ int configureDMP(unsigned short int features) {
 	}
 
 	//Enable MPU FIFO
-	status = configureMPU(fifoMask);
+	status = configureMpuFifo(fifoMask);
 	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Error configuring FIFO.\n\r");
 		return XST_FAILURE;
@@ -1820,7 +1823,7 @@ int getImuAddr(u8* addr) {
 /*
  * Configure MPU
  */
-int configureMPU(unsigned char fifoMask) {
+int configureMpuFifo(unsigned char fifoMask) {
 	//Variables
 	int status;
 
@@ -1865,7 +1868,7 @@ int initMPU() {
 	}
 
 //3. Select Sensors
-	unsigned char sensors = SENSORS_ALL;
+	unsigned char sensors = SENSORS_INV;
 	status = mpu_set_sensors(sensors);
 	if (status != 0) {
 		myprintf("mpu.c: Error setting sensors.\r\n");

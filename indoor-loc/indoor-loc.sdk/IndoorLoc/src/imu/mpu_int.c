@@ -25,6 +25,45 @@ void ImuIntrHandler(void *CallBackRef, u32 Bank, u32 Status);
 void myXGpioPs_IntrHandler(XGpioPs *InstancePtr);
 
 /*
+ * Need to Update Data?
+ * if USE_DMP is defined: check whether flag was set by ISR of DMP Interrupt
+ * else: check whether flag was set by ISR of AXI Timer Interrupt
+ */
+bool needToUpdateData(){
+	//Variables
+	bool update;
+
+	//Check if data should be updated
+#ifdef USE_DMP
+	update = dmpDataAvailable();
+#else
+	update = isTimerExpired();
+#endif
+
+	//Return
+	return update;
+}
+
+/*
+ * Setup Interrupt (depending on USE_DMP define)
+ * Returns 0 if successful
+ */
+int setupInt(){
+	//Variables
+	int status;
+
+	//Setup
+#ifdef USE_DMP
+	status = setupDMPInt();
+#else
+	status = initTmrInt(FIFO_RATE);
+#endif
+
+	//Return
+	return status;
+}
+
+/*
  * Check if data from IMU FIFO is available
  * Returns BOOL_TRUE if there is new data, BOOL_FALSE if not
  */
@@ -144,14 +183,12 @@ void ImuIntrHandler(void *CallBackRef, u32 Bank, u32 Status) {
 	int status = XST_SUCCESS;
 	short irq;
 
-#ifdef USE_DMP
 	//Get IRQ Status
 	status = mpu_get_int_status(&irq);
 	if (status == XST_SUCCESS) {
 		if ((irq & MPU_INT_STATUS_DMP_0) == MPU_INT_STATUS_DMP_0) { //DMP Interrupt
 			dataAvailable = 1;
 		}
-#endif
 	}
 }
 

@@ -32,7 +32,8 @@
  * Function Prototypes
  */
 int printQuaternionDriftAfterXMin(unsigned int time_min);
-int printDataForAnalysis(short sensors, short data, unsigned int numberOfRuns);
+int printGeneric(short int printMask, char* separator,
+		unsigned int numberOfRuns);
 int printForImuViewer(short int printMask, char* separator,
 		unsigned int numberOfRuns);
 int printDataUsingDMP(short sensors, bool initialCalibration,
@@ -71,15 +72,17 @@ int main() {
 //Print Quaternions and Position to Serial Port
 //	status = printForImuViewer(PRINT_ALL, SEPARATOR, DISPLAY_RUNS);
 
+//	Generic Print to Serial Port
+	status = printGeneric((PRINT_GYRO | PRINT_ACCEL | PRINT_COMP), SEPARATOR, DISPLAY_RUNS);
+
 //Quaternion Drift
 //status = printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
 
 //PWM Test
 //status = pwmTest();
 
-	//Timer Test
-	u32 freq = 200;//FIFO_RATE;
-	status = timerTest(freq);
+//	//Timer Test
+//	status = timerTest(FIFO_RATE);
 
 //Test position update functionality
 //	testPositionUpdate();
@@ -116,6 +119,86 @@ int printQuaternionDriftAfterXMin(unsigned int time_min) {
 
 	//Return
 	return XST_SUCCESS;
+}
+
+/*
+ * Prints Quaternions and/or Position for IMU Viewer
+ * In: print mask, separator between sensors, number of runs (if 0 --> print forever)
+ * Returns 0 if successful
+ */
+int printGeneric(short int printMask, char* separator,
+		unsigned int numberOfRuns) {
+	//Variables
+	int cnt = 0, printcnt = 0, status;
+	bool endless = BOOL_FALSE;
+
+	//Set number of runs, if endless print
+	if (numberOfRuns == 0) {
+		numberOfRuns = IMUVIEWER_FREQ;
+		endless = BOOL_TRUE;
+	}
+
+	//Init IMU and calibrate if specified
+	status = initIMU();
+	if (status != XST_SUCCESS) {
+		return status;
+	}
+
+	//Adjust Number of Runs
+	numberOfRuns *= (FIFO_RATE / IMUVIEWER_FREQ);
+
+	//Print to Serial Port
+	myprintf(".........Print to UART...........\n\r");
+	for (cnt = 0; cnt <= numberOfRuns; cnt++) {
+		//Reset Status
+		status = XST_SUCCESS;
+
+		//Wait for Interrupt Interrupt
+		if (needToUpdateData() == BOOL_TRUE) {
+			//Update Data
+			status = updateData();
+
+			//Check whether data should be printed
+			if (status == XST_SUCCESS) {
+				//Increase print counter
+				printcnt++;
+
+				if ((printcnt % (FIFO_RATE / IMUVIEWER_FREQ)) == 0) {
+					//Reset printcnt
+					printcnt = 0;
+
+					//Print
+					status = printforDisplay(&printMask, separator);
+
+					//Print new line
+					if (status == XST_SUCCESS) {
+						printf("\n\r");
+					} else {
+						cnt--;
+					}
+
+					//For endless prints
+					if (endless == BOOL_TRUE) {
+						cnt = 0;
+					}
+
+				}
+			} else {
+				cnt--;
+				printcnt--;
+			}
+		} else {
+			cnt--;
+		}
+
+		//Make sure only successful prints count
+		if (numberOfRuns < 1) {
+			cnt = 0;
+		}
+	}
+
+//Return
+	return status;
 }
 
 /*
@@ -334,12 +417,25 @@ int printDataWithoutDMP(short int sensors, char* separator,
 		//Print
 		status = printDataNoDMP(&sensors, separator);
 
-		//Decrease count if not successful
-		if (status != XST_SUCCESS || numberOfRuns < 1) {
+		//LED Run if Successful
+		if (status == XST_SUCCESS) {
+			ledRun();
+
+			//Decrease count if endless print
+			if (numberOfRuns < 1) {
+				cnt--;
+			}
+			//Decrease count if not successful
+		} else {
 			cnt--;
 		}
 
-		//Wait
+//		//Decrease count if not successful
+//		if (status != XST_SUCCESS || numberOfRuns < 1) {
+//			cnt--;
+//		}
+
+//Wait
 		usleep(1000000 / IMUVIEWER_FREQ); //100ms
 	}
 	return XST_SUCCESS;

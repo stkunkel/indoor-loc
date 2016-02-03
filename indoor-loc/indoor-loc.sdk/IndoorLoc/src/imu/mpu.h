@@ -82,7 +82,7 @@ int updateData();
 int calibrateGyrAcc(unsigned int samples);
 int getFifoCount();
 int dmpGyroCalibration(bool enable);
-int init();
+int initIMU();
 int configureDMP(unsigned short int features);
 int getImuAddr(u8* addr);
 
