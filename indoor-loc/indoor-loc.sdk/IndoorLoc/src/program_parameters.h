@@ -12,7 +12,8 @@
 //#define DEBUG 						//UNComment for DEBUG prints, COMMENT for print only for IMU viewer
 
 //Parameters
-#define CAL_SAMPLES				1000	//Number of samples used for calibration TODO: increase to 10000
-#define IMUVIEWER_FREQ			10 		//Hz
+#define CAL_SAMPLES				1000		//Number of samples used for calibration TODO: increase to 10000
+#define IMUVIEWER_FREQ			10 			//Hz
+#define FPGA_FREQ				100000000	//FCLK in Hz
 
 #endif /* PROGRAM_PARAMETERS_H_ */

@@ -15,6 +15,7 @@
 #include "imu/mpu_int.h"
 #include "robot/pwmsw.h"
 #include "zedboard/gpio_utils.h"
+#include "zedboard/timer_int.h"
 #include "bool.h"
 #include "program_parameters.h"
 
@@ -59,7 +60,7 @@ int main() {
 //	status = printDataWithoutDMP(SENSORS_ALL, SEPARATOR, DATA_NO_DMP_RUNS);
 
 //Print Data with DMP without initial or DMP gyro calibration
-	status = printDataUsingDMP(SENSORS_ALL, 0, 0, SEPARATOR, DATA_WITH_DMP_RUNS);
+//	status = printDataUsingDMP(SENSORS_ALL, 0, 0, SEPARATOR, DATA_WITH_DMP_RUNS);
 
 //Print Data with DMP with initial calibration but no DMP gyro calibration
 //	status = printDataUsingDMP(SENSORS_ALL, 1, 0, SEPARATOR, DATA_WITH_DMP_RUNS);
@@ -75,6 +76,10 @@ int main() {
 
 //PWM Test
 //status = pwmTest();
+
+	//Timer Test
+	u32 freq = 200;//FIFO_RATE;
+	status = timerTest(freq);
 
 //Test position update functionality
 //	testPositionUpdate();
