@@ -214,8 +214,8 @@ void Xil_DataAbortHandler(void *CallBackRef){
 		{ volatile register u32 Reg __asm(XREG_CP15_DATA_FAULT_STATUS);
 	  FaultStatus = Reg; }
 	#endif
-	xdbg_printf(XDBG_DEBUG_GENERAL, "Data abort with Data Fault Status Register  %x\n",FaultStatus);
-	xdbg_printf(XDBG_DEBUG_GENERAL, "Address of Instrcution causing Data abort %x\n",DataAbortAddr);
+	printf("Data abort with Data Fault Status Register  %x\n",FaultStatus); //xdbg_printf(XDBG_DEBUG_GENERAL, "Data abort with Data Fault Status Register  %x\n",FaultStatus);
+	printf("Address of Instrcution causing Data abort %x\n",DataAbortAddr);//xdbg_printf(XDBG_DEBUG_GENERAL, "Address of Instrcution causing Data abort %x\n",DataAbortAddr); //TODO change back
 	while(1) {
 		;
 	}

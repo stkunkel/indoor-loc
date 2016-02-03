@@ -659,7 +659,7 @@ void printQuat(float quat[QUATERNION_AMOUNT]) {
 //Print
 	myprintf("Quat: ");
 	for (i = 0; i < QUATERNION_AMOUNT; i++) {
-		printf(" %+1.6f", quat[i]); //Print space so IMU Viewer can distinguish negative sign of first value from other characters
+		printf(" %+f", quat[i]); //Print space so IMU Viewer can distinguish negative sign of first value from other characters
 //		if (i < QUATERNION_AMOUNT - 1) {
 //			printf(" ");
 //		}

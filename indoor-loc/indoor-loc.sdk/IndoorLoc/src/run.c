@@ -73,7 +73,7 @@ int main() {
 //	status = printForImuViewer(PRINT_ALL, SEPARATOR, DISPLAY_RUNS);
 
 //	Generic Print to Serial Port
-	status = printGeneric((PRINT_GYRO | PRINT_ACCEL | PRINT_COMP), SEPARATOR, DISPLAY_RUNS);
+	status = printGeneric((PRINT_GYRO | PRINT_QUAT), SEPARATOR, DISPLAY_RUNS);
 
 //Quaternion Drift
 //status = printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
