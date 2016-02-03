@@ -165,7 +165,7 @@ int printForImuViewer(short int printMask, char* separator,
 		status = XST_SUCCESS;
 
 		//Wait for Interrupt Interrupt
-		if (imuDataAvailable() == BOOL_TRUE) {
+		if (dmpDataAvailable() == BOOL_TRUE) {
 			//Update Data
 			status = updateData();
 
@@ -281,7 +281,7 @@ int printDataUsingDMP(short sensors, bool initialCalibration,
 		status = XST_SUCCESS;
 
 		//Wait for Interrupt Interrupt
-		if (imuDataAvailable() == BOOL_TRUE) {
+		if (dmpDataAvailable() == BOOL_TRUE) {
 			//Update Data
 			status = updateData();
 

@@ -28,7 +28,7 @@ void myXGpioPs_IntrHandler(XGpioPs *InstancePtr);
  * Check if data from IMU FIFO is available
  * Returns BOOL_TRUE if there is new data, BOOL_FALSE if not
  */
-bool imuDataAvailable() {
+bool dmpDataAvailable() {
 	if (dataAvailable == BOOL_TRUE){
 		dataAvailable = BOOL_FALSE;
 		return BOOL_TRUE;

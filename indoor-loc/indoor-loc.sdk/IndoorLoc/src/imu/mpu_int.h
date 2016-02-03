@@ -34,7 +34,7 @@
 #define FIFO_OFLOW_INT_BIT		0x10
 
 //Functions
-bool imuDataAvailable();
+bool dmpDataAvailable();
 int setupDMPInt();
 
 
