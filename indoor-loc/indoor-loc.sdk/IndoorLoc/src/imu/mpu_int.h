@@ -16,6 +16,7 @@
 #include "mpu.h"
 #include "../print_utils.h"
 #include "../program_parameters.h"
+#include "../bool.h"
 
 //Defines
 #define GPIO_DEVICE_ID		XPAR_XGPIOPS_0_DEVICE_ID
@@ -33,7 +34,7 @@
 #define FIFO_OFLOW_INT_BIT		0x10
 
 //Functions
-char imuDataAvailable();
+bool imuDataAvailable();
 int waitForInterrupt();
 int setupMPUInt();
 

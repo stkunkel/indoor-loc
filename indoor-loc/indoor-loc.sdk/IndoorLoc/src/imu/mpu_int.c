@@ -16,7 +16,7 @@
 static XScuGic Intc; // Interrupt Controller Driver
 static XGpioPs Gpio; //GPIO Device
 u32 lastIntVal = 0;
-static volatile char dataAvailable = 0;
+static volatile bool dataAvailable = BOOL_FALSE;
 
 /*
  * Function Prototypes
@@ -26,14 +26,14 @@ void myXGpioPs_IntrHandler(XGpioPs *InstancePtr);
 
 /*
  * Check if data from IMU FIFO is available
- * Returns 1 if there is new data, 0 if not
+ * Returns BOOL_TRUE if there is new data, BOOL_FALSE if not
  */
-char imuDataAvailable() {
-	if (dataAvailable) {
-		dataAvailable = 0;
-		return 1;
+bool imuDataAvailable() {
+	if (dataAvailable == BOOL_TRUE){
+		dataAvailable = BOOL_FALSE;
+		return BOOL_TRUE;
 	} else {
-		return 0;
+		return BOOL_FALSE;
 	}
 }
 
@@ -186,19 +186,15 @@ void ImuIntrHandler(void *CallBackRef, u32 Bank, u32 Status) {
 	int status = XST_SUCCESS;
 	short irq;
 
-	//Disable Interrupts
-//	XGpioPs_IntrDisablePin(GpioInt, GPIO_INT_PIN);
-
+#ifdef USE_DMP
 	//Get IRQ Status
 	status = mpu_get_int_status(&irq);
-	if ((status == XST_SUCCESS)
-			&& ((irq & MPU_INT_STATUS_DMP_0) == MPU_INT_STATUS_DMP_0)) { //INT from DMP
-		dataAvailable = 1;
+	if (status == XST_SUCCESS) {
+		if ((irq & MPU_INT_STATUS_DMP_0) == MPU_INT_STATUS_DMP_0) { //DMP Interrupt
+			dataAvailable = 1;
+		}
+#endif
 	}
-//
-//	//Enable Interrupts
-//	XGpioPs_IntrEnablePin(GpioInt, GPIO_INT_PIN);
-
 }
 
 /*
