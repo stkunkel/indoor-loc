@@ -1589,7 +1589,7 @@ int init() {
 	//No interrupts if not using DMP TODO
 #ifdef USE_DMP
 	//Enable Interrupts
-	status = setupMPUInt();
+	status = setupDMPInt();
 	if (status != XST_SUCCESS) {
 		return status;
 	}

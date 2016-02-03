@@ -63,18 +63,14 @@ int waitForInterrupt() {
 /*
  * Set Up Interrupt for IMU
  */
-int setupMPUInt() {
+int setupDMPInt() {
 	//Variables
 	int status;
 	XScuGic_Config* IntcConfig;
 	XGpioPs_Config* GpioConfig;
 	unsigned char data;
 
-	//MPU
-	//Disable all interrupts
-//	data = 0x15;
-//	imuI2cWrite(0x68, 0x38, 2, &data);
-
+	//MPU and DMP
 	//Configure MPU Interrupt Pin
 	status = imuI2cRead(0x68, 0x37, 2, &data);	//Read Register
 	if (status != XST_SUCCESS) {
@@ -103,26 +99,12 @@ int setupMPUInt() {
 		return XST_FAILURE;
 	}
 
-#ifdef USE_DMP
 	//Set DMP Interrupt Mode
 	status = dmp_set_interrupt_mode(DMP_INT_CONTINUOUS);//Interrupt when one FIFO period has elapsed
 	if (status != XST_SUCCESS) {
 		myprintf("mpu_int.c: Could not set interrupt mode.\r\n");
 		return XST_FAILURE;
 	}
-#else
-	//Enable MPU Data Ready Interrupt
-	status = imuI2cRead(0x68, 0x3A, 2, &data);	//Read Register
-	if (status != XST_SUCCESS) {
-		return XST_FAILURE;
-	}
-	data &= (~FIFO_OFLOW_INT_BIT); //Clear bit --> No FIFO Overflow Interrupt
-	data &= (~IIC_MST_INT_BIT); //Clear bit --> No I2C MST Interrupt
-	data |= DATA_RDY__INT_BIT; //Set bit --> Data Ready Interrupt
-	do {
-		status = imuI2cWrite(0x68, 0x37, 1, &data); //Write Register
-	} while (status != XST_SUCCESS);
-#endif
 
 	//Initialize Xil Exceptions
 	Xil_ExceptionInit();
@@ -171,7 +153,7 @@ int setupMPUInt() {
 	//Enable Interrupts in Processor
 	Xil_ExceptionEnableMask(XIL_EXCEPTION_IRQ);
 
-	//Free memory and return
+	//Free memory
 	return XST_SUCCESS;
 }
 
@@ -182,7 +164,6 @@ int setupMPUInt() {
  */
 void ImuIntrHandler(void *CallBackRef, u32 Bank, u32 Status) {
 	//Variables
-	//XGpioPs *GpioInt = (XGpioPs *) CallBackRef;
 	int status = XST_SUCCESS;
 	short irq;
 

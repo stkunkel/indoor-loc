@@ -36,7 +36,7 @@
 //Functions
 bool imuDataAvailable();
 int waitForInterrupt();
-int setupMPUInt();
+int setupDMPInt();
 
 
 #endif /* MPU_INT_H_ */
