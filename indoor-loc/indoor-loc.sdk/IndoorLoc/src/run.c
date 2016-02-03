@@ -145,7 +145,7 @@ int printForImuViewer(short int printMask, char* separator,
 	}
 
 	//Enable Interrupts
-	status = setupMPUInt();
+	status = setupDMPInt();
 	if (status != XST_SUCCESS) {
 		return status;
 	}
@@ -261,7 +261,7 @@ int printDataUsingDMP(short sensors, bool initialCalibration,
 	}
 
 //Enable Interrupts
-	status = setupMPUInt();
+	status = setupDMPInt();
 	if (status != XST_SUCCESS) {
 		return status;
 	}
