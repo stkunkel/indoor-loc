@@ -962,7 +962,7 @@ int updateData() {
 	long temperature;
 	unsigned long timestamp, temp_ts;
 	float gyro_conv[NUMBER_OF_AXES], accel_conv[NUMBER_OF_AXES],
-			compass_conv[NUMBER_OF_AXES], quat_conv[QUATERNION_AMOUNT],
+			compass_conv[NUMBER_OF_AXES], quat_conv[QUATERNION_AMOUNT], quat_new[QUATERNION_AMOUNT],
 			temp_conv;
 	float time_diff = 1.0 / FIFO_RATE;
 
@@ -1057,11 +1057,11 @@ int updateData() {
 		return status;
 	}
 #else
-	//Compute Quaternion of not using DMP
-	computeQuaternion(gyro_conv, quat_conv, &time_diff);
+	//Compute Quaternion quat_new if not using DMP
+	computeQuaternion(gyro_conv, quat_new, &time_diff);
 
-	//Update rotation (new rotation = recentQuat * quat_conv)
-	multiplyQuaternions(recentQuat, quat_conv, quat_conv);
+	//Update rotation (quat_conv = recentQuat * quat_new)
+	multiplyQuaternions(recentQuat, quat_new, quat_conv);
 #endif
 
 //Update Position and Velocity
