@@ -640,7 +640,7 @@ void printCompass(float conv[NUMBER_OF_AXES]) {
 }
 
 /*
- * Convert and Print Temperature Data  (already converted)
+ * Print Temperature Data  (already converted)
  */
 void printTemp(float* temp_conv) {
 //Print Temperature
@@ -685,7 +685,7 @@ void printEulerAngles(float* sigma, float* theta, float* psi) {
 }
 
 /*
- * Print Position
+ * Print Position (cm)
  */
 void printPosition(Vector* position) {
 //Variables
@@ -703,7 +703,7 @@ void printPosition(Vector* position) {
 }
 
 /*
- * Print Velocity
+ * Print Velocity (m/s)
  */
 void printVelocity(Vector* velocity) {
 //Variables
@@ -1367,8 +1367,8 @@ int calibrateGyrAcc(unsigned int samples) {
 
 	//Use gravity as it is
 	//Save gravity for later
-	normal_force.value[GRAVITY_AXIS] = accel_bias_f[GRAVITY_AXIS];
-//	memcpy(&normal_force, &accel_bias_f, NUMBER_OF_AXES * sizeof(float));
+//	normal_force.value[GRAVITY_AXIS] = accel_bias_f[GRAVITY_AXIS];
+	memcpy(&normal_force, &accel_bias_f, NUMBER_OF_AXES * sizeof(float));
 
 	//Make sure gravity is not cancelled
 	accel_bias_f[GRAVITY_AXIS] = 0.0;

@@ -8,7 +8,7 @@
 
 //Defines
 //#define USE_DMP						//Uncomment to use DMP. Comment to use MPU Register Values only.
-//#define INITIAL_CALIBRATION			//Uncomment for initial Calibration, comment to skip initial calibration
+#define INITIAL_CALIBRATION			//Uncomment for initial Calibration, comment to skip initial calibration
 //#define DEBUG 						//UNComment for DEBUG prints, COMMENT for print only for IMU viewer
 
 //Parameters

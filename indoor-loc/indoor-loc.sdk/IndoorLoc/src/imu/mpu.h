@@ -58,7 +58,8 @@
 #define PRINT_QUAT				0x10
 #define PRINT_VEL				0x20
 #define PRINT_POS				0x40
-#define PRINT_ALL				(PRINT_GYRO | PRINT_ACCEL | PRINT_QUAT |  PRINT_VEL)
+#define PRINT_SENSORS			(PRINT_GYRO | PRINT_ACCEL)
+#define PRINT_FOR_VIEWER		(PRINT_QUAT | PRINT_POS)
 
 //Constants
 #define GRAVITY					9.80665		//m/s^2
