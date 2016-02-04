@@ -29,9 +29,9 @@
 /*
  * Defines
  */
-#define LENGTH 		2.0
-#define WIDTH		1.0
-#define HEIGHT		0.1
+#define LENGTH 		1.0//2.0
+#define WIDTH		0.5//1.0
+#define HEIGHT		0.05//0.1
 #define DEVICE0		"/dev/ttyACM0"
 #define DEVICE1		"/dev/ttyACM1"
 #define FILE		"quat.txt"
@@ -135,7 +135,7 @@ int main(){
 		viewer.frame();
 		updateScene(tty_fd);
 		//sleep(1);
-		//usleep(100);
+		usleep(50000); //5ms --> works well with Zynq's print rate of 10Hz
 	}
 	
 	//Close UART Connection
@@ -151,7 +151,8 @@ int main(){
 void updateScene(int tty_fd){
 	//Variables
 	osg::Quat quat;
-	float w, x, y, z;
+	osg::Vec3 pos;
+	float w, x, y, z, px, py, pz;
 	int status;
 	char* line = (char*) malloc(500);
 	
@@ -162,30 +163,43 @@ void updateScene(int tty_fd){
 	y = quat.y();
 	z = quat.z();
 	
+	//Initialize Position
+	pos = transform->getPosition();
+	px = pos.x();
+	py = pos.y();
+	pz = pos.z();
+	
 	//Get Line from UART
 	status = read(tty_fd, line, 255);
 	if (status == 0){
-		//printf("Could not read from UART (%d).\r\n", status);
-		return;
+	  //printf("Could not read from UART (%d).\r\n", status);
+	  return;
 	}
 	
 	//printf("%s\r\n", line);
 	
-	//Get Quaternions
-	status = sscanf(line, "%f %f %f %f", &w, &x, &y, &z);
-	if (status != 4 || abs(w) > 1.0 || abs(x) > 1.0 || abs(y) > 1.0 || abs(z) > 1.0){
-		//printf("Could not get Quaternion (%d).\r\n", status);
-		return;
+	//Get Quaternion and Position
+	status = sscanf(line, "%f %f %f %f %f %f %f", &w, &x, &y, &z, &px, &py, &pz);
+	if (status != 7 || abs(w) > 1.0 || abs(x) > 1.0 || abs(y) > 1.0 || abs(z) > 1.0){
+	  //printf("Could not get data (%d).\r\n", status);
+	  return;
 	}
 	
-	//Invert y to fit IMUs coordinate system to OSG
+	//Invert 5y to fit IMUs coordinate system to OSG
 	y = -y;
+	py = -py;
 	
-	//Print Quaternion
-	printf("%f %f %f %f\n\r", w, x, y, z); 
+	//Scale Movement
+	px = px / 10.0;
+	py = py / 10.0;
+	pz = pz / 10.0;
+	
+	//Print Quaternion and Position
+	printf("%f %f %f %f %f %f %f\n\r", w, x, y, z, px, py, pz); 
 	
 	//Update Scene
 	transform->setAttitude(osg::Quat(w, x, y, z));
+	//transform->setPosition(osg::Vec3(px, py, pz));
 	
 	//Free memory
 	free(line);
