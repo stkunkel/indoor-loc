@@ -318,12 +318,86 @@ Matrix getTranspose(Matrix m) {
 /*
  * Multiply two Quaternions
  */
-void multiplyQuaternions(float* q1, float* q2, float* result){
+void multiplyQuaternions(float* q1, float* q2, float* result) {
 	//Variables
-	result[0] = q1[0]*q2[0] - q1[1]*q2[1] - q1[2]*q2[2] - q1[3]*q2[3];
-	result[1] = q1[0]*q2[1] + q1[1]*q2[0] + q1[2]*q2[3] - q1[3]*q2[2];
-	result[2] = q1[0]*q2[2] - q1[1]*q2[3] + q1[2]*q2[0] + q1[3]*q2[1];
-	result[3] = q1[0]*q2[3] + q1[1]*q2[2] - q1[2]*q2[1] + q1[3]*q2[0];
+	result[0] = q1[0] * q2[0] - q1[1] * q2[1] - q1[2] * q2[2] - q1[3] * q2[3];
+	result[1] = q1[0] * q2[1] + q1[1] * q2[0] + q1[2] * q2[3] - q1[3] * q2[2];
+	result[2] = q1[0] * q2[2] - q1[1] * q2[3] + q1[2] * q2[0] + q1[3] * q2[1];
+	result[3] = q1[0] * q2[3] + q1[1] * q2[2] - q1[2] * q2[1] + q1[3] * q2[0];
+}
+
+/*
+ * Test Vector Rotation using Quaternion
+ */
+void testVectorRotation() {
+	Vector vector = { .value[0] = 0.0, .value[1] = 1.0, .value[2] = 0.0 };
+	Vector result;
+	float quat[QUATERNION_AMOUNT] = { 1.0, 0.0, 0.0, 0.0 };
+
+	//Same
+	result = rotateVector(&vector, quat);
+	printf("0dgr: %f %f %f\r\n", result.value[0], result.value[1],
+			result.value[2]);
+
+	//90° Around x axis --> (0, 0, 1)
+	quat[0] = 0.7071;
+	quat[1] = 0.7071;
+	quat[2] = 0.0;
+	quat[3] = 0.0;
+	result = rotateVector(&vector, quat);
+	printf("90dgr: %f %f %f\r\n", result.value[0], result.value[1],
+			result.value[2]);
+
+	//180° around x axis --> (-1, 0, 0)
+	quat[0] = 0.0;
+	quat[1] = 1.0;
+	quat[2] = 0.0;
+	quat[3] = 0.0;
+	result = rotateVector(&vector, quat);
+	printf("180dgr: %f %f %f\r\n", result.value[0], result.value[1],
+			result.value[2]);
+
+}
+
+/*
+ * Rotate Vector using Quaternion
+ * Sources: http://www.euclideanspace.com/maths/algebra/realNormedAlgebra/quaternions/transforms/
+ * 			http://de.mathworks.com/help/aeroblks/quaternionrotation.html
+ * In: Pointer to vector and quaternion
+ * Returns rotated vector
+ */
+Vector rotateVector(Vector* vector, float quat[QUATERNION_AMOUNT]) {
+	//Variables
+	Vector result;
+
+	//Helper computations
+	float w_w = quat[0] * quat[0];
+	float x_x = quat[1] * quat[1];
+	float y_y = quat[2] * quat[2];
+	float z_z = quat[3] * quat[3];
+	float w_x = quat[0] * quat[1];
+	float w_y = quat[0] * quat[2];
+	float w_z = quat[0] * quat[3];
+	float x_y = quat[1] * quat[2];
+	float x_z = quat[1] * quat[3];
+	float y_z = quat[2] * quat[3];
+
+	//Computation
+	result.value[0] = w_w * vector->value[0] + 2 * w_y * vector->value[2]
+			- 2 * w_z * vector->value[1] + x_x * vector->value[0]
+			+ 2 * x_y * vector->value[1] + 2 * x_z * vector->value[2]
+			- z_z * vector->value[0] - y_y * vector->value[0];
+	result.value[1] = 2 * x_y * vector->value[0] + y_y * vector->value[1]
+			+ 2 * y_z * vector->value[2] + 2 * w_z * vector->value[0]
+			- z_z * vector->value[1] + w_w * vector->value[1]
+			- 2 * w_x * vector->value[2] - x_x * vector->value[1];
+	result.value[2] = 2 * x_z * vector->value[0] + 2 * y_z * vector->value[1]
+			+ z_z * vector->value[2] - 2 * w_y * vector->value[0]
+			- y_y * vector->value[2] + 2 * w_x * vector->value[1]
+			- x_x * vector->value[2] + w_w * vector->value[2];
+
+	//Return
+	return result;
 }
 
 /*

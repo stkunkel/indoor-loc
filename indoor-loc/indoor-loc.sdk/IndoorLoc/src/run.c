@@ -73,7 +73,7 @@ int main() {
 //	status = printForImuViewer(PRINT_ALL, SEPARATOR, DISPLAY_RUNS);
 
 //	Generic Print to Serial Port
-	status = printGeneric(PRINT_FOR_VIEWER, SEPARATOR, DISPLAY_RUNS);
+//	status = printGeneric((PRINT_ACCEL | PRINT_POS), SEPARATOR, DISPLAY_RUNS);
 
 //Quaternion Drift
 //status = printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
@@ -95,6 +95,9 @@ int main() {
 
 //Test Quaternion Computation
 //	testQuaternionComputation();
+
+	//Test Vector Rotation
+	testVectorRotation();
 
 //Test LED
 //	testToggleLed();

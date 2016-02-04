@@ -44,6 +44,8 @@ float getDeterminantRecursive(float* m, unsigned int degree);
 Matrix getAdj(Matrix m);
 Matrix getTranspose(Matrix m);
 void multiplyQuaternions(float* q1, float* q2, float* result);
+void testVectorRotation();
+Vector rotateVector(Vector* vector, float quat[QUATERNION_AMOUNT]);
 Matrix toRotationMatrix(float quat[QUATERNION_AMOUNT]);
 void eulerGetSigma(float quat[QUATERNION_AMOUNT], float* sigma);
 void eulerGetTheta(float quat[QUATERNION_AMOUNT], float* theta);
