@@ -978,7 +978,7 @@ int updateData() {
 	do {
 		status = readFromFifo(gyro, accel, quat, &timestamp, &sensors, more);
 		usleep(100);
-	} while (status != XST_SUCCESS);
+	}while (status != XST_SUCCESS);
 
 	//Free memory
 	free(more);
@@ -1714,6 +1714,35 @@ int initDMP() {
 }
 
 /*
+ * Test Quaternion Computation
+ */
+void testQuaternionComputation() {
+	//Variables
+	int i, j;
+	float gyro[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 };
+	float gyro_x[5] = { 0.0, 90.0, 90.0, -180.0, 0.0 };
+	float quat[QUATERNION_AMOUNT] = { 1.0, 0.0, 0.0, 0.0 };
+	float quat_gyro[QUATERNION_AMOUNT] = { 1.0, 0.0, 0.0, 0.0 };
+	float quat_new[QUATERNION_AMOUNT] = { 1.0, 0.0, 0.0, 0.0 };
+	float delta_t = 1;
+
+	for (i = 0; i < 5; i++) {
+		//Set x value
+		gyro[0] = gyro_x[i];
+
+		//Compute Quaternion
+		computeQuaternion(gyro, quat_gyro, &delta_t);
+
+		//Rotate
+		multiplyQuaternions(quat, quat_gyro, quat_new);
+		memcpy(&quat, &quat_new, QUATERNION_AMOUNT*sizeof(float));
+
+		//Print
+		printf("Angle x: %+3.2f, \t Quat: %+1.6f %+1.6f %+1.6f %+1.6f\r\n",
+				gyro_x[i], quat[0], quat[1], quat[2], quat[3]);
+	}
+}
+/*
  * Compute Quatenternion
  * Source: https://www.dropbox.com/s/87pl9lgv4bfubne/Incremental%20Quaternion%20from%203D%20Rotational%20Vector%20Derivation.pdf?dl=0
  * In: gyro data in dgr/s, time since last sample
@@ -1723,8 +1752,8 @@ void computeQuaternion(float gyro[NUMBER_OF_AXES],
 		float quat[QUATERNION_AMOUNT], float* delta_t) {
 	//Variables
 	int i;
-	float gyro_rad[NUMBER_OF_AXES];
-	float gyro_mag, rot_angle;
+	float gyro_rad[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 };
+	float gyro_mag = 0, rot_angle = 0;
 
 	//Convert gyro data from dgr/s to rad/s and compute sum of squares
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
@@ -1732,13 +1761,17 @@ void computeQuaternion(float gyro[NUMBER_OF_AXES],
 		gyro_mag += (gyro_rad[i] * gyro_rad[i]);
 	}
 
-	//Compute rotational vector magnitude
-	gyro_mag = sqrtf(gyro_mag);
+	//Prevent division by  zero
+	if (gyro_mag != 0) {
+		//Compute rotational vector magnitude
+		gyro_mag = sqrtf(gyro_mag);
 
-	//Compute Unit vector based on body rotation vector
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		gyro_rad[i] = gyro_rad[i] / gyro_mag;
+		//Compute Unit vector based on body rotation vector
+		for (i = 0; i < NUMBER_OF_AXES; i++) {
+			gyro_rad[i] = gyro_rad[i] / gyro_mag;
+		}
 	}
+
 
 	//Compute Rotation Angle
 	rot_angle = gyro_mag * (*delta_t);

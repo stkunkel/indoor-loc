@@ -84,6 +84,7 @@ int getFifoCount();
 int dmpGyroCalibration(bool enable);
 int initIMU();
 int configureDMP(unsigned short int features);
+void testQuaternionComputation();
 int getImuAddr(u8* addr);
 
 #endif /* MPU_H_ */
