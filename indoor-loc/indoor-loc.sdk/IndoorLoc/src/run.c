@@ -24,7 +24,7 @@
  */
 #define DATA_NO_DMP_RUNS 	0
 #define DATA_WITH_DMP_RUNS 	0
-#define DISPLAY_RUNS		10000
+#define DISPLAY_RUNS		0
 #define QUAT_DRIFT_MIN		1
 #define SEPARATOR			" "
 
@@ -38,7 +38,7 @@ int printForImuViewer(short int printMask, char* separator,
 		unsigned int numberOfRuns);
 int printDataUsingDMP(short sensors, bool initialCalibration,
 		bool dmpCalibration, char* separator, unsigned int numberOfRuns);
-int printDataWithoutDMP(short int sensors, char* separator,
+int printDataWithoutDMP(short sensors, char* separator,
 		unsigned int numberOfRuns);
 
 /*
@@ -73,7 +73,7 @@ int main() {
 //	status = printForImuViewer(PRINT_ALL, SEPARATOR, DISPLAY_RUNS);
 
 //	Generic Print to Serial Port
-	status = printGeneric(PRINT_SENSORS, SEPARATOR, 10);
+//	status = printGeneric(PRINT_FOR_VIEWER, SEPARATOR, DISPLAY_RUNS);
 
 //Quaternion Drift
 //status = printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
@@ -102,6 +102,9 @@ int main() {
 //Test LED
 //	testToggleLed();
 //	testLedRun();
+
+//Collect Data
+	collectRegisterData(600, 300);
 
 //Stay in here
 	while (1) {
@@ -145,7 +148,7 @@ int printGeneric(short int printMask, char* separator,
 	}
 
 	//Init IMU and calibrate if specified
-	status = initIMU();
+	status = initIMU(CAL_SAMPLES);
 	if (status != XST_SUCCESS) {
 		return status;
 	}
@@ -378,7 +381,7 @@ int printDataUsingDMP(short sensors, bool initialCalibration,
 					printcnt = 0;
 
 					//Print
-					printDataWithDMP(&sensors, separator);
+					printDataWithDMP(sensors, separator);
 
 					//Print new line
 					printf("\n\r");
@@ -405,7 +408,7 @@ int printDataUsingDMP(short sensors, bool initialCalibration,
  * Print Data without DMP
  * In: sensors, number of runs (if 0 --> endless loop)
  */
-int printDataWithoutDMP(short int sensors, char* separator,
+int printDataWithoutDMP(short sensors, char* separator,
 		unsigned int numberOfRuns) {
 //Variables
 	int cnt, status;
@@ -414,7 +417,7 @@ int printDataWithoutDMP(short int sensors, char* separator,
 	myprintf(".........Without DMP...........\n\r");
 	for (cnt = 0; cnt <= numberOfRuns; cnt++) {
 		//Print
-		status = printDataNoDMP(&sensors, separator);
+		status = printDataNoDMP(sensors, separator);
 
 		//LED Run if Successful
 		if (status == XST_SUCCESS) {

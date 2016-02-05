@@ -1869,6 +1869,9 @@ void collectRegisterData(unsigned int sampleTime,
 
 			//Read successful?
 			if (status == XST_SUCCESS) {
+				//LED Run
+				ledRun();
+
 				//Store count value
 				data->cnt = (u16) cnt;
 
@@ -1882,7 +1885,7 @@ void collectRegisterData(unsigned int sampleTime,
 	}
 
 	//Print samples
-	for (printcnt = 0; printcnt <= cnt; printcnt++) {
+	for (printcnt = 0; printcnt < cnt; printcnt++) {
 		printf("%d ", print->cnt);
 		printRaw(print->gyro);
 		printf(" ");
@@ -1890,6 +1893,7 @@ void collectRegisterData(unsigned int sampleTime,
 		printf(" ");
 		printRaw(print->compass);
 		printf(" %ld\r\n", print->temp);
+		print++;
 	}
 }
 
