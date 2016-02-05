@@ -66,6 +66,14 @@
 
 //Typedefs
 typedef struct {
+	u16 cnt;
+	short gyro[NUMBER_OF_AXES];
+	short accel[NUMBER_OF_AXES];
+	short compass[NUMBER_OF_AXES];
+	long temp;
+} MpuRegisterData;
+
+typedef struct {
 	Vector coordinates;
 	unsigned long timestamp;
 } Position;
@@ -75,17 +83,19 @@ int getFifoCount();
 int printforDisplay(short int *printMask, char* separator);
 void printQuatDrift(unsigned int time_min);
 int getQuatDrift(float *quat_drift, char calibration, unsigned int time_min);
-void printDataWithDMP(short int *sensors, char* separator);
-int printDataNoDMP(short int *sensors, char* separator);
+void printDataWithDMP(short sensors, char* separator);
+int printDataNoDMP(short sensors, char* separator);
 void testPositionUpdate();
 void quaternionTest();
 int updateData();
 int calibrateGyrAcc(unsigned int samples);
 int getFifoCount();
 int dmpGyroCalibration(bool enable);
-int initIMU();
+int initIMU(unsigned int calibrationTime);
 int configureDMP(unsigned short int features);
 void testQuaternionComputation();
+void collectRegisterData(unsigned int sampleTime,
+		unsigned int calibrationTime);
 int getImuAddr(u8* addr);
 
 #endif /* MPU_H_ */

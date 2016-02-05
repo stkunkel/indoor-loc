@@ -18,6 +18,7 @@ void printAccel(float conv[NUMBER_OF_AXES]);
 void printCompass(float conv[NUMBER_OF_AXES]);
 void printTemp(float* temp_conv);
 void printQuat(float quat[QUATERNION_AMOUNT]);
+void printRaw(short sensor[NUMBER_OF_AXES]);
 void printRotationAngle(long quat[QUATERNION_AMOUNT]);
 void printEulerAngles(float* sigma, float* theta, float* psi);
 void printPosition(Vector* position);
@@ -36,8 +37,8 @@ int readFromFifo(short *gyro, short *accel, long *quat,
 		unsigned long *timestamp, short *sensors, unsigned char *more);
 void computeQuaternion(float gyro[NUMBER_OF_AXES], float accel[NUMBER_OF_AXES],
 		float* delta_t, float quat[QUATERNION_AMOUNT]);
-int readFromRegs(short *gyro, short *accel, short* comp,
-		unsigned long *timestamp, short *sensors);
+int readFromRegs(short *gyro, short *accel, short* comp, long* temp,
+		unsigned long *timestamp, short sensorMask);
 int initDMP();
 int configureMpuFifo(unsigned char fifoMask);
 int initMPU();
@@ -434,7 +435,7 @@ int printQuatForDisplay() {
 /*
  * Print Data using DMP
  */
-void printDataWithDMP(short int *sensors, char* separator) {
+void printDataWithDMP(short sensors, char* separator) {
 	//Variables
 	float gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
 	float temp;
@@ -446,38 +447,38 @@ void printDataWithDMP(short int *sensors, char* separator) {
 	temp = recentTemp;
 
 	//Print Gyro
-	if (sensors[0] & INV_XYZ_GYRO) {
+	if (sensors & INV_XYZ_GYRO) {
 		printGyro(gyro);
 
 		//Print Separator
-		if ((sensors[0] & INV_XYZ_ACCEL) || (sensors[0] & INV_XYZ_COMPASS)
-				|| (sensors[0] & SENSOR_TEMP)) {
+		if ((sensors & INV_XYZ_ACCEL) || (sensors & INV_XYZ_COMPASS)
+				|| (sensors & SENSOR_TEMP)) {
 			printf(separator);
 		}
 	}
 
 	//Print Acc
-	if (sensors[0] & INV_XYZ_ACCEL) {
+	if (sensors & INV_XYZ_ACCEL) {
 		printAccel(accel);
 
 		//Print Separator
-		if ((sensors[0] & INV_XYZ_COMPASS) || (sensors[0] & SENSOR_TEMP)) {
+		if ((sensors & INV_XYZ_COMPASS) || (sensors & SENSOR_TEMP)) {
 			printf(separator);
 		}
 	}
 
 	//Print Compass
-	if (sensors[0] & INV_XYZ_COMPASS) {
+	if (sensors & INV_XYZ_COMPASS) {
 		printCompass(compass);
 
 		//Print Separator
-		if (sensors[0] & SENSOR_TEMP) {
+		if (sensors & SENSOR_TEMP) {
 			printf(separator);
 		}
 	}
 
 	//Print Temperature
-	if (sensors[0] & SENSOR_TEMP) {
+	if (sensors & SENSOR_TEMP) {
 		printTemp(&temp);
 	}
 }
@@ -485,14 +486,13 @@ void printDataWithDMP(short int *sensors, char* separator) {
 /*
  * Print Data and don't use DMP
  */
-int printDataNoDMP(short int *sensors, char* separator) {
+int printDataNoDMP(short sensors, char* separator) {
 //Variables
 	int status, return_val = XST_SUCCESS;
 	short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
 	unsigned long timestamp;
 	long temp_raw;
 	float conv[NUMBER_OF_AXES], temp_conv;
-	unsigned long int temp_timestamp;
 
 //Initialize IMU first if required
 	if (imuAddr == 0) {
@@ -504,14 +504,14 @@ int printDataNoDMP(short int *sensors, char* separator) {
 	}
 
 //Get Data
-	status = readFromRegs(gyro, accel, compass, &timestamp, sensors);
+	status = readFromRegs(gyro, accel, compass, &temp_raw, &timestamp, sensors);
 
 //Get Gyro
 	if (status != XST_SUCCESS) {
 		return_val = XST_FAILURE;
 	} else {
 		//Gyro
-		if (sensors[0] & INV_XYZ_GYRO) {
+		if (sensors & INV_XYZ_GYRO) {
 			//Convert Gyro
 			status = convertGyroData(gyro, conv);
 			if (status != XST_SUCCESS) {
@@ -526,7 +526,7 @@ int printDataNoDMP(short int *sensors, char* separator) {
 		}
 
 		//Accel
-		if (sensors[0] & INV_XYZ_ACCEL) {
+		if (sensors & INV_XYZ_ACCEL) {
 			//Convert Acc
 			status = convertAccData(accel, conv);
 			if (status != XST_SUCCESS) {
@@ -541,7 +541,7 @@ int printDataNoDMP(short int *sensors, char* separator) {
 		}
 
 		//Compass
-		if (sensors[0] & INV_XYZ_COMPASS) {
+		if (sensors & INV_XYZ_COMPASS) {
 			//Convert Compass
 			status = convertCompassData(compass, conv);
 			if (status != XST_SUCCESS) {
@@ -554,17 +554,9 @@ int printDataNoDMP(short int *sensors, char* separator) {
 				printf(separator);
 			}
 		}
-	}
 
-//Get Temperature
-	if (sensors[0] & SENSOR_TEMP) {
-		status = mpu_get_temperature(&temp_raw, &temp_timestamp);
-		if (status != XST_SUCCESS) {
-			myprintf("mpu.c Error getting Temperature data.");
-			return_val = XST_FAILURE;
-		} else {
-
-			//Convert Temperature
+		//Temperature
+		if (sensors & SENSOR_TEMP) {
 			status = convertTemperaturetoC(&temp_raw, &temp_conv);
 			if (status != XST_SUCCESS) {
 				myprintf("mpu.c Error converting Temperature data.");
@@ -576,9 +568,6 @@ int printDataNoDMP(short int *sensors, char* separator) {
 			}
 		}
 	}
-
-//Print new line
-	printf("\r\n");
 
 //Return
 	return return_val;
@@ -664,6 +653,23 @@ void printQuat(float quat[QUATERNION_AMOUNT]) {
 //		if (i < QUATERNION_AMOUNT - 1) {
 //			printf(" ");
 //		}
+	}
+}
+
+/*
+ * Print Raw Gyro/Accel/Compass Data
+ * In: Raw sensor data
+ */
+void printRaw(short sensor[NUMBER_OF_AXES]) {
+	//Variables
+	int i;
+
+	//Print
+	for (i = 0; i < NUMBER_OF_AXES; i++) {
+		printf("%d ", sensor[i]);
+		if (i < NUMBER_OF_AXES - 1) {
+			printf(" ");
+		}
 	}
 }
 
@@ -961,7 +967,7 @@ int updateData() {
 	short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES],
 			sensors;
 	long temperature;
-	unsigned long timestamp, temp_ts;
+	unsigned long timestamp;
 	float gyro_conv[NUMBER_OF_AXES], accel_conv[NUMBER_OF_AXES],
 			compass_conv[NUMBER_OF_AXES], quat_conv[QUATERNION_AMOUNT],
 			quat_new[QUATERNION_AMOUNT], temp_conv;
@@ -971,6 +977,7 @@ int updateData() {
 #ifdef USE_DMP
 	long quat[QUATERNION_AMOUNT];
 	unsigned char* more = (unsigned char *) malloc(100 * sizeof(char));
+	unsigned long temp_ts;
 #endif
 
 //Get latest data
@@ -995,11 +1002,20 @@ int updateData() {
 			compass[i] = -1;
 		}
 	}
+
+	//Get Temperature //TODO: Handle unequal timestamp
+	status = mpu_get_temperature(&temperature, &temp_ts);
+	if (status != XST_SUCCESS) {
+		myprintf("mpu.c Error getting Temperature data.");
+		temperature = -1;
+	}
+
 // Without DMP
 #else
 	//Read Data from Registers
 	sensors = SENSORS_ALL;
-	status = readFromRegs(gyro, accel, compass, &timestamp, &sensors);
+	status = readFromRegs(gyro, accel, compass, &temperature, &timestamp,
+			sensors);
 	if (status != XST_SUCCESS) {
 		return XST_FAILURE;
 	}
@@ -1007,13 +1023,6 @@ int updateData() {
 
 	//Update time difference
 	time_diff = (timestamp - recent_ts) / 1000.0;
-
-//Get Temperature //TODO: Handle unequal timestamp
-	status = mpu_get_temperature(&temperature, &temp_ts);
-	if (status != XST_SUCCESS) {
-		myprintf("mpu.c Error getting Temperature data.");
-		temperature = -1;
-	}
 
 	//Handle first function call
 	if (recent_ts == 0) {
@@ -1276,6 +1285,7 @@ int calibrateGyrAcc(unsigned int samples) {
 	int status = XST_FAILURE;
 	unsigned int i = 0, sample = 0;
 	short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
+	long temp;
 	unsigned long timestamp;
 	short int sensors = INV_XYZ_GYRO | INV_XYZ_ACCEL;
 	unsigned char* more = (unsigned char *) malloc(100 * sizeof(char));
@@ -1331,7 +1341,7 @@ int calibrateGyrAcc(unsigned int samples) {
 //Compute offsets
 	for (sample = 0; sample < samples; sample++) {
 		//Get Data
-		status = readFromRegs(gyro, accel, compass, &timestamp, &sensors);
+		status = readFromRegs(gyro, accel, compass, &temp, &timestamp, sensors);
 
 		//Use only successful reads
 		if (status != 0) {
@@ -1546,8 +1556,9 @@ int dmpGyroCalibration(bool enable) {
 
 /*
  * Initialize IMU
+ * In: calibration time in s
  */
-int initIMU() {
+int initIMU(unsigned int calibrationTime) {
 	//Variables
 	int status;
 
@@ -1577,7 +1588,7 @@ int initIMU() {
 	//Calibrate
 #ifdef INITIAL_CALIBRATION
 	myprintf(".........Calibrate...........\n\r");
-	status = calibrateGyrAcc(CAL_SAMPLES);
+	status = calibrateGyrAcc(calibrationTime * FIFO_RATE);
 	if (status != XST_SUCCESS) {
 		return status;
 	}
@@ -1756,50 +1767,40 @@ void computeQuaternion(float gyro[NUMBER_OF_AXES], float accel[NUMBER_OF_AXES],
 	int i;
 	float gyro_rad[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 };
 	float gyro_mag = 0, rot_angle = 0;
-	float scale = 1.0;
-	float quat_inv[QUATERNION_AMOUNT];
 
-	//Complementary Filter
-	Vector accel_meas = { .value[0] = 0.0, .value[1] = 0.0, .value[2] = 0.0 };
-	Vector accel_inertial =
-			{ .value[0] = 0.0, .value[1] = 0.0, .value[2] = 0.0 };
-	Vector corr = { .value[0] = 0.0, .value[1] = 0.0, .value[2] = 0.0 };
-	Vector gyro_corr = { .value[0] = 0.0, .value[1] = 0.0, .value[2] = 0.0 };
-
-	//Create Gyro and Accel Vector
-	gyro_corr = toVector(gyro);
-	accel_meas = toVector(accel);
-
-	//Rotate Accel Vector from body to world frame using recently quaternion
-	accel_inertial = rotateVector(&accel_meas, recentQuat);
-
-	//"Compare" inertial vector to expected result
-	corr = crossProductFromOrigin(&accel_inertial, &normal_force);
-
-	//Scale correction vector
-	corr = multVectorByScalar(corr, scale);
-
-	//Get Inverse of quaternion
-	quatInverse(quat, quat_inv);
-
-	//Rotate back to Body Frame
-	rotateVector(&corr, quat_inv);
-
-	//Compute corrected gyro vector
-	gyro_corr = addVectors(gyro_corr, corr);
-
-//	//DEBUG PRINT
-//	static int cnt = 0;
-//	if (cnt == 10) {
-//		cnt = 0;
-//		printf("%f (%f), %f (%f), %f (%f)\r\n", gyro_corr.value[0], gyro[0],
-//				gyro_corr.value[1], gyro[1], gyro_corr.value[2], gyro[2]);
-//	} else {
-//		cnt++;
-//	}
-
-	//Convert Vector back to float array
-	vectorToFloatArray(gyro_corr, gyro);
+//	//Complementary Filter
+//	float scale = 0.5;
+//	float quat_inv[QUATERNION_AMOUNT];
+//	Vector accel_meas = { .value[0] = 0.0, .value[1] = 0.0, .value[2] = 0.0 };
+//	Vector accel_inertial =
+//			{ .value[0] = 0.0, .value[1] = 0.0, .value[2] = 0.0 };
+//	Vector corr = { .value[0] = 0.0, .value[1] = 0.0, .value[2] = 0.0 };
+//	Vector gyro_corr = { .value[0] = 0.0, .value[1] = 0.0, .value[2] = 0.0 };
+//
+//	//Create Gyro and Accel Vector
+//	gyro_corr = toVector(gyro);
+//	accel_meas = toVector(accel);
+//
+//	//Rotate Accel Vector from body to world frame using recently quaternion
+//	accel_inertial = rotateVector(&accel_meas, recentQuat);
+//
+//	//"Compare" inertial vector to expected result
+//	corr = crossProductFromOrigin(&accel_inertial, &normal_force);
+//
+//	//Scale correction vector
+//	corr = multVectorByScalar(corr, scale);
+//
+//	//Get Inverse of quaternion
+//	quatInverse(quat, quat_inv);
+//
+//	//Rotate back to Body Frame
+//	rotateVector(&corr, quat_inv);
+//
+//	//Compute corrected gyro vector
+//	gyro_corr = addVectors(gyro_corr, corr);
+//
+//	//Convert Vector back to float array
+//	vectorToFloatArray(gyro_corr, gyro);
 
 	//Convert gyro data from dgr/s to rad/s and compute sum of squares
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
@@ -1831,18 +1832,80 @@ void computeQuaternion(float gyro[NUMBER_OF_AXES], float accel[NUMBER_OF_AXES],
 }
 
 /*
+ * Read register data for specified amount of time and prints to UART
+ * In: pointer to memory (not yet allocated), sample time in s, calibration time in s
+ */
+void collectRegisterData(unsigned int sampleTime,
+		unsigned int calibrationTime) {
+	//Variables
+	MpuRegisterData* data;
+	unsigned int cnt = 0, samples = 0, printcnt = 0;
+	int status;
+	unsigned long timestamp;
+	MpuRegisterData* print;
+
+	//Compute number of data samples
+	samples = sampleTime * FIFO_RATE;
+
+	//Allocate Memory
+	data = (MpuRegisterData*) malloc((samples + 200) * sizeof(MpuRegisterData));
+
+	//Set Print Pointer
+	print = data;
+
+	//Initialize
+	status = initIMU(calibrationTime);
+	if (status != XST_SUCCESS) {
+		printf("Could not initialize IMU.\r\n");
+		return;
+	}
+
+	//Get Samples
+	while (cnt < samples) {
+		if (needToUpdateData() == BOOL_TRUE) {
+			//Read Sensor Data and write to memory
+			status = readFromRegs(data->gyro, data->accel, data->compass,
+					&data->temp, &timestamp, SENSORS_ALL);
+
+			//Read successful?
+			if (status == XST_SUCCESS) {
+				//Store count value
+				data->cnt = (u16) cnt;
+
+				//Increase count
+				cnt++;
+
+				//Go to next data set
+				data++;
+			}
+		}
+	}
+
+	//Print samples
+	for (printcnt = 0; printcnt <= cnt; printcnt++) {
+		printf("%d ", print->cnt);
+		printRaw(print->gyro);
+		printf(" ");
+		printRaw(print->accel);
+		printf(" ");
+		printRaw(print->compass);
+		printf(" %ld\r\n", print->temp);
+	}
+}
+
+/*
  * Read from Registers
- * OUT: gyro, accel, comp, timestamp
+ * OUT: gyro, accel, comp, timestamp of
  * IN: sensors (INV_XYZ_GYRO for gyro, INV_XYZ_ACCEL for accel, INV_XYZ_COMPASS for compass)
  */
-int readFromRegs(short *gyro, short *accel, short* comp,
-		unsigned long *timestamp, short *sensors) {
+int readFromRegs(short *gyro, short *accel, short* comp, long* temp,
+		unsigned long *timestamp, short sensorMask) {
 //Variables
 	int status;
-	unsigned long ts_gyro = 0, ts_accel = 0, ts_comp = 0;
+	unsigned long ts_gyro = 0, ts_accel = 0, ts_comp = 0, ts_temp = 0;
 
 //Get Gyro
-	if (sensors[0] & INV_XYZ_GYRO) {
+	if (sensorMask & INV_XYZ_GYRO) {
 //		for (i = 0; i < NUMBER_OF_AXES; i++) {
 		status = mpu_get_gyro_reg(gyro, &ts_gyro);
 		if (status != XST_SUCCESS) {
@@ -1853,7 +1916,7 @@ int readFromRegs(short *gyro, short *accel, short* comp,
 	}
 
 //Get Acc
-	if (sensors[0] & INV_XYZ_ACCEL) {
+	if (sensorMask & INV_XYZ_ACCEL) {
 		status = mpu_get_accel_reg(accel, &ts_accel);
 		if (status != XST_SUCCESS) {
 //			myprintf("mpu.c Error getting Acc data.");
@@ -1862,7 +1925,7 @@ int readFromRegs(short *gyro, short *accel, short* comp,
 	}
 
 //Get Compass
-	if (sensors[0] & INV_XYZ_COMPASS) {
+	if (sensorMask & INV_XYZ_COMPASS) {
 		status = mpu_get_compass_reg(comp, &ts_comp);
 		if (status != XST_SUCCESS) {
 //			myprintf("mpu.c Error getting Compass data.");
@@ -1870,18 +1933,27 @@ int readFromRegs(short *gyro, short *accel, short* comp,
 		}
 	}
 
+	//Get Temperature
+	if (sensorMask & SENSOR_TEMP) {
+		status = mpu_get_temperature(temp, &ts_temp);
+		if (status != XST_SUCCESS) {
+//		myprintf("mpu.c Error getting Temperature data.");
+			return XST_FAILURE;
+		}
+	}
+
 //Make sure timestamp is the same TODO
 	if (ts_gyro != 0) {
 		*timestamp = ts_gyro;
+	} else if (ts_accel != 0) {
+		*timestamp = ts_accel;
+	} else if (ts_comp != 0) {
+		*timestamp = ts_comp;
+	} else if (ts_temp != 0) {
+		*timestamp = ts_temp;
+	} else {
+		*timestamp = 0;
 	}
-//
-//	if ((ts_accel != 0) && (*timestamp != ts_accel)) {
-//		return XST_FAILURE;
-//	}
-//
-//	if ((ts_comp) && (*timestamp != ts_comp)) {
-//		return XST_FAILURE;
-//	}
 
 //Return
 	return XST_SUCCESS;
