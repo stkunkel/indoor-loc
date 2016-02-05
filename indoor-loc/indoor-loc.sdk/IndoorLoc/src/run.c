@@ -24,7 +24,7 @@
  */
 #define DATA_NO_DMP_RUNS 	0
 #define DATA_WITH_DMP_RUNS 	0
-#define DISPLAY_RUNS		100000
+#define DISPLAY_RUNS		10000
 #define QUAT_DRIFT_MIN		1
 #define SEPARATOR			" "
 
@@ -73,7 +73,7 @@ int main() {
 //	status = printForImuViewer(PRINT_ALL, SEPARATOR, DISPLAY_RUNS);
 
 //	Generic Print to Serial Port
-//	status = printGeneric((PRINT_ACCEL | PRINT_POS), SEPARATOR, DISPLAY_RUNS);
+	status = printGeneric(PRINT_SENSORS, SEPARATOR, DISPLAY_RUNS);
 
 //Quaternion Drift
 //status = printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
@@ -97,7 +97,7 @@ int main() {
 //	testQuaternionComputation();
 
 	//Test Vector Rotation
-	testVectorRotation();
+//	testVectorRotation();
 
 //Test LED
 //	testToggleLed();

@@ -34,7 +34,8 @@ int convertQuatenion(long raw[QUATERNION_AMOUNT], float conv[QUATERNION_AMOUNT])
 int pushBiasesToDMP(long* gyro_bias, long* accel_bias);
 int readFromFifo(short *gyro, short *accel, long *quat,
 		unsigned long *timestamp, short *sensors, unsigned char *more);
-void computeQuaternion(float* gyro, float* quat, float* delta_t);
+void computeQuaternion(float gyro[NUMBER_OF_AXES], float accel[NUMBER_OF_AXES],
+		float* delta_t, float quat[QUATERNION_AMOUNT]);
 int readFromRegs(short *gyro, short *accel, short* comp,
 		unsigned long *timestamp, short *sensors);
 int initDMP();
@@ -962,8 +963,8 @@ int updateData() {
 	long temperature;
 	unsigned long timestamp, temp_ts;
 	float gyro_conv[NUMBER_OF_AXES], accel_conv[NUMBER_OF_AXES],
-			compass_conv[NUMBER_OF_AXES], quat_conv[QUATERNION_AMOUNT], quat_new[QUATERNION_AMOUNT],
-			temp_conv;
+			compass_conv[NUMBER_OF_AXES], quat_conv[QUATERNION_AMOUNT],
+			quat_new[QUATERNION_AMOUNT], temp_conv;
 	float time_diff = 1.0 / FIFO_RATE;
 
 //Variables for DMP only
@@ -1058,7 +1059,7 @@ int updateData() {
 	}
 #else
 	//Compute Quaternion quat_new if not using DMP
-	computeQuaternion(gyro_conv, quat_new, &time_diff);
+	computeQuaternion(gyro_conv, accel_conv, &time_diff, quat_new);
 
 	//Update rotation (quat_conv = recentQuat * quat_new)
 	multiplyQuaternions(recentQuat, quat_new, quat_conv);
@@ -1718,7 +1719,7 @@ int initDMP() {
  */
 void testQuaternionComputation() {
 	//Variables
-	int i, j;
+	int i;
 	float gyro[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 };
 	float gyro_x[5] = { 0.0, 90.0, 90.0, -180.0, 0.0 };
 	float quat[QUATERNION_AMOUNT] = { 1.0, 0.0, 0.0, 0.0 };
@@ -1731,11 +1732,11 @@ void testQuaternionComputation() {
 		gyro[0] = gyro_x[i];
 
 		//Compute Quaternion
-		computeQuaternion(gyro, quat_gyro, &delta_t);
+		computeQuaternion(gyro, normal_force.value, &delta_t, quat_gyro);
 
 		//Rotate
 		multiplyQuaternions(quat, quat_gyro, quat_new);
-		memcpy(&quat, &quat_new, QUATERNION_AMOUNT*sizeof(float));
+		memcpy(&quat, &quat_new, QUATERNION_AMOUNT * sizeof(float));
 
 		//Print
 		printf("Angle x: %+3.2f, \t Quat: %+1.6f %+1.6f %+1.6f %+1.6f\r\n",
@@ -1744,16 +1745,61 @@ void testQuaternionComputation() {
 }
 /*
  * Compute Quatenternion
- * Source: https://www.dropbox.com/s/87pl9lgv4bfubne/Incremental%20Quaternion%20from%203D%20Rotational%20Vector%20Derivation.pdf?dl=0
- * In: gyro data in dgr/s, time since last sample
+ * Sources: https://www.dropbox.com/s/87pl9lgv4bfubne/Incremental%20Quaternion%20from%203D%20Rotational%20Vector%20Derivation.pdf?dl=0
+ * 			http://philstech.blogspot.de/2015/06/complimentary-filter-example-quaternion.html
+ * In: gyro data in dgr/s, accel data in g, time difference to last sample
  * Out: quaternion
  */
-void computeQuaternion(float gyro[NUMBER_OF_AXES],
-		float quat[QUATERNION_AMOUNT], float* delta_t) {
+void computeQuaternion(float gyro[NUMBER_OF_AXES], float accel[NUMBER_OF_AXES],
+		float* delta_t, float quat[QUATERNION_AMOUNT]) {
 	//Variables
 	int i;
 	float gyro_rad[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 };
 	float gyro_mag = 0, rot_angle = 0;
+	float scale = 1.0;
+	float quat_inv[QUATERNION_AMOUNT];
+
+	//Complementary Filter
+	Vector accel_meas = { .value[0] = 0.0, .value[1] = 0.0, .value[2] = 0.0 };
+	Vector accel_inertial =
+			{ .value[0] = 0.0, .value[1] = 0.0, .value[2] = 0.0 };
+	Vector corr = { .value[0] = 0.0, .value[1] = 0.0, .value[2] = 0.0 };
+	Vector gyro_corr = { .value[0] = 0.0, .value[1] = 0.0, .value[2] = 0.0 };
+
+	//Create Gyro and Accel Vector
+	gyro_corr = toVector(gyro);
+	accel_meas = toVector(accel);
+
+	//Rotate Accel Vector from body to world frame using recently quaternion
+	accel_inertial = rotateVector(&accel_meas, recentQuat);
+
+	//"Compare" inertial vector to expected result
+	corr = crossProductFromOrigin(&accel_inertial, &normal_force);
+
+	//Scale correction vector
+	corr = multVectorByScalar(corr, scale);
+
+	//Get Inverse of quaternion
+	quatInverse(quat, quat_inv);
+
+	//Rotate back to Body Frame
+	rotateVector(&corr, quat_inv);
+
+	//Compute corrected gyro vector
+	gyro_corr = addVectors(gyro_corr, corr);
+
+//	//DEBUG PRINT
+//	static int cnt = 0;
+//	if (cnt == 10) {
+//		cnt = 0;
+//		printf("%f (%f), %f (%f), %f (%f)\r\n", gyro_corr.value[0], gyro[0],
+//				gyro_corr.value[1], gyro[1], gyro_corr.value[2], gyro[2]);
+//	} else {
+//		cnt++;
+//	}
+
+	//Convert Vector back to float array
+	vectorToFloatArray(gyro_corr, gyro);
 
 	//Convert gyro data from dgr/s to rad/s and compute sum of squares
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
@@ -1771,7 +1817,6 @@ void computeQuaternion(float gyro[NUMBER_OF_AXES],
 			gyro_rad[i] = gyro_rad[i] / gyro_mag;
 		}
 	}
-
 
 	//Compute Rotation Angle
 	rot_angle = gyro_mag * (*delta_t);
