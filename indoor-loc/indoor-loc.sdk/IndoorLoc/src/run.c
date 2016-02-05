@@ -73,7 +73,7 @@ int main() {
 //	status = printForImuViewer(PRINT_ALL, SEPARATOR, DISPLAY_RUNS);
 
 //	Generic Print to Serial Port
-	status = printGeneric(PRINT_SENSORS, SEPARATOR, DISPLAY_RUNS);
+	status = printGeneric(PRINT_SENSORS, SEPARATOR, 10);
 
 //Quaternion Drift
 //status = printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
@@ -96,7 +96,7 @@ int main() {
 //Test Quaternion Computation
 //	testQuaternionComputation();
 
-	//Test Vector Rotation
+//Test Vector Rotation
 //	testVectorRotation();
 
 //Test LED
@@ -140,8 +140,8 @@ int printGeneric(short int printMask, char* separator,
 
 	//Set number of runs, if endless print
 	if (numberOfRuns == 0) {
-		numberOfRuns = IMUVIEWER_FREQ;
 		endless = BOOL_TRUE;
+		numberOfRuns = 1;
 	}
 
 	//Init IMU and calibrate if specified
@@ -150,12 +150,12 @@ int printGeneric(short int printMask, char* separator,
 		return status;
 	}
 
-	//Adjust Number of Runs
-	numberOfRuns *= (FIFO_RATE / IMUVIEWER_FREQ);
-
 	//Print to Serial Port
 	myprintf(".........Print to UART...........\n\r");
-	for (cnt = 0; cnt <= numberOfRuns; cnt++) {
+	while (printcnt < numberOfRuns) {
+		//Increase Counter
+		cnt++;
+
 		//Reset Status
 		status = XST_SUCCESS;
 
@@ -166,40 +166,33 @@ int printGeneric(short int printMask, char* separator,
 
 			//Check whether data should be printed
 			if (status == XST_SUCCESS) {
-				//Increase print counter
-				printcnt++;
-
-				if ((printcnt % (FIFO_RATE / IMUVIEWER_FREQ)) == 0) {
-					//Reset printcnt
-					printcnt = 0;
+				if ((cnt % (FIFO_RATE / IMUVIEWER_FREQ)) == 0) {
 
 					//Print
 					status = printforDisplay(&printMask, separator);
 
 					//Print new line
 					if (status == XST_SUCCESS) {
+						//Increase print counter
+						printcnt++;
+
+						//Print new linw
 						printf("\n\r");
 					} else {
-						cnt--;
+						printcnt--;
 					}
 
 					//For endless prints
 					if (endless == BOOL_TRUE) {
-						cnt = 0;
+						printcnt = 0;
 					}
 
 				}
 			} else {
 				cnt--;
-				printcnt--;
 			}
 		} else {
 			cnt--;
-		}
-
-		//Make sure only successful prints count
-		if (numberOfRuns < 1) {
-			cnt = 0;
 		}
 	}
 
