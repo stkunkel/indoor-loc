@@ -453,6 +453,54 @@ void eulerGetPsi(float quat[QUATERNION_AMOUNT], float* psi) {
 }
 
 /*
+ * Quaternion Inverse
+ * Source: http://mathworld.wolfram.com/Quaternion.html
+ * In: Quaternion
+ * Out: Inverse
+ */
+void quatInverse(float quat[QUATERNION_AMOUNT], float result[QUATERNION_AMOUNT]){
+	//Variables
+	float conj[QUATERNION_AMOUNT];
+	float norm, norm_sq;
+
+	//Get Conjugate
+	quatConjugate(quat, conj);
+
+	//Get Norm and square
+	norm = quatNorm(quat);
+	norm_sq = norm * norm;
+
+	//Compute Inverse
+	result[0] = conj[0]/norm_sq;
+	result[1] = conj[0]/norm_sq;
+	result[2] = conj[0]/norm_sq;
+	result[3] = conj[0]/norm_sq;
+}
+
+/*
+ * Quaternion Norm
+ * Source: http://mathworld.wolfram.com/Quaternion.html
+ * In: Quaternion
+ * Returns Norm
+ */
+float quatNorm(float quat[QUATERNION_AMOUNT]){
+	return (sqrtf((quat[0]*quat[0]) + (quat[1]*quat[1]) + (quat[2]*quat[2]) + (quat[3]*quat[3])));
+}
+
+/*
+ * Quaternion Conjugate
+ * Source: http://mathworld.wolfram.com/Quaternion.html
+ * In: Quaternion
+ * Out: Conjugate
+ */
+void quatConjugate(float quat[QUATERNION_AMOUNT], float result[QUATERNION_AMOUNT]){
+	result[0] = quat[0];
+	result[1] = -quat[1];
+	result[2] = -quat[2];
+	result[3] = -quat[3];
+}
+
+/*
  * Comparison of Floats
  * In: two floats
  * Returns 1 if floats are (nearly) equal and 0 if not
@@ -516,6 +564,24 @@ void matrixToFloatArray(Matrix matrix,
 			array[i][j] = matrix.value[i * NUMBER_OF_AXES + j];
 		}
 	}
+}
+
+/*
+ * Cross-product of two vectors from origin (RHCS)
+ * In: Vector a and b
+ * Returns cross-product
+ */
+Vector crossProductFromOrigin(Vector* a, Vector* b) {
+	//Variables
+	Vector result;
+
+	//Computation
+	result.value[0] = a->value[1] * b->value[2] - a->value[2] * b->value[1];
+	result.value[1] = a->value[2] * b->value[0] - a->value[0] * b->value[2];
+	result.value[2] = a->value[0] * b->value[1] - a->value[1] * b->value[0];
+
+	//Return
+	return result;
 }
 
 /*
