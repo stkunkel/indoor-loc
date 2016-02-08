@@ -1842,14 +1842,12 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 	MpuRegisterData *dataStart, *dataColl, *print;
 	unsigned long cnt = 0, samples = 0, printcnt = 0;
 	int status;
-	unsigned long timestamp;
 
 	//Compute number of data samples
-	samples = 8191;	//sampleTime * FIFO_RATE;
+	samples = sampleTime * FIFO_RATE;
 
 	//Allocate Memory
-	dataStart = (MpuRegisterData*) malloc(
-			(samples + 200) * sizeof(MpuRegisterData));
+	dataStart = (MpuRegisterData*) 0x7000000;//(MpuRegisterData*) malloc((samples + 200) * sizeof(MpuRegisterData));
 
 	//Set Print Pointer
 	dataColl = dataStart;
@@ -1865,12 +1863,38 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 	//Get Samples
 	while (cnt < samples) {
 		if (needToUpdateData() == BOOL_TRUE) {
-			if (cnt == 8192) {
-				myprintf("");
-			}
+
 			//Read Sensor Data and write to memory
 			status = readFromRegs(dataColl->gyro, dataColl->accel,
-					dataColl->compass, &dataColl->temp, &timestamp, SENSORS_ALL); //&timestamp
+					dataColl->compass, &dataColl->temp, 0, SENSORS_ALL);
+
+			//Read successful?
+			if (status == XST_SUCCESS) {
+				//LED Run
+				ledRun();
+
+				//Store count value
+//				data->cnt = (u16) cnt;
+
+				//Increase count
+				cnt++;
+
+				//Go to next data set
+				if (cnt < samples) {
+					dataColl++;
+				}
+			}
+		}
+	}
+
+	cnt = 0;
+	//Get Samples
+	while (cnt < samples) {
+		if (needToUpdateData() == BOOL_TRUE) {
+
+			//Read Sensor Data and write to memory
+			status = readFromRegs(dataColl->gyro, dataColl->accel,
+					dataColl->compass, &dataColl->temp, 0, SENSORS_ALL);
 
 			//Read successful?
 			if (status == XST_SUCCESS) {
@@ -1893,18 +1917,21 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 
 	//Print samples
 	for (printcnt = 0; printcnt < cnt; printcnt++) {
+		//Print
 //		printf("%d ", print->cnt);
 		printRaw(print->gyro);
 		printf(" ");
 		printRaw(print->accel);
 		printf(" ");
 		printRaw(print->compass);
-		printf(" %ld\r\n", print->temp);
+		printf(" %ld;", print->temp);
+
+		//Increase Pointer Address
 		print++;
 	}
 
-	//Free memory
-	free(dataStart);
+//	//Free memory
+//	free(dataStart);
 }
 
 /*
