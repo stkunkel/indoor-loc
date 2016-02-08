@@ -73,7 +73,7 @@ int main() {
 //	status = printForImuViewer(PRINT_ALL, SEPARATOR, DISPLAY_RUNS);
 
 //	Generic Print to Serial Port
-	status = printGeneric(PRINT_ACCEL, SEPARATOR, DISPLAY_RUNS);
+//	status = printGeneric(PRINT_ACCEL, SEPARATOR, DISPLAY_RUNS);
 
 //Quaternion Drift
 //status = printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
@@ -104,7 +104,7 @@ int main() {
 //	testLedRun();
 
 //Collect Data
-	collectRegisterData(600, 300);
+	collectRegisterData(600, 60); //10min sampling, 1min calibration
 
 //Stay in here
 	while (1) {
