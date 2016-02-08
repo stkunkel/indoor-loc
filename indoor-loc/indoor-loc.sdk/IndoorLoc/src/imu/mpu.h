@@ -66,7 +66,7 @@
 
 //Typedefs
 typedef struct {
-	u16 cnt;
+//	u16 cnt;
 	short gyro[NUMBER_OF_AXES];
 	short accel[NUMBER_OF_AXES];
 	short compass[NUMBER_OF_AXES];

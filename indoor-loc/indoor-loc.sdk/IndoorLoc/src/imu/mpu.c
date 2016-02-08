@@ -1288,7 +1288,7 @@ int calibrateGyrAcc(unsigned int samples) {
 	unsigned int i = 0, sample = 0;
 	short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
 	long temp;
-	unsigned long timestamp;
+//	unsigned long timestamp;
 	short int sensors = INV_XYZ_GYRO | INV_XYZ_ACCEL;
 	unsigned char* more = (unsigned char *) malloc(100 * sizeof(char));
 	long gyro_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
@@ -1343,7 +1343,7 @@ int calibrateGyrAcc(unsigned int samples) {
 //Compute offsets
 	for (sample = 0; sample < samples; sample++) {
 		//Get Data
-		status = readFromRegs(gyro, accel, compass, &temp, &timestamp, sensors);
+		status = readFromRegs(gyro, accel, compass, &temp, 0, sensors); //&timestamp
 
 		//Use only successful reads
 		if (status != 0) {
@@ -1839,20 +1839,21 @@ void computeQuaternion(float gyro[NUMBER_OF_AXES], float accel[NUMBER_OF_AXES],
  */
 void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) {
 	//Variables
-	MpuRegisterData* data;
-	unsigned int cnt = 0, samples = 0, printcnt = 0;
+	MpuRegisterData *dataStart, *dataColl, *print;
+	unsigned long cnt = 0, samples = 0, printcnt = 0;
 	int status;
-	unsigned long timestamp;
-	MpuRegisterData* print;
+//	unsigned long timestamp;
 
 	//Compute number of data samples
-	samples = sampleTime * FIFO_RATE;
+	samples = 8191;	//sampleTime * FIFO_RATE;
 
 	//Allocate Memory
-	data = (MpuRegisterData*) malloc((samples + 200) * sizeof(MpuRegisterData));
+	dataStart = (MpuRegisterData*) malloc(
+			(samples + 200) * sizeof(MpuRegisterData));
 
 	//Set Print Pointer
-	print = data;
+	dataColl = dataStart;
+	print = dataStart;
 
 	//Initialize
 	status = initIMU(calibrationTime);
@@ -1864,9 +1865,12 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 	//Get Samples
 	while (cnt < samples) {
 		if (needToUpdateData() == BOOL_TRUE) {
+			if (cnt == 8192) {
+				myprintf("");
+			}
 			//Read Sensor Data and write to memory
-			status = readFromRegs(data->gyro, data->accel, data->compass,
-					&data->temp, &timestamp, SENSORS_ALL);
+			status = readFromRegs(dataColl->gyro, dataColl->accel,
+					dataColl->compass, &dataColl->temp, 0, SENSORS_ALL); //&timestamp
 
 			//Read successful?
 			if (status == XST_SUCCESS) {
@@ -1874,20 +1878,22 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 				ledRun();
 
 				//Store count value
-				data->cnt = (u16) cnt;
+//				data->cnt = (u16) cnt;
 
 				//Increase count
 				cnt++;
 
 				//Go to next data set
-				data++;
+				if (cnt < samples) {
+					dataColl++;
+				}
 			}
 		}
 	}
 
 	//Print samples
 	for (printcnt = 0; printcnt < cnt; printcnt++) {
-		printf("%d ", print->cnt);
+//		printf("%d ", print->cnt);
 		printRaw(print->gyro);
 		printf(" ");
 		printRaw(print->accel);
@@ -1898,7 +1904,7 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 	}
 
 	//Free memory
-	free(data);
+	free(dataStart);
 }
 
 /*
@@ -1910,12 +1916,12 @@ int readFromRegs(short *gyro, short *accel, short* comp, long* temp,
 		unsigned long *timestamp, short sensorMask) {
 //Variables
 	int status;
-	unsigned long ts_gyro = 0, ts_accel = 0, ts_comp = 0, ts_temp = 0;
+	//unsigned long ts_gyro = 0, ts_accel = 0, ts_comp = 0, ts_temp = 0;
 
 //Get Gyro
 	if (sensorMask & INV_XYZ_GYRO) {
 //		for (i = 0; i < NUMBER_OF_AXES; i++) {
-		status = mpu_get_gyro_reg(gyro, &ts_gyro);
+		status = mpu_get_gyro_reg(gyro, 0); //&ts_gyro
 		if (status != XST_SUCCESS) {
 //			myprintf("mpu.c Error getting Gyroscope data.");
 			return XST_FAILURE;
@@ -1925,7 +1931,7 @@ int readFromRegs(short *gyro, short *accel, short* comp, long* temp,
 
 //Get Acc
 	if (sensorMask & INV_XYZ_ACCEL) {
-		status = mpu_get_accel_reg(accel, &ts_accel);
+		status = mpu_get_accel_reg(accel, 0); //&ts_accel
 		if (status != XST_SUCCESS) {
 //			myprintf("mpu.c Error getting Acc data.");
 			return XST_FAILURE;
@@ -1934,7 +1940,7 @@ int readFromRegs(short *gyro, short *accel, short* comp, long* temp,
 
 //Get Compass
 	if (sensorMask & INV_XYZ_COMPASS) {
-		status = mpu_get_compass_reg(comp, &ts_comp);
+		status = mpu_get_compass_reg(comp, 0); //&ts_comp
 		if (status != XST_SUCCESS) {
 //			myprintf("mpu.c Error getting Compass data.");
 			return XST_FAILURE;
@@ -1943,25 +1949,25 @@ int readFromRegs(short *gyro, short *accel, short* comp, long* temp,
 
 	//Get Temperature
 	if (sensorMask & SENSOR_TEMP) {
-		status = mpu_get_temperature(temp, &ts_temp);
+		status = mpu_get_temperature(temp, 0); //&ts_temp
 		if (status != XST_SUCCESS) {
 //		myprintf("mpu.c Error getting Temperature data.");
 			return XST_FAILURE;
 		}
 	}
 
-//Make sure timestamp is the same TODO
-	if (ts_gyro != 0) {
-		*timestamp = ts_gyro;
-	} else if (ts_accel != 0) {
-		*timestamp = ts_accel;
-	} else if (ts_comp != 0) {
-		*timestamp = ts_comp;
-	} else if (ts_temp != 0) {
-		*timestamp = ts_temp;
-	} else {
-		*timestamp = 0;
-	}
+////Make sure timestamp is the same TODO
+//	if (ts_gyro != 0) {
+//		*timestamp = ts_gyro;
+//	} else if (ts_accel != 0) {
+//		*timestamp = ts_accel;
+//	} else if (ts_comp != 0) {
+//		*timestamp = ts_comp;
+//	} else if (ts_temp != 0) {
+//		*timestamp = ts_temp;
+//	} else {
+//		*timestamp = 0;
+//	}
 
 //Return
 	return XST_SUCCESS;
