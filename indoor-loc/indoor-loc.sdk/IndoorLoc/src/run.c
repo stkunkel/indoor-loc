@@ -73,7 +73,7 @@ int main() {
 //	status = printForImuViewer(PRINT_ALL, SEPARATOR, DISPLAY_RUNS);
 
 //	Generic Print to Serial Port
-//	status = printGeneric(PRINT_FOR_VIEWER, SEPARATOR, DISPLAY_RUNS);
+	status = printGeneric(PRINT_ACCEL, SEPARATOR, DISPLAY_RUNS);
 
 //Quaternion Drift
 //status = printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
@@ -148,7 +148,7 @@ int printGeneric(short int printMask, char* separator,
 	}
 
 	//Init IMU and calibrate if specified
-	status = initIMU(CAL_SAMPLES);
+	status = initIMU(CAL_TIME);
 	if (status != XST_SUCCESS) {
 		return status;
 	}

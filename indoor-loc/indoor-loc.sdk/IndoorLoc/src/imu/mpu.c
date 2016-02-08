@@ -340,7 +340,7 @@ int getQuatDrift(float *quat_drift, char calibration, unsigned int time_min) {
 
 //Calibrate if required
 	if (calibration) {
-		status = calibrateGyrAcc(CAL_SAMPLES);
+		status = calibrateGyrAcc(CAL_TIME);
 		if (status != XST_SUCCESS) {
 			myprintf("mpu.c Could not calibrate Gyr. and Acc.\r\n");
 			return status;
@@ -568,6 +568,8 @@ int printDataNoDMP(short sensors, char* separator) {
 			}
 		}
 	}
+
+	printf("\r\n");
 
 //Return
 	return return_val;
@@ -1835,8 +1837,7 @@ void computeQuaternion(float gyro[NUMBER_OF_AXES], float accel[NUMBER_OF_AXES],
  * Read register data for specified amount of time and prints to UART
  * In: pointer to memory (not yet allocated), sample time in s, calibration time in s
  */
-void collectRegisterData(unsigned int sampleTime,
-		unsigned int calibrationTime) {
+void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) {
 	//Variables
 	MpuRegisterData* data;
 	unsigned int cnt = 0, samples = 0, printcnt = 0;
@@ -1895,6 +1896,9 @@ void collectRegisterData(unsigned int sampleTime,
 		printf(" %ld\r\n", print->temp);
 		print++;
 	}
+
+	//Free memory
+	free(data);
 }
 
 /*
