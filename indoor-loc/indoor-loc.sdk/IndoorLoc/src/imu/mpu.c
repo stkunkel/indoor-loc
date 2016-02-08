@@ -1842,7 +1842,7 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 	MpuRegisterData *dataStart, *dataColl, *print;
 	unsigned long cnt = 0, samples = 0, printcnt = 0;
 	int status;
-//	unsigned long timestamp;
+	unsigned long timestamp;
 
 	//Compute number of data samples
 	samples = 8191;	//sampleTime * FIFO_RATE;
@@ -1870,7 +1870,7 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 			}
 			//Read Sensor Data and write to memory
 			status = readFromRegs(dataColl->gyro, dataColl->accel,
-					dataColl->compass, &dataColl->temp, 0, SENSORS_ALL); //&timestamp
+					dataColl->compass, &dataColl->temp, &timestamp, SENSORS_ALL); //&timestamp
 
 			//Read successful?
 			if (status == XST_SUCCESS) {
@@ -1917,6 +1917,11 @@ int readFromRegs(short *gyro, short *accel, short* comp, long* temp,
 //Variables
 	int status;
 	//unsigned long ts_gyro = 0, ts_accel = 0, ts_comp = 0, ts_temp = 0;
+
+	//Get Timestamp if required
+	if (timestamp > 0) {
+		imuGet_ms(timestamp);
+	}
 
 //Get Gyro
 	if (sensorMask & INV_XYZ_GYRO) {
