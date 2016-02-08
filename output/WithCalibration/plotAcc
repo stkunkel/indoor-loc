@@ -1,0 +1,21 @@
+#Read in data
+data = load ('data.txt');
+x = data(:,4);
+y = data(:,5);
+z = data(:,6);
+
+#Gyroscope
+plot(x, "r");
+hold on;
+plot(y, "g");
+hold on;
+plot(z, "b");
+hold on;
+
+#Set up Plot
+grid on;
+title('Accelerometer');
+xlabel('Sample Number');
+ylabel('Acceleration (in g)');
+legend('x', 'y', 'z');
+print("accelerometer.pdf");
