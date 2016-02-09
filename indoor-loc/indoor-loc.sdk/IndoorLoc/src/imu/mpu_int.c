@@ -81,7 +81,7 @@ bool dmpDataAvailable() {
  */
 int setupDMPInt() {
 	//Variables
-	int status;
+	int status, cnt = 0;
 	XScuGic_Config* IntcConfig;
 	XGpioPs_Config* GpioConfig;
 	unsigned char data;
@@ -99,7 +99,7 @@ int setupDMPInt() {
 	//data = 0x24; //debug
 	do {
 		status = imuI2cWrite(0x68, 0x37, 1, &data); //Write Register
-	} while (status != XST_SUCCESS);
+	} while (status != XST_SUCCESS && cnt < IIC_TIMEOUT);
 
 	//Set Interrupt level
 	status = mpu_set_int_level(0); //Set Interrupt for "active high" (0)

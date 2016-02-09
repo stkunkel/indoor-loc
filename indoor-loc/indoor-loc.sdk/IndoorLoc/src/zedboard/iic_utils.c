@@ -280,7 +280,7 @@ int iic_burstWrite(XIicPs *IicPs, u8 Address, u8 Register, u32 length,
 		unsigned char* Data) {
 	u8 WriteBuffer[length + 1];
 	int Status;
-//	int cnt = 0;
+	int cnt = 0;
 
 	/*
 	 * A temporary write buffer must be used which contains both the address
@@ -295,10 +295,10 @@ int iic_burstWrite(XIicPs *IicPs, u8 Address, u8 Register, u32 length,
 	while (XIicPs_BusIsBusy(IicPs)) {
 		/* NOP */
 		usleep(100);
-//		cnt++;
-//		if (cnt > 100) {
-//			return XST_FAILURE;
-//		}
+		cnt++;
+		if (cnt > IIC_TIMEOUT) {
+			return XST_FAILURE;
+		}
 	}
 
 	/*
@@ -376,17 +376,19 @@ int iic_read1(XIicPs *IicPs, u8 Address, u8 *Data) {
  */
 int iic_read2(XIicPs *IicPs, u8 Address, u8 Register, u8 *Data, int ByteCount) {
 	int Status;
-//	int cnt = 0;
+	int cnt = 0;
 
 	/*
 	 * Wait until bus is idle to start another transfer.
 	 */
 	while (XIicPs_BusIsBusy(IicPs)) {
 		usleep(100);
-//		cnt++;
-//		if (cnt > 100) {
-//			return XST_FAILURE;
-//		}
+
+		//Timeout
+		cnt++;
+		if (cnt > IIC_TIMEOUT) {
+			return XST_FAILURE;
+		}
 	}
 
 	/*

@@ -14,7 +14,8 @@
 #include "../print_utils.h"
 #include "../zedboard/time_utils.h"
 
-// PS I2C0 Init Parameters
+// Parameters
+#define IIC_TIMEOUT		100
 #define IIC_DEVICE_ID  	XPAR_PS7_I2C_0_DEVICE_ID
 #define IIC_SCLK_RATE  	400000//100000//XPAR_PS7_I2C_0_I2C_CLK_FREQ_HZ
 #define IIC_BASE_ADDR	XPAR_PS7_I2C_0_BASEADDR
