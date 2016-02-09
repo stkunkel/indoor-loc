@@ -97,9 +97,17 @@ int setupDMPInt() {
 	data &= (~INT_RD_CLEAR_BIT); //Clear bit --> interrupt status bits are cleared only by reading INT_STATUS (Register 58)
 	data |= LATCH_INT_EN_BIT; //Set bit --> INT pin is held high until the interrupt is cleared
 	//data = 0x24; //debug
-	do {
-		status = imuI2cWrite(0x68, 0x37, 1, &data); //Write Register
-	} while (status != XST_SUCCESS && cnt < IIC_TIMEOUT);
+	for (cnt = 0; cnt < 10; cnt++){
+		//Write Register
+		status = imuI2cWrite(0x68, 0x37, 1, &data);
+
+		//Check Status
+		if (status == XST_SUCCESS){
+			break;
+		} else if (status == XST_DEVICE_BUSY){
+			return XST_FAILURE;
+		}
+	}
 
 	//Set Interrupt level
 	status = mpu_set_int_level(0); //Set Interrupt for "active high" (0)
