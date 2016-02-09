@@ -52,7 +52,6 @@ bool isTimerExpired() {
 		tmrExpired = BOOL_FALSE;
 		return BOOL_TRUE;
 	} else {
-		u32 value = XTmrCtr_GetValue(&tmrCtr, 0);
 		return BOOL_FALSE;
 	}
 }
