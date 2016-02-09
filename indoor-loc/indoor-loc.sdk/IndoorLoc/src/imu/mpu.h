@@ -48,9 +48,10 @@
 #define ACCEL_CAL_MASK			0x02
 #define MAG_CAL_MASK			0x04
 #define GRAVITY_AXIS			2			//gravity along z axis
-#define FIFO_RATE				200
+#define FIFO_RATE				500//200
 
 //Print Parameters
+#define PRINT_NOTHING			0x00
 #define PRINT_GYRO				0x01
 #define PRINT_ACCEL				0x02
 #define PRINT_COMP				0x04

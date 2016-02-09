@@ -204,7 +204,7 @@ int printforDisplay(short int *printMask, char* separator) {
 	}
 
 	//Didnt print anything
-	if (l_printMask == 0x00) {
+	if (l_printMask == PRINT_NOTHING) {
 		return XST_SUCCESS;
 	} else {
 		return XST_FAILURE;
