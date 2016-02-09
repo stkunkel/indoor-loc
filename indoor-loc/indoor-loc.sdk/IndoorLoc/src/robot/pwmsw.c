@@ -33,6 +33,7 @@ float getAbsAngle(Joint joint);
 float valToAngle(Joint joint, u32 value);
 u32 angleToValue(Joint joint, float dgr);
 int moveTo(Joint joint, u32 value);
+int moveTowards(Joint joint, u32 value);
 short getPosMvDir(Joint joint);
 u32 getValReg(Joint joint);
 short getIndex(Joint joint);
@@ -115,7 +116,7 @@ int pwmTest() {
 				radToDeg(valToAngle(jointVal[reg], val)));
 
 		//Reset
-		writePwmReg(pwmValRegister[reg], 1500);
+		writePwmReg(pwmValRegister[reg], PWM_VAL_INIT);
 	}
 
 	//finish
@@ -304,53 +305,94 @@ u32 angleToValue(Joint joint, float dgr) {
  */
 int moveTo(Joint joint, u32 value) {
 	//Variables
-	u32 currValue;
+	int diff;
 
 	//Make sure value is positive
-	if (value < 0) {
-		value = 0;
+	if (value < PWM_VAL_MIN) {
+		value = PWM_VAL_MIN;
 	}
 
 	//Make sure value is in range
-	if (value > (u32) (PWM_VAL_MAX * stepAmount / PWM_STEPS)) {
-		value = (u32) PWM_VAL_MAX / PWM_STEPS * stepAmount;
+	if (value > PWM_VAL_MAX) {
+		value = PWM_VAL_MAX;
 	}
 
-	//Get start value
-	currValue = readPwmReg(getValReg(joint));
-
-	//Move in negative direction
-	while (currValue < value) {
-		//Compute new value
-		currValue++;
-
-		//Set new value
-		writePwmReg(getValReg(joint), currValue);
-
-		//Get new value
-		currValue = readPwmReg(getValReg(joint));
-
-		//Make movement smooth
-		usleep(SLEEP_BTW_STEPS);
-	}
-
-	//Move in positive direction
-	while (currValue > value) {
-		//Compute new value
-		currValue--;
-
-		//Set new value
-		writePwmReg(getValReg(joint), currValue);
-
-		//Get new value
-		currValue = readPwmReg(getValReg(joint));
-
-		//Make movement smooth
-		usleep(SLEEP_BTW_STEPS);
-	}
+	//Move
+	do {
+		diff = moveTowards(joint, value);
+	} while (diff != 0);
 
 	//Return
 	return PWM_SUCCESS;
+}
+
+/*
+ * Move one towards specified value
+ * In: Joint, value
+ * Returns difference between current and specified value (0 if value has been reached)
+ */
+int moveTowards(Joint joint, u32 value) {
+	//Variables
+	u32 currValue;
+
+	//Make sure value is positive
+	if (value < PWM_VAL_MIN) {
+		value = PWM_VAL_MIN;
+	}
+
+	//Make sure value is in range
+	if (value > PWM_VAL_MAX) {
+		value = PWM_VAL_MAX;
+	}
+
+	//Get current value
+	currValue = readPwmReg(getValReg(joint));
+
+	//Move in negative direction
+	if (currValue < value) {
+		//Compute new value
+		//2 steps at a time for angles higher than (-)90°
+		if (currValue < PWM_VAL_LOW || currValue > PWM_VAL_HIGH) {
+			currValue += 2;
+
+			//Correct value it is is out of range now
+			if (currValue > PWM_VAL_MAX) {
+				currValue = PWM_VAL_MAX;
+			} else if (currValue < PWM_VAL_MIN) {
+				currValue = PWM_VAL_MIN;
+			}
+		} else {
+			currValue++;
+		}
+	}
+
+	//Move in positive direction
+	else if (currValue > value) {
+		//Compute new value
+		//2 steps at a time for angles higher/lower than +/-90°
+		if (currValue < PWM_VAL_LOW || currValue > PWM_VAL_HIGH) {
+			currValue -= 2;
+
+			//Correct value it is is out of range now
+			if (currValue > PWM_VAL_MAX) {
+				currValue = PWM_VAL_MAX;
+			} else if (currValue < PWM_VAL_MIN) {
+				currValue = PWM_VAL_MIN;
+			}
+		} else {
+			currValue--;
+		}
+
+	}
+
+	//Set new value
+	writePwmReg(getValReg(joint), currValue);
+
+	//Get new value
+	currValue = readPwmReg(getValReg(joint));
+
+	//Return
+	return (value - currValue);
 }
 
 /*

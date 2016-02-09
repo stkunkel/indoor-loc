@@ -32,6 +32,8 @@
 #define PWM_VAL_MIN		0
 #define PWM_VAL_INIT	1500
 #define PWM_VAL_MAX		3000
+#define PWM_VAL_HIGH	2500
+#define PWM_VAL_LOW		500
 #define SLEEP_BTW_STEPS	2000 //us
 
 
