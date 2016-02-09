@@ -4,7 +4,8 @@ x = data(:,4);
 y = data(:,5);
 z = data(:,6);
 
-#Gyroscope
+#Plot all
+subplot(2,1,1);
 plot(x, "r");
 hold on;
 plot(y, "g");
@@ -18,4 +19,22 @@ title('Accelerometer');
 xlabel('Sample Number');
 ylabel('Acceleration (in g)');
 legend('x', 'y', 'z');
-print("accelerometer.pdf");
+
+
+#Only x and y
+subplot(2,1,2);
+plot(x, "r");
+hold on;
+plot(y, "g");
+hold on;
+
+#Set up Plot
+grid on;
+title('Accelerometer');
+xlabel('Sample Number');
+ylabel('Acceleration (in g)');
+legend('x', 'y');
+ylim([-150, 150]);
+
+#Print
+print("accelerometer_all.pdf");

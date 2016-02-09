@@ -1,10 +1,11 @@
-#Read in data
+# Read in data
 data = load ('data.txt');
 x = data(:,1);
 y = data(:,2);
 z = data(:,3);
 
-#Gyroscope
+# Plot all
+subplot(2,1,1);
 plot(x, "r");
 hold on;
 plot(y, "g");
@@ -12,10 +13,29 @@ hold on;
 plot(z, "b");
 hold on;
 
-#Set up Plot
+# Set up Plot
 grid on;
 title('Gyroscope');
 xlabel('Sample Number');
 ylabel('Angular Velocity (in Hardware Units)');
 legend('x', 'y', 'z');
-print("gyroscope.pdf");
+
+# Smaller Plot
+subplot(2,1,2);
+plot(x, "r");
+hold on;
+plot(y, "g");
+hold on;
+plot(z, "b");
+hold on;
+
+# Set up Plot
+grid on;
+title('Gyroscope');
+xlabel('Sample Number');
+ylabel('Angular Velocity (in Hardware Units)');
+legend('x', 'y', 'z');
+ylim([-50, 0])
+
+# Print
+print("gyroscope_all.pdf");
