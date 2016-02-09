@@ -53,23 +53,50 @@ void testToggleLed() {
  * LED Run
  */
 void ledRun() {
-	//Get next LED configuration
-	if (run == 0x80) {//If LED7 lights up, LED0 is next
-		run = 0x01;
-	} else { //Next LED is one to the left
-		run = (run << 1);
+	//Variables
+	static unsigned int cnt = 0;
+
+	//Increase Counter
+	cnt++;
+
+	//Only run every half second
+	if (cnt >= RUN_FREQ / 2) {
+		//Reset Count
+		cnt = 0;
+
+		//Get next LED configuration
+		if (run == 0x80) { //If LED7 lights up, LED0 is next
+			run = 0x01;
+		} else { //Next LED is one to the left
+			run = (run << 1);
+		}
+
+		//Go
+		XGpio_DiscreteWrite(&gpio, LED_CHANNEL, run);
 	}
 
-	//Go
-	XGpio_DiscreteWrite(&gpio, LED_CHANNEL, run);
 }
 
 /*
  * Toggle LED
  */
 void toggleLed(u8 ledMask) {
-	toggle = (~toggle) & ledMask;
-	XGpio_DiscreteWrite(&gpio, LED_CHANNEL, toggle);
+	//Variables
+	static unsigned int cnt = 0;
+
+	//Increase Counter
+	cnt++;
+
+	//Only run every half second
+	if (cnt >= RUN_FREQ / 2) {
+		//Reset Count
+		cnt = 0;
+
+		//Toggle
+		toggle = (~toggle) & ledMask;
+		XGpio_DiscreteWrite(&gpio, LED_CHANNEL, toggle);
+	}
+
 }
 
 /*

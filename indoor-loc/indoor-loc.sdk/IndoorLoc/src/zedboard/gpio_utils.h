@@ -13,6 +13,7 @@
 #include "xparameters.h"
 #include "xstatus.h"
 #include "xgpio.h"
+#include "../imu/mpu.h"
 
 /*
  * Defines
@@ -20,6 +21,7 @@
 #define AXI_GPIO_DEVICE_ID	XPAR_AXI_GPIO_0_DEVICE_ID
 #define LED_CHANNEL			2
 #define LED_MASK			0x55
+#define RUN_FREQ			FIFO_RATE
 
 /*
  * Functions
