@@ -297,7 +297,7 @@ int iic_burstWrite(XIicPs *IicPs, u8 Address, u8 Register, u32 length,
 		usleep(100);
 		cnt++;
 		if (cnt > IIC_TIMEOUT) {
-			return XST_FAILURE;
+			return XST_DEVICE_BUSY;
 		}
 	}
 
@@ -312,7 +312,7 @@ int iic_burstWrite(XIicPs *IicPs, u8 Address, u8 Register, u32 length,
 
 		myprintf("XIicPs_MasterSendPolled error at %ds!\n\r", timestamp_ms);
 #endif
-		return XST_FAILURE;
+		return Status;
 	}
 //print and return
 //myprintf("[iic_burstWrite] 0x%02X(0x%02X)=0x%X\n\r", Address, Register, *Data);
@@ -387,7 +387,7 @@ int iic_read2(XIicPs *IicPs, u8 Address, u8 Register, u8 *Data, int ByteCount) {
 		//Timeout
 		cnt++;
 		if (cnt > IIC_TIMEOUT) {
-			return XST_FAILURE;
+			return XST_DEVICE_BUSY;
 		}
 	}
 
@@ -396,7 +396,7 @@ int iic_read2(XIicPs *IicPs, u8 Address, u8 Register, u8 *Data, int ByteCount) {
 	 */
 	Status = XIicPs_SetOptions(IicPs, XIICPS_REP_START_OPTION);
 	if (Status != XST_SUCCESS) {
-		return XST_FAILURE;
+		return Status;
 	}
 	/*
 	 * Send the buffer using the IIC and check for errors.
@@ -410,7 +410,7 @@ int iic_read2(XIicPs *IicPs, u8 Address, u8 Register, u8 *Data, int ByteCount) {
 		myprintf("XIicPs_MasterSendPolled error at %d ms!\n\r", timestamp_ms);
 #endif
 
-		return XST_FAILURE;
+		return Status;
 	}
 
 	/*
@@ -424,7 +424,7 @@ int iic_read2(XIicPs *IicPs, u8 Address, u8 Register, u8 *Data, int ByteCount) {
 
 		myprintf("XIicPs_MasterRecvPolled error at %d ms!\n\r", timestamp_ms);
 #endif
-		return XST_FAILURE;
+		return Status;
 	}
 
 	/*
@@ -432,7 +432,7 @@ int iic_read2(XIicPs *IicPs, u8 Address, u8 Register, u8 *Data, int ByteCount) {
 	 */
 	Status = XIicPs_ClearOptions(IicPs, XIICPS_REP_START_OPTION);
 	if (Status != XST_SUCCESS) {
-		return XST_FAILURE;
+		return Status;
 	}
 
 //myprintf("[iic_read2] 0x%02X(0x%02X)=0x%X\n\r", Address, Register, *Data);
