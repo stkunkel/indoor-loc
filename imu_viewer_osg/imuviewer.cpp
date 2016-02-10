@@ -22,6 +22,7 @@
 #include <osgViewer/Viewer>
 #include <osg/PositionAttitudeTransform>
 #include <osgGA/TrackballManipulator>
+#include "localProcessing/mpu.h"
 
 //#include <osgViewer/ViewerEventHandlers>
 //#include <osgGA/StateSetManipulator>
@@ -44,8 +45,6 @@
 void updateScene(int tty_fd);
 int configureUart(int tty_fd);
 int readUartLine(int tty_fd, char* line);
-int configureStdout();
-int printToStdout(char* line);
 osg::ref_ptr<osg::Group> createLight();
 osg::Geode* createIMU(float length, float width, float height);
 
@@ -62,7 +61,7 @@ int main(){
 	osgViewer::Viewer viewer;
 	osg::PositionAttitudeTransform* rootnode = new osg::PositionAttitudeTransform;
 	transform = new osg::PositionAttitudeTransform;
-	int tty_fd;
+	int tty_fd = 0;
 	int status;
 	char* line = (char* ) malloc(500);
 	char c;
@@ -90,23 +89,14 @@ int main(){
 	viewer.setSceneData(rootnode); 
 	viewer.setCameraManipulator(new osgGA::TrackballManipulator());
 	
-	//Configure STDOUT
-	/*status = configureStdout();
-	if (status != 0){
-		strcpy(line, "Could not configure STDOUT.\n\r");
-		printToStdout(line);
-		return 0;
-	}
-	strcpy(line, "STDOUT Configuration done.\n\r");
-	printToStdout(line);
-	*/
-	
-	
+		//Initialization for local processing
+#ifdef LOCAL
+	status = init();
+	if (status != XST_SUCCESS){
+	  return 0;
+	} 
+#else
 	//Open UART Connection
-	//strcpy(line, "chmod +r ");
-	//strcat(line, DEVICE);
-	//status = system(line);
-	//DEVICE0
 	tty_fd = open(DEVICE0,  O_RDWR | O_NOCTTY | O_NDELAY);
 	if (tty_fd == -1){
 		printf("Could not open port %s, trying %s.\r\n", DEVICE0, DEVICE1);
@@ -127,19 +117,27 @@ int main(){
 	
 	//Configure UART
 	status = configureUart(tty_fd);
-	
-	
+#endif
 	
 	//Run
 	while(!viewer.done()){
+		printf("Frame.\r\n");
 		viewer.frame();
 		updateScene(tty_fd);
 		//sleep(1);
 		usleep(50000); //5ms --> works well with Zynq's print rate of 10Hz
 	}
 	
+#ifdef LOCAL
+	//Finish MPU Stuff
+	finish();
+	if (status != XST_SUCCESS){
+	  return 0;
+	}
+#else
 	//Close UART Connection
 	close(tty_fd);
+#endif
 	
 	//Return
 	return 0;
@@ -152,23 +150,33 @@ void updateScene(int tty_fd){
 	//Variables
 	osg::Quat quat;
 	osg::Vec3 pos;
-	float w, x, y, z, px, py, pz;
+	float quaternion[4];
+	float position[3];
+#ifndef LOCAL
 	int status;
 	char* line = (char*) malloc(500);
+#endif
 	
 	//Initialize Quaternion
 	quat = transform->getAttitude();
-	w = quat.w();
-	x = quat.x();
-	y = quat.y();
-	z = quat.z();
+	quaternion[0] = quat.w();
+	quaternion[1] = quat.x();
+	quaternion[2] = quat.y();
+	quaternion[3] = quat.z();
 	
 	//Initialize Position
 	pos = transform->getPosition();
-	px = pos.x();
-	py = pos.y();
-	pz = pos.z();
+	position[0] = pos.x();
+	position[1] = pos.y();
+	position[2] = pos.z();
 	
+#ifdef LOCAL
+	//Update Data
+	updateData();
+	
+	//Get recent date
+	getRecent(0, 0, 0, 0, quaternion, 0, position, 0);
+#else
 	//Get Line from UART
 	status = read(tty_fd, line, 255);
 	if (status == 0){
@@ -179,30 +187,32 @@ void updateScene(int tty_fd){
 	//printf("%s\r\n", line);
 	
 	//Get Quaternion and Position
-	status = sscanf(line, "%f %f %f %f %f %f %f", &w, &x, &y, &z, &px, &py, &pz);
-	if (status != 7 || abs(w) > 1.0 || abs(x) > 1.0 || abs(y) > 1.0 || abs(z) > 1.0){
+	status = sscanf(line, "%f %f %f %f %f %f %f", &quaternion[0], &quaternion[1], &quaternion[2], &quaternion[3], &position[0], &position[1], &position[2]);
+	if (status != 7 || abs(quaternion[0]) > 1.0 || abs(quaternion[1]) > 1.0 || abs(quaternion[2]) > 1.0 || abs(quaternion[3]) > 1.0){
 	  //printf("Could not get data (%d).\r\n", status);
 	  return;
 	}
-	
+#endif	
 	//Invert 5y to fit IMUs coordinate system to OSG
-	y = -y;
-	py = -py;
+	quaternion[2] = -quaternion[2];
+	position[2] = -position[2];
 	
 	//Scale Movement
-	px = px / 10.0;
-	py = py / 10.0;
-	pz = pz / 10.0;
+	position[0] = position[0] / 10.0;
+	position[1] = position[1] / 10.0;
+	position[2] = position[2] / 10.0;
 	
 	//Print Quaternion and Position
-	printf("%f %f %f %f %f %f %f\n\r", w, x, y, z, px, py, pz); 
+	printf("%f %f %f %f %f %f %f\n\r", quaternion[0], quaternion[1], quaternion[2], quaternion[3], position[0], position[1], position[2]); 
 	
 	//Update Scene
-	transform->setAttitude(osg::Quat(w, x, y, z));
-	//transform->setPosition(osg::Vec3(px, py, pz));
-	
+	transform->setAttitude(osg::Quat(quaternion[0], quaternion[1], quaternion[2], quaternion[3]));
+	//transform->setPosition(osg::Vec3(position[0], position[1], position[2]));
+
+#ifndef LOCAL
 	//Free memory
 	free(line);
+#endif
 }
 
 
@@ -252,46 +262,6 @@ int readUartLine(int tty_fd, char* line){
 	
 	return -1;
 
-}
-
-/*
- * Open STDOUT
- */
-int configureStdout(){
-	//Variables
-	struct termios stdio;
-	
-	//Configuration
-	memset(&stdio,0,sizeof(stdio));
-	stdio.c_iflag=IUTF8;
-	stdio.c_oflag=IUTF8;
-	stdio.c_cflag=0;
-	stdio.c_lflag=0;
-	stdio.c_cc[VMIN]=1;
-	stdio.c_cc[VTIME]=0;
-	
-	//Configure
-	tcsetattr(STDOUT_FILENO,TCSANOW,&stdio);
-	tcsetattr(STDOUT_FILENO,TCSAFLUSH,&stdio);
-	fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK);       // make the reads non-blocking
-	
-	return 0;
-}
-
-/*
- * Print line to STDOUT
- */
-int printToStdout(char* line){
-	//Variables
-	int length, status;
-	
-	//Get length
-	length = strlen(line);
-	
-	//Write
-	status = write(STDOUT_FILENO, &line, length);
-	
-	return status;
 }
 
 /*
