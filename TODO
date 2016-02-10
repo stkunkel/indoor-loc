@@ -1,0 +1,19 @@
+TODO IMU Viewer:
+Read in filtered data and display rotation --> Does it make sense?
+Compute Position --> Drift?
+
+TODO XSDK:
+FIR Filter
+Test Velocity and Position again with filtered values
+Test IIC Timeout --> prevent IIC Deadlock
+Test PWM Value Range for all motors
+
+
+IDEAS:
+Do caluclations with raw sensor values?
+More Calibration (--> Lohse2015)
+Complementary or Kalman Filter?
+
+
+QUESTIONS:
+Accel Bias: Save z value only or all values?
