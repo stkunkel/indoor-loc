@@ -42,6 +42,7 @@ int readFromRegs(short *gyro, short *accel, short* comp, long* temp,
 int initDMP();
 int configureMpuFifo(unsigned char fifoMask);
 int initMPU();
+void initVar();
 
 /*
  * Variables
@@ -49,22 +50,18 @@ int initMPU();
 static u8 imuAddr = 0;
 static bool dmpReady = BOOL_FALSE;
 static bool gyrAccIsCal = BOOL_FALSE;
-static long glob_gyro_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
-static long glob_accel_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
-static Vector recentVelocity = { .value[0] = 0.0, .value[1] = 0.0, .value[2
-		] = 0.0 };
-static Vector recentPosition = { .value[0] = 0.0, .value[1] = 0.0, .value[2
-		] = 0.0 };
+static long glob_gyro_bias[NUMBER_OF_AXES];
+static long glob_accel_bias[NUMBER_OF_AXES];
+static Vector recentVelocity;
+static Vector recentPosition;
 static unsigned long recent_ts = 0; //timestamp in ms
-static float recentGyro[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 }, 		//dgr/s
-		recentAccel[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 },			//g
-		recentCompass[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 },			//uT
-		recentQuat[QUATERNION_AMOUNT] = { 1.0, 0.0, 0.0, 0.0 };		//normalized
+static float recentGyro[NUMBER_OF_AXES], 		//dgr/s
+		recentAccel[NUMBER_OF_AXES],			//g
+		recentCompass[NUMBER_OF_AXES],			//uT
+		recentQuat[QUATERNION_AMOUNT];		//normalized
 static float recentTemp = 0.0;										//dgrC
-static Vector recentAccelInertial = { .value[0] = 0.0, .value[1] = 0.0, .value[2
-		] = 0.0 };
-static Vector normal_force = { .value[0] = 0.0, .value[1] = 0.0, .value[2
-		] = 0.0 }; //measure in G
+static Vector recentAccelInertial;
+static Vector normal_force; //measure in G
 
 /*
  * Print for Display
@@ -98,7 +95,7 @@ int printforDisplay(short int *printMask, char* separator) {
 
 	//Print Gyroscope
 	if (l_printMask & PRINT_GYRO) {
-		//Print Velocity
+		//Print
 		printGyro(gyro);
 
 		//Adjust Print Mask
@@ -114,7 +111,7 @@ int printforDisplay(short int *printMask, char* separator) {
 
 	//Print Acceleration
 	if (l_printMask & PRINT_ACCEL) {
-		//Print Velocity
+		//Print
 		printAccel(accel);
 
 		//Adjust Print Mask
@@ -130,7 +127,7 @@ int printforDisplay(short int *printMask, char* separator) {
 
 	//Print Compass
 	if (l_printMask & PRINT_COMP) {
-		//Print Velocity
+		//Print
 		printCompass(comp);
 
 		//Adjust Print Mask
@@ -146,7 +143,7 @@ int printforDisplay(short int *printMask, char* separator) {
 
 	//Print Temperature
 	if (l_printMask & PRINT_TEMP) {
-		//Print Velocity
+		//Print
 		printTemp(&temp);
 
 		//Adjust Print Mask
@@ -162,7 +159,7 @@ int printforDisplay(short int *printMask, char* separator) {
 
 	//Print Quaternion
 	if (l_printMask & PRINT_QUAT) {
-		//Print Quat
+		//Print
 		printQuat(quat);
 
 		//Adjust Print Mask
@@ -178,7 +175,7 @@ int printforDisplay(short int *printMask, char* separator) {
 
 	//Print Velocity
 	if (l_printMask & PRINT_VEL) {
-		//Print Velocity
+		//Print
 		printVelocity(&velocity);
 
 		//Adjust Print Mask
@@ -194,6 +191,7 @@ int printforDisplay(short int *printMask, char* separator) {
 
 	//Print Position
 	if (l_printMask & PRINT_POS) {
+		//Print
 		printPosition(&position);
 
 		//Adjust Print Mask
@@ -730,6 +728,57 @@ void printVelocity(Vector* velocity) {
 }
 
 /*
+ * Get Recent Data
+ * Supply NULL Pointer if data is not required
+ * In: Pointers for gyro, accel, compass, temperature, quaternion, velocity, position, timestamp
+ * Out: Recent gyro, accel, compass, temperature, quaternion, velocity, position, timestamp
+ */
+void getRecent(float gyro[NUMBER_OF_AXES], float accel[NUMBER_OF_AXES],
+		float compass[NUMBER_OF_AXES], float* temperature,
+		float quat[QUATERNION_AMOUNT], float* velocity, float* position,
+		unsigned long* timestamp) {
+	//Gyro
+	if (gyro != 0) {
+		memcpy(gyro, recentGyro, NUMBER_OF_AXES * sizeof(float));
+	}
+
+	//Accel
+	if (accel != 0) {
+		memcpy(accel, recentAccel, NUMBER_OF_AXES * sizeof(float));
+	}
+
+	//Compass
+	if (compass != 0) {
+		memcpy(compass, recentCompass, NUMBER_OF_AXES * sizeof(float));
+	}
+
+	//Temp
+	if (temperature != 0) {
+		*temperature = recentTemp;
+	}
+
+	//Quat
+	if (quat != 0) {
+		memcpy(quat, recentQuat, QUATERNION_AMOUNT * sizeof(float));
+	}
+
+	//Velocity
+	if (velocity != 0) {
+		memcpy(velocity, recentVelocity.value, NUMBER_OF_AXES * sizeof(float));
+	}
+
+	//Position
+	if (position != 0) {
+		memcpy(position, recentPosition.value, NUMBER_OF_AXES * sizeof(float));
+	}
+
+	//Timestamp
+	if (timestamp != 0) {
+		*timestamp = recent_ts;
+	}
+}
+
+/*
  * Test Position Update function
  */
 void testPositionUpdate() {
@@ -745,6 +794,9 @@ void testPositionUpdate() {
 	Vector l_recentPosition = { .value[0] = 0.0, .value[1] = 0.0, .value[2
 			] = 0.0 };
 	float normal_force_measured[NUMBER_OF_AXES] = { 0.0, 0.0, 1.0 };
+
+	//Init Global Variables
+	initVar();
 
 	// Test Parameters
 	// Acceleration in Y_AXIS;
@@ -1201,7 +1253,7 @@ int convertGyroData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]) 
 
 //convert data
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		converted[i] = raw[i] / sensitivity;
+		converted[i] = raw[i] * 1.0 / sensitivity;
 	}
 
 //Return
@@ -2064,6 +2116,41 @@ int initMPU() {
 		return XST_FAILURE;
 	}
 
+	//6. Init Global Variables
+	initVar();
+
 //Sleep and Return
 	return XST_SUCCESS;
+}
+
+/*
+ * Initialize Global Variables
+ */
+void initVar() {
+	//Variables
+	int i;
+	float temp_f[NUMBER_OF_AXES];
+	long temp_l[NUMBER_OF_AXES];
+
+	//Init temp variables
+	for (i = 0; i < NUMBER_OF_AXES; i++) {
+		temp_f[i] = 0.0;
+		temp_l[i] = 0;
+	}
+
+	//Initialize
+	memcpy(glob_gyro_bias, temp_l, NUMBER_OF_AXES * sizeof(long));
+	memcpy(glob_accel_bias, temp_l, NUMBER_OF_AXES * sizeof(long));
+	memcpy(normal_force.value, temp_f, NUMBER_OF_AXES * sizeof(float));
+	recent_ts = 0;
+	memcpy(recentGyro, temp_f, NUMBER_OF_AXES * sizeof(float));
+	memcpy(recentAccel, temp_f, NUMBER_OF_AXES * sizeof(float));
+	memcpy(recentCompass, temp_f, NUMBER_OF_AXES * sizeof(float));
+	memcpy(recentQuat, temp_f, NUMBER_OF_AXES * sizeof(float));
+	recentQuat[0] = 1.0;
+	recentQuat[3] = 0.0;
+	recentTemp = 0.0;
+	memcpy(recentAccelInertial.value, temp_f, NUMBER_OF_AXES * sizeof(float));
+	memcpy(recentVelocity.value, temp_f, NUMBER_OF_AXES * sizeof(float));
+	memcpy(recentPosition.value, temp_f, NUMBER_OF_AXES * sizeof(float));
 }

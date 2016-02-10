@@ -34,7 +34,7 @@
 #define ACC_SENS_FRS_1			8192		//LSB/g for AFS_SEL = 1
 #define ACC_SENS_FRS_2			4096		//LSB/g for AFS_SEL = 2
 #define ACC_SENS_FRS_3			2048		//LSB/g for AFS_SEL = 3
-#define MAG_SENS_FRS_1200		0.3			//T/LSB for FRS = 1200, 13-bit, output in 2's complement format
+#define MAG_SENS_FRS_1200		0.3			//uT/LSB for FRS = 1200, 13-bit, output in 2's complement format
 #define TEMP_SENS_UNTRIMMED		340			//LSB/°C
 #define TEMP_OFFSET_35C			-521		//LSB
 #define QUATERNION_SCALING		1073741824	//Internal values: 1.0 is scaled to 2^30 = 1073741824 (msp430/eMD-6.0/core/mllite/results_holder.c --> inv_get_6axis_quaternion)
@@ -86,6 +86,10 @@ void printQuatDrift(unsigned int time_min);
 int getQuatDrift(float *quat_drift, char calibration, unsigned int time_min);
 void printDataWithDMP(short sensors, char* separator);
 int printDataNoDMP(short sensors, char* separator);
+void getRecent(float gyro[NUMBER_OF_AXES], float accel[NUMBER_OF_AXES],
+		float compass[NUMBER_OF_AXES], float* temperature,
+		float quat[QUATERNION_AMOUNT], float* velocity, float* position,
+		unsigned long* timestamp);
 void testPositionUpdate();
 void quaternionTest();
 int updateData();
