@@ -4,6 +4,12 @@ x = data(:,4);
 y = data(:,5);
 z = data(:,6);
 
+# Print Statistics to Console
+printf("x: Mean: %f \t Min: %d \t Max: %d \t Median: %d\n", mean(x), min(x), max(x), median(x));
+printf("y: Mean: %f \t Min: %d \t Max: %d \t Median: %d\n", mean(y), min(y), max(y), median(y));
+printf("z: Mean: %f \t Min: %d \t Max: %d \t Median: %d\n", mean(z), min(z), max(z), median(z));
+printf("\r\n");
+
 #Plot all
 subplot(2,1,1);
 plot(x, "r");
