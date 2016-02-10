@@ -11,9 +11,9 @@ z = data(:,3);
 coeff = fir1(20, 0.1, 'low');
 
 # Filter data
-filtered_x = filter2(coeff, x);
-filtered_y = filter2(coeff, y);
-filtered_z = filter2(coeff, z);
+filtered_x = filter(coeff, 1, x);
+filtered_y = filter(coeff, 1, y);
+filtered_z = filter(coeff, 1, z);
 
 # Print Statistics to Console
 printf("x (filtered): Mean: %f (%f) \t Min: %d (%f) \t Max: %d (%f) \t Median: %d (%f)\n", mean(x), mean(filtered_x), min(x), min(filtered_x), max(x), max(filtered_x), median(x), median(filtered_x));
