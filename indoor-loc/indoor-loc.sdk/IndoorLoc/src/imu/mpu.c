@@ -1484,6 +1484,10 @@ int calibrateGyrAcc(unsigned int samples) {
 			return XST_FAILURE;
 		}
 
+		//Set Recent Gyro and Accel
+		memcpy(&recentGyro, &gyro_bias_f, NUMBER_OF_AXES*sizeof(float));
+		memcpy(&recentAccel, &normal_force, NUMBER_OF_AXES*sizeof(float));
+
 		//Calibration successful --> set flag
 		gyrAccIsCal = BOOL_TRUE;
 		status = XST_SUCCESS;
@@ -2160,10 +2164,12 @@ void initVar() {
 	//Initialize
 	memcpy(glob_gyro_bias, temp_l, NUMBER_OF_AXES * sizeof(long));
 	memcpy(glob_accel_bias, temp_l, NUMBER_OF_AXES * sizeof(long));
+	glob_accel_bias[GRAVITY_AXIS] = 1.0;
 	memcpy(normal_force.value, temp_f, NUMBER_OF_AXES * sizeof(float));
 	recent_ts = 0;
 	memcpy(recentGyro, temp_f, NUMBER_OF_AXES * sizeof(float));
 	memcpy(recentAccel, temp_f, NUMBER_OF_AXES * sizeof(float));
+	recentAccel[GRAVITY_AXIS] = 1.0;
 	memcpy(recentCompass, temp_f, NUMBER_OF_AXES * sizeof(float));
 	memcpy(recentQuat, temp_f, NUMBER_OF_AXES * sizeof(float));
 	recentQuat[0] = 1.0;
