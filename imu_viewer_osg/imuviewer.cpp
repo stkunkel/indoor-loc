@@ -63,8 +63,6 @@ int main(){
 	transform = new osg::PositionAttitudeTransform;
 	int tty_fd = 0;
 	int status;
-	char* line = (char* ) malloc(500);
-	char c;
 	
 	//Light
 	osg::ref_ptr<osg::Group> lightGroup = createLight();
@@ -121,11 +119,10 @@ int main(){
 	
 	//Run
 	while(!viewer.done()){
-		printf("Frame.\r\n");
 		viewer.frame();
 		updateScene(tty_fd);
 		//sleep(1);
-		usleep(50000); //5ms --> works well with Zynq's print rate of 10Hz
+		usleep(1000/FIFO_RATE); //50000 --> 5ms --> works well with Zynq's print rate of 10Hz
 	}
 	
 #ifdef LOCAL
