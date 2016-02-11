@@ -121,8 +121,11 @@ int main(){
 	while(!viewer.done()){
 		viewer.frame();
 		updateScene(tty_fd);
-		//sleep(1);
-		usleep(1000/FIFO_RATE); //50000 --> 5ms --> works well with Zynq's print rate of 10Hz
+#ifdef LOCAL
+		usleep(1000000/FIFO_RATE); //2000us --> 2ms --> just like sample rate
+#else
+		usleep(1000000/IMUVIEWER_FREQ); //100000 --> 100ms --> works well with Zynq's print rate of 10Hz TODO: Test
+#endif
 	}
 	
 #ifdef LOCAL

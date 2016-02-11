@@ -10,6 +10,9 @@
 #define LOCAL
 #define FILEDESC	"filtered.txt"
 
+//Print Frequency
+#define IMUVIEWER_FREQ			10 			//Hz
+
 //Return Types
 #define XST_SUCCESS	0
 #define XST_FAILURE	1
