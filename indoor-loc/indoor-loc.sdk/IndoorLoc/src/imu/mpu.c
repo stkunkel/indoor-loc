@@ -1441,14 +1441,26 @@ int calibrateGyrAcc(unsigned int samples) {
 //	normal_force.value[GRAVITY_AXIS] = accel_bias_f[GRAVITY_AXIS];
 	memcpy(&normal_force, &accel_bias_f, NUMBER_OF_AXES * sizeof(float));
 
-	//Make sure gravity is not cancelled
-	accel_bias_f[GRAVITY_AXIS] = 0.0;
-
 //Convert biases
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
 		gyro_bias[i] = (long) (gyro_bias_f[i] * GYRO_SENS_FRS_2);
 		accel_bias[i] = (long) (accel_bias_f[i] / 2 * ACC_SENS_FRS_2);
 	}
+
+	//Print Offsets
+	myprintf("Gyro Bias: ");
+	for (i = 0; i < NUMBER_OF_AXES; i++) {
+		printf("%ld ", gyro_bias[i]); //TODO
+	}
+	myprintf("\r\nAccel Bias: ");
+	for (i = 0; i < NUMBER_OF_AXES; i++) {
+		printf("%ld ", accel_bias[i]); //TODO
+	}
+	printf("\r\n"); //TODO
+
+	//Make sure gravity is not cancelled
+	accel_bias_f[GRAVITY_AXIS] = 0.0;
+	accel_bias[GRAVITY_AXIS] = 0;
 
 	//Save biases for later
 	memcpy(&glob_gyro_bias, &gyro_bias, NUMBER_OF_AXES * sizeof(long));
@@ -1456,17 +1468,6 @@ int calibrateGyrAcc(unsigned int samples) {
 
 //Set status mask
 	status = GYRO_CAL_MASK | ACCEL_CAL_MASK;
-
-//Print Offsets
-	myprintf("Gyro Bias: ");
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		myprintf("%ld ", gyro_bias[i]);
-	}
-	myprintf("\r\nAccel Bias: ");
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		myprintf("%ld ", normal_force.value[i]);
-	}
-	myprintf("\r\n");
 
 //Set calibrated flag
 	if (status & GYRO_CAL_MASK && status & ACCEL_CAL_MASK) { //gyro and accel calibrated
@@ -1485,8 +1486,8 @@ int calibrateGyrAcc(unsigned int samples) {
 		}
 
 		//Set Recent Gyro and Accel
-		memcpy(&recentGyro, &gyro_bias_f, NUMBER_OF_AXES*sizeof(float));
-		memcpy(&recentAccel, &normal_force, NUMBER_OF_AXES*sizeof(float));
+		memcpy(&recentGyro, &gyro_bias_f, NUMBER_OF_AXES * sizeof(float));
+		memcpy(&recentAccel, &normal_force, NUMBER_OF_AXES * sizeof(float));
 
 		//Calibration successful --> set flag
 		gyrAccIsCal = BOOL_TRUE;
