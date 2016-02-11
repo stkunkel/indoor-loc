@@ -1912,6 +1912,25 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 		return;
 	}
 
+	//Read out some data sets before sampling starts
+	for (cnt = 0; cnt < 50; cnt++) {
+		if (needToUpdateData() == BOOL_TRUE) {
+
+			//Read Sensor Data and write to memory
+			status = readFromRegs(dataColl->gyro, dataColl->accel,
+					dataColl->compass, &dataColl->temp, 0, SENSORS_ALL);
+
+			//Read successful?
+			if (status == XST_SUCCESS) {
+				//LED Run
+				ledRun();
+			}
+		}
+	}
+
+	//Reset cnt
+	cnt = 0;
+
 	//Get Samples
 	while (cnt < samples) {
 		if (needToUpdateData() == BOOL_TRUE) {
