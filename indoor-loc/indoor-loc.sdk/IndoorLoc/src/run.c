@@ -104,7 +104,7 @@ int main() {
 //	testLedRun();
 
 //Collect Data
-	collectRegisterData(600, 60); //10min sampling, 1min calibration
+	collectRegisterData(120, 60); //2min sampling, 1min calibration
 
 //Stay in here
 	while (1) {
