@@ -47,6 +47,7 @@
 #define GYRO_CAL_MASK			0x01
 #define ACCEL_CAL_MASK			0x02
 #define MAG_CAL_MASK			0x04
+#define CAL_IGNORE_SAMPLES		50
 #define GRAVITY_AXIS			2			//gravity along z axis
 #define FIFO_RATE				500//200
 

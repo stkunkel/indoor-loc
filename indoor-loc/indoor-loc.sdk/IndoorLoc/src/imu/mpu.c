@@ -1393,7 +1393,7 @@ int calibrateGyrAcc(unsigned int samples) {
 	}
 
 	//Read out some data sets before sampling starts
-	for (sample = 0; sample < 50; sample++) {
+	for (sample = 0; sample < CAL_IGNORE_SAMPLES; sample++) {
 		//Read Sensor
 		status = readFromRegs(gyro, accel, compass, &temp, 0, sensors);
 	}
@@ -1919,7 +1919,7 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 	}
 
 	//Read out some data sets before sampling starts
-	for (cnt = 0; cnt < 50; cnt++) {
+	for (cnt = 0; cnt < CAL_IGNORE_SAMPLES; cnt++) {
 		if (needToUpdateData() == BOOL_TRUE) {
 
 			//Read Sensor Data and write to memory
