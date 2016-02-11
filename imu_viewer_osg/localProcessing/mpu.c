@@ -39,7 +39,8 @@ int readInData(FILE* file, short *gyro, short *accel, unsigned long *timestamp);
 /*
  * Variables
  */
-static FILE* file;
+static FILE* infile;
+static FILE* outfile;
 static long glob_gyro_bias[NUMBER_OF_AXES];
 static long glob_accel_bias[NUMBER_OF_AXES];
 static Vector recentVelocity;
@@ -269,7 +270,7 @@ int updateData() {
 	float time_diff = 1.0 / FIFO_RATE;
 
 	//Read Data from Registers
-	status = readInData(file, gyro, accel, &timestamp);
+	status = readInData(infile, gyro, accel, &timestamp);
 	if (status != XST_SUCCESS) {
 		return XST_FAILURE;
 	}
@@ -335,6 +336,35 @@ int updateData() {
 
 //Update Temperature
 	recentTemp = temp_conv;
+
+//Print Data to file
+	//Print data to file (Gyro)
+	for (i = 0; i < NUMBER_OF_AXES; i++){
+	  fprintf(outfile, "%f ", recentGyro[i]);
+	}
+	
+	//Print data to file (Accel)
+	for (i = 0; i < NUMBER_OF_AXES; i++){
+	  fprintf(outfile, "%f ", recentAccel[i]);
+	}
+	
+	//Print data to file (Quat)
+	for (i = 0; i < QUATERNION_AMOUNT; i++){
+	  fprintf(outfile, "%f ", recentQuat[i]);
+	}
+	
+	//Print data to file (Vel)
+	for (i = 0; i < NUMBER_OF_AXES; i++){
+	  fprintf(outfile, "%f ", recentVelocity.value[i]);
+	}
+	
+	//Print data to file (Pos)
+	for (i = 0; i < NUMBER_OF_AXES; i++){
+	  fprintf(outfile, "%f ", recentPosition.value[i]);
+	}
+	
+	fprintf(outfile, "\r\n");
+	
 
 //Return
 	return status;
@@ -531,20 +561,25 @@ void computeQuaternion(float gyro[NUMBER_OF_AXES], float accel[NUMBER_OF_AXES],
  */
 int readInData(FILE* file, short *gyro, short *accel, unsigned long *timestamp) {
 //Variables
-  int i;
+  int success;
+  char* line = 0;
+  size_t len = 0;
+  ssize_t read;
 
-//Read in Gyro Values from File
-  for (i = 0; i < NUMBER_OF_AXES; i++){
-    fscanf(file, "%hd", &gyro[i]);
-    //printf("%hd ", gyro[i]);
+//Read in one Line from File
+  if ((read = getline(&line, &len, file)) != -1) {
+    //Get Values from File
+    success = sscanf(line, "%hd %hd %hd %hd %hd %hd", &gyro[0], &gyro[1], &gyro[2], &accel[0], &accel[1], &accel[2]);
+    
+    //Check for correct amount of values
+    if (success != 6){
+      return XST_FAILURE;
+    }
+    
+  } else {
+    return XST_FAILURE;
   }
 
-//Read in Accel Values from File
-  for (i = 0; i < NUMBER_OF_AXES; i++){
-    fscanf(file, "%hd", &accel[i]);
-    //printf("%hd ", accel[i]);
-  }
-  printf("\r\n");
 
 //Compute Timestamp if required
   if (timestamp > 0) {
@@ -560,13 +595,14 @@ int readInData(FILE* file, short *gyro, short *accel, unsigned long *timestamp) 
  * Initialize
  */
 int init(){
-  //Open File
-  file = fopen(FILEDESC, "r");
+  //Open Files
+  infile = fopen(INFILEDESC, "r");
+  outfile = fopen(OUTFILEDESC, "w");
 
-  if (file == 0){
+  if (infile == 0 || outfile == 0){
     return XST_FAILURE;
   } else {
-    printf("File opened.\r\n");
+    printf("Files opened.\r\n");
   }
 
   //Init Variables
@@ -581,9 +617,16 @@ int init(){
  * Finish
  */
 int finish(){
-  if (file){
-    fclose(file);
-    printf("File closed.\r\n");
+  //Close Input File
+  if (infile){
+    fclose(infile);
+    printf("Input File closed.\r\n");
+  }
+  
+  //Close Output File
+   if (outfile){
+    fclose(outfile);
+    printf("Output File closed.\r\n");
   }
 
   //Return
@@ -608,7 +651,10 @@ void initVar() {
 	//Initialize
 	memcpy(glob_gyro_bias, temp_l, NUMBER_OF_AXES * sizeof(long));
 	memcpy(glob_accel_bias, temp_l, NUMBER_OF_AXES * sizeof(long));
-	memcpy(normal_force.value, temp_f, NUMBER_OF_AXES * sizeof(float));
+	//memcpy(normal_force.value, temp_f, NUMBER_OF_AXES * sizeof(float));
+	normal_force.value[0] = NORM_MEAS_X;
+	normal_force.value[1] = NORM_MEAS_Y;
+	normal_force.value[2] = NORM_MEAS_Z;
 	recent_ts = 0;
 	memcpy(recentGyro, temp_f, NUMBER_OF_AXES * sizeof(float));
 	memcpy(recentAccel, temp_f, NUMBER_OF_AXES * sizeof(float));

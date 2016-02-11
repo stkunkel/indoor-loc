@@ -8,7 +8,14 @@
 
 //Defines
 #define LOCAL
-#define FILEDESC	"filtered.txt"
+#define INFILEDESC	"filtered.txt"
+#define OUTFILEDESC	"out.txt"
+
+//Measured Normal Force
+#define ACCEL_CONV_VAL	16384
+#define NORM_MEAS_X	(-1525.4/ACCEL_CONV_VAL)	//0.98352050781 //(raw / ACCEL_CONV_VAL)
+#define NORM_MEAS_Y	(-288.4/ACCEL_CONV_VAL)	//-0.00756835937
+#define NORM_MEAS_Z	(16059.2/ACCEL_CONV_VAL)	//-0.0869140625
 
 //Print Frequency
 #define IMUVIEWER_FREQ			10 			//Hz

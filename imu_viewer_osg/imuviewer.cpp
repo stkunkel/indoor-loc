@@ -42,7 +42,7 @@
 /*
  * Function Prototypes
  */
-void updateScene(int tty_fd);
+int updateScene(int tty_fd);
 int configureUart(int tty_fd);
 int readUartLine(int tty_fd, char* line);
 osg::ref_ptr<osg::Group> createLight();
@@ -120,9 +120,12 @@ int main(){
 	//Run
 	while(!viewer.done()){
 		viewer.frame();
-		updateScene(tty_fd);
+		status = updateScene(tty_fd);
+		if (status != 0){
+		  break;
+		}
 #ifdef LOCAL
-		usleep(1000000/FIFO_RATE); //2000us --> 2ms --> just like sample rate
+		//usleep(1000000/FIFO_RATE); //2000us --> 2ms --> just like sample rate
 #else
 		usleep(1000000/IMUVIEWER_FREQ); //100000 --> 100ms --> works well with Zynq's print rate of 10Hz TODO: Test
 #endif
@@ -145,15 +148,16 @@ int main(){
 
 /*
  * Update setScene
+ * Returns 0 if successful
  */
-void updateScene(int tty_fd){
+int updateScene(int tty_fd){
 	//Variables
 	osg::Quat quat;
 	osg::Vec3 pos;
 	float quaternion[4];
 	float position[3];
-#ifndef LOCAL
 	int status;
+#ifndef LOCAL
 	char* line = (char*) malloc(500);
 #endif
 	
@@ -172,7 +176,10 @@ void updateScene(int tty_fd){
 	
 #ifdef LOCAL
 	//Update Data
-	updateData();
+	status = updateData();
+	if (status != XST_SUCCESS){
+	  return 1;
+	}
 	
 	//Get recent date
 	getRecent(0, 0, 0, 0, quaternion, 0, position, 0);
@@ -181,7 +188,7 @@ void updateScene(int tty_fd){
 	status = read(tty_fd, line, 255);
 	if (status == 0){
 	  //printf("Could not read from UART (%d).\r\n", status);
-	  return;
+	  return 1;
 	}
 	
 	//printf("%s\r\n", line);
@@ -190,7 +197,7 @@ void updateScene(int tty_fd){
 	status = sscanf(line, "%f %f %f %f %f %f %f", &quaternion[0], &quaternion[1], &quaternion[2], &quaternion[3], &position[0], &position[1], &position[2]);
 	if (status != 7 || abs(quaternion[0]) > 1.0 || abs(quaternion[1]) > 1.0 || abs(quaternion[2]) > 1.0 || abs(quaternion[3]) > 1.0){
 	  //printf("Could not get data (%d).\r\n", status);
-	  return;
+	  return 1;
 	}
 #endif	
 	//Invert 5y to fit IMUs coordinate system to OSG
@@ -203,7 +210,7 @@ void updateScene(int tty_fd){
 	position[2] = position[2] / 10.0;
 	
 	//Print Quaternion and Position
-	printf("%f %f %f %f %f %f %f\n\r", quaternion[0], quaternion[1], quaternion[2], quaternion[3], position[0], position[1], position[2]); 
+	//printf("%f %f %f %f %f %f %f\n\r", quaternion[0], quaternion[1], quaternion[2], quaternion[3], position[0], position[1], position[2]); 
 	
 	//Update Scene
 	transform->setAttitude(osg::Quat(quaternion[0], quaternion[1], quaternion[2], quaternion[3]));
@@ -213,6 +220,9 @@ void updateScene(int tty_fd){
 	//Free memory
 	free(line);
 #endif
+	
+	//Return
+	return 0;
 }
 
 
