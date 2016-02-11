@@ -1460,11 +1460,11 @@ int calibrateGyrAcc(unsigned int samples) {
 //Print Offsets
 	myprintf("Gyro Bias: ");
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		myprintf("%d ", gyro_bias[i]);
+		myprintf("%ld ", gyro_bias[i]);
 	}
 	myprintf("\r\nAccel Bias: ");
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		myprintf("%d ", accel_bias[i]);
+		myprintf("%ld ", accel_bias[i]);
 	}
 	myprintf("\r\n");
 
