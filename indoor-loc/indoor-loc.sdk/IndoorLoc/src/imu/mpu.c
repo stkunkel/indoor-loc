@@ -1464,7 +1464,7 @@ int calibrateGyrAcc(unsigned int samples) {
 	}
 	myprintf("\r\nAccel Bias: ");
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		myprintf("%ld ", accel_bias[i]);
+		myprintf("%ld ", normal_force.value[i]);
 	}
 	myprintf("\r\n");
 
@@ -2166,6 +2166,7 @@ void initVar() {
 	memcpy(glob_accel_bias, temp_l, NUMBER_OF_AXES * sizeof(long));
 	glob_accel_bias[GRAVITY_AXIS] = 1.0;
 	memcpy(normal_force.value, temp_f, NUMBER_OF_AXES * sizeof(float));
+	normal_force.value[GRAVITY_AXIS] = 1.0;
 	recent_ts = 0;
 	memcpy(recentGyro, temp_f, NUMBER_OF_AXES * sizeof(float));
 	memcpy(recentAccel, temp_f, NUMBER_OF_AXES * sizeof(float));
