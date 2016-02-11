@@ -1392,6 +1392,12 @@ int calibrateGyrAcc(unsigned int samples) {
 		return status;
 	}
 
+	//Read out some data sets before sampling starts
+	for (sample = 0; sample < 50; sample++) {
+		//Read Sensor
+		status = readFromRegs(gyro, accel, compass, &temp, 0, sensors);
+	}
+
 //Compute offsets
 	for (sample = 0; sample < samples; sample++) {
 		//Get Data
@@ -1919,12 +1925,6 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 			//Read Sensor Data and write to memory
 			status = readFromRegs(dataColl->gyro, dataColl->accel,
 					dataColl->compass, &dataColl->temp, 0, SENSORS_ALL);
-
-			//Read successful?
-			if (status == XST_SUCCESS) {
-				//LED Run
-				ledRun();
-			}
 		}
 	}
 
