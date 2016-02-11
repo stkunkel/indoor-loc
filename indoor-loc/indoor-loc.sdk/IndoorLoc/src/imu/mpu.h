@@ -24,7 +24,7 @@
 #include "../program_parameters.h"
 
 //IMU Parameters
-#define GYRO_SENS				250//500			//°/s (250 would be more accurate, but 500 works more stable with IMU Viewer)
+#define GYRO_SENS				500			//°/s (250 would be more accurate, but max is too small)
 #define ACCEL_SENS				2			//G
 #define GYRO_SENS_FRS_0			131			//LSB/(°/s) for FS_SEL = 0, 16-bit
 #define GYRO_SENS_FRS_1			65.5		//LSB/(°/s) for FS_SEL = 1
