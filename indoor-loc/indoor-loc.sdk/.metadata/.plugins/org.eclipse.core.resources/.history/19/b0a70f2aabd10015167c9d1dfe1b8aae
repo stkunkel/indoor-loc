@@ -42,6 +42,7 @@ int readFromRegs(short *gyro, short *accel, short* comp, long* temp,
 int initDMP();
 int configureMpuFifo(unsigned char fifoMask);
 int initMPU();
+void initVar();
 
 /*
  * Variables
@@ -49,22 +50,18 @@ int initMPU();
 static u8 imuAddr = 0;
 static bool dmpReady = BOOL_FALSE;
 static bool gyrAccIsCal = BOOL_FALSE;
-static long glob_gyro_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
-static long glob_accel_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
-static Vector recentVelocity = { .value[0] = 0.0, .value[1] = 0.0, .value[2
-		] = 0.0 };
-static Vector recentPosition = { .value[0] = 0.0, .value[1] = 0.0, .value[2
-		] = 0.0 };
+static long glob_gyro_bias[NUMBER_OF_AXES];
+static long glob_accel_bias[NUMBER_OF_AXES];
+static Vector recentVelocity;
+static Vector recentPosition;
 static unsigned long recent_ts = 0; //timestamp in ms
-static float recentGyro[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 }, 		//dgr/s
-		recentAccel[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 },			//g
-		recentCompass[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 },			//uT
-		recentQuat[QUATERNION_AMOUNT] = { 1.0, 0.0, 0.0, 0.0 };		//normalized
+static float recentGyro[NUMBER_OF_AXES], 		//dgr/s
+		recentAccel[NUMBER_OF_AXES],			//g
+		recentCompass[NUMBER_OF_AXES],			//uT
+		recentQuat[QUATERNION_AMOUNT];		//normalized
 static float recentTemp = 0.0;										//dgrC
-static Vector recentAccelInertial = { .value[0] = 0.0, .value[1] = 0.0, .value[2
-		] = 0.0 };
-static Vector normal_force = { .value[0] = 0.0, .value[1] = 0.0, .value[2
-		] = 0.0 }; //measure in G
+static Vector recentAccelInertial;
+static Vector normal_force; //measure in G
 
 /*
  * Print for Display
@@ -98,7 +95,7 @@ int printforDisplay(short int *printMask, char* separator) {
 
 	//Print Gyroscope
 	if (l_printMask & PRINT_GYRO) {
-		//Print Velocity
+		//Print
 		printGyro(gyro);
 
 		//Adjust Print Mask
@@ -114,7 +111,7 @@ int printforDisplay(short int *printMask, char* separator) {
 
 	//Print Acceleration
 	if (l_printMask & PRINT_ACCEL) {
-		//Print Velocity
+		//Print
 		printAccel(accel);
 
 		//Adjust Print Mask
@@ -130,7 +127,7 @@ int printforDisplay(short int *printMask, char* separator) {
 
 	//Print Compass
 	if (l_printMask & PRINT_COMP) {
-		//Print Velocity
+		//Print
 		printCompass(comp);
 
 		//Adjust Print Mask
@@ -146,7 +143,7 @@ int printforDisplay(short int *printMask, char* separator) {
 
 	//Print Temperature
 	if (l_printMask & PRINT_TEMP) {
-		//Print Velocity
+		//Print
 		printTemp(&temp);
 
 		//Adjust Print Mask
@@ -162,7 +159,7 @@ int printforDisplay(short int *printMask, char* separator) {
 
 	//Print Quaternion
 	if (l_printMask & PRINT_QUAT) {
-		//Print Quat
+		//Print
 		printQuat(quat);
 
 		//Adjust Print Mask
@@ -178,7 +175,7 @@ int printforDisplay(short int *printMask, char* separator) {
 
 	//Print Velocity
 	if (l_printMask & PRINT_VEL) {
-		//Print Velocity
+		//Print
 		printVelocity(&velocity);
 
 		//Adjust Print Mask
@@ -194,6 +191,7 @@ int printforDisplay(short int *printMask, char* separator) {
 
 	//Print Position
 	if (l_printMask & PRINT_POS) {
+		//Print
 		printPosition(&position);
 
 		//Adjust Print Mask
@@ -204,7 +202,7 @@ int printforDisplay(short int *printMask, char* separator) {
 	}
 
 	//Didnt print anything
-	if (l_printMask == 0x00) {
+	if (l_printMask == PRINT_NOTHING) {
 		return XST_SUCCESS;
 	} else {
 		return XST_FAILURE;
@@ -730,6 +728,57 @@ void printVelocity(Vector* velocity) {
 }
 
 /*
+ * Get Recent Data
+ * Supply NULL Pointer if data is not required
+ * In: Pointers for gyro, accel, compass, temperature, quaternion, velocity, position, timestamp
+ * Out: Recent gyro, accel, compass, temperature, quaternion, velocity, position, timestamp
+ */
+void getRecent(float gyro[NUMBER_OF_AXES], float accel[NUMBER_OF_AXES],
+		float compass[NUMBER_OF_AXES], float* temperature,
+		float quat[QUATERNION_AMOUNT], float* velocity, float* position,
+		unsigned long* timestamp) {
+	//Gyro
+	if (gyro != 0) {
+		memcpy(gyro, recentGyro, NUMBER_OF_AXES * sizeof(float));
+	}
+
+	//Accel
+	if (accel != 0) {
+		memcpy(accel, recentAccel, NUMBER_OF_AXES * sizeof(float));
+	}
+
+	//Compass
+	if (compass != 0) {
+		memcpy(compass, recentCompass, NUMBER_OF_AXES * sizeof(float));
+	}
+
+	//Temp
+	if (temperature != 0) {
+		*temperature = recentTemp;
+	}
+
+	//Quat
+	if (quat != 0) {
+		memcpy(quat, recentQuat, QUATERNION_AMOUNT * sizeof(float));
+	}
+
+	//Velocity
+	if (velocity != 0) {
+		memcpy(velocity, recentVelocity.value, NUMBER_OF_AXES * sizeof(float));
+	}
+
+	//Position
+	if (position != 0) {
+		memcpy(position, recentPosition.value, NUMBER_OF_AXES * sizeof(float));
+	}
+
+	//Timestamp
+	if (timestamp != 0) {
+		*timestamp = recent_ts;
+	}
+}
+
+/*
  * Test Position Update function
  */
 void testPositionUpdate() {
@@ -745,6 +794,9 @@ void testPositionUpdate() {
 	Vector l_recentPosition = { .value[0] = 0.0, .value[1] = 0.0, .value[2
 			] = 0.0 };
 	float normal_force_measured[NUMBER_OF_AXES] = { 0.0, 0.0, 1.0 };
+
+	//Init Global Variables
+	initVar();
 
 	// Test Parameters
 	// Acceleration in Y_AXIS;
@@ -1101,33 +1153,43 @@ int updateData() {
 
 /*
  * Update Position (also updates timestamps)
+ * In: pointers accelerations, quaternion, recent acceleration, recent velocity, recent position, time difference to last sample
  */
 void updatePosition(float* accel_conv, float* quat_conv,
 		Vector* p_recentAccelInertial, Vector* p_recentVelocity,
 		Vector* p_recentPosition, float* time_diff) {
-//Variables
+
+	//Variables
 	Vector accel_measuremt, normal_force_rot, accel_inertial, velocity,
 			newPosition;
 	Matrix rotation, rotation_inv;
+	float quat_conj[QUATERNION_AMOUNT];
 
-//	//DEBUG
-//	quat_conv[0] = 1.0;
-//	quat_conv[1] = 0.0;
-//	quat_conv[2] = 0.0;
-//	quat_conv[3] = 0.0;
-//	//DEBUG END
-
-//Create measured accel vector
+	//Create measured accel vector
 	accel_measuremt = toVector(accel_conv);
 
-//Create rotation matrix
+	///////////////QUAT
+	Vector normal_force_rot2, accel_measuremt2, accel_inertial2;
+
+	//Get Quaternion Conjugate
+	quatConjugate(quat_conv, quat_conj);
+
+	//Rotate normal force
+	normal_force_rot2 = rotateVector(normal_force, quat_conv);
+
+	//Remove gravity
+	accel_measuremt2 = addVectors(accel_measuremt,
+			multVectorByScalar(normal_force_rot2, -1));
+
+	//Compute Inertial Acceleration Vector
+	accel_inertial2 = rotateVector(accel_measuremt2, quat_inv);
+
+	//////////////Rotation Matrix
+	//Create rotation matrix
 	rotation = toRotationMatrix(quat_conv);
 
-//Get inverse of rotation matrix
-	//rotation_inv = multMatrixByScalar(rotation, 1);
-	//rotation_inv = multMatrixByScalar(rotation, -1);
+	//Get inverse of rotation matrix
 	rotation_inv = getTranspose(rotation);
-	//getInverseOfMatrix(&rotation, &rotation_inv);
 
 	//Rotate normal force
 	normal_force_rot = multMatrixAndVector(rotation, normal_force);
@@ -1136,20 +1198,20 @@ void updatePosition(float* accel_conv, float* quat_conv,
 	accel_measuremt = addVectors(accel_measuremt,
 			multVectorByScalar(normal_force_rot, -1));
 
-//Compute Inertial Acceleration Vector
+	//Compute Inertial Acceleration Vector
 	accel_inertial = multMatrixAndVector(rotation_inv, accel_measuremt); //rotation_inv
 
-//Convert 1g to 9.81 m/s^2
+	//Convert 1g to 9.81 m/s^2
 	accel_inertial = multVectorByScalar(accel_inertial, GRAVITY);
 
-//Compute Velocity
+	//Compute Velocity
 	computeVelocity(p_recentVelocity, &accel_inertial, *time_diff, &velocity);
 
-//Compute Position
+	//Compute Position
 	computePosition(p_recentPosition, p_recentVelocity, &accel_inertial,
 			*time_diff, &newPosition);
 
-//Set new Values
+	//Set new Values
 	*p_recentAccelInertial = accel_inertial;
 	*p_recentVelocity = velocity;
 	*p_recentPosition = newPosition;
@@ -1201,7 +1263,7 @@ int convertGyroData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]) 
 
 //convert data
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		converted[i] = raw[i] / sensitivity;
+		converted[i] = raw[i] * 1.0 / sensitivity;
 	}
 
 //Return
@@ -1340,6 +1402,12 @@ int calibrateGyrAcc(unsigned int samples) {
 		return status;
 	}
 
+	//Read out some data sets before sampling starts
+	for (sample = 0; sample < CAL_IGNORE_SAMPLES; sample++) {
+		//Read Sensor
+		status = readFromRegs(gyro, accel, compass, &temp, 0, sensors);
+	}
+
 //Compute offsets
 	for (sample = 0; sample < samples; sample++) {
 		//Get Data
@@ -1383,14 +1451,26 @@ int calibrateGyrAcc(unsigned int samples) {
 //	normal_force.value[GRAVITY_AXIS] = accel_bias_f[GRAVITY_AXIS];
 	memcpy(&normal_force, &accel_bias_f, NUMBER_OF_AXES * sizeof(float));
 
-	//Make sure gravity is not cancelled
-	accel_bias_f[GRAVITY_AXIS] = 0.0;
-
 //Convert biases
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
 		gyro_bias[i] = (long) (gyro_bias_f[i] * GYRO_SENS_FRS_2);
 		accel_bias[i] = (long) (accel_bias_f[i] / 2 * ACC_SENS_FRS_2);
 	}
+
+	//Print Offsets
+	myprintf("Gyro Bias: ");
+	for (i = 0; i < NUMBER_OF_AXES; i++) {
+		printf("%ld ", gyro_bias[i]); //TODO
+	}
+	myprintf("\r\nAccel Bias: ");
+	for (i = 0; i < NUMBER_OF_AXES; i++) {
+		printf("%ld ", accel_bias[i]); //TODO
+	}
+	printf("\r\n"); //TODO
+
+	//Make sure gravity is not cancelled
+	accel_bias_f[GRAVITY_AXIS] = 0.0;
+	accel_bias[GRAVITY_AXIS] = 0;
 
 	//Save biases for later
 	memcpy(&glob_gyro_bias, &gyro_bias, NUMBER_OF_AXES * sizeof(long));
@@ -1398,17 +1478,6 @@ int calibrateGyrAcc(unsigned int samples) {
 
 //Set status mask
 	status = GYRO_CAL_MASK | ACCEL_CAL_MASK;
-
-//Print Offsets
-	myprintf("Gyro Bias: ");
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		myprintf("%d ", gyro_bias[i]);
-	}
-	myprintf("\r\nAccel Bias: ");
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		myprintf("%d ", accel_bias[i]);
-	}
-	myprintf("\r\n");
 
 //Set calibrated flag
 	if (status & GYRO_CAL_MASK && status & ACCEL_CAL_MASK) { //gyro and accel calibrated
@@ -1425,6 +1494,10 @@ int calibrateGyrAcc(unsigned int samples) {
 			gyrAccIsCal = BOOL_FALSE;
 			return XST_FAILURE;
 		}
+
+		//Set Recent Gyro and Accel
+		memcpy(&recentGyro, &gyro_bias_f, NUMBER_OF_AXES * sizeof(float));
+		memcpy(&recentAccel, &normal_force, NUMBER_OF_AXES * sizeof(float));
 
 		//Calibration successful --> set flag
 		gyrAccIsCal = BOOL_TRUE;
@@ -1562,7 +1635,9 @@ int dmpGyroCalibration(bool enable) {
  */
 int initIMU(unsigned int calibrationTime) {
 	//Variables
-	int status;
+	int status, sample;
+	short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
+	long temp;
 
 	//Init MPU
 	myprintf(".........Initialize MPU...........\n\r");
@@ -1596,6 +1671,12 @@ int initIMU(unsigned int calibrationTime) {
 	}
 
 #endif
+
+	//Read some values to make sure upcoming values will be useful
+	for (sample = 0; sample < CAL_IGNORE_SAMPLES; sample++) {
+		//Read Sensor
+		status = readFromRegs(gyro, accel, compass, &temp, 0, SENSORS_ALL);
+	}
 
 	//Setup Interrupt
 	status = setupInt();
@@ -1847,8 +1928,7 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 	samples = sampleTime * FIFO_RATE;
 
 	//Allocate Memory
-	dataStart = (MpuRegisterData*) malloc(
-			(samples + 200) * sizeof(MpuRegisterData));
+	dataStart = (MpuRegisterData*) 0x7000000;//(MpuRegisterData*) malloc((samples + 200) * sizeof(MpuRegisterData));
 
 	//Set Print Pointer
 	dataColl = dataStart;
@@ -1861,16 +1941,22 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 		return;
 	}
 
+	//Read out some data sets before sampling starts
+	for (cnt = 0; cnt < CAL_IGNORE_SAMPLES; cnt++) {
+		if (needToUpdateData() == BOOL_TRUE) {
+
+			//Read Sensor Data and write to memory
+			status = readFromRegs(dataColl->gyro, dataColl->accel,
+					dataColl->compass, &dataColl->temp, 0, SENSORS_ALL);
+		}
+	}
+
+	//Reset cnt
+	cnt = 0;
+
 	//Get Samples
 	while (cnt < samples) {
 		if (needToUpdateData() == BOOL_TRUE) {
-			if (cnt == 8192) {
-				myprintf("");
-			}
-
-			if (dataColl > 0x30000) {
-				dataColl = 0xFFFF0000;
-			}
 
 			//Read Sensor Data and write to memory
 			status = readFromRegs(dataColl->gyro, dataColl->accel,
@@ -1904,17 +1990,14 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 		printRaw(print->accel);
 		printf(" ");
 		printRaw(print->compass);
-		printf(" %ld\r\n", print->temp);
+		printf(" %ld;", print->temp);
 
 		//Increase Pointer Address
 		print++;
-		if (print > 0x30000) {
-			print = 0xFFFF0000;
-		}
 	}
 
-	//Free memory
-	free(dataStart);
+//	//Free memory
+//	free(dataStart);
 }
 
 /*
@@ -2075,6 +2158,44 @@ int initMPU() {
 		return XST_FAILURE;
 	}
 
+	//6. Init Global Variables
+	initVar();
+
 //Sleep and Return
 	return XST_SUCCESS;
+}
+
+/*
+ * Initialize Global Variables
+ */
+void initVar() {
+	//Variables
+	int i;
+	float temp_f[NUMBER_OF_AXES];
+	long temp_l[NUMBER_OF_AXES];
+
+	//Init temp variables
+	for (i = 0; i < NUMBER_OF_AXES; i++) {
+		temp_f[i] = 0.0;
+		temp_l[i] = 0;
+	}
+
+	//Initialize
+	memcpy(glob_gyro_bias, temp_l, NUMBER_OF_AXES * sizeof(long));
+	memcpy(glob_accel_bias, temp_l, NUMBER_OF_AXES * sizeof(long));
+	glob_accel_bias[GRAVITY_AXIS] = 1.0;
+	memcpy(normal_force.value, temp_f, NUMBER_OF_AXES * sizeof(float));
+	normal_force.value[GRAVITY_AXIS] = 1.0;
+	recent_ts = 0;
+	memcpy(recentGyro, temp_f, NUMBER_OF_AXES * sizeof(float));
+	memcpy(recentAccel, temp_f, NUMBER_OF_AXES * sizeof(float));
+	recentAccel[GRAVITY_AXIS] = 1.0;
+	memcpy(recentCompass, temp_f, NUMBER_OF_AXES * sizeof(float));
+	memcpy(recentQuat, temp_f, NUMBER_OF_AXES * sizeof(float));
+	recentQuat[0] = 1.0;
+	recentQuat[3] = 0.0;
+	recentTemp = 0.0;
+	memcpy(recentAccelInertial.value, temp_f, NUMBER_OF_AXES * sizeof(float));
+	memcpy(recentVelocity.value, temp_f, NUMBER_OF_AXES * sizeof(float));
+	memcpy(recentPosition.value, temp_f, NUMBER_OF_AXES * sizeof(float));
 }

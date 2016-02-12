@@ -35100,3 +35100,173 @@ arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
  210724	   3256	  24712	 238692	  3a464	IndoorLoc.elf
 Finished building: IndoorLoc.elf.size
  
+18:06:22 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/imu/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu.d" -MT"src/imu/mpu.d" -o "src/imu/mpu.o" "../src/imu/mpu.c"
+../src/imu/mpu.c: In function 'updatePosition':
+../src/imu/mpu.c:1178:22: error: incompatible type for argument 1 of 'rotateVector'
+  normal_force_rot2 = rotateVector(normal_force, quat_conv);
+                      ^
+In file included from ../src/imu/mpu.h:19:0,
+                 from ../src/imu/mpu.c:9:
+../src/imu/../math_utils.h:48:8: note: expected 'struct Vector *' but argument is of type 'Vector'
+ Vector rotateVector(Vector* vector, float quat[QUATERNION_AMOUNT]);
+        ^
+../src/imu/mpu.c:1185:51: error: 'quat_inv' undeclared (first use in this function)
+src/imu/subdir.mk:24: recipe for target 'src/imu/mpu.o' failed
+  accel_inertial2 = rotateVector(accel_measuremt2, quat_inv);
+                                                   ^
+../src/imu/mpu.c:1185:51: note: each undeclared identifier is reported only once for each function it appears in
+../src/imu/mpu.c:1185:20: error: incompatible type for argument 1 of 'rotateVector'
+  accel_inertial2 = rotateVector(accel_measuremt2, quat_inv);
+                    ^
+In file included from ../src/imu/mpu.h:19:0,
+                 from ../src/imu/mpu.c:9:
+../src/imu/../math_utils.h:48:8: note: expected 'struct Vector *' but argument is of type 'Vector'
+ Vector rotateVector(Vector* vector, float quat[QUATERNION_AMOUNT]);
+        ^
+../src/imu/mpu.c:1172:46: warning: variable 'accel_inertial2' set but not used [-Wunused-but-set-variable]
+  Vector normal_force_rot2, accel_measuremt2, accel_inertial2;
+                                              ^
+make: *** [src/imu/mpu.o] Error 1
+18:06:41 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/imu/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu.d" -MT"src/imu/mpu.d" -o "src/imu/mpu.o" "../src/imu/mpu.c"
+../src/imu/mpu.c: In function 'updatePosition':
+../src/imu/mpu.c:1178:22: error: incompatible type for argument 1 of 'rotateVector'
+  normal_force_rot2 = rotateVector(normal_force, quat_conv);
+                      ^
+In file included from ../src/imu/mpu.h:19:0,
+                 from ../src/imu/mpu.c:9:
+../src/imu/../math_utils.h:48:8: note: expected 'struct Vector *' but argument is of type 'Vector'
+ Vector rotateVector(Vector* vector, float quat[QUATERNION_AMOUNT]);
+        ^
+../src/imu/mpu.c:1185:51: error: 'quat_inv' undeclared (first use in this function)
+  accel_inertial2 = rotateVector(accel_measuremt2, quat_inv);
+                                                   ^
+../src/imu/mpu.c:1185:51: note: each undeclared identifier is reported only once for each function it appears in
+../src/imu/mpu.c:1185:20: error: incompatible type for argument 1 of 'rotateVector'
+  accel_inertial2 = rotateVector(accel_measuremt2, quat_inv);
+                    ^
+In file included from ../src/imu/mpu.h:19:0,
+                 from ../src/imu/mpu.c:9:
+../src/imu/../math_utils.h:48:8: note: expected 'struct Vector *' but argument is of type 'Vector'
+ Vector rotateVector(Vector* vector, float quat[QUATERNION_AMOUNT]);
+        ^
+../src/imu/mpu.c:1172:46: warning: variable 'accel_inertial2' set but not used [-Wunused-but-set-variable]
+  Vector normal_force_rot2, accel_measuremt2, accel_inertial2;
+                                              ^
+src/imu/subdir.mk:24: recipe for target 'src/imu/mpu.o' failed
+make: *** [src/imu/mpu.o] Error 1
+18:07:22 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/imu/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu.d" -MT"src/imu/mpu.d" -o "src/imu/mpu.o" "../src/imu/mpu.c"
+../src/imu/mpu.c: In function 'updatePosition':
+../src/imu/mpu.c:1178:22: error: incompatible type for argument 1 of 'rotateVector'
+  normal_force_rot2 = rotateVector(normal_force, quat_conv);
+                      ^
+In file included from ../src/imu/mpu.h:19:0,
+                 from ../src/imu/mpu.c:9:
+../src/imu/../math_utils.h:48:8: note: expected 'struct Vector *' but argument is of type 'Vector'
+ Vector rotateVector(Vector* vector, float quat[QUATERNION_AMOUNT]);
+        ^
+../src/imu/mpu.c:1185:51: error: 'quat_inv' undeclared (first use in this function)
+  accel_inertial2 = rotateVector(accel_measuremt2, quat_inv);
+                                                   ^
+../src/imu/mpu.c:1185:51: note: each undeclared identifier is reported only once for each function it appears in
+../src/imu/mpu.c:1185:20: error: incompatible type for argument 1 of 'rotateVector'
+  accel_inertial2 = rotateVector(accel_measuremt2, quat_inv);
+                    ^
+In file included from ../src/imu/mpu.h:19:0,
+                 from ../src/imu/mpu.c:9:
+../src/imu/../math_utils.h:48:8: note: expected 'struct Vector *' but argument is of type 'Vector'
+ Vector rotateVector(Vector* vector, float quat[QUATERNION_AMOUNT]);
+        ^
+../src/imu/mpu.c:1172:46: warning: variable 'accel_inertial2' set but not used [-Wunused-but-set-variable]
+  Vector normal_force_rot2, accel_measuremt2, accel_inertial2;
+                                              ^
+src/imu/subdir.mk:24: recipe for target 'src/imu/mpu.o' failed
+make: *** [src/imu/mpu.o] Error 1
+18:07:58 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/imu/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu.d" -MT"src/imu/mpu.d" -o "src/imu/mpu.o" "../src/imu/mpu.c"
+../src/imu/mpu.c: In function 'updatePosition':
+../src/imu/mpu.c:1185:52: error: 'quat_inv' undeclared (first use in this function)
+  accel_inertial2 = rotateVector(&accel_measuremt2, quat_inv);
+                                                    ^
+../src/imu/mpu.c:1185:52: note: each undeclared identifier is reported only once for each function it appears in
+../src/imu/mpu.c:1172:46: warning: variable 'accel_inertial2' set but not used [-Wunused-but-set-variable]
+  Vector normal_force_rot2, accel_measuremt2, accel_inertial2;
+                                              ^
+src/imu/subdir.mk:24: recipe for target 'src/imu/mpu.o' failed
+make: *** [src/imu/mpu.o] Error 1
+18:08:20 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/imu/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu.d" -MT"src/imu/mpu.d" -o "src/imu/mpu.o" "../src/imu/mpu.c"
+../src/imu/mpu.c: In function 'updatePosition':
+../src/imu/mpu.c:1172:46: warning: variable 'accel_inertial2' set but not used [-Wunused-but-set-variable]
+  Vector normal_force_rot2, accel_measuremt2, accel_inertial2;
+                                              ^
+Finished building: ../src/imu/mpu.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/run.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'main':
+../src/run.c:49:6: warning: unused variable 'status' [-Wunused-variable]
+  int status = XST_SUCCESS;
+      ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/ruppi/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 210788	   3256	  24712	 238756	  3a4a4	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+18:08:26 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+18:18:47 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/imu/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/imu/mpu.o" -I../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/include -MMD -MP -MF"src/imu/mpu.d" -MT"src/imu/mpu.d" -o "src/imu/mpu.o" "../src/imu/mpu.c"
+../src/imu/mpu.c: In function 'updatePosition':
+../src/imu/mpu.c:1172:46: warning: variable 'accel_inertial2' set but not used [-Wunused-but-set-variable]
+  Vector normal_force_rot2, accel_measuremt2, accel_inertial2;
+                                              ^
+Finished building: ../src/imu/mpu.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/ruppi/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_minimal_bsp_1/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o  ./src/robot/pwmsw.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/math_utils.o ./src/platform.o ./src/print_utils.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 210788	   3256	  24712	 238756	  3a4a4	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+18:18:48 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
+18:19:43 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for 'all'.
