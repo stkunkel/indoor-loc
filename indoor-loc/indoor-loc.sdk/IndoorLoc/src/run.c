@@ -22,7 +22,7 @@
 /*
  * Defines
  */
-#define DATA_NO_DMP_RUNS 	0
+#define DATA_NO_DMP_RUNS 	10000
 #define DATA_WITH_DMP_RUNS 	0
 #define DISPLAY_RUNS		0
 #define QUAT_DRIFT_MIN		1
@@ -58,7 +58,7 @@ int main() {
 	myprintf(".........Program Start...........\n\r");
 
 	//Print Data without DMP
-//	status = printDataWithoutDMP(SENSORS_ALL, SEPARATOR, DATA_NO_DMP_RUNS);
+	status = printDataWithoutDMP(SENSORS_ALL, SEPARATOR, DATA_NO_DMP_RUNS);
 
 //Print Data with DMP without initial or DMP gyro calibration
 //	status = printDataUsingDMP(SENSORS_ALL, 0, 0, SEPARATOR, DATA_WITH_DMP_RUNS);
@@ -73,7 +73,7 @@ int main() {
 //	status = printForImuViewer(PRINT_ALL, SEPARATOR, DISPLAY_RUNS);
 
 //	Generic Print to Serial Port
-//	status = printGeneric(PRINT_NOTHING, SEPARATOR, DISPLAY_RUNS);
+	status = printGeneric(PRINT_NOTHING, SEPARATOR, DISPLAY_RUNS);
 
 //Quaternion Drift
 //status = printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);

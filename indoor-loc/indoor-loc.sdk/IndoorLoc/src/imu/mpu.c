@@ -1153,6 +1153,7 @@ int updateData() {
 
 /*
  * Update Position (also updates timestamps)
+ * In: pointers accelerations, quaternion, recent acceleration, recent velocity, recent position, time difference to last sample
  */
 void updatePosition(float* accel_conv, float* quat_conv,
 		Vector* p_recentAccelInertial, Vector* p_recentVelocity,
@@ -1625,7 +1626,9 @@ int dmpGyroCalibration(bool enable) {
  */
 int initIMU(unsigned int calibrationTime) {
 	//Variables
-	int status;
+	int status, sample;
+	short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
+	long temp;
 
 	//Init MPU
 	myprintf(".........Initialize MPU...........\n\r");
@@ -1659,6 +1662,12 @@ int initIMU(unsigned int calibrationTime) {
 	}
 
 #endif
+
+	//Read some values to make sure upcoming values will be useful
+	for (sample = 0; sample < CAL_IGNORE_SAMPLES; sample++) {
+		//Read Sensor
+		status = readFromRegs(gyro, accel, compass, &temp, 0, SENSORS_ALL);
+	}
 
 	//Setup Interrupt
 	status = setupInt();
