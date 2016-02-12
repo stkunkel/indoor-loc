@@ -58,7 +58,7 @@ int main() {
 	myprintf(".........Program Start...........\n\r");
 
 	//Print Data without DMP
-	status = printDataWithoutDMP(SENSORS_ALL, SEPARATOR, DATA_NO_DMP_RUNS);
+//	status = printDataWithoutDMP(SENSORS_ALL, SEPARATOR, DATA_NO_DMP_RUNS);
 
 //Print Data with DMP without initial or DMP gyro calibration
 //	status = printDataUsingDMP(SENSORS_ALL, 0, 0, SEPARATOR, DATA_WITH_DMP_RUNS);
@@ -85,7 +85,7 @@ int main() {
 //	status = timerTest(FIFO_RATE);
 
 //Test position update functionality
-//	testPositionUpdate();
+	testPositionUpdate();
 
 //Test Matrix Inverse
 //	testMatrixInverse();
@@ -104,7 +104,7 @@ int main() {
 //	testLedRun();
 
 //Collect Data
-	collectRegisterData(120, 60); //2min sampling, 1min calibration
+//	collectRegisterData(120, 60); //2min sampling, 1min calibration
 
 //Stay in here
 	while (1) {

@@ -1158,29 +1158,38 @@ int updateData() {
 void updatePosition(float* accel_conv, float* quat_conv,
 		Vector* p_recentAccelInertial, Vector* p_recentVelocity,
 		Vector* p_recentPosition, float* time_diff) {
-//Variables
+
+	//Variables
 	Vector accel_measuremt, normal_force_rot, accel_inertial, velocity,
 			newPosition;
 	Matrix rotation, rotation_inv;
+	float quat_inv[QUATERNION_AMOUNT];
 
-//	//DEBUG
-//	quat_conv[0] = 1.0;
-//	quat_conv[1] = 0.0;
-//	quat_conv[2] = 0.0;
-//	quat_conv[3] = 0.0;
-//	//DEBUG END
-
-//Create measured accel vector
+	//Create measured accel vector
 	accel_measuremt = toVector(accel_conv);
 
-//Create rotation matrix
+	///////////////QUAT
+	Vector normal_force_rot2, accel_measuremt2, accel_inertial2;
+
+	//Get Quaternion Conjugate
+	quatInverse(quat_conv, quat_inv);
+
+	//Rotate normal force
+	normal_force_rot2 = rotateVector(&normal_force, quat_conv);
+
+	//Remove gravity
+	accel_measuremt2 = addVectors(accel_measuremt,
+			multVectorByScalar(normal_force_rot2, -1));
+
+	//Compute Inertial Acceleration Vector
+	accel_inertial2 = rotateVector(&accel_measuremt2, quat_inv);
+
+	//////////////Rotation Matrix
+	//Create rotation matrix
 	rotation = toRotationMatrix(quat_conv);
 
-//Get inverse of rotation matrix
-	//rotation_inv = multMatrixByScalar(rotation, 1);
-	//rotation_inv = multMatrixByScalar(rotation, -1);
+	//Get inverse of rotation matrix
 	rotation_inv = getTranspose(rotation);
-	//getInverseOfMatrix(&rotation, &rotation_inv);
 
 	//Rotate normal force
 	normal_force_rot = multMatrixAndVector(rotation, normal_force);
@@ -1189,20 +1198,20 @@ void updatePosition(float* accel_conv, float* quat_conv,
 	accel_measuremt = addVectors(accel_measuremt,
 			multVectorByScalar(normal_force_rot, -1));
 
-//Compute Inertial Acceleration Vector
+	//Compute Inertial Acceleration Vector
 	accel_inertial = multMatrixAndVector(rotation_inv, accel_measuremt); //rotation_inv
 
-//Convert 1g to 9.81 m/s^2
+	//Convert 1g to 9.81 m/s^2
 	accel_inertial = multVectorByScalar(accel_inertial, GRAVITY);
 
-//Compute Velocity
+	//Compute Velocity
 	computeVelocity(p_recentVelocity, &accel_inertial, *time_diff, &velocity);
 
-//Compute Position
+	//Compute Position
 	computePosition(p_recentPosition, p_recentVelocity, &accel_inertial,
 			*time_diff, &newPosition);
 
-//Set new Values
+	//Set new Values
 	*p_recentAccelInertial = accel_inertial;
 	*p_recentVelocity = velocity;
 	*p_recentPosition = newPosition;
