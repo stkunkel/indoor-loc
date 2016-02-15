@@ -10,6 +10,7 @@
 //#define USE_DMP						//Uncomment to use DMP. Comment to use MPU Register Values only.
 //#define INITIAL_CALIBRATION			//Uncomment for initial Calibration, comment to skip initial calibration
 //#define DEBUG 						//UNComment for DEBUG prints, COMMENT for print only for IMU viewer
+#define DISABLE_POS_COMP				//UNcomment to disable quaternion and position computation (not required if just raw data is to be outputtet)
 
 //Parameters
 #define CAL_TIME				60 //s
