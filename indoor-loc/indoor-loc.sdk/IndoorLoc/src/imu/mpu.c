@@ -18,7 +18,6 @@ void printAccel(float conv[NUMBER_OF_AXES]);
 void printCompass(float conv[NUMBER_OF_AXES]);
 void printTemp(float* temp_conv);
 void printQuat(float quat[QUATERNION_AMOUNT]);
-void printRaw(short sensor[NUMBER_OF_AXES]);
 void printRotationAngle(long quat[QUATERNION_AMOUNT]);
 void printEulerAngles(float* sigma, float* theta, float* psi);
 void printPosition(Vector* position);
@@ -37,8 +36,6 @@ int readFromFifo(short *gyro, short *accel, long *quat,
 		unsigned long *timestamp, short *sensors, unsigned char *more);
 void computeQuaternion(float gyro[NUMBER_OF_AXES], float accel[NUMBER_OF_AXES],
 		float* delta_t, float quat[QUATERNION_AMOUNT]);
-int readFromRegs(short *gyro, short *accel, short* comp, long* temp,
-		unsigned long *timestamp, short sensorMask);
 int initDMP();
 int configureMpuFifo(unsigned char fifoMask);
 int initMPU();
@@ -979,7 +976,7 @@ int updateData() {
 	if (status != XST_SUCCESS) {
 		return status;
 	}
-
+#ifndef DISABLE_POS_COMP
 #ifdef USE_DMP
 	//Convert Quaternion if using DMP
 	status = convertQuatenion(quat, quat_conv);
@@ -997,6 +994,8 @@ int updateData() {
 //Update Position and Velocity
 	updatePosition(accel_conv, quat_conv, &recentAccelInertial, &recentVelocity,
 			&recentPosition, &time_diff);
+
+#endif
 
 //Update Timestamp
 	recent_ts = timestamp;
@@ -1029,7 +1028,7 @@ void updatePosition(float* accel_conv, float* quat_conv,
 	Vector accel_measuremt, normal_force_rot, accel_inertial, velocity,
 			newPosition;
 	Matrix rotation, rotation_inv;
-	float quat_inv[QUATERNION_AMOUNT];
+//	float quat_inv[QUATERNION_AMOUNT];
 
 	//Create measured accel vector
 	accel_measuremt = toVector(accel_conv);
