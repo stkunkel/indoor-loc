@@ -273,140 +273,6 @@ int printCurrentAccelForDisplay() {
 }
 
 /*
- * Print Drift w/o and with Calibration
- */
-void printQuatDrift(unsigned int time_min) {
-//Variables
-	int status;
-	float quat_drift[4] = { 0.0, 0.0, 0.0, 0.0 };
-	char calibration = 0;
-
-//w/o initial calibration
-	status = getQuatDrift(quat_drift, calibration, time_min);
-	if (status != XST_SUCCESS) {
-		myprintf("Error in drift calculation without calibration\r\n.");
-	} else {
-		myprintf(
-				"Quat Drift after %d minute(s) without initial calibration: %f %f %f %f\r\n",
-				time_min, quat_drift[0], quat_drift[1], quat_drift[2],
-				quat_drift[3]);
-	}
-
-//w/ initial calibration
-	calibration = 1;
-	status = getQuatDrift(quat_drift, calibration, time_min);
-	if (status != XST_SUCCESS) {
-		myprintf("Error in drift calculation with calibration\r\n.");
-	} else {
-		myprintf(
-				"Quat Drift after %d minute(s) with initial calibration: %f %f %f %f\r\n",
-				time_min, quat_drift[0], quat_drift[1], quat_drift[2],
-				quat_drift[3]);
-	}
-
-//also enable dynamic calibration in DMP TODO: does it work?
-	dmpGyroCalibration(1);
-	status = getQuatDrift(quat_drift, calibration, time_min);
-	if (status != XST_SUCCESS) {
-		myprintf(
-				"Error in drift calculation with initial calibration and DMP dynamic calibration\r\n.");
-	} else {
-		myprintf(
-				"Quat Drift after %d minutes with initial calibration and DMP dynamic calibration: %f %f %f %f\r\n",
-				time_min, quat_drift[0], quat_drift[1], quat_drift[2],
-				quat_drift[3]);
-	}
-}
-
-/*
- * Get drift after x minutes
- * Returns: 0 if successful
- * In: time in minutes
- * Out: quat drift
- */
-int getQuatDrift(float *quat_drift, char calibration, unsigned int time_min) {
-//Variables
-	XTime time_s = (XTime) (time_min * 60);
-	XTime start, now;
-	int status = XST_FAILURE, i;
-	short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES];
-	long quat[QUATERNION_AMOUNT];
-	unsigned long timestamp;
-	short int sensors;
-	unsigned char* more = (unsigned char *) malloc(100 * sizeof(char));
-	float quat_init[QUATERNION_AMOUNT];
-
-//Calibrate if required
-	if (calibration) {
-		status = calibrateGyrAcc(CAL_TIME);
-		if (status != XST_SUCCESS) {
-			myprintf("mpu.c Could not calibrate Gyr. and Acc.\r\n");
-			return status;
-		}
-	} else {
-		//init and configure DMP
-		if (dmpReady == BOOL_FALSE) {
-			status = initDMP(FEATURES_RAW);
-			if (status != XST_SUCCESS) {
-				myprintf("mpu.c Could not initialize DMP.\r\n");
-				return status;
-			}
-
-			status = configureDMP(FEATURES_RAW);
-			if (status != XST_SUCCESS) {
-				myprintf("mpu.c Could not configure DMP.\r\n");
-				return status;
-			}
-		}
-	}
-
-//Get initial quaternion
-	do {
-		status = readFromFifo(gyro, accel, quat, &timestamp, &sensors, more);
-	} while (status != XST_SUCCESS);
-
-//Convert initial quaternion
-	status = convertQuatenion(quat, quat_init);
-	if (status != XST_SUCCESS) {
-		myprintf("mpu.c: Could not convert initial quaternion.\r\n");
-		return XST_FAILURE;
-	}
-
-//Get start time
-	XTime_GetTime(&start);
-
-//read until time is up
-	do {
-		//get current time
-		XTime_GetTime(&now);
-
-		//Get Quaternion
-		status = readFromFifo(gyro, accel, quat, &timestamp, &sensors, more);
-		if (status != XST_SUCCESS) {
-			usleep(100);
-			continue;
-		}
-
-	} while (now < start + time_s * COUNTS_PER_SECOND);
-
-//Convert quaternion drift
-	status = convertQuatenion(quat, quat_drift);
-	if (status != XST_SUCCESS) {
-		myprintf("mpu.c: Could not convert final quaternion.\r\n");
-		return XST_FAILURE;
-	}
-
-//Compute difference
-	for (i = 0; i < QUATERNION_AMOUNT; i++) {
-		quat_drift[i] = quat_drift[i] - quat_init[i];
-	}
-
-//Return
-	free(more);
-	return XST_SUCCESS;
-}
-
-/*
  * Print one Quaternion for Display
  * (You have to call updateData() to get most recent value.)
  */
@@ -1169,20 +1035,20 @@ void updatePosition(float* accel_conv, float* quat_conv,
 	accel_measuremt = toVector(accel_conv);
 
 	///////////////QUAT
-	Vector normal_force_rot2, accel_measuremt2, accel_inertial2;
-
-	//Get Quaternion Conjugate
-	quatInverse(quat_conv, quat_inv);
-
-	//Rotate normal force
-	normal_force_rot2 = rotateVector(&normal_force, quat_conv);
-
-	//Remove gravity
-	accel_measuremt2 = addVectors(accel_measuremt,
-			multVectorByScalar(normal_force_rot2, -1));
-
-	//Compute Inertial Acceleration Vector
-	accel_inertial2 = rotateVector(&accel_measuremt2, quat_inv);
+//	Vector normal_force_rot2, accel_measuremt2, accel_inertial2;
+//
+//	//Get Quaternion Conjugate
+//	quatInverse(quat_conv, quat_inv);
+//
+//	//Rotate normal force
+//	normal_force_rot2 = rotateVector(&normal_force, quat_conv);
+//
+//	//Remove gravity
+//	accel_measuremt2 = addVectors(accel_measuremt,
+//			multVectorByScalar(normal_force_rot2, -1));
+//
+//	//Compute Inertial Acceleration Vector
+//	accel_inertial2 = rotateVector(&accel_measuremt2, quat_inv);
 
 	//////////////Rotation Matrix
 	//Create rotation matrix
@@ -1942,14 +1808,14 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 	}
 
 	//Read out some data sets before sampling starts
-	for (cnt = 0; cnt < CAL_IGNORE_SAMPLES; cnt++) {
-		if (needToUpdateData() == BOOL_TRUE) {
-
-			//Read Sensor Data and write to memory
-			status = readFromRegs(dataColl->gyro, dataColl->accel,
-					dataColl->compass, &dataColl->temp, 0, SENSORS_ALL);
-		}
-	}
+//	for (cnt = 0; cnt < CAL_IGNORE_SAMPLES; cnt++) {
+//		if (needToUpdateData() == BOOL_TRUE) {
+//
+//			//Read Sensor Data and write to memory
+//			status = readFromRegs(dataColl->gyro, dataColl->accel,
+//					dataColl->compass, &dataColl->temp, 0, SENSORS_ALL);
+//		}
+//	}
 
 	//Reset cnt
 	cnt = 0;

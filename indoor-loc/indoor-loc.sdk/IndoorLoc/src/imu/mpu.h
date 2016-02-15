@@ -24,7 +24,7 @@
 #include "../program_parameters.h"
 
 //IMU Parameters
-#define GYRO_SENS				500			//°/s (250 would be more accurate, but max is too small)
+#define GYRO_SENS				1000		//°/s (the smaller, the more accurate, but max is too small and more rustle)
 #define ACCEL_SENS				2			//G
 #define GYRO_SENS_FRS_0			131			//LSB/(°/s) for FS_SEL = 0, 16-bit
 #define GYRO_SENS_FRS_1			65.5		//LSB/(°/s) for FS_SEL = 1
@@ -84,7 +84,6 @@ typedef struct {
 int getFifoCount();
 int printforDisplay(short int *printMask, char* separator);
 void printQuatDrift(unsigned int time_min);
-int getQuatDrift(float *quat_drift, char calibration, unsigned int time_min);
 void printDataWithDMP(short sensors, char* separator);
 int printDataNoDMP(short sensors, char* separator);
 void getRecent(float gyro[NUMBER_OF_AXES], float accel[NUMBER_OF_AXES],

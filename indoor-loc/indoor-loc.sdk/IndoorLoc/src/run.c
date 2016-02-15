@@ -31,7 +31,6 @@
 /*
  * Function Prototypes
  */
-int printQuaternionDriftAfterXMin(unsigned int time_min);
 int printGeneric(short int printMask, char* separator,
 		unsigned int numberOfRuns);
 int printForImuViewer(short int printMask, char* separator,
@@ -85,7 +84,7 @@ int main() {
 //	status = timerTest(FIFO_RATE);
 
 //Test position update functionality
-	testPositionUpdate();
+//	testPositionUpdate();
 
 //Test Matrix Inverse
 //	testMatrixInverse();
@@ -104,7 +103,7 @@ int main() {
 //	testLedRun();
 
 //Collect Data
-//	collectRegisterData(120, 60); //2min sampling, 1min calibration
+	collectRegisterData(900, 0); //15min sampling, no calibration
 
 //Stay in here
 	while (1) {
@@ -114,20 +113,6 @@ int main() {
 	//Finish
 	cleanup_platform();
 	return 0;
-}
-
-/*
- * Prints Quaternion Drift
- * In: time in min
- * Returns 0 when done
- */
-int printQuaternionDriftAfterXMin(unsigned int time_min) {
-	//Print
-	myprintf(".........Drift...........\n\r");
-	printQuatDrift(time_min);
-
-	//Return
-	return XST_SUCCESS;
 }
 
 /*
