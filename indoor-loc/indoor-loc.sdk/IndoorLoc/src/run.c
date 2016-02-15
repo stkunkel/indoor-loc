@@ -78,7 +78,7 @@ int main() {
 //status = printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
 
 //PWM Test
-//status = pwmTest();
+status = pwmTest();
 
 //	//Timer Test
 //	status = timerTest(FIFO_RATE);
@@ -103,7 +103,7 @@ int main() {
 //	testLedRun();
 
 //Collect Data
-	collectRegisterData(900, 0); //15min sampling, no calibration
+//	collectRegisterData(900, 0); //15min sampling, no calibration
 
 //Stay in here
 	while (1) {
@@ -164,8 +164,10 @@ int printGeneric(short int printMask, char* separator,
 						//Increase print counter
 						printcnt++;
 
-						//Print new linw
-						printf("\n\r");
+						//Print new line
+						if (printMask != PRINT_NOTHING) {
+							printf("\n\r");
+						}
 					} else {
 						printcnt--;
 					}

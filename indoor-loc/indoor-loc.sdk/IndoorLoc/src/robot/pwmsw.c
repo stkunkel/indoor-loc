@@ -77,6 +77,20 @@ int pwmTest() {
 //	}
 //	return 0;
 
+//90°-0°-90°-0°
+	moveToAbsAngle(wrist, 90.0);
+//	moveTo(wrist, 2500);
+	sleep(1);
+	moveToAbsAngle(wrist, 180.0);
+//	moveTo(wrist, 1500);
+	sleep(1);
+	moveToAbsAngle(wrist, 90.0);
+//	moveTo(wrist, 2500);
+	sleep(1);
+	moveToAbsAngle(wrist, 180.0);
+//	moveTo(wrist, 1500);
+	return PWM_SUCCESS;
+
 //Get Reg Values
 	for (reg = 0; reg < NUMBER_OF_JOINTS; reg++) {
 		//Get current value
@@ -324,6 +338,29 @@ int moveTo(Joint joint, u32 value) {
 
 	//Return
 	return PWM_SUCCESS;
+}
+
+/*
+ * Set Angle for Joint
+ * In: Joint, angle in dgr
+ */
+void setAngle(Joint joint, float angle) {
+	//Variables
+	u32 value;
+
+	//Convert angle to value
+	value = angleToValue(joint, angle);
+
+	// Set Value
+	writePwmReg(getValReg(joint), value);
+}
+
+/*
+ * Set Value for Joint
+ * In: Joint, value
+ */
+void setValue(Joint joint, u32 value) {
+	writePwmReg(getValReg(joint), value);
 }
 
 /*

@@ -89,5 +89,8 @@ typedef enum {
  * Functions
  */
 int pwmTest();
+void setAngle(Joint joint, float angle);
+void setValue(Joint joint, u32 value);
+int reset();
 
 #endif
