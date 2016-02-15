@@ -39,7 +39,7 @@ int imuI2cWrite(unsigned char slave_addr, unsigned char reg_addr,
 	status = iic_burstWrite(&IicPs, slave_addr, reg_addr, length, data);
 
 	if (status != XST_SUCCESS) {
-		myprintf("mpu_utils.c: Error on IIC Write (0x%x).\r\n", reg_addr);
+		myprintf("mpu_utils.c: Error on IIC Write (Addr: 0x%x, Err: 0x%x).\r\n", reg_addr, status);
 		return status;
 	}
 
@@ -59,7 +59,7 @@ int imuI2cRead(unsigned char slave_addr, unsigned char reg_addr,
 	status = iic_read2(&IicPs, slave_addr, reg_addr, data, length);
 
 	if (status != XST_SUCCESS) {
-		myprintf("mpu_utils.c: Error on IIC Read (0x%x).\r\n", reg_addr);
+		myprintf("mpu_utils.c: Error on IIC Read (Addr: 0x%x, Err: 0x%x).\r\n", reg_addr, status);
 		return status;
 	}
 
