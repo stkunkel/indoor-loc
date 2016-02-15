@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Copy data.txt
+cp data.txt fir/data.txt
+
+# Change directors
+cd fir
+
+# Let Octave Create Filtered Data
+octave createFilteredData
+
+# Discard first 20 data sets
+sed -i -e 1,20d filtered.txt
+
+# Let Octave Print Mean
+octave getMeanOfFirstThousandFilteredValues
+
+# Change back
+cd ..

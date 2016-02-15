@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Replace semi colon with line break
+cat kermit.txt | tr ';' '\n' > data_tmp.txt
+
+# Get complete lines
+cat data_tmp.txt | grep -P '^([+-]?\d+)(\s+([+-]?\d+)){9}$' > data.txt
+
+# Remove all lines with less than 45 characters
+#sed -r '/^.{,45}$/d' data_tmp.txt > data_tmp2.txt
+
+# Remove all lines with more than 55 characters
+#sed '/^.\{55\}..*/d' data_tmp2.txt > data.txt
+
+# Remove temp files
+rm data_tmp.txt #data_tmp2.txt

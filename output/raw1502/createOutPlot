@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Copy out-txt into fir directory
+ cp ../../imu_viewer_osg/out.txt fir/out.txt
+
+# Go to fir directory
+cd fir
+
+# Let Octave Create Plots
+octave firFilterGyro
+octave firFilterAcc
+octave plotOut
