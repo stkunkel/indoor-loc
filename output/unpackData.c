@@ -42,6 +42,7 @@ int main() {
   int status;
   char buff[NUM_OF_VALUES];
   MpuRegisterData data;
+  int i1 = 0, i2 = 0;
 
   //Open Files
   status = openFiles();
@@ -53,19 +54,26 @@ int main() {
   //Read Ten Values at a Time from Input File
   while (fgets(buff, NUM_OF_VALUES+1, (FILE*)infile)){
     //Convert back
-    data.gyro[0] = (short) (buff[0] | (buff[1] << 8));
-    data.gyro[1] = (short) (buff[2] | (buff[3] << 8));
-    data.gyro[2] = (short) (buff[4] | (buff[5] << 8));
-    data.accel[0] = (short) (buff[6] | (buff[7] << 8));
-    data.accel[1] = (short) (buff[8] | (buff[9] << 8));
-    data.accel[2] = (short) (buff[10] | (buff[11] << 8));
-    data.compass[0] = (short) (buff[12] | (buff[13] << 8));
-    data.compass[1] = (short) (buff[14] | (buff[15] << 8));
-    data.compass[2] = (short) (buff[16] | (buff[17] << 8));
-    data.temp = (long) (buff[18] | (buff[19] << 8) | (buff[20] << 16) | (buff[21] << 24));
+    data.gyro[0] = (short) ((buff[0]&0x00FF) | ((buff[1]&0x00FF) << 8));
+    data.gyro[1] = (short) ((buff[2]&0x00FF) | ((buff[3]&0x00FF) << 8));
+    data.gyro[2] = (short) ((buff[4]&0x00FF) | ((buff[5]&0x00FF) << 8));
+    data.accel[0] = (short) ((buff[6]&0x00FF) | ((buff[7]&0x00FF) << 8));
+    data.accel[1] = (short) ((buff[8]&0x00FF) | ((buff[9]&0x00FF) << 8));
+    data.accel[2] = (short) ((buff[10]&0x00FF) | ((buff[11]&0x00FF) << 8));
+    data.compass[0] = (short) ((buff[12]&0x00FF) | ((buff[13]&0x00FF) << 8));
+    data.compass[1] = (short) ((buff[14]&0x00FF) | ((buff[15]&0x00FF) << 8));
+    data.compass[2] = (short) ((buff[16]&0x00FF) | ((buff[17]&0x00FF) << 8));
+    i1 = (buff[18] | (buff[19] << 8)) & 0x0000FFFF;
+    i2 = (buff[20] | (buff[21] << 8)) & 0x0000FFFF;
+    data.temp = (long) (i1 | (i2 << 16));
+    
+    //Check for invalid line
+    if (data.temp == 0){
+      break;
+    }
     
     //Print to Output File
-    fprintf(outfile, "%hi %hi %hi %hi %hi %hi %hi %hi %hi %ld\r\n", data.gyro[0], data.gyro[1], data.gyro[2], data.accel[0], data.accel[1], data.accel[2], data.compass[0], data.compass[1], data.compass[2], data.temp);
+    fprintf(outfile, "%hi %hi %hi %hi %hi %hi %hi %hi %hi %li\r\n", data.gyro[0], data.gyro[1], data.gyro[2], data.accel[0], data.accel[1], data.accel[2], data.compass[0], data.compass[1], data.compass[2], data.temp);
   }
   
   //Close Files
