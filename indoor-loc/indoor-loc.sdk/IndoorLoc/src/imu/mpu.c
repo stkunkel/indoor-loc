@@ -1809,8 +1809,8 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 		if (needToUpdateData() == BOOL_TRUE) {
 
 			//Read Sensor Data and write to memory
-			status = readFromRegs(data.gyro, data.accel,
-					data.compass, &data.temp, 0, SENSORS_ALL);
+			status = readFromRegs(data.gyro, data.accel, data.compass,
+					&data.temp, 0, SENSORS_ALL);
 
 			//Read successful?
 			if (status == XST_SUCCESS) {
@@ -1820,48 +1820,50 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 				//Store to buffer
 				*bufCurr = (unsigned char) (data.gyro[0] & BYTE0);
 				bufCurr++;
-				*bufCurr = (unsigned char) (data.gyro[0] & BYTE1);
+				*bufCurr = (unsigned char) ((data.gyro[0] & BYTE1) >> 8);
 				bufCurr++;
 				*bufCurr = (unsigned char) (data.gyro[1] & BYTE0);
 				bufCurr++;
-				*bufCurr = (unsigned char) (data.gyro[1] & BYTE1);
+				*bufCurr = (unsigned char) ((data.gyro[1] & BYTE1) >> 8);
 				bufCurr++;
 				*bufCurr = (unsigned char) (data.gyro[2] & BYTE0);
 				bufCurr++;
-				*bufCurr = (unsigned char) (data.gyro[2] & BYTE1);
+				*bufCurr = (unsigned char) ((data.gyro[2] & BYTE1) >> 8);
 				bufCurr++;
 				*bufCurr = (unsigned char) (data.accel[0] & BYTE0);
 				bufCurr++;
-				*bufCurr = (unsigned char) (data.accel[0] & BYTE1);
+				*bufCurr = (unsigned char) ((data.accel[0] & BYTE1) >> 8);
 				bufCurr++;
 				*bufCurr = (unsigned char) (data.accel[1] & BYTE0);
 				bufCurr++;
-				*bufCurr = (unsigned char) (data.accel[1] & BYTE1);
+				*bufCurr = (unsigned char) ((data.accel[1] & BYTE1) >> 8);
 				bufCurr++;
 				*bufCurr = (unsigned char) (data.accel[2] & BYTE0);
 				bufCurr++;
-				*bufCurr = (unsigned char) (data.accel[2] & BYTE1);
+				*bufCurr = (unsigned char) ((data.accel[2] & BYTE1) >> 8);
 				bufCurr++;
 				*bufCurr = (unsigned char) (data.compass[0] & BYTE0);
 				bufCurr++;
-				*bufCurr = (unsigned char) (data.compass[0] & BYTE1);
+				*bufCurr = (unsigned char) ((data.compass[0] & BYTE1) >> 8);
 				bufCurr++;
 				*bufCurr = (unsigned char) (data.compass[1] & BYTE0);
 				bufCurr++;
-				*bufCurr = (unsigned char) (data.compass[1] & BYTE1);
+				*bufCurr = (unsigned char) ((data.compass[1] & BYTE1) >> 8);
 				bufCurr++;
 				*bufCurr = (unsigned char) (data.compass[2] & BYTE0);
 				bufCurr++;
-				*bufCurr = (unsigned char) (data.compass[2] & BYTE1);
+				*bufCurr = (unsigned char) ((data.compass[2] & BYTE1) >> 8);
 				bufCurr++;
 				*bufCurr = (unsigned char) (data.temp & BYTE0);
 				bufCurr++;
-				*bufCurr = (unsigned char) (data.temp & BYTE1);
+				*bufCurr = (unsigned char) ((data.temp & BYTE1) >> 8);
 				bufCurr++;
-				*bufCurr = (unsigned char) (data.temp & BYTE2);
+				*bufCurr = (unsigned char) ((data.temp & BYTE2) >> 16);
 				bufCurr++;
-				*bufCurr = (unsigned char) (data.temp & BYTE3);
+				*bufCurr = (unsigned char) ((data.temp & BYTE3) >> 24);
 				bufCurr++;
+
+				printf("%li\r\n", data.temp);
 
 				//Increase Counter
 				cnt++;
@@ -1877,7 +1879,7 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 
 	//Transmit buf
 	printf("XModem Transmission starts.\r\n");
-	xmodemTransmit(bufStart, ((cnt-1) * DATA_NUMBER_OF_BYTES));
+	xmodemTransmit(bufStart, ((cnt - 1) * DATA_NUMBER_OF_BYTES));
 	printf("XModem Transmission finished.\r\n");
 
 //	//Free memory
