@@ -18,8 +18,8 @@ int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 	long temp;
 
 	//Set angles
-	angle[0] = 90.0;
-	angle[1] = 0.0;
+	angle[0] = 0.0;
+	angle[1] = 90.0;
 
 	//Compute number of data samples
 	samples = sampleTime * FIFO_RATE;
@@ -70,7 +70,11 @@ int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 		}
 
 		//Get Sensor Data
-		if (needToUpdateData() == BOOL_TRUE) {
+		while (needToUpdateData() == BOOL_FALSE){
+			usleep(20);
+		}
+
+//		if (needToUpdateData() == BOOL_TRUE) {
 
 			//Read Sensor Data and write to memory
 			if (collect == BOOL_TRUE) {
@@ -111,7 +115,7 @@ int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 				}
 			}
 		}
-	}
+//	}
 
 	//Print samples
 	if (collect == BOOL_TRUE) {
