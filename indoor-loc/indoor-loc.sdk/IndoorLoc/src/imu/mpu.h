@@ -82,7 +82,7 @@ typedef struct {
 
 //Functions
 int getFifoCount();
-int printforDisplay(short int *printMask, char* separator);
+int printforDisplay(short printMask, char* separator);
 void printRaw(short sensor[NUMBER_OF_AXES]);
 void printDataWithDMP(short sensors, char* separator);
 int printDataNoDMP(short sensors, char* separator);

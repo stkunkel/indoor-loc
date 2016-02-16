@@ -67,7 +67,7 @@ static Vector normal_force; //measure in G
  * In: print mask
  * Returns 0 if successful
  */
-int printforDisplay(short int *printMask, char* separator) {
+int printforDisplay(short printMask, char* separator) {
 	//Variables
 	float gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], comp[NUMBER_OF_AXES],
 			quat[QUATERNION_AMOUNT], temp;
@@ -84,7 +84,7 @@ int printforDisplay(short int *printMask, char* separator) {
 	position = recentPosition;
 
 	//Create Copy of Print Mask
-	memcpy(&l_printMask, printMask, sizeof(short));
+	l_printMask = printMask;
 
 	//Print Timestamp
 	myprintf("TS: %dms", recent_ts);
