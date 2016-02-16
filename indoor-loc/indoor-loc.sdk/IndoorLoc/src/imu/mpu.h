@@ -19,6 +19,7 @@
 #include "../math_utils.h"
 #include "../zedboard/print_utils.h"
 #include "../zedboard/time_utils.h"
+#include "../zedboard/timer_int.h"
 #include "../zedboard/gpio_utils.h"
 #include "../bool.h"
 #include "../program_parameters.h"
@@ -62,6 +63,13 @@
 #define PRINT_POS				0x40
 #define PRINT_SENSORS			(PRINT_GYRO | PRINT_ACCEL)
 #define PRINT_FOR_VIEWER		(PRINT_QUAT | PRINT_POS)
+
+//XModem
+#define DATA_NUMBER_OF_BYTES	22
+#define BYTE0					0x000000FF
+#define BYTE1					0x0000FF00
+#define BYTE2					0x00FF0000
+#define BYTE3					0xFF000000
 
 //Constants
 #define GRAVITY					9.80665		//m/s^2

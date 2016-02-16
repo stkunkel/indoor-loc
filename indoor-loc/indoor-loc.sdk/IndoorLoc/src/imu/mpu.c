@@ -1785,19 +1785,17 @@ void computeQuaternion(float gyro[NUMBER_OF_AXES], float accel[NUMBER_OF_AXES],
  */
 void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) {
 	//Variables
-	MpuRegisterData *dataStart, *dataColl, *print;
+	MpuRegisterData data;
 	unsigned long cnt = 0, samples = 0, printcnt = 0;
 	int status;
+	unsigned char *bufStart, *bufCurr;
 
 	//Compute number of data samples
 	samples = sampleTime * FIFO_RATE;
 
-	//Allocate Memory
-	dataStart = (MpuRegisterData*) 0x7000000;//(MpuRegisterData*) malloc((samples + 200) * sizeof(MpuRegisterData));
-
-	//Set Print Pointer
-	dataColl = dataStart;
-	print = dataStart;
+	//Set Pointer for Buffer
+	bufStart = (unsigned char*) 0x7000000;
+	bufCurr = bufStart;
 
 	//Initialize
 	status = initIMU(calibrationTime);
@@ -1806,60 +1804,81 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 		return;
 	}
 
-	//Read out some data sets before sampling starts
-//	for (cnt = 0; cnt < CAL_IGNORE_SAMPLES; cnt++) {
-//		if (needToUpdateData() == BOOL_TRUE) {
-//
-//			//Read Sensor Data and write to memory
-//			status = readFromRegs(dataColl->gyro, dataColl->accel,
-//					dataColl->compass, &dataColl->temp, 0, SENSORS_ALL);
-//		}
-//	}
-
-	//Reset cnt
-	cnt = 0;
-
 	//Get Samples
 	while (cnt < samples) {
 		if (needToUpdateData() == BOOL_TRUE) {
 
 			//Read Sensor Data and write to memory
-			status = readFromRegs(dataColl->gyro, dataColl->accel,
-					dataColl->compass, &dataColl->temp, 0, SENSORS_ALL);
+			status = readFromRegs(data.gyro, data.accel,
+					data.compass, &data.temp, 0, SENSORS_ALL);
 
 			//Read successful?
 			if (status == XST_SUCCESS) {
 				//LED Run
 				ledRun();
 
-				//Store count value
-//				data->cnt = (u16) cnt;
+				//Store to buffer
+				*bufCurr = (unsigned char) (data.gyro[0] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.gyro[0] & BYTE1);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.gyro[1] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.gyro[1] & BYTE1);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.gyro[2] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.gyro[2] & BYTE1);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.accel[0] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.accel[0] & BYTE1);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.accel[1] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.accel[1] & BYTE1);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.accel[2] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.accel[2] & BYTE1);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.compass[0] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.compass[0] & BYTE1);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.compass[1] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.compass[1] & BYTE1);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.compass[2] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.compass[2] & BYTE1);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.temp & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.temp & BYTE1);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.temp & BYTE2);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.temp & BYTE3);
+				bufCurr++;
 
-				//Increase count
+				//Increase Counter
 				cnt++;
-
-				//Go to next data set
-				if (cnt < samples) {
-					dataColl++;
-				}
 			}
 		}
 	}
 
-	//Print samples
-	for (printcnt = 0; printcnt < cnt; printcnt++) {
-		//Print
-//		printf("%d ", print->cnt);
-		printRaw(print->gyro);
-		printf(" ");
-		printRaw(print->accel);
-		printf(" ");
-		printRaw(print->compass);
-		printf(" %ld;", print->temp);
+	//Disable Timer Interrupts
+	disableTmrInt();
 
-		//Increase Pointer Address
-		print++;
-	}
+	//Initialize XUart
+	initXUartPs();
+
+	//Transmit buf
+	printf("XModem Transmission starts.\r\n");
+	xmodemTransmit(bufStart, ((cnt-1) * DATA_NUMBER_OF_BYTES));
+	printf("XModem Transmission finished.\r\n");
 
 //	//Free memory
 //	free(dataStart);

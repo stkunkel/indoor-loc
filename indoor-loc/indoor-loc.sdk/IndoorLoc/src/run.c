@@ -78,7 +78,7 @@ int main() {
 //status = printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
 
 //PWM Test
-status = pwmTest();
+//	status = pwmTest();
 
 //	//Timer Test
 //	status = timerTest(FIFO_RATE);
@@ -102,8 +102,11 @@ status = pwmTest();
 //	testToggleLed();
 //	testLedRun();
 
+//Test XModem
+//	testXModem();
+
 //Collect Data
-//	collectRegisterData(900, 0); //15min sampling, no calibration
+	collectRegisterData(10, 0); //15min sampling, no calibration
 
 //Stay in here
 	while (1) {
