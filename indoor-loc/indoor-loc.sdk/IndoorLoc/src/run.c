@@ -106,7 +106,7 @@ int main() {
 //	testXModem();
 
 //Collect Data
-	collectRegisterData(10, 0); //15min sampling, no calibration
+	collectRegisterData(1, 0); //15min sampling, no calibration
 
 //Stay in here
 	while (1) {

@@ -1878,9 +1878,9 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 	initXUartPs();
 
 	//Transmit buf
-	printf("XModem Transmission starts.\r\n");
+	//printf("XModem Transmission starts.\r\n");
 	xmodemTransmit(bufStart, ((cnt - 1) * DATA_NUMBER_OF_BYTES));
-	printf("XModem Transmission finished.\r\n");
+	//printf("XModem Transmission finished.\r\n");
 
 //	//Free memory
 //	free(dataStart);
