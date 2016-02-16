@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include <math.h>
 #include "../platform.h"
-#include "../print_utils.h"
+#include "../zedboard/print_utils.h"
 #include "../math_utils.h"
 #include "pwm.h"
 

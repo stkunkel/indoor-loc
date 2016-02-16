@@ -14,7 +14,7 @@
 #include "xgpiops.h"
 #include "xil_types.h"
 #include "mpu.h"
-#include "../print_utils.h"
+#include "../zedboard/print_utils.h"
 #include "../program_parameters.h"
 #include "../bool.h"
 #include "../zedboard/timer_int.h"

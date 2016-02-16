@@ -7,7 +7,7 @@
 #define MATH_UTILS_H_
 
 //Includes
-#include "print_utils.h"
+#include "zedboard/print_utils.h"
 #include "math.h"
 #include <string.h>
 #include "program_parameters.h"

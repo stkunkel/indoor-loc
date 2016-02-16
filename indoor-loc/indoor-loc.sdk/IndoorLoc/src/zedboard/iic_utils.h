@@ -11,7 +11,7 @@
 #include <unistd.h>
 #include "xparameters.h"
 #include "xiicps.h"
-#include "../print_utils.h"
+#include "print_utils.h"
 #include "../zedboard/time_utils.h"
 
 // Parameters

@@ -17,7 +17,7 @@
 #include "mpu9150/mpl/invensense_adv.h"
 #include "mpu9150/mpl/ml_math_func.h"
 #include "../math_utils.h"
-#include "../print_utils.h"
+#include "../zedboard/print_utils.h"
 #include "../zedboard/time_utils.h"
 #include "../zedboard/gpio_utils.h"
 #include "../bool.h"

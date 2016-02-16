@@ -12,7 +12,7 @@
 #include "xil_exception.h"
 #include "xtmrctr.h"
 #include "../bool.h"
-#include "../print_utils.h"
+#include "print_utils.h"
 #include "../zedboard/gpio_utils.h"
 
 //Parameters

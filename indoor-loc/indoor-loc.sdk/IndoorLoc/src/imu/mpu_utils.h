@@ -17,7 +17,7 @@
 #include "xstatus.h"
 #include "xtime_l.h"
 #include "../zedboard/iic_utils.h"
-#include "../print_utils.h"
+#include "../zedboard/print_utils.h"
 #include "../zedboard/time_utils.h"
 
 //Zynq Parameters
