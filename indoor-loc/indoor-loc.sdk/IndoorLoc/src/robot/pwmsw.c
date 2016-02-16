@@ -28,12 +28,14 @@ static const Joint jointVal[6] = { base, shoulder, elbow, wrist, thumb, finger }
 /*
  * Function Prototypes
  */
-int moveToAbsAngle(Joint joint, float dgr);
+float moveToAbsAngle(Joint joint, float dgr);
 float getAbsAngle(Joint joint);
 float valToAngle(Joint joint, u32 value);
 u32 angleToValue(Joint joint, float dgr);
-int moveTo(Joint joint, u32 value);
+u32 moveTo(Joint joint, u32 value);
 int moveTowards(Joint joint, u32 value);
+u32 getLowerPwmLimit(Joint joint);
+u32 getUpperPwmLimit(Joint joint);
 short getPosMvDir(Joint joint);
 u32 getValReg(Joint joint);
 short getIndex(Joint joint);
@@ -77,19 +79,29 @@ int pwmTest() {
 //	}
 //	return 0;
 
-//90°-0°-90°-0°
-	moveToAbsAngle(wrist, 90.0);
-//	moveTo(wrist, 2500);
-	sleep(1);
-	moveToAbsAngle(wrist, 180.0);
-//	moveTo(wrist, 1500);
-	sleep(1);
-	moveToAbsAngle(wrist, 90.0);
-//	moveTo(wrist, 2500);
-	sleep(1);
-	moveToAbsAngle(wrist, 180.0);
-//	moveTo(wrist, 1500);
-	return PWM_SUCCESS;
+////90°-0°-90°-0°
+//	Joint joint = wrist;
+//	float a1 = 0.0;
+//	float a2 = -90.0;
+//	moveToAbsAngle(joint, a1);
+//	sleep(1);
+//	moveToAbsAngle(joint, a2);
+//	sleep(1);
+//	moveToAbsAngle(joint, a1);
+//	return PWM_SUCCESS;
+
+	//Invalid Values
+//	setValue(finger, 2750);
+//	setValue(finger, PWM_VAL_INIT);
+//	setValue(thumb, 250);
+//	setValue(thumb, PWM_VAL_INIT);
+//	setValue(wrist, 3000);
+//	setValue(wrist, PWM_VAL_INIT);
+//	setValue(elbow, 0);
+//	setValue(elbow, PWM_VAL_INIT);
+//	setValue(shoulder, 3000);
+//	setValue(shoulder, PWM_VAL_INIT);
+//	return 0;
 
 //Get Reg Values
 	for (reg = 0; reg < NUMBER_OF_JOINTS; reg++) {
@@ -109,7 +121,7 @@ int pwmTest() {
 			val -= 1000;
 		}
 
-		status = moveTo(jointVal[reg], val);
+		moveTo(jointVal[reg], val);
 
 		//Get and print current value
 		val = readPwmReg(pwmValRegister[reg]);
@@ -122,7 +134,7 @@ int pwmTest() {
 		} else {
 			val += 1000;
 		}
-		status = moveTo(jointVal[reg], val);
+		moveTo(jointVal[reg], val);
 
 		//Get and print current value
 		val = readPwmReg(pwmValRegister[reg]);
@@ -134,25 +146,28 @@ int pwmTest() {
 	}
 
 	//finish
-	return status;
+	return PWM_SUCCESS;
 }
 
 /*
  * Move to Absolute Angle
  */
-int moveToAbsAngle(Joint joint, float dgr) {
+float moveToAbsAngle(Joint joint, float dgr) {
 	//Variables
-	int status = PWM_SUCCESS;
-	u32 val;
+	u32 val, realVal;
+	float angle;
 
 	//Get final steps
 	val = angleToValue(joint, dgr);
 
 	//Move
-	status = moveTo(joint, val);
+	realVal = moveTo(joint, val);
+
+	//Get Current Angle
+	angle = valToAngle(joint, realVal);
 
 	//Return
-	return status;
+	return angle;
 }
 
 /*
@@ -276,22 +291,26 @@ u32 angleToValue(Joint joint, float dgr) {
 
 	//Compute m and n for wrist or finger
 	if (joint == wrist || joint == finger) {
-		if (dgr >= DGR_NEG_LIMIT / 2.0 && dgr <= DGR_POS_LIMIT / 2.0) {
+		if (equal_f(dgr, (DGR_NEG_LIMIT / 2.0))
+				|| equal_f(dgr, (DGR_POS_LIMIT / 2.0))
+				|| (dgr > (DGR_NEG_LIMIT / 2.0) && dgr < (DGR_POS_LIMIT / 2.0))) { // -90.0 <= dgr <= 90.0
 			m = 100.0 / 9.0;
-			n = 500;
+			n = 1500; //500
 		} else {
 			//Get m
 			m = 50.0 / 9.0;
 
 			//Get n
-			if (dgr < DGR_NEG_LIMIT / 2) {
+			if (dgr < (DGR_NEG_LIMIT / 2)) {
 				n = -2000;
 			} else { //dgr > 90
 				n = 1000;
 			}
 		}
 	} else { //other joints
-		if (dgr >= DGR_NEG_LIMIT / 2.0 && dgr <= DGR_POS_LIMIT / 2.0) {
+		if (equal_f(dgr, (DGR_NEG_LIMIT / 2.0))
+				|| equal_f(dgr, (DGR_POS_LIMIT / 2.0))
+				|| (dgr > (DGR_NEG_LIMIT / 2.0) && dgr < (DGR_POS_LIMIT / 2.0))) { // -90.0 <= dgr <= 90.0
 			m = -100.0 / 9.0;
 			n = 1500;
 		} else {
@@ -299,7 +318,7 @@ u32 angleToValue(Joint joint, float dgr) {
 			m = -50.0 / 9.0;
 
 			//Get n
-			if (dgr < DGR_NEG_LIMIT / 2) {
+			if (dgr < (DGR_NEG_LIMIT / 2)) {
 				n = 2000;
 			} else { //dgr > 90
 				n = 1000;
@@ -315,20 +334,23 @@ u32 angleToValue(Joint joint, float dgr) {
 /*
  * Move to specified value
  * In: Joint, value
- * Returns 0 if successful
+ * Returns PWM value
  */
-int moveTo(Joint joint, u32 value) {
+u32 moveTo(Joint joint, u32 value) {
 	//Variables
 	int diff;
+	u32 limit;
 
-	//Make sure value is positive
-	if (value < PWM_VAL_MIN) {
-		value = PWM_VAL_MIN;
+	//Make sure value is smaller than upper limit
+	limit = getUpperPwmLimit(joint);
+	if (value > limit) {
+		value = limit;
 	}
 
-	//Make sure value is in range
-	if (value > PWM_VAL_MAX) {
-		value = PWM_VAL_MAX;
+	//Make sure value is bigger than lower limit
+	limit = getLowerPwmLimit(joint);
+	if (value < limit) {
+		value = limit;
 	}
 
 	//Move
@@ -337,30 +359,56 @@ int moveTo(Joint joint, u32 value) {
 	} while (diff != 0);
 
 	//Return
-	return PWM_SUCCESS;
+	return value;
 }
 
 /*
  * Set Angle for Joint
  * In: Joint, angle in dgr
  */
-void setAngle(Joint joint, float angle) {
+float setAngle(Joint joint, float angle) {
 	//Variables
-	u32 value;
+	u32 value, realValue;
+	float realAngle;
 
 	//Convert angle to value
 	value = angleToValue(joint, angle);
 
 	// Set Value
-	writePwmReg(getValReg(joint), value);
+	realValue = setValue((joint), value);
+
+	//Compute Real angle
+	realAngle = valToAngle(joint, realValue);
+
+	//Return
+	return realAngle;
 }
 
 /*
  * Set Value for Joint
  * In: Joint, value
  */
-void setValue(Joint joint, u32 value) {
+u32 setValue(Joint joint, u32 value) {
+	//Variables
+	u32 limit;
+
+	//Make sure value is smaller than upper limit
+	limit = getUpperPwmLimit(joint);
+	if (value > limit) {
+		value = limit;
+	}
+
+	//Make sure value is bigger than lower limit
+	limit = getLowerPwmLimit(joint);
+	if (value < limit) {
+		value = limit;
+	}
+
+	//Set Value
 	writePwmReg(getValReg(joint), value);
+
+	//Return Value
+	return value;
 }
 
 /*
@@ -422,14 +470,55 @@ int moveTowards(Joint joint, u32 value) {
 
 	}
 
-	//Set new value
-	writePwmReg(getValReg(joint), currValue);
-
-	//Get new value
-	currValue = readPwmReg(getValReg(joint));
+	//Set new value and get real value
+	currValue = setValue(joint, currValue);
 
 	//Return
 	return (value - currValue);
+}
+
+/*
+ * Get Upper PWM Limit
+ * Thumb, Finger and Shoulder cannot move more than -90°
+ * Base can move up to -180°
+ * Elbow and wrist can move up to -270°
+ */
+u32 getLowerPwmLimit(Joint joint) {
+	switch (joint) {
+	case thumb:
+	case finger:
+	case shoulder:
+		return PWM_VAL_LOW;
+	case base:
+		return PWM_VAL_MIN;
+	case elbow:
+	case wrist:
+		return PWM_LIMIT_LOW;
+	default:
+		return PWM_VAL_INIT;
+	}
+}
+
+/*
+ * Get Upper PWM Limit
+ * Thumb, Finger and Shoulder cannot move more than 90°
+ * Base can move up to 180°
+ * Elbow and wrist can move up to 270°
+ */
+u32 getUpperPwmLimit(Joint joint) {
+	switch (joint) {
+	case thumb:
+	case finger:
+	case shoulder:
+		return PWM_VAL_HIGH;
+	case base:
+		return PWM_VAL_MAX;
+	case elbow:
+	case wrist:
+		return PWM_LIMIT_HIGH;
+	default:
+		return PWM_VAL_INIT;
+	}
 }
 
 /*
@@ -509,23 +598,24 @@ short getIndex(Joint joint) {
  * Returns 0 if successful
  */
 int reset() {
-	//Variables
-	int status = PWM_SUCCESS, i;
+//Variables
+	int i;
+	u32 value;
 
-	//Move to initial setting
+//Move to initial setting
 	for (i = 0; i < NUMBER_OF_JOINTS; i++) {
-		status = moveTo(jointVal[i], PWM_VAL_INIT);
+		value = moveTo(jointVal[i], PWM_VAL_INIT);
 
-		if (status != PWM_SUCCESS) {
+		if (value != PWM_VAL_INIT) {
 			return PWM_FAILURE;
 		}
 	}
 
-	//Remember steps and initial value
+//Remember steps and initial value
 	stepAmount = PWM_STEPS;
 	valInit = PWM_VAL_INIT;
 
-	//Return
+//Return
 	return PWM_SUCCESS;
 }
 
@@ -544,10 +634,10 @@ u32 readPwmReg(u32 reg) {
  * Returns 0 if successful
  */
 int writePwmReg(u32 reg, u32 value) {
-	//Write value to register
+//Write value to register
 	PWM_mWriteReg(PWMADDRESS, reg, value);
 
-	//Check if value written correctly
+//Check if value written correctly
 	if (readPwmReg(reg) == value) {
 		return PWM_SUCCESS;
 	} else {

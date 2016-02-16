@@ -15,6 +15,7 @@
 #include <math.h>
 #include "../platform.h"
 #include "../print_utils.h"
+#include "../math_utils.h"
 #include "pwm.h"
 
 /*
@@ -34,6 +35,8 @@
 #define PWM_VAL_MAX		3000
 #define PWM_VAL_HIGH	2500
 #define PWM_VAL_LOW		500
+#define PWM_LIMIT_HIGH	2750
+#define PWM_LIMIT_LOW	250
 #define SLEEP_BTW_STEPS	2000 //us
 
 
@@ -56,8 +59,8 @@
 /*
  * Robot Arm Defines
  */
-#define DGR_POS_LIMIT		180
-#define DGR_NEG_LIMIT		-180
+#define DGR_POS_LIMIT		180.0
+#define DGR_NEG_LIMIT		-180.0
 #define NUMBER_OF_JOINTS	6
 #define BASE_REG			PWM0_VAL_REG
 #define SHOULDER_REG		PWM1_VAL_REG
@@ -89,8 +92,8 @@ typedef enum {
  * Functions
  */
 int pwmTest();
-void setAngle(Joint joint, float angle);
-void setValue(Joint joint, u32 value);
+float setAngle(Joint joint, float angle);
+u32 setValue(Joint joint, u32 value);
 int reset();
 
 #endif
