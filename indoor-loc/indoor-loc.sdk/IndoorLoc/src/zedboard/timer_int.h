@@ -24,6 +24,8 @@
 //Functions
 int timerTest(u32 int_freq);
 bool isTimerExpired();
+void reenableTmrInt();
+void disableTmrInt();
 int initTmrInt(u32 int_freq);
 
 #endif /* TIMER_INT_H_ */

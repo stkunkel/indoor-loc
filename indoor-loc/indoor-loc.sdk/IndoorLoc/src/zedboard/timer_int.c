@@ -24,18 +24,18 @@ void TMR_Intr_Handler(void *InstancePtr);
 /*
  * Timer Test
  */
-int timerTest(u32 int_freq){
+int timerTest(u32 int_freq) {
 	//Variables
 	int status;
 
 	//Init Timer
 	status = initTmrInt(int_freq);
-	if (status != XST_SUCCESS){
+	if (status != XST_SUCCESS) {
 		myprintf("timer_int.c Could not initialize AXI Timer.\r\n");
 	}
 
-	while (1){
-		if (isTimerExpired() == BOOL_TRUE){
+	while (1) {
+		if (isTimerExpired() == BOOL_TRUE) {
 			ledRun();
 		}
 	}
@@ -76,6 +76,28 @@ void tmrIntrHandler(void *InstancePtr) {
 }
 
 /*
+ * Enable Timer Interrupts
+ */
+void reenableTmrInt() {
+	//Enable Timer Interrupts
+	XTmrCtr_EnableIntr(tmrCtr.BaseAddress, 0);
+
+	//Enable Interrupts for Timer
+	XScuGic_Enable(&Intc, INTC_TMR_INT_ID);
+}
+
+/*
+ * Disable Timer Interrupts
+ */
+void disableTmrInt() {
+	//Enable Interrupts for Timer
+	XScuGic_Disable(&Intc, INTC_TMR_INT_ID);
+
+	//Enable Timer Interrupts
+	XTmrCtr_DisableIntr(tmrCtr.BaseAddress, 0);
+}
+
+/*
  * Initialize Timer Interrupt
  * In: interrupt frequency in Hz
  */
@@ -96,7 +118,7 @@ int initTmrInt(u32 int_freq) {
 	XTmrCtr_SetHandler(&tmrCtr, (XTmrCtr_Handler) tmrIntrHandler, &tmrCtr);
 
 	//Reset Timer Value
-	int_freq = (u32) (FPGA_FREQ/int_freq);
+	int_freq = (u32) (FPGA_FREQ / int_freq);
 	reset_val = ~int_freq;
 
 	//Reset Timer Value
