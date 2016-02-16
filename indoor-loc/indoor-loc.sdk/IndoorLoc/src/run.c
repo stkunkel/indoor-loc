@@ -157,7 +157,7 @@ int printGeneric(short int printMask, char* separator,
 				if ((cnt % (FIFO_RATE / IMUVIEWER_FREQ)) == 0) {
 
 					//Print
-					status = printforDisplay(&printMask, separator);
+					status = printforDisplay(printMask, separator);
 
 					//Print new line
 					if (status == XST_SUCCESS) {
@@ -251,7 +251,7 @@ int printForImuViewer(short int printMask, char* separator,
 					printcnt = 0;
 
 					//Print
-					status = printforDisplay(&printMask, separator);
+					status = printforDisplay(printMask, separator);
 
 					//Print new line
 					if (status == XST_SUCCESS) {
