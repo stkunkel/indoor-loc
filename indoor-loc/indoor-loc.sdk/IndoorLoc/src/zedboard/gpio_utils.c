@@ -19,11 +19,8 @@ static u8 run = 0x01;
  * Test LED Run
  */
 void testLedRun() {
-	//Variables
-	int status;
-
 	//Initialize
-	status = initGpio();
+	initGpio();
 
 	//Run
 	while (1) {
@@ -36,11 +33,8 @@ void testLedRun() {
  * Test Toggle LED
  */
 void testToggleLed() {
-	//Variables
-	int status;
-
 	//Initialize
-	status = initGpio();
+	initGpio();
 
 	//Toggle
 	while (1) {
