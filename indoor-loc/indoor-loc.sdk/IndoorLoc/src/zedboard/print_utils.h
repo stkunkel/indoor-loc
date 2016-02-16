@@ -15,7 +15,9 @@
 #include "../program_parameters.h"
 
 //Functions
+void testXModem();
 int xmodemTransmit(unsigned char *src, int srcsz);
+void initXUartPs();
 int myprintf(const char *format, ...);
 
 #endif /* PRINT_UTILS_H_ */
