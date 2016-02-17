@@ -12,7 +12,8 @@
 #include "platform.h"
 #include "imu/mpu.h"
 #include "imu/mpu_int.h"
-#include "robot/pwmsw.h"
+//#include "robot/pwmsw.h"
+#include "robot/robotCtrl.h"
 #include "zedboard/print_utils.h"
 #include "zedboard/gpio_utils.h"
 #include "zedboard/timer_int.h"
@@ -44,9 +45,6 @@ int printDataWithoutDMP(short sensors, char* separator,
  * Main
  */
 int main() {
-	//Variables
-	int status = XST_SUCCESS;
-
 	//Init Platform
 	init_platform();
 
@@ -57,31 +55,31 @@ int main() {
 	myprintf(".........Program Start...........\n\r");
 
 	//Print Data without DMP
-//	status = printDataWithoutDMP(SENSORS_ALL, SEPARATOR, DATA_NO_DMP_RUNS);
+//	printDataWithoutDMP(SENSORS_ALL, SEPARATOR, DATA_NO_DMP_RUNS);
 
 //Print Data with DMP without initial or DMP gyro calibration
-//	status = printDataUsingDMP(SENSORS_ALL, 0, 0, SEPARATOR, DATA_WITH_DMP_RUNS);
+//	printDataUsingDMP(SENSORS_ALL, 0, 0, SEPARATOR, DATA_WITH_DMP_RUNS);
 
 //Print Data with DMP with initial calibration but no DMP gyro calibration
-//	status = printDataUsingDMP(SENSORS_ALL, 1, 0, SEPARATOR, DATA_WITH_DMP_RUNS);
+//	printDataUsingDMP(SENSORS_ALL, 1, 0, SEPARATOR, DATA_WITH_DMP_RUNS);
 
 //Print Data with DMP with and DMP gyro calibration
-//	status = printDataUsingDMP(SENSORS_ALL, 1, 1, SEPARATOR, DATA_WITH_DMP_RUNS);
+//	printDataUsingDMP(SENSORS_ALL, 1, 1, SEPARATOR, DATA_WITH_DMP_RUNS);
 
 //Print Quaternions and Position to Serial Port
-//	status = printForImuViewer(PRINT_ALL, SEPARATOR, DISPLAY_RUNS);
+//	printForImuViewer(PRINT_ALL, SEPARATOR, DISPLAY_RUNS);
 
 //	Generic Print to Serial Port
-//	status = printGeneric(PRINT_NOTHING, SEPARATOR, DISPLAY_RUNS);
+//	printGeneric(PRINT_NOTHING, SEPARATOR, DISPLAY_RUNS);
 
 //Quaternion Drift
-//status = printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
+//printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
 
 //PWM Test
-//	status = pwmTest();
+//	pwmTest();
 
 //	//Timer Test
-//	status = timerTest(FIFO_RATE);
+//	timerTest(FIFO_RATE);
 
 //Test position update functionality
 //	testPositionUpdate();
@@ -106,7 +104,10 @@ int main() {
 //	testXModem();
 
 //Collect Data
-	collectRegisterData(1, 0); //15min sampling, no calibration
+//	collectRegisterData(1, 0); //15min sampling, no calibration
+
+	//Collect Robot Movement Data
+	collectRobotMvmtData(20, 0, BOOL_TRUE);
 
 //Stay in here
 	while (1) {
