@@ -892,7 +892,7 @@ int updateData() {
 
 //Variables for computing position only
 #ifndef DISABLE_POS_COMP
-	quat_new[QUATERNION_AMOUNT];
+	float quat_new[QUATERNION_AMOUNT];
 #endif
 
 //Variables for DMP only
