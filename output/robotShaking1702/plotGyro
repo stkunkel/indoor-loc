@@ -1,0 +1,23 @@
+# Read in data
+data = load ('data.txt');
+x = data(:,1);
+y = data(:,2);
+z = data(:,3);
+
+# Plot all
+plot(x, "r");
+hold on;
+plot(y, "g");
+hold on;
+plot(z, "b");
+hold on;
+
+# Set up Plot
+grid on;
+title('Gyroscope');
+xlabel('Sample Number');
+ylabel('Angular Velocity (in Hardware Units)');
+legend('x', 'y', 'z');
+
+# Print
+print("gyroscope.pdf");
