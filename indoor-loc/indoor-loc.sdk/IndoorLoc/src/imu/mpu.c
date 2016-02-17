@@ -366,6 +366,9 @@ int printDataNoDMP(short sensors, char* separator) {
 
 //Get Data
 	status = readFromRegs(gyro, accel, compass, &temp_raw, &timestamp, sensors);
+	if (status == XST_DEVICE_BUSY){
+		return status;
+	}
 
 //Get Gyro
 	if (status != XST_SUCCESS) {
@@ -908,39 +911,48 @@ int updateData() {
 	do {
 		status = readFromFifo(gyro, accel, quat, &timestamp, &sensors, more);
 		usleep(100);
+		if (status == XST_DEVICE_BUSY) {
+			return status;
+		}
 	}while (status != XST_SUCCESS);
 
 	//Free memory
 	free(more);
 
-	//Get Compass //TODO: Handle unequal timestamp
-	status = mpu_get_compass_reg(compass, &temp_ts);
-	if (status != XST_SUCCESS) {
-		//Print
-		myprintf("mpu.c Error getting Compass data.");
+	if (status == XST_SUCCESS) {
+		//Get Compass //TODO: Handle unequal timestamp
+		status = mpu_get_compass_reg(compass, &temp_ts);
+		if (status != XST_SUCCESS) {
+			//Print
+			myprintf("mpu.c Error getting Compass data.");
 
-		//Set compass data invalid
-		for (i = 0; i < NUMBER_OF_AXES; i++) {
-			compass[i] = -1;
+			//Set compass data invalid
+			for (i = 0; i < NUMBER_OF_AXES; i++) {
+				compass[i] = -1;
+			}
 		}
-	}
 
-	//Get Temperature //TODO: Handle unequal timestamp
-	status = mpu_get_temperature(&temperature, &temp_ts);
-	if (status != XST_SUCCESS) {
-		myprintf("mpu.c Error getting Temperature data.");
-		temperature = -1;
+		//Get Temperature //TODO: Handle unequal timestamp
+		status = mpu_get_temperature(&temperature, &temp_ts);
+		if (status != XST_SUCCESS) {
+			myprintf("mpu.c Error getting Temperature data.");
+			temperature = -1;
+		}
 	}
 
 // Without DMP
 #else
 	//Read Data from Registers
 	sensors = SENSORS_ALL;
-	status = readFromRegs(gyro, accel, compass, &temperature, &timestamp,
-			sensors);
-	if (status != XST_SUCCESS) {
-		return XST_FAILURE;
-	}
+	do {
+		status = readFromRegs(gyro, accel, compass, &temperature, &timestamp,
+				sensors);
+
+		//Check status
+		if (status == XST_DEVICE_BUSY) {
+			return status;
+		}
+	} while (status != XST_SUCCESS);
 #endif
 
 	//Update time difference
@@ -1241,7 +1253,7 @@ int calibrateGyrAcc(unsigned int samples) {
 	}
 
 //Disable DMP
-	status = mpu_set_dmp_state(0);
+	status = imuSetDmpState(0);
 	if (status != XST_SUCCESS) {
 		gyrAccIsCal = BOOL_FALSE;
 		myprintf("mpu.c: Could not disable DMP.\r\n");
@@ -1249,23 +1261,23 @@ int calibrateGyrAcc(unsigned int samples) {
 	}
 
 //Set Gyro Bias to 0
-	status = mpu_set_gyro_bias_reg(gyro_bias);
+	status = imuSetGyroBias(gyro_bias);
 	if (status != XST_SUCCESS) {
 		gyrAccIsCal = BOOL_FALSE;
 		myprintf("mpu.c: Could not initially set gyro bias.\r\n");
-		return XST_FAILURE;
+		return status;
 	}
 
 //Set Accel Bias to 0
-	status = mpu_set_accel_bias_6050_reg(accel_bias);
+	status = imuSetAccelBias(accel_bias);
 	if (status != XST_SUCCESS) {
 		gyrAccIsCal = BOOL_FALSE;
 		myprintf("mpu.c: Could not initially set accel bias.\r\n");
-		return XST_FAILURE;
+		return status;
 	}
 
 //Reset FIFO
-	status = mpu_reset_fifo();
+	status = imuResetFifo();
 	if (status != XST_SUCCESS) {
 		gyrAccIsCal = BOOL_FALSE;
 		myprintf("mpu.c: Could not reset FIFO.\r\n");
@@ -1276,6 +1288,15 @@ int calibrateGyrAcc(unsigned int samples) {
 	for (sample = 0; sample < CAL_IGNORE_SAMPLES; sample++) {
 		//Read Sensor
 		status = readFromRegs(gyro, accel, compass, &temp, 0, sensors);
+
+		//Check status
+		if (status != XST_SUCCESS) {
+			if (status == XST_DEVICE_BUSY) {
+				return status;
+			} else {
+				sample--;
+			}
+		}
 	}
 
 //Compute offsets
@@ -1284,8 +1305,12 @@ int calibrateGyrAcc(unsigned int samples) {
 		status = readFromRegs(gyro, accel, compass, &temp, 0, sensors); //&timestamp
 
 		//Use only successful reads
-		if (status != 0) {
-			sample--;
+		if (status != XST_SUCCESS) {
+			if (status == XST_DEVICE_BUSY) {
+				return status;
+			} else {
+				sample--;
+			}
 		} else {
 			//Convert accel
 			status = convertAccData(accel, accel_bias_conv);
@@ -1352,17 +1377,17 @@ int calibrateGyrAcc(unsigned int samples) {
 //Set calibrated flag
 	if (status & GYRO_CAL_MASK && status & ACCEL_CAL_MASK) { //gyro and accel calibrated
 		//Push accel bias to register
-		status = mpu_set_accel_bias_6050_reg(accel_bias);
+		status = imuSetAccelBias(accel_bias);
 		if (status != XST_SUCCESS) {
 			gyrAccIsCal = BOOL_FALSE;
-			return XST_FAILURE;
+			return status;
 		}
 
 		//Push Gyro Bias to register
-		status = mpu_set_gyro_bias_reg(gyro_bias);
+		status = imuSetGyroBias(gyro_bias);
 		if (status != XST_SUCCESS) {
 			gyrAccIsCal = BOOL_FALSE;
-			return XST_FAILURE;
+			return status;
 		}
 
 		//Set Recent Gyro and Accel
@@ -1393,9 +1418,6 @@ int calibrateGyrAcc(unsigned int samples) {
 		myprintf("Calibration done.\r\n");
 	}
 
-//Sleep
-//sleep(1);
-
 //Free memory and return
 	free(more);
 	return status;
@@ -1411,15 +1433,16 @@ int pushBiasesToDMP(long* gyro_bias, long* accel_bias) {
 	int status;
 
 	//Set Gyro and Accel Bias
-	status = dmp_set_gyro_bias(gyro_bias);
+	status = imuSetDmpGyroBias(gyro_bias);
 	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Could not initially set gyro bias.\r\n");
+		return status;
 	}
 
-	status = dmp_set_accel_bias(accel_bias);
+	status = imuSetDmpAccelBias(accel_bias);
 	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Could not initially set accel bias.\r\n");
-		return XST_FAILURE;
+		return status;
 	}
 
 	return XST_SUCCESS;
@@ -1427,54 +1450,25 @@ int pushBiasesToDMP(long* gyro_bias, long* accel_bias) {
 
 /*
  * Read from FIFO
+ * In: Pointers to gyro, accel, quat, timestamp, sensors and more
+ * Returns 0 if successful
  */
 int readFromFifo(short *gyro, short *accel, long *quat,
 		unsigned long *timestamp, short *sensors, unsigned char *more) {
 //Variables
 	int status = XST_FAILURE;
 
-//Increase count
-//	count++;
-
-//Make sure the read command is not called too often
-//	if (count >= 500) { //was: 500
-//	Reset Count, increment read count
-//	count = 0;
-
 //Read FIFO
-	status = dmp_read_fifo(gyro, accel, quat, timestamp, sensors, more);
-//		if (status != XST_SUCCESS) {
-//	usleep(1000); //sleep to prevent IIC bus from becoming busy (was: 100, worked ok with 10000)
-//	myprintf("mpu.c: Could not read DMP FIFO.\n\r");
-//		}
-//	}
+	status = imuDmpReadFifo(gyro, accel, quat, timestamp, sensors, more);
 
 //Return
 	return status;
 }
 
 /*
- * Get FIFO Count
- * Returns DMP FIFO Count
- */
-int getFifoCount() {
-//Variables
-	int size;
-	unsigned char* data = (unsigned char*) malloc(100 * sizeof(char));
-
-//Read FIFO Count Registers
-	imuI2cRead(imuAddr, 0x72, 2, data);
-
-//Convert
-	size = (data[0] << 8) | data[1];
-
-//Free memory and return
-	free(data);
-	return size;
-}
-
-/*
  * Enable Gyro Calibration
+ * In: bool whether to enable or disable
+ * Returns 0 if successful
  */
 int dmpGyroCalibration(bool enable) {
 //Variables
@@ -1489,8 +1483,7 @@ int dmpGyroCalibration(bool enable) {
 	}
 
 	//Enable gyro cal if requested
-	status = dmp_enable_gyro_cal(enableCal);
-
+	status = imuEnableDmpGyroCal(enableCal);
 	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Could not enable/disable Gyroscope Calibration.\n\r");
 	}
@@ -1502,6 +1495,7 @@ int dmpGyroCalibration(bool enable) {
 /*
  * Initialize IMU
  * In: calibration time in s
+ * Returns 0 if successful
  */
 int initIMU(unsigned int calibrationTime) {
 	//Variables
@@ -1546,6 +1540,13 @@ int initIMU(unsigned int calibrationTime) {
 	for (sample = 0; sample < CAL_IGNORE_SAMPLES; sample++) {
 		//Read Sensor
 		status = readFromRegs(gyro, accel, compass, &temp, 0, SENSORS_ALL);
+		if (status != XST_SUCCESS) {
+			if (status == XST_DEVICE_BUSY) {
+				return status;
+			} else {
+				sample--;
+			}
+		}
 	}
 
 	//Setup Interrupt
@@ -1554,21 +1555,22 @@ int initIMU(unsigned int calibrationTime) {
 		return status;
 	}
 
-//	//No interrupts if not using DMP TODO
-//#ifdef USE_DMP
-//	//Enable Interrupts
-//	status = setupDMPInt();
-//	if (status != XST_SUCCESS) {
-//		return status;
-//	}
-//#endif
-
 	//Return
 	return status;
 }
 
 /*
  * Configure DMP
+ * In: feature mask
+ * DMP_FEATURE_TAP
+ * DMP_FEATURE_ANDROID_ORIENT
+ * DMP_FEATURE_LP_QUAT
+ * DMP_FEATURE_6X_LP_QUAT
+ * DMP_FEATURE_GYRO_CAL
+ * DMP_FEATURE_SEND_RAW_ACCEL
+ * DMP_FEATURE_SEND_RAW_GYRO
+ * NOTE: DMP_FEATURE_LP_QUAT and DMP_FEATURE_6X_LP_QUAT are mutually
+ * Returns 0 if successful
  */
 int configureDMP(unsigned short int features) {
 //Variables
@@ -1579,7 +1581,7 @@ int configureDMP(unsigned short int features) {
 	if (imuAddr == 0) {
 		status = initMPU();
 		if (status != XST_SUCCESS) {
-			return XST_FAILURE;
+			return status;
 		}
 	}
 
@@ -1588,7 +1590,7 @@ int configureDMP(unsigned short int features) {
 		status = initDMP();
 		if (status != XST_SUCCESS) {
 			myprintf("mpu.c: Error initializing DMP.\r\n");
-			return XST_FAILURE;
+			return status;
 		}
 	}
 
@@ -1603,21 +1605,26 @@ int configureDMP(unsigned short int features) {
 #endif
 
 //Enable DMP
-	status = mpu_set_dmp_state(1);
+	status = imuSetDmpState(1);
 	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Could not enable DMP.\r\n");
-		return XST_FAILURE;
+		if (status == XST_DEVICE_BUSY) {
+			exit(0);
+		} else {
+			return status;
+		}
 	}
 
 //Enable Features
-	status = dmp_enable_feature(features);
+	status = imuEnableDmpFeatures(features);
 	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Error enabling desired features.\r\n");
-		return XST_FAILURE;
+		if (status == XST_DEVICE_BUSY) {
+			exit(0);
+		} else {
+			return status;
+		}
 	}
-
-	//Set LPF
-//	mpu_set_lpf(5);
 
 //Set fifo mask according to features
 	if (features & DMP_FEATURE_SEND_CAL_GYRO
@@ -1629,17 +1636,25 @@ int configureDMP(unsigned short int features) {
 	}
 
 	//Set FIFO rate
-	status = dmp_set_fifo_rate(FIFO_RATE);
+	status = imuSetFifoRate(FIFO_RATE);
 	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Error Setting FIFO rate.\n\r");
-		return XST_FAILURE;
+		if (status == XST_DEVICE_BUSY) {
+			exit(0);
+		} else {
+			return status;
+		}
 	}
 
-	//Enable MPU FIFO
+	//Configure MPU FIFO
 	status = configureMpuFifo(fifoMask);
 	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Error configuring FIFO.\n\r");
-		return XST_FAILURE;
+		if (status == XST_DEVICE_BUSY) {
+			exit(0);
+		} else {
+			return status;
+		}
 	}
 
 //Return
@@ -1648,6 +1663,7 @@ int configureDMP(unsigned short int features) {
 
 /*
  * Init DMP
+ * Returns 0 if successful
  */
 int initDMP() {
 //Variables
@@ -1656,19 +1672,25 @@ int initDMP() {
 //Check wheter DMP has already been initialized
 	if (dmpReady == BOOL_FALSE) {
 		//Load Firmware and set flag
-		status = dmp_load_motion_driver_firmware();
+		status = imuDmpLoadMotionDriverFirmware();
 		if (status != XST_SUCCESS) {
 			dmpReady = BOOL_FALSE;
 			myprintf("mpu.c: Error loading firmware of DMP.\r\n");
-			return XST_FAILURE;
+
+			//Check whether IIC Device is busy
+			if (status == XST_DEVICE_BUSY) {
+				exit(0);
+			} else {
+				return status;
+			}
 		}
 	}
 
 //Enable DMP
-	status = mpu_set_dmp_state(1);
+	status = imuSetDmpState(1);
 	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Could not enable DMP.\r\n");
-		return XST_FAILURE;
+		return status;
 	}
 
 //Set flag
@@ -1817,6 +1839,11 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 			status = readFromRegs(data.gyro, data.accel, data.compass,
 					&data.temp, 0, SENSORS_ALL);
 
+			//Check whether IIC Bus is Busy
+			if (status == XST_DEVICE_BUSY) {
+				break; //TODO Any error handling?
+			}
+
 			//Read successful?
 			if (status == XST_SUCCESS) {
 				//LED Run
@@ -1884,15 +1911,13 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 	//printf("XModem Transmission starts.\r\n");
 	xmodemTransmit(bufStart, ((cnt - 1) * DATA_NUMBER_OF_BYTES));
 	//printf("XModem Transmission finished.\r\n");
-
-//	//Free memory
-//	free(dataStart);
 }
 
 /*
  * Read from Registers
  * OUT: gyro, accel, comp, timestamp of
  * IN: sensors (INV_XYZ_GYRO for gyro, INV_XYZ_ACCEL for accel, INV_XYZ_COMPASS for compass)
+ * Returns 0 if successful
  */
 int readFromRegs(short *gyro, short *accel, short* comp, long* temp,
 		unsigned long *timestamp, short sensorMask) {
@@ -1907,72 +1932,77 @@ int readFromRegs(short *gyro, short *accel, short* comp, long* temp,
 
 //Get Gyro
 	if (sensorMask & INV_XYZ_GYRO) {
-//		for (i = 0; i < NUMBER_OF_AXES; i++) {
-		status = mpu_get_gyro_reg(gyro, 0); //&ts_gyro
+		status = imuReadGyroReg(gyro, 0);
 		if (status != XST_SUCCESS) {
-//			myprintf("mpu.c Error getting Gyroscope data.");
-			return XST_FAILURE;
+			return status;
 		}
-//		}
 	}
 
 //Get Acc
 	if (sensorMask & INV_XYZ_ACCEL) {
-		status = mpu_get_accel_reg(accel, 0); //&ts_accel
+		status = imuReadAccelReg(accel, 0);
 		if (status != XST_SUCCESS) {
-//			myprintf("mpu.c Error getting Acc data.");
-			return XST_FAILURE;
+			return status;
 		}
 	}
 
 //Get Compass
 	if (sensorMask & INV_XYZ_COMPASS) {
-		status = mpu_get_compass_reg(comp, 0); //&ts_comp
+		status = imuReadCompassReg(comp, 0);
 		if (status != XST_SUCCESS) {
-//			myprintf("mpu.c Error getting Compass data.");
-			return XST_FAILURE;
+			return status;
 		}
 	}
 
 	//Get Temperature
 	if (sensorMask & SENSOR_TEMP) {
-		status = mpu_get_temperature(temp, 0); //&ts_temp
+		status = imuReadTemp(temp, 0);
 		if (status != XST_SUCCESS) {
-//		myprintf("mpu.c Error getting Temperature data.");
-			return XST_FAILURE;
+			return status;
 		}
 	}
 
-////Make sure timestamp is the same TODO
-//	if (ts_gyro != 0) {
-//		*timestamp = ts_gyro;
-//	} else if (ts_accel != 0) {
-//		*timestamp = ts_accel;
-//	} else if (ts_comp != 0) {
-//		*timestamp = ts_comp;
-//	} else if (ts_temp != 0) {
-//		*timestamp = ts_temp;
-//	} else {
-//		*timestamp = 0;
-//	}
-
-//Return
+	//Return
 	return XST_SUCCESS;
 }
 
 /*
- * get IMU Address
+ * Get IMU Address
+ * Out: IMU Address
+ * Returns 0 if successful
  */
 int getImuAddr(u8* addr) {
+	//Variables
+	int status;
+
+	//Has IMU address been set already?
 	if (imuAddr == 0) {
-		initMPU();
+		//Initialize
+		status = initMPU();
+
+		//Check for successful initialization
+		if (status != XST_SUCCESS) {
+			//Check whether IIC Device is busy
+			if (status == XST_DEVICE_BUSY) {
+				exit(0);
+			} else {
+				return status;
+			}
+		}
 	}
+
+	//Put address into global variable and return
 	*addr = imuAddr;
 	return XST_SUCCESS;
 }
 
 /*
  * Configure MPU
+ * In: Fifo Mask:
+ * INV_X_GYRO, INV_Y_GYRO, INV_Z_GYRO
+ * INV_XYZ_GYRO
+ * INV_XYZ_ACCEL
+ * Returns 0 if successful
  */
 int configureMpuFifo(unsigned char fifoMask) {
 	//Variables
@@ -1982,14 +2012,20 @@ int configureMpuFifo(unsigned char fifoMask) {
 	status = mpu_configure_fifo(fifoMask);
 	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Error configuring FIFO.\n\r");
-		return XST_FAILURE;
+
+		//Check whether IIC Device is busy
+		if (status == XST_DEVICE_BUSY) {
+			exit(0);
+		} else {
+			return status;
+		}
 	}
 
 	//Reset FIFO
-	status = mpu_reset_fifo();
+	status = imuResetFifo();
 	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Could not reset FIFO.\n\r");
-		return XST_FAILURE;
+		return status;
 	}
 
 	//Return
@@ -1998,6 +2034,7 @@ int configureMpuFifo(unsigned char fifoMask) {
 
 /*
  * Initialize IMU
+ * Returns 0 if successful
  */
 int initMPU() {
 //Variables
@@ -2007,44 +2044,80 @@ int initMPU() {
 	status = imuInit(&imuAddr);
 	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Error in Setting IMU Address.\n\r");
-		return XST_FAILURE;
+
+		//Check whether IIC Device is busy
+		if (status == XST_DEVICE_BUSY) {
+			exit(0);
+		} else {
+			return status;
+		}
 	}
 
 //2. Init IMU
 	struct int_param_s param;
-	status = mpu_init(&param);
+	status = imuInitMpu(&param);
 	if (status != 0) {
 		myprintf("mpu.c: Error initializing IMU\r\n.");
-		return XST_FAILURE;
+
+		//Check whether IIC Device is busy
+		if (status == XST_DEVICE_BUSY) {
+			exit(0);
+		} else {
+			return status;
+		}
 	}
 
 //3. Select Sensors
 	unsigned char sensors = SENSORS_INV;
-	status = mpu_set_sensors(sensors);
+	status = imuSetSensors(sensors);
 	if (status != 0) {
 		myprintf("mpu.c: Error setting sensors.\r\n");
-		return XST_FAILURE;
+
+		//Check whether IIC Device is busy
+		if (status == XST_DEVICE_BUSY) {
+			exit(0);
+		} else {
+			return status;
+		}
 	}
 
 //4. Set Sample Rate
-	status = mpu_set_sample_rate(MPU_SAMPLE_RATE);
+	status = imuSetSampleRate(MPU_SAMPLE_RATE);
 	if (status != 0) {
 		myprintf("mpu.c: Error setting MPU sample rate.\r\n");
-		return XST_FAILURE;
+
+		//Check whether IIC Device is busy
+		if (status == XST_DEVICE_BUSY) {
+			exit(0);
+		} else {
+			return status;
+		}
 	}
 
 //5. Set sensitivities
 //Gyro
-	status = mpu_set_gyro_fsr(GYRO_SENS);
+	status = imuSetGyroFsr(GYRO_SENS);
 	if (status != 0) {
 		myprintf("mpu.c: Error setting gyroscope FRS.\r\n");
-		return XST_FAILURE;
+
+		//Check whether IIC Device is busy
+		if (status == XST_DEVICE_BUSY) {
+			exit(0);
+		} else {
+			return status;
+		}
 	}
 //Accel
-	status = mpu_set_accel_fsr(ACCEL_SENS);
+	status = imuSetAccelFsr(ACCEL_SENS);
 	if (status != 0) {
 		myprintf("mpu.c: Error setting gyroscope FRS.\r\n");
-		return XST_FAILURE;
+
+		//Check whether IIC Device is busy
+		if (status == XST_DEVICE_BUSY) {
+			exit(0);
+		} else {
+			return status;
+		}
 	}
 
 	//6. Init Global Variables
