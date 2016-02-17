@@ -106,8 +106,8 @@ int main() {
 //Collect Data
 //	collectRegisterData(1, 0); //15min sampling, no calibration
 
-	//Collect Robot Movement Data
-	collectRobotMvmtData(20, 0, BOOL_TRUE);
+//Collect Robot Movement Data
+	collectRobotMvmtData(300, 0, BOOL_TRUE);
 
 //Stay in here
 	while (1) {
@@ -228,7 +228,11 @@ int printForImuViewer(short int printMask, char* separator,
 	//Enable Interrupts
 	status = setupDMPInt();
 	if (status != XST_SUCCESS) {
-		return status;
+		if (status == XST_DEVICE_BUSY) {
+			exit(0);
+		} else {
+			return status;
+		}
 	}
 
 	//Adjust Number of Runs
@@ -344,7 +348,11 @@ int printDataUsingDMP(short sensors, bool initialCalibration,
 //Enable Interrupts
 	status = setupDMPInt();
 	if (status != XST_SUCCESS) {
-		return status;
+		if (status == XST_DEVICE_BUSY) {
+			exit(0);
+		} else {
+			return status;
+		}
 	}
 
 //Adjust Number of Runs
