@@ -887,8 +887,13 @@ int updateData() {
 	unsigned long timestamp;
 	float gyro_conv[NUMBER_OF_AXES], accel_conv[NUMBER_OF_AXES],
 			compass_conv[NUMBER_OF_AXES], quat_conv[QUATERNION_AMOUNT],
-			quat_new[QUATERNION_AMOUNT], temp_conv;
+			temp_conv;
 	float time_diff = 1.0 / FIFO_RATE;
+
+//Variables for computing position only
+#ifndef DISABLE_POS_COMP
+	quat_new[QUATERNION_AMOUNT];
+#endif
 
 //Variables for DMP only
 #ifdef USE_DMP
@@ -1786,7 +1791,7 @@ void computeQuaternion(float gyro[NUMBER_OF_AXES], float accel[NUMBER_OF_AXES],
 void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) {
 	//Variables
 	MpuRegisterData data;
-	unsigned long cnt = 0, samples = 0, printcnt = 0;
+	unsigned long cnt = 0, samples = 0;
 	int status;
 	unsigned char *bufStart, *bufCurr;
 
@@ -1862,8 +1867,6 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 				bufCurr++;
 				*bufCurr = (unsigned char) ((data.temp & BYTE3) >> 24);
 				bufCurr++;
-
-				printf("%li\r\n", data.temp);
 
 				//Increase Counter
 				cnt++;
