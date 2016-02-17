@@ -54,19 +54,19 @@ int main() {
   //Read Ten Values at a Time from Input File
   while (fgets(buff, NUM_OF_VALUES+1, (FILE*)infile)){
     //Convert back
-    data.gyro[0] = (short) ((buff[0]&0x00FF) | ((buff[1]&0x00FF) << 8));
-    data.gyro[1] = (short) ((buff[2]&0x00FF) | ((buff[3]&0x00FF) << 8));
-    data.gyro[2] = (short) ((buff[4]&0x00FF) | ((buff[5]&0x00FF) << 8));
-    data.accel[0] = (short) ((buff[6]&0x00FF) | ((buff[7]&0x00FF) << 8));
-    data.accel[1] = (short) ((buff[8]&0x00FF) | ((buff[9]&0x00FF) << 8));
-    data.accel[2] = (short) ((buff[10]&0x00FF) | ((buff[11]&0x00FF) << 8));
-    data.compass[0] = (short) ((buff[12]&0x00FF) | ((buff[13]&0x00FF) << 8));
-    data.compass[1] = (short) ((buff[14]&0x00FF) | ((buff[15]&0x00FF) << 8));
-    data.compass[2] = (short) ((buff[16]&0x00FF) | ((buff[17]&0x00FF) << 8));
-    i1 = (buff[18] | (buff[19] << 8)) & 0x0000FFFF;
-    i2 = (buff[20] | (buff[21] << 8)) & 0x0000FFFF;
-    data.temp = (long) (i1 | (i2 << 16));
-    
+    data.gyro[0] = (short) ((buff[0]&0x00FF) | (((buff[1]&0x00FF) << 8)&0xFF00));
+    data.gyro[1] = (short) ((buff[2]&0x00FF) | (((buff[3]&0x00FF) << 8)&0xFF00));
+    data.gyro[2] = (short) ((buff[4]&0x00FF) | (((buff[5]&0x00FF) << 8)&0xFF00));
+    data.accel[0] = (short) ((buff[6]&0x00FF) | (((buff[7]&0x00FF) << 8)&0xFF00));
+    data.accel[1] = (short) ((buff[8]&0x00FF) | (((buff[9]&0x00FF) << 8)&0xFF00));
+    data.accel[2] = (short) ((buff[10]&0x00FF) | (((buff[11]&0x00FF) << 8)&0xFF00));
+    data.compass[0] = (short) ((buff[12]&0x00FF) | (((buff[13]&0x00FF) << 8)&0xFF00));
+    data.compass[1] = (short) ((buff[14]&0x00FF) | (((buff[15]&0x00FF) << 8)&0xFF00));
+    data.compass[2] = (short) ((buff[16]&0x00FF) | (((buff[17]&0x00FF) << 8)&0xFF00));
+    i1 = ((buff[18]&0x00FF) | (((buff[19]&0x00FF) << 8)&0xFF00)) & 0x0000FFFF;
+    i2 = ((buff[20]&0x00FF) | (((buff[21]&0x00FF) << 8)&0xFF00)) & 0x0000FFFF;
+    data.temp = (long) ((i1&0x0000FFFF) | (((i2&0x0000FFFF) << 16)&0xFFFF0000));
+
     //Check for invalid line
     if (data.temp == 0){
       break;
