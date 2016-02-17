@@ -26,6 +26,31 @@ static int setAddr(u8* addr, char* addr_c);
  * Functions
  */
 
+
+/*
+ * Wrapper to Set DMP Interrupt Mode
+ * Returns 0 if successful and 21 if IIC bus is busy
+ */
+int imuSetDmpIntMode(unsigned char mode) {
+	//Variables
+	int success, failCnt = 0;
+
+	// Read Data
+	do {
+		// Execute Function
+		success = dmp_set_interrupt_mode(mode); //TODO
+
+		//Take care of unsuccessful IIC Reads
+		failCnt++;
+		if (failCnt > IIC_FAIL_MAX) {
+			return XST_DEVICE_BUSY;
+		}
+	} while (success != XST_SUCCESS);
+
+	//Return
+	return XST_SUCCESS;
+}
+
 /*
  * Wrapper to Set DMP Accel Bias
  * Returns 0 if successful and 21 if IIC bus is busy
