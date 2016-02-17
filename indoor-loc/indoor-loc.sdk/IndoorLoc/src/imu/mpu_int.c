@@ -29,7 +29,7 @@ void myXGpioPs_IntrHandler(XGpioPs *InstancePtr);
  * if USE_DMP is defined: check whether flag was set by ISR of DMP Interrupt
  * else: check whether flag was set by ISR of AXI Timer Interrupt
  */
-bool needToUpdateData(){
+bool needToUpdateData() {
 	//Variables
 	bool update;
 
@@ -48,7 +48,7 @@ bool needToUpdateData(){
  * Setup Interrupt (depending on USE_DMP define)
  * Returns 0 if successful
  */
-int setupInt(){
+int setupInt() {
 	//Variables
 	int status;
 
@@ -68,7 +68,7 @@ int setupInt(){
  * Returns BOOL_TRUE if there is new data, BOOL_FALSE if not
  */
 bool dmpDataAvailable() {
-	if (dataAvailable == BOOL_TRUE){
+	if (dataAvailable == BOOL_TRUE) {
 		dataAvailable = BOOL_FALSE;
 		return BOOL_TRUE;
 	} else {
@@ -81,32 +81,26 @@ bool dmpDataAvailable() {
  */
 int setupDMPInt() {
 	//Variables
-	int status, cnt = 0;
+	int status;
 	XScuGic_Config* IntcConfig;
 	XGpioPs_Config* GpioConfig;
 	unsigned char data;
 
 	//MPU and DMP
 	//Configure MPU Interrupt Pin
-	status = imuI2cRead(0x68, 0x37, 2, &data);	//Read Register
+	status = imuReadIntConfig(&data);	//Read Register
 	if (status != XST_SUCCESS) {
-		return XST_FAILURE;
+		return status;
 	}
 	data &= (~INT_LEVEL_BIT); //Clear bit --> active high
 	data &= (~INT_OPEN_BIT); //Clear bit --> push-pull
 	data &= (~INT_RD_CLEAR_BIT); //Clear bit --> interrupt status bits are cleared only by reading INT_STATUS (Register 58)
 	data |= LATCH_INT_EN_BIT; //Set bit --> INT pin is held high until the interrupt is cleared
-	//data = 0x24; //debug
-	for (cnt = 0; cnt < 10; cnt++){
-		//Write Register
-		status = imuI2cWrite(0x68, 0x37, 1, &data);
 
-		//Check Status
-		if (status == XST_SUCCESS){
-			break;
-		} else if (status == XST_DEVICE_BUSY){
-			return XST_FAILURE;
-		}
+	//Configure Int Pin
+	status = imuConfigureInt(&data);
+	if (status != XST_SUCCESS) {
+		return status;
 	}
 
 	//Set Interrupt level
@@ -124,7 +118,7 @@ int setupDMPInt() {
 	}
 
 	//Set DMP Interrupt Mode
-	status = dmp_set_interrupt_mode(DMP_INT_CONTINUOUS);//Interrupt when one FIFO period has elapsed
+	status = dmp_set_interrupt_mode(DMP_INT_CONTINUOUS); //Interrupt when one FIFO period has elapsed
 	if (status != XST_SUCCESS) {
 		myprintf("mpu_int.c: Could not set interrupt mode.\r\n");
 		return XST_FAILURE;
@@ -192,7 +186,7 @@ void ImuIntrHandler(void *CallBackRef, u32 Bank, u32 Status) {
 	short irq;
 
 	//Get IRQ Status
-	status = mpu_get_int_status(&irq);
+	status = imuGetIntStatus(&irq);
 	if (status == XST_SUCCESS) {
 		if ((irq & MPU_INT_STATUS_DMP_0) == MPU_INT_STATUS_DMP_0) { //DMP Interrupt
 			dataAvailable = 1;

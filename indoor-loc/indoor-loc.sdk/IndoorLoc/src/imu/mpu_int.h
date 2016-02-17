@@ -13,6 +13,7 @@
 #include "xil_exception.h"
 #include "xgpiops.h"
 #include "xil_types.h"
+#include "mpu_utils.h"
 #include "mpu.h"
 #include "../zedboard/print_utils.h"
 #include "../program_parameters.h"
