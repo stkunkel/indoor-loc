@@ -16,6 +16,7 @@
 #include "xgpiops.h"
 #include "xstatus.h"
 #include "xtime_l.h"
+#include "mpu9150/inv_mpu.h"
 #include "../zedboard/iic_utils.h"
 #include "../zedboard/print_utils.h"
 #include "../zedboard/time_utils.h"
@@ -31,6 +32,25 @@
 #define IMU_LAST_ADDR_BIT	0			//one IMU
 
 //Functions
+int imuSetIntLatched(unsigned char enable);
+int imuSetGyroBias(long *gyro_bias);
+int imuSetDmpState(unsigned char enable);
+int imuSetGyroFsr(unsigned short fsr);
+int imuSetAccelFsr(unsigned char fsr) ;
+int imuResetFifo();
+int imuSetSampleRate(unsigned short rate);
+int imuDmpLoadMotionDriverFirmware();
+int imuInitMpu(struct int_param_s *int_param);
+int imuDmpReadFifo(short *gyro, short *accel, long *quat,
+		unsigned long *timestamp, short *sensors, unsigned char *more);
+int imuReadGyroBias(long *gyro_bias);
+int imuSetAccelBias(const long *accel_bias);
+int imuReadAccelBias(long *accel_bias);
+int imuGetIntStatus(short* status);
+int imuReadGyroReg(short *data, unsigned long *timestamp);
+int imuReadAccelReg(short *data, unsigned long *timestamp);
+int imuReadCompassReg(short *data, unsigned long *timestamp);
+int imuReadTemp(long *data, unsigned long *timestamp);
 int imuI2cRead(unsigned char slave_addr, unsigned char reg_addr, unsigned char length, unsigned char *data);
 int imuI2cWrite(unsigned char slave_addr, unsigned char reg_addr, unsigned char length, unsigned char *data);
 void imuDelay(unsigned long ms);
