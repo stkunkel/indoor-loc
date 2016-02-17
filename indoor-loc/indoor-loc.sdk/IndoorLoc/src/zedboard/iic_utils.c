@@ -9,8 +9,16 @@
 #include "iic_utils.h"
 
 /*
- * Functions
+ * Global Variables
  */
+bool busy = BOOL_FALSE;
+
+/*
+ * Check whether busy flag has been set during sending or receiving data
+ */
+bool iic_check_busy_flag(){
+	return busy;
+}
 
 /*
  * Set IIC Clock
@@ -297,6 +305,7 @@ int iic_burstWrite(XIicPs *IicPs, u8 Address, u8 Register, u32 length,
 		usleep(100);
 		cnt++;
 		if (cnt > IIC_TIMEOUT) {
+			busy = BOOL_TRUE;
 			return XST_DEVICE_BUSY;
 		}
 	}
@@ -387,6 +396,7 @@ int iic_read2(XIicPs *IicPs, u8 Address, u8 Register, u8 *Data, int ByteCount) {
 		//Timeout
 		cnt++;
 		if (cnt > IIC_TIMEOUT) {
+			busy = BOOL_TRUE;
 			return XST_DEVICE_BUSY;
 		}
 	}

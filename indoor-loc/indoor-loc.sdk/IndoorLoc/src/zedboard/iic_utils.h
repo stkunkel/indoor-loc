@@ -13,14 +13,17 @@
 #include "xiicps.h"
 #include "print_utils.h"
 #include "../zedboard/time_utils.h"
+#include "../bool.h"
 
 // Parameters
 #define IIC_TIMEOUT		100
+#define IIC_FAIL_MAX	10
 #define IIC_DEVICE_ID  	XPAR_PS7_I2C_0_DEVICE_ID
-#define IIC_SCLK_RATE  	400000//100000//XPAR_PS7_I2C_0_I2C_CLK_FREQ_HZ
+#define IIC_SCLK_RATE  	400000
 #define IIC_BASE_ADDR	XPAR_PS7_I2C_0_BASEADDR
 
 //Functions
+bool iic_check_busy_flag();
 int SetIiCSClk(XIicPs *InstancePtr, u32 FsclHz );
 int iic_init(XIicPs *IicPs, u16 DeviceId, u32 ClkRate);
 int iic_reset_init_abort(XIicPs *IicPs, u16 DeviceId, u32 ClkRate);
