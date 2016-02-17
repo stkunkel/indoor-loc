@@ -3,8 +3,11 @@
  * Author: Stephanie Kunkel
  */
 #include "robotCtrl.h"
+
 /*
  * Collect Robot Movement Data
+ * In: sample time (s), calibration time (s), bool whether to collect data and send it via UART or print directly to UART
+ * Returns 0 if successful
  */
 int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 		bool collect) {
@@ -13,12 +16,14 @@ int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 	unsigned long cnt = 0, samples = 0;
 	int status;
 	unsigned char *bufStart, *bufCurr;
-	Joint joint = wrist;
-	float angle[2];
+	Joint joint = base;
+	float angle[2], currAngle, dir;
 
 	//Set angles
 	angle[0] = 0.0;
 	angle[1] = 90.0;
+	currAngle = angle[0];
+	dir = 1.0;
 
 	//Compute number of data samples
 	samples = sampleTime * FIFO_RATE;
@@ -46,7 +51,17 @@ int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 	//Get Samples
 	while (cnt < samples) {
 
-		//Move Robot
+//		//Get Moving Direction
+//		if (currAngle >= angle[1]){
+//			dir = -1.0;
+//		}  else if (currAngle <= angle[0]){
+//			dir = 1.0;
+//		}
+//
+//		//Move Robot
+//		currAngle += dir;
+//		setAngle(joint, currAngle);
+
 		if (cnt % 2 == 0) {
 			setAngle(joint, angle[0]);
 		} else {
@@ -55,20 +70,20 @@ int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 
 		//Get Sensor Data
 		while (needToUpdateData() == BOOL_FALSE) {
-			usleep(20);
+			usleep(1);
 		}
 
-		//Collect Data in required
-		if (collect == BOOL_TRUE) {
+		//Read Sensor Data and write to memory
+		status = readFromRegs(data.gyro, data.accel, data.compass, &data.temp,
+				0, SENSORS_ALL);
 
-			//Read Sensor Data and write to memory
-			status = readFromRegs(data.gyro, data.accel, data.compass,
-					&data.temp, 0, SENSORS_ALL);
+		//Read successful?
+		if (status == XST_SUCCESS) {
+			//LED Run
+			ledRun();
 
-			//Read successful?
-			if (status == XST_SUCCESS) {
-				//LED Run
-				ledRun();
+			//Collect Data in required
+			if (collect == BOOL_TRUE) {
 
 				//Store to buffer
 				*bufCurr = (unsigned char) (data.gyro[0] & BYTE0);
@@ -115,26 +130,46 @@ int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 				bufCurr++;
 				*bufCurr = (unsigned char) ((data.temp & BYTE3) >> 24);
 				bufCurr++;
+			} else {
+				//Update Data
+				status = updateData();
 
-				//Increase Counter
-				cnt++;
+				//Check whether data should be printed
+				if (status == XST_SUCCESS) {
+					if ((cnt % (FIFO_RATE / IMUVIEWER_FREQ)) == 0) {
+
+						//Print
+						status = printforDisplay(PRINT_FOR_VIEWER, " ");
+
+						//Print new line
+						if (status == XST_SUCCESS) {
+
+							//Print new line
+							printf("\n\r");
+						}
+					}
+				}
 			}
-		} else {
+
+			//Increase Counter
 			cnt++;
 		}
 	}
 
-	//Disable Timer Interrupts
+//Reset Robot
+	reset();
+
+//Disable Timer Interrupts
 	disableTmrInt();
 
-	//Initialize XUart
+//Initialize XUart
 	initXUartPs();
 
-	//Transmit buf
-	//printf("XModem Transmission starts.\r\n");
+//Transmit buf
+//printf("XModem Transmission starts.\r\n");
 	xmodemTransmit(bufStart, ((cnt - 1) * DATA_NUMBER_OF_BYTES));
-	//printf("XModem Transmission finished.\r\n");
+//printf("XModem Transmission finished.\r\n");
 
-	//Return
+//Return
 	return PWM_SUCCESS;
 }

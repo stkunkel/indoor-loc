@@ -10,6 +10,7 @@
 #include "xstatus.h"
 #include "../imu/mpu.h"
 #include "pwmsw.h"
+#include "../zedboard/print_utils.h"
 
 //Functions
 int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
