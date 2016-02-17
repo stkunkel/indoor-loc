@@ -32,6 +32,15 @@
 #define IMU_LAST_ADDR_BIT	0			//one IMU
 
 //Functions
+int imuSetDmpAccelBias(long *bias);
+int imuSetDmpGyroBias(long *bias);
+int imuGetFifoCnt(int* cnt);
+int imuEnableDmpGyroCal(unsigned char enable);
+int imuEnableDmpFeatures(unsigned short mask);
+int imuSetFifoRate(unsigned short rate);
+int imuSetSensors(unsigned char sensors);
+int imuReadIntConfig(unsigned char* config);
+int imuConfigureInt(unsigned char* config);
 int imuSetIntLatched(unsigned char enable);
 int imuSetGyroBias(long *gyro_bias);
 int imuSetDmpState(unsigned char enable);

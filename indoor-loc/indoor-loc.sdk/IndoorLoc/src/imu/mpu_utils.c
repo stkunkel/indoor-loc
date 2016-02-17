@@ -26,6 +26,229 @@ static int setAddr(u8* addr, char* addr_c);
  * Functions
  */
 
+/*
+ * Wrapper to Set DMP Accel Bias
+ * Returns 0 if successful and 21 if IIC bus is busy
+ */
+int imuSetDmpAccelBias(long *bias) {
+	//Variables
+	int success, failCnt = 0;
+
+	// Read Data
+	do {
+		// Execute Function
+		success = dmp_set_accel_bias(bias); //TODO
+
+		//Take care of unsuccessful IIC Reads
+		failCnt++;
+		if (failCnt > IIC_FAIL_MAX) {
+			return XST_DEVICE_BUSY;
+		}
+	} while (success != XST_SUCCESS);
+
+	//Return
+	return XST_SUCCESS;
+}
+
+/*
+ * Wrapper to Set DMP Gyro Bias
+ * Returns 0 if successful and 21 if IIC bus is busy
+ */
+int imuSetDmpGyroBias(long *bias) {
+	//Variables
+	int success, failCnt = 0;
+
+	// Read Data
+	do {
+		// Execute Function
+		success = dmp_set_gyro_bias(bias); //TODO
+
+		//Take care of unsuccessful IIC Reads
+		failCnt++;
+		if (failCnt > IIC_FAIL_MAX) {
+			return XST_DEVICE_BUSY;
+		}
+	} while (success != XST_SUCCESS);
+
+	//Return
+	return XST_SUCCESS;
+}
+
+/*
+ * Get Fifo Count
+ * Out: fifo count
+ * Returns 0 if successful and 21 if IIC bus is busy
+ */
+int imuGetFifoCnt(int* cnt) {
+	//Variables
+	int success, failCnt = 0;
+	unsigned char* data = (unsigned char*) malloc(100 * sizeof(char));
+
+	// Read Data
+	do {
+		// Execute Function
+		success = imuI2cRead(imuAddr, 0x72, 2, data);
+
+		//Take care of unsuccessful IIC Reads
+		failCnt++;
+		if (failCnt > IIC_FAIL_MAX) {
+			return XST_DEVICE_BUSY;
+		}
+	} while (success != XST_SUCCESS);
+
+	//Convert
+	*cnt = (data[0] << 8) | data[1];
+
+	//Free memory and return
+	free(data);
+
+	//Return
+	return XST_SUCCESS;
+}
+
+/*
+ * Wrapper to Enable DMP Gyro Calibration
+ * Returns 0 if successful and 21 if IIC bus is busy
+ */
+int imuEnableDmpGyroCal(unsigned char enable) {
+	//Variables
+	int success, failCnt = 0;
+
+	// Read Data
+	do {
+		// Execute Function
+		success = dmp_enable_gyro_cal(enable); //TODO
+
+		//Take care of unsuccessful IIC Reads
+		failCnt++;
+		if (failCnt > IIC_FAIL_MAX) {
+			return XST_DEVICE_BUSY;
+		}
+	} while (success != XST_SUCCESS);
+
+	//Return
+	return XST_SUCCESS;
+}
+
+/*
+ * Wrapper to Enable DMP Features
+ * Returns 0 if successful and 21 if IIC bus is busy
+ */
+int imuEnableDmpFeatures(unsigned short mask) {
+	//Variables
+	int success, failCnt = 0;
+
+	// Read Data
+	do {
+		// Execute Function
+		success = dmp_enable_feature(mask); //TODO
+
+		//Take care of unsuccessful IIC Reads
+		failCnt++;
+		if (failCnt > IIC_FAIL_MAX) {
+			return XST_DEVICE_BUSY;
+		}
+	} while (success != XST_SUCCESS);
+
+	//Return
+	return XST_SUCCESS;
+}
+
+/*
+ * Wrapper to Set FIFO Rate
+ * Returns 0 if successful and 21 if IIC bus is busy
+ */
+int imuSetFifoRate(unsigned short rate) {
+	//Variables
+	int success, failCnt = 0;
+
+	// Read Data
+	do {
+		// Execute Function
+		success = dmp_set_fifo_rate(rate); //TODO
+
+		//Take care of unsuccessful IIC Reads
+		failCnt++;
+		if (failCnt > IIC_FAIL_MAX) {
+			return XST_DEVICE_BUSY;
+		}
+	} while (success != XST_SUCCESS);
+
+	//Return
+	return XST_SUCCESS;
+}
+
+/*
+ * Wrapper to Set Sensors
+ * Returns 0 if successful and 21 if IIC bus is busy
+ */
+int imuSetSensors(unsigned char sensors) {
+	//Variables
+	int success, failCnt = 0;
+
+	// Read Data
+	do {
+		// Execute Function
+		success = mpu_set_sensors(sensors);
+
+		//Take care of unsuccessful IIC Reads
+		failCnt++;
+		if (failCnt > IIC_FAIL_MAX) {
+			return XST_DEVICE_BUSY;
+		}
+	} while (success != XST_SUCCESS);
+
+	//Return
+	return XST_SUCCESS;
+}
+
+/*
+ * Read Interrupt Pin Setup
+ * Returns 0 if successful and 21 if IIC bus is busy
+ */
+int imuReadIntConfig(unsigned char* config) {
+	//Variables
+	int success, failCnt = 0;
+
+	// Read Data
+	do {
+		// Execute Function
+		success = imuI2cRead(0x68, 0x37, 2, config);
+
+		//Take care of unsuccessful IIC Reads
+		failCnt++;
+		if (failCnt > IIC_FAIL_MAX) {
+			return XST_DEVICE_BUSY;
+		}
+	} while (success != XST_SUCCESS);
+
+	//Return
+	return XST_SUCCESS;
+}
+
+/*
+ * Setup Interrupt Pin
+ * Returns 0 if successful and 21 if IIC bus is busy
+ */
+int imuConfigureInt(unsigned char* config) {
+	//Variables
+	int success, failCnt = 0;
+
+	// Read Data
+	do {
+		// Execute Function
+		success = imuI2cWrite(0x68, 0x37, 1, config);
+
+		//Take care of unsuccessful IIC Reads
+		failCnt++;
+		if (failCnt > IIC_FAIL_MAX) {
+			return XST_DEVICE_BUSY;
+		}
+	} while (success != XST_SUCCESS);
+
+	//Return
+	return XST_SUCCESS;
+}
 
 /*
  * Wrapper to Set Latched Interrupt
@@ -195,7 +418,6 @@ int imuSetSampleRate(unsigned short rate) {
 	return XST_SUCCESS;
 }
 
-
 /*
  * Wrapper to load DMP Firmware
  * Returns 0 if successful and 21 if IIC bus is busy
@@ -207,7 +429,7 @@ int imuDmpLoadMotionDriverFirmware() {
 	// Read Data
 	do {
 		// Execute Function
-		success = dmp_load_motion_driver_firmware();//TODO
+		success = dmp_load_motion_driver_firmware(); //TODO
 
 		//Take care of unsuccessful IIC Reads
 		failCnt++;
@@ -256,7 +478,7 @@ int imuDmpReadFifo(short *gyro, short *accel, long *quat,
 	// Read Data
 	do {
 		// Execute Function
-		success = dmp_read_fifo(gyro, accel, quat, timestamp, sensors, more);//TODO
+		success = dmp_read_fifo(gyro, accel, quat, timestamp, sensors, more); //TODO
 
 		//Take care of unsuccessful IIC Reads
 		failCnt++;
