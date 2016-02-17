@@ -9,13 +9,12 @@
 int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 		bool collect) {
 	//Variables
-	MpuRegisterData *dataStart, *dataColl, *print;
-	unsigned long cnt = 0, samples = 0, printcnt = 0;
+	MpuRegisterData data;
+	unsigned long cnt = 0, samples = 0;
 	int status;
+	unsigned char *bufStart, *bufCurr;
 	Joint joint = wrist;
 	float angle[2];
-	short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
-	long temp;
 
 	//Set angles
 	angle[0] = 0.0;
@@ -24,14 +23,9 @@ int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 	//Compute number of data samples
 	samples = sampleTime * FIFO_RATE;
 
-	//Allocate Memory
-	if (collect == BOOL_TRUE) {
-		dataStart = (MpuRegisterData*) 0x7000000; //(MpuRegisterData*) malloc((samples + 200) * sizeof(MpuRegisterData));
-
-		//Set Print Pointer
-		dataColl = dataStart;
-		print = dataStart;
-	}
+	//Set Pointer for Buffer
+	bufStart = (unsigned char*) 0x7000000;
+	bufCurr = bufStart;
 
 	//Reset Robot
 	status = reset();
@@ -45,16 +39,6 @@ int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 		printf("Could not initialize IMU.\r\n");
 		return PWM_FAILURE;
 	}
-
-	//Read out some data sets before sampling starts
-	//	for (cnt = 0; cnt < CAL_IGNORE_SAMPLES; cnt++) {
-	//		if (needToUpdateData() == BOOL_TRUE) {
-	//
-	//			//Read Sensor Data and write to memory
-	//			status = readFromRegs(dataColl->gyro, dataColl->accel,
-	//					dataColl->compass, &dataColl->temp, 0, SENSORS_ALL);
-	//		}
-	//	}
 
 	//Reset cnt
 	cnt = 0;
@@ -70,69 +54,86 @@ int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 		}
 
 		//Get Sensor Data
-		while (needToUpdateData() == BOOL_FALSE){
+		while (needToUpdateData() == BOOL_FALSE) {
 			usleep(20);
 		}
 
-//		if (needToUpdateData() == BOOL_TRUE) {
+		//Collect Data in required
+		if (collect == BOOL_TRUE) {
 
 			//Read Sensor Data and write to memory
-			if (collect == BOOL_TRUE) {
-				status = readFromRegs(dataColl->gyro, dataColl->accel,
-						dataColl->compass, &dataColl->temp, 0, SENSORS_ALL);
-			} else {
-				status = readFromRegs(gyro, accel, compass, &temp, 0,
-				SENSORS_ALL);
-			}
+			status = readFromRegs(data.gyro, data.accel, data.compass,
+					&data.temp, 0, SENSORS_ALL);
 
 			//Read successful?
 			if (status == XST_SUCCESS) {
 				//LED Run
 				ledRun();
 
-				//Increase count
+				//Store to buffer
+				*bufCurr = (unsigned char) (data.gyro[0] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.gyro[0] & BYTE1) >> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.gyro[1] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.gyro[1] & BYTE1) >> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.gyro[2] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.gyro[2] & BYTE1) >> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.accel[0] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.accel[0] & BYTE1) >> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.accel[1] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.accel[1] & BYTE1) >> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.accel[2] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.accel[2] & BYTE1) >> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.compass[0] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.compass[0] & BYTE1) >> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.compass[1] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.compass[1] & BYTE1) >> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.compass[2] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.compass[2] & BYTE1) >> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.temp & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.temp & BYTE1) >> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.temp & BYTE2) >> 16);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.temp & BYTE3) >> 24);
+				bufCurr++;
+
+				//Increase Counter
 				cnt++;
-
-				if (collect == BOOL_TRUE) {
-					//Go to next data set
-					if (cnt < samples) {
-						dataColl++;
-					}
-				} else {
-					//Print
-					status = printforDisplay(PRINT_FOR_VIEWER, " ");
-
-					//Print new line
-					if (status == XST_SUCCESS) {
-						//Increase print counter
-						printcnt++;
-
-						//Print new line
-						printf("\n\r");
-					} else {
-						cnt--;
-					}
-				}
 			}
-		}
-//	}
-
-	//Print samples
-	if (collect == BOOL_TRUE) {
-		for (printcnt = 0; printcnt < cnt; printcnt++) {
-			//Print
-			//		printf("%d ", print->cnt);
-			printRaw(print->gyro);
-			printf(" ");
-			printRaw(print->accel);
-			printf(" ");
-			printRaw(print->compass);
-			printf(" %ld;", print->temp);
-
-			//Increase Pointer Address
-			print++;
+		} else {
+			cnt++;
 		}
 	}
+
+	//Disable Timer Interrupts
+	disableTmrInt();
+
+	//Initialize XUart
+	initXUartPs();
+
+	//Transmit buf
+	//printf("XModem Transmission starts.\r\n");
+	xmodemTransmit(bufStart, ((cnt - 1) * DATA_NUMBER_OF_BYTES));
+	//printf("XModem Transmission finished.\r\n");
 
 	//Return
 	return PWM_SUCCESS;
