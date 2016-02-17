@@ -55,6 +55,11 @@ int setupInt() {
 	//Setup
 #ifdef USE_DMP
 	status = setupDMPInt();
+	if (status == XST_DEVICE_BUSY) {
+		exit(0);
+	} else {
+		return status;
+	}
 #else
 	status = initTmrInt(FIFO_RATE);
 #endif
@@ -92,6 +97,8 @@ int setupDMPInt() {
 	if (status != XST_SUCCESS) {
 		return status;
 	}
+
+	//Modify Bits
 	data &= (~INT_LEVEL_BIT); //Clear bit --> active high
 	data &= (~INT_OPEN_BIT); //Clear bit --> push-pull
 	data &= (~INT_RD_CLEAR_BIT); //Clear bit --> interrupt status bits are cleared only by reading INT_STATUS (Register 58)
@@ -107,21 +114,21 @@ int setupDMPInt() {
 	status = mpu_set_int_level(0); //Set Interrupt for "active high" (0)
 	if (status != XST_SUCCESS) {
 		myprintf("mpu_int.c: Could not set interrupt level.\r\n");
-		return XST_FAILURE;
+		return status;
 	}
 
 	//Enable Latched Interrupt
-	status = mpu_set_int_latched(1);
+	status = imuSetIntLatched(1);
 	if (status != XST_SUCCESS) {
 		myprintf("mpu_int.c: Could not set latched interrupt.\r\n");
-		return XST_FAILURE;
+		return status;
 	}
 
 	//Set DMP Interrupt Mode
-	status = dmp_set_interrupt_mode(DMP_INT_CONTINUOUS); //Interrupt when one FIFO period has elapsed
+	status = imuSetDmpIntMode(DMP_INT_CONTINUOUS); //Interrupt when one FIFO period has elapsed
 	if (status != XST_SUCCESS) {
 		myprintf("mpu_int.c: Could not set interrupt mode.\r\n");
-		return XST_FAILURE;
+		return status;
 	}
 
 	//Initialize Xil Exceptions
@@ -132,7 +139,7 @@ int setupDMPInt() {
 	status = XGpioPs_CfgInitialize(&Gpio, GpioConfig, GpioConfig->BaseAddr);
 	if (status != XST_SUCCESS) {
 		myprintf("mpu_utils.c: Error initializing GPIO Config.\r\n");
-		return XST_FAILURE;
+		return status;
 	}
 
 	//Initialize GIC
@@ -141,7 +148,7 @@ int setupDMPInt() {
 			IntcConfig->CpuBaseAddress);
 	if (status != XST_SUCCESS) {
 		myprintf("mpu_utils.c: Error initializing SCU GIC Config.\r\n");
-		return XST_FAILURE;
+		return status;
 	}
 
 	//Connect interrupt controller interrupt handler to HW interrupt handling logic in PS
