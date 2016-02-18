@@ -9,7 +9,7 @@
  */
 #define INFILEDESC		"data.bin"
 #define OUTFILEDESC		"data.txt"
-#define NUM_OF_VALUES		22
+#define NUM_OF_VALUES		22//sizeof(MpuRegisterData)
 #define NUMBER_OF_AXES		3
 
 /*
@@ -19,7 +19,8 @@ typedef struct {
 	short gyro[NUMBER_OF_AXES];
 	short accel[NUMBER_OF_AXES];
 	short compass[NUMBER_OF_AXES];
-	long temp;
+	int temp; //instead of long --> 4 byte
+	//short fill;
 } MpuRegisterData;
 
 /*
@@ -51,17 +52,17 @@ int main() {
   
   
   //Read Ten Values at a Time from Input File
-  while (fgets(buff, NUM_OF_VALUES+1, (FILE*)infile)){
+  while (fgets(buff, NUM_OF_VALUES, (FILE*)infile)){
     //Convert back
     pdata = (MpuRegisterData*) &buff;
 
     //Check for invalid line
-    if (pdata->temp == 0){
-      break;
-    }
+    //if (pdata->temp == 0){
+    //  break;
+    //}
     
     //Print to Output File
-    fprintf(outfile, "%hi %hi %hi %hi %hi %hi %hi %hi %hi %li\r\n", pdata->gyro[0], pdata->gyro[1], pdata->gyro[2], pdata->accel[0], pdata->accel[1], pdata->accel[2], pdata->compass[0], pdata->compass[1], pdata->compass[2], pdata->temp);
+    fprintf(outfile, "%hi %hi %hi %hi %hi %hi %hi %hi %hi %d\r\n", pdata->gyro[0], pdata->gyro[1], pdata->gyro[2], pdata->accel[0], pdata->accel[1], pdata->accel[2], pdata->compass[0], pdata->compass[1], pdata->compass[2], pdata->temp);
   }
   
   //Close Files

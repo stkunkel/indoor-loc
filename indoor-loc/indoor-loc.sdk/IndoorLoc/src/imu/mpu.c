@@ -1505,6 +1505,7 @@ int initIMU(unsigned int calibrationTime) {
 
 	//Init MPU
 	myprintf(".........Initialize MPU...........\n\r");
+	usleep(1000000);
 	status = initMPU();
 	if (status != XST_SUCCESS) {
 		return status;
@@ -1809,10 +1810,12 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 
 	//Compute number of data samples
 	samples = sampleTime * FIFO_RATE;
+	samples = 2;
 
 	//Set Pointer for Buffer
 	buff = (unsigned char*) 0x7000000;
 	pdata = (MpuRegisterData*) 0x7000000;
+	memset(pdata, 0, samples * sizeof(MpuRegisterData));
 
 	//Initialize
 	status = initIMU(calibrationTime);
@@ -1828,6 +1831,9 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 			//Read Sensor Data and write to memory
 			status = readFromRegs(pdata->gyro, pdata->accel, pdata->compass,
 					&(pdata->temp), 0, SENSORS_ALL);
+
+			//Set fill
+			//pdata->fill = 0;
 
 			//Check whether IIC Bus is Busy
 			if (status == XST_DEVICE_BUSY) {
@@ -1850,18 +1856,18 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 		}
 	}
 
+	//Decrease Pointer
+	pdata--;
+
 	//Disable Timer Interrupts
 	disableTmrInt();
-
-	//Decrease Counter
-	cnt--;
 
 	//Initialize XUart
 	initXUartPs();
 
 	//Transmit buf
 	//printf("XModem Transmission starts.\r\n");
-	xmodemTransmit(buff, (cnt * DATA_NUMBER_OF_BYTES));
+	xmodemTransmit(buff, (cnt * 22)); //sizeof(MpuRegisterData)
 	//printf("XModem Transmission finished.\r\n");
 }
 
