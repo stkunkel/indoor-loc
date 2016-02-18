@@ -14,6 +14,13 @@
 #include "xuartps.h"
 #include "../program_parameters.h"
 
+//Defines
+#define XMODEM_PACKET_SIZE		133
+#define XMODEM_PKG_CONT_SIZE	128
+#define XMODEM_INDEX_HEAD		0
+#define XMODEM_INDEX_CONTENT	3
+#define XMODEM_INDEX_CRC		131
+
 
 //Functions
 void testXModem();
