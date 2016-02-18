@@ -1,19 +1,16 @@
 TODO IMU Viewer:
-Read in filtered data and display rotation --> Does it make sense?
-Compute Position --> Drift?
+Read in filtered data and display rotation --> calculation error?
+Compute Position --> calculation error?
 
 TODO XSDK:
-XModem for Data Collection
 Handle IIC_DEVICE_BUSY errors if gyro frs=1000dgr/s
 Read out Sensor Sensitivities and store them in global variables
 FIR Filter
 Test Velocity and Position again with filtered values
-Test IIC Timeout --> prevent IIC Deadlock
-Test PWM Value Range for all motors
 
 
 IDEAS:
-Do caluclations with raw sensor values?
+Do calculations with raw sensor values?
 More Calibration (--> Lohse2015)
 Complementary or Kalman Filter?
 
