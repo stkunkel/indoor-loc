@@ -56,8 +56,6 @@ int setupInt() {
 #ifdef USE_DMP
 	status = setupDMPInt();
 	if (status == XST_DEVICE_BUSY) {
-		exit(0);
-	} else {
 		return status;
 	}
 #else

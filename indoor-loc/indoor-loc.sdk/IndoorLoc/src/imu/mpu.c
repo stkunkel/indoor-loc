@@ -366,7 +366,7 @@ int printDataNoDMP(short sensors, char* separator) {
 
 //Get Data
 	status = readFromRegs(gyro, accel, compass, &temp_raw, &timestamp, sensors);
-	if (status == XST_DEVICE_BUSY){
+	if (status == XST_DEVICE_BUSY) {
 		return status;
 	}
 
@@ -1609,8 +1609,6 @@ int configureDMP(unsigned short int features) {
 	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Could not enable DMP.\r\n");
 		if (status == XST_DEVICE_BUSY) {
-			exit(0);
-		} else {
 			return status;
 		}
 	}
@@ -1620,8 +1618,6 @@ int configureDMP(unsigned short int features) {
 	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Error enabling desired features.\r\n");
 		if (status == XST_DEVICE_BUSY) {
-			exit(0);
-		} else {
 			return status;
 		}
 	}
@@ -1640,8 +1636,6 @@ int configureDMP(unsigned short int features) {
 	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Error Setting FIFO rate.\n\r");
 		if (status == XST_DEVICE_BUSY) {
-			exit(0);
-		} else {
 			return status;
 		}
 	}
@@ -1651,8 +1645,6 @@ int configureDMP(unsigned short int features) {
 	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Error configuring FIFO.\n\r");
 		if (status == XST_DEVICE_BUSY) {
-			exit(0);
-		} else {
 			return status;
 		}
 	}
@@ -1679,8 +1671,6 @@ int initDMP() {
 
 			//Check whether IIC Device is busy
 			if (status == XST_DEVICE_BUSY) {
-				exit(0);
-			} else {
 				return status;
 			}
 		}
@@ -1984,8 +1974,6 @@ int getImuAddr(u8* addr) {
 		if (status != XST_SUCCESS) {
 			//Check whether IIC Device is busy
 			if (status == XST_DEVICE_BUSY) {
-				exit(0);
-			} else {
 				return status;
 			}
 		}
@@ -2015,8 +2003,6 @@ int configureMpuFifo(unsigned char fifoMask) {
 
 		//Check whether IIC Device is busy
 		if (status == XST_DEVICE_BUSY) {
-			exit(0);
-		} else {
 			return status;
 		}
 	}
@@ -2047,8 +2033,6 @@ int initMPU() {
 
 		//Check whether IIC Device is busy
 		if (status == XST_DEVICE_BUSY) {
-			exit(0);
-		} else {
 			return status;
 		}
 	}
@@ -2061,8 +2045,6 @@ int initMPU() {
 
 		//Check whether IIC Device is busy
 		if (status == XST_DEVICE_BUSY) {
-			exit(0);
-		} else {
 			return status;
 		}
 	}
@@ -2075,8 +2057,6 @@ int initMPU() {
 
 		//Check whether IIC Device is busy
 		if (status == XST_DEVICE_BUSY) {
-			exit(0);
-		} else {
 			return status;
 		}
 	}
@@ -2088,8 +2068,6 @@ int initMPU() {
 
 		//Check whether IIC Device is busy
 		if (status == XST_DEVICE_BUSY) {
-			exit(0);
-		} else {
 			return status;
 		}
 	}
@@ -2102,8 +2080,6 @@ int initMPU() {
 
 		//Check whether IIC Device is busy
 		if (status == XST_DEVICE_BUSY) {
-			exit(0);
-		} else {
 			return status;
 		}
 	}
@@ -2114,8 +2090,6 @@ int initMPU() {
 
 		//Check whether IIC Device is busy
 		if (status == XST_DEVICE_BUSY) {
-			exit(0);
-		} else {
 			return status;
 		}
 	}

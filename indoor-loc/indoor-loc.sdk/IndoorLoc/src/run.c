@@ -48,11 +48,14 @@ int main() {
 	//Init Platform
 	init_platform();
 
+	//Print Output Separator
+	myprintf(".........Program Start...........\n\r");
+
 	//Init GPIO (for LEDs)
 	initGpio();
 
-	//Print Output Separator
-	myprintf(".........Program Start...........\n\r");
+	//Reset Robot
+	reset();
 
 	//Print Data without DMP
 //	printDataWithoutDMP(SENSORS_ALL, SEPARATOR, DATA_NO_DMP_RUNS);
@@ -104,10 +107,10 @@ int main() {
 //	testXModem();
 
 //Collect Data
-//	collectRegisterData(1, 0); //15min sampling, no calibration
+	collectRegisterData(600, 0); //10min sampling, no calibration
 
 //Collect Robot Movement Data
-	collectRobotMvmtData(300, 0, BOOL_TRUE);
+//	collectRobotMvmtData(300, 0, BOOL_TRUE);
 
 //Stay in here
 	while (1) {
@@ -182,6 +185,8 @@ int printGeneric(short int printMask, char* separator,
 					}
 
 				}
+			} else if (status == XST_DEVICE_BUSY) {
+				return status;
 			} else {
 				cnt--;
 			}
@@ -228,11 +233,7 @@ int printForImuViewer(short int printMask, char* separator,
 	//Enable Interrupts
 	status = setupDMPInt();
 	if (status != XST_SUCCESS) {
-		if (status == XST_DEVICE_BUSY) {
-			exit(0);
-		} else {
-			return status;
-		}
+		return status;
 	}
 
 	//Adjust Number of Runs
@@ -274,6 +275,8 @@ int printForImuViewer(short int printMask, char* separator,
 					}
 
 				}
+			} else if (status == XST_DEVICE_BUSY) {
+				return status;
 			} else {
 				cnt--;
 				printcnt--;
@@ -348,11 +351,7 @@ int printDataUsingDMP(short sensors, bool initialCalibration,
 //Enable Interrupts
 	status = setupDMPInt();
 	if (status != XST_SUCCESS) {
-		if (status == XST_DEVICE_BUSY) {
-			exit(0);
-		} else {
-			return status;
-		}
+		return status;
 	}
 
 //Adjust Number of Runs
@@ -390,6 +389,8 @@ int printDataUsingDMP(short sensors, bool initialCalibration,
 						cnt = 0;
 					}
 				}
+			} else if (status == XST_DEVICE_BUSY) {
+				return status;
 			} else {
 				cnt--;
 				printcnt--;
@@ -427,6 +428,8 @@ int printDataWithoutDMP(short sensors, char* separator,
 				cnt--;
 			}
 			//Decrease count if not successful
+		} else if (status == XST_DEVICE_BUSY) {
+			return status;
 		} else {
 			cnt--;
 		}
