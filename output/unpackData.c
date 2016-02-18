@@ -9,8 +9,19 @@
  */
 #define INFILEDESC		"data.bin"
 #define OUTFILEDESC		"data.txt"
-#define NUM_OF_VALUES		22//sizeof(MpuRegisterData)
 #define NUMBER_OF_AXES		3
+#define DATA_NUMBER_OF_BYTES	sizeof(MpuRegisterData)
+#define BYTE0			0x000000FF
+#define BYTE1			0x0000FF00
+#define BYTE2			0x00FF0000
+#define BYTE3			0xFF000000
+#define SAMPLES_PER_PACKET	((int) (XMODEM_PKG_CONT_SIZE / DATA_NUMBER_OF_BYTES))
+#define XMODEM_PADDING_BYTES	((int) (XMODEM_PKG_CONT_SIZE % DATA_NUMBER_OF_BYTES))
+#define XMODEM_PACKET_SIZE	133
+#define XMODEM_PKG_CONT_SIZE	128
+#define XMODEM_INDEX_HEAD	0
+#define XMODEM_INDEX_CONTENT	3
+#define XMODEM_INDEX_CRC	131
 
 /*
  * Typedefs
@@ -40,8 +51,8 @@ int closeFiles();
  */
 int main() {
   //Variables
-  int status;
-  char buff[NUM_OF_VALUES];
+  int status, i;
+  char buff[XMODEM_PACKET_SIZE];
   MpuRegisterData *pdata;
 
   //Open Files
@@ -51,18 +62,21 @@ int main() {
   }
   
   
-  //Read Ten Values at a Time from Input File
-  while (fgets(buff, NUM_OF_VALUES, (FILE*)infile)){
-    //Convert back
-    pdata = (MpuRegisterData*) &buff;
-
-    //Check for invalid line
-    //if (pdata->temp == 0){
-    //  break;
-    //}
+  //Read One XModem Packet from Input File
+  while (fgets(buff, XMODEM_PACKET_SIZE, (FILE*)infile)){
     
-    //Print to Output File
-    fprintf(outfile, "%hi %hi %hi %hi %hi %hi %hi %hi %hi %d\r\n", pdata->gyro[0], pdata->gyro[1], pdata->gyro[2], pdata->accel[0], pdata->accel[1], pdata->accel[2], pdata->compass[0], pdata->compass[1], pdata->compass[2], pdata->temp);
+    
+    //Get Address of packet content
+    pdata = (MpuRegisterData*) (&buff);
+    
+    //Go through samples
+    for (i = 0; i < SAMPLES_PER_PACKET; i++){
+      //Print to Output File
+      fprintf(outfile, "%hi %hi %hi %hi %hi %hi %hi %hi %hi %d\r\n", pdata->gyro[0], pdata->gyro[1], pdata->gyro[2], pdata->accel[0], pdata->accel[1], pdata->accel[2], pdata->compass[0], pdata->compass[1], pdata->compass[2], pdata->temp);
+      
+      //Increase Pointer
+      pdata++;
+    }
   }
   
   //Close Files

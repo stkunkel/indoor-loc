@@ -13,6 +13,10 @@
 #include <unistd.h>
 #include "program_parameters.h"
 
+//Defines
+#define XMODEM_PACKET_SIZE	1030
+#define XMODEM_PKG_CONT_SIZE	1024
+
 //Functions
 int myprintf(const char *format, ...);
 

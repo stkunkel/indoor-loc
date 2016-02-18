@@ -1807,10 +1807,11 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 	unsigned long cnt = 0, samples = 0;
 	int status;
 	unsigned char *buff;
+	int packets = 1;
 
 	//Compute number of data samples
 	samples = sampleTime * FIFO_RATE;
-	samples = 2;
+	samples = 23;
 
 	//Set Pointer for Buffer
 	buff = (unsigned char*) 0x7000000;
@@ -1829,8 +1830,18 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 		if (needToUpdateData() == BOOL_TRUE) {
 
 			//Read Sensor Data and write to memory
-			status = readFromRegs(pdata->gyro, pdata->accel, pdata->compass,
-					&(pdata->temp), 0, SENSORS_ALL);
+//			status = readFromRegs(pdata->gyro, pdata->accel, pdata->compass,
+//					&(pdata->temp), 0, SENSORS_ALL);
+			pdata->gyro[0] = (short) cnt;
+			pdata->gyro[1] = (short) cnt;
+			pdata->gyro[2] = (short) cnt;
+			pdata->accel[0] = (short) cnt;
+			pdata->accel[1] = (short) cnt;
+			pdata->accel[2] = (short) cnt;
+			pdata->compass[0] = (short) cnt;
+			pdata->compass[1] = (short) cnt;
+			pdata->compass[2] = (short) cnt;
+			pdata->temp = (long) cnt;
 
 			//Set fill
 			//pdata->fill = 0;
@@ -1849,9 +1860,14 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 				//Increase address
 				pdata++;
 
-
 				//Increase Counter
 				cnt++;
+
+				//Add Padding for XModem Transmission
+				if (cnt % 5 == 0) { //SAMPLES_PER_PACKET
+//					pdata = (MpuRegisterData*)((int)(pdata) + 12); //XMODEM_PADDING_BYTES
+					packets++;
+				}
 			}
 		}
 	}
@@ -1867,7 +1883,7 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 
 	//Transmit buf
 	//printf("XModem Transmission starts.\r\n");
-	xmodemTransmit(buff, (cnt * 22)); //sizeof(MpuRegisterData)
+	xmodemTransmit(buff, (packets * XMODEM_PKG_CONT_SIZE));
 	//printf("XModem Transmission finished.\r\n");
 }
 
