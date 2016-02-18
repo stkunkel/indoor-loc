@@ -1802,17 +1802,17 @@ void computeQuaternion(float gyro[NUMBER_OF_AXES], float accel[NUMBER_OF_AXES],
  */
 void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) {
 	//Variables
-	MpuRegisterData data;
+	MpuRegisterData *pdata;
 	unsigned long cnt = 0, samples = 0;
 	int status;
-	unsigned char *bufStart, *bufCurr;
+	unsigned char *buff;
 
 	//Compute number of data samples
 	samples = sampleTime * FIFO_RATE;
 
 	//Set Pointer for Buffer
-	bufStart = (unsigned char*) 0x7000000;
-	bufCurr = bufStart;
+	buff = (unsigned char*) 0x7000000;
+	pdata = (MpuRegisterData*) 0x7000000;
 
 	//Initialize
 	status = initIMU(calibrationTime);
@@ -1826,11 +1826,12 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 		if (needToUpdateData() == BOOL_TRUE) {
 
 			//Read Sensor Data and write to memory
-			status = readFromRegs(data.gyro, data.accel, data.compass,
-					&data.temp, 0, SENSORS_ALL);
+			status = readFromRegs(pdata->gyro, pdata->accel, pdata->compass,
+					&(pdata->temp), 0, SENSORS_ALL);
 
 			//Check whether IIC Bus is Busy
 			if (status == XST_DEVICE_BUSY) {
+				myprintf("IIC Bus is busy.\r\n");
 				break; //TODO Any error handling?
 			}
 
@@ -1839,51 +1840,9 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 				//LED Run
 				ledRun();
 
-				//Store to buffer
-				*bufCurr = (unsigned char) (data.gyro[0] & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.gyro[0] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.gyro[1] & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.gyro[1] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.gyro[2] & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.gyro[2] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.accel[0] & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.accel[0] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.accel[1] & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.accel[1] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.accel[2] & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.accel[2] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.compass[0] & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.compass[0] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.compass[1] & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.compass[1] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.compass[2] & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.compass[2] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.temp & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.temp & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.temp & BYTE2) >> 16);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.temp & BYTE3) >> 24);
-				bufCurr++;
+				//Increase address
+				pdata++;
+
 
 				//Increase Counter
 				cnt++;
@@ -1894,12 +1853,15 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 	//Disable Timer Interrupts
 	disableTmrInt();
 
+	//Decrease Counter
+	cnt--;
+
 	//Initialize XUart
 	initXUartPs();
 
 	//Transmit buf
 	//printf("XModem Transmission starts.\r\n");
-	xmodemTransmit(bufStart, ((cnt - 1) * DATA_NUMBER_OF_BYTES));
+	xmodemTransmit(buff, (cnt * DATA_NUMBER_OF_BYTES));
 	//printf("XModem Transmission finished.\r\n");
 }
 
