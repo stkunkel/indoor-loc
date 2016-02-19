@@ -13,10 +13,10 @@ int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 		bool collect) {
 	//Variables
 	MpuRegisterData data;
-	unsigned long cnt = 0, samples = 0;
+	uint32_t cnt = 0, samples = 0;
 	int status;
 	unsigned char *bufStart, *bufCurr;
-	Joint joint = base;
+	Joint joint = wrist;
 	float angle[2], currAngle, dir;
 
 	//Set angles
@@ -30,7 +30,7 @@ int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 
 	//Set Pointer for Buffer
 	bufStart = (unsigned char*) 0x7000000;
-	bufCurr = bufStart;
+	bufCurr = bufStart + sizeof(cnt);
 
 	//Reset Robot
 	status = reset();
@@ -156,19 +156,29 @@ int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 		}
 	}
 
-//Reset Robot
+   //Reset Robot
 	reset();
 
-//Disable Timer Interrupts
+	//Disable Timer Interrupts
 	disableTmrInt();
 
-//Initialize XUart
+	//Write number of samples into buffer
+	bufCurr = bufStart;
+	*bufCurr = (unsigned char) (cnt & BYTE0);
+	bufCurr++;
+	*bufCurr = (unsigned char) ((cnt & BYTE1) >> 8);
+	bufCurr++;
+	*bufCurr = (unsigned char) ((cnt & BYTE2) >> 16);
+	bufCurr++;
+	*bufCurr = (unsigned char) ((cnt & BYTE3) >> 24);
+
+	//Initialize XUart
 	initXUartPs();
 
-//Transmit buf
-//printf("XModem Transmission starts.\r\n");
-	xmodemTransmit(bufStart, ((cnt - 1) * DATA_NUMBER_OF_BYTES));
-//printf("XModem Transmission finished.\r\n");
+	//Transmit buf
+	//printf("XModem Transmission starts.\r\n");
+	xmodemTransmit(bufStart, (sizeof(cnt) + cnt * DATA_NUMBER_OF_BYTES));
+	//printf("XModem Transmission finished.\r\n");
 
 //Return
 	return PWM_SUCCESS;
