@@ -1,4 +1,4 @@
-Gyro Sens: 500°/s
+Gyro FSR: 500°/s --> Sensitivity = 32.8
 no calibration
 no DMP
 1min sampling time
