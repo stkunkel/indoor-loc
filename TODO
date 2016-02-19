@@ -4,7 +4,6 @@ Compute Position --> calculation error?
 
 TODO XSDK:
 Handle IIC_DEVICE_BUSY errors if gyro frs=1000dgr/s
-Read out Sensor Sensitivities and store them in global variables
 FIR Filter
 Test Velocity and Position again with filtered values
 
@@ -16,4 +15,4 @@ Complementary or Kalman Filter?
 
 
 QUESTIONS:
-Accel Bias: Save z value only or all values?
+Accel Bias: Save z value only or all values? --> All, b/c sensor may not be laying on flat surface!
