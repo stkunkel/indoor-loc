@@ -1803,20 +1803,18 @@ void computeQuaternion(float gyro[NUMBER_OF_AXES], float accel[NUMBER_OF_AXES],
  */
 void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) {
 	//Variables
-	MpuRegisterData *pdata;
+	MpuRegisterData data;
 	unsigned long cnt = 0, samples = 0;
 	int status;
-	unsigned char *buff;
-	int packets = 1;
+	unsigned char *bufStart, *bufCurr;
 
 	//Compute number of data samples
-	samples = sampleTime * FIFO_RATE;
-	samples = 23;
+	//samples = sampleTime * FIFO_RATE;
+	samples = 60;
 
 	//Set Pointer for Buffer
-	buff = (unsigned char*) 0x7000000;
-	pdata = (MpuRegisterData*) 0x7000000;
-	memset(pdata, 0, samples * sizeof(MpuRegisterData));
+	bufStart = (unsigned char*) 0x7000000;
+	bufCurr = bufStart;
 
 	//Initialize
 	status = initIMU(calibrationTime);
@@ -1828,62 +1826,91 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 	//Get Samples
 	while (cnt < samples) {
 		if (needToUpdateData() == BOOL_TRUE) {
-
 			//Read Sensor Data and write to memory
-//			status = readFromRegs(pdata->gyro, pdata->accel, pdata->compass,
-//					&(pdata->temp), 0, SENSORS_ALL);
-			pdata->gyro[0] = (short) cnt;
-			pdata->gyro[1] = (short) cnt;
-			pdata->gyro[2] = (short) cnt;
-			pdata->accel[0] = (short) cnt;
-			pdata->accel[1] = (short) cnt;
-			pdata->accel[2] = (short) cnt;
-			pdata->compass[0] = (short) cnt;
-			pdata->compass[1] = (short) cnt;
-			pdata->compass[2] = (short) cnt;
-			pdata->temp = (long) cnt;
+//			status = readFromRegs(data.gyro, data.accel, data.compass,
+//					&data.temp, 0, SENSORS_ALL);
 
-			//Set fill
-			//pdata->fill = 0;
-
-			//Check whether IIC Bus is Busy
-			if (status == XST_DEVICE_BUSY) {
-				myprintf("IIC Bus is busy.\r\n");
-				break; //TODO Any error handling?
-			}
+			data.gyro[0] = (int16_t) cnt;
+			data.gyro[1] = (int16_t) cnt;
+			data.gyro[2] = (int16_t) cnt;
+			data.accel[0] = (int16_t) cnt;
+			data.accel[1] = (int16_t) cnt;
+			data.accel[2] = (int16_t) cnt;
+			data.compass[0] = (int16_t) cnt;
+			data.compass[1] = (int16_t) cnt;
+			data.compass[2] = (int16_t) cnt;
+			data.temp = (int32_t) cnt;
+			status = XST_SUCCESS;
 
 			//Read successful?
 			if (status == XST_SUCCESS) {
 				//LED Run
 				ledRun();
 
-				//Increase address
-				pdata++;
+				//Store to buffer
+				*bufCurr = (unsigned char) (data.gyro[0] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.gyro[0] & BYTE1) >> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.gyro[1] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.gyro[1] & BYTE1) >> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.gyro[2] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.gyro[2] & BYTE1) >> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.accel[0] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.accel[0] & BYTE1) >> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.accel[1] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.accel[1] & BYTE1) >> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.accel[2] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.accel[2] & BYTE1) >> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.compass[0] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.compass[0] & BYTE1) >> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.compass[1] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.compass[1] & BYTE1) >> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.compass[2] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.compass[2] & BYTE1) >> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.temp & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.temp & BYTE1) >> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.temp & BYTE2) >> 16);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.temp & BYTE3) >> 24);
+				bufCurr++;
 
 				//Increase Counter
 				cnt++;
-
-				//Add Padding for XModem Transmission
-				if (cnt % 5 == 0) { //SAMPLES_PER_PACKET
-//					pdata = (MpuRegisterData*)((int)(pdata) + 12); //XMODEM_PADDING_BYTES
-					packets++;
-				}
 			}
 		}
 	}
 
-	//Decrease Pointer
-	pdata--;
-
 	//Disable Timer Interrupts
 	disableTmrInt();
+
+	//Decrease Counter
+	cnt--;
 
 	//Initialize XUart
 	initXUartPs();
 
 	//Transmit buf
 	//printf("XModem Transmission starts.\r\n");
-	xmodemTransmit(buff, (packets * XMODEM_PKG_CONT_SIZE));
+	xmodemTransmit(bufStart, (cnt * DATA_NUMBER_OF_BYTES));
 	//printf("XModem Transmission finished.\r\n");
 }
 

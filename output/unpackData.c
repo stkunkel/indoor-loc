@@ -9,29 +9,17 @@
  */
 #define INFILEDESC		"data.bin"
 #define OUTFILEDESC		"data.txt"
+#define NUM_OF_VALUES		23//sizeof(MpuRegisterData)
 #define NUMBER_OF_AXES		3
-#define DATA_NUMBER_OF_BYTES	sizeof(MpuRegisterData)
-#define BYTE0			0x000000FF
-#define BYTE1			0x0000FF00
-#define BYTE2			0x00FF0000
-#define BYTE3			0xFF000000
-#define SAMPLES_PER_PACKET	((int) (XMODEM_PKG_CONT_SIZE / DATA_NUMBER_OF_BYTES))
-#define XMODEM_PADDING_BYTES	((int) (XMODEM_PKG_CONT_SIZE % DATA_NUMBER_OF_BYTES))
-#define XMODEM_PACKET_SIZE	133
-#define XMODEM_PKG_CONT_SIZE	128
-#define XMODEM_INDEX_HEAD	0
-#define XMODEM_INDEX_CONTENT	3
-#define XMODEM_INDEX_CRC	131
 
 /*
  * Typedefs
  */
 typedef struct {
-	short gyro[NUMBER_OF_AXES];
-	short accel[NUMBER_OF_AXES];
-	short compass[NUMBER_OF_AXES];
-	int temp; //instead of long --> 4 byte
-	//short fill;
+	int16_t gyro[NUMBER_OF_AXES];
+	int16_t accel[NUMBER_OF_AXES];
+	int16_t compass[NUMBER_OF_AXES];
+	int32_t temp;
 } MpuRegisterData;
 
 /*
@@ -51,9 +39,10 @@ int closeFiles();
  */
 int main() {
   //Variables
-  int status, i;
-  char buff[XMODEM_PACKET_SIZE];
-  MpuRegisterData *pdata;
+  int status;
+  char buff[NUM_OF_VALUES];
+  MpuRegisterData data;
+  //int16_t i1 = 0, i2 = 0;
 
   //Open Files
   status = openFiles();
@@ -62,21 +51,47 @@ int main() {
   }
   
   
-  //Read One XModem Packet from Input File
-  while (fgets(buff, XMODEM_PACKET_SIZE, (FILE*)infile)){
+  //Read Ten Values at a Time from Input File
+  while (fgets(buff, NUM_OF_VALUES, (FILE*)infile)){
+    //Convert back
+    //data.gyro[0] = (int16_t) ((buff[0]&0x00FF) | (((buff[1]&0x00FF) << 8)&0xFF00));
+    //data.gyro[1] = (int16_t) ((buff[2]&0x00FF) | (((buff[3]&0x00FF) << 8)&0xFF00));
+    //data.gyro[2] = (int16_t) ((buff[4]&0x00FF) | (((buff[5]&0x00FF) << 8)&0xFF00));
+    //data.accel[0] = (int16_t) ((buff[6]&0x00FF) | (((buff[7]&0x00FF) << 8)&0xFF00));
+    //data.accel[1] = (int16_t) ((buff[8]&0x00FF) | (((buff[9]&0x00FF) << 8)&0xFF00));
+    //data.accel[2] = (int16_t) ((buff[10]&0x00FF) | (((buff[11]&0x00FF) << 8)&0xFF00));
+    //data.compass[0] = (int16_t) ((buff[12]&0x00FF) | (((buff[13]&0x00FF) << 8)&0xFF00));
+    //data.compass[1] = (int16_t) ((buff[14]&0x00FF) | (((buff[15]&0x00FF) << 8)&0xFF00));
+    //data.compass[2] = (int16_t) ((buff[16]&0x00FF) | (((buff[17]&0x00FF) << 8)&0xFF00));
+    //i1 = ((buff[18]&0x00FF) | (((buff[19]&0x00FF) << 8)&0xFF00)) & 0x0000FFFF;
+    //i2 = ((buff[20]&0x00FF) | (((buff[21]&0x00FF) << 8)&0xFF00)) & 0x0000FFFF;
+    //data.temp = (int32_t) ((i1&0x0000FFFF) | (((i2&0x0000FFFF) << 16)&0xFFFF0000));
+    data.gyro[0]  = (int16_t) (buff[0]&0x00FF);
+    data.gyro[0] |= (int16_t) ((buff[1]&0x00FF)<<8);
+    data.gyro[1]  = (int16_t) (buff[2]&0x00FF);
+    data.gyro[1] |= (int16_t) ((buff[3]&0x00FF)<<8);
+    data.gyro[2]  = (int16_t) (buff[4]&0x00FF);
+    data.gyro[2] |= (int16_t) ((buff[5]&0x00FF)<<8);
+    data.accel[0]  = (int16_t) (buff[6]&0x00FF);
+    data.accel[0] |= (int16_t) ((buff[7]&0x00FF)<<8);
+    data.accel[1]  = (int16_t) (buff[8]&0x00FF);
+    data.accel[1] |= (int16_t) ((buff[9]&0x00FF)<<8);
+    data.accel[2]  = (int16_t) (buff[10]&0x00FF);
+    data.accel[2] |= (int16_t) ((buff[11]&0x00FF)<<8);
+    data.compass[0]  = (int16_t) (buff[12]&0x00FF);
+    data.compass[0] |= (int16_t) ((buff[13]&0x00FF)<<8);
+    data.compass[1]  = (int16_t) (buff[14]&0x00FF);
+    data.compass[1] |= (int16_t) ((buff[15]&0x00FF)<<8);
+    data.compass[2]  = (int16_t) (buff[16]&0x00FF);
+    data.compass[2] |= (int16_t) ((buff[17]&0x00FF)<<8);
+    data.temp  = (int32_t) ((buff[18]&0x00FF)<<24);
+    data.temp |= (int32_t) ((buff[19]&0x00FF)<<16);
+    data.temp |= (int32_t) ((buff[20]&0x00FF)<<8);
+    data.temp |= (int32_t) ((buff[21]&0x00FF)<<0);
     
     
-    //Get Address of packet content
-    pdata = (MpuRegisterData*) (&buff);
-    
-    //Go through samples
-    for (i = 0; i < SAMPLES_PER_PACKET; i++){
-      //Print to Output File
-      fprintf(outfile, "%hi %hi %hi %hi %hi %hi %hi %hi %hi %d\r\n", pdata->gyro[0], pdata->gyro[1], pdata->gyro[2], pdata->accel[0], pdata->accel[1], pdata->accel[2], pdata->compass[0], pdata->compass[1], pdata->compass[2], pdata->temp);
-      
-      //Increase Pointer
-      pdata++;
-    }
+    //Print to Output File
+    fprintf(outfile, " %d %d %d %d %d %d %d %d %d %d\r\n", data.gyro[0], data.gyro[1], data.gyro[2], data.accel[0], data.accel[1], data.accel[2], data.compass[0], data.compass[1], data.compass[2], data.temp);
   }
   
   //Close Files
