@@ -1809,8 +1809,8 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 	unsigned char *bufStart, *bufCurr;
 
 	//Compute number of data samples
-	//samples = sampleTime * FIFO_RATE;
-	samples = 60;
+	samples = sampleTime * FIFO_RATE;
+//	samples = 60;
 
 	//Set Pointer for Buffer
 	bufStart = (unsigned char*) 0x7000000;
@@ -1824,23 +1824,26 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 	}
 
 	//Get Samples
-	while (cnt < samples) {
+	while (cnt <= samples) {
 		if (needToUpdateData() == BOOL_TRUE) {
+			//Get Data
+			if (cnt == samples) {
+				//Add One More Data Set
+				data.gyro[0] = (int16_t) 0;
+				data.gyro[1] = (int16_t) 0;
+				data.gyro[2] = (int16_t) 0;
+				data.accel[0] = (int16_t) 0;
+				data.accel[1] = (int16_t) 0;
+				data.accel[2] = (int16_t) 0;
+				data.compass[0] = (int16_t) 0;
+				data.compass[1] = (int16_t) 0;
+				data.compass[2] = (int16_t) 0;
+				data.temp = (int32_t) 0;
+			} else {
 			//Read Sensor Data and write to memory
-//			status = readFromRegs(data.gyro, data.accel, data.compass,
-//					&data.temp, 0, SENSORS_ALL);
-
-			data.gyro[0] = (int16_t) cnt;
-			data.gyro[1] = (int16_t) cnt;
-			data.gyro[2] = (int16_t) cnt;
-			data.accel[0] = (int16_t) cnt;
-			data.accel[1] = (int16_t) cnt;
-			data.accel[2] = (int16_t) cnt;
-			data.compass[0] = (int16_t) cnt;
-			data.compass[1] = (int16_t) cnt;
-			data.compass[2] = (int16_t) cnt;
-			data.temp = (int32_t) cnt;
-			status = XST_SUCCESS;
+			status = readFromRegs(data.gyro, data.accel, data.compass,
+					&data.temp, 0, SENSORS_ALL);
+			}
 
 			//Read successful?
 			if (status == XST_SUCCESS) {
