@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Let Octave Create Filtered Data
+octave createFilteredData
+
+# Make copy of filtered Data
+#cp filtered.txt filtered_orig.txt
+
+# Discard first 20 data sets
+#sed -i -e 1,20d filtered.txt
+
+# Create Filtered Plots
+octave firFilterGyro
+octave firFilterAcc
+
+# Let Octave Print Mean
+octave getMean
