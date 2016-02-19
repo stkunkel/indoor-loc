@@ -25,8 +25,8 @@
 #include "../program_parameters.h"
 
 //IMU Parameters
-#define GYRO_SENS				1000		//°/s (the smaller, the more accurate, but max is too small and more rustle)
-#define ACCEL_SENS				2			//G
+#define GYRO_FRS				1000		//°/s (the smaller, the more accurate, but max is too small and more rustle)
+#define ACCEL_FRS				2			//G
 #define GYRO_SENS_FRS_0			131			//LSB/(°/s) for FS_SEL = 0, 16-bit
 #define GYRO_SENS_FRS_1			65.5		//LSB/(°/s) for FS_SEL = 1
 #define GYRO_SENS_FRS_2			32.8		//LSB/(°/s) for FS_SEL = 2

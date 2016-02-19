@@ -2047,7 +2047,7 @@ int initMPU() {
 //2. Init IMU
 	struct int_param_s param;
 	status = imuInitMpu(&param);
-	if (status != 0) {
+	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Error initializing IMU\r\n.");
 
 		//Check whether IIC Device is busy
@@ -2059,7 +2059,7 @@ int initMPU() {
 //3. Select Sensors
 	unsigned char sensors = SENSORS_INV;
 	status = imuSetSensors(sensors);
-	if (status != 0) {
+	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Error setting sensors.\r\n");
 
 		//Check whether IIC Device is busy
@@ -2070,7 +2070,7 @@ int initMPU() {
 
 //4. Set Sample Rate
 	status = imuSetSampleRate(MPU_SAMPLE_RATE);
-	if (status != 0) {
+	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Error setting MPU sample rate.\r\n");
 
 		//Check whether IIC Device is busy
@@ -2081,8 +2081,8 @@ int initMPU() {
 
 //5. Set sensitivities
 //Gyro
-	status = imuSetGyroFsr(GYRO_SENS);
-	if (status != 0) {
+	status = imuSetGyroFsr(GYRO_FRS);
+	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Error setting gyroscope FRS.\r\n");
 
 		//Check whether IIC Device is busy
@@ -2091,8 +2091,8 @@ int initMPU() {
 		}
 	}
 //Accel
-	status = imuSetAccelFsr(ACCEL_SENS);
-	if (status != 0) {
+	status = imuSetAccelFsr(ACCEL_FRS);
+	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Error setting gyroscope FRS.\r\n");
 
 		//Check whether IIC Device is busy
