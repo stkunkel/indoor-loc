@@ -18,7 +18,7 @@ py = data(:,15);
 pz = data(:,16);
 
 #Plot Gyro
-subplot(4,1,1);
+p1 = subplot(4,1,1);
 plot(gx, "r");
 hold on;
 plot(gy, "g");
@@ -27,7 +27,7 @@ plot(gz, "b");
 hold on;
 
 #Set up Plot
-grid on;
+grid minor;
 title('Gyroscope');
 xlabel('Sample Number');
 ylabel('Angular Velocity (in dgr/s)');
@@ -35,7 +35,7 @@ legend('gx', 'gy', 'gz');
 
 
 #Plot Accel
-subplot(5,1,2);
+p2 = subplot(5,1,2);
 plot(ax, "r");
 hold on;
 plot(ay, "g");
@@ -44,14 +44,14 @@ plot(az, "b");
 hold on;
 
 #Set up Plot
-grid on;
+grid minor;
 title('Accelerometer');
 xlabel('Sample Number');
 ylabel('Acceleration (in g)');
 legend('x', 'y', 'z');
 
 #Plot Quat
-subplot(5,1,3);
+p3 = subplot(5,1,3);
 plot(qw, "m");
 hold on;
 plot(qx, "r");
@@ -62,14 +62,14 @@ plot(qz, "b");
 hold on;
 
 #Set up Plot
-grid on;
+grid minor;
 title('Quaternions');
 xlabel('Sample Number');
 ylabel('Quaternion Rotation');
 legend('w', 'x', 'y', 'z');
 
 #Plot Vel
-subplot(5,1,4);
+p4 = subplot(5,1,4);
 plot(vx, "r");
 hold on;
 plot(vy, "g");
@@ -78,14 +78,14 @@ plot(vz, "b");
 hold on;
 
 #Set up Plot
-grid on;
+grid minor;
 title('Velocity');
 xlabel('Sample Number');
 ylabel('Velocity (in m/s)');
 legend('x', 'y', 'z');
 
 #Plot Pos
-subplot(5,1,5);
+p5 = subplot(5,1,5);
 plot(px, "r");
 hold on;
 plot(py, "g");
@@ -94,11 +94,12 @@ plot(pz, "b");
 hold on;
 
 #Set up Plot
-grid on;
+grid minor;
 title('Position');
 xlabel('Sample Number');
 ylabel('Position (in m)');
 legend('x', 'y', 'z');
 
 #Print
-print("-r1200", "out.pdf");
+print("-r2400", "out.pdf");
+print("-dsvg", "out.svg");
