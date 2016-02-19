@@ -1804,17 +1804,16 @@ void computeQuaternion(float gyro[NUMBER_OF_AXES], float accel[NUMBER_OF_AXES],
 void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) {
 	//Variables
 	MpuRegisterData data;
-	unsigned long cnt = 0, samples = 0;
+	uint32_t cnt = 0, samples = 0;
 	int status;
 	unsigned char *bufStart, *bufCurr;
 
-	//Compute number of data samples
-	samples = sampleTime * FIFO_RATE;
-//	samples = 60;
-
 	//Set Pointer for Buffer
 	bufStart = (unsigned char*) 0x7000000;
-	bufCurr = bufStart;
+	bufCurr = bufStart + sizeof(cnt);
+
+	//Compute number of data samples
+	samples = sampleTime * FIFO_RATE;
 
 	//Initialize
 	status = initIMU(calibrationTime);
@@ -1824,26 +1823,13 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 	}
 
 	//Get Samples
-	while (cnt <= samples) {
+	while (cnt < samples) {
 		if (needToUpdateData() == BOOL_TRUE) {
 			//Get Data
-			if (cnt == samples) {
-				//Add One More Data Set
-				data.gyro[0] = (int16_t) 0;
-				data.gyro[1] = (int16_t) 0;
-				data.gyro[2] = (int16_t) 0;
-				data.accel[0] = (int16_t) 0;
-				data.accel[1] = (int16_t) 0;
-				data.accel[2] = (int16_t) 0;
-				data.compass[0] = (int16_t) 0;
-				data.compass[1] = (int16_t) 0;
-				data.compass[2] = (int16_t) 0;
-				data.temp = (int32_t) 0;
-			} else {
+
 			//Read Sensor Data and write to memory
 			status = readFromRegs(data.gyro, data.accel, data.compass,
 					&data.temp, 0, SENSORS_ALL);
-			}
 
 			//Read successful?
 			if (status == XST_SUCCESS) {
@@ -1905,15 +1891,22 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 	//Disable Timer Interrupts
 	disableTmrInt();
 
-	//Decrease Counter
-	cnt--;
+	//Write number of samples into buffer
+	bufCurr = bufStart;
+	*bufCurr = (unsigned char) (cnt & BYTE0);
+	bufCurr++;
+	*bufCurr = (unsigned char) ((cnt & BYTE1) >> 8);
+	bufCurr++;
+	*bufCurr = (unsigned char) ((cnt & BYTE2) >> 16);
+	bufCurr++;
+	*bufCurr = (unsigned char) ((cnt & BYTE3) >> 24);
 
 	//Initialize XUart
 	initXUartPs();
 
 	//Transmit buf
 	//printf("XModem Transmission starts.\r\n");
-	xmodemTransmit(bufStart, (cnt * DATA_NUMBER_OF_BYTES));
+	xmodemTransmit(bufStart, (sizeof(cnt) + cnt * DATA_NUMBER_OF_BYTES));
 	//printf("XModem Transmission finished.\r\n");
 }
 
