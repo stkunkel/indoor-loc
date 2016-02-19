@@ -9,7 +9,7 @@
  */
 #define INFILEDESC		"data.bin"
 #define OUTFILEDESC		"data.txt"
-#define NUM_OF_VALUES		23//sizeof(MpuRegisterData)
+#define NUM_OF_VALUES		22//23//sizeof(MpuRegisterData)
 #define NUMBER_OF_AXES		3
 
 /*
@@ -52,7 +52,7 @@ int main() {
   
   
   //Read Ten Values at a Time from Input File
-  while (fgets(buff, NUM_OF_VALUES, (FILE*)infile)){
+  while (fread(buff, NUM_OF_VALUES, 1, (FILE*)infile)){ //fgets(buff, NUM_OF_VALUES, (FILE*)infile)
     //Convert back
     //data.gyro[0] = (int16_t) ((buff[0]&0x00FF) | (((buff[1]&0x00FF) << 8)&0xFF00));
     //data.gyro[1] = (int16_t) ((buff[2]&0x00FF) | (((buff[3]&0x00FF) << 8)&0xFF00));
@@ -84,10 +84,10 @@ int main() {
     data.compass[1] |= (int16_t) ((buff[15]&0x00FF)<<8);
     data.compass[2]  = (int16_t) (buff[16]&0x00FF);
     data.compass[2] |= (int16_t) ((buff[17]&0x00FF)<<8);
-    data.temp  = (int32_t) ((buff[18]&0x00FF)<<24);
-    data.temp |= (int32_t) ((buff[19]&0x00FF)<<16);
-    data.temp |= (int32_t) ((buff[20]&0x00FF)<<8);
-    data.temp |= (int32_t) ((buff[21]&0x00FF)<<0);
+    data.temp  = (int32_t) ((buff[18]&0x00FF)<<0);
+    data.temp |= (int32_t) ((buff[19]&0x00FF)<<8);
+    data.temp |= (int32_t) ((buff[20]&0x00FF)<<16);
+    data.temp |= (int32_t) ((buff[21]&0x00FF)<<24);
     
     
     //Print to Output File
