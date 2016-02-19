@@ -107,10 +107,13 @@ int main() {
 //	testXModem();
 
 //Collect Data
-	collectRegisterData(600, 0); //10min sampling, no calibration
+	collectRegisterData(13, 0); //1min sampling, no calibration
 
 //Collect Robot Movement Data
 //	collectRobotMvmtData(300, 0, BOOL_TRUE);
+
+//Clear LEDs
+	clearLEDs();
 
 //Stay in here
 	while (1) {
