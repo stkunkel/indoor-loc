@@ -14,11 +14,11 @@
 #include "print_utils.h"
 
 //Selected Sensitivties
-#define GYRO_SENSITIVITY	GYRO_SENS_FRS_0 //250°/s
+#define GYRO_SENSITIVITY	GYRO_SENS_FRS_2 //1000°/s
 #define ACCEL_SENSITIVITY	ACC_SENS_FRS_0 //2G
 
 //IMU Parameters
-#define GYRO_SENS				250//500			//°/s (250 would be more accurate, but 500 works more stable with IMU Viewer)
+#define GYRO_SENS				1000//500			//°/s (250 would be more accurate, but 500 works more stable with IMU Viewer)
 #define ACCEL_SENS				2			//G
 #define GYRO_SENS_FRS_0			131			//LSB/(°/s) for FS_SEL = 0, 16-bit
 #define GYRO_SENS_FRS_1			65.5		//LSB/(°/s) for FS_SEL = 1
