@@ -94,22 +94,30 @@ void toggleLed(u8 ledMask) {
 }
 
 /*
+ * Clear All LEDs
+ */
+void clearLEDs() {
+	//Clear LEDs
+	XGpio_DiscreteWrite(&gpio, LED_CHANNEL, 0);
+}
+
+/*
  * Initialize GPIO
  */
 int initGpio() {
-	//Variables
-	int status;
+//Variables
+int status;
 
-	//Initialize GPIO
-	status = XGpio_Initialize(&gpio, AXI_GPIO_DEVICE_ID);
+//Initialize GPIO
+status = XGpio_Initialize(&gpio, AXI_GPIO_DEVICE_ID);
 
-	//Set Direction
-	XGpio_SetDataDirection(&gpio, LED_CHANNEL, 0);
+//Set Direction
+XGpio_SetDataDirection(&gpio, LED_CHANNEL, 0);
 
-	//Clear LEDs
-	if (status == XST_SUCCESS) {
-		XGpio_DiscreteWrite(&gpio, LED_CHANNEL, 0);
-	}
+//Clear LEDs
+if (status == XST_SUCCESS) {
+	clearLEDs(status, &gpio);
+}
 
-	return XST_SUCCESS;
+return XST_SUCCESS;
 }

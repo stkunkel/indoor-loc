@@ -30,6 +30,7 @@ void testLedRun();
 void testToggleLed();
 void ledRun();
 void toggleLed(u8 ledMask);
+void clearLEDs();
 int initGpio();
 
 #endif /* GPIO_UTILS_H_ */
