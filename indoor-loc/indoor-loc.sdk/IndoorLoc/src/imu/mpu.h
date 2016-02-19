@@ -65,23 +65,21 @@
 #define PRINT_FOR_VIEWER		(PRINT_QUAT | PRINT_POS)
 
 //XModem
-#define DATA_NUMBER_OF_BYTES	sizeof(MpuRegisterData)
+#define DATA_NUMBER_OF_BYTES	22
 #define BYTE0					0x000000FF
 #define BYTE1					0x0000FF00
 #define BYTE2					0x00FF0000
 #define BYTE3					0xFF000000
-#define SAMPLES_PER_PACKET		((int) (XMODEM_PKG_CONT_SIZE / DATA_NUMBER_OF_BYTES))
-#define XMODEM_PADDING_BYTES	((int) (XMODEM_PKG_CONT_SIZE % DATA_NUMBER_OF_BYTES))
 
 //Constants
 #define GRAVITY					9.80665		//m/s^2
 
 //Typedefs
 typedef struct {
-	short gyro[NUMBER_OF_AXES];
-	short accel[NUMBER_OF_AXES];
-	short compass[NUMBER_OF_AXES];
-	long temp;
+	int16_t gyro[NUMBER_OF_AXES];
+	int16_t accel[NUMBER_OF_AXES];
+	int16_t compass[NUMBER_OF_AXES];
+	int32_t temp;
 //	short fill;
 } MpuRegisterData;
 

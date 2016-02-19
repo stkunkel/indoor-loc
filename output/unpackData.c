@@ -3,13 +3,18 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 
 /*
  * Parameters
  */
 #define INFILEDESC		"data.bin"
 #define OUTFILEDESC		"data.txt"
-#define NUM_OF_VALUES		22//23//sizeof(MpuRegisterData)
+#define NUM_OF_VALUES		22
+#define BYTE0			0x000000FF
+#define BYTE1			0x0000FF00
+#define BYTE2			0x00FF0000
+#define BYTE3			0xFF000000
 #define NUMBER_OF_AXES		3
 
 /*
@@ -40,7 +45,8 @@ int closeFiles();
 int main() {
   //Variables
   int status;
-  char buff[NUM_OF_VALUES];
+  unsigned char buff[NUM_OF_VALUES];
+  uint32_t samples, i;
   MpuRegisterData data;
 
   //Open Files
@@ -49,37 +55,51 @@ int main() {
     return 1;
   }
   
+  //Read out number of samples
+  if (fread(buff, sizeof(samples), 1, (FILE*)infile)){
+    samples  = (int32_t) ((buff[0]&BYTE0)<<0);
+    samples |= (int32_t) ((buff[1]&BYTE0)<<8);
+    samples |= (int32_t) ((buff[2]&BYTE0)<<16);
+    samples |= (int32_t) ((buff[3]&BYTE0)<<24); 
+    
+    printf("Reading in %d samples...\r\n", samples);
+  } else {
+    return 1;
+  }
   
-  //Read Ten Values at a Time from Input File
-  while (fread(buff, NUM_OF_VALUES, 1, (FILE*)infile)){ //fgets(buff, NUM_OF_VALUES, (FILE*)infile)
+  //Go through samples
+  for (i = 0; i < samples; i++){
+    //Read One Sample from Input File
+    fread(buff, NUM_OF_VALUES, 1, (FILE*)infile);
+  
     //Convert back
-    data.gyro[0]  = (int16_t) (buff[0]&0x00FF);
-    data.gyro[0] |= (int16_t) ((buff[1]&0x00FF)<<8);
-    data.gyro[1]  = (int16_t) (buff[2]&0x00FF);
-    data.gyro[1] |= (int16_t) ((buff[3]&0x00FF)<<8);
-    data.gyro[2]  = (int16_t) (buff[4]&0x00FF);
-    data.gyro[2] |= (int16_t) ((buff[5]&0x00FF)<<8);
-    data.accel[0]  = (int16_t) (buff[6]&0x00FF);
-    data.accel[0] |= (int16_t) ((buff[7]&0x00FF)<<8);
-    data.accel[1]  = (int16_t) (buff[8]&0x00FF);
-    data.accel[1] |= (int16_t) ((buff[9]&0x00FF)<<8);
-    data.accel[2]  = (int16_t) (buff[10]&0x00FF);
-    data.accel[2] |= (int16_t) ((buff[11]&0x00FF)<<8);
-    data.compass[0]  = (int16_t) (buff[12]&0x00FF);
-    data.compass[0] |= (int16_t) ((buff[13]&0x00FF)<<8);
-    data.compass[1]  = (int16_t) (buff[14]&0x00FF);
-    data.compass[1] |= (int16_t) ((buff[15]&0x00FF)<<8);
-    data.compass[2]  = (int16_t) (buff[16]&0x00FF);
-    data.compass[2] |= (int16_t) ((buff[17]&0x00FF)<<8);
-    data.temp  = (int32_t) ((buff[18]&0x00FF)<<0);
-    data.temp |= (int32_t) ((buff[19]&0x00FF)<<8);
-    data.temp |= (int32_t) ((buff[20]&0x00FF)<<16);
-    data.temp |= (int32_t) ((buff[21]&0x00FF)<<24);
+    data.gyro[0]  = (int16_t) (buff[0]&BYTE0);
+    data.gyro[0] |= (int16_t) ((buff[1]&BYTE0)<<8);
+    data.gyro[1]  = (int16_t) (buff[2]&BYTE0);
+    data.gyro[1] |= (int16_t) ((buff[3]&BYTE0)<<8);
+    data.gyro[2]  = (int16_t) (buff[4]&BYTE0);
+    data.gyro[2] |= (int16_t) ((buff[5]&BYTE0)<<8);
+    data.accel[0]  = (int16_t) (buff[6]&BYTE0);
+    data.accel[0] |= (int16_t) ((buff[7]&BYTE0)<<8);
+    data.accel[1]  = (int16_t) (buff[8]&BYTE0);
+    data.accel[1] |= (int16_t) ((buff[9]&BYTE0)<<8);
+    data.accel[2]  = (int16_t) (buff[10]&BYTE0);
+    data.accel[2] |= (int16_t) ((buff[11]&BYTE0)<<8);
+    data.compass[0]  = (int16_t) (buff[12]&BYTE0);
+    data.compass[0] |= (int16_t) ((buff[13]&BYTE0)<<8);
+    data.compass[1]  = (int16_t) (buff[14]&BYTE0);
+    data.compass[1] |= (int16_t) ((buff[15]&BYTE0)<<8);
+    data.compass[2]  = (int16_t) (buff[16]&BYTE0);
+    data.compass[2] |= (int16_t) ((buff[17]&BYTE0)<<8);
+    data.temp  = (int32_t) ((buff[18]&BYTE0)<<0);
+    data.temp |= (int32_t) ((buff[19]&BYTE0)<<8);
+    data.temp |= (int32_t) ((buff[20]&BYTE0)<<16);
+    data.temp |= (int32_t) ((buff[21]&BYTE0)<<24);
     
     //Final Data Set
-    if (data.gyro[0] == 0 && data.gyro[1] == 0 && data.gyro[2] && data.accel[0] == 0 && data.accel[1] == 0 && data.accel[2] && data.compass[0] == 0 && data.compass[1] == 0 && data.compass[2] && data.temp == 0){
-      break;
-    }
+    //if (data.temp == (int32_t)0){
+    //  break;
+    //}
     
     //Print to Output File
     fprintf(outfile, " %d %d %d %d %d %d %d %d %d %d\r\n", data.gyro[0], data.gyro[1], data.gyro[2], data.accel[0], data.accel[1], data.accel[2], data.compass[0], data.compass[1], data.compass[2], data.temp);
