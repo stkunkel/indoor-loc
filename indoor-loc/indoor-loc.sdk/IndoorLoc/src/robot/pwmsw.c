@@ -8,11 +8,6 @@
  */
 #include "pwmsw.h"
 
-/*
- * Global Variables
- */
-u32 stepAmount = PWM_STEPS;
-u32 valInit = PWM_VAL_INIT;
 
 /*
  * Arrays for faster access
@@ -637,10 +632,6 @@ int reset() {
 			return PWM_FAILURE;
 		}
 	}
-
-//Remember steps and initial value
-	stepAmount = PWM_STEPS;
-	valInit = PWM_VAL_INIT;
 
 //Return
 	return PWM_SUCCESS;
