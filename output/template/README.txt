@@ -1,4 +1,5 @@
 Gyro Sens: 500°/s
+Accel Sens: 4G
 no calibration
 no DMP
 15min sampling time
