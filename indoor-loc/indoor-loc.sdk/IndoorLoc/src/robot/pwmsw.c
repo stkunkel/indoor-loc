@@ -52,12 +52,21 @@ int pwmTest() {
 	u32 val = PWM_VAL_INIT;
 	int status = PWM_SUCCESS;
 	int reg = 0;
+	uint32_t values[NUMBER_OF_JOINTS] = { 0, 0, 0, 0, 0, 0};
 
 	//Reset
 	status = reset();
 	if (status != PWM_SUCCESS) {
 		return status;
 	}
+
+	//Get current values
+	getPwmRegValues(values);
+	printf("PWM Register Values:");
+	for (reg = 0; reg < NUMBER_OF_JOINTS; reg++){
+		printf(" %u", (unsigned int) values[reg]);
+	}
+	printf("\r\n");
 
 	//Debug
 //	myprintf(("Degree -> Val:\r\n"));
@@ -666,7 +675,7 @@ void getPwmRegValues (uint32_t values[NUMBER_OF_JOINTS]){
 
 	//Get Values
 	for (i = 0; i < NUMBER_OF_JOINTS; i++){
-		values[i] = readPwmReg(getValReg(pwmValRegister[i]));
+		values[i] = readPwmReg(pwmValRegister[i]);
 	}
 }
 
