@@ -2,6 +2,10 @@
  * robotCtrl.c: Robot control and movement data collection
  * Author: Stephanie Kunkel
  */
+
+/*
+ * Includes
+ */
 #include "robotCtrl.h"
 
 /*
@@ -12,16 +16,18 @@
 int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 		bool collect) {
 	//Variables
-	MpuRegisterData data;
-	uint32_t cnt = 0, samples = 0;
+	RobotMpuData data;
+	uint32_t cnt = 0, samples = 0, anglecnt = 0, angleid = 0;
 	int status;
 	unsigned char *bufStart, *bufCurr;
 	Joint joint = wrist;
-	float angle[2], currAngle, dir;
+	float angle[4], currAngle, dir;
 
 	//Set angles
 	angle[0] = 0.0;
 	angle[1] = 90.0;
+	angle[2] = 90.0;
+	angle[3] = 0.0;
 	currAngle = angle[0];
 	dir = 1.0;
 
@@ -62,20 +68,33 @@ int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 //		currAngle += dir;
 //		setAngle(joint, currAngle);
 
-		if (cnt % 2 == 0) {
-			setAngle(joint, angle[0]);
-		} else {
-			setAngle(joint, angle[1]);
-		}
+//Set Angle
+//		if (cnt % 2 == 0) {
+//			setAngle(joint, angle[0]);
+//		} else {
+//			setAngle(joint, angle[1]);
+//		}
 
-		//Get Sensor Data
+//Get Sensor Data
 		while (needToUpdateData() == BOOL_FALSE) {
 			usleep(1);
 		}
 
+		//Set Angle
+		if (cnt % ((FIFO_RATE * HSS_422_TIME_FOR_90_DGRS) / 1000) == 0) {
+			if (angleid >= 2) {
+				angleid = 0;
+			}
+			setAngle(joint, angle[angleid]);
+			angleid++;
+		}
+
+		//Get PWM Data
+		getPwmRegValues(data.pwmValues);
+
 		//Read Sensor Data and write to memory
-		status = readFromRegs(data.gyro, data.accel, data.compass, &data.temp,
-				0, SENSORS_ALL);
+		status = readFromRegs(data.mpuData.gyro, data.mpuData.accel,
+				data.mpuData.compass, &data.mpuData.temp, 0, SENSORS_ALL);
 
 		//Read successful?
 		if (status == XST_SUCCESS) {
@@ -85,50 +104,109 @@ int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 			//Collect Data in required
 			if (collect == BOOL_TRUE) {
 
-				//Store to buffer
-				*bufCurr = (unsigned char) (data.gyro[0] & BYTE0);
+				//Store PWM Values in buffer
+				*bufCurr = (unsigned char) (data.pwmValues[0] & BYTE0);
 				bufCurr++;
-				*bufCurr = (unsigned char) ((data.gyro[0] & BYTE1) >> 8);
+				*bufCurr = (unsigned char) ((data.pwmValues[0] & BYTE1) >> 8);
 				bufCurr++;
-				*bufCurr = (unsigned char) (data.gyro[1] & BYTE0);
+				*bufCurr = (unsigned char) ((data.pwmValues[0] & BYTE2) >> 16);
 				bufCurr++;
-				*bufCurr = (unsigned char) ((data.gyro[1] & BYTE1) >> 8);
+				*bufCurr = (unsigned char) ((data.pwmValues[0] & BYTE3) >> 24);
 				bufCurr++;
-				*bufCurr = (unsigned char) (data.gyro[2] & BYTE0);
+				*bufCurr = (unsigned char) (data.pwmValues[1] & BYTE0);
 				bufCurr++;
-				*bufCurr = (unsigned char) ((data.gyro[2] & BYTE1) >> 8);
+				*bufCurr = (unsigned char) ((data.pwmValues[1] & BYTE1) >> 8);
 				bufCurr++;
-				*bufCurr = (unsigned char) (data.accel[0] & BYTE0);
+				*bufCurr = (unsigned char) ((data.pwmValues[1] & BYTE2) >> 16);
 				bufCurr++;
-				*bufCurr = (unsigned char) ((data.accel[0] & BYTE1) >> 8);
+				*bufCurr = (unsigned char) ((data.pwmValues[1] & BYTE3) >> 24);
 				bufCurr++;
-				*bufCurr = (unsigned char) (data.accel[1] & BYTE0);
+				*bufCurr = (unsigned char) (data.pwmValues[1] & BYTE0);
 				bufCurr++;
-				*bufCurr = (unsigned char) ((data.accel[1] & BYTE1) >> 8);
+				*bufCurr = (unsigned char) ((data.pwmValues[2] & BYTE1) >> 8);
 				bufCurr++;
-				*bufCurr = (unsigned char) (data.accel[2] & BYTE0);
+				*bufCurr = (unsigned char) ((data.pwmValues[2] & BYTE2) >> 16);
 				bufCurr++;
-				*bufCurr = (unsigned char) ((data.accel[2] & BYTE1) >> 8);
+				*bufCurr = (unsigned char) ((data.pwmValues[2] & BYTE3) >> 24);
 				bufCurr++;
-				*bufCurr = (unsigned char) (data.compass[0] & BYTE0);
+				*bufCurr = (unsigned char) (data.pwmValues[3] & BYTE0);
 				bufCurr++;
-				*bufCurr = (unsigned char) ((data.compass[0] & BYTE1) >> 8);
+				*bufCurr = (unsigned char) ((data.pwmValues[3] & BYTE1) >> 8);
 				bufCurr++;
-				*bufCurr = (unsigned char) (data.compass[1] & BYTE0);
+				*bufCurr = (unsigned char) ((data.pwmValues[3] & BYTE2) >> 16);
 				bufCurr++;
-				*bufCurr = (unsigned char) ((data.compass[1] & BYTE1) >> 8);
+				*bufCurr = (unsigned char) ((data.pwmValues[3] & BYTE3) >> 24);
 				bufCurr++;
-				*bufCurr = (unsigned char) (data.compass[2] & BYTE0);
+				*bufCurr = (unsigned char) (data.pwmValues[4] & BYTE0);
 				bufCurr++;
-				*bufCurr = (unsigned char) ((data.compass[2] & BYTE1) >> 8);
+				*bufCurr = (unsigned char) ((data.pwmValues[4] & BYTE1) >> 8);
 				bufCurr++;
-				*bufCurr = (unsigned char) (data.temp & BYTE0);
+				*bufCurr = (unsigned char) ((data.pwmValues[4] & BYTE2) >> 16);
 				bufCurr++;
-				*bufCurr = (unsigned char) ((data.temp & BYTE1) >> 8);
+				*bufCurr = (unsigned char) ((data.pwmValues[4] & BYTE3) >> 24);
 				bufCurr++;
-				*bufCurr = (unsigned char) ((data.temp & BYTE2) >> 16);
+				*bufCurr = (unsigned char) (data.pwmValues[5] & BYTE0);
 				bufCurr++;
-				*bufCurr = (unsigned char) ((data.temp & BYTE3) >> 24);
+				*bufCurr = (unsigned char) ((data.pwmValues[5] & BYTE1) >> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.pwmValues[5] & BYTE2) >> 16);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.pwmValues[5] & BYTE3) >> 24);
+				bufCurr++;
+
+				//Store MPU Data in buffer
+				*bufCurr = (unsigned char) (data.mpuData.gyro[0] & BYTE0);
+				bufCurr++;
+				*bufCurr =
+						(unsigned char) ((data.mpuData.gyro[0] & BYTE1) >> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.mpuData.gyro[1] & BYTE0);
+				bufCurr++;
+				*bufCurr =
+						(unsigned char) ((data.mpuData.gyro[1] & BYTE1) >> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.mpuData.gyro[2] & BYTE0);
+				bufCurr++;
+				*bufCurr =
+						(unsigned char) ((data.mpuData.gyro[2] & BYTE1) >> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.mpuData.accel[0] & BYTE0);
+				bufCurr++;
+				*bufCurr =
+						(unsigned char) ((data.mpuData.accel[0] & BYTE1) >> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.mpuData.accel[1] & BYTE0);
+				bufCurr++;
+				*bufCurr =
+						(unsigned char) ((data.mpuData.accel[1] & BYTE1) >> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.mpuData.accel[2] & BYTE0);
+				bufCurr++;
+				*bufCurr =
+						(unsigned char) ((data.mpuData.accel[2] & BYTE1) >> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.mpuData.compass[0] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.mpuData.compass[0] & BYTE1)
+						>> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.mpuData.compass[1] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.mpuData.compass[1] & BYTE1)
+						>> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.mpuData.compass[2] & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.mpuData.compass[2] & BYTE1)
+						>> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) (data.mpuData.temp & BYTE0);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.mpuData.temp & BYTE1) >> 8);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.mpuData.temp & BYTE2) >> 16);
+				bufCurr++;
+				*bufCurr = (unsigned char) ((data.mpuData.temp & BYTE3) >> 24);
 				bufCurr++;
 			} else {
 				//Update Data
@@ -156,7 +234,7 @@ int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 		}
 	}
 
-   //Reset Robot
+	//Reset Robot
 	reset();
 
 	//Disable Timer Interrupts

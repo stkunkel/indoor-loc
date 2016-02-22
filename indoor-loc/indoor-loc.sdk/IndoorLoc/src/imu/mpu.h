@@ -65,7 +65,7 @@
 #define PRINT_FOR_VIEWER		(PRINT_QUAT | PRINT_POS)
 
 //XModem
-#define DATA_NUMBER_OF_BYTES	22
+#define DATA_NUMBER_OF_BYTES	46
 #define BYTE0					0x000000FF
 #define BYTE1					0x0000FF00
 #define BYTE2					0x00FF0000
