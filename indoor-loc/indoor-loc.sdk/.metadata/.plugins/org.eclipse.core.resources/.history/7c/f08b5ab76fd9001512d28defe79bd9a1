@@ -1,0 +1,28 @@
+/*
+ * robotCtrl.h: Robot control and movement data collection
+ * Author: Stephanie Kunkel
+ */
+
+#ifndef ROBOTCTRL_H_
+#define ROBOTCTRL_H_
+
+//Includes
+#include "xstatus.h"
+#include "../imu/mpu.h"
+#include "pwmsw.h"
+#include "../zedboard/print_utils.h"
+
+//Parameters
+#define PWM_PULSE_INTERVAL		20 //ms
+
+//Struct for Data Transmission
+typedef struct {
+	uint32_t pwmValues[NUMBER_OF_JOINTS];
+	MpuRegisterData mpuData;
+} RobotMpuData;
+
+//Functions
+int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
+		bool collect);
+
+#endif /* ROBOTCTRL_H_ */
