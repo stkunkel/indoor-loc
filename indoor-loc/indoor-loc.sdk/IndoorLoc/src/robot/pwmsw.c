@@ -17,13 +17,14 @@ u32 valInit = PWM_VAL_INIT;
 /*
  * Arrays for faster access
  */
-static const u32 pwmValRegister[6] = { PWM0_VAL_REG, PWM1_VAL_REG, PWM2_VAL_REG,
+static const u32 pwmValRegister[NUMBER_OF_JOINTS] = { PWM0_VAL_REG, PWM1_VAL_REG, PWM2_VAL_REG,
 PWM3_VAL_REG, PWM4_VAL_REG, PWM5_VAL_REG };
-static const u32 pwmStepsRegister[6] = { PWM0_STEPS_REG, PWM1_STEPS_REG,
+static const u32 pwmStepsRegister[NUMBER_OF_JOINTS] = { PWM0_STEPS_REG, PWM1_STEPS_REG,
 PWM2_STEPS_REG, PWM3_STEPS_REG, PWM4_STEPS_REG, PWM5_STEPS_REG };
-static const char* jointName[6] = { "Base", "Shoulder", "Elbow", "Wrist",
+static const char* jointName[NUMBER_OF_JOINTS] = { "Base", "Shoulder", "Elbow", "Wrist",
 		"Thumb", "Finger" };
-static const Joint jointVal[6] = { base, shoulder, elbow, wrist, thumb, finger };
+static const Joint jointVal[NUMBER_OF_JOINTS] = { base, shoulder, elbow, wrist, thumb, finger };
+static u32 pwmCurrValue[NUMBER_OF_JOINTS] = { PWM_VAL_INIT, PWM_VAL_INIT, PWM_VAL_INIT, PWM_VAL_INIT, PWM_VAL_INIT, PWM_VAL_INIT };
 
 /*
  * Function Prototypes
@@ -38,10 +39,11 @@ u32 getLowerPwmLimit(Joint joint);
 u32 getUpperPwmLimit(Joint joint);
 short getPosMvDir(Joint joint);
 u32 getValReg(Joint joint);
-short getIndex(Joint joint);
+short getIndexForReg(u32 reg);
+short getIndexOfJoint(Joint joint);
 int reset();
+u32 writePwmReg(u32 reg, u32 value);
 u32 readPwmReg(u32 reg);
-int writePwmReg(u32 reg, u32 value);
 
 /*
  * Functions
@@ -387,10 +389,12 @@ float setAngle(Joint joint, float angle) {
 /*
  * Set Value for Joint
  * In: Joint, value
+ * Returns current value
  */
 u32 setValue(Joint joint, u32 value) {
 	//Variables
 	u32 limit;
+	u32 currVal = 0;
 
 	//Make sure value is smaller than upper limit
 	limit = getUpperPwmLimit(joint);
@@ -405,10 +409,10 @@ u32 setValue(Joint joint, u32 value) {
 	}
 
 	//Set Value
-	writePwmReg(getValReg(joint), value);
+	currVal = writePwmReg(getValReg(joint), value);
 
 	//Return Value
-	return value;
+	return currVal;
 }
 
 /*
@@ -524,7 +528,7 @@ u32 getUpperPwmLimit(Joint joint) {
 /*
  * Get positive moving direction for Joint
  * In: Joint
- * Returns sign for positive moving direction
+ * Returns sign for positive moving direction  (0 if Joint is unknown)
  */
 short getPosMvDir(Joint joint) {
 	switch (joint) {
@@ -548,7 +552,7 @@ short getPosMvDir(Joint joint) {
 /*
  * Get value register for Joint
  * In: Joint
- * Returns register
+ * Returns register (-1 if Joint is unknown)
  */
 u32 getValReg(Joint joint) {
 	switch (joint) {
@@ -570,11 +574,35 @@ u32 getValReg(Joint joint) {
 }
 
 /*
+ * Get index for pwm register
+ * In: register
+ * Returns internal index (-1 if reg is unknown)
+ */
+short getIndexForReg(u32 reg) {
+	switch (reg) {
+	case BASE_REG:
+		return BASE_INDEX;
+	case SHOULDER_REG:
+		return SHOULDER_INDEX;
+	case ELBOW_REG:
+		return ELBOW_INDEX;
+	case WRIST_REG:
+		return WRIST_INDEX;
+	case THUMB_REG:
+		return THUMB_INDEX;
+	case FINGER_REG:
+		return FINGER_INDEX;
+	default:
+		return -1;
+	}
+}
+
+/*
  * Get index of Joint
  * In: Joint
- * Returns internal index
+ * Returns internal index (-1 if Joint is unknown)
  */
-short getIndex(Joint joint) {
+short getIndexOfJoint(Joint joint) {
 	switch (joint) {
 	case base:
 		return BASE_INDEX;
@@ -620,27 +648,30 @@ int reset() {
 }
 
 /*
+ * Write to Register of PWM Module
+ * In: Register, Value
+ * Returns current value
+ */
+u32 writePwmReg(u32 reg, u32 value) {
+	//Variables
+	u32 currentValue = 0;
+
+	//Write value to register
+	PWM_mWriteReg(PWMADDRESS, reg, value);
+
+	//Read current value
+	currentValue = readPwmReg(reg);
+
+	//Return current value
+	return currentValue;
+}
+
+
+/*
  * Read from Register of PWM Module
  * In: Register
  * Returns content of register
  */
 u32 readPwmReg(u32 reg) {
 	return PWM_mReadReg(PWMADDRESS, reg);
-}
-
-/*
- * Write to Register of PWM Module
- * In: Register, Value
- * Returns 0 if successful
- */
-int writePwmReg(u32 reg, u32 value) {
-//Write value to register
-	PWM_mWriteReg(PWMADDRESS, reg, value);
-
-//Check if value written correctly
-	if (readPwmReg(reg) == value) {
-		return PWM_SUCCESS;
-	} else {
-		return PWM_REG_CONT_NO_MATCH;
-	}
 }

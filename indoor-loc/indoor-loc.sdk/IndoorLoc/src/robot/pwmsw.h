@@ -23,7 +23,6 @@
  */
 #define PWM_SUCCESS				0
 #define PWM_FAILURE				1
-#define PWM_REG_CONT_NO_MATCH	2
 
 /*
  * Defines: General
