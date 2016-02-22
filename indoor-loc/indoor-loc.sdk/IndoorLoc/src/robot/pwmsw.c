@@ -666,6 +666,19 @@ u32 writePwmReg(u32 reg, u32 value) {
 	return currentValue;
 }
 
+/*
+ * Read all PWM Register Values
+ * Out: array of values
+ */
+void getPwmRegValues (uint32_t values[NUMBER_OF_JOINTS]){
+	//Variables
+	int i;
+
+	//Get Values
+	for (i = 0; i < NUMBER_OF_JOINTS; i++){
+		values[i] = readPwmReg(getValReg(pwmValRegister[i]));
+	}
+}
 
 /*
  * Read from Register of PWM Module

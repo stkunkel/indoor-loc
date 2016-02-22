@@ -94,5 +94,6 @@ int pwmTest();
 float setAngle(Joint joint, float angle);
 u32 setValue(Joint joint, u32 value);
 int reset();
+void getPwmRegValues (uint32_t values[NUMBER_OF_JOINTS]);
 
 #endif
