@@ -24,7 +24,6 @@ PWM2_STEPS_REG, PWM3_STEPS_REG, PWM4_STEPS_REG, PWM5_STEPS_REG };
 static const char* jointName[NUMBER_OF_JOINTS] = { "Base", "Shoulder", "Elbow", "Wrist",
 		"Thumb", "Finger" };
 static const Joint jointVal[NUMBER_OF_JOINTS] = { base, shoulder, elbow, wrist, thumb, finger };
-static u32 pwmCurrValue[NUMBER_OF_JOINTS] = { PWM_VAL_INIT, PWM_VAL_INIT, PWM_VAL_INIT, PWM_VAL_INIT, PWM_VAL_INIT, PWM_VAL_INIT };
 
 /*
  * Function Prototypes
