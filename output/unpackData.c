@@ -8,16 +8,21 @@
 /*
  * Parameters
  */
-#define ROBOT_DATA		//Uncomment to get MPU Data only
+//#define ROBOT_DATA		//Uncomment to get MPU Data only
 #define INFILEDESC		"data.bin"
 #define OUTFILEDESC		"data.txt"
-#define NUM_OF_VALUES		46
 #define BYTE0			0x000000FF
 #define BYTE1			0x0000FF00
 #define BYTE2			0x00FF0000
 #define BYTE3			0xFF000000
 #define NUMBER_OF_AXES		3
 #define NUMBER_OF_JOINTS	6
+
+#ifdef ROBOT_DATA
+#define NUM_OF_VALUES		46
+#else
+#define NUM_OF_VALUES		22
+#endif
 
 /*
  * Typedefs
