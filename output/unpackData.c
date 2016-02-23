@@ -134,7 +134,7 @@ int main() {
     data.mpuData.temp |= (int32_t) ((buff[45]&BYTE0)<<24);
     
     //Print to Output File
-    fprintf(outfile, " %d %d %d %d %d %d %d %d %d %d %u %u %u %u %u %u\r\n", data.mpuData.gyro[0], data.mpuData.gyro[1], data.mpuData.gyro[2], data.mpuData.accel[0], data.mpuData.accel[1], data.mpuData.accel[2], data.mpuData.compass[0], data.mpuData.compass[1], data.mpuData.compass[2], data.mpuData.temp, data.pwmValues[0], data.pwmValues[1], data.pwmValues[2], data.pwmValues[3], data.pwmValues[4], data.pwmValues[5]);
+    fprintf(outfile, "%d %d %d %d %d %d %d %d %d %d %u %u %u %u %u %u\r\n", data.mpuData.gyro[0], data.mpuData.gyro[1], data.mpuData.gyro[2], data.mpuData.accel[0], data.mpuData.accel[1], data.mpuData.accel[2], data.mpuData.compass[0], data.mpuData.compass[1], data.mpuData.compass[2], data.mpuData.temp, data.pwmValues[0], data.pwmValues[1], data.pwmValues[2], data.pwmValues[3], data.pwmValues[4], data.pwmValues[5]);
 #else
     data.gyro[0]  = (int16_t) (buff[0]&BYTE0);
     data.gyro[0] |= (int16_t) ((buff[1]&BYTE0)<<8);
@@ -160,7 +160,7 @@ int main() {
     data.temp |= (int32_t) ((buff[21]&BYTE0)<<24);
     
     //Print to Output File
-    fprintf(outfile, " %d %d %d %d %d %d %d %d %d %d\r\n", data.gyro[0], data.gyro[1], data.gyro[2], data.accel[0], data.accel[1], data.accel[2], data.compass[0], data.compass[1], data.compass[2], data.temp);
+    fprintf(outfile, "%d %d %d %d %d %d %d %d %d %d\r\n", data.gyro[0], data.gyro[1], data.gyro[2], data.accel[0], data.accel[1], data.accel[2], data.compass[0], data.compass[1], data.compass[2], data.temp);
 #endif
   }
   
