@@ -25,17 +25,11 @@ void printVelocity(Vector* velocity);
 void updatePosition(float* accel_conv, float* quat_conv,
 		Vector* p_recentAccelInertial, Vector* p_recentVelocity,
 		Vector* p_recentPosition, float* time_diff);
-int convertGyroData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
-int convertAccData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
-int convertCompassData(short raw[NUMBER_OF_AXES],
-		float converted[NUMBER_OF_AXES]);
-int convertTemperaturetoC(long* raw, float* converted);
 int convertQuatenion(long raw[QUATERNION_AMOUNT], float conv[QUATERNION_AMOUNT]);
 int pushBiasesToDMP(long* gyro_bias, long* accel_bias);
+int setOffsets(long gyro_bias[NUMBER_OF_AXES], long accel_bias[NUMBER_OF_AXES]);
 int readFromFifo(short *gyro, short *accel, long *quat,
 		unsigned long *timestamp, short *sensors, unsigned char *more);
-void computeQuaternion(float gyro[NUMBER_OF_AXES], float accel[NUMBER_OF_AXES],
-		float* delta_t, float quat[QUATERNION_AMOUNT]);
 int initDMP();
 int configureMpuFifo(unsigned char fifoMask);
 int initMPU();
@@ -955,9 +949,6 @@ int updateData() {
 	} while (status != XST_SUCCESS);
 #endif
 
-	//Update time difference
-	time_diff = (timestamp - recent_ts) / 1000.0;
-
 	//Handle first function call
 	if (recent_ts == 0) {
 		//Set recent timestamp (time diff is in s, so it has to be converted to ms)
@@ -969,6 +960,9 @@ int updateData() {
 			recentPosition.value[i] = 0.0;
 		}
 	}
+
+	//Update time difference
+	time_diff = (timestamp - recent_ts) / 1000.0;
 
 //Convert Gyro
 	status = convertGyroData(gyro, gyro_conv);
@@ -1221,12 +1215,91 @@ int convertQuatenion(long raw[QUATERNION_AMOUNT], float conv[QUATERNION_AMOUNT])
 }
 
 /*
- * Calibrate Gyroscope and Accelerometer
- * Note: My Calibration is only for Gyro and Accel //TODO
- * Note2: MPU9150 has to sit on a flat surface, x axis (where LED is) facing upwards or downward
- * In: number of samples used for calibration
+ * Push calibration results to DMP
+ * In: gyro and accel biases in q1 format
+ * Returns 0 if successful
+ */
+int pushBiasesToDMP(long* gyro_bias, long* accel_bias) {
+//Variables
+	int status;
+
+//Set Gyro and Accel Bias
+	status = imuSetDmpGyroBias(gyro_bias);
+	if (status != XST_SUCCESS) {
+		myprintf("mpu.c: Could not initially set gyro bias.\r\n");
+		return status;
+	}
+
+	status = imuSetDmpAccelBias(accel_bias);
+	if (status != XST_SUCCESS) {
+		myprintf("mpu.c: Could not initially set accel bias.\r\n");
+		return status;
+	}
+
+	return XST_SUCCESS;
+}
+
+/*
+ * Compute and Set Gyro and Accel Offsets
+ * In: Numer of Samples
+ * Returns 0 if successful
  */
 int calibrateGyrAcc(unsigned int samples) {
+	//Variables
+	int status;
+	long gyro_bias[NUMBER_OF_AXES];
+	long accel_bias[NUMBER_OF_AXES];
+
+	//Compute Offsets
+	status = computeOffsets(samples, gyro_bias, accel_bias);
+	if (status != XST_SUCCESS) {
+		return status;
+	}
+
+	//Set Offsets
+	status = setOffsets(gyro_bias, accel_bias);
+	if (status != XST_SUCCESS) {
+		return status;
+	}
+
+	//Return
+	return XST_SUCCESS;
+}
+
+/*
+ * Push Gyro and Accel Offsets to MPU
+ * In: Gyro and Accel Bias
+ * Returns 0 if successful
+ */
+int setOffsets(long gyro_bias[NUMBER_OF_AXES], long accel_bias[NUMBER_OF_AXES]) {
+	//Variables
+	int status;
+
+	//Set Accel Bias
+	status = imuSetAccelBias(accel_bias);
+	if (status != XST_SUCCESS) {
+		myprintf("mpu.c: Could not set accel bias for MPU.\r\n");
+		return status;
+	}
+
+	//Set Gyro Bias
+	status = imuSetGyroBias(gyro_bias);
+	if (status != XST_SUCCESS) {
+		myprintf("mpu.c: Could not set gyro bias for MPU.\r\n");
+		return status;
+	}
+
+	//Return
+	return XST_SUCCESS;
+}
+
+/*
+ * Compute and Set Gyroscope and Accelerometer Offsets
+ * In: number of samples used for calibration
+ * Out: Gyro and Accel Offsets
+ */
+int computeOffsets(unsigned int samples, long gyro_bias[NUMBER_OF_AXES],
+		long accel_bias[NUMBER_OF_AXES]) {
 //Variables
 	int status = XST_FAILURE;
 	unsigned int i = 0, sample = 0;
@@ -1235,12 +1308,11 @@ int calibrateGyrAcc(unsigned int samples) {
 //	unsigned long timestamp;
 	short int sensors = INV_XYZ_GYRO | INV_XYZ_ACCEL;
 	unsigned char* more = (unsigned char *) malloc(100 * sizeof(char));
-	long gyro_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
-	long accel_bias[NUMBER_OF_AXES] = { 0, 0, 0 };
 	float gyro_bias_conv[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 };
 	float accel_bias_conv[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 };
 	float gyro_bias_f[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 };
 	float accel_bias_f[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 };
+	long l_accel_bias[NUMBER_OF_AXES];
 
 //Init MPU
 //Initialize IMU first if required
@@ -1353,15 +1425,18 @@ int calibrateGyrAcc(unsigned int samples) {
 	}
 
 	//Print Offsets
-	myprintf("Gyro Bias: ");
+	myprintf("Gyro Offset: ");
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
 		printf("%ld ", gyro_bias[i]); //TODO
 	}
-	myprintf("\r\nAccel Bias: ");
+	myprintf("\r\nAccel Offset: ");
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
 		printf("%ld ", accel_bias[i]); //TODO
 	}
 	printf("\r\n"); //TODO
+
+	//Make a copy of accel bias
+	memcpy(&l_accel_bias, &accel_bias, NUMBER_OF_AXES * sizeof(long));
 
 	//Make sure gravity is not cancelled
 	accel_bias_f[GRAVITY_AXIS] = 0.0;
@@ -1371,39 +1446,15 @@ int calibrateGyrAcc(unsigned int samples) {
 	memcpy(&glob_gyro_bias, &gyro_bias, NUMBER_OF_AXES * sizeof(long));
 	memcpy(&glob_accel_bias, &accel_bias, NUMBER_OF_AXES * sizeof(long));
 
-//Set status mask
-	status = GYRO_CAL_MASK | ACCEL_CAL_MASK;
+	//Set Recent Gyro and Accel
+	memcpy(&recentGyro, &gyro_bias_f, NUMBER_OF_AXES * sizeof(float));
+	memcpy(&recentAccel, &normal_force, NUMBER_OF_AXES * sizeof(float));
 
-//Set calibrated flag
-	if (status & GYRO_CAL_MASK && status & ACCEL_CAL_MASK) { //gyro and accel calibrated
-		//Push accel bias to register
-		status = imuSetAccelBias(accel_bias);
-		if (status != XST_SUCCESS) {
-			gyrAccIsCal = BOOL_FALSE;
-			return status;
-		}
+	//Set Accel Return Value
+	memcpy(&accel_bias, &l_accel_bias, NUMBER_OF_AXES * sizeof(long));
 
-		//Push Gyro Bias to register
-		status = imuSetGyroBias(gyro_bias);
-		if (status != XST_SUCCESS) {
-			gyrAccIsCal = BOOL_FALSE;
-			return status;
-		}
-
-		//Set Recent Gyro and Accel
-		memcpy(&recentGyro, &gyro_bias_f, NUMBER_OF_AXES * sizeof(float));
-		memcpy(&recentAccel, &normal_force, NUMBER_OF_AXES * sizeof(float));
-
-		//Calibration successful --> set flag
-		gyrAccIsCal = BOOL_TRUE;
-		status = XST_SUCCESS;
-	} else {
-		//Calibration successful --> set flag
-		gyrAccIsCal = BOOL_FALSE;
-		status = XST_FAILURE;
-	}
 #ifdef USE_DMP
-	//Configure and enable DMP
+//Configure and enable DMP
 	status = configureDMP(FEATURES_CAL);
 	if (status != XST_SUCCESS) {
 		return status;
@@ -1420,31 +1471,6 @@ int calibrateGyrAcc(unsigned int samples) {
 
 //Free memory and return
 	free(more);
-	return status;
-}
-
-/*
- * Push calibration results to DMP
- * In: gyro and accel biases in q1 format
- * Returns 0 if successful
- */
-int pushBiasesToDMP(long* gyro_bias, long* accel_bias) {
-	//Variables
-	int status;
-
-	//Set Gyro and Accel Bias
-	status = imuSetDmpGyroBias(gyro_bias);
-	if (status != XST_SUCCESS) {
-		myprintf("mpu.c: Could not initially set gyro bias.\r\n");
-		return status;
-	}
-
-	status = imuSetDmpAccelBias(accel_bias);
-	if (status != XST_SUCCESS) {
-		myprintf("mpu.c: Could not initially set accel bias.\r\n");
-		return status;
-	}
-
 	return XST_SUCCESS;
 }
 
@@ -1475,20 +1501,20 @@ int dmpGyroCalibration(bool enable) {
 	int status = XST_SUCCESS;
 	char enableCal = 0;
 
-	//Set Enable Variable
+//Set Enable Variable
 	if (enable == BOOL_TRUE) {
 		enableCal = 1;
 	} else {
 		enableCal = 0;
 	}
 
-	//Enable gyro cal if requested
+//Enable gyro cal if requested
 	status = imuEnableDmpGyroCal(enableCal);
 	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Could not enable/disable Gyroscope Calibration.\n\r");
 	}
 
-	//Return
+//Return
 	return status;
 }
 
@@ -1498,12 +1524,12 @@ int dmpGyroCalibration(bool enable) {
  * Returns 0 if successful
  */
 int initIMU(unsigned int calibrationTime) {
-	//Variables
+//Variables
 	int status, sample;
 	short gyro[NUMBER_OF_AXES], accel[NUMBER_OF_AXES], compass[NUMBER_OF_AXES];
 	long temp;
 
-	//Init MPU
+//Init MPU
 	myprintf(".........Initialize MPU...........\n\r");
 	usleep(1000000);
 	status = initMPU();
@@ -1512,14 +1538,14 @@ int initIMU(unsigned int calibrationTime) {
 	}
 
 #ifdef USE_DMP
-	//Init DMP
+//Init DMP
 	myprintf(".........Initialize DMP...........\n\r");
 	status = initDMP();
 	if (status != XST_SUCCESS) {
 		return status;
 	}
 
-	//Configure DMP
+//Configure DMP
 	myprintf(".........Configure DMP...........\n\r");
 	status = configureDMP(FEATURES_RAW);
 	if (status != XST_SUCCESS) {
@@ -1527,17 +1553,16 @@ int initIMU(unsigned int calibrationTime) {
 	}
 #endif
 
-	//Calibrate
-#ifdef INITIAL_CALIBRATION
-	myprintf(".........Calibrate...........\n\r");
-	status = calibrateGyrAcc(calibrationTime * FIFO_RATE);
-	if (status != XST_SUCCESS) {
-		return status;
+//Calibrate
+	if (calibrationTime > 0) {
+		myprintf(".........Calibrate...........\n\r");
+		status = calibrateGyrAcc(calibrationTime * FIFO_RATE);
+		if (status != XST_SUCCESS) {
+			return status;
+		}
 	}
 
-#endif
-
-	//Read some values to make sure upcoming values will be useful
+//Read some values to make sure upcoming values will be useful
 	for (sample = 0; sample < CAL_IGNORE_SAMPLES; sample++) {
 		//Read Sensor
 		status = readFromRegs(gyro, accel, compass, &temp, 0, SENSORS_ALL);
@@ -1550,13 +1575,13 @@ int initIMU(unsigned int calibrationTime) {
 		}
 	}
 
-	//Setup Interrupt
+//Setup Interrupt
 	status = setupInt();
 	if (status != XST_SUCCESS) {
 		return status;
 	}
 
-	//Return
+//Return
 	return status;
 }
 
@@ -1595,15 +1620,13 @@ int configureDMP(unsigned short int features) {
 		}
 	}
 
-#ifdef INITIAL_CALIBRATION
-//Push Biases to DMP if calibration is finished
-	if (gyrAccIsCal == BOOL_TRUE) {
-		status = pushBiasesToDMP(glob_gyro_bias, glob_accel_bias);
-		if (status != XST_SUCCESS) {
-			myprintf("mpu.c: Unable to push biases to DMP.\r\n");
-		}
-	}
-#endif
+////Push Biases to DMP if calibration is finished
+//	if (gyrAccIsCal == BOOL_TRUE) {
+//		status = pushBiasesToDMP(glob_gyro_bias, glob_accel_bias);
+//		if (status != XST_SUCCESS) {
+//			myprintf("mpu.c: Unable to push biases to DMP.\r\n");
+//		}
+//	}
 
 //Enable DMP
 	status = imuSetDmpState(1);
@@ -1632,7 +1655,7 @@ int configureDMP(unsigned short int features) {
 		fifoMask |= INV_XYZ_ACCEL;
 	}
 
-	//Set FIFO rate
+//Set FIFO rate
 	status = imuSetFifoRate(FIFO_RATE);
 	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Error Setting FIFO rate.\n\r");
@@ -1641,7 +1664,7 @@ int configureDMP(unsigned short int features) {
 		}
 	}
 
-	//Configure MPU FIFO
+//Configure MPU FIFO
 	status = configureMpuFifo(fifoMask);
 	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Error configuring FIFO.\n\r");
@@ -1695,7 +1718,7 @@ int initDMP() {
  * Test Quaternion Computation
  */
 void testQuaternionComputation() {
-	//Variables
+//Variables
 	int i;
 	float gyro[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 };
 	float gyro_x[5] = { 0.0, 90.0, 90.0, -180.0, 0.0 };
@@ -1729,7 +1752,7 @@ void testQuaternionComputation() {
  */
 void computeQuaternion(float gyro[NUMBER_OF_AXES], float accel[NUMBER_OF_AXES],
 		float* delta_t, float quat[QUATERNION_AMOUNT]) {
-	//Variables
+//Variables
 	int i;
 	float gyro_rad[NUMBER_OF_AXES] = { 0.0, 0.0, 0.0 };
 	float gyro_mag = 0, rot_angle = 0;
@@ -1768,13 +1791,13 @@ void computeQuaternion(float gyro[NUMBER_OF_AXES], float accel[NUMBER_OF_AXES],
 //	//Convert Vector back to float array
 //	vectorToFloatArray(gyro_corr, gyro);
 
-	//Convert gyro data from dgr/s to rad/s and compute sum of squares
+//Convert gyro data from dgr/s to rad/s and compute sum of squares
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
 		gyro_rad[i] = degToRad(gyro[i]);
 		gyro_mag += (gyro_rad[i] * gyro_rad[i]);
 	}
 
-	//Prevent division by  zero
+//Prevent division by  zero
 	if (gyro_mag != 0) {
 		//Compute rotational vector magnitude
 		gyro_mag = sqrtf(gyro_mag);
@@ -1785,13 +1808,13 @@ void computeQuaternion(float gyro[NUMBER_OF_AXES], float accel[NUMBER_OF_AXES],
 		}
 	}
 
-	//Compute Rotation Angle
+//Compute Rotation Angle
 	rot_angle = gyro_mag * (*delta_t);
 
-	//Construct Quaternion
+//Construct Quaternion
 	quat[0] = cosf(rot_angle / 2);	//w
 
-	//x, y , z
+//x, y , z
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
 		quat[i + 1] = gyro_rad[i] * sinf(rot_angle / 2);
 	}
@@ -1802,27 +1825,27 @@ void computeQuaternion(float gyro[NUMBER_OF_AXES], float accel[NUMBER_OF_AXES],
  * In: pointer to memory (not yet allocated), sample time in s, calibration time in s
  */
 void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) {
-	//Variables
+//Variables
 	MpuRegisterData data;
 	uint32_t cnt = 0, samples = 0;
 	int status;
 	unsigned char *bufStart, *bufCurr;
 
-	//Set Pointer for Buffer
+//Set Pointer for Buffer
 	bufStart = (unsigned char*) 0x7000000;
 	bufCurr = bufStart + sizeof(cnt);
 
-	//Compute number of data samples
+//Compute number of data samples
 	samples = sampleTime * FIFO_RATE;
 
-	//Initialize
+//Initialize
 	status = initIMU(calibrationTime);
 	if (status != XST_SUCCESS) {
 		printf("Could not initialize IMU.\r\n");
 		return;
 	}
 
-	//Get Samples
+//Get Samples
 	while (cnt < samples) {
 		if (needToUpdateData() == BOOL_TRUE) {
 			//Get Data
@@ -1888,10 +1911,10 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 		}
 	}
 
-	//Disable Timer Interrupts
+//Disable Timer Interrupts
 	disableTmrInt();
 
-	//Write number of samples into buffer
+//Write number of samples into buffer
 	bufCurr = bufStart;
 	*bufCurr = (unsigned char) (cnt & BYTE0);
 	bufCurr++;
@@ -1901,13 +1924,13 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 	bufCurr++;
 	*bufCurr = (unsigned char) ((cnt & BYTE3) >> 24);
 
-	//Initialize XUart
+//Initialize XUart
 	initXUartPs();
 
-	//Transmit buf
-	//printf("XModem Transmission starts.\r\n");
+//Transmit buf
+//printf("XModem Transmission starts.\r\n");
 	xmodemTransmit(bufStart, (sizeof(cnt) + cnt * DATA_NUMBER_OF_BYTES));
-	//printf("XModem Transmission finished.\r\n");
+//printf("XModem Transmission finished.\r\n");
 }
 
 /*
@@ -1920,9 +1943,9 @@ int readFromRegs(short *gyro, short *accel, short* comp, long* temp,
 		unsigned long *timestamp, short sensorMask) {
 //Variables
 	int status;
-	//unsigned long ts_gyro = 0, ts_accel = 0, ts_comp = 0, ts_temp = 0;
+//unsigned long ts_gyro = 0, ts_accel = 0, ts_comp = 0, ts_temp = 0;
 
-	//Get Timestamp if required
+//Get Timestamp if required
 	if (timestamp > 0) {
 		imuGet_ms(timestamp);
 	}
@@ -1951,7 +1974,7 @@ int readFromRegs(short *gyro, short *accel, short* comp, long* temp,
 		}
 	}
 
-	//Get Temperature
+//Get Temperature
 	if (sensorMask & SENSOR_TEMP) {
 		status = imuReadTemp(temp, 0);
 		if (status != XST_SUCCESS) {
@@ -1959,7 +1982,7 @@ int readFromRegs(short *gyro, short *accel, short* comp, long* temp,
 		}
 	}
 
-	//Return
+//Return
 	return XST_SUCCESS;
 }
 
@@ -1969,10 +1992,10 @@ int readFromRegs(short *gyro, short *accel, short* comp, long* temp,
  * Returns 0 if successful
  */
 int getImuAddr(u8* addr) {
-	//Variables
+//Variables
 	int status;
 
-	//Has IMU address been set already?
+//Has IMU address been set already?
 	if (imuAddr == 0) {
 		//Initialize
 		status = initMPU();
@@ -1986,7 +2009,7 @@ int getImuAddr(u8* addr) {
 		}
 	}
 
-	//Put address into global variable and return
+//Put address into global variable and return
 	*addr = imuAddr;
 	return XST_SUCCESS;
 }
@@ -2000,10 +2023,10 @@ int getImuAddr(u8* addr) {
  * Returns 0 if successful
  */
 int configureMpuFifo(unsigned char fifoMask) {
-	//Variables
+//Variables
 	int status;
 
-	//Enable MPU FIFO
+//Enable MPU FIFO
 	status = mpu_configure_fifo(fifoMask);
 	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Error configuring FIFO.\n\r");
@@ -2014,14 +2037,14 @@ int configureMpuFifo(unsigned char fifoMask) {
 		}
 	}
 
-	//Reset FIFO
+//Reset FIFO
 	status = imuResetFifo();
 	if (status != XST_SUCCESS) {
 		myprintf("mpu.c: Could not reset FIFO.\n\r");
 		return status;
 	}
 
-	//Return
+//Return
 	return XST_SUCCESS;
 }
 
@@ -2032,6 +2055,11 @@ int configureMpuFifo(unsigned char fifoMask) {
 int initMPU() {
 //Variables
 	int status;
+
+	//0. Check whether IMU has already been initialized
+	if (imuAddr != 0) {
+		return XST_SUCCESS;
+	}
 
 //1. Init IMU (Set Address, etc.)
 	status = imuInit(&imuAddr);
@@ -2101,7 +2129,7 @@ int initMPU() {
 		}
 	}
 
-	//6. Init Global Variables
+//6. Init Global Variables
 	initVar();
 
 //Sleep and Return
@@ -2109,21 +2137,48 @@ int initMPU() {
 }
 
 /*
+ * Reset Computation
+ * Resets all computation values except biases, normal force and timestamp
+ */
+void resetComputation() {
+	//Variables
+	int i;
+	float temp_f[NUMBER_OF_AXES];
+
+	//Init temp variables
+	for (i = 0; i < NUMBER_OF_AXES; i++) {
+		temp_f[i] = 0.0;
+	}
+
+	memcpy(recentGyro, temp_f, NUMBER_OF_AXES * sizeof(float));
+	memcpy(recentAccel, temp_f, NUMBER_OF_AXES * sizeof(float));
+	recentAccel[GRAVITY_AXIS] = 1.0;
+	memcpy(recentCompass, temp_f, NUMBER_OF_AXES * sizeof(float));
+	memcpy(recentQuat, temp_f, NUMBER_OF_AXES * sizeof(float));
+	recentQuat[0] = 1.0;
+	recentQuat[3] = 0.0;
+	recentTemp = 0.0;
+	memcpy(recentAccelInertial.value, temp_f, NUMBER_OF_AXES * sizeof(float));
+	memcpy(recentVelocity.value, temp_f, NUMBER_OF_AXES * sizeof(float));
+	memcpy(recentPosition.value, temp_f, NUMBER_OF_AXES * sizeof(float));
+}
+
+/*
  * Initialize Global Variables
  */
 void initVar() {
-	//Variables
+//Variables
 	int i;
 	float temp_f[NUMBER_OF_AXES];
 	long temp_l[NUMBER_OF_AXES];
 
-	//Init temp variables
+//Init temp variables
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
 		temp_f[i] = 0.0;
 		temp_l[i] = 0;
 	}
 
-	//Initialize
+//Initialize
 	memcpy(glob_gyro_bias, temp_l, NUMBER_OF_AXES * sizeof(long));
 	memcpy(glob_accel_bias, temp_l, NUMBER_OF_AXES * sizeof(long));
 	glob_accel_bias[GRAVITY_AXIS] = 1.0;

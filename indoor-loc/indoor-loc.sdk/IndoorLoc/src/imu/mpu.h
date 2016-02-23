@@ -101,16 +101,26 @@ void getRecent(float gyro[NUMBER_OF_AXES], float accel[NUMBER_OF_AXES],
 void testPositionUpdate();
 void quaternionTest();
 int updateData();
+int convertGyroData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
+int convertAccData(short raw[NUMBER_OF_AXES], float converted[NUMBER_OF_AXES]);
+int convertCompassData(short raw[NUMBER_OF_AXES],
+		float converted[NUMBER_OF_AXES]);
+int convertTemperaturetoC(long* raw, float* converted);
 int calibrateGyrAcc(unsigned int samples);
+int computeOffsets(unsigned int samples, long gyro_bias[NUMBER_OF_AXES],
+		long accel_bias[NUMBER_OF_AXES]);
 int getFifoCount();
 int dmpGyroCalibration(bool enable);
 int initIMU(unsigned int calibrationTime);
 int configureDMP(unsigned short int features);
 void testQuaternionComputation();
+void computeQuaternion(float gyro[NUMBER_OF_AXES], float accel[NUMBER_OF_AXES],
+		float* delta_t, float quat[QUATERNION_AMOUNT]);
 void collectRegisterData(unsigned int sampleTime,
 		unsigned int calibrationTime);
 int readFromRegs(short *gyro, short *accel, short* comp, long* temp,
 		unsigned long *timestamp, short sensorMask);
 int getImuAddr(u8* addr);
+void resetComputation();
 
 #endif /* MPU_H_ */
