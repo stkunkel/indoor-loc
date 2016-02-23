@@ -436,19 +436,89 @@ Matrix toRotationMatrix(float quat[QUATERNION_AMOUNT]) {
 }
 
 /*
- * Euler Angles
+ * Test Euler Angle Computation
  */
-void eulerGetSigma(float quat[QUATERNION_AMOUNT], float* sigma) {
-	*sigma = atan2((quat[2] * quat[3] + quat[0] * quat[1]),
+void testEulerAngles() {
+	//Variables
+	int i = 0, j = 0;
+	float quat[QUATERNION_AMOUNT][QUATERNION_AMOUNT];
+	float eulerAngles[NUMBER_OF_AXES];
+
+	//Initialize
+	for (i = 0; i < 3; i++) {
+		for (j = 0; j < QUATERNION_AMOUNT; j++) {
+			quat[i][j] = 0.0;
+		}
+	}
+
+	//Set angles
+	quat[0][0] = 1.0; // 0°
+
+	//90° ar. x, y and z
+	for (i = 1; i < QUATERNION_AMOUNT; i++) {
+		quat[i][0] = 0.7071067811865476;
+		quat[i][i] = 0.7071067811865476;
+	}
+
+	//Print
+	for (i = 0; i < QUATERNION_AMOUNT; i++) {
+		//Quaternion
+		printf("Q:");
+		for (j = 0; j < QUATERNION_AMOUNT; j++) {
+			printf(" %f", quat[i][j]);
+		}
+
+		//Euler Angle
+		toEulerAngles(&quat[i][0], eulerAngles);
+		printf(" - EA:");
+		for (j = 0; j < NUMBER_OF_AXES; j++) {
+			printf(" %f", eulerAngles[j]);
+		}
+
+		printf("\r\n");
+
+	}
+
+}
+
+/*
+ * Get Euler Angles in dgr from Quaternion
+ * In: Quaternion
+ * Out: Euler Angles (Roll, Pitch, Yaw)
+ */
+void toEulerAngles(float quat[QUATERNION_AMOUNT],
+		float eulerAngles[NUMBER_OF_AXES]) {
+	toRoll(quat, &eulerAngles[0]);
+	toPitch(quat, &eulerAngles[1]);
+	toYaw(quat, &eulerAngles[2]);
+}
+
+/*
+ * Get Roll (Sigma) in dgr for RHCS
+ * In: Quaternion
+ * Out: Roll
+ */
+void toRoll(float quat[QUATERNION_AMOUNT], float* roll) {
+	*roll = atan2((quat[2] * quat[3] + quat[0] * quat[1]),
 			0.5 - (quat[1] * quat[1] + quat[2] * quat[2])) * 180 / M_PI;
 }
 
-void eulerGetTheta(float quat[QUATERNION_AMOUNT], float* theta) {
-	*theta = asin(-2.0 * (quat[1] * quat[3] + quat[0] * quat[2])) * 180 / M_PI;
+/*
+ * Get Pitch (Theta) in dgr for RHCS
+ * In: Quaternion
+ * Out: Pitch
+ */
+void toPitch(float quat[QUATERNION_AMOUNT], float* pitch) {
+	*pitch = -1.0*asin(-2.0 * (quat[1] * quat[3] + quat[0] * quat[2])) * 180 / M_PI; //RHCS
 }
 
-void eulerGetPsi(float quat[QUATERNION_AMOUNT], float* psi) {
-	*psi = atan2((quat[1] * quat[2] + quat[0] * quat[3]),
+/*
+ * Get Yaw (Psi) in dgr for RHCS
+ * In: Quaternion
+ * Out: Yaw
+ */
+void toYaw(float quat[QUATERNION_AMOUNT], float* yaw) {
+	*yaw = atan2((quat[1] * quat[2] + quat[0] * quat[3]),
 			0.5 - (quat[2] * quat[2] + quat[3] * quat[3])) * 180 / M_PI;
 }
 
@@ -458,7 +528,7 @@ void eulerGetPsi(float quat[QUATERNION_AMOUNT], float* psi) {
  * In: Quaternion
  * Out: Inverse
  */
-void quatInverse(float quat[QUATERNION_AMOUNT], float result[QUATERNION_AMOUNT]){
+void quatInverse(float quat[QUATERNION_AMOUNT], float result[QUATERNION_AMOUNT]) {
 	//Variables
 	float conj[QUATERNION_AMOUNT];
 	float norm, norm_sq;
@@ -471,10 +541,10 @@ void quatInverse(float quat[QUATERNION_AMOUNT], float result[QUATERNION_AMOUNT])
 	norm_sq = norm * norm;
 
 	//Compute Inverse
-	result[0] = conj[0]/norm_sq;
-	result[1] = conj[0]/norm_sq;
-	result[2] = conj[0]/norm_sq;
-	result[3] = conj[0]/norm_sq;
+	result[0] = conj[0] / norm_sq;
+	result[1] = conj[0] / norm_sq;
+	result[2] = conj[0] / norm_sq;
+	result[3] = conj[0] / norm_sq;
 }
 
 /*
@@ -483,8 +553,10 @@ void quatInverse(float quat[QUATERNION_AMOUNT], float result[QUATERNION_AMOUNT])
  * In: Quaternion
  * Returns Norm
  */
-float quatNorm(float quat[QUATERNION_AMOUNT]){
-	return (sqrtf((quat[0]*quat[0]) + (quat[1]*quat[1]) + (quat[2]*quat[2]) + (quat[3]*quat[3])));
+float quatNorm(float quat[QUATERNION_AMOUNT]) {
+	return (sqrtf(
+			(quat[0] * quat[0]) + (quat[1] * quat[1]) + (quat[2] * quat[2])
+					+ (quat[3] * quat[3])));
 }
 
 /*
@@ -493,7 +565,8 @@ float quatNorm(float quat[QUATERNION_AMOUNT]){
  * In: Quaternion
  * Out: Conjugate
  */
-void quatConjugate(float quat[QUATERNION_AMOUNT], float result[QUATERNION_AMOUNT]){
+void quatConjugate(float quat[QUATERNION_AMOUNT],
+		float result[QUATERNION_AMOUNT]) {
 	result[0] = quat[0];
 	result[1] = -quat[1];
 	result[2] = -quat[2];
