@@ -106,14 +106,20 @@ int main() {
 //Test XModem
 //	testXModem();
 
+	//Test Euler Angles
+//	testEulerAngles();
+
+	//Test Gyro Sens Computation
+	testMpuGyroSensCalc();
+
 //Collect Data
-//	collectRegisterData(120, 0); //1min sampling, no calibration
+//	collectRegisterData(1800, 0); //1min sampling, no calibration
 
 //Collect Robot Movement Data
-	int i = 0;
-	for (i = 2; i < 15; i++) {
-		collectRobotMvmtData(120, 0, BOOL_TRUE);
-	}
+//	int i = 0;
+//	for (i = 2; i < 15; i++) {
+//		collectRobotMvmtData(120, 0, BOOL_TRUE);
+//	}
 
 //Clear LEDs
 	clearLEDs();
