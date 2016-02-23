@@ -22,6 +22,8 @@ typedef struct {
 } RobotMpuData;
 
 //Functions
+void testMpuGyroSensCalc() ;
+int determineMpuGyroSensitivity(unsigned int samples, float gyro_sens[NUMBER_OF_AXES]);
 int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 		bool collect);
 
