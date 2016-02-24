@@ -8,10 +8,11 @@
 
 //Includes
 #include "xstatus.h"
-#include "../imu/mpu.h"
-#include "pwmsw.h"
-#include "../zedboard/print_utils.h"
+#include "../program_parameters.h"
 #include "dataBuffer.h"
+#include "pwmsw.h"
+#include "../imu/mpu.h"
+#include "../zedboard/print_utils.h"
 
 //Parameters
 #define HSS_422_TIME_FOR_90_DGRS		500//400//333 //ms

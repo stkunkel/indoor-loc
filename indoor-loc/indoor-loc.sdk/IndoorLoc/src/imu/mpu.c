@@ -1825,6 +1825,9 @@ void computeQuaternion(float gyro[NUMBER_OF_AXES], float accel[NUMBER_OF_AXES],
 	for (i = 0; i < NUMBER_OF_AXES; i++) {
 		quat[i + 1] = gyro_rad[i] * sinf(rot_angle / 2);
 	}
+
+	//Normalize Quaternion
+	normalizeQuat(quat);
 }
 
 /*
@@ -1833,7 +1836,7 @@ void computeQuaternion(float gyro[NUMBER_OF_AXES], float accel[NUMBER_OF_AXES],
  */
 void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) {
 //Variables
-	MpuRegisterData data;
+	RobotMpuData data;
 	uint32_t cnt = 0, samples = 0;
 	int status;
 	unsigned char *bufStart, *bufCurr;
@@ -1857,9 +1860,12 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 		if (needToUpdateData() == BOOL_TRUE) {
 			//Get Data
 
+			//Get PWM Data
+			getPwmRegValues(data.pwmValues);
+
 			//Read Sensor Data and write to memory
-			status = readFromRegs(data.gyro, data.accel, data.compass,
-					&data.temp, 0, SENSORS_ALL);
+			status = readFromRegs(data.mpuData.gyro, data.mpuData.accel,
+					data.mpuData.compass, &data.mpuData.temp, 0, SENSORS_ALL);
 
 			//Read successful?
 			if (status == XST_SUCCESS) {
@@ -1867,50 +1873,7 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 				ledRun();
 
 				//Store to buffer
-				*bufCurr = (unsigned char) (data.gyro[0] & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.gyro[0] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.gyro[1] & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.gyro[1] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.gyro[2] & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.gyro[2] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.accel[0] & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.accel[0] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.accel[1] & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.accel[1] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.accel[2] & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.accel[2] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.compass[0] & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.compass[0] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.compass[1] & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.compass[1] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.compass[2] & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.compass[2] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.temp & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.temp & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.temp & BYTE2) >> 16);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.temp & BYTE3) >> 24);
-				bufCurr++;
+				storeInBuff(&data);
 
 				//Increase Counter
 				cnt++;
@@ -1918,26 +1881,8 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 		}
 	}
 
-//Disable Timer Interrupts
-	disableTmrInt();
-
-//Write number of samples into buffer
-	bufCurr = bufStart;
-	*bufCurr = (unsigned char) (cnt & BYTE0);
-	bufCurr++;
-	*bufCurr = (unsigned char) ((cnt & BYTE1) >> 8);
-	bufCurr++;
-	*bufCurr = (unsigned char) ((cnt & BYTE2) >> 16);
-	bufCurr++;
-	*bufCurr = (unsigned char) ((cnt & BYTE3) >> 24);
-
-//Initialize XUart
-	initXUartPs();
-
-//Transmit buf
-//printf("XModem Transmission starts.\r\n");
-	xmodemTransmit(bufStart, (sizeof(cnt) + cnt * DATA_NUMBER_OF_BYTES));
-//printf("XModem Transmission finished.\r\n");
+	//Transmit Buff
+	status = transmitBuf();
 }
 
 /*

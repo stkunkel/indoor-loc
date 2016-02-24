@@ -23,6 +23,8 @@
 #include "../zedboard/gpio_utils.h"
 #include "../bool.h"
 #include "../program_parameters.h"
+#include "../robot/dataBuffer.h"
+
 
 //IMU Parameters
 #define GYRO_FRS				1000		//°/s (the smaller, the more accurate, but max is too small and more rustle)
@@ -67,14 +69,6 @@
 //Constants
 #define GRAVITY					9.80665		//m/s^2
 
-//Typedefs
-typedef struct {
-	int16_t gyro[NUMBER_OF_AXES];
-	int16_t accel[NUMBER_OF_AXES];
-	int16_t compass[NUMBER_OF_AXES];
-	int32_t temp;
-//	short fill;
-} MpuRegisterData;
 
 typedef struct {
 	Vector coordinates;

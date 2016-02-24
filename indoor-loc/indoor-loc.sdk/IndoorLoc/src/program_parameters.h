@@ -24,4 +24,26 @@
 #define BYTE2					0x00FF0000
 #define BYTE3					0xFF000000
 
+//Robot
+#define NUMBER_OF_JOINTS		6
+
+//Math
+#define NUMBER_OF_AXES			3					//x, y, z
+#define QUATERNION_AMOUNT		(NUMBER_OF_AXES + 1)//w, x, y, z rotational angles
+
+//Struct for Mpu Register Data
+typedef struct {
+	int16_t gyro[NUMBER_OF_AXES];
+	int16_t accel[NUMBER_OF_AXES];
+	int16_t compass[NUMBER_OF_AXES];
+	int32_t temp;
+//	short fill;
+} MpuRegisterData;
+
+//Struct for Data Transmission
+typedef struct {
+	uint32_t pwmValues[NUMBER_OF_JOINTS];
+	MpuRegisterData mpuData;
+} RobotMpuData;
+
 #endif /* PROGRAM_PARAMETERS_H_ */
