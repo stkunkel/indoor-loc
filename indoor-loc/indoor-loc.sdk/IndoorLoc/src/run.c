@@ -73,7 +73,7 @@ int main() {
 //	printForImuViewer(PRINT_ALL, SEPARATOR, DISPLAY_RUNS);
 
 //	Generic Print to Serial Port
-//	printGeneric(PRINT_NOTHING, SEPARATOR, DISPLAY_RUNS);
+//	printGeneric(PRINT_SENSORS, SEPARATOR, DISPLAY_RUNS);
 
 //Quaternion Drift
 //printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
@@ -110,7 +110,7 @@ int main() {
 //	testEulerAngles();
 
 	//Test Gyro Sens Computation
-	testMpuGyroSensCalc();
+//	testMpuGyroSensCalc();
 
 //Collect Data
 //	collectRegisterData(1800, 0); //1min sampling, no calibration
@@ -118,7 +118,7 @@ int main() {
 //Collect Robot Movement Data
 //	int i = 0;
 //	for (i = 2; i < 15; i++) {
-//		collectRobotMvmtData(120, 0, BOOL_TRUE);
+		collectRobotMvmtData(10, 0, BOOL_TRUE);
 //	}
 
 //Clear LEDs

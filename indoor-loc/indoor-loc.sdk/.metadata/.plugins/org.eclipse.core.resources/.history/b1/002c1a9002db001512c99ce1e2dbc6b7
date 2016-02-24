@@ -1,0 +1,21 @@
+/*
+ * dataBuffer.c: Robot control and movement data collection
+ * Author: Stephanie Kunkel
+ */
+
+#ifndef DATABUFFER_H_
+#define DATABUFFER_H_
+
+//Includes
+#include "../imu/mpu.h"
+
+//Defines
+#define BUF_ADDR	0x0x7000000
+
+//Struct for Data Transmission
+typedef struct {
+	uint32_t pwmValues[NUMBER_OF_JOINTS];
+	MpuRegisterData mpuData;
+} RobotMpuData;
+
+#endif /* DATABUFFER_H_ */
