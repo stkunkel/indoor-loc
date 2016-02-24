@@ -11,15 +11,11 @@
 #include "../imu/mpu.h"
 #include "pwmsw.h"
 #include "../zedboard/print_utils.h"
+#include "dataBuffer.h"
 
 //Parameters
 #define HSS_422_TIME_FOR_90_DGRS		500//400//333 //ms
 
-//Struct for Data Transmission
-typedef struct {
-	uint32_t pwmValues[NUMBER_OF_JOINTS];
-	MpuRegisterData mpuData;
-} RobotMpuData;
 
 //Functions
 void testMpuGyroSensCalc() ;

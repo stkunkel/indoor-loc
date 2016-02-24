@@ -64,13 +64,6 @@
 #define PRINT_SENSORS			(PRINT_GYRO | PRINT_ACCEL)
 #define PRINT_FOR_VIEWER		(PRINT_QUAT | PRINT_POS)
 
-//XModem
-#define DATA_NUMBER_OF_BYTES	46
-#define BYTE0					0x000000FF
-#define BYTE1					0x0000FF00
-#define BYTE2					0x00FF0000
-#define BYTE3					0xFF000000
-
 //Constants
 #define GRAVITY					9.80665		//m/s^2
 
