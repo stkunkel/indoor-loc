@@ -56,9 +56,8 @@ static Vector normal_force; //measure in G
 
 /*
  * Print for Display
- * Format: "<quat: w> <quat: x> <quat: y> <quat: z> | <pos: x> <pos: y> <pos: z>" (no new line)
  * You have to call updateData() first to get most recent value.
- * In: print mask
+ * In: print mask, separator character
  * Returns 0 if successful
  */
 int printforDisplay(short printMask, char* separator) {
@@ -81,8 +80,10 @@ int printforDisplay(short printMask, char* separator) {
 	l_printMask = printMask;
 
 	//Print Timestamp
-	myprintf("TS: %dms", recent_ts);
-	myprintf(separator);
+	if (l_printMask != 0x00) {
+		myprintf("TS: %dms", recent_ts);
+		myprintf(separator);
+	}
 
 	//Print Gyroscope
 	if (l_printMask & PRINT_GYRO) {
@@ -1330,6 +1331,12 @@ int computeOffsets(unsigned int samples, long gyro_bias[NUMBER_OF_AXES],
 		gyrAccIsCal = BOOL_FALSE;
 		myprintf("mpu.c: Could not disable DMP.\r\n");
 		return status;
+	}
+
+	//Initialize Gyro and Accel Bias
+	for (i = 0; i < NUMBER_OF_AXES; i++) {
+		gyro_bias[i] = 0;
+		accel_bias[i] = 0;
 	}
 
 //Set Gyro Bias to 0
