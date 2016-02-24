@@ -25,5 +25,6 @@ typedef struct {
 //Functions
 void storeInBuff(RobotMpuData* data);
 int transmitBuf();
+void resetBuff();
 
 #endif /* DATABUFFER_H_ */

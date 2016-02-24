@@ -157,3 +157,12 @@ int transmitBuf() {
 	//Return
 	return 0;
 }
+
+/*
+ * Reset Buff Address
+ * I.e. Discard all samples taken
+ */
+void resetBuff(){
+	bufCurr = (unsigned char*) BUF_ADDR;
+	cnt = 0;
+}
