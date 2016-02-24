@@ -8,7 +8,7 @@
 /*
  * Parameters
  */
-//#define ROBOT_DATA		//Uncomment to get MPU Data only
+#define ROBOT_DATA		//Uncomment to get MPU Data only
 #define INFILEDESC		"data.bin"
 #define OUTFILEDESC		"data.txt"
 #define BYTE0			0x000000FF
