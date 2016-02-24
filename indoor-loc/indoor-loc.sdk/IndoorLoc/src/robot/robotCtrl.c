@@ -23,7 +23,7 @@ void testMpuGyroSensCalc() {
 	if (status != PWM_SUCCESS) {
 		printf("robotCtrl.c: Could not determine gyro sensitivity.\r\n");
 	} else {
-		printf("Gyro Sens: - %f %f\r\n", gyro_sens[1], gyro_sens[2]);
+		printf("Gyro Sens: N/A %f %f\r\n", gyro_sens[1], gyro_sens[2]);
 	}
 
 }
@@ -47,7 +47,7 @@ int determineMpuGyroSensitivity(unsigned int samples,
 	RobotMpuData data;
 	unsigned long timestamp = 0, recent_ts = 0;
 	float time_diff;
-	float euler[NUMBER_OF_AXES], eulerMax[NUMBER_OF_AXES][NUMBER_OF_AXES];
+	float max = 0.0;
 
 	//Set Angles
 	angle[0] = 0.0;
@@ -59,8 +59,6 @@ int determineMpuGyroSensitivity(unsigned int samples,
 	for (q = 0; q < NUMBER_OF_AXES; q++) {
 		quat_abs[q + 1] = 0.0;
 		quat_rel[q + 1] = 0.0;
-
-		euler[q] = 0.0;
 	}
 
 	//Initialize IMU
@@ -73,26 +71,26 @@ int determineMpuGyroSensitivity(unsigned int samples,
 	//For each joint
 	for (j = 0; j < NUMBER_OF_AXES; j++) {
 
+		//Skip x axis
+		if (joint[j] == thumb) { // || joint[j] == wrist
+			continue;
+		}
+
 		//Reset Robot
 		status = reset();
 		if (status != PWM_SUCCESS) {
 			return PWM_FAILURE;
 		}
+		sleep(2);
 
 		//Reset i
 		i = 0;
 
-		//Reset Quaternion and EulerMax
+		//Reset Quaternion and max values
 		quat_abs[0] = 1.0;
-		for (i = 0; i < NUMBER_OF_AXES; i++) {
-			quat_abs[i+1] = 0.0;
-			eulerMax[j][i] = 0.0;
-			euler[i] = 0.0;
-		}
-
-		//Skip x axis
-		if (joint[j] == thumb || joint[j] == wrist) {
-			continue;
+		max = 0.0;
+		for (q = 1; q < QUATERNION_AMOUNT; q++) {
+			quat_abs[q] = 0.0;
 		}
 
 		//Take samples
@@ -104,12 +102,18 @@ int determineMpuGyroSensitivity(unsigned int samples,
 			}
 
 			//Set Angle
-			if (s % ((FIFO_RATE * HSS_422_TIME_FOR_90_DGRS) / 1000) == 0) {
-				if (i >= 2) {
-					i = 0;
-				}
-				setAngle(joint[j], angle[i]);
+//			if (s % ((FIFO_RATE * HSS_422_TIME_FOR_90_DGRS) / 1000) == 0) {
+//				setAngle(joint[j], angle[i % 2]);
+//				i++;
+//
+//				if (i == 2){
+//					break;
+//				}
+//			}
+			if (i < 1) {
+				setAngle(joint[j], angle[1]);
 				i++;
+				samples = s + ((FIFO_RATE * HSS_422_TIME_FOR_90_DGRS) / 1000);
 			}
 
 			//Get PWM Data
@@ -146,28 +150,23 @@ int determineMpuGyroSensitivity(unsigned int samples,
 				//Compute new absolute rotation
 				multiplyQuaternions(quat_abs, quat_rel, quat_new);
 
+				//Remember biggest Rotation
+				if (quat_abs[j + 1] > max) {
+					max = quat_abs[j + 1];
+				}
+
 				//Store new quaternion as absolute rotation
 				memcpy(&quat_abs, &quat_new, QUATERNION_AMOUNT * sizeof(float));
-
-				//Get Euler Angles
-				toEulerAngles(quat_abs, euler);
-
-				//Remember biggest Euler Angle
-				if (euler[j] > eulerMax[j][j]) {
-					memcpy(&eulerMax[j][0], &euler,
-					NUMBER_OF_AXES * sizeof(float));
-				}
 			} else {
 				s--;
 			}
 		}
 
-		//Compute sensitivity
-		gyro_sens[j] = eulerMax[j][j] - angle[1];
+		//Compute sensitivity TODO
+		gyro_sens[j] = max / 0.7071;
 
-		//Reset Robot
+		//Reset
 		reset();
-		sleep(5);
 	}
 
 //Return
@@ -189,7 +188,7 @@ int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 	RobotMpuData data;
 	uint32_t cnt = 0, samples = 0, anglecnt = 0, angleid = 0;
 	int status;
-	unsigned char *bufStart, *bufCurr;
+//	unsigned char *bufStart, *bufCurr;
 	Joint joint = wrist;
 	float angle[4], currAngle, dir;
 
@@ -204,9 +203,9 @@ int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 //Compute number of data samples
 	samples = sampleTime * FIFO_RATE;
 
-//Set Pointer for Buffer
-	bufStart = (unsigned char*) 0x7000000;
-	bufCurr = bufStart + sizeof(cnt);
+////Set Pointer for Buffer
+//	bufStart = (unsigned char*) 0x7000000;
+//	bufCurr = bufStart + sizeof(cnt);
 
 //Reset Robot
 	status = reset();
@@ -274,110 +273,9 @@ int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 			//Collect Data in required
 			if (collect == BOOL_TRUE) {
 
-				//Store PWM Values in buffer
-				*bufCurr = (unsigned char) (data.pwmValues[0] & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.pwmValues[0] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.pwmValues[0] & BYTE2) >> 16);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.pwmValues[0] & BYTE3) >> 24);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.pwmValues[1] & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.pwmValues[1] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.pwmValues[1] & BYTE2) >> 16);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.pwmValues[1] & BYTE3) >> 24);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.pwmValues[1] & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.pwmValues[2] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.pwmValues[2] & BYTE2) >> 16);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.pwmValues[2] & BYTE3) >> 24);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.pwmValues[3] & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.pwmValues[3] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.pwmValues[3] & BYTE2) >> 16);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.pwmValues[3] & BYTE3) >> 24);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.pwmValues[4] & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.pwmValues[4] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.pwmValues[4] & BYTE2) >> 16);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.pwmValues[4] & BYTE3) >> 24);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.pwmValues[5] & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.pwmValues[5] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.pwmValues[5] & BYTE2) >> 16);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.pwmValues[5] & BYTE3) >> 24);
-				bufCurr++;
+				//Store Values in buffer
+				storeInBuff(&data);
 
-				//Store MPU Data in buffer
-				*bufCurr = (unsigned char) (data.mpuData.gyro[0] & BYTE0);
-				bufCurr++;
-				*bufCurr =
-						(unsigned char) ((data.mpuData.gyro[0] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.mpuData.gyro[1] & BYTE0);
-				bufCurr++;
-				*bufCurr =
-						(unsigned char) ((data.mpuData.gyro[1] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.mpuData.gyro[2] & BYTE0);
-				bufCurr++;
-				*bufCurr =
-						(unsigned char) ((data.mpuData.gyro[2] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.mpuData.accel[0] & BYTE0);
-				bufCurr++;
-				*bufCurr =
-						(unsigned char) ((data.mpuData.accel[0] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.mpuData.accel[1] & BYTE0);
-				bufCurr++;
-				*bufCurr =
-						(unsigned char) ((data.mpuData.accel[1] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.mpuData.accel[2] & BYTE0);
-				bufCurr++;
-				*bufCurr =
-						(unsigned char) ((data.mpuData.accel[2] & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.mpuData.compass[0] & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.mpuData.compass[0] & BYTE1)
-						>> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.mpuData.compass[1] & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.mpuData.compass[1] & BYTE1)
-						>> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.mpuData.compass[2] & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.mpuData.compass[2] & BYTE1)
-						>> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) (data.mpuData.temp & BYTE0);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.mpuData.temp & BYTE1) >> 8);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.mpuData.temp & BYTE2) >> 16);
-				bufCurr++;
-				*bufCurr = (unsigned char) ((data.mpuData.temp & BYTE3) >> 24);
-				bufCurr++;
 			} else {
 				//Update Data
 				status = updateData();
@@ -407,27 +305,9 @@ int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 //Reset Robot
 	reset();
 
-//Disable Timer Interrupts
-	disableTmrInt();
-
-//Write number of samples into buffer
-	bufCurr = bufStart;
-	*bufCurr = (unsigned char) (cnt & BYTE0);
-	bufCurr++;
-	*bufCurr = (unsigned char) ((cnt & BYTE1) >> 8);
-	bufCurr++;
-	*bufCurr = (unsigned char) ((cnt & BYTE2) >> 16);
-	bufCurr++;
-	*bufCurr = (unsigned char) ((cnt & BYTE3) >> 24);
-
-//Initialize XUart
-	initXUartPs();
-
-//Transmit buf
-//printf("XModem Transmission starts.\r\n");
-	xmodemTransmit(bufStart, (sizeof(cnt) + cnt * DATA_NUMBER_OF_BYTES));
-//printf("XModem Transmission finished.\r\n");
+	//Transmit Buff
+	status = transmitBuf();
 
 //Return
-	return PWM_SUCCESS;
+	return status;
 }
