@@ -483,43 +483,86 @@ void testEulerAngles() {
 
 /*
  * Get Euler Angles in dgr from Quaternion
+ * Sources: https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles
+ * 			http://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToEuler/index.htm
  * In: Quaternion
  * Out: Euler Angles (Roll, Pitch, Yaw)
  */
 void toEulerAngles(float quat[QUATERNION_AMOUNT],
 		float eulerAngles[NUMBER_OF_AXES]) {
-	toRoll(quat, &eulerAngles[0]);
-	toPitch(quat, &eulerAngles[1]);
-	toYaw(quat, &eulerAngles[2]);
+	//Variables
+	float l_quat[QUATERNION_AMOUNT];
+	float n, test;
+	float sq_x, sq_y, sq_z;
+
+	//Normalize quat
+	n = quatNorm(quat);
+	l_quat[0] = quat[0] / n;
+	l_quat[1] = quat[1] / n;
+	l_quat[2] = quat[2] / n;
+	l_quat[3] = quat[3] / n;
+
+	//Check for singularity (+-86.3 to +-90 dgr)
+	test = l_quat[1] * l_quat[2] + l_quat[3] * l_quat[0];
+	if (test > 0.49) { //singularity at north pole
+		eulerAngles[2] = 2 * atan2(l_quat[1], l_quat[0]) * 180 / M_PI;
+		eulerAngles[1] = 90.0;
+		eulerAngles[0] = 0.0;
+	} else if (test < -0.49) { //singularity at south pole
+		eulerAngles[2] = -2 * atan2(l_quat[1], l_quat[0]) * 180 / M_PI;
+		eulerAngles[1] = -90.0;
+		eulerAngles[0] = 0.0;
+	} else {
+		//Compute squares
+		sq_x = l_quat[1] * l_quat[1];
+		sq_y = l_quat[2] * l_quat[2];
+		sq_z = l_quat[3] * l_quat[3];
+
+		//Compute euler angles
+		eulerAngles[2] = atan2(
+				((2 * l_quat[2] * l_quat[0]) - (2 * l_quat[1] * l_quat[3])),
+				(1 - 2 * sq_y - 2 * sq_z)) * 180 / M_PI;
+		eulerAngles[1] = asin(2*test);
+		eulerAngles[0] = atan2(
+				((2 * l_quat[1] * l_quat[0]) - (2 * l_quat[2] * l_quat[3])),
+				(1 - 2 * sq_x - 2 * sq_z)) * 180 / M_PI;
+	}
+
 }
 
 /*
- * Get Roll (Sigma) in dgr for RHCS
+ * Get Roll (Sigma) in dgr for LHCS
+ * Source: https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles
  * In: Quaternion
  * Out: Roll
  */
 void toRoll(float quat[QUATERNION_AMOUNT], float* roll) {
-	*roll = atan2((quat[2] * quat[3] + quat[0] * quat[1]),
-			0.5 - (quat[1] * quat[1] + quat[2] * quat[2])) * 180 / M_PI;
+//Compute Angle
+*roll = atan2((2 * (quat[0] * quat[1] + quat[2] * quat[3])),
+		(1 - 2 * (quat[1] * quat[1] + quat[2] * quat[2]))) * 180 / M_PI;
 }
 
 /*
- * Get Pitch (Theta) in dgr for RHCS
+ * Get Pitch (Theta) in dgr for LHCS
+ * Source: https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles
  * In: Quaternion
  * Out: Pitch
  */
 void toPitch(float quat[QUATERNION_AMOUNT], float* pitch) {
-	*pitch = -1.0*asin(-2.0 * (quat[1] * quat[3] + quat[0] * quat[2])) * 180 / M_PI; //RHCS
+//Compute Angle
+*pitch = asin(2.0 * (quat[0] * quat[2] - quat[1] * quat[3])) * 180 / M_PI;
 }
 
 /*
- * Get Yaw (Psi) in dgr for RHCS
+ * Get Yaw (Psi) in dgr for LHCS
+ * Source: https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles
  * In: Quaternion
  * Out: Yaw
  */
 void toYaw(float quat[QUATERNION_AMOUNT], float* yaw) {
-	*yaw = atan2((quat[1] * quat[2] + quat[0] * quat[3]),
-			0.5 - (quat[2] * quat[2] + quat[3] * quat[3])) * 180 / M_PI;
+//Compute Angle
+*yaw = atan2((2 * (quat[0] * quat[3] + quat[1] * quat[2])),
+		(1 - 2 * (quat[2] * quat[2] + quat[3] * quat[3]))) * 180 / M_PI;
 }
 
 /*
@@ -529,22 +572,35 @@ void toYaw(float quat[QUATERNION_AMOUNT], float* yaw) {
  * Out: Inverse
  */
 void quatInverse(float quat[QUATERNION_AMOUNT], float result[QUATERNION_AMOUNT]) {
-	//Variables
-	float conj[QUATERNION_AMOUNT];
-	float norm, norm_sq;
+//Variables
+float conj[QUATERNION_AMOUNT];
+float norm, norm_sq;
 
-	//Get Conjugate
-	quatConjugate(quat, conj);
+//Get Conjugate
+quatConjugate(quat, conj);
 
-	//Get Norm and square
-	norm = quatNorm(quat);
-	norm_sq = norm * norm;
+//Get Norm and square
+norm = quatNorm(quat);
+norm_sq = norm * norm;
 
-	//Compute Inverse
-	result[0] = conj[0] / norm_sq;
-	result[1] = conj[0] / norm_sq;
-	result[2] = conj[0] / norm_sq;
-	result[3] = conj[0] / norm_sq;
+//Compute Inverse
+result[0] = conj[0] / norm_sq;
+result[1] = conj[0] / norm_sq;
+result[2] = conj[0] / norm_sq;
+result[3] = conj[0] / norm_sq;
+}
+
+/*
+ * Normalize Quaternion
+ * In: Quaternion
+ * Out: Normalized Quaternion
+ */
+void normalizeQuat(float quat[QUATERNION_AMOUNT]){
+	float n = quatNorm(quat);
+	quat[0] = quat[0] / n;
+	quat[1] = quat[1] / n;
+	quat[2] = quat[2] / n;
+	quat[3] = quat[3] / n;
 }
 
 /*
@@ -554,9 +610,9 @@ void quatInverse(float quat[QUATERNION_AMOUNT], float result[QUATERNION_AMOUNT])
  * Returns Norm
  */
 float quatNorm(float quat[QUATERNION_AMOUNT]) {
-	return (sqrtf(
-			(quat[0] * quat[0]) + (quat[1] * quat[1]) + (quat[2] * quat[2])
-					+ (quat[3] * quat[3])));
+return (sqrtf(
+		(quat[0] * quat[0]) + (quat[1] * quat[1]) + (quat[2] * quat[2])
+				+ (quat[3] * quat[3])));
 }
 
 /*
@@ -566,11 +622,11 @@ float quatNorm(float quat[QUATERNION_AMOUNT]) {
  * Out: Conjugate
  */
 void quatConjugate(float quat[QUATERNION_AMOUNT],
-		float result[QUATERNION_AMOUNT]) {
-	result[0] = quat[0];
-	result[1] = -quat[1];
-	result[2] = -quat[2];
-	result[3] = -quat[3];
+	float result[QUATERNION_AMOUNT]) {
+result[0] = quat[0];
+result[1] = -quat[1];
+result[2] = -quat[2];
+result[3] = -quat[3];
 }
 
 /*
@@ -579,24 +635,24 @@ void quatConjugate(float quat[QUATERNION_AMOUNT],
  * Returns 1 if floats are (nearly) equal and 0 if not
  */
 char equal_f(float f1, float f2) {
-	if (fabs(f1 - f2) < EPSILON) {
-		return 1;
-	} else {
-		return 0;
-	}
+if (fabs(f1 - f2) < EPSILON) {
+	return 1;
+} else {
+	return 0;
+}
 }
 /*
  * Convert float to Q16
  */
 long floatToQ16(float x) {
-	return (long) ((1L << 16) * x);
+return (long) ((1L << 16) * x);
 }
 
 /*
  * Convert Q16 to float
  */
 float q16ToFloat(long q16) {
-	return (float) q16 / (1L << 16);
+return (float) q16 / (1L << 16);
 }
 
 /*
@@ -606,19 +662,19 @@ float q16ToFloat(long q16) {
  */
 Matrix toMatrix(float array[NUMBER_OF_AXES][NUMBER_OF_AXES]) {
 //Variables
-	int i, j;
-	Matrix matrix;
+int i, j;
+Matrix matrix;
 
 //Create Matrix
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		for (j = 0; j < NUMBER_OF_AXES; j++) {
-			matrix.value[i * NUMBER_OF_AXES + j] = array[i][j];
-		}
-
+for (i = 0; i < NUMBER_OF_AXES; i++) {
+	for (j = 0; j < NUMBER_OF_AXES; j++) {
+		matrix.value[i * NUMBER_OF_AXES + j] = array[i][j];
 	}
 
+}
+
 //Return
-	return matrix;
+return matrix;
 }
 
 /*
@@ -627,16 +683,16 @@ Matrix toMatrix(float array[NUMBER_OF_AXES][NUMBER_OF_AXES]) {
  * Out: Float array with two indices
  */
 void matrixToFloatArray(Matrix matrix,
-		float array[NUMBER_OF_AXES][NUMBER_OF_AXES]) {
+	float array[NUMBER_OF_AXES][NUMBER_OF_AXES]) {
 //Variables
-	int i, j;
+int i, j;
 
 //Create Vector
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		for (j = 0; j < NUMBER_OF_AXES; j++) {
-			array[i][j] = matrix.value[i * NUMBER_OF_AXES + j];
-		}
+for (i = 0; i < NUMBER_OF_AXES; i++) {
+	for (j = 0; j < NUMBER_OF_AXES; j++) {
+		array[i][j] = matrix.value[i * NUMBER_OF_AXES + j];
 	}
+}
 }
 
 /*
@@ -645,16 +701,16 @@ void matrixToFloatArray(Matrix matrix,
  * Returns cross-product
  */
 Vector crossProductFromOrigin(Vector* a, Vector* b) {
-	//Variables
-	Vector result;
+//Variables
+Vector result;
 
-	//Computation
-	result.value[0] = a->value[1] * b->value[2] - a->value[2] * b->value[1];
-	result.value[1] = a->value[2] * b->value[0] - a->value[0] * b->value[2];
-	result.value[2] = a->value[0] * b->value[1] - a->value[1] * b->value[0];
+//Computation
+result.value[0] = a->value[1] * b->value[2] - a->value[2] * b->value[1];
+result.value[1] = a->value[2] * b->value[0] - a->value[0] * b->value[2];
+result.value[2] = a->value[0] * b->value[1] - a->value[1] * b->value[0];
 
-	//Return
-	return result;
+//Return
+return result;
 }
 
 /*
@@ -664,13 +720,13 @@ Vector crossProductFromOrigin(Vector* a, Vector* b) {
  */
 Vector toVector(float* array) {
 //Variables
-	Vector vector;
+Vector vector;
 
 //Create Vector
-	memcpy(&(vector.value[0]), array, NUMBER_OF_AXES * sizeof(float));
+memcpy(&(vector.value[0]), array, NUMBER_OF_AXES * sizeof(float));
 
 //Return
-	return vector;
+return vector;
 }
 
 /*
@@ -680,12 +736,12 @@ Vector toVector(float* array) {
  */
 void vectorToFloatArray(Vector vector, float* array) {
 //Variables
-	int i;
+int i;
 
 //Create Vector
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		array[i] = vector.value[i];
-	}
+for (i = 0; i < NUMBER_OF_AXES; i++) {
+	array[i] = vector.value[i];
+}
 }
 
 /*
@@ -695,16 +751,16 @@ void vectorToFloatArray(Vector vector, float* array) {
  */
 Vector multVectorByScalar(Vector vector, float scalar) {
 //Variables
-	int i;
-	Vector result;
+int i;
+Vector result;
 
 //Multiply each element by scalar
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		result.value[i] = vector.value[i] * scalar;
-	}
+for (i = 0; i < NUMBER_OF_AXES; i++) {
+	result.value[i] = vector.value[i] * scalar;
+}
 
 //Return
-	return result;
+return result;
 }
 
 /*
@@ -714,16 +770,16 @@ Vector multVectorByScalar(Vector vector, float scalar) {
  */
 Vector addVectors(Vector vector1, Vector vector2) {
 //Variables
-	int i;
-	Vector result;
+int i;
+Vector result;
 
 //Add each element
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		result.value[i] = vector1.value[i] + vector2.value[i];
-	}
+for (i = 0; i < NUMBER_OF_AXES; i++) {
+	result.value[i] = vector1.value[i] + vector2.value[i];
+}
 
 //Return
-	return result;
+return result;
 }
 
 /*
@@ -733,16 +789,16 @@ Vector addVectors(Vector vector1, Vector vector2) {
  */
 Vector substractVectors(Vector minuend, Vector substrahend) {
 //Variables
-	int i;
-	Vector result;
+int i;
+Vector result;
 
 //Add each element
-	for (i = 0; i < NUMBER_OF_AXES; i++) {
-		result.value[i] = minuend.value[i] - substrahend.value[i];
-	}
+for (i = 0; i < NUMBER_OF_AXES; i++) {
+	result.value[i] = minuend.value[i] - substrahend.value[i];
+}
 
 //Return
-	return result;
+return result;
 }
 
 /*
@@ -752,16 +808,16 @@ Vector substractVectors(Vector minuend, Vector substrahend) {
  */
 Matrix multMatrixByScalar(Matrix matrix, float scalar) {
 //Variables
-	int i;
-	Matrix result;
+int i;
+Matrix result;
 
 //Multiply each element by scalar
-	for (i = 0; i < NUMBER_OF_AXES * NUMBER_OF_AXES; i++) {
-		result.value[i] = matrix.value[i] * scalar;
-	}
+for (i = 0; i < NUMBER_OF_AXES * NUMBER_OF_AXES; i++) {
+	result.value[i] = matrix.value[i] * scalar;
+}
 
 //Return
-	return result;
+return result;
 }
 
 /*
@@ -771,20 +827,20 @@ Matrix multMatrixByScalar(Matrix matrix, float scalar) {
  */
 Vector multMatrixAndVector(Matrix matrix, Vector vector) {
 //Variables
-	int i, j;
-	Vector result;
+int i, j;
+Vector result;
 
 //Multiply each element by scalar
-	for (i = 0; i < NUMBER_OF_AXES; i++) { //row index
-		result.value[i] = 0.0;
-		for (j = 0; j < NUMBER_OF_AXES; j++) { //column index
-			result.value[i] += matrix.value[i * NUMBER_OF_AXES + j]
-					* vector.value[j];
-		}
+for (i = 0; i < NUMBER_OF_AXES; i++) { //row index
+	result.value[i] = 0.0;
+	for (j = 0; j < NUMBER_OF_AXES; j++) { //column index
+		result.value[i] += matrix.value[i * NUMBER_OF_AXES + j]
+				* vector.value[j];
 	}
+}
 
 //Return
-	return result;
+return result;
 }
 
 /*
@@ -793,7 +849,7 @@ Vector multMatrixAndVector(Matrix matrix, Vector vector) {
  * Returns Radians
  */
 float degToRad(float deg) {
-	return (deg / 180.0 * M_PI);
+return (deg / 180.0 * M_PI);
 }
 
 /*
@@ -802,5 +858,5 @@ float degToRad(float deg) {
  * Returns Degrees
  */
 float radToDeg(float rad) {
-	return (rad * 180.0 / M_PI);
+return (rad * 180.0 / M_PI);
 }

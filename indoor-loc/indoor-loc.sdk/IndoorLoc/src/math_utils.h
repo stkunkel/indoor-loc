@@ -13,8 +13,6 @@
 #include "program_parameters.h"
 
 //Defines
-#define NUMBER_OF_AXES			3					//x, y, z
-#define QUATERNION_AMOUNT		(NUMBER_OF_AXES + 1)//w, x, y, z rotational angles
 #define X_AXIS					0
 #define Y_AXIS					1
 #define Z_AXIS					2
@@ -53,6 +51,7 @@ void toRoll(float quat[QUATERNION_AMOUNT], float* roll);
 void toPitch(float quat[QUATERNION_AMOUNT], float* pitch);
 void toYaw(float quat[QUATERNION_AMOUNT], float* yaw);
 void quatInverse(float quat[QUATERNION_AMOUNT], float result[QUATERNION_AMOUNT]);
+void normalizeQuat(float quat[QUATERNION_AMOUNT]);
 float quatNorm(float quat[QUATERNION_AMOUNT]);
 void quatConjugate(float quat[QUATERNION_AMOUNT], float result[QUATERNION_AMOUNT]);
 char equal_f(float f1, float f2);
