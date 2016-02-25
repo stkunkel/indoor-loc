@@ -1,4 +1,4 @@
-Gyro Sens: 500°/s
+Gyro Sens: 1000°/s
 Accel Sens: 4G
 no calibration
 no DMP
