@@ -1,4 +1,4 @@
-Gyro Sens: 500°/s
+Gyro Sens: 1000°/s
 Accel Sens: 4G
 no calibration (i.e. raw data)
 no DMP
@@ -30,10 +30,10 @@ x: Avg(x): -56
 y: Avg(y): 17
 z: Avg(z): -9
 
-Sensitivity (90°):
+Sensitivity (90°): Quaternions
 x: N/A
-y: Max(-y): 10116, Max(+y): 12587
-z: Max(-z): 10183, Max(+z): 10206
+y: First Peak:  0.736955 --> divided by expected  0.7071 (for 90°)  --> Sens = 1.042221751
+z: First Peak: -0.696601 --> divided by expected -0.7071 (for -90°) --> Sens = 0.985152029
 
 #################################
 Accel

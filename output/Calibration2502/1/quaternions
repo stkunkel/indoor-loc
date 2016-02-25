@@ -2,7 +2,7 @@
 pkg load quaternion;
 
 # Parameters
-gyr_sens = 65.5;
+gyr_sens = 32.8;
 acc_sens = 8192;
 delta_t = 1/500;
 
@@ -30,7 +30,7 @@ for i = 1:length(gx)
   gyr_raw = [gx(i); gy(i); gz(i)];
   acc_raw = [ax(i); ay(i); az(i)];
   
-  #Convert
+  #Convert to dgr
   gyr = gyr_raw / gyr_sens;
   acc = acc_raw / acc_sens;
   
@@ -86,6 +86,7 @@ out = [ow ox oy oz];
 fid = fopen('quaternions.txt', 'w');
 fdisp(fid, out);
 fclose(fid) 
+save('quat.mat', 'out');
 
 # Print
 print("quaternions.pdf");
