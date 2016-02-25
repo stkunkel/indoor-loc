@@ -56,7 +56,7 @@ int determineMpuGyroSensitivity(unsigned int samples,
 	//Initialize quaternions and Euler angles
 	quat_abs[0] = 1.0;
 	quat_rel[0] = 1.0;
-	for (q = 0; q < NUMBER_OF_AXES; q++) {
+	for (q = 1; q < QUATERNION_AMOUNT; q++) {
 		quat_abs[q + 1] = 0.0;
 		quat_rel[q + 1] = 0.0;
 	}
@@ -72,7 +72,7 @@ int determineMpuGyroSensitivity(unsigned int samples,
 	for (j = 0; j < NUMBER_OF_AXES; j++) {
 
 		//Skip x axis
-		if (joint[j] == thumb) { // || joint[j] == wrist
+		if (joint[j] == thumb || joint[j] == wrist) { //TODO
 			continue;
 		}
 
@@ -102,19 +102,23 @@ int determineMpuGyroSensitivity(unsigned int samples,
 			}
 
 			//Set Angle
-//			if (s % ((FIFO_RATE * HSS_422_TIME_FOR_90_DGRS) / 1000) == 0) {
-//				setAngle(joint[j], angle[i % 2]);
-//				i++;
-//
+			if (s % ((FIFO_RATE * HSS_422_TIME_FOR_90_DGRS) / 1000) == 0) {
+				setAngle(joint[j], angle[i % 2]);
+				i++;
+
+				if (i % 2 == 0) {
+					max = quat_abs[j + 1];
+				}
+
 //				if (i == 2){
 //					break;
 //				}
-//			}
-			if (i < 1) {
-				setAngle(joint[j], angle[1]);
-				i++;
-				samples = s + ((FIFO_RATE * HSS_422_TIME_FOR_90_DGRS) / 1000);
 			}
+//			if (i < 1) {
+//				setAngle(joint[j], angle[1]);
+//				i++;
+//				samples = s + ((FIFO_RATE * HSS_422_TIME_FOR_90_DGRS) / 1000);
+//			}
 
 			//Get PWM Data
 			getPwmRegValues(data.pwmValues);
@@ -150,10 +154,10 @@ int determineMpuGyroSensitivity(unsigned int samples,
 				//Compute new absolute rotation
 				multiplyQuaternions(quat_abs, quat_rel, quat_new);
 
-				//Remember biggest Rotation
-				if (quat_abs[j + 1] > max) {
-					max = quat_abs[j + 1];
-				}
+//				//Remember biggest Rotation
+//				if (quat_abs[j + 1] > max) {
+//					max = quat_abs[j + 1];
+//				}
 
 				//Store new quaternion as absolute rotation
 				memcpy(&quat_abs, &quat_new, QUATERNION_AMOUNT * sizeof(float));
@@ -189,13 +193,13 @@ int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 	uint32_t cnt = 0, samples = 0, anglecnt = 0, angleid = 0;
 	int status;
 //	unsigned char *bufStart, *bufCurr;
-	Joint joint = wrist;
+	Joint joint = base;
 	float angle[4], currAngle, dir;
 
 //Set angles
 	angle[0] = 0.0;
-	angle[1] = 90.0;
-	angle[2] = 90.0;
+	angle[1] = 0.0;//90.0;
+	angle[2] = 0.0;//90.0;
 	angle[3] = 0.0;
 	currAngle = angle[0];
 	dir = 1.0;
@@ -299,6 +303,9 @@ int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 
 			//Increase Counter
 			cnt++;
+
+//		} else if (status == XST_DEVICE_BUSY){
+//			break;
 		}
 	}
 
