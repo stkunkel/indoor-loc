@@ -19,6 +19,12 @@ static unsigned char* bufCurr = (unsigned char*) BUF_ADDR + sizeof(cnt);
  * In: Pointer to data set
  */
 void storeInBuff(RobotMpuData* data) {
+	//Check for buffer overflow
+	if (bufCurr > (unsigned char*)BUF_MAX){
+		cnt = 0;
+		bufCurr = (unsigned char*) BUF_ADDR + sizeof(cnt);
+	}
+
 	//Store PWM Values in buffer
 	*bufCurr = (unsigned char) (data->pwmValues[0] & BYTE0);
 	bufCurr++;

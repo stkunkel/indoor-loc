@@ -14,6 +14,7 @@
 
 //Defines
 #define BUF_ADDR			0x7000000
+#define BUF_MAX				(0x1FF00000 - DATA_NUMBER_OF_BYTES)
 
 
 //Functions
