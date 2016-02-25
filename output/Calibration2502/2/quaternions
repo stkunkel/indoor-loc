@@ -1,0 +1,98 @@
+# Load Quaternion pkg
+pkg load quaternion;
+
+# Parameters
+gyr_sens = 65.5;
+acc_sens = 8192;
+delta_t = 1/500;
+
+#Read in data
+data = load ('data.txt');
+gx = data(:,1);
+gy = data(:,2);
+gz = data(:,3);
+ax = data(:,4);
+ay = data(:,5);
+az = data(:,6);
+
+# Absolute Quaternion
+quat_abs = quaternion(1, 0, 0, 0);
+
+# Convert degrees to radians
+gxr = gx * pi/180;
+gyr = gy * pi/180;
+gzr = gz * pi/180;
+
+# Compute Quaternions
+for i = 1:length(gx)
+  
+  #Get data set
+  gyr_raw = [gx(i); gy(i); gz(i)];
+  acc_raw = [ax(i); ay(i); az(i)];
+  
+  #Convert
+  gyr = gyr_raw / gyr_sens;
+  acc = acc_raw / acc_sens;
+  
+  #Convert to radians
+  gyr_rad = gyr * pi/180;
+  
+  # Normalize
+  gyr_norm = gyr_rad / norm(gyr_rad);
+  acc_norm = acc / norm(acc);
+  
+  # Integrate --> rotation angle
+  angle = norm(gyr_rad) * delta_t;
+  
+  # Construct Quaternion
+  quat_rel = quaternion(cos(angle/2), gyr_norm(1,1)*sin(angle/2), gyr_norm(2,1)*sin(angle/2), gyr_norm(3,1)*sin(angle/2));
+  
+  # Compute Absolute rotation
+  quat_abs = quat_abs * quat_rel;
+  
+  # Keep track of quaternions for plot
+  ow(i) = quat_abs.w;
+  ox(i) = quat_abs.x;
+  oy(i) = quat_abs.y;
+  oz(i) = quat_abs.z;
+  
+endfor
+
+# Plot Quaternion
+plot(ow, "c");
+hold on;
+plot(ox, "r");
+hold on;
+plot(oy, "g");
+hold on;
+plot(oz, "b");
+hold on;
+
+# Set up Plot
+grid on;
+title('Quaternions');
+xlabel('Sample Number');
+ylabel('Value');
+legend('w', 'x', 'y', 'z');
+
+# Prepare for Data Export
+ow = rot90(ow, -1);
+ox = rot90(ox, -1);
+oy = rot90(oy, -1);
+oz = rot90(oz, -1);
+out = [ow ox oy oz];
+
+# Data Export
+fid = fopen('quaternions.txt', 'w');
+fdisp(fid, out);
+fclose(fid) 
+
+# Print
+print("quaternions.pdf");
+
+# Print Min and Max
+printf("Quaternion (Min/Max):\r\n");
+printf("w %f / %f\r\n", min(ow), max(ow));
+printf("x %f / %f\r\n", min(ox), max(ox));
+printf("y %f / %f\r\n", min(oy), max(oy));
+printf("z %f / %f\r\n", min(oz), max(oz));

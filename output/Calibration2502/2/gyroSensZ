@@ -1,0 +1,29 @@
+# Read in data
+data = load ('data.txt');
+z = data(:,3);
+x = [1:length(z)];
+
+# Print Min and Max
+printf("Min: %d Max: %d\r\n\r\n", min(z), max(z));
+
+# Get Peaks
+z1 = abs(z(3:end-2));
+z2 = abs(z(2:end-3));
+z3 = abs(z(1:end-4));
+z4 = abs(z(4:end-1));
+z5 = abs(z(5:end));
+idx = find(z1 > z3 & z1 > z5) + 1;
+
+# Plot Data and Peaks
+plot(x, z, 'b', x(idx), z(idx), 'r.');
+hold on;
+
+# Set up Plot
+grid on;
+title('Gyroscope');
+xlabel('Sample Number');
+zlabel('Angular Velocitz (in Hardware Units)');
+legend('z', 'Peaks (z)');
+
+# Print
+print("gyroscope_sensz.pdf");

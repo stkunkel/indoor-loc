@@ -1,0 +1,20 @@
+# Read in data
+data = load ('data.txt');
+gx = data(:,1);
+gy = data(:,2);
+gz = data(:,3);
+ax = data(:,4);
+ay = data(:,5);
+az = data(:,6);
+
+# Print Gyro Averages
+printf("Gyroscope:\r\n");
+printf("Avg(x): %d\r\n", mean(gx));
+printf("Avg(y): %d\r\n", mean(gy));
+printf("Avg(z): %d\r\n", mean(gz));
+
+# Print Accel Averages
+printf("Accelerometer:\r\n");
+printf("Avg(x): %d\r\n", mean(ax));
+printf("Avg(y): %d\r\n", mean(ay));
+printf("Avg(z): %d\r\n", mean(az));
