@@ -1861,7 +1861,7 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 			//Get Data
 
 			//Get PWM Data
-			getPwmRegValues(data.pwmValues);
+//			getPwmRegValues(data.pwmValues);
 
 			//Read Sensor Data and write to memory
 			status = readFromRegs(data.mpuData.gyro, data.mpuData.accel,
