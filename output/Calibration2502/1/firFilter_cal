@@ -1,0 +1,137 @@
+# Load Signal Package
+pkg load signal
+
+# Parameters
+gyr_sens = 32.8;
+acc_sens = 8192;
+wndw = 20;
+val = 0.1;
+outfile = "firFilter_cal.pdf";
+
+# Load Calibrated Data
+load ('calibrated.mat', 'cal');
+gx = cal(:,1);
+gy = cal(:,2);
+gz = cal(:,3);
+ax = cal(:,4);
+ay = cal(:,5);
+az = cal(:,6);
+
+# FIR Filter Coefficients
+coeff = fir1(wndw, val, 'low');
+
+# Apply Filter
+filtered_gx = filter(coeff, 1, gx);
+filtered_gy = filter(coeff, 1, gy);
+filtered_gz = filter(coeff, 1, gz);
+filtered_ax = filter(coeff, 1, ax);
+filtered_ay = filter(coeff, 1, ay);
+filtered_az = filter(coeff, 1, az);
+
+# Export Filtered
+firfil = [filtered_gx filtered_gz filtered_gz filtered_ax filtered_ay filtered_az];
+save('fir.mat', 'firfil');
+
+# Gyroscope
+# Plot gx
+plot(gx, "r");
+hold on;
+plot(filtered_gx, "c");
+hold on;
+
+# Set up Plot
+grid on;
+title('Gyroscope (x)');
+xlabel('Sample Number');
+ylabel('Angular Velocity (Hardware Units)');
+legend('Calibrated', 'FIR Filter');
+hold off;
+
+# Print Plot
+print(outfile);
+
+# Plot gy
+plot(gy, "g");
+hold on;
+plot(filtered_gy, "c");
+hold on;
+
+# Set up Plot
+grid on;
+title('Gyroscope (y)');
+xlabel('Sample Number');
+ylabel('Angular Velocity (Hardware Units)');
+legend('Calibrated', 'FIR Filter');
+hold off;
+
+# Print Plot
+print("-append", outfile);
+
+# Plot gz
+plot(gz, "b");
+hold on;
+plot(filtered_gz, "c");
+hold on;
+
+# Set up Plot
+grid on;
+title('Gyroscope (z)');
+xlabel('Sample Number');
+ylabel('Angular Velocity (Hardware Units)');
+legend('Calibrated', 'FIR Filter');
+hold off;
+
+# Print Plot
+print("-append", outfile);
+
+# Accelerometer
+# Plot ax
+plot(ax, "r");
+hold on;
+plot(filtered_ax, "c");
+hold on;
+
+# Set up Plot
+grid on;
+title('Accelerometer (x)');
+xlabel('Sample Number');
+ylabel('Acceleration (Hardware Units)');
+legend('Calibrated', 'FIR Filter');
+hold off;
+
+# Print Plot
+print("-append", outfile);
+
+# Plot ay
+plot(ay, "g");
+hold on;
+plot(filtered_ay, "c");
+hold on;
+
+# Set up Plot
+grid on;
+title('Accelerometer (y)');
+xlabel('Sample Number');
+ylabel('Acceleration (Hardware Units)');
+legend('Calibrated', 'FIR Filter');
+hold off;
+
+# Print Plot
+print("-append", outfile);
+
+# Plot az
+plot(az, "b");
+hold on;
+plot(filtered_az, "c");
+hold on;
+
+# Set up Plot
+grid on;
+title('Accelerometer (z)');
+xlabel('Sample Number');
+ylabel('Acceleration (Hardware Units)');
+legend('Calibrated', 'FIR Filter');
+hold off;
+
+# Print Plot
+print("-append", outfile);

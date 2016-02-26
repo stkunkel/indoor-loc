@@ -1,0 +1,38 @@
+FIR (20, 0.1; first and last 20 values discarded)
+Gyroscope:
+x: Mean: 11.802748, Median: 23.791804, Min: -949.186922, Max: 754.109602, Range: 1703.296524, Stddev: 285.790114
+y: Mean: 25.232721, Median: -72.326035, Min: -9615.654427, Max: 11813.035492, Range: 21428.689919, Stddev: 7299.602919
+z: Mean: -9.806191, Median: -0.788285, Min: -1442.716225, Max: 1363.323557, Range: 2806.039783, Stddev: 499.464466
+Accelerometer:
+x: Mean: -4986.934409, Median: -6005.469277, Min: -24970.273452, Max: 8248.179973, Range: 33218.453425, Stddev: 6213.754435
+y: Mean: -149.912621, Median: -193.586587, Min: -2073.314722, Max: 2314.412846, Range: 4387.727568, Stddev: 669.758363
+z: Mean: 3338.139426, Median: 3386.902466, Min: -2273.544194, Max: 8367.811999, Range: 10641.356193, Stddev: 3137.277092
+
+
+
+
+
+MVAVG (windows size: 20; first and last 20 values discarded) --> fastest
+Gyroscope:
+x: Mean: 11.808872, Median: 16.850000, Min: -637.000000, Max: 671.550000, Range: 1308.550000, Stddev: 240.828195
+y: Mean: 25.235761, Median: -94.461663, Min: -9552.237794, Max: 11636.583086, Range: 21188.820881, Stddev: 7266.165408
+z: Mean: -9.811957, Median: -20.580580, Min: -1003.093909, Max: 925.339413, Range: 1928.433322, Stddev: 441.605131
+Accelerometer:
+x: Mean: -4987.020893, Median: -6408.024394, Min: -20158.974318, Max: 6251.508136, Range: 26410.482454, Stddev: 6002.737174
+y: Mean: -149.934229, Median: -175.931882, Min: -1668.979469, Max: 1860.950582, Range: 3529.930051, Stddev: 546.835702
+z: Mean: 3338.079281, Median: 3400.181736, Min: -1981.963276, Max: 8265.588119, Range: 10247.551394, Stddev: 3113.782287
+
+
+
+
+KALMAN (q = 0.125; r = 4.0; p = 30000.0; x = 0.0; k = 1.0) --> slowest
+Gyroscope:
+x: Mean: 11.805659, Median: 15.380728, Min: -774.242985, Max: 707.845620, Range: 1482.088604, Stddev: 263.979826
+y: Mean: 25.183768, Median: -64.349917, Min: -9605.614597, Max: 11748.359704, Range: 21353.974301, Stddev: 7270.669797
+z: Mean: -9.843772, Median: -12.344116, Min: -1384.686455, Max: 1323.623540, Range: 2708.309995, Stddev: 480.787702
+Accelerometer:
+x: Mean: -4987.052388, Median: -6281.693869, Min: -23018.032599, Max: 8424.835480, Range: 31442.868078, Stddev: 6104.491692
+y: Mean: -150.019007, Median: -181.204709, Min: -2026.259600, Max: 2136.411299, Range: 4162.670899, Stddev: 624.404212
+z: Mean: 3338.101897, Median: 3456.599850, Min: -2393.891398, Max: 8388.618505, Range: 10782.509904, Stddev: 3125.562746
+
+

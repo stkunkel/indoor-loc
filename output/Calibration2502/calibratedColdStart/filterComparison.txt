@@ -1,0 +1,36 @@
+FIR (20, 0.1; first and last 20 values discarded)
+Gyroscope:
+x: Mean: -0.775188, Median: -0.793248, Min: -70.329835, Max: 75.445077, Range: 145.774913, Stddev: 7.923922
+y: Mean: 0.524362, Median: 0.525355, Min: -16.459164, Max: 17.418001, Range: 33.877165, Stddev: 1.405096
+z: Mean: -0.222983, Median: -0.223467, Min: -6.468227, Max: 6.917114, Range: 13.385342, Stddev: 1.036031
+Accelerometer:
+x: Mean: 151.496777, Median: 151.508915, Min: 77.056649, Max: 230.457934, Range: 153.401285, Stddev: 9.245774
+y: Mean: -489.550098, Median: -489.707544, Min: -693.254734, Max: -305.480151, Range: 387.774583, Stddev: 23.479923
+z: Mean: 8228.170199, Median: 8227.711759, Min: 8176.031375, Max: 8289.172807, Range: 113.141432, Stddev: 15.434631
+
+
+
+
+MVAVG (windows size: 20; first and last 20 values discarded) --> fastest
+Gyroscope:
+x: Mean: -0.774660, Median: -0.750000, Min: -48.900000, Max: 56.900000, Range: 105.800000, Stddev: 5.152569
+y: Mean: 0.524426, Median: 0.527719, Min: -12.281455, Max: 13.240944, Range: 25.522400, Stddev: 1.068769
+z: Mean: -0.223035, Median: -0.203014, Min: -4.161794, Max: 4.212548, Range: 8.374342, Stddev: 0.684994
+Accelerometer:
+x: Mean: 151.496081, Median: 151.520527, Min: 101.663130, Max: 211.918917, Range: 110.255787, Stddev: 6.985341
+y: Mean: -489.551323, Median: -489.771174, Min: -631.026337, Max: -361.507289, Range: 269.519048, Stddev: 15.108425
+z: Mean: 8228.169853, Median: 8228.084530, Min: 8186.627861, Max: 8272.734073, Range: 86.106211, Stddev: 11.421041
+
+
+
+
+KALMAN (q = 0.125; r = 4.0; p = 30000.0; x = 0.0; k = 1.0) --> slowest
+Gyroscope:
+x: Mean: -0.770847, Median: -0.789048, Min: -59.236562, Max: 64.348553, Range: 123.585114, Stddev: 6.673062
+y: Mean: 0.524221, Median: 0.525116, Min: -13.861067, Max: 15.489409, Range: 29.350476, Stddev: 1.253531
+z: Mean: -0.223499, Median: -0.222518, Min: -5.728923, Max: 6.611687, Range: 12.340609, Stddev: 0.916988
+Accelerometer:
+x: Mean: 151.494000, Median: 151.517813, Min: 83.424715, Max: 220.696498, Range: 137.271783, Stddev: 8.598395
+y: Mean: -489.551723, Median: -489.656610, Min: -667.462910, Max: -331.165438, Range: 336.297472, Stddev: 19.947461
+z: Mean: 8228.162050, Median: 8227.868313, Min: 8171.217420, Max: 8286.039292, Range: 114.821872, Stddev: 14.345632
+
