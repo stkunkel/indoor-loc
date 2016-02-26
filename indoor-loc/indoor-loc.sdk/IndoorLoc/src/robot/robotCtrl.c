@@ -304,8 +304,8 @@ int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 			//Increase Counter
 			cnt++;
 
-//		} else if (status == XST_DEVICE_BUSY){
-//			break;
+		} else if (status == XST_DEVICE_BUSY){
+			break;
 		}
 	}
 
