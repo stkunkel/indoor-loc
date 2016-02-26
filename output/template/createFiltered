@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Let Octave Create Filtered Data
-octave createFilteredData
+octave createFilteredData.m
 
 # Make copy of filtered Data
 cp filtered.txt filtered_orig.txt
@@ -10,8 +10,8 @@ cp filtered.txt filtered_orig.txt
 sed -i -e 1,20d filtered.txt
 
 # Create Filtered Plots
-octave firFilterGyro
-octave firFilterAcc
+octave firFilterGyro.m
+octave firFilterAcc.m
 
 # Let Octave Print Mean
-octave getMean
+octave getMean.m
