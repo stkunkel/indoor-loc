@@ -37,12 +37,22 @@ for i = 1:length(gx)
   #Convert to radians
   gyr_rad = gyr * pi/180;
   
-  # Normalize
-  gyr_norm = gyr_rad / norm(gyr_rad);
-  acc_norm = acc / norm(acc);
+  # Normalize Gyr
+  gyr_norm_sc = norm(gyr_rad);
+  if (gyr_norm_sc != 0)
+    gyr_norm = gyr_rad / gyr_norm_sc;
+  else 
+    gyr_norm_sc = 1;
+  endif
+  
+  # Normalize Acc
+  acc_norm_sc = acc / norm(acc);
+  if (acc_norm_sc == 0)
+    acc_norm_sc = 1;
+  endif;
   
   # Integrate --> rotation angle
-  angle = norm(gyr_rad) * delta_t;
+  angle = gyr_norm_sc * delta_t;
   
   # Construct Quaternion
   quat_rel = quaternion(cos(angle/2), gyr_norm(1,1)*sin(angle/2), gyr_norm(2,1)*sin(angle/2), gyr_norm(3,1)*sin(angle/2));
