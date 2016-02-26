@@ -6,14 +6,14 @@ gyr_sens = 32.8;
 acc_sens = 8192;
 delta_t = 1/500;
 
-#Read in data
-data = load ('data.txt');
-gx = data(:,1);
-gy = data(:,2);
-gz = data(:,3);
-ax = data(:,4);
-ay = data(:,5);
-az = data(:,6);
+# Load Calibrated Data
+load ('calibrated.mat', 'cal');
+gx = cal(:,1);
+gy = cal(:,2);
+gz = cal(:,3);
+ax = cal(:,4);
+ay = cal(:,5);
+az = cal(:,6);
 
 # Absolute Quaternion
 quat_abs = quaternion(1, 0, 0, 0);
@@ -80,7 +80,7 @@ hold on;
 
 # Set up Plot
 grid on;
-title('Quaternions');
+title('Quaternions (after calibration)');
 xlabel('Sample Number');
 ylabel('Value');
 legend('w', 'x', 'y', 'z');
@@ -90,20 +90,10 @@ ow = rot90(ow, -1);
 ox = rot90(ox, -1);
 oy = rot90(oy, -1);
 oz = rot90(oz, -1);
-out = [ow ox oy oz];
+quat_cal = [ow ox oy oz];
 
 # Data Export
-fid = fopen('quaternions.txt', 'w');
-fdisp(fid, out);
-fclose(fid) 
-save('quat.mat', 'out');
+save('quat_cal.mat', 'quat_cal');
 
 # Print
-print("quaternions.pdf");
-
-# Print Min and Max
-printf("Quaternion (Min/Max):\r\n");
-printf("w %f / %f\r\n", min(ow), max(ow));
-printf("x %f / %f\r\n", min(ox), max(ox));
-printf("y %f / %f\r\n", min(oy), max(oy));
-printf("z %f / %f\r\n", min(oz), max(oz));
+print("quaternions_cal.pdf");
