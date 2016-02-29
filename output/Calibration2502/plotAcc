@@ -16,7 +16,7 @@ hold on;
 grid on;
 title('Accelerometer');
 xlabel('Sample Number');
-ylabel('Acceleration (in g)');
+ylabel('Acceleration (Hardware Units)');
 legend('x', 'y', 'z');
 
 #Print
