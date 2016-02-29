@@ -8,7 +8,7 @@ gz_zlo = -9;
 ax_sens = 1.000854492;
 ax_zlo = 180;
 ay_sens = 1.000671387;
-ay_zlo = 226;
+ay_zlo = -226;
 az_sens = 0.986572266;
 az_zlo = -35;
 

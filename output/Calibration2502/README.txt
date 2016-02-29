@@ -40,7 +40,7 @@ Accel
 #################################
 ZLO (0G):
 x: Avg(x): 137	Avg(x): 71	Avg(x): 331 			--> ZLO = Avg = 180
-y: Avg(y): -207	Avg(y): -209	Avg(y): -263 			--> ZLO = Avg = 226
+y: Avg(y): -207	Avg(y): -209	Avg(y): -263 			--> ZLO = Avg = -226
 z: Avg(z): 105	Avg(z): 194	Avg(z): 143	Avg(z): -585 	--> ZLO = Avg = -35
 
 Sensitivity (1G):
