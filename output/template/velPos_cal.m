@@ -96,7 +96,7 @@ hold on;
 grid on;
 title('Velocity');
 xlabel('Sample Number');
-ylabel('Velocity (m/s^2)');
+ylabel('Velocity (m/s)');
 legend('x', 'y', 'z');
 hold off;
 
@@ -115,7 +115,7 @@ hold on;
 grid on;
 title('Position');
 xlabel('Sample Number');
-ylabel('Position (m/s)');
+ylabel('Position (m)');
 legend('x', 'y', 'z');
 hold off;
 
