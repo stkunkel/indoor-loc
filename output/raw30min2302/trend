@@ -1,0 +1,78 @@
+# Parameters
+order = 2;
+pcs = 2;
+outfile = "trend.pdf";
+
+# Read in data
+data = load ('data.txt');
+gx = data(:,1);
+gy = data(:,2);
+gz = data(:,3);
+ax = data(:,4);
+ay = data(:,5);
+az = data(:,6);
+
+# Get samples
+l = [1:length(gx)];
+
+# Get trend gx
+ppgx = splinefit(l, gx, pcs, "order", order);
+tgx = ppval(ppgx, l);
+
+# Get trend gy
+ppgy = splinefit(l, gy, pcs, "order", order);
+tgy = ppval(ppgy, l);
+
+# Get trend gz
+ppgz = splinefit(l, gz, pcs, "order", order);
+tgz = ppval(ppgz, l);
+
+# Get trend ax
+ppax = splinefit(l, ax, pcs, "order", order);
+tax = ppval(ppax, l);
+
+# Get trend ay
+ppay = splinefit(l, ay, pcs, "order", order);
+tay = ppval(ppay, l);
+
+# Get trend az
+ppaz = splinefit(l, az, pcs, "order", order);
+taz = ppval(ppaz, l);
+
+# Plot Gyro
+plot(tgx/mean(tgx), "r");
+hold on;
+plot(tgy/mean(tgy), "g");
+hold on;
+plot(tgz/mean(tgz), "b");
+hold on;
+
+# Set up Plot
+grid on;
+title('Gyroscope Trend (splinefit)');
+xlabel('Sample Number');
+ylabel('Value');
+legend('x/mean(x)', 'y/mean(y)', 'z/mean(z)');
+hold off;
+
+# Print
+print(outfile);
+
+# Plot Accel
+plot(tax/mean(tax), "r");
+hold on;
+plot(tay/mean(tay), "g");
+hold on;
+plot(taz/mean(taz), "b");
+hold on;
+
+# Set up Plot
+grid on;
+title('Accelerometer Trend (splinefit)');
+xlabel('Sample Number');
+ylabel('Value');
+legend('x/mean(x)', 'y/mean(y)', 'z/mean(z)');
+hold off;
+
+# Print
+print("-append", outfile);
