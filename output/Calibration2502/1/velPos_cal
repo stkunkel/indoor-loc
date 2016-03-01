@@ -1,4 +1,5 @@
 # Parameters
+outfile = "velPos_cal.pdf";
 f_norm = [331; -263; 8082];
 gyr_sens = 32.8;
 acc_sens = 8192;
@@ -101,7 +102,7 @@ legend('x', 'y', 'z');
 hold off;
 
 # Print Velocity
-print("velPos_cal.pdf");
+print(outfile);
 
 # Plot Position
 plot(sx, "r");
@@ -120,4 +121,4 @@ legend('x', 'y', 'z');
 hold off;
 
 # Print Position
-print("-append", "velPos_cal.pdf");
+print("-append", outfile);
