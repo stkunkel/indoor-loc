@@ -9,6 +9,7 @@ acc_sens = 8192;
 delta_t = 1/500;
 gravity = 9.80665;
 gyro_weight = 0.98;
+acc_range = 0.1;
 grav_z = 8082/acc_sens;
 v = [0; 0; 0];
 s = [0; 0; 0];
@@ -97,15 +98,30 @@ for i = 1:length(gx)
   # Compute Absolute rotation quaternion from gyroscope
   quat_abs_gyr = quat_abs * quat_rel_gyr;
   
-   # Construct absolute rotation quaternion from accelerometer
-  quat_abs_acc = quaternion(cos(angle_acc/2), acc_norm(1,1)*sin(angle_acc/2), acc_norm(2,1)*sin(angle_acc/2), acc_norm(3,1)*sin(angle_acc/2));
+  # Get sum of accelerations
+  acc_sum = acc(1,1) + acc(2,1) + acc(3,1);
   
-  # Complementary filter
-  w = gyro_weight * quat_abs_gyr.w + (1 - gyro_weight) * quat_abs_acc.w;
-  x = gyro_weight * quat_abs_gyr.x + (1 - gyro_weight) * quat_abs_acc.x;
-  y = gyro_weight * quat_abs_gyr.y + (1 - gyro_weight) * quat_abs_acc.y;
-  z = gyro_weight * quat_abs_gyr.z + (1 - gyro_weight) * quat_abs_acc.z;
-  quat_abs = quaternion(w, x, y, z);
+  # IMU is sitting still (just gravity) --> Complementary Filter for rotation (combine gyro and acc)
+  if (acc_sum < (grav_z + acc_range) && acc_sum > (grav_z - acc_range))
+
+	# Construct absolute rotation quaternion from accelerometer
+	quat_abs_acc = quaternion(cos(angle_acc/2), acc_norm(1,1)*sin(angle_acc/2), acc_norm(2,1)*sin(angle_acc/2), acc_norm(3,1)*sin(angle_acc/2));
+	
+	# Complementary filter
+	w = gyro_weight * quat_abs_gyr.w + (1 - gyro_weight) * quat_abs_acc.w;
+	x = gyro_weight * quat_abs_gyr.x + (1 - gyro_weight) * quat_abs_acc.x;
+	y = gyro_weight * quat_abs_gyr.y + (1 - gyro_weight) * quat_abs_acc.y;
+	z = gyro_weight * quat_abs_gyr.z + (1 - gyro_weight) * quat_abs_acc.z;
+	
+	# Create Quaternion
+	quat_abs = quaternion(w, x, y, z);
+	
+  # IMU is moving --> use gyro rotation only
+  else 
+	quat_abs = quat_abs_gyr;
+  endif;
+  
+  
   
   # Keep track of quaternions for plot
   qw(i) = quat_abs.w;
@@ -182,7 +198,7 @@ hold on;
 
 # Set up Plot
 grid on;
-title('Quaternions (after calibration)');
+title('Quaternions (after calibration and filtering)');
 xlabel('Sample Number');
 ylabel('Value');
 legend('w', 'x', 'y', 'z');
