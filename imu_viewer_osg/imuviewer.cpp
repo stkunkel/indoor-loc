@@ -35,7 +35,7 @@
 #define HEIGHT		0.05//0.1
 #define DEVICE0		"/dev/ttyACM0"
 #define DEVICE1		"/dev/ttyACM1"
-#define FILE		"quat.txt"
+#define FILENAME		"quat.mat"
 #define BAUDRATE 	B115200
 #define DELTA		0.01
 
@@ -52,6 +52,7 @@ osg::Geode* createIMU(float length, float width, float height);
  * Global Variables
  */
 osg::PositionAttitudeTransform* transform;
+FILE* fp;
 
 /*
  * Main
@@ -101,14 +102,14 @@ int main(){
 		  //DEVICE1
 		  tty_fd = open(DEVICE1,  O_RDWR | O_NOCTTY | O_NDELAY);
 		  if (tty_fd == -1){
-		    printf("Could not open port %s, trying %s.\r\n", DEVICE1, FILE);
+		    printf("Could not open port %s, trying %s.\r\n", DEVICE1, FILENAME);
 		    //FILE
-		    tty_fd = open(FILE,  O_RDWR | O_NOCTTY | O_NDELAY);
-		    if (tty_fd == -1){
-		      printf("Could not open port %s.\r\n", FILE);
+		    fp = fopen(FILENAME, "r");
+		    if (fp == NULL){
+		      printf("Could not open port %s.\r\n", FILENAME);
 		      return 0;
 		    } else {
-		      printf("Using Sample Data.\r\n");
+		      printf("Using Data From File.\r\n");
 		    }
 		  }
 	}
@@ -126,8 +127,10 @@ int main(){
 		}
 #ifdef LOCAL
 		//usleep(1000000/FIFO_RATE); //2000us --> 2ms --> just like sample rate
-#else
-		usleep(1000000/IMUVIEWER_FREQ); //100000 --> 100ms --> works well with Zynq's print rate of 10Hz TODO: Test
+#else		
+		if (fp == NULL){
+		  usleep(1000000/IMUVIEWER_FREQ); //100000 --> 100ms --> works well with Zynq's print rate of 10Hz TODO: Test
+		}
 #endif
 	}
 	
@@ -139,7 +142,14 @@ int main(){
 	}
 #else
 	//Close UART Connection
-	close(tty_fd);
+	if (tty_fd != -1){
+	  close(tty_fd);
+	}
+	
+	// Close File
+	if (fp != NULL){
+	  fclose(fp);
+	}
 #endif
 	
 	//Return
@@ -159,6 +169,7 @@ int updateScene(int tty_fd){
 	int status;
 #ifndef LOCAL
 	char* line = (char*) malloc(500);
+	size_t len = 0;
 #endif
 	
 	//Initialize Quaternion
@@ -184,23 +195,42 @@ int updateScene(int tty_fd){
 	//Get recent date
 	getRecent(0, 0, 0, 0, quaternion, 0, position, 0);
 #else
-	//Get Line from UART
-	status = read(tty_fd, line, 255);
-	if (status == 0){
-	  //printf("Could not read from UART (%d).\r\n", status);
+	// UART
+	if (tty_fd != -1){
+	
+	  //Get Line from UART
+	  status = read(tty_fd, line, 255);
+	  if (status == 0){
+	    //printf("Could not read from UART (%d).\r\n", status);
+	    return 1;
+	  }
+	  
+	  //printf("%s\r\n", line);
+	  
+	  //Get Quaternion and Position
+	  status = sscanf(line, "%f %f %f %f %f %f %f", &quaternion[0], &quaternion[1], &quaternion[2], &quaternion[3], &position[0], &position[1], &position[2]);
+	  if (status != 7 || abs(quaternion[0]) > 1.0 || abs(quaternion[1]) > 1.0 || abs(quaternion[2]) > 1.0 || abs(quaternion[3]) > 1.0){
+	    //printf("Could not get data (%d).\r\n", status);
+	    return 1;
+	  }
+	} else if (fp != NULL){ //File
+	  // Read line
+	  status = getline(&line, &len, fp);
+	  if (status == -1){
+	    return 1;
+	  }
+	  
+	  //Check for Quaternions only
+	  status = sscanf(line, "%g %g %g %g", &quaternion[0], &quaternion[1], &quaternion[2], &quaternion[3]);
+	  if (status != 4){
+	    return 0;
+	  }
+	} else {
 	  return 1;
 	}
-	
-	//printf("%s\r\n", line);
-	
-	//Get Quaternion and Position
-	status = sscanf(line, "%f %f %f %f %f %f %f", &quaternion[0], &quaternion[1], &quaternion[2], &quaternion[3], &position[0], &position[1], &position[2]);
-	if (status != 7 || abs(quaternion[0]) > 1.0 || abs(quaternion[1]) > 1.0 || abs(quaternion[2]) > 1.0 || abs(quaternion[3]) > 1.0){
-	  //printf("Could not get data (%d).\r\n", status);
-	  return 1;
-	}
+	  
 #endif	
-	//Invert 5y to fit IMUs coordinate system to OSG
+	//Invert y to fit IMUs coordinate system to OSG
 	quaternion[2] = -quaternion[2];
 	position[2] = -position[2];
 	
