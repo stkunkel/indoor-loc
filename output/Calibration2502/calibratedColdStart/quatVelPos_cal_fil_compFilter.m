@@ -38,7 +38,7 @@ endif
 
 # Create Outfile Strings
 outfile = strcat("quat_posVel_", filter_str, "_compFilter.pdf");
-q_mat_outfile = strcat("quat_", filter_str, "_compFilter.mat");
+q_mat_outfile = strcat("quatPos_", filter_str, "_compFilter.mat");
 
 # Extract Gyro and Accel Data
 gx = data(:,1);
@@ -120,8 +120,6 @@ for i = 1:length(gx)
   else 
 	quat_abs = quat_abs_gyr;
   endif;
-  
-  
   
   # Keep track of quaternions for plot
   qw(i) = quat_abs.w;
@@ -208,10 +206,13 @@ qw = rot90(qw, -1);
 qx = rot90(qx, -1);
 qy = rot90(qy, -1);
 qz = rot90(qz, -1);
-quat_cal_filt_compFil = [qw qx qy qz];
+sx = rot90(sx, -1);
+sy = rot90(sy, -1);
+sz = rot90(sz, -1);
+out = [qw qx qy qz sx sy sz];
 
 # Data Export
-save(q_mat_outfile, 'quat_cal_filt_compFil');
+save(q_mat_outfile, 'out');
 
 # Print
 print(outfile);

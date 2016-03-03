@@ -35,7 +35,7 @@
 #define HEIGHT		0.05//0.1
 #define DEVICE0		"/dev/ttyACM0"
 #define DEVICE1		"/dev/ttyACM1"
-#define FILENAME		"quat.mat"
+#define FILENAME	"quatPos.mat"
 #define BAUDRATE 	B115200
 #define DELTA		0.01
 
@@ -204,28 +204,24 @@ int updateScene(int tty_fd){
 	    //printf("Could not read from UART (%d).\r\n", status);
 	    return 1;
 	  }
-	  
-	  //printf("%s\r\n", line);
-	  
-	  //Get Quaternion and Position
-	  status = sscanf(line, "%f %f %f %f %f %f %f", &quaternion[0], &quaternion[1], &quaternion[2], &quaternion[3], &position[0], &position[1], &position[2]);
-	  if (status != 7 || abs(quaternion[0]) > 1.0 || abs(quaternion[1]) > 1.0 || abs(quaternion[2]) > 1.0 || abs(quaternion[3]) > 1.0){
-	    //printf("Could not get data (%d).\r\n", status);
-	    return 1;
-	  }
 	} else if (fp != NULL){ //File
 	  // Read line
 	  status = getline(&line, &len, fp);
 	  if (status == -1){
 	    return 1;
+	  } else {
+	    if (line[0] == '#'){
+	      return 0;
+	    }
 	  }
+	} else { //Neither UART nor File
+	  return 1;
+	}
 	  
-	  //Check for Quaternions only
-	  status = sscanf(line, "%g %g %g %g", &quaternion[0], &quaternion[1], &quaternion[2], &quaternion[3]);
-	  if (status != 4){
-	    return 0;
-	  }
-	} else {
+	//Get Quaternion and Position
+	status = sscanf(line, "%f %f %f %f %f %f %f", &quaternion[0], &quaternion[1], &quaternion[2], &quaternion[3], &position[0], &position[1], &position[2]);
+	if (status != 7 || abs(quaternion[0]) > 1.0 || abs(quaternion[1]) > 1.0 || abs(quaternion[2]) > 1.0 || abs(quaternion[3]) > 1.0){
+	  //printf("Could not get data (%d).\r\n", status);
 	  return 1;
 	}
 	  
