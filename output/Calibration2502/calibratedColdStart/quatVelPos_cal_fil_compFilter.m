@@ -161,17 +161,27 @@ for i = 1:length(gx)
   #Convert to m/s^2
   acc_i_c = acc_i * gravity;
   
+  # Get recent acceleration and velocity
+  if ( i == 1 )
+    a_recent = [0; 0; 0];
+  else
+    a_recent = [oax(i-1); oay(i-1); oaz(i-1)];
+  endif;
+  
   #Compute Velocity (first integration)
-  v_curr = v + acc_i_c * delta_t;
+  v_curr = v + a_recent * delta_t; %v + acc_i_c * delta_t;
   
   #Compute Position (second integration)
-  s_curr = s + v*delta_t + 0.5 * acc_i_c * delta_t^2;
+  s_curr = s + v * delta_t; %s + v*delta_t + 0.5 * acc_i_c * delta_t^2;
   
   #Replace old velocity and position by new ones
   v = v_curr;
   s = s_curr;
   
   # Keep track of velocity and position for plots
+  oax(i) = acc_i_c(1,1);
+  oay(i) = acc_i_c(2,1);
+  oaz(i) = acc_i_c(3,1);
   vx(i) = v(1,1);
   vy(i) = v(2,1);
   vz(i) = v(3,1);
