@@ -1,11 +1,12 @@
 # Parameters
 outfile = "kalmanFilter_cal.pdf";
-incdir = "/home/rupprich/Masterarbeit/indoor-loc/output/template";
+gyr_sens = 32.8;
+acc_sens = 8192;
 q = 0.125; 	#the smaller the less noise
-r = 4.0;	#the higher the more stable, the lower the more filter relies on sensor data
-
-# Modify Load Path
-addpath(incdir);
+r = 10.0;	#the higher the more stable, the lower the more filter relies on sensor data
+q_acc = 0.0004; %taken from data sheet
+q_gyr = 0.005; %taken from data sheet
+values_discard = 40;
 
 #Kalman Function
 function filtered = kalman1d(q, r, p, x ,k, data)
@@ -46,12 +47,20 @@ ay = cal(:,5);
 az = cal(:,6);
 
 # Apply Filter
-filtered_gx = kalman1d(q, r, p, x, k, gx);
-filtered_gy = kalman1d(q, r, p, x, k, gy);
-filtered_gz = kalman1d(q, r, p, x, k, gz);
-filtered_ax = kalman1d(q, r, p, x, k, ax);
-filtered_ay = kalman1d(q, r, p, x, k, ay);
-filtered_az = kalman1d(q, r, p, x, k, az);
+gx_kalman = kalman1d(q_gyr, r, p, x, k, gx);
+gy_kalman = kalman1d(q_gyr, r, p, x, k, gy);
+gz_kalman = kalman1d(q_gyr, r, p, x, k, gz);
+ax_kalman = kalman1d(q_acc, r, p, x, k, ax);
+ay_kalman = kalman1d(q_acc, r, p, x, k, ay);
+az_kalman = kalman1d(q_acc, r, p, x, k, az);
+
+# Remove first values
+filtered_gx = gx_kalman(values_discard:end);
+filtered_gy = gy_kalman(values_discard:end);
+filtered_gz = gz_kalman(values_discard:end);
+filtered_ax = ax_kalman(values_discard:end);
+filtered_ay = ay_kalman(values_discard:end);
+filtered_az = az_kalman(values_discard:end);
 
 # Export Filtered
 kalmanfil = [rot90(filtered_gx, -1) rot90(filtered_gy, -1) rot90(filtered_gz, -1) rot90(filtered_ax, -1) rot90(filtered_ay, -1) rot90(filtered_az, -1)];
@@ -79,7 +88,7 @@ grid on;
 title('Gyroscope (x)');
 xlabel('Sample Number');
 ylabel('Angular Velocity (Hardware Units)');
-legend('Calibrated', 'Kalman Filter');
+legend('Calibrated', strcat("Kalman Filter (q = ", num2str(q_gyr), ", r = ", num2str(r), ")"));
 hold off;
 
 # Print Plot
@@ -96,7 +105,7 @@ grid on;
 title('Gyroscope (y)');
 xlabel('Sample Number');
 ylabel('Angular Velocity (Hardware Units)');
-legend('Calibrated', 'Kalman Filter');
+legend('Calibrated', strcat("Kalman Filter (q = ", num2str(q_gyr), ", r = ", num2str(r), ")"));
 hold off;
 
 # Print Plot
@@ -113,7 +122,7 @@ grid on;
 title('Gyroscope (z)');
 xlabel('Sample Number');
 ylabel('Angular Velocity (Hardware Units)');
-legend('Calibrated', 'Kalman Filter');
+legend('Calibrated', strcat("Kalman Filter (q = ", num2str(q_gyr), ", r = ", num2str(r), ")"));
 hold off;
 
 # Print Plot
@@ -131,7 +140,7 @@ grid on;
 title('Accelerometer (x)');
 xlabel('Sample Number');
 ylabel('Acceleration (Hardware Units)');
-legend('Calibrated', 'Kalman Filter');
+legend('Calibrated', strcat("Kalman Filter (q = ", num2str(q_acc), ", r = ", num2str(r), ")"));
 hold off;
 
 # Print Plot
@@ -148,7 +157,7 @@ grid on;
 title('Accelerometer (y)');
 xlabel('Sample Number');
 ylabel('Acceleration (Hardware Units)');
-legend('Calibrated', 'Kalman Filter');
+legend('Calibrated', strcat("Kalman Filter (q = ", num2str(q_acc), ", r = ", num2str(r), ")"));
 hold off;
 
 # Print Plot
@@ -165,7 +174,7 @@ grid on;
 title('Accelerometer (z)');
 xlabel('Sample Number');
 ylabel('Acceleration (Hardware Units)');
-legend('Calibrated', 'Kalman Filter');
+legend('Calibrated', strcat("Kalman Filter (q = ", num2str(q_acc), ", r = ", num2str(r), ")"));
 hold off;
 
 # Print Plot
