@@ -21,6 +21,7 @@ static unsigned char* bufCurr = (unsigned char*) BUF_ADDR + sizeof(cnt);
 void storeInBuff(RobotMpuData* data) {
 	//Check for buffer overflow
 	if (bufCurr > (unsigned char*)BUF_MAX){
+		transmitBuf();
 		cnt = 0;
 		bufCurr = (unsigned char*) BUF_ADDR + sizeof(cnt);
 	}
