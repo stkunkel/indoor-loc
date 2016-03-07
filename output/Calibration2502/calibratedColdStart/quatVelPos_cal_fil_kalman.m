@@ -33,10 +33,10 @@ function angle_out = kalman_angle(angle_in, rate, stddev_angle, stddev_rate, del
   A = [1 (delta_t); 0 1];
   B = [delta_t; 0];
   H = [1 0];
-  P = [0 0; 0 0];
+  P = [10000 0; 0 0];
   P_prev = [0 0; 0 0];
   Q = [stddev_angle (var_angle * var_rate); (var_rate * var_angle) stddev_rate];
-  R = [stddev_angle 0; 0 stddev_rate];
+  R = [stddev_angle];
 
   # Go through samples
   for i=2:length(angle_in)
@@ -49,13 +49,15 @@ function angle_out = kalman_angle(angle_in, rate, stddev_angle, stddev_rate, del
     P = A*P_prev*transpose(A) + Q;
 
     # Measurement Update
-    K = P_prev*transpose(H)*inverse(H*P_prev*transpose(H) + R);
-    y_hat = y_hat_neg + K*([angle_in(i); rate(i)] - H*y_hat_neg);
+    K = (P_prev*transpose(H))*inverse(H*P_prev*transpose(H) + R);
+    y_hat = y_hat_neg + K*(angle_in(i) - H*y_hat_neg);
     P = (eye(2,2) - K*H)*P_prev;
     
     # Store values
     angle_out(i) = y_hat(1,1);
   end
+  
+  disp(P);
 
 endfunction
 
