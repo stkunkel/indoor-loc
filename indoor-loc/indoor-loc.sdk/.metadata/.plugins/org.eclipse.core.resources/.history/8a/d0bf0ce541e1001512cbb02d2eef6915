@@ -190,17 +190,22 @@ int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 		bool collect) {
 //Variables
 	RobotMpuData data;
-	uint32_t cnt = 0, samples = 0, angleid = 0, anglecnt = 0;
+	uint32_t cnt = 0, samples = 0, angleid = 0;
 	int status;
-	Joint joint = wrist;
-	float angle[2];
+	Joint joint = base;
+	float angle[4];
 
 //Set angles
 	angle[0] = 0.0;
-	angle[1] = 90.0;
+	angle[1] = 0.0;//90.0;
+	angle[2] = 90.0;//90.0;
+	angle[3] = 0.0;
+	angle[4] = 0.0;
+	angle[5] = -90.0;
 
 //Compute number of data samples
 	samples = sampleTime * FIFO_RATE;
+
 
 //Reset Robot
 	status = reset();
@@ -226,27 +231,12 @@ int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 			usleep(1);
 		}
 
-		// Move Robot
 		if (cnt % ((FIFO_RATE * HSS_422_TIME_FOR_90_DGRS) / 1000) == 0) {
-
-			//Increase Angle Counter
-			anglecnt++;
-
-			//Check whether new angle should be set
-			if (anglecnt >= 10) {
-
-				//Reset Angle Counter
-				anglecnt = 0;
-
-				//Reset Angle ID
-				if (angleid > 2) {
-					angleid = 0;
-				}
-
-				//Set angle and increase ID
-				setAngle(joint, angle[0]); //angleid
-				angleid++;
+			if (angleid > 5) {
+				angleid = 0;
 			}
+			setAngle(joint, angle[angleid]);
+			angleid++;
 		}
 
 		//Get PWM Data
@@ -291,7 +281,7 @@ int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 			//Increase Counter
 			cnt++;
 
-		} else if (status == XST_DEVICE_BUSY) {
+		} else if (status == XST_DEVICE_BUSY){
 			break;
 		}
 	}

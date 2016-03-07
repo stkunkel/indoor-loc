@@ -227,27 +227,27 @@ int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 		}
 
 		// Move Robot
-		if (cnt % ((FIFO_RATE * HSS_422_TIME_FOR_90_DGRS) / 1000) == 0) {
-
-			//Increase Angle Counter
-			anglecnt++;
-
-			//Check whether new angle should be set
-			if (anglecnt >= 10) {
-
-				//Reset Angle Counter
-				anglecnt = 0;
-
-				//Reset Angle ID
-				if (angleid > 2) {
-					angleid = 0;
-				}
-
-				//Set angle and increase ID
-				setAngle(joint, angle[0]); //angleid
-				angleid++;
-			}
-		}
+//		if (cnt % ((FIFO_RATE * HSS_422_TIME_FOR_90_DGRS) / 1000) == 0) {
+//
+//			//Increase Angle Counter
+//			anglecnt++;
+//
+//			//Check whether new angle should be set
+//			if (anglecnt >= 10) {
+//
+//				//Reset Angle Counter
+//				anglecnt = 0;
+//
+//				//Reset Angle ID
+//				if (angleid > 2) {
+//					angleid = 0;
+//				}
+//
+//				//Set angle and increase ID
+//				setAngle(joint, angle[angleid]);
+//				angleid++;
+//			}
+//		}
 
 		//Get PWM Data
 		getPwmRegValues(data.pwmValues);
