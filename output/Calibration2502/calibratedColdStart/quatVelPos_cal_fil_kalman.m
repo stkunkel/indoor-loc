@@ -2,7 +2,7 @@
 pkg load quaternion;
 
 # Parameters
-filter = 4; % 0 = "raw", 1 = "cal", 2 = "mvavg", 3 = "fir", 4 = "kalman"
+filter = 1; % 0 = "raw", 1 = "cal", 2 = "mvavg", 3 = "fir", 4 = "kalman"
 f_norm = [331; -263; 8082];
 gyr_sens = 32.8;
 acc_sens = 8192;
@@ -30,13 +30,13 @@ function angle_out = kalman_angle(angle_in, rate, stddev_angle, stddev_rate, del
   # Initialize
   y_hat = [angle_in(1); rate(1)];
   angle_out(1) = angle_in(1);
-  A = [1 (delta_t); 0 1];
+  A = [1 (-delta_t); 0 1];
   B = [delta_t; 0];
   H = [1 0];
-  P = [10000 0; 0 0];
-  P_prev = [0 0; 0 0];
-  Q = [stddev_angle (var_angle * var_rate); (var_rate * var_angle) stddev_rate];
-  R = [stddev_angle];
+  P = [1000 0; 0 0];
+  P_prev = P;
+  Q = [stddev_angle 0; 0 stddev_rate];
+  R = stddev_angle;
 
   # Go through samples
   for i=2:length(angle_in)
@@ -188,7 +188,7 @@ hold on;
 grid on;
 title('Sensor Fusion using Kalman Filter');
 xlabel('Sample Number');
-ylabel('Rotation around y-axis (dgr)');
+ylabel('Rotation around z-axis (dgr)');
 legend('Gyro only', 'Accel only', 'Kalman');
 
 # Print
