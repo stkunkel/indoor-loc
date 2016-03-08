@@ -2,7 +2,7 @@
 pkg load quaternion;
 
 # Parameters
-filter = 2; % 0 = "raw", 1 = "cal", 2 = "mvavg", 3 = "fir", 4 = "kalman"
+filter = 1; % 0 = "raw", 1 = "cal", 2 = "mvavg", 3 = "fir", 4 = "kalman"
 f_norm = [331; -263; 8082];
 gyr_sens = 32.8;
 acc_sens = 8192;
@@ -10,13 +10,14 @@ delta_t = 1/500;
 gravity = 9.80665;
 gyro_weight = 0.98;
 acc_range = 0.1;
-grav_z = 8082/acc_sens;
+f_norm_conv = [331; -263; 8082] /acc_sens;
 stddev_rate_x = 24.500152 / gyr_sens;
 stddev_rate_y = 1.029194 / gyr_sens;
 stddev_rate_z = 3.045021 / gyr_sens;
 stddev_angle_x = 22.443588 / acc_sens;
 stddev_angle_y = 72.858551 / acc_sens;
 stddev_angle_z = 40.575413 / acc_sens;
+acc_rec = [0; 0; 1];
 v = [0; 0; 0];
 s = [0; 0; 0];
 
@@ -24,13 +25,13 @@ s = [0; 0; 0];
 function angle_out = kalman_angle(angle_in, rate, stddev_angle, stddev_rate, delta_t)
   
   # Compute Variances
-  var_angle = sqrt(stddev_angle);
-  var_rate = sqrt(stddev_rate);
+  var_angle = stddev_angle^2;
+  var_rate = stddev_rate^2;
 
   # Initialize
   y_hat = [angle_in(1); rate(1)];
   angle_out(1) = angle_in(1);
-  A = [1 (-delta_t); 0 1];
+  A = [1 (delta_t); 0 1];
   B = [delta_t; 0];
   H = [1 0];
   P = [1000 0; 0 0];
@@ -107,18 +108,26 @@ az = az / acc_sens;
 # Compute Angle
 for i = 1:length(gx)
   
-  # Normalize Acc
-  acc_mag = sqrt(ax(i)^2 + ay(i)^2 + az(i)^2);
-  if (acc_mag != 0)
-		acc_norm = [(ax(i) / acc_mag); (ay(i) / acc_mag); (az(i) / acc_mag)];
+  # Get Magnitude of acceleration
+  acc_i = [ax(i); ay(i); az(i)];
+  acc_mag = norm(acc_i);
+  
+  # Use recent Acc if acceleration is way different than gravity
+  if (acc_mag < (1-acc_range) || acc_mag > (1+acc_range))
+    acc_norm = acc_rec;
+  elseif (acc_mag != 0) % normalize
+    acc_norm = acc_i / acc_mag;
   else 
-    acc_norm = [ax(i); ay(i); az(i)];
+    acc_norm = acc_i;
   endif;
   
-  # Compute Angle from Accelerometer
-  angle_acc_x(i) = acc_norm(1,1) / grav_z;
-  angle_acc_y(i) = acc_norm(2,1) / grav_z;
-  angle_acc_z(i) = acc_norm(3,1) / grav_z;
+  # Store Acc for next iteration
+  acc_rec = acc_norm;
+  
+  # Compute Angle from Accelerometer and convert to dgr
+  angle_acc_x(i) = asin(acc_norm(1,1)) / pi * 180;
+  angle_acc_y(i) = asin(acc_norm(2,1)) / pi * 180;
+  angle_acc_z(i) = acos(acc_norm(3,1)) / pi * 180;
   
   # Compute Angle from Gyroscope
   if (i == 1)
@@ -139,11 +148,11 @@ angle_y = kalman_angle(angle_acc_y, gy, stddev_angle_y, stddev_rate_y, delta_t);
 angle_z = kalman_angle(angle_acc_z, gz, stddev_angle_z, stddev_rate_z, delta_t);
 
 # Plot x
-plot(angle_gyr_x, "r");
-hold on;
 plot(angle_acc_x, "g");
 hold on;
-plot(angle_x, "c");
+plot(angle_gyr_x, "r");
+hold on;
+plot(angle_x, "b");
 hold on;
 
 # Set up Plot
@@ -151,18 +160,18 @@ grid on;
 title('Sensor Fusion using Kalman Filter');
 xlabel('Sample Number');
 ylabel('Rotation around x-axis (dgr)');
-legend('Gyro only', 'Accel only', 'Kalman');
+legend('Accel only', 'Gyro only', 'Kalman');
 
 # Print
 print(outfile);
 hold off;
 
 # Plot y
-plot(angle_gyr_y, "r");
-hold on;
 plot(angle_acc_y, "g");
 hold on;
-plot(angle_y, "c");
+plot(angle_gyr_y, "r");
+hold on;
+plot(angle_y, "b");
 hold on;
 
 # Set up Plot
@@ -170,18 +179,18 @@ grid on;
 title('Sensor Fusion using Kalman Filter');
 xlabel('Sample Number');
 ylabel('Rotation around y-axis (dgr)');
-legend('Gyro only', 'Accel only', 'Kalman');
+legend('Accel only', 'Gyro only', 'Kalman');
 
 # Print
 print("-append", outfile);
 hold off;
 
 # Plot z
-plot(angle_gyr_z, "r");
-hold on;
 plot(angle_acc_z, "g");
 hold on;
-plot(angle_z, "c");
+plot(angle_gyr_z, "r");
+hold on;
+plot(angle_z, "b");
 hold on;
 
 # Set up Plot
@@ -189,7 +198,7 @@ grid on;
 title('Sensor Fusion using Kalman Filter');
 xlabel('Sample Number');
 ylabel('Rotation around z-axis (dgr)');
-legend('Gyro only', 'Accel only', 'Kalman');
+legend('Accel only', 'Gyro only', 'Kalman');
 
 # Print
 print("-append", outfile);
