@@ -2,7 +2,7 @@
 pkg load quaternion;
 
 # Parameters
-filter = 1; % 0 = "raw", 1 = "cal", 2 = "mvavg", 3 = "fir", 4 = "kalman"
+filter = 2; % 0 = "raw", 1 = "cal", 2 = "mvavg", 3 = "fir", 4 = "kalman"
 f_norm = [331; -263; 8082];
 gyr_sens = 32.8;
 acc_sens = 8192;
@@ -116,9 +116,9 @@ for i = 1:length(gx)
   endif;
   
   # Compute Angle from Accelerometer
-  angle_acc_x(i) = acc_norm(1,1) / sqrt(acc_norm(2,1)^2 + acc_norm(3,1));
-  angle_acc_y(i) = acc_norm(2,1) / sqrt(acc_norm(1,1)^2 + acc_norm(3,1));
-  angle_acc_z(i) = acc_norm(3,1) / sqrt(acc_norm(1,1)^2 + acc_norm(2,1));
+  angle_acc_x(i) = acc_norm(1,1) / grav_z;
+  angle_acc_y(i) = acc_norm(2,1) / grav_z;
+  angle_acc_z(i) = acc_norm(3,1) / grav_z;
   
   # Compute Angle from Gyroscope
   if (i == 1)
