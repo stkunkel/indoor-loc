@@ -2,7 +2,7 @@
 pkg load quaternion;
 
 # Parameters
-filter = 1; % 0 = "raw", 1 = "cal", 2 = "mvavg", 3 = "fir", 4 = "kalman"
+filter = 2; % 0 = "raw", 1 = "cal", 2 = "mvavg", 3 = "fir", 4 = "kalman"
 f_norm = [331; -263; 8082];
 gyr_sens = 32.8;
 acc_sens = 8192;
@@ -29,18 +29,16 @@ function angle_out = kalman_angle(angle_in, rate, stddev_angle, stddev_rate, del
   var_rate = stddev_rate^2;
 
   # Initialize
-  y_hat = [angle_in(1); rate(1)];
-  angle_out(1) = angle_in(1);
+  y_hat = [0; 0];
   A = [1 (-delta_t); 0 1];
   B = [delta_t; 0];
   H = eye(2,2);
   P = [1000 0; 0 1000];
-  P_prev = P;
   Q = [var_angle 0; 0 var_rate];
   R = [stddev_angle 0; 0 stddev_rate];
 
   # Go through samples
-  for i=2:length(angle_in)
+  for i=1:length(angle_in)
   
     # Rememver previous error covariance
     P_prev = P;
