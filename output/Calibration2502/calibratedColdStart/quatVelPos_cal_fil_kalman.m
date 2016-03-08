@@ -31,8 +31,8 @@ function angle_out = kalman_angle(angle_in, rate, stddev_angle, stddev_rate, del
   # Initialize
   y_hat = [angle_in(1); rate(1)];
   angle_out(1) = angle_in(1);
-  A = [1 (delta_t); 0 1];
-  B = [delta_t; 0];
+  A = [1 (delta_t); 0 0];
+  B = [0; 1];
   H = [1 0];
   P = [1000 0; 0 0];
   P_prev = P;
