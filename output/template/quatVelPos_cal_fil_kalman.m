@@ -92,6 +92,7 @@ endif
 # Create Outfile Strings
 outfile = strcat("quat_posVel_", filter_str, "_kalman.pdf");
 q_mat_outfile = strcat("quatPos_", filter_str, "_kalman.mat");
+avs_outfile = strcat("avs_", filter_str, "_kalman.mat");
 
 # Extract Gyro and Accel Data
 gx = data(:,1);
@@ -164,7 +165,7 @@ for i = 1:length(gx)
 
 endfor
 
-# Kalman Filter for x axis
+# Apply Kalman Filter
 angle_x = kalman_angle(angle_acc_x, gx, stddev_angle_x, stddev_rate_x, delta_t);
 angle_y = kalman_angle(angle_acc_y, gy, stddev_angle_y, stddev_rate_y, delta_t);
 angle_z = kalman_angle(angle_acc_z, gz, stddev_angle_z, stddev_rate_z, delta_t);
@@ -349,13 +350,23 @@ qw = rot90(qw, -1);
 qx = rot90(qx, -1);
 qy = rot90(qy, -1);
 qz = rot90(qz, -1);
+oax = rot90(oax, -1);
+oay = rot90(oay, -1);
+oaz = rot90(oaz, -1);
+vx = rot90(vx, -1);
+vy = rot90(vy, -1);
+vz = rot90(vz, -1);
 sx = rot90(sx, -1);
 sy = rot90(sy, -1);
 sz = rot90(sz, -1);
-out = [qw qx qy qz sx sy sz];
 
-# Data Export
+# Data Export for IMU Viewer
+out = [qw qx qy qz sx sy sz];
 save(q_mat_outfile, 'out');
+
+# Data Export for Fusion with UWB
+avs = [oax oay oaz vx vy vz sx sy sz];
+save(avs_outfile, 'avs');
 
 # Print
 print("-append", outfile);

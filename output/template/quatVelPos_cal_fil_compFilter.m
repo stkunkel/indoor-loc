@@ -2,15 +2,15 @@
 pkg load quaternion;
 
 # Parameters
-filter = 2; % 0 = "raw", 1 = "cal", 2 = "mvavg", 3 = "fir", 4 = "kalman"
-f_norm = [331; -263; 8082];
+filter = 5; % 0 = "raw", 1 = "static cal", 2 = "static cal + mvavg", 3 = "static cal + fir", 4 = "static cal + kalman", 5 = "simple cal + no filter"
+gyro_weight = 0.98;
+acc_range = 0.1;
 gyr_sens = 32.8;
 acc_sens = 8192;
 delta_t = 1/500;
+grav_raw = acc_sens;
 gravity = 9.80665;
-gyro_weight = 0.98;
-acc_range = 0.1;
-grav_z = 8082/acc_sens;
+f_norm = [0; 0; acc_sens];
 v = [0; 0; 0];
 s = [0; 0; 0];
 
@@ -19,18 +19,30 @@ if (filter == 1)
 	load ('calibrated.mat', 'cal');
 	data = cal;
 	filter_str = "cal";
+	f_norm = [331; -263; 8082];
+	grav_raw = 8082;
 elseif (filter == 2)
 	load('mvavg.mat', 'mvavg');
 	data = mvavg;
 	filter_str = "mvavg";
+	f_norm = [331; -263; 8082];
+	grav_raw = 8082;
 elseif (filter == "fir")
 	load('fir.mat', 3);
 	data = firfil;
 	filter_str = "fir";
+	f_norm = [331; -263; 8082];
+	grav_raw = 8082;
 elseif (filter == 4)
 	load('kalman.mat', 'kalmanfil');
 	data = kalmanfil;
 	filter_str = "kalman";
+	f_norm = [331; -263; 8082];
+	grav_raw = 8082;
+elseif (filter == 5)
+	load('simple_calibration.mat', 'cal');
+	data = cal;
+	filter_str = "simple_cal";
 else
 	data = load('data.txt');
 	filter_str = "raw";
@@ -39,14 +51,18 @@ endif
 # Create Outfile Strings
 outfile = strcat("quat_posVel_", filter_str, "_compFilter.pdf");
 q_mat_outfile = strcat("quatPos_", filter_str, "_compFilter.mat");
+avs_outfile = strcat("avs_", filter_str, "_compFilter.mat");
 
-# Extract Gyro and Accel Data
-gx = data(:,1);
-gy = data(:,2);
-gz = data(:,3);
-ax = data(:,4);
-ay = data(:,5);
-az = data(:,6);
+# Extract Gyro and Accel Data and convert
+gx = data(:,1) / gyr_sens;
+gy = data(:,2) / gyr_sens;
+gz = data(:,3) / gyr_sens;
+ax = data(:,4) / acc_sens;
+ay = data(:,5) / acc_sens;
+az = data(:,6) / acc_sens;
+
+# Compute Gravity
+grav_z = grav_raw/acc_sens;
 
 # Absolute Quaternion
 quat_abs = quaternion(1, 0, 0, 0);
@@ -58,12 +74,8 @@ f_norm = f_norm / acc_sens;
 for i = 1:length(gx)
   
   #Get data set
-  gyr_raw = [gx(i); gy(i); gz(i)];
-  acc_raw = [ax(i); ay(i); az(i)];
-  
-  #Convert to dgr
-  gyr = gyr_raw / gyr_sens;
-  acc = acc_raw / acc_sens;
+  gyr = [gx(i); gy(i); gz(i)];
+  acc = [ax(i); ay(i); az(i)];
   
   ############## Quaternion Start ##############
   
@@ -216,13 +228,23 @@ qw = rot90(qw, -1);
 qx = rot90(qx, -1);
 qy = rot90(qy, -1);
 qz = rot90(qz, -1);
+oax = rot90(oax, -1);
+oay = rot90(oay, -1);
+oaz = rot90(oaz, -1);
+vx = rot90(vx, -1);
+vy = rot90(vy, -1);
+vz = rot90(vz, -1);
 sx = rot90(sx, -1);
 sy = rot90(sy, -1);
 sz = rot90(sz, -1);
-out = [qw qx qy qz sx sy sz];
 
-# Data Export
+# Data Export for IMU Viewer
+out = [qw qx qy qz sx sy sz];
 save(q_mat_outfile, 'out');
+
+# Data Export for Fusion with UWB
+avs = [oax oay oaz vx vy vz sx sy sz];
+save(avs_outfile, 'avs');
 
 # Print
 print(outfile);
