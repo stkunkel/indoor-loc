@@ -2,7 +2,7 @@
 pkg load quaternion;
 
 # Parameters
-filter = 2; % 0 = "raw", 1 = "cal", 2 = "mvavg", 3 = "fir", 4 = "kalman"
+filter = 1; % 0 = "raw", 1 = "cal", 2 = "mvavg", 3 = "fir", 4 = "kalman"
 f_norm = [331; -263; 8082];
 gyr_sens = 32.8;
 acc_sens = 8192;
