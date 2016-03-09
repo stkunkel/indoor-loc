@@ -2,15 +2,15 @@
 pkg load quaternion;
 
 # Parameters
-filter = 1; % 0 = "raw", 1 = "cal", 2 = "mvavg", 3 = "fir", 4 = "kalman"
-f_norm = [331; -263; 8082];
+filter = 5; % 0 = "raw", 1 = "static cal", 2 = "static cal + mvavg", 3 = "static cal + fir", 4 = "static cal + kalman", 5 = "simple cal + no filter"
+gyro_weight = 0.98;
+acc_range = 0.1;
 gyr_sens = 32.8;
 acc_sens = 8192;
 delta_t = 1/500;
+grav_raw = acc_sens;
 gravity = 9.80665;
-gyro_weight = 0.98;
-acc_range = 0.1;
-grav_z = 8082/acc_sens;
+f_norm = [0; 0; acc_sens];
 v = [0; 0; 0];
 s = [0; 0; 0];
 
@@ -19,18 +19,30 @@ if (filter == 1)
 	load ('calibrated.mat', 'cal');
 	data = cal;
 	filter_str = "cal";
+	f_norm = [331; -263; 8082];
+	grav_raw = 8082;
 elseif (filter == 2)
 	load('mvavg.mat', 'mvavg');
 	data = mvavg;
 	filter_str = "mvavg";
+	f_norm = [331; -263; 8082];
+	grav_raw = 8082;
 elseif (filter == "fir")
 	load('fir.mat', 3);
 	data = firfil;
 	filter_str = "fir";
+	f_norm = [331; -263; 8082];
+	grav_raw = 8082;
 elseif (filter == 4)
 	load('kalman.mat', 'kalmanfil');
 	data = kalmanfil;
 	filter_str = "kalman";
+	f_norm = [331; -263; 8082];
+	grav_raw = 8082;
+elseif (filter == 5)
+	load('simple_calibration.mat', 'cal');
+	data = cal;
+	filter_str = "simple_cal";
 else
 	data = load('data.txt');
 	filter_str = "raw";
@@ -47,6 +59,9 @@ gz = data(:,3);
 ax = data(:,4);
 ay = data(:,5);
 az = data(:,6);
+
+# Compute Gravity
+grav_z = grav_raw/acc_sens;
 
 # Absolute Quaternion
 quat_abs = quaternion(1, 0, 0, 0);
