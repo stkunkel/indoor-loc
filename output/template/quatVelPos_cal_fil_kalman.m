@@ -2,21 +2,16 @@
 pkg load quaternion;
 
 # Parameters
-filter = 2; % 0 = "raw", 1 = "cal", 2 = "mvavg", 3 = "fir", 4 = "kalman"
-f_norm = [331; -263; 8082];
+filter = 5; % 0 = "raw", 1 = "static cal", 2 = "static cal + mvavg", 3 = "static cal + fir", 4 = "static cal + kalman", 5 = "simple cal + no filter"
+ign_samples = 0; % samples to ignore until Filter has converged
+gyro_weight = 0.98;
+acc_range = 0.1;
 gyr_sens = 32.8;
 acc_sens = 8192;
 delta_t = 1/500;
+grav_raw = acc_sens;
 gravity = 9.80665;
-gyro_weight = 0.98;
-acc_range = 0.1;
-f_norm_conv = [331; -263; 8082] /acc_sens;
-stddev_rate_x = 24.500152 / gyr_sens;
-stddev_rate_y = 1.029194 / gyr_sens;
-stddev_rate_z = 3.045021 / gyr_sens;
-stddev_angle_x = 22.443588 / acc_sens;
-stddev_angle_y = 72.858551 / acc_sens;
-stddev_angle_z = 40.575413 / acc_sens;
+f_norm = [0; 0; acc_sens];
 acc_rec = [0; 0; 1];
 v = [0; 0; 0];
 s = [0; 0; 0];
@@ -65,18 +60,30 @@ if (filter == 1)
 	load ('calibrated.mat', 'cal');
 	data = cal;
 	filter_str = "cal";
+	f_norm = [331; -263; 8082];
+	grav_raw = 8082;
 elseif (filter == 2)
 	load('mvavg.mat', 'mvavg');
 	data = mvavg;
 	filter_str = "mvavg";
+	f_norm = [331; -263; 8082];
+	grav_raw = 8082;
 elseif (filter == "fir")
 	load('fir.mat', 3);
 	data = firfil;
 	filter_str = "fir";
+	f_norm = [331; -263; 8082];
+	grav_raw = 8082;
 elseif (filter == 4)
 	load('kalman.mat', 'kalmanfil');
 	data = kalmanfil;
 	filter_str = "kalman";
+	f_norm = [331; -263; 8082];
+	grav_raw = 8082;
+elseif (filter == 5)
+	load('simple_calibration.mat', 'cal');
+	data = cal;
+	filter_str = "simple_cal";
 else
 	data = load('data.txt');
 	filter_str = "raw";
@@ -101,7 +108,24 @@ gz = gz / gyr_sens;
 ax = ax / acc_sens;
 ay = ay / acc_sens;
 az = az / acc_sens;
+f_norm_conv = f_norm / acc_sens;
 
+# Compute Standard deviations
+if (filter == 1 || filter == 2 || filter == 3 || filter == 4)
+  stddev_rate_x = 24.500152 / gyr_sens;
+  stddev_rate_y = 1.029194 / gyr_sens;
+  stddev_rate_z = 3.045021 / gyr_sens;
+  stddev_angle_x = 22.443588 / acc_sens;
+  stddev_angle_y = 72.858551 / acc_sens;
+  stddev_angle_z = 40.575413 / acc_sens;
+else
+  stddev_rate_x = std(gx);
+  stddev_rate_y = std(gy);
+  stddev_rate_z = std(gz);
+  stddev_angle_x = std(ax);
+  stddev_angle_y = std(ay);
+  stddev_angle_z = std(az);
+endif;
 
 # Compute Angle
 for i = 1:length(gx)
@@ -202,3 +226,178 @@ legend('Accel only', 'Gyro only', 'Kalman');
 print("-append", outfile);
 hold off;
 
+# Absolute Quaternion
+quat_abs = quaternion(1, 0, 0, 0);
+
+# Compute Quaternions
+for i = (ign_samples+1):length(gx)
+  
+  #Get data set (already converted)
+  gyr = [gx(i); gy(i); gz(i)];
+  acc = [ax(i); ay(i); az(i)];
+  
+  ############## Quaternion Start ##############
+  
+  #Convert angle to radians
+  angle_acc_z_rad = angle_acc_z * pi/180;
+  
+  # Normalize Acc
+  acc_norm_sc = acc / norm(acc);
+  if (acc_norm_sc != 0)
+    acc_norm = acc / acc_norm_sc;
+  else 
+    acc_norm_sc = 1;
+    acc_norm = acc;
+  endif;
+  
+  # Construct absolute rotation quaternion
+  quat_abs = quaternion(cos(angle_acc_z_rad(i)/2), acc_norm(1,1)*sin(angle_acc_z_rad(i)/2), acc_norm(2,1)*sin(angle_acc_z_rad(i)/2), acc_norm(3,1)*sin(angle_acc_z_rad(i)/2));
+  
+  # Keep track of quaternions for plot
+  qw(i) = quat_abs.w;
+  qx(i) = quat_abs.x;
+  qy(i) = quat_abs.y;
+  qz(i) = quat_abs.z;
+  
+  ######## Velocity / Position Start #########
+  
+  
+   #Helper Computations
+  qw_qw = qw(i) * qw(i);
+  qw_qx = qw(i) * qx(i);
+  qw_qy = qw(i) * qy(i);
+  qw_qz = qw(i) * qz(i);
+  qx_qx = qx(i) * qx(i);
+  qx_qy = qx(i) * qy(i);
+  qx_qz = qx(i) * qz(i);
+  qy_qy = qy(i) * qy(i);
+  qy_qz = qy(i) * qz(i);
+  qz_qz = qz(i) * qz(i);
+  
+  #Quaternion to Rotation Matrix
+  rot = [(qw_qw + qx_qx - qy_qy - qz_qz) 	(2 * qx_qy + 2 * qw_qz) 	(2 * qx_qz - 2 * qw_qy); 
+	  (2 * qx_qy - 2 * qw_qz) 		(qw_qw - qx_qx + qy_qy - qz_qz) (2 * qy_qz + 2 * qw_qx)
+	  (2 * qx_qz + 2 * qw_qy) 		(2 * qy_qz - 2 * qw_qx) 	(qw_qw - qx_qx - qy_qy + qz_qz)];
+  
+  #Get Transpose
+  rot_t = transpose(rot);
+  
+  #Rotate Normal force
+  f_norm_rot = rot * f_norm_conv;
+  
+  # Debug
+  %keyboard();
+  
+  #Remove Gravity
+  acc = acc - f_norm_rot;
+  
+  #Compute Intertial Acceleration
+  acc_inert = rot_t * acc;
+  
+  #Convert to m/s^2
+  acc_i_c = acc_inert * gravity;
+  
+  # Get recent acceleration
+  if ( i <= (ign_samples+1) )
+    a_recent = [0; 0; 0];
+  else
+    a_recent = [oax(i-1); oay(i-1); oaz(i-1)];
+  endif;
+  
+  #Compute Velocity (first integration)
+  v_curr = v + a_recent * delta_t; %v + acc_i_c * delta_t;
+  
+  #Compute Position (second integration)
+  s_curr = s + v * delta_t; %s + v*delta_t + 0.5 * acc_i_c * delta_t^2;
+  
+  #Replace old velocity and position by new ones
+  v = v_curr;
+  s = s_curr;
+  
+  # Keep track of velocity and position for plots
+  oax(i) = acc_i_c(1,1);
+  oay(i) = acc_i_c(2,1);
+  oaz(i) = acc_i_c(3,1);
+  vx(i) = v(1,1);
+  vy(i) = v(2,1);
+  vz(i) = v(3,1);
+  sx(i) = s(1,1);
+  sy(i) = s(2,1);
+  sz(i) = s(3,1);
+  
+endfor
+
+# clear
+hold off;
+
+# Plot Quaternion
+plot(qw, "c");
+hold on;
+plot(qx, "r");
+hold on;
+plot(qy, "g");
+hold on;
+plot(qz, "b");
+hold on;
+
+# Set up Plot
+grid on;
+title('Quaternions (after calibration and filtering)');
+xlabel('Sample Number');
+ylabel('Value');
+legend('w', 'x', 'y', 'z');
+
+# Prepare for Data Export
+qw = rot90(qw, -1);
+qx = rot90(qx, -1);
+qy = rot90(qy, -1);
+qz = rot90(qz, -1);
+sx = rot90(sx, -1);
+sy = rot90(sy, -1);
+sz = rot90(sz, -1);
+out = [qw qx qy qz sx sy sz];
+
+# Data Export
+save(q_mat_outfile, 'out');
+
+# Print
+print("-append", outfile);
+hold off;
+
+# Plot Velocity
+plot(vx, "r");
+hold on;
+plot(vy, "g");
+hold on;
+plot(vz, "b");
+hold on;
+
+# Set up Plot
+grid on;
+title('Velocity');
+xlabel('Sample Number');
+ylabel('Velocity (m/s)');
+legend('x', 'y', 'z');
+hold off;
+
+# Print Velocity
+print("-append", outfile);
+
+# Plot Position
+plot(sx, "r");
+hold on;
+plot(sy, "g");
+hold on;
+plot(sz, "b");
+hold on;
+
+# Set up Plot
+grid on;
+title('Position');
+xlabel('Sample Number');
+ylabel('Position (m)');
+legend('x', 'y', 'z');
+hold off;
+
+# Print Position
+print("-append", outfile);

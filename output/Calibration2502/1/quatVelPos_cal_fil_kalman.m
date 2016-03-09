@@ -2,22 +2,16 @@
 pkg load quaternion;
 
 # Parameters
-filter = 1; % 0 = "raw", 1 = "cal", 2 = "mvavg", 3 = "fir", 4 = "kalman"
+filter = 5; % 0 = "raw", 1 = "static cal", 2 = "static cal + mvavg", 3 = "static cal + fir", 4 = "static cal + kalman", 5 = "simple cal + no filter"
 ign_samples = 0; % samples to ignore until Filter has converged
-f_norm = [331; -263; 8082];
+gyro_weight = 0.98;
+acc_range = 0.1;
 gyr_sens = 32.8;
 acc_sens = 8192;
 delta_t = 1/500;
+grav_raw = acc_sens;
 gravity = 9.80665;
-gyro_weight = 0.98;
-acc_range = 0.1;
-f_norm_conv = [331; -263; 8082] /acc_sens;
-stddev_rate_x = 24.500152 / gyr_sens;
-stddev_rate_y = 1.029194 / gyr_sens;
-stddev_rate_z = 3.045021 / gyr_sens;
-stddev_angle_x = 22.443588 / acc_sens;
-stddev_angle_y = 72.858551 / acc_sens;
-stddev_angle_z = 40.575413 / acc_sens;
+f_norm = [0; 0; acc_sens];
 acc_rec = [0; 0; 1];
 v = [0; 0; 0];
 s = [0; 0; 0];
@@ -66,18 +60,30 @@ if (filter == 1)
 	load ('calibrated.mat', 'cal');
 	data = cal;
 	filter_str = "cal";
+	f_norm = [331; -263; 8082];
+	grav_raw = 8082;
 elseif (filter == 2)
 	load('mvavg.mat', 'mvavg');
 	data = mvavg;
 	filter_str = "mvavg";
+	f_norm = [331; -263; 8082];
+	grav_raw = 8082;
 elseif (filter == "fir")
 	load('fir.mat', 3);
 	data = firfil;
 	filter_str = "fir";
+	f_norm = [331; -263; 8082];
+	grav_raw = 8082;
 elseif (filter == 4)
 	load('kalman.mat', 'kalmanfil');
 	data = kalmanfil;
 	filter_str = "kalman";
+	f_norm = [331; -263; 8082];
+	grav_raw = 8082;
+elseif (filter == 5)
+	load('simple_calibration.mat', 'cal');
+	data = cal;
+	filter_str = "simple_cal";
 else
 	data = load('data.txt');
 	filter_str = "raw";
@@ -102,7 +108,24 @@ gz = gz / gyr_sens;
 ax = ax / acc_sens;
 ay = ay / acc_sens;
 az = az / acc_sens;
+f_norm_conv = f_norm / acc_sens;
 
+# Compute Standard deviations
+if (filter == 1 || filter == 2 || filter == 3 || filter == 4)
+  stddev_rate_x = 24.500152 / gyr_sens;
+  stddev_rate_y = 1.029194 / gyr_sens;
+  stddev_rate_z = 3.045021 / gyr_sens;
+  stddev_angle_x = 22.443588 / acc_sens;
+  stddev_angle_y = 72.858551 / acc_sens;
+  stddev_angle_z = 40.575413 / acc_sens;
+else
+  stddev_rate_x = std(gx);
+  stddev_rate_y = std(gy);
+  stddev_rate_z = std(gz);
+  stddev_angle_x = std(ax);
+  stddev_angle_y = std(ay);
+  stddev_angle_z = std(az);
+endif;
 
 # Compute Angle
 for i = 1:length(gx)
@@ -228,7 +251,7 @@ for i = (ign_samples+1):length(gx)
   endif;
   
   # Construct absolute rotation quaternion
-  quat_abs = unit(quaternion(cos(angle_acc_z_rad(i)/2), acc_norm(1,1)*sin(angle_acc_z_rad(i)/2), acc_norm(2,1)*sin(angle_acc_z_rad(i)/2), acc_norm(3,1)*sin(angle_acc_z_rad(i)/2)));
+  quat_abs = quaternion(cos(angle_acc_z_rad(i)/2), acc_norm(1,1)*sin(angle_acc_z_rad(i)/2), acc_norm(2,1)*sin(angle_acc_z_rad(i)/2), acc_norm(3,1)*sin(angle_acc_z_rad(i)/2));
   
   # Keep track of quaternions for plot
   qw(i) = quat_abs.w;
