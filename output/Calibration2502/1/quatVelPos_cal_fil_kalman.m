@@ -251,7 +251,7 @@ for i = (ign_samples+1):length(gx)
   endif;
   
   # Construct absolute rotation quaternion
-  quat_abs = quaternion(cos(angle_acc_z_rad(i)/2), acc_norm(1,1)*sin(angle_acc_z_rad(i)/2), acc_norm(2,1)*sin(angle_acc_z_rad(i)/2), acc_norm(3,1)*sin(angle_acc_z_rad(i)/2));
+  quat_abs = unit(quaternion(cos(angle_acc_z_rad(i)/2), acc_norm(1,1)*sin(angle_acc_z_rad(i)/2), acc_norm(2,1)*sin(angle_acc_z_rad(i)/2), acc_norm(3,1)*sin(angle_acc_z_rad(i)/2)));
   
   # Keep track of quaternions for plot
   qw(i) = quat_abs.w;
@@ -284,9 +284,6 @@ for i = (ign_samples+1):length(gx)
   
   #Rotate Normal force
   f_norm_rot = rot * f_norm_conv;
-  
-  # Debug
-  %keyboard();
   
   #Remove Gravity
   acc = acc - f_norm_rot;
