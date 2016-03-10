@@ -22,8 +22,8 @@ function pos = kalman_pos(a_imu, v_imu, s_uwb, stddev_imu, stddev_uwb, delta_t)
 
   # Initialize
   y_hat = [0; 0; 0];
-  A = [1 (-delta_t) (-0.5*delta_t^2); 0 1 (-delta_t); 0 0 1];
-  B = [delta_t 0.5*delta_t^2; 1 0; 0 1];
+  A = [1 (delta_t) 0; 0 1 (delta_t); 0 0 1];
+  B = [0 0; 1 0; 0 1];
   H = eye(3,3);
   P = [1000 0 0; 0 1000 0; 0 0 1000];
   Q = [var_s 0 0; 0 var_v 0; 0 0 var_a];
@@ -34,7 +34,7 @@ function pos = kalman_pos(a_imu, v_imu, s_uwb, stddev_imu, stddev_uwb, delta_t)
   
     # Set u and z
     u = [v_imu(i); a_imu(i)];
-    z = [s_uwb(i); v_imu(i); a_imu(i)];
+    z = [s_uwb(i); 0; 0];
   
     # Rememver previous error covariance
     P_prev = P;
