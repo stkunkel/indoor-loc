@@ -118,7 +118,7 @@ int main() {
 //Collect Robot Movement Data
 //	int i = 0;
 //	for (i = 2; i < 15; i++) {
-		collectRobotMvmtData(9000, 0, BOOL_TRUE);
+		collectRobotMvmtData(10, 0, BOOL_TRUE);
 //	}
 
 //Clear LEDs
