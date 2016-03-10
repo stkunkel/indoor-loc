@@ -1,4 +1,4 @@
--- (c) Copyright 1995-2015 Xilinx, Inc. All rights reserved.
+-- (c) Copyright 1995-2016 Xilinx, Inc. All rights reserved.
 -- 
 -- This file contains confidential and proprietary information
 -- of Xilinx, Inc. and is protected under U.S. and
@@ -56,7 +56,8 @@ COMPONENT design_1_xlconcat_0_0
   PORT (
     In0 : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
     In1 : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
-    dout : OUT STD_LOGIC_VECTOR(1 DOWNTO 0)
+    In2 : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+    dout : OUT STD_LOGIC_VECTOR(2 DOWNTO 0)
   );
 END COMPONENT;
 -- COMP_TAG_END ------ End COMPONENT Declaration ------------
@@ -69,6 +70,7 @@ your_instance_name : design_1_xlconcat_0_0
   PORT MAP (
     In0 => In0,
     In1 => In1,
+    In2 => In2,
     dout => dout
   );
 -- INST_TAG_END ------ End INSTANTIATION Template ---------

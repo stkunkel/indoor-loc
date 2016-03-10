@@ -1,4 +1,4 @@
-// (c) Copyright 1995-2015 Xilinx, Inc. All rights reserved.
+// (c) Copyright 1995-2016 Xilinx, Inc. All rights reserved.
 // 
 // This file contains confidential and proprietary information
 // of Xilinx, Inc. and is protected under U.S. and
@@ -57,7 +57,8 @@
 design_1_xlconcat_0_0 your_instance_name (
   .In0(In0),    // input wire [0 : 0] In0
   .In1(In1),    // input wire [0 : 0] In1
-  .dout(dout)  // output wire [1 : 0] dout
+  .In2(In2),    // input wire [0 : 0] In2
+  .dout(dout)  // output wire [2 : 0] dout
 );
 // INST_TAG_END ------ End INSTANTIATION Template ---------
 

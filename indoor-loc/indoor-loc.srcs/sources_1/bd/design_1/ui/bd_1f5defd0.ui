@@ -2,44 +2,84 @@
    guistr: "# # String gsaved with Nlview 6.5.5  2015-06-26 bk=1.3371 VDI=38 GEI=35 GUI=JA:1.8
 #  -string -flagsOSRD
 preplace port DDR -pg 1 -y 570 -defaultsOSRD
+preplace port sws_8bits -pg 1 -y 530 -defaultsOSRD
 preplace port leds_8bits -pg 1 -y 390 -defaultsOSRD
-preplace port btns_5bits -pg 1 -y 370 -defaultsOSRD
-preplace port FIXED_IO -pg 1 -y 590 -defaultsOSRD
+preplace port uwb_spi_mosi -pg 1 -y 850 -defaultsOSRD
+preplace port btns_5bits -pg 1 -y 550 -defaultsOSRD
+preplace port uwb_gpio_in -pg 1 -y 980 -defaultsOSRD
+preplace port uwb_rst_n -pg 1 -y 890 -defaultsOSRD
+preplace port uwb_gpio_io -pg 1 -y 740 -defaultsOSRD
+preplace port uwb_spi_miso -pg 1 -y 1090 -defaultsOSRD
+preplace port FIXED_IO -pg 1 -y 610 -defaultsOSRD
 preplace portBus pwmOe -pg 1 -y 640 -defaultsOSRD
 preplace portBus pwmPulse -pg 1 -y 260 -defaultsOSRD
-preplace portBus pwmDir -pg 1 -y 520 -defaultsOSRD
-preplace inst pwm_dir_1 -pg 1 -lvl 4 -y 520 -defaultsOSRD
+preplace portBus uwb_spi_sel_n -pg 1 -y 1030 -defaultsOSRD
+preplace portBus uwb_spi_sck -pg 1 -y 1000 -defaultsOSRD
+preplace portBus pwmDir -pg 1 -y 510 -defaultsOSRD
+preplace inst iobuf_ak_3 -pg 1 -lvl 5 -y 730 -defaultsOSRD
+preplace inst axi_quad_spi_uwb -pg 1 -lvl 3 -y 860 -defaultsOSRD
+preplace inst xlconstant_0 -pg 1 -lvl 4 -y 700 -defaultsOSRD
+preplace inst pwm_dir_1 -pg 1 -lvl 5 -y 430 -defaultsOSRD
 preplace inst rst_processing_system7_0_100M -pg 1 -lvl 2 -y 370 -defaultsOSRD
+preplace inst xlslice_3 -pg 1 -lvl 4 -y 890 -defaultsOSRD
+preplace inst util_vector_logic_0 -pg 1 -lvl 4 -y 1000 -defaultsOSRD
+preplace inst xlslice_4 -pg 1 -lvl 4 -y 790 -defaultsOSRD
 preplace inst xlconcat_0 -pg 1 -lvl 1 -y 520 -defaultsOSRD
-preplace inst axi_timer_0 -pg 1 -lvl 4 -y 100 -defaultsOSRD
-preplace inst axi_gpio_0 -pg 1 -lvl 4 -y 390 -defaultsOSRD
-preplace inst pwm_oe_0 -pg 1 -lvl 4 -y 640 -defaultsOSRD
-preplace inst pwm_0 -pg 1 -lvl 4 -y 260 -defaultsOSRD
+preplace inst axi_timer_0 -pg 1 -lvl 5 -y 30 -defaultsOSRD
+preplace inst axi_gpio_0 -pg 1 -lvl 5 -y 320 -defaultsOSRD
+preplace inst pwm_oe_0 -pg 1 -lvl 5 -y 550 -defaultsOSRD
+preplace inst axi_gpio_1 -pg 1 -lvl 3 -y 510 -defaultsOSRD
+preplace inst util_vector_logic_1 -pg 1 -lvl 5 -y 1000 -defaultsOSRD
+preplace inst xlconcat_1 -pg 1 -lvl 1 -y 1000 -defaultsOSRD
+preplace inst axi_gpio_uwb -pg 1 -lvl 3 -y 660 -defaultsOSRD
+preplace inst pwm_0 -pg 1 -lvl 5 -y 190 -defaultsOSRD
+preplace inst iobuf_ak_2 -pg 1 -lvl 5 -y 880 -defaultsOSRD
 preplace inst processing_system7_0 -pg 1 -lvl 2 -y 680 -defaultsOSRD
-preplace inst processing_system7_0_axi_periph -pg 1 -lvl 3 -y 280 -defaultsOSRD
-preplace netloc processing_system7_0_DDR 1 2 3 NJ 570 NJ 570 NJ
-preplace netloc pwm_0_pwmPulse 1 4 1 NJ
-preplace netloc processing_system7_0_axi_periph_M00_AXI 1 3 1 1050
-preplace netloc processing_system7_0_M_AXI_GP0 1 2 1 700
-preplace netloc processing_system7_0_FCLK_RESET0_N 1 1 2 220 280 660
-preplace netloc processing_system7_0_axi_periph_M02_AXI 1 3 1 1070
-preplace netloc rst_processing_system7_0_100M_peripheral_aresetn 1 2 2 680 120 1040
+preplace inst processing_system7_0_axi_periph -pg 1 -lvl 3 -y 210 -defaultsOSRD
+preplace netloc processing_system7_0_DDR 1 2 4 NJ 740 NJ 600 NJ 600 NJ
+preplace netloc pwm_0_pwmPulse 1 5 1 NJ
+preplace netloc axi_quad_spi_uwb_ss_o 1 3 3 1300 840 NJ 940 NJ
+preplace netloc xlslice_3_Dout 1 4 1 N
+preplace netloc processing_system7_0_axi_periph_M03_AXI 1 2 2 740 -10 1300
+preplace netloc processing_system7_0_axi_periph_M00_AXI 1 3 2 N 160 1560
+preplace netloc iobuf_ak_2_dout 1 0 6 -20 1070 NJ 1070 NJ 1070 NJ 1070 NJ 1070 1860
+preplace netloc iobuf_ak_3_dout 1 0 6 -20 800 NJ 800 NJ 760 NJ 650 NJ 650 1860
+preplace netloc processing_system7_0_M_AXI_GP0 1 2 1 690
+preplace netloc processing_system7_0_axi_periph_M05_AXI 1 2 2 750 430 1290
+preplace netloc util_vector_logic_0_Res 1 4 1 N
+preplace netloc xlconcat_1_dout 1 1 3 N 1000 NJ 1000 1290
+preplace netloc processing_system7_0_FCLK_RESET0_N 1 1 2 220 280 670
+preplace netloc axi_gpio_1_GPIO2 1 3 3 NJ 500 NJ 500 NJ
+preplace netloc processing_system7_0_axi_periph_M02_AXI 1 3 2 1350 170 N
+preplace netloc uwb_gpio_in_1 1 0 1 N
+preplace netloc axi_quad_spi_uwb_sck_o 1 3 1 1310
+preplace netloc rst_processing_system7_0_100M_peripheral_aresetn 1 2 3 720 -20 1330 -10 1550
 preplace netloc xlconcat_0_dout 1 1 1 200
-preplace netloc axi_gpio_0_GPIO2 1 4 1 NJ
-preplace netloc processing_system7_0_FIXED_IO 1 2 3 NJ 590 NJ 590 NJ
-preplace netloc axi_gpio_0_GPIO 1 4 1 NJ
-preplace netloc axi_gpio_0_ip2intc_irpt 1 0 5 10 450 NJ 470 NJ 470 NJ 470 1330
-preplace netloc pwm_dir_1_dout 1 4 1 NJ
-preplace netloc rst_processing_system7_0_100M_interconnect_aresetn 1 2 1 690
-preplace netloc processing_system7_0_FCLK_CLK0 1 1 3 210 260 670 110 1060
-preplace netloc processing_system7_0_axi_periph_M01_AXI 1 3 1 1030
-preplace netloc axi_timer_0_interrupt 1 0 5 20 460 NJ 460 NJ 460 NJ 460 1340
-preplace netloc pwm_oe_0_dout 1 4 1 NJ
-levelinfo -pg 1 -10 110 460 880 1200 1360 -top 0 -bot 800
+preplace netloc xlconstant_0_dout 1 4 1 1560
+preplace netloc processing_system7_0_FIXED_IO 1 2 4 NJ 580 NJ 580 NJ 610 NJ
+preplace netloc axi_gpio_1_ip2intc_irpt 1 0 4 -30 -50 NJ -50 NJ -50 1320
+preplace netloc uwb_spi_miso_1 1 0 4 N 1090 NJ 1090 NJ 1090 1280
+preplace netloc axi_gpio_0_GPIO 1 5 1 1910
+preplace netloc util_vector_logic_1_Res 1 5 1 N
+preplace netloc Net1 1 5 1 N
+preplace netloc Net 1 5 1 N
+preplace netloc pwm_dir_1_dout 1 5 1 NJ
+preplace netloc rst_processing_system7_0_100M_interconnect_aresetn 1 2 1 680
+preplace netloc processing_system7_0_FCLK_CLK0 1 1 4 210 270 710 -30 N -30 1570
+preplace netloc axi_gpio_1_GPIO 1 3 3 NJ 490 NJ 490 NJ
+preplace netloc axi_gpio_uwb_gpio_io_o 1 3 1 1320
+preplace netloc processing_system7_0_axi_periph_M04_AXI 1 2 2 750 750 1300
+preplace netloc processing_system7_0_axi_periph_M01_AXI 1 3 2 1340 -20 N
+preplace netloc axi_quad_spi_uwb_io0_o 1 3 3 1340 630 NJ 630 NJ
+preplace netloc xlslice_0_Dout 1 4 1 1570
+preplace netloc axi_quad_spi_uwb_ip2intc_irpt 1 0 4 -30 910 NJ 910 NJ 960 1270
+preplace netloc axi_timer_0_interrupt 1 0 6 -20 450 NJ 460 NJ 440 NJ 440 1560 480 1900
+preplace netloc pwm_oe_0_dout 1 5 1 NJ
+levelinfo -pg 1 -50 110 470 1120 1460 1730 1930 -top -70 -bot 1150
 ",
 }
 {
-   da_axi4_cnt: "14",
-   da_board_cnt: "18",
+   da_axi4_cnt: "17",
+   da_board_cnt: "24",
    da_ps7_cnt: "1",
 }

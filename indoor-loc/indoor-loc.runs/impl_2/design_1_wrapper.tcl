@@ -56,6 +56,7 @@ set rc [catch {
   set_property ip_repo_paths {
   /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.cache/ip
   /home/rupprich/Masterarbeit/indoor-loc/ip_repo/pwm_1.0
+  /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/project_1.ipdefs/iobuf_0
 } [current_project]
   set_property ip_output_repo /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.cache/ip [current_project]
   add_files -quiet /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.runs/synth_2/design_1_wrapper.dcp
@@ -71,7 +72,21 @@ set rc [catch {
   set_property processing_order EARLY [get_files /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_0_0/design_1_axi_gpio_0_0.xdc]
   read_xdc -ref design_1_axi_timer_0_0 /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_timer_0_0/design_1_axi_timer_0_0.xdc
   set_property processing_order EARLY [get_files /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_timer_0_0/design_1_axi_timer_0_0.xdc]
+  read_xdc -prop_thru_buffers -ref design_1_axi_gpio_1_0 -cells U0 /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_1_0/design_1_axi_gpio_1_0_board.xdc
+  set_property processing_order EARLY [get_files /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_1_0/design_1_axi_gpio_1_0_board.xdc]
+  read_xdc -ref design_1_axi_gpio_1_0 -cells U0 /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_1_0/design_1_axi_gpio_1_0.xdc
+  set_property processing_order EARLY [get_files /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_1_0/design_1_axi_gpio_1_0.xdc]
+  read_xdc -prop_thru_buffers -ref design_1_axi_quad_spi_0_0 -cells U0 /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_quad_spi_0_0/design_1_axi_quad_spi_0_0_board.xdc
+  set_property processing_order EARLY [get_files /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_quad_spi_0_0/design_1_axi_quad_spi_0_0_board.xdc]
+  read_xdc -ref design_1_axi_quad_spi_0_0 -cells U0 /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_quad_spi_0_0/design_1_axi_quad_spi_0_0.xdc
+  set_property processing_order EARLY [get_files /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_quad_spi_0_0/design_1_axi_quad_spi_0_0.xdc]
+  read_xdc -prop_thru_buffers -ref design_1_axi_gpio_1_1 -cells U0 /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_1_1/design_1_axi_gpio_1_1_board.xdc
+  set_property processing_order EARLY [get_files /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_1_1/design_1_axi_gpio_1_1_board.xdc]
+  read_xdc -ref design_1_axi_gpio_1_1 -cells U0 /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_1_1/design_1_axi_gpio_1_1.xdc
+  set_property processing_order EARLY [get_files /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_1_1/design_1_axi_gpio_1_1.xdc]
   read_xdc /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/constrs_1/new/pwm.xdc
+  read_xdc -ref design_1_axi_quad_spi_0_0 -cells U0 /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_quad_spi_0_0/design_1_axi_quad_spi_0_0_clocks.xdc
+  set_property processing_order LATE [get_files /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_quad_spi_0_0/design_1_axi_quad_spi_0_0_clocks.xdc]
   link_design -top design_1_wrapper -part xc7z020clg484-1
   close_msg_db -file init_design.pb
 } RESULT]

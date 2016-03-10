@@ -14,7 +14,10 @@ set_property parent.project_path /home/rupprich/Masterarbeit/indoor-loc/indoor-l
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language VHDL [current_project]
 set_property board_part em.avnet.com:zed:part0:1.3 [current_project]
-set_property ip_repo_paths /home/rupprich/Masterarbeit/indoor-loc/ip_repo/pwm_1.0 [current_project]
+set_property ip_repo_paths {
+  /home/rupprich/Masterarbeit/indoor-loc/ip_repo/pwm_1.0
+  /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/project_1.ipdefs/iobuf_0
+} [current_project]
 set_property vhdl_version vhdl_2k [current_fileset]
 add_files /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/design_1.bd
 set_property used_in_implementation false [get_files -all /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.xdc]
@@ -27,6 +30,16 @@ set_property used_in_implementation false [get_files -all /home/rupprich/Mastera
 set_property used_in_implementation false [get_files -all /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_0_0/design_1_axi_gpio_0_0.xdc]
 set_property used_in_implementation false [get_files -all /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_timer_0_0/design_1_axi_timer_0_0.xdc]
 set_property used_in_implementation false [get_files -all /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_timer_0_0/design_1_axi_timer_0_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_1_0/design_1_axi_gpio_1_0_board.xdc]
+set_property used_in_implementation false [get_files -all /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_1_0/design_1_axi_gpio_1_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_1_0/design_1_axi_gpio_1_0.xdc]
+set_property used_in_implementation false [get_files -all /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_quad_spi_0_0/design_1_axi_quad_spi_0_0_board.xdc]
+set_property used_in_implementation false [get_files -all /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_quad_spi_0_0/design_1_axi_quad_spi_0_0.xdc]
+set_property used_in_implementation false [get_files -all /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_quad_spi_0_0/design_1_axi_quad_spi_0_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_quad_spi_0_0/design_1_axi_quad_spi_0_0_clocks.xdc]
+set_property used_in_implementation false [get_files -all /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_1_1/design_1_axi_gpio_1_1_board.xdc]
+set_property used_in_implementation false [get_files -all /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_1_1/design_1_axi_gpio_1_1_ooc.xdc]
+set_property used_in_implementation false [get_files -all /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_1_1/design_1_axi_gpio_1_1.xdc]
 set_property used_in_implementation false [get_files -all /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/ip/design_1_auto_pc_0/design_1_auto_pc_0_ooc.xdc]
 set_property used_in_implementation false [get_files -all /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/design_1_ooc.xdc]
 set_property is_locked true [get_files /home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.srcs/sources_1/bd/design_1/design_1.bd]

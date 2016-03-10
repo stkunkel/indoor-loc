@@ -1,4 +1,4 @@
--- (c) Copyright 1995-2015 Xilinx, Inc. All rights reserved.
+-- (c) Copyright 1995-2016 Xilinx, Inc. All rights reserved.
 -- 
 -- This file contains confidential and proprietary information
 -- of Xilinx, Inc. and is protected under U.S. and
@@ -96,7 +96,7 @@ COMPONENT design_1_processing_system7_0_0
     M_AXI_GP0_BRESP : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
     M_AXI_GP0_RRESP : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
     M_AXI_GP0_RDATA : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-    IRQ_F2P : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
+    IRQ_F2P : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
     FCLK_CLK0 : OUT STD_LOGIC;
     FCLK_RESET0_N : OUT STD_LOGIC;
     MIO : INOUT STD_LOGIC_VECTOR(53 DOWNTO 0);

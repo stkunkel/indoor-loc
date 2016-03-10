@@ -1,4 +1,4 @@
--- (c) Copyright 1995-2015 Xilinx, Inc. All rights reserved.
+-- (c) Copyright 1995-2016 Xilinx, Inc. All rights reserved.
 -- 
 -- This file contains confidential and proprietary information
 -- of Xilinx, Inc. and is protected under U.S. and
@@ -60,7 +60,8 @@ ENTITY design_1_xlconcat_0_0 IS
   PORT (
     In0 : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
     In1 : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
-    dout : OUT STD_LOGIC_VECTOR(1 DOWNTO 0)
+    In2 : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+    dout : OUT STD_LOGIC_VECTOR(2 DOWNTO 0)
   );
 END design_1_xlconcat_0_0;
 
@@ -138,7 +139,7 @@ ARCHITECTURE design_1_xlconcat_0_0_arch OF design_1_xlconcat_0_0 IS
       In29 : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
       In30 : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
       In31 : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
-      dout : OUT STD_LOGIC_VECTOR(1 DOWNTO 0)
+      dout : OUT STD_LOGIC_VECTOR(2 DOWNTO 0)
     );
   END COMPONENT xlconcat;
 BEGIN
@@ -176,13 +177,13 @@ BEGIN
       IN29_WIDTH => 1,
       IN30_WIDTH => 1,
       IN31_WIDTH => 1,
-      dout_width => 2,
-      NUM_PORTS => 2
+      dout_width => 3,
+      NUM_PORTS => 3
     )
     PORT MAP (
       In0 => In0,
       In1 => In1,
-      In2 => STD_LOGIC_VECTOR(TO_UNSIGNED(0, 1)),
+      In2 => In2,
       In3 => STD_LOGIC_VECTOR(TO_UNSIGNED(0, 1)),
       In4 => STD_LOGIC_VECTOR(TO_UNSIGNED(0, 1)),
       In5 => STD_LOGIC_VECTOR(TO_UNSIGNED(0, 1)),

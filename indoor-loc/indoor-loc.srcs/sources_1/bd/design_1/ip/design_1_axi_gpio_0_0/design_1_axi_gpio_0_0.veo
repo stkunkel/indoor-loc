@@ -1,4 +1,4 @@
-// (c) Copyright 1995-2015 Xilinx, Inc. All rights reserved.
+// (c) Copyright 1995-2016 Xilinx, Inc. All rights reserved.
 // 
 // This file contains confidential and proprietary information
 // of Xilinx, Inc. and is protected under U.S. and
@@ -74,9 +74,7 @@ design_1_axi_gpio_0_0 your_instance_name (
   .s_axi_rresp(s_axi_rresp),      // output wire [1 : 0] s_axi_rresp
   .s_axi_rvalid(s_axi_rvalid),    // output wire s_axi_rvalid
   .s_axi_rready(s_axi_rready),    // input wire s_axi_rready
-  .ip2intc_irpt(ip2intc_irpt),    // output wire ip2intc_irpt
-  .gpio_io_i(gpio_io_i),          // input wire [4 : 0] gpio_io_i
-  .gpio2_io_o(gpio2_io_o)        // output wire [7 : 0] gpio2_io_o
+  .gpio_io_o(gpio_io_o)          // output wire [7 : 0] gpio_io_o
 );
 // INST_TAG_END ------ End INSTANTIATION Template ---------
 
