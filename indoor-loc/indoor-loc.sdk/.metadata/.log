@@ -1107,3 +1107,17 @@ java.io.IOException: Communication channel is closed by remote peer
 	at org.eclipse.tcf.core.AbstractChannel$1$2.run(AbstractChannel.java:305)
 	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
 	at java.lang.Thread.run(Thread.java:745)
+!SESSION 2016-03-08 13:54:33.576 -----------------------------------------------
+eclipse.buildId=2015.3
+java.version=1.8.0_45
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.tcf 4 0 2016-03-10 10:55:55.003
+!MESSAGE TCF channel terminated
+!STACK 0
+java.io.IOException: Communication channel is closed by remote peer
+	at org.eclipse.tcf.core.AbstractChannel$1$2.run(AbstractChannel.java:305)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.lang.Thread.run(Thread.java:745)
