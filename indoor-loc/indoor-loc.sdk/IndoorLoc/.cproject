@@ -25,9 +25,7 @@
 							<tool id="xilinx.gnu.arm.c.toolchain.compiler.debug.1511755502" name="ARM gcc compiler" superClass="xilinx.gnu.arm.c.toolchain.compiler.debug">
 								<option defaultValue="gnu.c.optimization.level.none" id="xilinx.gnu.compiler.option.optimization.level.1744837731" name="Optimization Level" superClass="xilinx.gnu.compiler.option.optimization.level" valueType="enumerated"/>
 								<option id="xilinx.gnu.compiler.option.debugging.level.1208381120" name="Debug Level" superClass="xilinx.gnu.compiler.option.debugging.level" value="gnu.c.debugging.level.max" valueType="enumerated"/>
-								<option id="xilinx.gnu.compiler.inferred.swplatform.includes.1299524426" name="Software Platform Include Path" superClass="xilinx.gnu.compiler.inferred.swplatform.includes" valueType="includePath">
-									<listOptionValue builtIn="false" value="../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include"/>
-								</option>
+								<option id="xilinx.gnu.compiler.inferred.swplatform.includes.1299524426" name="Software Platform Include Path" superClass="xilinx.gnu.compiler.inferred.swplatform.includes" valueType="includePath"/>
 								<option id="xilinx.gnu.compiler.symbols.defined.625639265" name="Defined symbols (-D)" superClass="xilinx.gnu.compiler.symbols.defined" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="MOTION_DRIVER_TARGET_ZEDBOARD"/>
 									<listOptionValue builtIn="false" value="MPU9150"/>
@@ -36,6 +34,9 @@
 									<listOptionValue builtIn="false" value="__ACCUM_EPSILON__"/>
 								</option>
 								<option id="xilinx.gnu.compiler.option.profiling.enable.1914900293" name="Enable Profiling (-pg)" superClass="xilinx.gnu.compiler.option.profiling.enable" value="false" valueType="boolean"/>
+								<option id="xilinx.gnu.compiler.dircategory.includes.951052805" name="Include Paths" superClass="xilinx.gnu.compiler.dircategory.includes" valueType="includePath">
+									<listOptionValue builtIn="false" value="../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include"/>
+								</option>
 								<inputType id="xilinx.gnu.arm.c.compiler.input.923718330" name="C source files" superClass="xilinx.gnu.arm.c.compiler.input"/>
 							</tool>
 							<tool id="xilinx.gnu.arm.cxx.toolchain.compiler.debug.233183225" name="ARM g++ compiler" superClass="xilinx.gnu.arm.cxx.toolchain.compiler.debug">

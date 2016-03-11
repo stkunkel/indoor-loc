@@ -1,0 +1,66 @@
+/*
+ * gpio_utils.c: Utilities for LEDs, etc.
+ * Author: Stephanie Kunkel
+ */
+
+/*
+ * Includes
+ */
+#include "gpio_utils.h"
+
+/*
+ * Variables
+ */
+static XGpio inGpio, outGpio;
+static u8 toggle = 0x00;
+
+
+/*
+ * Toggle LED
+ */
+void toggleLed(u8 ledMask) {
+	//Variables
+	static unsigned int cnt = 0;
+
+	//Increase Counter
+	cnt++;
+
+	//Reset Count
+	cnt = 0;
+
+	//Toggle
+	toggle = (~toggle) & ledMask;
+	XGpio_DiscreteWrite(&outGpio, LED_CHANNEL, toggle);
+
+}
+
+/*
+ * Clear All LEDs
+ */
+void clearLEDs() {
+	//Clear LEDs
+	XGpio_DiscreteWrite(&outGpio, LED_CHANNEL, 0);
+}
+
+/*
+ * Initialize GPIO
+ */
+int initGpio() {
+//Variables
+	int status;
+
+//Initialize GPIOs
+	status = XGpio_Initialize(&outGpio, OUTGPIO_DEVICE_ID);
+	status = XGpio_Initialize(&inGpio, INGPIO_DEVICE_ID);
+
+//Set Direction
+	XGpio_SetDataDirection(&outGpio, LED_CHANNEL, 0);
+	XGpio_SetDataDirection(&inGpio, LED_CHANNEL, 1);
+
+//Clear LEDs
+	if (status == XST_SUCCESS) {
+		clearLEDs(status, &outGpio);
+	}
+
+	return XST_SUCCESS;
+}

@@ -1,0 +1,38 @@
+/*
+ * uwb.c: UWB Control
+ * Author: Stephanie Kunkel
+ */
+
+#include "uwb.h"
+
+/*
+ * Global Variables
+ */
+XGpio uwbGpio;
+XSpi decaSpi;
+
+/*
+ * Reset DW1000
+ */
+
+void reset_DW1000() {
+	//Variables
+	u32 uwbIn;
+
+	//Initialize UWB GPIO
+	XGpio_Initialize(&uwbGpio, XPAR_AXI_GPIO_UWB_DEVICE_ID);
+
+	//Reset On
+	XGpio_DiscreteWrite(&uwbGpio, 1, 0); // reset on
+	uwbIn = XGpio_DiscreteRead(&uwbGpio, 2);
+
+	//Reset Off
+	XGpio_DiscreteWrite(&uwbGpio, 1, 0xff); // reset off
+	uwbIn = XGpio_DiscreteRead(&uwbGpio, 2);
+	while (0 == (uwbIn & 0x4)) {
+		uwbIn = XGpio_DiscreteRead(&uwbGpio, 2);
+	}
+	myprintf("UBW reset completed\r\n");
+
+	deca_sleep(2);
+}

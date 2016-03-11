@@ -1,0 +1,78 @@
+/*
+ * gpio_utils.c: Utilities for LEDs, etc.
+ * Author: Stephanie Kunkel
+ */
+
+/*
+ * Includes
+ */
+#include "gpio_utils.h"
+
+/*
+ * Variables
+ */
+static XGpio inGpio, outGpio;
+
+/*
+ * Get Switch Status
+ */
+u32 getSwitchStatus(){
+	return (0x00 & XGpio_DiscreteRead(&inGpio,2));
+}
+
+/*
+ * Get Button Status
+ */
+u32 getButtonStatus(){
+	return (0x00 & XGpio_DiscreteRead(&inGpio,1));
+}
+
+/*
+ * Toggle LED
+ */
+void toggleLed(u8 ledMask) {
+	//Variables
+	static u8 leds = 0;
+
+	//LED is on
+	if ((leds & ledMask) == ledMask){
+		leds = leds & (~ledMask); //clear LED
+	} else { //LED is off
+		leds = leds | ledMask; //enable LED
+	}
+
+	//Toggle
+	XGpio_DiscreteWrite(&outGpio, LED_CHANNEL, leds);
+
+}
+
+/*
+ * Clear All LEDs
+ */
+void clearLEDs() {
+	//Clear LEDs
+	XGpio_DiscreteWrite(&outGpio, LED_CHANNEL, 0);
+}
+
+/*
+ * Initialize GPIO
+ */
+int initGpio() {
+//Variables
+	int status;
+
+//Initialize GPIOs
+	status = XGpio_Initialize(&outGpio, OUTGPIO_DEVICE_ID);
+	status = XGpio_Initialize(&inGpio, INGPIO_DEVICE_ID);
+
+//Set Direction
+	XGpio_SetDataDirection(&outGpio, LED_CHANNEL, 0);
+	XGpio_SetDataDirection(&inGpio, LED_CHANNEL, 1);
+
+//Clear LEDs
+	if (status == XST_SUCCESS) {
+		clearLEDs(status, &outGpio);
+	}
+
+	return XST_SUCCESS;
+}

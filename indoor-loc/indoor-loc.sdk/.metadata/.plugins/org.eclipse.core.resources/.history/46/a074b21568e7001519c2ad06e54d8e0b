@@ -1,0 +1,37 @@
+/*
+ * gpio_utils.h
+ * Author: Stephanie Kunkel
+ */
+
+#ifndef GPIO_UTILS_H_
+#define GPIO_UTILS_H_
+
+/*
+ * Includes
+ */
+#include <unistd.h>
+#include "xparameters.h"
+#include "xstatus.h"
+#include "xgpio.h"
+#include "../imu/mpu.h"
+
+/*
+ * Defines
+ */
+#define INGPIO_DEVICE_ID	XPAR_AXI_GPIO_0_DEVICE_ID
+#define OUTGPIO_DEVICE_ID	XPAR_AXI_GPIO_1_DEVICE_ID
+#define LED_CHANNEL			1
+#define IMU_MASK			( 1 << 5 )
+#define ROBOT_MASK			( 1 << 6 )
+#define UWB_MAST			( 1 << 7 )
+#define INT_MASK			( 1 << 4 )
+
+/*
+ * Functions
+ */
+u32 getSwitchStatus();
+void toggleLed(u8 ledMask);
+void clearLEDs();
+int initGpio();
+
+#endif /* GPIO_UTILS_H_ */

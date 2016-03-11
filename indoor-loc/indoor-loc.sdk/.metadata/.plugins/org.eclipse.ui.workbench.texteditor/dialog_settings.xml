@@ -2,22 +2,23 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="inGpio" key="selection"/>
+		<item value="toggleLed(UWB_MASK);" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="ledToggle();"/>
+			<item value="ledRun"/>
 			<item value="inGpio"/>
 			<item value="gpio"/>
 			<item value="gpio_device_id"/>
 			<item value="spi"/>
 			<item value="uwb"/>
 			<item value="data."/>
-			<item value="j+"/>
-			<item value="w "/>
 		</list>
 		<list key="replacehistory">
+			<item value="toggleLed(UWB_MASK);"/>
 			<item value="data.mpuData."/>
 			<item value="data-&gt;"/>
 			<item value="quat[0] "/>
@@ -25,7 +26,6 @@
 			<item value="quat[2]"/>
 			<item value="quat[1]"/>
 			<item value="quat[0]"/>
-			<item value="z"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
