@@ -18,17 +18,24 @@
 /*
  * Defines
  */
-#define AXI_GPIO_DEVICE_ID	XPAR_AXI_GPIO_0_DEVICE_ID
+#define INGPIO_DEVICE_ID	XPAR_AXI_GPIO_1_DEVICE_ID
+#define OUTGPIO_DEVICE_ID	XPAR_AXI_GPIO_0_DEVICE_ID
 #define LED_CHANNEL			1
-#define LED_MASK			0x55
-#define RUN_FREQ			FIFO_RATE
+#define SWITCH_CHANNEL		1
+#define BUTTON_CHANNEL		2
+#define DIR_IN				1
+#define DIR_OUT				0
+#define INT_MASK			0x10
+#define IMU_MASK			0x20
+#define ROBOT_MASK			0x40
+#define UWB_MASK			0x80
 
 /*
  * Functions
  */
-void testLedRun();
+u32 getSwitchStatus();
+u32 getButtonStatus();
 void testToggleLed();
-void ledRun();
 void toggleLed(u8 ledMask);
 void clearLEDs();
 int initGpio();

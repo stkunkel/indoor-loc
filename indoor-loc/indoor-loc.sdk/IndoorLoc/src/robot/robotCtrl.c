@@ -131,7 +131,7 @@ int determineMpuGyroSensitivity(unsigned int samples,
 			//Read successful?
 			if (status == XST_SUCCESS) {
 				//LED Run
-				ledRun();
+				toggleLed(ROBOT_MASK);
 
 				//Handle first function call
 				if (recent_ts == 0) {
@@ -245,6 +245,7 @@ int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 
 				//Set angle and increase ID
 				setAngle(joint, angle[0]); //angleid
+				toggleLed(ROBOT_MASK);
 				angleid++;
 			}
 		}
@@ -259,7 +260,9 @@ int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 		//Read successful?
 		if (status == XST_SUCCESS) {
 			//LED Run
-			ledRun();
+			if (cnt % FIFO_RATE == 0) {
+				toggleLed(IMU_MASK);
+			}
 
 			//Collect Data in required
 			if (collect == BOOL_TRUE) {

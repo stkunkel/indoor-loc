@@ -23,7 +23,7 @@
 #include "../zedboard/gpio_utils.h"
 #include "../bool.h"
 #include "../program_parameters.h"
-#include "../robot/dataBuffer.h"
+#include "../dataBuffer.h"
 
 
 //IMU Parameters
@@ -46,7 +46,7 @@
 #define SENSORS_ALL				(SENSORS_INV | SENSOR_TEMP)//all sensors
 #define FEATURES_CAL			(DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_SEND_CAL_GYRO | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_TAP) //DMP_FEATURE_TAP for ensure DMP sends interrupts at specified rate
 #define FEATURES_RAW			(DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_SEND_RAW_GYRO | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_TAP) //DMP_FEATURE_TAP for ensure DMP sends interrupts at specified rate
-#define MPU_SAMPLE_RATE			200			//Hz
+#define MPU_SAMPLE_RATE			IMU_SAMPLE_FREQ			//Hz
 #define GYRO_CAL_MASK			0x01
 #define ACCEL_CAL_MASK			0x02
 #define MAG_CAL_MASK			0x04

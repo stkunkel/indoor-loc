@@ -18,9 +18,9 @@ static unsigned char* bufCurr = (unsigned char*) BUF_ADDR + sizeof(cnt);
  * Store in Buffer
  * In: Pointer to data set
  */
-void storeInBuff(RobotMpuData* data) {
+void storeInBuff(SensorPwmData* data) {
 	//Check for buffer overflow
-	if (bufCurr > (unsigned char*)BUF_MAX){
+	if (bufCurr > (unsigned char*) BUF_MAX) {
 		transmitBuf();
 		cnt = 0;
 		bufCurr = (unsigned char*) BUF_ADDR + sizeof(cnt);
@@ -122,6 +122,12 @@ void storeInBuff(RobotMpuData* data) {
 	*bufCurr = (unsigned char) ((data->mpuData.temp & BYTE3) >> 24);
 	bufCurr++;
 
+	//UWB Distance
+	*bufCurr = (unsigned char) (data->uwb_dist & BYTE0);
+	bufCurr++;
+	*bufCurr = (unsigned char) ((data->uwb_dist) & BYTE1 >> 8);
+	bufCurr++;
+
 	//Increase Counter
 	cnt++;
 }
@@ -155,7 +161,8 @@ int transmitBuf() {
 
 	//Transmit buf
 	//printf("XModem Transmission starts.\r\n");
-	xmodemTransmit((unsigned char*) BUF_ADDR, (sizeof(cnt) + cnt * DATA_NUMBER_OF_BYTES));
+	xmodemTransmit((unsigned char*) BUF_ADDR,
+			(sizeof(cnt) + cnt * DATA_NUMBER_OF_BYTES));
 	//printf("XModem Transmission finished.\r\n");
 
 	//Enable Timer Interrupts
@@ -169,7 +176,7 @@ int transmitBuf() {
  * Reset Buff Address
  * I.e. Discard all samples taken
  */
-void resetBuff(){
+void resetBuff() {
 	bufCurr = (unsigned char*) BUF_ADDR;
 	cnt = 0;
 }

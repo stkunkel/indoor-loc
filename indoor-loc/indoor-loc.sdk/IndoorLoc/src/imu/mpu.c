@@ -1022,7 +1022,7 @@ int updateData() {
 	recentTemp = temp_conv;
 
 //LED Run
-	ledRun();
+	toggleLed(IMU_MASK);
 
 //Return
 	return status;
@@ -1870,7 +1870,7 @@ void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) 
 			//Read successful?
 			if (status == XST_SUCCESS) {
 				//LED Run
-				ledRun();
+				toggleLed(IMU_MASK);
 
 				//Store to buffer
 				storeInBuff(&data);

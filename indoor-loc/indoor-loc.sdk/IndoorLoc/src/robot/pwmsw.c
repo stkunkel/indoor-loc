@@ -368,8 +368,25 @@ u32 moveTo(Joint joint, u32 value) {
 }
 
 /*
+ * Set All Angles
+ * In/Out: Array with Values (base, shoulder, elbow, wrist, thumb, finger)
+ */
+void setAllAngles(float angles[NUMBER_OF_JOINTS]){
+	//Variables
+	int i = 0;
+	float realAngle;
+
+	//Go through array
+	for (i = 0; i < NUMBER_OF_JOINTS; i++){
+		realAngle = setAngle(jointVal[i], angles[i]);
+		angles[i] = realAngle;
+	}
+}
+
+/*
  * Set Angle for Joint
  * In: Joint, angle in dgr
+ * Returns angle that has been set
  */
 float setAngle(Joint joint, float angle) {
 	//Variables

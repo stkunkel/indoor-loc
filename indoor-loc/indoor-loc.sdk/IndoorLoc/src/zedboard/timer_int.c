@@ -36,7 +36,7 @@ int timerTest(u32 int_freq) {
 
 	while (1) {
 		if (isTimerExpired() == BOOL_TRUE) {
-			ledRun();
+			toggleLed(INT_MASK);
 		}
 	}
 

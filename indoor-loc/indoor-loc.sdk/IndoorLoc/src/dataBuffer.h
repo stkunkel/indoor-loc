@@ -7,10 +7,10 @@
 #define DATABUFFER_H_
 
 //Includes
-#include "../imu/mpu.h"
-//#include "pwmsw.h"
-#include "../zedboard/print_utils.h"
-#include "../zedboard/timer_int.h"
+#include "imu/mpu.h"
+//#include "robot/pwmsw.h"
+#include "zedboard/print_utils.h"
+#include "zedboard/timer_int.h"
 
 //Defines
 #define BUF_ADDR			0x7000000
@@ -18,7 +18,7 @@
 
 
 //Functions
-void storeInBuff(RobotMpuData* data);
+void storeInBuff(SensorPwmData* data);
 int transmitBuf();
 void resetBuff();
 

@@ -12,13 +12,14 @@
 //#define DISABLE_POS_COMP				//UNcomment to disable quaternion and position computation (not required if just raw data is to be outputtet)
 
 //Parameters
-#define CAL_TIME				10 //s
+#define CAL_TIME				0 //s
 #define CAL_SAMPLES				1000
+#define IMU_SAMPLE_FREQ			200			//Hz
 #define IMUVIEWER_FREQ			10 			//Hz
 #define FPGA_FREQ				100000000	//FCLK in Hz
 
 //XModem
-#define DATA_NUMBER_OF_BYTES	46
+#define DATA_NUMBER_OF_BYTES	48
 #define BYTE0					0x000000FF
 #define BYTE1					0x0000FF00
 #define BYTE2					0x00FF0000
@@ -26,6 +27,9 @@
 
 //Robot
 #define NUMBER_OF_JOINTS		6
+
+//UWB
+#define UWB_DIST_SENS			(sizeof(int16_t))
 
 //Math
 #define NUMBER_OF_AXES			3					//x, y, z
@@ -40,10 +44,17 @@ typedef struct {
 //	short fill;
 } MpuRegisterData;
 
-//Struct for Data Transmission
+//Struct for Robot and MPU Register Data
 typedef struct {
 	uint32_t pwmValues[NUMBER_OF_JOINTS];
 	MpuRegisterData mpuData;
 } RobotMpuData;
+
+//Struct for Sensor and Robot Data
+typedef struct {
+	MpuRegisterData mpuData;
+	uint32_t pwmValues[NUMBER_OF_JOINTS];
+	int16_t  uwb_dist;
+} SensorPwmData;
 
 #endif /* PROGRAM_PARAMETERS_H_ */

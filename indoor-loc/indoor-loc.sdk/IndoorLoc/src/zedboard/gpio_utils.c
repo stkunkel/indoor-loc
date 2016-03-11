@@ -11,85 +11,54 @@
 /*
  * Variables
  */
-static XGpio gpio;
-static u8 toggle = 0x00;
-static u8 run = 0x01;
+static XGpio inGpio, outGpio;
+static u8 leds = 0;
 
 /*
- * Test LED Run
+ * Get Switch Status
  */
-void testLedRun() {
-	//Initialize
-	initGpio();
-
-	//Run
-	while (1) {
-		ledRun();
-		sleep(1);
-	}
+u32 getSwitchStatus() {
+	return (0x00 & XGpio_DiscreteRead(&inGpio, SWITCH_CHANNEL));
 }
 
 /*
- * Test Toggle LED
+ * Get Button Status
+ */
+u32 getButtonStatus() {
+	return (0x00 & XGpio_DiscreteRead(&inGpio, BUTTON_CHANNEL));
+}
+
+/*
+ * LED Toggle Test
  */
 void testToggleLed() {
-	//Initialize
-	initGpio();
+	u8 mask[] = { 0xFF, INT_MASK, IMU_MASK, ROBOT_MASK, UWB_MASK };
+	int number = sizeof(mask);
+	int i, j;
 
-	//Toggle
-	while (1) {
-		toggleLed(LED_MASK);
-		sleep(1);
-	}
-}
-
-/*
- * LED Run
- */
-void ledRun() {
-	//Variables
-	static unsigned int cnt = 0;
-
-	//Increase Counter
-	cnt++;
-
-	//Only run every half second
-	if (cnt >= RUN_FREQ / 2) {
-		//Reset Count
-		cnt = 0;
-
-		//Get next LED configuration
-		if (run == 0x80) { //If LED7 lights up, LED0 is next
-			run = 0x01;
-		} else { //Next LED is one to the left
-			run = (run << 1);
+	for (i = 0; i < number; i++) {
+		for (j = 0; j < 10; j++) {
+			toggleLed(mask[i]);
+			usleep(100000);
 		}
-
-		//Go
-		XGpio_DiscreteWrite(&gpio, LED_CHANNEL, run);
 	}
 
 }
 
 /*
  * Toggle LED
+ * In: Bit Mask for LED(s)
  */
 void toggleLed(u8 ledMask) {
-	//Variables
-	static unsigned int cnt = 0;
-
-	//Increase Counter
-	cnt++;
-
-	//Only run every half second
-	if (cnt >= RUN_FREQ / 2) {
-		//Reset Count
-		cnt = 0;
-
-		//Toggle
-		toggle = (~toggle) & ledMask;
-		XGpio_DiscreteWrite(&gpio, LED_CHANNEL, toggle);
+	//LED is on
+	if ((leds & ledMask) == ledMask) {
+		leds = leds & (~ledMask); //clear LED
+	} else { //LED is off
+		leds = leds | ledMask; //enable LED
 	}
+
+	//Toggle
+	XGpio_DiscreteWrite(&outGpio, LED_CHANNEL, leds);
 
 }
 
@@ -98,7 +67,8 @@ void toggleLed(u8 ledMask) {
  */
 void clearLEDs() {
 	//Clear LEDs
-	XGpio_DiscreteWrite(&gpio, LED_CHANNEL, 0);
+	leds = 0x00;
+	XGpio_DiscreteWrite(&outGpio, LED_CHANNEL, leds);
 }
 
 /*
@@ -106,18 +76,21 @@ void clearLEDs() {
  */
 int initGpio() {
 //Variables
-int status;
+	int status;
 
-//Initialize GPIO
-status = XGpio_Initialize(&gpio, AXI_GPIO_DEVICE_ID);
+//Initialize GPIOs
+	status = XGpio_Initialize(&outGpio, OUTGPIO_DEVICE_ID);
+	status = XGpio_Initialize(&inGpio, INGPIO_DEVICE_ID);
 
 //Set Direction
-XGpio_SetDataDirection(&gpio, LED_CHANNEL, 0);
+	XGpio_SetDataDirection(&outGpio, LED_CHANNEL, DIR_OUT);
+	XGpio_SetDataDirection(&inGpio, 1, DIR_IN);
+	XGpio_SetDataDirection(&inGpio, 2, DIR_IN);
 
 //Clear LEDs
-if (status == XST_SUCCESS) {
-	clearLEDs(status, &gpio);
-}
+	if (status == XST_SUCCESS) {
+		clearLEDs(status, &outGpio);
+	}
 
-return XST_SUCCESS;
+	return XST_SUCCESS;
 }
