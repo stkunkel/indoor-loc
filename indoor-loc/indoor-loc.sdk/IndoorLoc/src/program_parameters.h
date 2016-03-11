@@ -54,7 +54,7 @@ typedef struct {
 typedef struct {
 	MpuRegisterData mpuData;
 	uint32_t pwmValues[NUMBER_OF_JOINTS];
-	int16_t  uwb_dist;
+	int16_t  uwb_dist_cm;
 } SensorPwmData;
 
 #endif /* PROGRAM_PARAMETERS_H_ */

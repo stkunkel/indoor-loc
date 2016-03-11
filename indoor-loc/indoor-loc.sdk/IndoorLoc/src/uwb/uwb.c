@@ -12,23 +12,6 @@ XGpio uwbGpio;
 XSpi decaSpi;
 UwbState state = send;
 
-/*
- * Convert Distance to double
- * In: distance as int16_t
- * Returns distance as double
- */
-double distToDouble(int16_t distance){
-	return ((double) distance / UWB_DIST_SENS);
-}
-
-/*
- * Convert Distance to 16-bit integer
- * In: distance
- * Returns distance as int16_t
- */
-int16_t distToInt(double distance){
-	return ((int16_t) (distance * UWB_DIST_SENS));
-}
 
 /*
  * State Machine to get Distance

@@ -29,8 +29,6 @@ typedef enum { send, receive, wait } UwbState;
 /*
  * Function Prototypes
  */
-double distToDouble(int16_t distance);
-int16_t distToInt(double distance);
 int getDistance(double* p_distance);
 int ssTwrInit(void);
 int transmit();

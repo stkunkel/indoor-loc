@@ -123,9 +123,9 @@ void storeInBuff(SensorPwmData* data) {
 	bufCurr++;
 
 	//UWB Distance
-	*bufCurr = (unsigned char) (data->uwb_dist & BYTE0);
+	*bufCurr = (unsigned char) (data->uwb_dist_cm & BYTE0);
 	bufCurr++;
-	*bufCurr = (unsigned char) ((data->uwb_dist) & BYTE1 >> 8);
+	*bufCurr = (unsigned char) ((data->uwb_dist_cm & BYTE1) >> 8);
 	bufCurr++;
 
 	//Increase Counter

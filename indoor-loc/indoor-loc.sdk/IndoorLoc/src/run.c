@@ -217,7 +217,7 @@ int moveAndCollect(unsigned int sampleTime, bool collect) {
 		//Read UWB Value
 		status = uwbGetDistance(&dist_temp);
 		if (status == DWT_SUCCESS) {
-			data.uwb_dist = distToInt(dist_temp);
+			data.uwb_dist_cm = (int16_t)(dist_temp * 100);
 		}
 
 		//Read Sensor Data and write to memory
