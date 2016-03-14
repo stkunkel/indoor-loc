@@ -123,7 +123,7 @@ title(cstrcat('Sensor Fusion (IMU + UWB) using ', filter_out_outstr, ' Filter'))
 xlabel('Sample Number');
 ylabel('Position on x-axis (m)');
 legend('IMU only', 'UWB only', filter_out_outstr);
-ylim([-0.5 0.5]);
+ylim([-0.5 1]);
 
 # Print
 print(outfile);
