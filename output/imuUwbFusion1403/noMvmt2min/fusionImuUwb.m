@@ -3,40 +3,38 @@ pkg load quaternion;
 
 # Parameters
 filter_in = 0; % 0 = "Complementary Filter", 1 = "Kalman Filter"
-filter_out = 0; % 0 = "Complementary Filter", 1 = "Kalman Filter"
+filter_out = 1; % 0 = "Complementary Filter", 1 = "Kalman Filter"
 ign_samples = 0; % samples to ignore until Filter has converged
 imu_weight = 0.98;
 delta_t = 1/500;
 n = 100;
 
 #Kalman Function
-function pos = kalman_pos(a_imu, v_imu, s_uwb, stddev_imu, stddev_uwb, delta_t)
+function pos = kalman_pos(a_imu, s_uwb, stddev_imu, stddev_uwb, delta_t)
   
   # Standard Deviations
   std_a = stddev_imu;
-  std_v = std_a*delta_t;
   std_s = stddev_uwb;
   
   # Compute Variances
   var_a = std_a^2;
-  var_v = std_v^2;
   var_s = std_s^2;
 
   # Initialize
-  y_hat = [0; 0; 0];
-  A = [1 (delta_t) 0; 0 1 (delta_t); 0 0 1];
-  B = [0 0; 1 0; 0 1];
-  H = eye(3,3);
-  P = [1000 0 0; 0 1000 0; 0 0 1000];
-  Q = [var_s 0 0; 0 var_v 0; 0 0 var_a];
-  R = [std_s 0 0; 0 std_v 0; 0 0 std_a];
+  y_hat = [0; 0];
+  A = [1 (delta_t); 0 1];
+  B = delta_t^2/2;
+  H = [1 1/delta_t];
+  P = [1000 0; 0 1000];
+  Q = [var_s 0; 0 var_a];
+  R = std_s;
 
   # Go through samples
   for i=1:length(a_imu)
   
     # Set u and z
-    u = [v_imu(i); a_imu(i)];
-    z = [s_uwb(i); 0; 0];
+    u = a_imu(i);
+    z = s_uwb(i);
   
     # Rememver previous error covariance
     P_prev = P;
@@ -48,7 +46,7 @@ function pos = kalman_pos(a_imu, v_imu, s_uwb, stddev_imu, stddev_uwb, delta_t)
     # Measurement Update
     K = (P_prev*transpose(H))*inverse(H*P_prev*transpose(H) + R);
     y_hat = y_hat_neg + K*(z - H*y_hat_neg);
-    P = (eye(3,3) - K*H)*P_prev;
+    P = (eye(2,2) - K*H)*P_prev;
     
     # Store values
     pos(i,1) = y_hat(1,1);
@@ -97,12 +95,12 @@ outfile = strcat("posVel_", filter_in_str, "_", filter_out_str, ".pdf");
 data_outfile = strcat("pos_", filter_in_str, "_", filter_out_str, ".mat");
 
 # Compute Standard deviations
-stddev_imu = std([a_i(:,1); a_i(:,2); a_i(:,3)]);
+%stddev_imu = std([a_i(:,1); a_i(:,2); a_i(:,3)]);
 stddev_uwb = std(s_u);%.000001;
 
 
 if (filter_out == 1) % Kalman Filter for position
-  pos_x = kalman_pos(a_i(:,1), v_i(:,1), s_u(:,1), stddev_imu, stddev_uwb, delta_t);
+  pos_x = kalman_pos(a_i(:,1), s_u(:,1), dist, std(a_i(:,1)), stddev_uwb, delta_t);
   %pos_y = kalman_pos(a_i(:,2), v_i(:,2), s_u(:,2), stddev_imu, stddev_uwb, delta_t);
   %pos_z = kalman_pos(a_i(:,3), v_i(:,3), s_u(:,3), stddev_imu, stddev_uwb, delta_t);
 else % Complementary Filter
