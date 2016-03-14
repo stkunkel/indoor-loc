@@ -22,12 +22,13 @@ function pos = kalman_pos(a_imu, s_uwb, stddev_imu, stddev_uwb, delta_t)
 
   # Initialize
   y_hat = [0; 0];
-  A = [1 (delta_t); 0 1];
-  B = delta_t^2/2;
-  H = [1 1/delta_t];
+  A = [1 (delta_t); 0 1]; 
+  B = [delta_t^2/2; delta_t];
+  %H = [1 1/delta_t]; 
+  H = [-1 -delta_t];
   P = [1000 0; 0 1000];
   Q = [var_s 0; 0 var_a];
-  R = std_s;
+  R = var_s;
 
   # Go through samples
   for i=1:length(a_imu)
