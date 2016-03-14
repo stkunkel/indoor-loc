@@ -2,7 +2,7 @@
 pkg load quaternion;
 
 # Parameters
-filter = 6; % 0 = "raw", 1 = "static cal", 2 = "static cal + mvavg", 3 = "static cal + fir", 4 = "static cal + kalman", 5 = "simple cal + no filter", 6 = "simple cal + mvavg"
+filter = 5; % 0 = "raw", 1 = "static cal", 2 = "static cal + mvavg", 3 = "static cal + fir", 4 = "static cal + kalman", 5 = "simple cal + no filter", 6 = "simple cal + mvavg"
 ign_samples = 0; % samples to ignore until Filter has converged
 gyro_weight = 0.98;
 acc_range = 0.1;
@@ -84,10 +84,12 @@ elseif (filter == 5)
 	load('simple_calibration.mat', 'cal');
 	data = cal;
 	filter_str = "simple_cal";
+	load('fnorm.mat', 'f_norm');
 elseif (filter == 6)
 	load('mvavg_simple_cal.mat', 'mvavg');
 	data = mvavg;
 	filter_str = "mvavg_simple_cal";
+	load('fnorm.mat', 'f_norm');
 else
 	data = load('data.txt');
 	filter_str = "raw";

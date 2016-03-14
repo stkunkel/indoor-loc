@@ -1,5 +1,6 @@
 # Parameters
 name = "simple_calibration";
+f_norm_filename = "fnorm.mat";
 n = 100; %number of samples for calibration
 gyr_sens = 32.8;
 acc_sens = 8192;
@@ -45,6 +46,10 @@ better_az = removeOffset((az-8192), n) + 8192;
 # Export Calibrated Data
 cal = [better_gx better_gy better_gx better_ax better_ay better_az];
 save(outmat, 'cal');
+
+# Export normal force
+f_norm = [mean(better_ax(1:n)); mean(better_ay(1:n)); mean(better_az(1:n))];
+save(f_norm_filename, 'f_norm');
 
 # Gyroscope
 # Plot gx

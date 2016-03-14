@@ -43,6 +43,7 @@ elseif (filter == 5)
 	load('simple_calibration.mat', 'cal');
 	data = cal;
 	filter_str = "simple_cal";
+	load('fnorm.mat', 'f_norm');
 else
 	data = load('data.txt');
 	filter_str = "raw";
