@@ -14,7 +14,7 @@
 //Parameters
 #define CAL_TIME				0 //s
 #define CAL_SAMPLES				1000
-#define IMU_SAMPLE_FREQ			200			//Hz
+#define IMU_SAMPLE_FREQ			500			//Hz
 #define IMUVIEWER_FREQ			10 			//Hz
 #define FPGA_FREQ				100000000	//FCLK in Hz
 
