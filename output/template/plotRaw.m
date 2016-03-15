@@ -91,7 +91,7 @@ grid on;
 title('Distance to UWB Receiver');
 xlabel('Sample Number');
 ylabel('Distance (cm)');
-legend('-x');
+legend('x');
 
 # Print
 print("-append", outfile);
