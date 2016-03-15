@@ -52,7 +52,7 @@
 #define MAG_CAL_MASK			0x04
 #define CAL_IGNORE_SAMPLES		50
 #define GRAVITY_AXIS			2			//gravity along z axis
-#define FIFO_RATE				500//200
+#define FIFO_RATE				IMU_SAMPLE_FREQ//200
 
 //Print Parameters
 #define PRINT_NOTHING			0x00
