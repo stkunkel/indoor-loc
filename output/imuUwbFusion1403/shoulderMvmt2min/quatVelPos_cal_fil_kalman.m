@@ -309,7 +309,7 @@ for i = (ign_samples+1):length(gx)
   endif;
   
   #Compute Velocity (first integration)
-  v_curr = v + a_recent * delta_t; %v + acc_i_c * delta_t;
+  v_curr = a_recent * delta_t; %v + acc_i_c * delta_t;
   
   #Compute Position (second integration)
   s_curr = s + v * delta_t; %s + v*delta_t + 0.5 * acc_i_c * delta_t^2;
