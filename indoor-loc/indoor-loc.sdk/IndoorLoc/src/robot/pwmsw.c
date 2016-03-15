@@ -397,7 +397,7 @@ float setAngle(Joint joint, float angle) {
 	value = angleToValue(joint, angle);
 
 	// Set Value
-	realValue = setValue((joint), value);
+	realValue = setValue(joint, value);
 
 	//Compute Real angle
 	realAngle = valToAngle(joint, realValue);
