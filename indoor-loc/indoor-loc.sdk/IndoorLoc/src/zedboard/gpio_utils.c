@@ -18,14 +18,14 @@ static u8 leds = 0;
  * Get Switch Status
  */
 u32 getSwitchStatus() {
-	return (0x00 & XGpio_DiscreteRead(&inGpio, SWITCH_CHANNEL));
+	return (XGpio_DiscreteRead(&inGpio, SWITCH_CHANNEL));
 }
 
 /*
  * Get Button Status
  */
 u32 getButtonStatus() {
-	return (0x00 & XGpio_DiscreteRead(&inGpio, BUTTON_CHANNEL));
+	return (XGpio_DiscreteRead(&inGpio, BUTTON_CHANNEL));
 }
 
 /*
