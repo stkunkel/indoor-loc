@@ -20,7 +20,7 @@ function pos = kalman_pos(a_imu, v_imu, s_uwb, delta_t)
 
   # Initialize
   y_hat = [0; 0; 0];
-  A = [1 0 0; 0 0 0; 0 0 0]; 
+  A = [1 (delta_t) 0; 0 0 0; 0 0 0]; 
   B = [0; delta_t; 1];
   H = [1 0 0];
   P = [1000 0 0; 0 1000 0; 0 0 1000];

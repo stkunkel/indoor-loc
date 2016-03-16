@@ -115,7 +115,7 @@ gz = gz / gyr_sens;
 ax = ax / acc_sens;
 ay = ay / acc_sens;
 az = az / acc_sens;
-f_norm_conv = f_norm / acc_sens;
+f_norm = f_norm / acc_sens;
 
 # Compute Standard deviations
 if (filter == 1 || filter == 2 || filter == 3 || filter == 4)
@@ -289,27 +289,21 @@ for i = (ign_samples+1):length(gx)
   #Get Transpose
   rot_t = transpose(rot);
   
-  #Rotate Normal force
-  f_norm_rot = rot * f_norm_conv;
-  
-  #Remove Gravity
-  acc = acc - f_norm_rot;
-  
   #Compute Intertial Acceleration
-  acc_inert = rot_t * acc;
+  acc_i = rot_t * acc - f_norm;
   
   #Convert to m/s^2
-  acc_i_c = acc_inert * gravity;
+  acc_i_c = acc_i * gravity;
   
-  # Get recent acceleration
+  # Get current acceleration
   if ( i <= (ign_samples+1) )
-    a_recent = [0; 0; 0];
+    a_curr = [0; 0; 0];
   else
-    a_recent = [oax(i-1); oay(i-1); oaz(i-1)];
+    a_curr = acc_i_c;
   endif;
   
   #Compute Velocity (first integration)
-  v_curr = a_recent * delta_t; %v + acc_i_c * delta_t;
+  v_curr = v + a_curr * delta_t; %v + acc_i_c * delta_t;
   
   #Compute Position (second integration)
   s_curr = s + v * delta_t; %s + v*delta_t + 0.5 * acc_i_c * delta_t^2;
@@ -319,9 +313,9 @@ for i = (ign_samples+1):length(gx)
   s = s_curr;
   
   # Keep track of velocity and position for plots
-  oax(i) = acc_i_c(1,1);
-  oay(i) = acc_i_c(2,1);
-  oaz(i) = acc_i_c(3,1);
+  oax(i) = a_curr(1,1);
+  oay(i) = a_curr(2,1);
+  oaz(i) = a_curr(3,1);
   vx(i) = v(1,1);
   vy(i) = v(2,1);
   vz(i) = v(3,1);
