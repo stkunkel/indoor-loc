@@ -2,7 +2,7 @@
 pkg load quaternion;
 
 # Parameters
-filter_in = 0; % 0 = "Complementary Filter", 1 = "Kalman Filter"
+filter_in = 1; % 0 = "Complementary Filter", 1 = "Kalman Filter"
 filter_out = 1; % 0 = "Complementary Filter", 1 = "Kalman Filter"
 ign_samples = 0; % samples to ignore until Filter has converged
 imu_weight = 0.98;

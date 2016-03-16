@@ -2,7 +2,6 @@
 name = "simple_calibration";
 f_norm_filename = "fnorm.mat";
 n = 100; %number of samples for calibration
-wndw = 20;
 gyr_sens = 32.8;
 acc_sens = 8192;
 
@@ -44,12 +43,8 @@ better_ax = removeOffset(ax, n);
 better_ay = removeOffset(ay, n);
 better_az = removeOffset((az-8192), n) + 8192;
 
-# Prepare data: remove first and last samples to match UWB
-out = [better_gx better_gy better_gx better_ax better_ay better_az];
-l = length(out);
-cal = out(wndw+1:l-wndw,:);
-
 # Export Calibrated Data
+cal = [better_gx better_gy better_gx better_ax better_ay better_az];
 save(outmat, 'cal');
 
 # Export normal force
