@@ -4,7 +4,7 @@ pkg load quaternion;
 # Parameters
 filter = 5; % 0 = "raw", 1 = "static cal", 2 = "static cal + mvavg", 3 = "static cal + fir", 4 = "static cal + kalman", 5 = "simple cal + no filter"
 gyro_weight = 0.98;
-acc_range = 0.1;
+acc_range = 0.01;
 gyr_sens = 32.8;
 acc_sens = 8192;
 delta_t = 1/500;
@@ -13,6 +13,7 @@ gravity = 9.80665;
 f_norm = [0; 0; acc_sens];
 v = [0; 0; 0];
 s = [0; 0; 0];
+acc_cnt = 0;
 
 # Load Data
 if (filter == 1)
@@ -62,14 +63,15 @@ ax = data(:,4) / acc_sens;
 ay = data(:,5) / acc_sens;
 az = data(:,6) / acc_sens;
 
-# Compute Gravity
-grav_z = grav_raw/acc_sens;
-
 # Absolute Quaternion
 quat_abs = quaternion(1, 0, 0, 0);
+quat_abs_acc_rec = quat_abs;
 
 # Convert Normal Force to G
 f_norm = f_norm / acc_sens;
+
+# Compute Gravity
+grav_z = f_norm(3,1);
 
 # Compute Quaternions
 for i = 1:length(gx)
@@ -91,19 +93,11 @@ for i = 1:length(gx)
     gyr_norm_sc = 1;
   endif
   
-  # Normalize Acc
-  acc_norm_sc = acc / norm(acc);
-  if (acc_norm_sc != 0)
-	acc_norm = acc / acc_norm_sc;
-  else 
-    acc_norm_sc = 1;
-  endif;
-  
   # Integrate Gyro Data --> rotation angle
   angle_gyr = gyr_norm_sc * delta_t;
-  
-  # Get Angle from Acc
-  angle_acc = acc_norm(3,1) / grav_z;
+  if(angle_gyr < 0)
+    angle_gyr = 2*pi - angle_gyr;
+  endif;
   
   # Construct Quaternion  from gyroscope
   quat_rel_gyr = quaternion(cos(angle_gyr/2), gyr_norm(1,1)*sin(angle_gyr/2), gyr_norm(2,1)*sin(angle_gyr/2), gyr_norm(3,1)*sin(angle_gyr/2));
@@ -112,26 +106,51 @@ for i = 1:length(gx)
   quat_abs_gyr = quat_abs * quat_rel_gyr;
   
   # Get sum of accelerations
-  acc_sum = acc(1,1) + acc(2,1) + acc(3,1);
+  acc_sum = sqrt(acc(1,1)^2 + acc(2,1)^2 + acc(3,1)^2);
   
   # IMU is sitting still (just gravity) --> Complementary Filter for rotation (combine gyro and acc)
   if (acc_sum < (grav_z + acc_range) && acc_sum > (grav_z - acc_range))
+        
+    # Normalize Acc
+    acc_norm = acc / acc_sum;
+    
+    # Is IMUs z axis pointing towards global z axis?
+    if (acc_norm != f_norm(1,1) || acc_norm(2,1) != f_norm(2,1) || acc_norm(3,1) != f_norm(3,1))
+    
+      # Get Rotation Angle
+      angle_acc = acos(acc_norm(1,1)*f_norm(1,1) + acc_norm(2,1)*f_norm(2,1) + acc_norm(3,1)*f_norm(3,1));
+      
+      # Get rotation axis vector
+      rot_vec = cross(acc_norm, f_norm);
+      
+      # Normalize rotation axis vector
+      rot_vec_mag = norm(rot_vec);
+      if (rot_vec_mag != 0)
+	rot_vec = rot_vec / rot_vec_mag;
+      endif;  
 
-	# Construct absolute rotation quaternion from accelerometer
-	quat_abs_acc = quaternion(cos(angle_acc/2), acc_norm(1,1)*sin(angle_acc/2), acc_norm(2,1)*sin(angle_acc/2), acc_norm(3,1)*sin(angle_acc/2));
-	
-	# Complementary filter
-	w = gyro_weight * quat_abs_gyr.w + (1 - gyro_weight) * quat_abs_acc.w;
-	x = gyro_weight * quat_abs_gyr.x + (1 - gyro_weight) * quat_abs_acc.x;
-	y = gyro_weight * quat_abs_gyr.y + (1 - gyro_weight) * quat_abs_acc.y;
-	z = gyro_weight * quat_abs_gyr.z + (1 - gyro_weight) * quat_abs_acc.z;
-	
-	# Create Quaternion
-	quat_abs = quaternion(w, x, y, z);
+      # Construct absolute rotation quaternion from accelerometer
+      quat_abs_acc = unit(quaternion(cos(angle_acc/2), rot_vec(1,1)*sin(angle_acc/2), rot_vec(2,1)*sin(angle_acc/2), rot_vec(3,1)*sin(angle_acc/2)));
+    
+    else
+      quat_abs_acc = quaternion(1, 0, 0, 0);
+    endif;
+    
+    # Increase Counter
+    acc_cnt++;
+    
+    # Complementary filter
+    w = gyro_weight * quat_abs_gyr.w + (1 - gyro_weight) * quat_abs_acc.w;
+    x = gyro_weight * quat_abs_gyr.x + (1 - gyro_weight) * quat_abs_acc.x;
+    y = gyro_weight * quat_abs_gyr.y + (1 - gyro_weight) * quat_abs_acc.y;
+    z = gyro_weight * quat_abs_gyr.z + (1 - gyro_weight) * quat_abs_acc.z;
+  
+    # Create Quaternion
+    quat_abs = quaternion(w, x, y, z);
 	
   # IMU is moving --> use gyro rotation only
   else 
-	quat_abs = quat_abs_gyr;
+	quat_abs_acc = quat_abs_gyr;
   endif;
   
   # Keep track of quaternions for plot
@@ -197,6 +216,9 @@ for i = 1:length(gx)
   sz(i) = s(3,1);
   
 endfor
+
+# Print Acc cnt
+printf("Acceleration used for angle: %d out of %d samples\r\n", acc_cnt, i);
 
 # clear
 hold off;

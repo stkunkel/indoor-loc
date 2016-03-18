@@ -114,23 +114,30 @@ for i = 1:length(gx)
     # Normalize Acc
     acc_norm = acc / acc_sum;
     
-    # Get Rotation Angle
-    angle_acc = acos(acc_norm(1,1)*f_norm(1,1) + acc_norm(2,1)*f_norm(2,1) + acc_norm(3,1)*f_norm(1,1));
+    # Is IMUs z axis pointing towards global z axis?
+    if (acc_norm != f_norm(1,1) || acc_norm(2,1) != f_norm(2,1) || acc_norm(3,1) != f_norm(3,1))
     
-    # Get rotation axis vector
-    rot_vec = cross(acc_norm, f_norm);
+      # Get Rotation Angle
+      angle_acc = acos(acc_norm(1,1)*f_norm(1,1) + acc_norm(2,1)*f_norm(2,1) + acc_norm(3,1)*f_norm(3,1));
+      
+      # Get rotation axis vector
+      rot_vec = cross(acc_norm, f_norm);
+      
+      # Normalize rotation axis vector
+      rot_vec_mag = norm(rot_vec);
+      if (rot_vec_mag != 0)
+	rot_vec = rot_vec / rot_vec_mag;
+      endif;  
+
+      # Construct absolute rotation quaternion from accelerometer
+      quat_abs_acc = unit(quaternion(cos(angle_acc/2), rot_vec(1,1)*sin(angle_acc/2), rot_vec(2,1)*sin(angle_acc/2), rot_vec(3,1)*sin(angle_acc/2)));
     
-%      # Normalize rotation axis vector
-%      rot_vec_mag = norm(rot_vec);
-%      if (rot_vec_mag != 0)
-%        rot_vec = rot_vec / rot_vec_mag;
-%      endif;  
+    else
+      quat_abs_acc = quaternion(1, 0, 0, 0);
+    endif;
     
     # Increase Counter
     acc_cnt++;
-
-    # Construct absolute rotation quaternion from accelerometer
-    quat_abs_acc = unit(quaternion(cos(angle_acc/2), rot_vec(1,1)*sin(angle_acc/2), rot_vec(2,1)*sin(angle_acc/2), rot_vec(3,1)*sin(angle_acc/2)));
     
     # Complementary filter
     w = gyro_weight * quat_abs_gyr.w + (1 - gyro_weight) * quat_abs_acc.w;
