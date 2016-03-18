@@ -3,7 +3,8 @@ Accel Sens: 4G
 no calibration (i.e. raw data)
 no DMP
 2min sampling time per set
-Servo Motors still on after reset
+
+IMU facing backwards (i.e. robots moves away from the x-axis).
 
 Normal Force computed as mean of first 100 values
 
