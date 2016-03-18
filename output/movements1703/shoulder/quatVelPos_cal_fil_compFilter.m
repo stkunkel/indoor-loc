@@ -151,6 +151,7 @@ for i = 1:length(gx)
   # IMU is moving --> use gyro rotation only
   else 
 	quat_abs_acc = quat_abs_gyr;
+	quat_abs = quat_abs_gyr;
   endif;
   
   # Keep track of quaternions for plot
@@ -158,6 +159,18 @@ for i = 1:length(gx)
   qx(i) = quat_abs.x;
   qy(i) = quat_abs.y;
   qz(i) = quat_abs.z;
+  
+  # Remember q_abs_gyr
+  q_gyr(i, 1) = quat_abs_gyr.w;
+  q_gyr(i, 2) = quat_abs_gyr.x;
+  q_gyr(i, 3) = quat_abs_gyr.y;
+  q_gyr(i, 4) = quat_abs_gyr.z;
+  
+  # Remember Quat computed from Accelerometer
+  q_acc(i, 1) = quat_abs_acc.w;
+  q_acc(i, 2) = quat_abs_acc.x;
+  q_acc(i, 3) = quat_abs_acc.y;
+  q_acc(i, 4) = quat_abs_acc.z;
   
   ######## Velocity / Position Start #########
   
@@ -262,6 +275,10 @@ save(q_mat_outfile, 'out');
 # Data Export for Fusion with UWB
 avs = [oax oay oaz vx vy vz sx sy sz];
 save(avs_outfile, 'avs');
+
+# Export quaternions
+save(strcat('q_acc_', filter_str,'.mat'), 'q_acc');
+save(strcat('q_gyr_', filter_str, '.mat'), 'q_gyr');
 
 # Print
 print(outfile);
