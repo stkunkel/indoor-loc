@@ -33,7 +33,7 @@
 /*
  * Function Prototypes
  */
-int moveAndCollect(unsigned int sampleTime, Joint joint, bool collect);
+int moveAndCollect(unsigned int sampleTime, bool collect);
 int printGeneric(short int printMask, char* separator,
 		unsigned int numberOfRuns);
 int printForImuViewer(short int printMask, char* separator,
@@ -123,7 +123,7 @@ int main() {
 //	testToggleLed();
 
 //Move Robot and collect all sensor data (IMU and UWB)
-	moveAndCollect(60, shoulder, BOOL_TRUE);
+	moveAndCollect(120, BOOL_TRUE);
 
 //Clear LEDs
 	clearLEDs();
@@ -141,12 +141,13 @@ int main() {
 /*
  * Move Robot and Collect IMU and UWB Sensor Data
  */
-int moveAndCollect(unsigned int sampleTime, Joint joint, bool collect) {
+int moveAndCollect(unsigned int sampleTime, bool collect) {
 	//Variables
 	int status;
 	SensorPwmData data;
 	uint32_t cnt = 0, samples = 0, angleid = 0, anglecnt = 0, button, sw;
-	float angle[6];
+	Joint joint = shoulder;
+	float angle[7];
 	double dist_temp = 0.0;
 
 	//Set angles
@@ -156,6 +157,7 @@ int moveAndCollect(unsigned int sampleTime, Joint joint, bool collect) {
 	angle[3] = 90.0;
 	angle[4] = 60.0;
 	angle[5] = 30.0;
+	angle[6] = 0.0;
 
 	//Compute number of data samples
 	samples = sampleTime * FIFO_RATE;
@@ -236,16 +238,12 @@ int moveAndCollect(unsigned int sampleTime, Joint joint, bool collect) {
 				anglecnt = 0;
 
 				//Reset Angle ID
-				if (angleid >= sizeof(angle) / sizeof(angle[0])) {
+				if (angleid > sizeof(angle)/sizeof(angle[0])) {
 					angleid = 0;
 				}
 
 				//Set angle and increase ID
-				if (angleid > 0) {
-					setAngle(joint, angle[angleid]); //angleid
-				} else {
-					setAngle(joint, angle[angleid]); //angleid
-				}
+				setAngle(joint, angle[angleid]); //angleid
 				toggleLed(ROBOT_MASK);
 				angleid++;
 			}

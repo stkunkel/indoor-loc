@@ -13961,3 +13961,992 @@ Finished building: IndoorLoc.elf.size
 16:08:28 **** Incremental Build of configuration Debug for project IndoorLoc ****
 make all 
 make: Nothing to be done for `all'.
+09:22:24 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/crc16.o ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/print_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o ./src/zedboard/xmodem.o  ./src/uwb/decadriver/deca_device.o ./src/uwb/decadriver/deca_params_init.o ./src/uwb/decadriver/deca_range_tables.o  ./src/uwb/decaApp/ssTwrInit.o  ./src/uwb/deca/deca_mutex.o ./src/uwb/deca/deca_sleep.o ./src/uwb/deca/deca_spi.o  ./src/uwb/uwb.o  ./src/robot/pwmsw.o ./src/robot/robotCtrl.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/dataBuffer.o ./src/math_utils.o ./src/platform.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 265092	   3368	1029160	1297620	 13ccd4	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+09:22:35 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/crc16.o ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/print_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o ./src/zedboard/xmodem.o  ./src/uwb/decadriver/deca_device.o ./src/uwb/decadriver/deca_params_init.o ./src/uwb/decadriver/deca_range_tables.o  ./src/uwb/decaApp/ssTwrInit.o  ./src/uwb/deca/deca_mutex.o ./src/uwb/deca/deca_sleep.o ./src/uwb/deca/deca_spi.o  ./src/uwb/uwb.o  ./src/robot/pwmsw.o ./src/robot/robotCtrl.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/dataBuffer.o ./src/math_utils.o ./src/platform.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 265092	   3368	1029160	1297620	 13ccd4	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+09:22:51 **** Incremental Build of configuration Debug for project uwbTest ****
+make all 
+make: Nothing to be done for `all'.
+09:29:22 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/crc16.o ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/print_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o ./src/zedboard/xmodem.o  ./src/uwb/decadriver/deca_device.o ./src/uwb/decadriver/deca_params_init.o ./src/uwb/decadriver/deca_range_tables.o  ./src/uwb/decaApp/ssTwrInit.o  ./src/uwb/deca/deca_mutex.o ./src/uwb/deca/deca_sleep.o ./src/uwb/deca/deca_spi.o  ./src/uwb/uwb.o  ./src/robot/pwmsw.o ./src/robot/robotCtrl.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/dataBuffer.o ./src/math_utils.o ./src/platform.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 265156	   3368	1029160	1297684	 13cd14	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+09:31:33 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/crc16.o ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/print_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o ./src/zedboard/xmodem.o  ./src/uwb/decadriver/deca_device.o ./src/uwb/decadriver/deca_params_init.o ./src/uwb/decadriver/deca_range_tables.o  ./src/uwb/decaApp/ssTwrInit.o  ./src/uwb/deca/deca_mutex.o ./src/uwb/deca/deca_sleep.o ./src/uwb/deca/deca_spi.o  ./src/uwb/uwb.o  ./src/robot/pwmsw.o ./src/robot/robotCtrl.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/dataBuffer.o ./src/math_utils.o ./src/platform.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 265156	   3368	1029160	1297684	 13cd14	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+09:32:41 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/crc16.o ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/print_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o ./src/zedboard/xmodem.o  ./src/uwb/decadriver/deca_device.o ./src/uwb/decadriver/deca_params_init.o ./src/uwb/decadriver/deca_range_tables.o  ./src/uwb/decaApp/ssTwrInit.o  ./src/uwb/deca/deca_mutex.o ./src/uwb/deca/deca_sleep.o ./src/uwb/deca/deca_spi.o  ./src/uwb/uwb.o  ./src/robot/pwmsw.o ./src/robot/robotCtrl.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/dataBuffer.o ./src/math_utils.o ./src/platform.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 265156	   3368	1029160	1297684	 13cd14	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+09:33:08 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+09:34:04 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/crc16.o ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/print_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o ./src/zedboard/xmodem.o  ./src/uwb/decadriver/deca_device.o ./src/uwb/decadriver/deca_params_init.o ./src/uwb/decadriver/deca_range_tables.o  ./src/uwb/decaApp/ssTwrInit.o  ./src/uwb/deca/deca_mutex.o ./src/uwb/deca/deca_sleep.o ./src/uwb/deca/deca_spi.o  ./src/uwb/uwb.o  ./src/robot/pwmsw.o ./src/robot/robotCtrl.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/dataBuffer.o ./src/math_utils.o ./src/platform.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 265156	   3368	1029160	1297684	 13cd14	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+09:34:38 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+09:35:30 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/zedboard/gpio_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/zedboard/gpio_utils.o" -MMD -MP -MF"src/zedboard/gpio_utils.d" -MT"src/zedboard/gpio_utils.d" -o "src/zedboard/gpio_utils.o" "../src/zedboard/gpio_utils.c"
+Finished building: ../src/zedboard/gpio_utils.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/crc16.o ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/print_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o ./src/zedboard/xmodem.o  ./src/uwb/decadriver/deca_device.o ./src/uwb/decadriver/deca_params_init.o ./src/uwb/decadriver/deca_range_tables.o  ./src/uwb/decaApp/ssTwrInit.o  ./src/uwb/deca/deca_mutex.o ./src/uwb/deca/deca_sleep.o ./src/uwb/deca/deca_spi.o  ./src/uwb/uwb.o  ./src/robot/pwmsw.o ./src/robot/robotCtrl.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/dataBuffer.o ./src/math_utils.o ./src/platform.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 265156	   3368	1029160	1297684	 13cd14	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+09:35:37 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+09:37:12 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+09:43:31 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+09:46:02 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/crc16.o ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/print_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o ./src/zedboard/xmodem.o  ./src/uwb/decadriver/deca_device.o ./src/uwb/decadriver/deca_params_init.o ./src/uwb/decadriver/deca_range_tables.o  ./src/uwb/decaApp/ssTwrInit.o  ./src/uwb/deca/deca_mutex.o ./src/uwb/deca/deca_sleep.o ./src/uwb/deca/deca_spi.o  ./src/uwb/uwb.o  ./src/robot/pwmsw.o ./src/robot/robotCtrl.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/dataBuffer.o ./src/math_utils.o ./src/platform.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 265156	   3368	1029160	1297684	 13cd14	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+09:46:08 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+09:48:21 **** Incremental Build of configuration Debug for project uwbTest ****
+make all 
+make: Nothing to be done for `all'.
+09:56:49 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'moveAndCollect':
+../src/run.c:179:3: warning: suggest parentheses around assignment used as truth value [-Wparentheses]
+   if (status = DWT_SUCCESS){
+   ^
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/crc16.o ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/print_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o ./src/zedboard/xmodem.o  ./src/uwb/decadriver/deca_device.o ./src/uwb/decadriver/deca_params_init.o ./src/uwb/decadriver/deca_range_tables.o  ./src/uwb/decaApp/ssTwrInit.o  ./src/uwb/deca/deca_mutex.o ./src/uwb/deca/deca_sleep.o ./src/uwb/deca/deca_spi.o  ./src/uwb/uwb.o  ./src/robot/pwmsw.o ./src/robot/robotCtrl.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/dataBuffer.o ./src/math_utils.o ./src/platform.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 265236	   3368	1029160	1297764	 13cd64	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+09:56:52 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'moveAndCollect':
+../src/run.c:179:14: error: expected ')' before numeric constant
+   if (status 0= DWT_SUCCESS){
+              ^
+make: *** [src/run.o] Error 1
+09:56:55 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/crc16.o ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/print_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o ./src/zedboard/xmodem.o  ./src/uwb/decadriver/deca_device.o ./src/uwb/decadriver/deca_params_init.o ./src/uwb/decadriver/deca_range_tables.o  ./src/uwb/decaApp/ssTwrInit.o  ./src/uwb/deca/deca_mutex.o ./src/uwb/deca/deca_sleep.o ./src/uwb/deca/deca_spi.o  ./src/uwb/uwb.o  ./src/robot/pwmsw.o ./src/robot/robotCtrl.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/dataBuffer.o ./src/math_utils.o ./src/platform.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 265236	   3368	1029160	1297764	 13cd64	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+09:56:58 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+09:57:25 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/crc16.o ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/print_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o ./src/zedboard/xmodem.o  ./src/uwb/decadriver/deca_device.o ./src/uwb/decadriver/deca_params_init.o ./src/uwb/decadriver/deca_range_tables.o  ./src/uwb/decaApp/ssTwrInit.o  ./src/uwb/deca/deca_mutex.o ./src/uwb/deca/deca_sleep.o ./src/uwb/deca/deca_spi.o  ./src/uwb/uwb.o  ./src/robot/pwmsw.o ./src/robot/robotCtrl.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/dataBuffer.o ./src/math_utils.o ./src/platform.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 265236	   3368	1029160	1297764	 13cd64	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+09:57:28 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+09:58:07 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'moveAndCollect':
+../src/run.c:181:15: error: 'RNG_DELAY_MS' undeclared (first use in this function)
+    deca_sleep(RNG_DELAY_MS);
+               ^
+../src/run.c:181:15: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [src/run.o] Error 1
+09:59:17 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/uwb/decaApp/ssTwrInit.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/uwb/decaApp/ssTwrInit.o" -MMD -MP -MF"src/uwb/decaApp/ssTwrInit.d" -MT"src/uwb/decaApp/ssTwrInit.d" -o "src/uwb/decaApp/ssTwrInit.o" "../src/uwb/decaApp/ssTwrInit.c"
+../src/uwb/decaApp/ssTwrInit.c: In function 'ssTwrInit':
+../src/uwb/decaApp/ssTwrInit.c:101:6: warning: unused variable 'status' [-Wunused-variable]
+ 
+      ^
+../src/uwb/decaApp/ssTwrInit.c: In function 'getDistance':
+../src/uwb/decaApp/ssTwrInit.c:264:1: warning: control reaches end of non-void function [-Wreturn-type]
+ 
+ ^
+Finished building: ../src/uwb/decaApp/ssTwrInit.c
+ 
+Building file: ../src/uwb/uwb.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/uwb/uwb.o" -MMD -MP -MF"src/uwb/uwb.d" -MT"src/uwb/uwb.d" -o "src/uwb/uwb.o" "../src/uwb/uwb.c"
+Finished building: ../src/uwb/uwb.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'moveAndCollect':
+../src/run.c:181:15: error: 'RNG_DELAY_MS' undeclared (first use in this function)
+    deca_sleep(RNG_DELAY_MS);
+               ^
+../src/run.c:181:15: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [src/run.o] Error 1
+09:59:28 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+In file included from ../src/run.c:17:0:
+../src/run.c: In function 'moveAndCollect':
+../src/uwb/uwb.h:26:19: error: 'RNG_DELAY_MS' undeclared (first use in this function)
+ #define UWB_DELAY RNG_DELAY_MS
+                   ^
+../src/run.c:181:15: note: in expansion of macro 'UWB_DELAY'
+    deca_sleep(UWB_DELAY);
+               ^
+../src/uwb/uwb.h:26:19: note: each undeclared identifier is reported only once for each function it appears in
+ #define UWB_DELAY RNG_DELAY_MS
+                   ^
+../src/run.c:181:15: note: in expansion of macro 'UWB_DELAY'
+    deca_sleep(UWB_DELAY);
+               ^
+make: *** [src/run.o] Error 1
+09:59:56 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+In file included from ../src/run.c:17:0:
+../src/run.c: In function 'moveAndCollect':
+../src/uwb/uwb.h:26:19: error: 'RNG_DELAY_MS' undeclared (first use in this function)
+ #define UWB_DELAY RNG_DELAY_MS
+                   ^
+../src/run.c:181:16: note: in expansion of macro 'UWB_DELAY'
+    usleep(1000*UWB_DELAY);
+                ^
+../src/uwb/uwb.h:26:19: note: each undeclared identifier is reported only once for each function it appears in
+ #define UWB_DELAY RNG_DELAY_MS
+                   ^
+../src/run.c:181:16: note: in expansion of macro 'UWB_DELAY'
+    usleep(1000*UWB_DELAY);
+                ^
+make: *** [src/run.o] Error 1
+10:00:29 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/uwb/decaApp/ssTwrInit.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/uwb/decaApp/ssTwrInit.o" -MMD -MP -MF"src/uwb/decaApp/ssTwrInit.d" -MT"src/uwb/decaApp/ssTwrInit.d" -o "src/uwb/decaApp/ssTwrInit.o" "../src/uwb/decaApp/ssTwrInit.c"
+../src/uwb/decaApp/ssTwrInit.c: In function 'ssTwrInit':
+../src/uwb/decaApp/ssTwrInit.c:101:6: warning: unused variable 'status' [-Wunused-variable]
+ 
+      ^
+../src/uwb/decaApp/ssTwrInit.c: In function 'getDistance':
+../src/uwb/decaApp/ssTwrInit.c:264:1: warning: control reaches end of non-void function [-Wreturn-type]
+ 
+ ^
+Finished building: ../src/uwb/decaApp/ssTwrInit.c
+ 
+Building file: ../src/uwb/uwb.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/uwb/uwb.o" -MMD -MP -MF"src/uwb/uwb.d" -MT"src/uwb/uwb.d" -o "src/uwb/uwb.o" "../src/uwb/uwb.c"
+Finished building: ../src/uwb/uwb.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+../src/run.c: In function 'moveAndCollect':
+../src/run.c:181:16: error: 'UWB_DELAY' undeclared (first use in this function)
+    usleep(1000*UWB_DELAY);
+                ^
+../src/run.c:181:16: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [src/run.o] Error 1
+10:00:57 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/crc16.o ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/print_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o ./src/zedboard/xmodem.o  ./src/uwb/decadriver/deca_device.o ./src/uwb/decadriver/deca_params_init.o ./src/uwb/decadriver/deca_range_tables.o  ./src/uwb/decaApp/ssTwrInit.o  ./src/uwb/deca/deca_mutex.o ./src/uwb/deca/deca_sleep.o ./src/uwb/deca/deca_spi.o  ./src/uwb/uwb.o  ./src/robot/pwmsw.o ./src/robot/robotCtrl.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/dataBuffer.o ./src/math_utils.o ./src/platform.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 265236	   3368	1029160	1297764	 13cd64	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:01:00 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+10:03:41 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/crc16.o ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/print_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o ./src/zedboard/xmodem.o  ./src/uwb/decadriver/deca_device.o ./src/uwb/decadriver/deca_params_init.o ./src/uwb/decadriver/deca_range_tables.o  ./src/uwb/decaApp/ssTwrInit.o  ./src/uwb/deca/deca_mutex.o ./src/uwb/deca/deca_sleep.o ./src/uwb/deca/deca_spi.o  ./src/uwb/uwb.o  ./src/robot/pwmsw.o ./src/robot/robotCtrl.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/dataBuffer.o ./src/math_utils.o ./src/platform.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 265236	   3368	1029160	1297764	 13cd64	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:03:45 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+10:05:29 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/crc16.o ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/print_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o ./src/zedboard/xmodem.o  ./src/uwb/decadriver/deca_device.o ./src/uwb/decadriver/deca_params_init.o ./src/uwb/decadriver/deca_range_tables.o  ./src/uwb/decaApp/ssTwrInit.o  ./src/uwb/deca/deca_mutex.o ./src/uwb/deca/deca_sleep.o ./src/uwb/deca/deca_spi.o  ./src/uwb/uwb.o  ./src/robot/pwmsw.o ./src/robot/robotCtrl.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/dataBuffer.o ./src/math_utils.o ./src/platform.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 265236	   3368	1029160	1297764	 13cd64	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+10:05:35 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+10:07:44 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/crc16.o ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/print_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o ./src/zedboard/xmodem.o  ./src/uwb/decadriver/deca_device.o ./src/uwb/decadriver/deca_params_init.o ./src/uwb/decadriver/deca_range_tables.o  ./src/uwb/decaApp/ssTwrInit.o  ./src/uwb/deca/deca_mutex.o ./src/uwb/deca/deca_sleep.o ./src/uwb/deca/deca_spi.o  ./src/uwb/uwb.o  ./src/robot/pwmsw.o ./src/robot/robotCtrl.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/dataBuffer.o ./src/math_utils.o ./src/platform.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 265268	   3368	1029160	1297796	 13cd84	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+11:05:40 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/crc16.o ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/print_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o ./src/zedboard/xmodem.o  ./src/uwb/decadriver/deca_device.o ./src/uwb/decadriver/deca_params_init.o ./src/uwb/decadriver/deca_range_tables.o  ./src/uwb/decaApp/ssTwrInit.o  ./src/uwb/deca/deca_mutex.o ./src/uwb/deca/deca_sleep.o ./src/uwb/deca/deca_spi.o  ./src/uwb/uwb.o  ./src/robot/pwmsw.o ./src/robot/robotCtrl.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/dataBuffer.o ./src/math_utils.o ./src/platform.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 265268	   3368	1029160	1297796	 13cd84	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+11:05:48 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+11:06:32 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+11:08:20 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/crc16.o ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/print_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o ./src/zedboard/xmodem.o  ./src/uwb/decadriver/deca_device.o ./src/uwb/decadriver/deca_params_init.o ./src/uwb/decadriver/deca_range_tables.o  ./src/uwb/decaApp/ssTwrInit.o  ./src/uwb/deca/deca_mutex.o ./src/uwb/deca/deca_sleep.o ./src/uwb/deca/deca_spi.o  ./src/uwb/uwb.o  ./src/robot/pwmsw.o ./src/robot/robotCtrl.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/dataBuffer.o ./src/math_utils.o ./src/platform.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 265268	   3368	1029160	1297796	 13cd84	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+11:08:48 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+11:09:50 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+11:10:56 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+11:11:06 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+11:03:13 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/crc16.o ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/print_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o ./src/zedboard/xmodem.o  ./src/uwb/decadriver/deca_device.o ./src/uwb/decadriver/deca_params_init.o ./src/uwb/decadriver/deca_range_tables.o  ./src/uwb/decaApp/ssTwrInit.o  ./src/uwb/deca/deca_mutex.o ./src/uwb/deca/deca_sleep.o ./src/uwb/deca/deca_spi.o  ./src/uwb/uwb.o  ./src/robot/pwmsw.o ./src/robot/robotCtrl.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/dataBuffer.o ./src/math_utils.o ./src/platform.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 265332	   3368	1029160	1297860	 13cdc4	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+11:04:14 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+11:07:51 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+11:09:09 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/crc16.o ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/print_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o ./src/zedboard/xmodem.o  ./src/uwb/decadriver/deca_device.o ./src/uwb/decadriver/deca_params_init.o ./src/uwb/decadriver/deca_range_tables.o  ./src/uwb/decaApp/ssTwrInit.o  ./src/uwb/deca/deca_mutex.o ./src/uwb/deca/deca_sleep.o ./src/uwb/deca/deca_spi.o  ./src/uwb/uwb.o  ./src/robot/pwmsw.o ./src/robot/robotCtrl.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/dataBuffer.o ./src/math_utils.o ./src/platform.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 265332	   3368	1029160	1297860	 13cdc4	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+11:13:49 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/zedboard/gpio_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/zedboard/gpio_utils.o" -MMD -MP -MF"src/zedboard/gpio_utils.d" -MT"src/zedboard/gpio_utils.d" -o "src/zedboard/gpio_utils.o" "../src/zedboard/gpio_utils.c"
+Finished building: ../src/zedboard/gpio_utils.c
+ 
+Building file: ../src/zedboard/iic_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/zedboard/iic_utils.o" -MMD -MP -MF"src/zedboard/iic_utils.d" -MT"src/zedboard/iic_utils.d" -o "src/zedboard/iic_utils.o" "../src/zedboard/iic_utils.c"
+Finished building: ../src/zedboard/iic_utils.c
+ 
+Building file: ../src/zedboard/print_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/zedboard/print_utils.o" -MMD -MP -MF"src/zedboard/print_utils.d" -MT"src/zedboard/print_utils.d" -o "src/zedboard/print_utils.o" "../src/zedboard/print_utils.c"
+Finished building: ../src/zedboard/print_utils.c
+ 
+Building file: ../src/zedboard/timer_int.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/zedboard/timer_int.o" -MMD -MP -MF"src/zedboard/timer_int.d" -MT"src/zedboard/timer_int.d" -o "src/zedboard/timer_int.o" "../src/zedboard/timer_int.c"
+Finished building: ../src/zedboard/timer_int.c
+ 
+Building file: ../src/zedboard/xmodem.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/zedboard/xmodem.o" -MMD -MP -MF"src/zedboard/xmodem.d" -MT"src/zedboard/xmodem.d" -o "src/zedboard/xmodem.o" "../src/zedboard/xmodem.c"
+Finished building: ../src/zedboard/xmodem.c
+ 
+Building file: ../src/uwb/decaApp/ssTwrInit.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/uwb/decaApp/ssTwrInit.o" -MMD -MP -MF"src/uwb/decaApp/ssTwrInit.d" -MT"src/uwb/decaApp/ssTwrInit.d" -o "src/uwb/decaApp/ssTwrInit.o" "../src/uwb/decaApp/ssTwrInit.c"
+../src/uwb/decaApp/ssTwrInit.c: In function 'ssTwrInit':
+../src/uwb/decaApp/ssTwrInit.c:101:6: warning: unused variable 'status' [-Wunused-variable]
+ 
+      ^
+../src/uwb/decaApp/ssTwrInit.c: In function 'waitAfterReceive':
+../src/uwb/decaApp/ssTwrInit.c:356:29: error: 'IMU_SAMPLE_FREQ' undeclared (first use in this function)
+   cnt = 0;
+                             ^
+../src/uwb/decaApp/ssTwrInit.c:356:29: note: each undeclared identifier is reported only once for each function it appears in
+../src/uwb/decaApp/ssTwrInit.c: In function 'getDistance':
+../src/uwb/decaApp/ssTwrInit.c:264:1: warning: control reaches end of non-void function [-Wreturn-type]
+ 
+ ^
+../src/uwb/decaApp/ssTwrInit.c: In function 'waitAfterReceive':
+../src/uwb/decaApp/ssTwrInit.c:362:1: warning: control reaches end of non-void function [-Wreturn-type]
+ 
+ ^
+make: *** [src/uwb/decaApp/ssTwrInit.o] Error 1
+11:14:16 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/zedboard/gpio_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/zedboard/gpio_utils.o" -MMD -MP -MF"src/zedboard/gpio_utils.d" -MT"src/zedboard/gpio_utils.d" -o "src/zedboard/gpio_utils.o" "../src/zedboard/gpio_utils.c"
+Finished building: ../src/zedboard/gpio_utils.c
+ 
+Building file: ../src/zedboard/iic_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/zedboard/iic_utils.o" -MMD -MP -MF"src/zedboard/iic_utils.d" -MT"src/zedboard/iic_utils.d" -o "src/zedboard/iic_utils.o" "../src/zedboard/iic_utils.c"
+Finished building: ../src/zedboard/iic_utils.c
+ 
+Building file: ../src/zedboard/print_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/zedboard/print_utils.o" -MMD -MP -MF"src/zedboard/print_utils.d" -MT"src/zedboard/print_utils.d" -o "src/zedboard/print_utils.o" "../src/zedboard/print_utils.c"
+Finished building: ../src/zedboard/print_utils.c
+ 
+Building file: ../src/zedboard/timer_int.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/zedboard/timer_int.o" -MMD -MP -MF"src/zedboard/timer_int.d" -MT"src/zedboard/timer_int.d" -o "src/zedboard/timer_int.o" "../src/zedboard/timer_int.c"
+Finished building: ../src/zedboard/timer_int.c
+ 
+Building file: ../src/zedboard/xmodem.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/zedboard/xmodem.o" -MMD -MP -MF"src/zedboard/xmodem.d" -MT"src/zedboard/xmodem.d" -o "src/zedboard/xmodem.o" "../src/zedboard/xmodem.c"
+Finished building: ../src/zedboard/xmodem.c
+ 
+Building file: ../src/uwb/decaApp/ssTwrInit.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/uwb/decaApp/ssTwrInit.o" -MMD -MP -MF"src/uwb/decaApp/ssTwrInit.d" -MT"src/uwb/decaApp/ssTwrInit.d" -o "src/uwb/decaApp/ssTwrInit.o" "../src/uwb/decaApp/ssTwrInit.c"
+../src/uwb/decaApp/ssTwrInit.c: In function 'ssTwrInit':
+../src/uwb/decaApp/ssTwrInit.c:101:6: warning: unused variable 'status' [-Wunused-variable]
+ 
+      ^
+../src/uwb/decaApp/ssTwrInit.c: In function 'getDistance':
+../src/uwb/decaApp/ssTwrInit.c:264:1: warning: control reaches end of non-void function [-Wreturn-type]
+ 
+ ^
+Finished building: ../src/uwb/decaApp/ssTwrInit.c
+ 
+Building file: ../src/uwb/uwb.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/uwb/uwb.o" -MMD -MP -MF"src/uwb/uwb.d" -MT"src/uwb/uwb.d" -o "src/uwb/uwb.o" "../src/uwb/uwb.c"
+Finished building: ../src/uwb/uwb.c
+ 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+Finished building: ../src/robot/pwmsw.c
+ 
+Building file: ../src/robot/robotCtrl.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/robot/robotCtrl.o" -MMD -MP -MF"src/robot/robotCtrl.d" -MT"src/robot/robotCtrl.d" -o "src/robot/robotCtrl.o" "../src/robot/robotCtrl.c"
+../src/robot/robotCtrl.c: In function 'collectRobotMvmtData':
+../src/robot/robotCtrl.c:271:17: warning: passing argument 1 of 'storeInBuff' from incompatible pointer type
+     storeInBuff(&data);
+                 ^
+In file included from ../src/robot/robotCtrl.h:12:0,
+                 from ../src/robot/robotCtrl.c:9:
+../src/robot/../dataBuffer.h:21:6: note: expected 'struct SensorPwmData *' but argument is of type 'struct RobotMpuData *'
+ void storeInBuff(SensorPwmData* data);
+      ^
+Finished building: ../src/robot/robotCtrl.c
+ 
+Building file: ../src/imu/mpu9150/inv_mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/imu/mpu9150/inv_mpu.o" -MMD -MP -MF"src/imu/mpu9150/inv_mpu.d" -MT"src/imu/mpu9150/inv_mpu.d" -o "src/imu/mpu9150/inv_mpu.o" "../src/imu/mpu9150/inv_mpu.c"
+Finished building: ../src/imu/mpu9150/inv_mpu.c
+ 
+Building file: ../src/imu/mpu9150/inv_mpu_dmp_motion_driver.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/imu/mpu9150/inv_mpu_dmp_motion_driver.o" -MMD -MP -MF"src/imu/mpu9150/inv_mpu_dmp_motion_driver.d" -MT"src/imu/mpu9150/inv_mpu_dmp_motion_driver.d" -o "src/imu/mpu9150/inv_mpu_dmp_motion_driver.o" "../src/imu/mpu9150/inv_mpu_dmp_motion_driver.c"
+Finished building: ../src/imu/mpu9150/inv_mpu_dmp_motion_driver.c
+ 
+Building file: ../src/imu/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/imu/mpu.o" -MMD -MP -MF"src/imu/mpu.d" -MT"src/imu/mpu.d" -o "src/imu/mpu.o" "../src/imu/mpu.c"
+../src/imu/mpu.c: In function 'collectRegisterData':
+../src/imu/mpu.c:1876:17: warning: passing argument 1 of 'storeInBuff' from incompatible pointer type
+     storeInBuff(&data);
+                 ^
+In file included from ../src/imu/mpu.h:26:0,
+                 from ../src/imu/mpu.c:9:
+../src/imu/../dataBuffer.h:21:6: note: expected 'struct SensorPwmData *' but argument is of type 'struct RobotMpuData *'
+ void storeInBuff(SensorPwmData* data);
+      ^
+../src/imu/mpu.c:1842:28: warning: variable 'bufCurr' set but not used [-Wunused-but-set-variable]
+  unsigned char *bufStart, *bufCurr;
+                            ^
+Finished building: ../src/imu/mpu.c
+ 
+Building file: ../src/imu/mpu_int.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/imu/mpu_int.o" -MMD -MP -MF"src/imu/mpu_int.d" -MT"src/imu/mpu_int.d" -o "src/imu/mpu_int.o" "../src/imu/mpu_int.c"
+Finished building: ../src/imu/mpu_int.c
+ 
+Building file: ../src/imu/mpu_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/imu/mpu_utils.o" -MMD -MP -MF"src/imu/mpu_utils.d" -MT"src/imu/mpu_utils.d" -o "src/imu/mpu_utils.o" "../src/imu/mpu_utils.c"
+../src/imu/mpu_utils.c: In function 'imuSetDmpIntMode':
+../src/imu/mpu_utils.c:41:3: warning: implicit declaration of function 'dmp_set_interrupt_mode' [-Wimplicit-function-declaration]
+   success = dmp_set_interrupt_mode(mode); //TODO
+   ^
+../src/imu/mpu_utils.c: In function 'imuSetDmpAccelBias':
+../src/imu/mpu_utils.c:65:3: warning: implicit declaration of function 'dmp_set_accel_bias' [-Wimplicit-function-declaration]
+   success = dmp_set_accel_bias(bias); //TODO
+   ^
+../src/imu/mpu_utils.c: In function 'imuSetDmpGyroBias':
+../src/imu/mpu_utils.c:89:3: warning: implicit declaration of function 'dmp_set_gyro_bias' [-Wimplicit-function-declaration]
+   success = dmp_set_gyro_bias(bias); //TODO
+   ^
+../src/imu/mpu_utils.c: In function 'imuEnableDmpGyroCal':
+../src/imu/mpu_utils.c:145:3: warning: implicit declaration of function 'dmp_enable_gyro_cal' [-Wimplicit-function-declaration]
+   success = dmp_enable_gyro_cal(enable); //TODO
+   ^
+../src/imu/mpu_utils.c: In function 'imuEnableDmpFeatures':
+../src/imu/mpu_utils.c:169:3: warning: implicit declaration of function 'dmp_enable_feature' [-Wimplicit-function-declaration]
+   success = dmp_enable_feature(mask); //TODO
+   ^
+../src/imu/mpu_utils.c: In function 'imuSetFifoRate':
+../src/imu/mpu_utils.c:193:3: warning: implicit declaration of function 'dmp_set_fifo_rate' [-Wimplicit-function-declaration]
+   success = dmp_set_fifo_rate(rate); //TODO
+   ^
+../src/imu/mpu_utils.c: In function 'imuDmpLoadMotionDriverFirmware':
+../src/imu/mpu_utils.c:457:3: warning: implicit declaration of function 'dmp_load_motion_driver_firmware' [-Wimplicit-function-declaration]
+   success = dmp_load_motion_driver_firmware(); //TODO
+   ^
+../src/imu/mpu_utils.c: In function 'imuDmpReadFifo':
+../src/imu/mpu_utils.c:506:3: warning: implicit declaration of function 'dmp_read_fifo' [-Wimplicit-function-declaration]
+   success = dmp_read_fifo(gyro, accel, quat, timestamp, sensors, more); //TODO
+   ^
+../src/imu/mpu_utils.c: In function 'imuReadGyroBias':
+../src/imu/mpu_utils.c:530:3: warning: implicit declaration of function 'mpu_read_6500_gyro_bias' [-Wimplicit-function-declaration]
+   success = mpu_read_6500_gyro_bias(gyro_bias); //TODO
+   ^
+Finished building: ../src/imu/mpu_utils.c
+ 
+Building file: ../src/dataBuffer.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/dataBuffer.o" -MMD -MP -MF"src/dataBuffer.d" -MT"src/dataBuffer.d" -o "src/dataBuffer.o" "../src/dataBuffer.c"
+Finished building: ../src/dataBuffer.c
+ 
+Building file: ../src/math_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/math_utils.o" -MMD -MP -MF"src/math_utils.d" -MT"src/math_utils.d" -o "src/math_utils.o" "../src/math_utils.c"
+Finished building: ../src/math_utils.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/crc16.o ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/print_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o ./src/zedboard/xmodem.o  ./src/uwb/decadriver/deca_device.o ./src/uwb/decadriver/deca_params_init.o ./src/uwb/decadriver/deca_range_tables.o  ./src/uwb/decaApp/ssTwrInit.o  ./src/uwb/deca/deca_mutex.o ./src/uwb/deca/deca_sleep.o ./src/uwb/deca/deca_spi.o  ./src/uwb/uwb.o  ./src/robot/pwmsw.o ./src/robot/robotCtrl.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/dataBuffer.o ./src/math_utils.o ./src/platform.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 265332	   3368	1029160	1297860	 13cdc4	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+11:14:30 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/zedboard/gpio_utils.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/zedboard/gpio_utils.o" -MMD -MP -MF"src/zedboard/gpio_utils.d" -MT"src/zedboard/gpio_utils.d" -o "src/zedboard/gpio_utils.o" "../src/zedboard/gpio_utils.c"
+Finished building: ../src/zedboard/gpio_utils.c
+ 
+Building file: ../src/zedboard/timer_int.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/zedboard/timer_int.o" -MMD -MP -MF"src/zedboard/timer_int.d" -MT"src/zedboard/timer_int.d" -o "src/zedboard/timer_int.o" "../src/zedboard/timer_int.c"
+Finished building: ../src/zedboard/timer_int.c
+ 
+Building file: ../src/uwb/decaApp/ssTwrInit.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/uwb/decaApp/ssTwrInit.o" -MMD -MP -MF"src/uwb/decaApp/ssTwrInit.d" -MT"src/uwb/decaApp/ssTwrInit.d" -o "src/uwb/decaApp/ssTwrInit.o" "../src/uwb/decaApp/ssTwrInit.c"
+../src/uwb/decaApp/ssTwrInit.c: In function 'ssTwrInit':
+../src/uwb/decaApp/ssTwrInit.c:101:6: warning: unused variable 'status' [-Wunused-variable]
+ 
+      ^
+../src/uwb/decaApp/ssTwrInit.c: In function 'getDistance':
+../src/uwb/decaApp/ssTwrInit.c:264:1: warning: control reaches end of non-void function [-Wreturn-type]
+ 
+ ^
+Finished building: ../src/uwb/decaApp/ssTwrInit.c
+ 
+Building file: ../src/robot/robotCtrl.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/robot/robotCtrl.o" -MMD -MP -MF"src/robot/robotCtrl.d" -MT"src/robot/robotCtrl.d" -o "src/robot/robotCtrl.o" "../src/robot/robotCtrl.c"
+../src/robot/robotCtrl.c: In function 'collectRobotMvmtData':
+../src/robot/robotCtrl.c:271:17: warning: passing argument 1 of 'storeInBuff' from incompatible pointer type
+     storeInBuff(&data);
+                 ^
+In file included from ../src/robot/robotCtrl.h:12:0,
+                 from ../src/robot/robotCtrl.c:9:
+../src/robot/../dataBuffer.h:21:6: note: expected 'struct SensorPwmData *' but argument is of type 'struct RobotMpuData *'
+ void storeInBuff(SensorPwmData* data);
+      ^
+Finished building: ../src/robot/robotCtrl.c
+ 
+Building file: ../src/imu/mpu.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/imu/mpu.o" -MMD -MP -MF"src/imu/mpu.d" -MT"src/imu/mpu.d" -o "src/imu/mpu.o" "../src/imu/mpu.c"
+../src/imu/mpu.c: In function 'collectRegisterData':
+../src/imu/mpu.c:1876:17: warning: passing argument 1 of 'storeInBuff' from incompatible pointer type
+     storeInBuff(&data);
+                 ^
+In file included from ../src/imu/mpu.h:26:0,
+                 from ../src/imu/mpu.c:9:
+../src/imu/../dataBuffer.h:21:6: note: expected 'struct SensorPwmData *' but argument is of type 'struct RobotMpuData *'
+ void storeInBuff(SensorPwmData* data);
+      ^
+../src/imu/mpu.c:1842:28: warning: variable 'bufCurr' set but not used [-Wunused-but-set-variable]
+  unsigned char *bufStart, *bufCurr;
+                            ^
+Finished building: ../src/imu/mpu.c
+ 
+Building file: ../src/imu/mpu_int.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/imu/mpu_int.o" -MMD -MP -MF"src/imu/mpu_int.d" -MT"src/imu/mpu_int.d" -o "src/imu/mpu_int.o" "../src/imu/mpu_int.c"
+Finished building: ../src/imu/mpu_int.c
+ 
+Building file: ../src/dataBuffer.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/dataBuffer.o" -MMD -MP -MF"src/dataBuffer.d" -MT"src/dataBuffer.d" -o "src/dataBuffer.o" "../src/dataBuffer.c"
+Finished building: ../src/dataBuffer.c
+ 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/crc16.o ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/print_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o ./src/zedboard/xmodem.o  ./src/uwb/decadriver/deca_device.o ./src/uwb/decadriver/deca_params_init.o ./src/uwb/decadriver/deca_range_tables.o  ./src/uwb/decaApp/ssTwrInit.o  ./src/uwb/deca/deca_mutex.o ./src/uwb/deca/deca_sleep.o ./src/uwb/deca/deca_spi.o  ./src/uwb/uwb.o  ./src/robot/pwmsw.o ./src/robot/robotCtrl.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/dataBuffer.o ./src/math_utils.o ./src/platform.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 265332	   3368	1029160	1297860	 13cdc4	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+11:16:07 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+11:27:48 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/robot/pwmsw.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/robot/pwmsw.o" -MMD -MP -MF"src/robot/pwmsw.d" -MT"src/robot/pwmsw.d" -o "src/robot/pwmsw.o" "../src/robot/pwmsw.c"
+Finished building: ../src/robot/pwmsw.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/crc16.o ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/print_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o ./src/zedboard/xmodem.o  ./src/uwb/decadriver/deca_device.o ./src/uwb/decadriver/deca_params_init.o ./src/uwb/decadriver/deca_range_tables.o  ./src/uwb/decaApp/ssTwrInit.o  ./src/uwb/deca/deca_mutex.o ./src/uwb/deca/deca_sleep.o ./src/uwb/deca/deca_spi.o  ./src/uwb/uwb.o  ./src/robot/pwmsw.o ./src/robot/robotCtrl.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/dataBuffer.o ./src/math_utils.o ./src/platform.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 265332	   3368	1029160	1297860	 13cdc4	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+11:29:12 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/crc16.o ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/print_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o ./src/zedboard/xmodem.o  ./src/uwb/decadriver/deca_device.o ./src/uwb/decadriver/deca_params_init.o ./src/uwb/decadriver/deca_range_tables.o  ./src/uwb/decaApp/ssTwrInit.o  ./src/uwb/deca/deca_mutex.o ./src/uwb/deca/deca_sleep.o ./src/uwb/deca/deca_spi.o  ./src/uwb/uwb.o  ./src/robot/pwmsw.o ./src/robot/robotCtrl.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/dataBuffer.o ./src/math_utils.o ./src/platform.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 265332	   3368	1029160	1297860	 13cdc4	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+11:29:15 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+11:57:09 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/crc16.o ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/print_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o ./src/zedboard/xmodem.o  ./src/uwb/decadriver/deca_device.o ./src/uwb/decadriver/deca_params_init.o ./src/uwb/decadriver/deca_range_tables.o  ./src/uwb/decaApp/ssTwrInit.o  ./src/uwb/deca/deca_mutex.o ./src/uwb/deca/deca_sleep.o ./src/uwb/deca/deca_spi.o  ./src/uwb/uwb.o  ./src/robot/pwmsw.o ./src/robot/robotCtrl.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/dataBuffer.o ./src/math_utils.o ./src/platform.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 265332	   3368	1029160	1297860	 13cdc4	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+11:57:25 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+11:59:53 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/crc16.o ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/print_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o ./src/zedboard/xmodem.o  ./src/uwb/decadriver/deca_device.o ./src/uwb/decadriver/deca_params_init.o ./src/uwb/decadriver/deca_range_tables.o  ./src/uwb/decaApp/ssTwrInit.o  ./src/uwb/deca/deca_mutex.o ./src/uwb/deca/deca_sleep.o ./src/uwb/deca/deca_spi.o  ./src/uwb/uwb.o  ./src/robot/pwmsw.o ./src/robot/robotCtrl.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/dataBuffer.o ./src/math_utils.o ./src/platform.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 265396	   3368	1029160	1297924	 13ce04	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+12:00:00 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+12:00:41 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+12:04:48 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+16:32:09 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+16:38:45 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/crc16.o ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/print_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o ./src/zedboard/xmodem.o  ./src/uwb/decadriver/deca_device.o ./src/uwb/decadriver/deca_params_init.o ./src/uwb/decadriver/deca_range_tables.o  ./src/uwb/decaApp/ssTwrInit.o  ./src/uwb/deca/deca_mutex.o ./src/uwb/deca/deca_sleep.o ./src/uwb/deca/deca_spi.o  ./src/uwb/uwb.o  ./src/robot/pwmsw.o ./src/robot/robotCtrl.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/dataBuffer.o ./src/math_utils.o ./src/platform.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 265396	   3368	1029160	1297924	 13ce04	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+16:38:49 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+09:00:40 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/crc16.o ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/print_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o ./src/zedboard/xmodem.o  ./src/uwb/decadriver/deca_device.o ./src/uwb/decadriver/deca_params_init.o ./src/uwb/decadriver/deca_range_tables.o  ./src/uwb/decaApp/ssTwrInit.o  ./src/uwb/deca/deca_mutex.o ./src/uwb/deca/deca_sleep.o ./src/uwb/deca/deca_spi.o  ./src/uwb/uwb.o  ./src/robot/pwmsw.o ./src/robot/robotCtrl.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/dataBuffer.o ./src/math_utils.o ./src/platform.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 265396	   3368	1029160	1297924	 13ce04	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+09:01:03 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+09:04:16 **** Auto Build of configuration Debug for project IndoorLoc ****
+make all 
+Building file: ../src/run.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -DMOTION_DRIVER_TARGET_ZEDBOARD -DMPU9150 -U__ACCUM_EPSILON__ -Wall -O0 -g3 -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/run.o" -MMD -MP -MF"src/run.d" -MT"src/run.d" -o "src/run.o" "../src/run.c"
+Finished building: ../src/run.c
+ 
+Building target: IndoorLoc.elf
+Invoking: ARM gcc linker
+arm-xilinx-eabi-gcc -L../../IndoorLoc_bsp/ps7_cortexa9_0/lib -L"/home/rupprich/Masterarbeit/indoor-loc/indoor-loc/indoor-loc.sdk/IndoorLoc/src/imu/mpu9150/mpl" -Wl,-T -Wl,../src/lscript.ld -L../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/lib -o "IndoorLoc.elf"  ./src/zedboard/crc16.o ./src/zedboard/gpio_utils.o ./src/zedboard/iic_utils.o ./src/zedboard/print_utils.o ./src/zedboard/time_utils.o ./src/zedboard/timer_int.o ./src/zedboard/xmodem.o  ./src/uwb/decadriver/deca_device.o ./src/uwb/decadriver/deca_params_init.o ./src/uwb/decadriver/deca_range_tables.o  ./src/uwb/decaApp/ssTwrInit.o  ./src/uwb/deca/deca_mutex.o ./src/uwb/deca/deca_sleep.o ./src/uwb/deca/deca_spi.o  ./src/uwb/uwb.o  ./src/robot/pwmsw.o ./src/robot/robotCtrl.o  ./src/imu/mpu9150/mpl/data_builder.o ./src/imu/mpu9150/mpl/eMPL_outputs.o ./src/imu/mpu9150/mpl/hal_outputs.o ./src/imu/mpu9150/mpl/message_layer.o ./src/imu/mpu9150/mpl/ml_math_func.o ./src/imu/mpu9150/mpl/mlmath.o ./src/imu/mpu9150/mpl/mpl.o ./src/imu/mpu9150/mpl/results_holder.o ./src/imu/mpu9150/mpl/start_manager.o ./src/imu/mpu9150/mpl/storage_manager.o  ./src/imu/mpu9150/inv_mpu.o ./src/imu/mpu9150/inv_mpu_dmp_motion_driver.o  ./src/imu/mpu.o ./src/imu/mpu_int.o ./src/imu/mpu_utils.o  ./src/dataBuffer.o ./src/math_utils.o ./src/platform.o ./src/run.o   -lmpllib -lm -llibmplmpu -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: IndoorLoc.elf
+ 
+Invoking: ARM Print Size
+arm-xilinx-eabi-size IndoorLoc.elf  |tee "IndoorLoc.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 265396	   3368	1029160	1297924	 13ce04	IndoorLoc.elf
+Finished building: IndoorLoc.elf.size
+ 
+09:11:35 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+09:17:05 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+09:31:08 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+14:41:45 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
+14:42:13 **** Incremental Build of configuration Debug for project IndoorLoc ****
+make all 
+make: Nothing to be done for `all'.
