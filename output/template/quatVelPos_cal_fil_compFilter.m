@@ -2,7 +2,7 @@
 pkg load quaternion;
 
 # Parameters
-filter = 5; % 0 = "raw", 1 = "static cal", 2 = "static cal + mvavg", 3 = "static cal + fir", 4 = "static cal + kalman", 5 = "simple cal + no filter"
+filter = 6; % 0 = "raw", 1 = "static cal", 2 = "static cal + mvavg", 3 = "static cal + fir", 4 = "static cal + kalman", 5 = "simple cal + no filter", 6 = "simple cal + FIR (LH)"
 gyro_weight = 0.98;
 acc_range = 0.01;
 gyr_sens = 32.8;
@@ -45,6 +45,11 @@ elseif (filter == 5)
 	data = cal;
 	filter_str = "simple_cal";
 	load('fnorm.mat', 'f_norm');
+elseif (filter == 6)
+	load('fir_hl.mat', 'firfil');
+	data = firfil;
+	filter_str = "simple_cal_fir_hl";
+	load('fnorm.mat', 'f_norm');
 else
 	data = load('data.txt');
 	filter_str = "raw";
@@ -56,12 +61,12 @@ q_mat_outfile = strcat("quatPos_", filter_str, "_compFilter.mat");
 avs_outfile = strcat("avs_", filter_str, "_compFilter.mat");
 
 # Extract Gyro and Accel Data and convert
-gx = data(:,1) / gyr_sens;
-gy = data(:,2) / gyr_sens;
-gz = data(:,3) / gyr_sens;
-ax = data(:,4) / acc_sens;
-ay = data(:,5) / acc_sens;
-az = data(:,6) / acc_sens;
+gx = data(1:10000,1) / gyr_sens;
+gy = data(1:10000,2) / gyr_sens;
+gz = data(1:10000,3) / gyr_sens;
+ax = data(1:10000,4) / acc_sens;
+ay = data(1:10000,5) / acc_sens;
+az = data(1:10000,6) / acc_sens;
 
 # Absolute Quaternion
 quat_abs = quaternion(1, 0, 0, 0);
@@ -277,8 +282,8 @@ avs = [oax oay oaz vx vy vz sx sy sz];
 save(avs_outfile, 'avs');
 
 # Export quaternions
-save(strcat('q_acc_', filter_str,'.mat'), 'q_acc');
-save(strcat('q_gyr_', filter_str, '.mat'), 'q_gyr');
+save(strcat('q_acc_', filter_str,'qa.mat'), 'q_acc');
+save(strcat('q_gyr_', filter_str, 'qg.mat'), 'q_gyr');
 
 # Print
 print(outfile);

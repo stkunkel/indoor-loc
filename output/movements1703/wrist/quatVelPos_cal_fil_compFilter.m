@@ -2,7 +2,7 @@
 pkg load quaternion;
 
 # Parameters
-filter = 5; % 0 = "raw", 1 = "static cal", 2 = "static cal + mvavg", 3 = "static cal + fir", 4 = "static cal + kalman", 5 = "simple cal + no filter"
+filter = 6; % 0 = "raw", 1 = "static cal", 2 = "static cal + mvavg", 3 = "static cal + fir", 4 = "static cal + kalman", 5 = "simple cal + no filter", 6 = "simple cal + FIR (LH)"
 gyro_weight = 0.98;
 acc_range = 0.01;
 gyr_sens = 32.8;
@@ -45,6 +45,11 @@ elseif (filter == 5)
 	data = cal;
 	filter_str = "simple_cal";
 	load('fnorm.mat', 'f_norm');
+elseif (filter == 6)
+	load('fir_hl.mat', 'firfil');
+	data = firfil;
+	filter_str = "simple_cal_fir_hl";
+	load('fnorm.mat', 'f_norm');
 else
 	data = load('data.txt');
 	filter_str = "raw";
@@ -56,12 +61,12 @@ q_mat_outfile = strcat("quatPos_", filter_str, "_compFilter.mat");
 avs_outfile = strcat("avs_", filter_str, "_compFilter.mat");
 
 # Extract Gyro and Accel Data and convert
-gx = data(:,1) / gyr_sens;
-gy = data(:,2) / gyr_sens;
-gz = data(:,3) / gyr_sens;
-ax = data(:,4) / acc_sens;
-ay = data(:,5) / acc_sens;
-az = data(:,6) / acc_sens;
+gx = data(1:10000,1) / gyr_sens;
+gy = data(1:10000,2) / gyr_sens;
+gz = data(1:10000,3) / gyr_sens;
+ax = data(1:10000,4) / acc_sens;
+ay = data(1:10000,5) / acc_sens;
+az = data(1:10000,6) / acc_sens;
 
 # Absolute Quaternion
 quat_abs = quaternion(1, 0, 0, 0);
@@ -114,23 +119,30 @@ for i = 1:length(gx)
     # Normalize Acc
     acc_norm = acc / acc_sum;
     
-    # Get Rotation Angle
-    angle_acc = acos(acc_norm(1,1)*f_norm(1,1) + acc_norm(2,1)*f_norm(2,1) + acc_norm(3,1)*f_norm(1,1));
+    # Is IMUs z axis pointing towards global z axis?
+    if (acc_norm != f_norm(1,1) || acc_norm(2,1) != f_norm(2,1) || acc_norm(3,1) != f_norm(3,1))
     
-    # Get rotation axis vector
-    rot_vec = cross(acc_norm, f_norm);
+      # Get Rotation Angle
+      angle_acc = acos(acc_norm(1,1)*f_norm(1,1) + acc_norm(2,1)*f_norm(2,1) + acc_norm(3,1)*f_norm(3,1));
+      
+      # Get rotation axis vector
+      rot_vec = cross(acc_norm, f_norm);
+      
+      # Normalize rotation axis vector
+      rot_vec_mag = norm(rot_vec);
+      if (rot_vec_mag != 0)
+	rot_vec = rot_vec / rot_vec_mag;
+      endif;  
+
+      # Construct absolute rotation quaternion from accelerometer
+      quat_abs_acc = unit(quaternion(cos(angle_acc/2), rot_vec(1,1)*sin(angle_acc/2), rot_vec(2,1)*sin(angle_acc/2), rot_vec(3,1)*sin(angle_acc/2)));
     
-%      # Normalize rotation axis vector
-%      rot_vec_mag = norm(rot_vec);
-%      if (rot_vec_mag != 0)
-%        rot_vec = rot_vec / rot_vec_mag;
-%      endif;  
+    else
+      quat_abs_acc = quaternion(1, 0, 0, 0);
+    endif;
     
     # Increase Counter
     acc_cnt++;
-
-    # Construct absolute rotation quaternion from accelerometer
-    quat_abs_acc = unit(quaternion(cos(angle_acc/2), rot_vec(1,1)*sin(angle_acc/2), rot_vec(2,1)*sin(angle_acc/2), rot_vec(3,1)*sin(angle_acc/2)));
     
     # Complementary filter
     w = gyro_weight * quat_abs_gyr.w + (1 - gyro_weight) * quat_abs_acc.w;
@@ -144,6 +156,7 @@ for i = 1:length(gx)
   # IMU is moving --> use gyro rotation only
   else 
 	quat_abs_acc = quat_abs_gyr;
+	quat_abs = quat_abs_gyr;
   endif;
   
   # Keep track of quaternions for plot
@@ -151,6 +164,18 @@ for i = 1:length(gx)
   qx(i) = quat_abs.x;
   qy(i) = quat_abs.y;
   qz(i) = quat_abs.z;
+  
+  # Remember q_abs_gyr
+  q_gyr(i, 1) = quat_abs_gyr.w;
+  q_gyr(i, 2) = quat_abs_gyr.x;
+  q_gyr(i, 3) = quat_abs_gyr.y;
+  q_gyr(i, 4) = quat_abs_gyr.z;
+  
+  # Remember Quat computed from Accelerometer
+  q_acc(i, 1) = quat_abs_acc.w;
+  q_acc(i, 2) = quat_abs_acc.x;
+  q_acc(i, 3) = quat_abs_acc.y;
+  q_acc(i, 4) = quat_abs_acc.z;
   
   ######## Velocity / Position Start #########
   
@@ -255,6 +280,10 @@ save(q_mat_outfile, 'out');
 # Data Export for Fusion with UWB
 avs = [oax oay oaz vx vy vz sx sy sz];
 save(avs_outfile, 'avs');
+
+# Export quaternions
+save(strcat('q_acc_', filter_str,'qa.mat'), 'q_acc');
+save(strcat('q_gyr_', filter_str, 'qg.mat'), 'q_gyr');
 
 # Print
 print(outfile);
