@@ -1831,61 +1831,6 @@ void computeQuaternion(float gyro[NUMBER_OF_AXES], float accel[NUMBER_OF_AXES],
 }
 
 /*
- * Read register data for specified amount of time and prints to UART
- * In: pointer to memory (not yet allocated), sample time in s, calibration time in s
- */
-void collectRegisterData(unsigned int sampleTime, unsigned int calibrationTime) {
-//Variables
-	RobotMpuData data;
-	uint32_t cnt = 0, samples = 0;
-	int status;
-	unsigned char *bufStart, *bufCurr;
-
-//Set Pointer for Buffer
-	bufStart = (unsigned char*) 0x7000000;
-	bufCurr = bufStart + sizeof(cnt);
-
-//Compute number of data samples
-	samples = sampleTime * FIFO_RATE;
-
-//Initialize
-	status = initIMU(calibrationTime);
-	if (status != XST_SUCCESS) {
-		printf("Could not initialize IMU.\r\n");
-		return;
-	}
-
-//Get Samples
-	while (cnt < samples) {
-		if (needToUpdateData() == BOOL_TRUE) {
-			//Get Data
-
-			//Get PWM Data
-//			getPwmRegValues(data.pwmValues);
-
-			//Read Sensor Data and write to memory
-			status = readFromRegs(data.mpuData.gyro, data.mpuData.accel,
-					data.mpuData.compass, &data.mpuData.temp, 0, SENSORS_ALL);
-
-			//Read successful?
-			if (status == XST_SUCCESS) {
-				//LED Run
-				toggleLed(IMU_MASK);
-
-				//Store to buffer
-				storeInBuff(&data);
-
-				//Increase Counter
-				cnt++;
-			}
-		}
-	}
-
-	//Transmit Buff
-	status = transmitBuf();
-}
-
-/*
  * Read from Registers
  * OUT: gyro, accel, comp, timestamp of
  * IN: sensors (INV_XYZ_GYRO for gyro, INV_XYZ_ACCEL for accel, INV_XYZ_COMPASS for compass)

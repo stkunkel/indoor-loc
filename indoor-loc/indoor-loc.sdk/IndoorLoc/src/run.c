@@ -92,42 +92,6 @@ int main() {
 //	Generic Print to Serial Port
 //	printGeneric(PRINT_SENSORS, SEPARATOR, DISPLAY_RUNS);
 
-//Quaternion Drift
-//printQuaternionDriftAfterXMin(QUAT_DRIFT_MIN);
-
-//PWM Test
-//	pwmTest();
-
-//	//Timer Test
-//	timerTest(FIFO_RATE);
-
-//Test position update functionality
-//	testPositionUpdate();
-
-//Test Matrix Inverse
-//	testMatrixInverse();
-
-//Test Quaternions for IMU Viewer
-//	quaternionTest();
-
-//Test Quaternion Computation
-//	testQuaternionComputation();
-
-//Test Vector Rotation
-//	testVectorRotation();
-
-//Test XModem
-//	testXModem();
-
-//Test Euler Angles
-//	testEulerAngles();
-
-//Collect Data
-//	collectRegisterData(1800, 0); //1min sampling, no calibration
-
-//Test LED Toggle
-//	testToggleLed();
-
 //Move Robot and collect all sensor data (IMU and UWB)
 	moveAndCollect(60, shoulder, angle, numOfAngles, BOOL_TRUE);
 

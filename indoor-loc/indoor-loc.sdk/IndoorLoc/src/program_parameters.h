@@ -44,12 +44,6 @@ typedef struct {
 //	short fill;
 } MpuRegisterData;
 
-//Struct for Robot and MPU Register Data
-typedef struct {
-	uint32_t pwmValues[NUMBER_OF_JOINTS];
-	MpuRegisterData mpuData;
-} RobotMpuData;
-
 //Struct for Sensor and Robot Data
 typedef struct {
 	MpuRegisterData mpuData;

@@ -103,8 +103,6 @@ int configureDMP(unsigned short int features);
 void testQuaternionComputation();
 void computeQuaternion(float gyro[NUMBER_OF_AXES], float accel[NUMBER_OF_AXES],
 		float* delta_t, float quat[QUATERNION_AMOUNT]);
-void collectRegisterData(unsigned int sampleTime,
-		unsigned int calibrationTime);
 int readFromRegs(short *gyro, short *accel, short* comp, long* temp,
 		unsigned long *timestamp, short sensorMask);
 int getImuAddr(u8* addr);
