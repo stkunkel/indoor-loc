@@ -45,7 +45,7 @@ set_property IOSTANDARD LVCMOS33 [get_ports {uwb_spi_miso}]
 set_property PACKAGE_PIN AA4 [get_ports {uwb_spi_sck[0]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {uwb_spi_sck[0]}]
 
-#JC3P - get_ports {uwb_gpio_in[0]
+#JC3P - uwb_gpio_in[0]
 set_property PACKAGE_PIN R6 [get_ports {uwb_gpio_in}]
 set_property IOSTANDARD LVCMOS33 [get_ports {uwb_gpio_in}]
 
