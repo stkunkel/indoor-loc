@@ -310,7 +310,9 @@ int moveAndCollect(unsigned int sampleTime, Joint joint, bool collect) {
 	reset();
 
 	//Transmit Buff
-	status = transmitBuf();
+	if (collect == BOOL_TRUE) {
+		status = transmitBuf();
+	}
 
 	//Return
 	return status;
