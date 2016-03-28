@@ -33,7 +33,8 @@
 /*
  * Function Prototypes
  */
-int moveAndCollect(unsigned int sampleTime, Joint joint, bool collect);
+int moveAndCollect(unsigned int sampleTime, Joint joint, float* angle,
+		unsigned int numOfAngles, bool collect);
 int printGeneric(short int printMask, char* separator,
 		unsigned int numberOfRuns);
 int printForImuViewer(short int printMask, char* separator,
@@ -47,6 +48,21 @@ int printDataWithoutDMP(short sensors, char* separator,
  * Main
  */
 int main() {
+	//Variables
+	float angle[6];
+	unsigned int numOfAngles;
+
+	//Set angles
+	angle[0] = 0.0;
+	angle[1] = 30.0;
+	angle[2] = 60.0;
+	angle[3] = 90.0;
+	angle[4] = 60.0;
+	angle[5] = 30.0;
+
+	//Compute number of angles
+	numOfAngles = sizeof(angle) / sizeof(angle[0]);
+
 	//Init Platform
 	init_platform();
 
@@ -123,7 +139,7 @@ int main() {
 //	testToggleLed();
 
 //Move Robot and collect all sensor data (IMU and UWB)
-	moveAndCollect(60, shoulder, BOOL_TRUE);
+	moveAndCollect(60, shoulder, angle, numOfAngles, BOOL_TRUE);
 
 //Clear LEDs
 	clearLEDs();
@@ -141,21 +157,13 @@ int main() {
 /*
  * Move Robot and Collect IMU and UWB Sensor Data
  */
-int moveAndCollect(unsigned int sampleTime, Joint joint, bool collect) {
+int moveAndCollect(unsigned int sampleTime, Joint joint, float* angle,
+		unsigned int numOfAngles, bool collect) {
 	//Variables
 	int status;
 	SensorPwmData data;
 	uint32_t cnt = 0, samples = 0, angleid = 0, anglecnt = 0, button, sw;
-	float angle[6];
 	double dist_temp = 0.0;
-
-	//Set angles
-	angle[0] = 0.0;
-	angle[1] = 30.0;
-	angle[2] = 60.0;
-	angle[3] = 90.0;
-	angle[4] = 60.0;
-	angle[5] = 30.0;
 
 	//Compute number of data samples
 	samples = sampleTime * FIFO_RATE;
@@ -230,24 +238,22 @@ int moveAndCollect(unsigned int sampleTime, Joint joint, bool collect) {
 			anglecnt++;
 
 			//Check whether new angle should be set
-			if (anglecnt >= 5) {
+			if (anglecnt >= STEPS_BEFORE_NEW_ANGLE) {
 
 				//Reset Angle Counter
 				anglecnt = 0;
 
 				//Reset Angle ID
-				if (angleid >= sizeof(angle) / sizeof(angle[0])) {
+				if (angleid >= numOfAngles) {
 					angleid = 0;
 				}
 
 				//Set angle and increase ID
-				if (angleid > 0) {
-					setAngle(joint, angle[angleid]); //angleid
-				} else {
-					setAngle(joint, angle[angleid]); //angleid
-				}
-				toggleLed(ROBOT_MASK);
+				setAngle(joint, angle[angleid]); //angleid
 				angleid++;
+
+				//Toggle LED
+				toggleLed(ROBOT_MASK);
 			}
 		}
 
@@ -301,7 +307,7 @@ int moveAndCollect(unsigned int sampleTime, Joint joint, bool collect) {
 			//Increase Counter
 			cnt++;
 
-		} else if (status == XST_DEVICE_BUSY) {
+		} else if (status == XST_DEVICE_BUSY) { //IIC bus is busy
 			break;
 		}
 	}
@@ -381,12 +387,12 @@ int printGeneric(short int printMask, char* separator,
 					}
 
 				}
-			} else if (status == XST_DEVICE_BUSY) {
+			} else if (status == XST_DEVICE_BUSY) {	//IIC bus is busy
 				return status;
-			} else {
+			} else {	//Other error
 				cnt--;
 			}
-		} else {
+		} else { // No data available
 			cnt--;
 		}
 	}
@@ -471,13 +477,13 @@ int printForImuViewer(short int printMask, char* separator,
 					}
 
 				}
-			} else if (status == XST_DEVICE_BUSY) {
+			} else if (status == XST_DEVICE_BUSY) {	//IIC bus is busy
 				return status;
-			} else {
+			} else { // Other error
 				cnt--;
 				printcnt--;
 			}
-		} else {
+		} else { //No data available
 			cnt--;
 		}
 
@@ -585,13 +591,13 @@ int printDataUsingDMP(short sensors, bool initialCalibration,
 						cnt = 0;
 					}
 				}
-			} else if (status == XST_DEVICE_BUSY) {
+			} else if (status == XST_DEVICE_BUSY) { //IIC bus is busy
 				return status;
-			} else {
+			} else { //Other error
 				cnt--;
 				printcnt--;
 			}
-		} else {
+		} else { // No new data
 			cnt--;
 		}
 	}
@@ -624,9 +630,9 @@ int printDataWithoutDMP(short sensors, char* separator,
 				cnt--;
 			}
 			//Decrease count if not successful
-		} else if (status == XST_DEVICE_BUSY) {
+		} else if (status == XST_DEVICE_BUSY) { //IIC bus is busy
 			return status;
-		} else {
+		} else { // Other error
 			cnt--;
 		}
 
@@ -635,7 +641,7 @@ int printDataWithoutDMP(short sensors, char* separator,
 //			cnt--;
 //		}
 
-//Wait
+		//Wait
 		usleep(1000000 / IMUVIEWER_FREQ); //100ms
 	}
 	return XST_SUCCESS;

@@ -17,11 +17,10 @@
 
 //Parameters
 #define HSS_422_TIME_FOR_90_DGRS		500//400//333 //ms
+#define STEPS_BEFORE_NEW_ANGLE			5
 
 
 //Functions
-void testMpuGyroSensCalc() ;
-int determineMpuGyroSensitivity(unsigned int samples, float gyro_sens[NUMBER_OF_AXES]);
 int collectRobotMvmtData(unsigned int sampleTime, unsigned int calibrationTime,
 		bool collect);
 
