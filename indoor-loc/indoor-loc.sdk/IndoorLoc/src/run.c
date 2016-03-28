@@ -12,8 +12,7 @@
 #include "platform.h"
 #include "imu/mpu.h"
 #include "imu/mpu_int.h"
-//#include "robot/pwmsw.h"
-#include "robot/robotCtrl.h"
+#include "robot/pwmsw.h"
 #include "uwb/uwb.h"
 #include "uwb/decaApp/appCfg.h"
 #include "zedboard/print_utils.h"
@@ -123,17 +122,8 @@ int main() {
 //Test Euler Angles
 //	testEulerAngles();
 
-//Test Gyro Sens Computation
-//	testMpuGyroSensCalc();
-
 //Collect Data
 //	collectRegisterData(1800, 0); //1min sampling, no calibration
-
-//Collect Robot Movement Data
-//	int i = 0;
-//	for (i = 2; i < 15; i++) {
-//	collectRobotMvmtData(10, 0, BOOL_TRUE);
-//	}
 
 //Test LED Toggle
 //	testToggleLed();

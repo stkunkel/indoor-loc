@@ -25,6 +25,12 @@
 #define PWM_FAILURE				1
 
 /*
+ * Time Defines
+ */
+#define HSS_422_TIME_FOR_90_DGRS		500//400//333 //ms
+#define STEPS_BEFORE_NEW_ANGLE			5
+
+/*
  * Defines: General
  */
 #define PWMADDRESS  	0x43c00000
