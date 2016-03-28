@@ -307,9 +307,9 @@ u32 angleToValue(Joint joint, float dgr) {
 
 			//Get n
 			if (dgr < (DGR_NEG_LIMIT / 2)) {
-				n = -2000;
-			} else { //dgr > 90
 				n = 1000;
+			} else { //dgr > 90
+				n = 2000;
 			}
 		}
 	} else { //other joints
