@@ -64,6 +64,7 @@ int main(){
 	transform = new osg::PositionAttitudeTransform;
 	int tty_fd = 0;
 	int status;
+	int waitTime;
 	
 	//Light
 	osg::ref_ptr<osg::Group> lightGroup = createLight();
@@ -106,12 +107,17 @@ int main(){
 		    //FILE
 		    fp = fopen(FILENAME, "r");
 		    if (fp == NULL){
-		      printf("Could not open port %s.\r\n", FILENAME);
+		      printf("Could not open file %s.\r\n", FILENAME);
 		      return 0;
 		    } else {
 		      printf("Using Data From File.\r\n");
+		      waitTime = 1000000/FIFO_RATE;
 		    }
+		  } else {
+		    waitTime = 1000/IMUVIEWER_FREQ; //1000000
 		  }
+	} else {
+	  waitTime = 1000/IMUVIEWER_FREQ;
 	}
 	
 	//Configure UART
@@ -125,13 +131,9 @@ int main(){
 		if (status != 0){
 		  break;
 		}
-#ifdef LOCAL
-		//usleep(1000000/FIFO_RATE); //2000us --> 2ms --> just like sample rate
-#else		
-		if (fp == NULL){
-		  usleep(1000000/IMUVIEWER_FREQ); //100000 --> 100ms --> works well with Zynq's print rate of 10Hz TODO: Test
-		}
-#endif
+
+		usleep(waitTime); //100000 --> 100ms --> works well with Zynq's print rate of 10Hz TODO: Test
+
 	}
 	
 #ifdef LOCAL
@@ -222,7 +224,7 @@ int updateScene(int tty_fd){
 	status = sscanf(line, "%f %f %f %f %f %f %f", &quaternion[0], &quaternion[1], &quaternion[2], &quaternion[3], &position[0], &position[1], &position[2]);
 	if (status != 7 || abs(quaternion[0]) > 1.0 || abs(quaternion[1]) > 1.0 || abs(quaternion[2]) > 1.0 || abs(quaternion[3]) > 1.0){
 	  //printf("Could not get data (%d).\r\n", status);
-	  return 1;
+	  return 0;
 	}
 	  
 #endif	
