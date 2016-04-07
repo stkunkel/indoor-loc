@@ -1,8 +1,8 @@
-% Load Quaternion pkg
+# Load Quaternion pkg
 pkg load quaternion;
 
-% Parameters
-filter = 5; % 0 = "raw", 1 = "static cal", 2 = "static cal + mvavg", 3 = "static cal + fir", 4 = "static cal + kalman", 5 = "simple cal + no filter", 6 = "simple cal + mvavg"
+# Parameters
+filter = 5; % 0 = "raw", 1 = "static cal", 2 = "static cal + mvavg", 3 = "static cal + fir", 4 = "static cal + kalman", 5 = "simple cal + no filter", 6 = "simple cal + FIR (LH)"
 ign_samples = 0; % samples to ignore until Filter has converged
 gyro_weight = 0.98;
 acc_range = 0.1;
@@ -16,14 +16,14 @@ acc_rec = [0; 0; 1];
 v = [0; 0; 0];
 s = [0; 0; 0];
 
-%Kalman Function
+#Kalman Function
 function angle_out = kalman_angle(angle_in, rate, stddev_angle, stddev_rate, delta_t)
   
-  % Compute Variances
+  # Compute Variances
   var_angle = stddev_angle^2;
   var_rate = stddev_rate^2;
 
-  % Initialize
+  # Initialize
   y_hat = [0; 0];
   A = [1 (-delta_t); 0 1];
   B = [delta_t; 0];
@@ -32,22 +32,22 @@ function angle_out = kalman_angle(angle_in, rate, stddev_angle, stddev_rate, del
   Q = [var_angle 0; 0 var_rate];
   R = [stddev_angle 0; 0 stddev_rate];
 
-  % Go through samples
+  # Go through samples
   for i=1:length(angle_in)
   
-    % Rememver previous error covariance
+    # Rememver previous error covariance
     P_prev = P;
 
-    % Prediction Update
+    # Prediction Update
     y_hat_neg = A*y_hat + B*rate(i);
     P = A*P_prev*transpose(A) + Q;
 
-    % Measurement Update
+    # Measurement Update
     K = (P_prev*transpose(H))*inverse(H*P_prev*transpose(H) + R);
     y_hat = y_hat_neg + K*([angle_in(i); rate(i)] - H*y_hat_neg);
     P = (eye(2,2) - K*H)*P_prev;
     
-    % Store values
+    # Store values
     angle_out(i) = y_hat(1,1);
   end
   
@@ -55,7 +55,7 @@ function angle_out = kalman_angle(angle_in, rate, stddev_angle, stddev_rate, del
 
 endfunction
 
-% Load Data
+# Load Data
 if (filter == 1)
 	load ('calibrated.mat', 'cal');
 	data = cal;
@@ -86,21 +86,22 @@ elseif (filter == 5)
 	filter_str = "simple_cal";
 	load('fnorm.mat', 'f_norm');
 elseif (filter == 6)
-	load('mvavg_simple_cal.mat', 'mvavg');
-	data = mvavg;
-	filter_str = "mvavg_simple_cal";
+	load('fir_hl.mat', 'firfil');
+	data = firfil;
+	filter_str = "simple_cal_fir_hl";
 	load('fnorm.mat', 'f_norm');
 else
 	data = load('data.txt');
 	filter_str = "raw";
 endif
 
-% Create Outfile Strings
-outfile = strcat("quat_posVel_", filter_str, "_kalman.pdf");
+# Create Outfile Strings
+outfile_raw = strcat("quat_posVel_", filter_str, "_kalman");
+outfile = strcat(outfile_raw, ".pdf");
 q_mat_outfile = strcat("quatPos_", filter_str, "_kalman.mat");
 avs_outfile = strcat("avs_", filter_str, "_kalman.mat");
 
-% Extract Gyro and Accel Data
+# Extract Gyro and Accel Data
 gx = data(:,1);
 gy = data(:,2);
 gz = data(:,3);
@@ -108,7 +109,7 @@ ax = data(:,4);
 ay = data(:,5);
 az = data(:,6);
 
-% Convert
+# Convert
 gx = gx / gyr_sens;
 gy = gy / gyr_sens;
 gz = gz / gyr_sens;
@@ -117,7 +118,7 @@ ay = ay / acc_sens;
 az = az / acc_sens;
 f_norm = f_norm / acc_sens;
 
-% Compute Standard deviations
+# Compute Standard deviations
 if (filter == 1 || filter == 2 || filter == 3 || filter == 4)
   stddev_rate_x = 24.500152 / gyr_sens;
   stddev_rate_y = 1.029194 / gyr_sens;
@@ -134,14 +135,14 @@ else
   stddev_angle_z = std(az);
 endif;
 
-% Compute Angle
+# Compute Angle
 for i = 1:length(gx)
   
-  % Get Magnitude of acceleration
+  # Get Magnitude of acceleration
   acc_i = [ax(i); ay(i); az(i)];
   acc_mag = norm(acc_i);
   
-  % Use recent Acc if acceleration is way different than gravity
+  # Use recent Acc if acceleration is way different than gravity
   if (acc_mag < (1-acc_range) || acc_mag > (1+acc_range))
     acc_norm = acc_rec;
   elseif (acc_mag != 0) % normalize
@@ -150,15 +151,15 @@ for i = 1:length(gx)
     acc_norm = acc_i;
   endif;
   
-  % Store Acc for next iteration
+  # Store Acc for next iteration
   acc_rec = acc_norm;
   
-  % Compute Angle from Accelerometer and convert to dgr
+  # Compute Angle from Accelerometer and convert to dgr
   angle_acc_x(i) = asin(acc_norm(1,1)) / pi * 180;
   angle_acc_y(i) = asin(acc_norm(2,1)) / pi * 180;
   angle_acc_z(i) = acos(acc_norm(3,1)) / pi * 180;
   
-  % Compute Angle from Gyroscope
+  # Compute Angle from Gyroscope
   if (i == 1)
     angle_gyr_x(i) = gx(i) * delta_t;
     angle_gyr_y(i) = gy(i) * delta_t;
@@ -171,12 +172,12 @@ for i = 1:length(gx)
 
 endfor
 
-% Apply Kalman Filter
+# Apply Kalman Filter
 angle_x = kalman_angle(angle_acc_x, gx, stddev_angle_x, stddev_rate_x, delta_t);
 angle_y = kalman_angle(angle_acc_y, gy, stddev_angle_y, stddev_rate_y, delta_t);
 angle_z = kalman_angle(angle_acc_z, gz, stddev_angle_z, stddev_rate_z, delta_t);
 
-% Plot x
+# Plot x
 plot(angle_acc_x, "g");
 hold on;
 plot(angle_gyr_x, "r");
@@ -184,18 +185,19 @@ hold on;
 plot(angle_x, "b");
 hold on;
 
-% Set up Plot
+# Set up Plot
 grid on;
 title('Sensor Fusion using Kalman Filter');
 xlabel('Sample Number');
 ylabel('Rotation around x-axis (dgr)');
 legend('Accel only', 'Gyro only', 'Kalman');
 
-% Print
+# Print
+print("-color", strcat(outfile_raw, "_angle_x", ".eps"));
 print(outfile);
 hold off;
 
-% Plot y
+# Plot y
 plot(angle_acc_y, "g");
 hold on;
 plot(angle_gyr_y, "r");
@@ -203,18 +205,19 @@ hold on;
 plot(angle_y, "b");
 hold on;
 
-% Set up Plot
+# Set up Plot
 grid on;
 title('Sensor Fusion using Kalman Filter');
 xlabel('Sample Number');
 ylabel('Rotation around y-axis (dgr)');
 legend('Accel only', 'Gyro only', 'Kalman');
 
-% Print
+# Print
+print("-color", strcat(outfile_raw, "_angle_y", ".eps"));
 print("-append", outfile);
 hold off;
 
-% Plot z
+# Plot z
 plot(angle_acc_z, "g");
 hold on;
 plot(angle_gyr_z, "r");
@@ -222,33 +225,34 @@ hold on;
 plot(angle_z, "b");
 hold on;
 
-% Set up Plot
+# Set up Plot
 grid on;
 title('Sensor Fusion using Kalman Filter');
 xlabel('Sample Number');
 ylabel('Rotation around z-axis (dgr)');
 legend('Accel only', 'Gyro only', 'Kalman');
 
-% Print
+# Print
+print("-color", strcat(outfile_raw, "_angle_z", ".eps"));
 print("-append", outfile);
 hold off;
 
-% Absolute Quaternion
+# Absolute Quaternion
 quat_abs = quaternion(1, 0, 0, 0);
 
-% Compute Quaternions
+# Compute Quaternions
 for i = (ign_samples+1):length(gx)
   
-  %Get data set (already converted)
+  #Get data set (already converted)
   gyr = [gx(i); gy(i); gz(i)];
   acc = [ax(i); ay(i); az(i)];
   
-  %%%%%%%%%%%%%% Quaternion Start %%%%%%%%%%%%%%
+  ############## Quaternion Start ##############
   
-  %Convert angle to radians
+  #Convert angle to radians
   angle_acc_z_rad = angle_acc_z * pi/180;
   
-  % Normalize Acc
+  # Normalize Acc
   acc_norm_sc = acc / norm(acc);
   if (acc_norm_sc != 0)
     acc_norm = acc / acc_norm_sc;
@@ -257,19 +261,19 @@ for i = (ign_samples+1):length(gx)
     acc_norm = acc;
   endif;
   
-  % Construct absolute rotation quaternion
+  # Construct absolute rotation quaternion
   quat_abs = unit(quaternion(cos(angle_acc_z_rad(i)/2), acc_norm(1,1)*sin(angle_acc_z_rad(i)/2), acc_norm(2,1)*sin(angle_acc_z_rad(i)/2), acc_norm(3,1)*sin(angle_acc_z_rad(i)/2)));
   
-  % Keep track of quaternions for plot
+  # Keep track of quaternions for plot
   qw(i) = quat_abs.w;
   qx(i) = quat_abs.x;
   qy(i) = quat_abs.y;
   qz(i) = quat_abs.z;
   
-  %%%%%%%% Velocity / Position Start %%%%%%%%%
+  ######## Velocity / Position Start #########
   
   
-   %Helper Computations
+   #Helper Computations
   qw_qw = qw(i) * qw(i);
   qw_qx = qw(i) * qx(i);
   qw_qy = qw(i) * qy(i);
@@ -281,38 +285,38 @@ for i = (ign_samples+1):length(gx)
   qy_qz = qy(i) * qz(i);
   qz_qz = qz(i) * qz(i);
   
-  %Quaternion to Rotation Matrix
+  #Quaternion to Rotation Matrix
   rot = [(qw_qw + qx_qx - qy_qy - qz_qz) 	(2 * qx_qy + 2 * qw_qz) 	(2 * qx_qz - 2 * qw_qy); 
 	  (2 * qx_qy - 2 * qw_qz) 		(qw_qw - qx_qx + qy_qy - qz_qz) (2 * qy_qz + 2 * qw_qx)
 	  (2 * qx_qz + 2 * qw_qy) 		(2 * qy_qz - 2 * qw_qx) 	(qw_qw - qx_qx - qy_qy + qz_qz)];
   
-  %Get Transpose
+  #Get Transpose
   rot_t = transpose(rot);
   
-  %Compute Intertial Acceleration
+  #Compute Intertial Acceleration
   acc_i = rot_t * acc - f_norm;
   
-  %Convert to m/s^2
+  #Convert to m/s^2
   acc_i_c = acc_i * gravity;
   
-  % Get current acceleration
+  # Get current acceleration
   if ( i <= (ign_samples+1) )
     a_curr = [0; 0; 0];
   else
     a_curr = acc_i_c;
   endif;
   
-  %Compute Velocity (first integration)
+  #Compute Velocity (first integration)
   v_curr = v + a_curr * delta_t; %v + acc_i_c * delta_t;
   
-  %Compute Position (second integration)
-  s_curr = s + v * delta_t; %s + v*delta_t + 0.5 * acc_i_c * delta_t^2;
+  #Compute Position (second integration)
+  s_curr = s + v_curr * delta_t; %s + v*delta_t + 0.5 * acc_i_c * delta_t^2;
   
-  %Replace old velocity and position by new ones
+  #Replace old velocity and position by new ones
   v = v_curr;
   s = s_curr;
   
-  % Keep track of velocity and position for plots
+  # Keep track of velocity and position for plots
   oax(i) = a_curr(1,1);
   oay(i) = a_curr(2,1);
   oaz(i) = a_curr(3,1);
@@ -325,10 +329,10 @@ for i = (ign_samples+1):length(gx)
   
 endfor
 
-% clear
+# clear
 hold off;
 
-% Plot Quaternion
+# Plot Quaternion
 plot(qw, "c");
 hold on;
 plot(qx, "r");
@@ -338,14 +342,14 @@ hold on;
 plot(qz, "b");
 hold on;
 
-% Set up Plot
+# Set up Plot
 grid on;
 title('Quaternions (after calibration and filtering)');
 xlabel('Sample Number');
 ylabel('Value');
 legend('w', 'x', 'y', 'z');
 
-% Prepare for Data Export
+# Prepare for Data Export
 qw = rot90(qw, -1);
 qx = rot90(qx, -1);
 qy = rot90(qy, -1);
@@ -360,19 +364,19 @@ sx = rot90(sx, -1);
 sy = rot90(sy, -1);
 sz = rot90(sz, -1);
 
-% Data Export for IMU Viewer
+# Data Export for IMU Viewer
 out = [qw qx qy qz sx sy sz];
 save(q_mat_outfile, 'out');
 
-% Data Export for Fusion with UWB
+# Data Export for Fusion with UWB
 avs = [oax oay oaz vx vy vz sx sy sz];
 save(avs_outfile, 'avs');
 
-% Print
+# Print
 print("-append", outfile);
 hold off;
 
-% Plot Velocity
+# Plot Velocity
 plot(vx, "r");
 hold on;
 plot(vy, "g");
@@ -380,7 +384,7 @@ hold on;
 plot(vz, "b");
 hold on;
 
-% Set up Plot
+# Set up Plot
 grid on;
 title('Velocity');
 xlabel('Sample Number');
@@ -388,10 +392,10 @@ ylabel('Velocity (m/s)');
 legend('x', 'y', 'z');
 hold off;
 
-% Print Velocity
+# Print Velocity
 print("-append", outfile);
 
-% Plot Position
+# Plot Position
 plot(sx, "r");
 hold on;
 plot(sy, "g");
@@ -399,7 +403,7 @@ hold on;
 plot(sz, "b");
 hold on;
 
-% Set up Plot
+# Set up Plot
 grid on;
 title('Position');
 xlabel('Sample Number');
@@ -407,5 +411,5 @@ ylabel('Position (m)');
 legend('x', 'y', 'z');
 hold off;
 
-% Print Position
+# Print Position
 print("-append", outfile);

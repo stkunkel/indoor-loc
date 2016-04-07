@@ -2,7 +2,7 @@
 pkg load quaternion;
 
 # Parameters
-filter = 5; % 0 = "raw", 1 = "static cal", 2 = "static cal + mvavg", 3 = "static cal + fir", 4 = "static cal + kalman", 5 = "simple cal + no filter", 6 = "simple cal + mvavg"
+filter = 5; % 0 = "raw", 1 = "static cal", 2 = "static cal + mvavg", 3 = "static cal + fir", 4 = "static cal + kalman", 5 = "simple cal + no filter", 6 = "simple cal + FIR (LH)"
 ign_samples = 0; % samples to ignore until Filter has converged
 gyro_weight = 0.98;
 acc_range = 0.1;
@@ -86,9 +86,9 @@ elseif (filter == 5)
 	filter_str = "simple_cal";
 	load('fnorm.mat', 'f_norm');
 elseif (filter == 6)
-	load('mvavg_simple_cal.mat', 'mvavg');
-	data = mvavg;
-	filter_str = "mvavg_simple_cal";
+	load('fir_hl.mat', 'firfil');
+	data = firfil;
+	filter_str = "simple_cal_fir_hl";
 	load('fnorm.mat', 'f_norm');
 else
 	data = load('data.txt');
@@ -96,7 +96,8 @@ else
 endif
 
 # Create Outfile Strings
-outfile = strcat("quat_posVel_", filter_str, "_kalman.pdf");
+outfile_raw = strcat("quat_posVel_", filter_str, "_kalman");
+outfile = strcat(outfile_raw, ".pdf");
 q_mat_outfile = strcat("quatPos_", filter_str, "_kalman.mat");
 avs_outfile = strcat("avs_", filter_str, "_kalman.mat");
 
@@ -192,6 +193,7 @@ ylabel('Rotation around x-axis (dgr)');
 legend('Accel only', 'Gyro only', 'Kalman');
 
 # Print
+print("-color", strcat(outfile_raw, "_angle_x", ".eps"));
 print(outfile);
 hold off;
 
@@ -211,6 +213,7 @@ ylabel('Rotation around y-axis (dgr)');
 legend('Accel only', 'Gyro only', 'Kalman');
 
 # Print
+print("-color", strcat(outfile_raw, "_angle_y", ".eps"));
 print("-append", outfile);
 hold off;
 
@@ -230,6 +233,7 @@ ylabel('Rotation around z-axis (dgr)');
 legend('Accel only', 'Gyro only', 'Kalman');
 
 # Print
+print("-color", strcat(outfile_raw, "_angle_z", ".eps"));
 print("-append", outfile);
 hold off;
 
@@ -306,7 +310,7 @@ for i = (ign_samples+1):length(gx)
   v_curr = v + a_curr * delta_t; %v + acc_i_c * delta_t;
   
   #Compute Position (second integration)
-  s_curr = s + v * delta_t; %s + v*delta_t + 0.5 * acc_i_c * delta_t^2;
+  s_curr = s + v_curr * delta_t; %s + v*delta_t + 0.5 * acc_i_c * delta_t^2;
   
   #Replace old velocity and position by new ones
   v = v_curr;
