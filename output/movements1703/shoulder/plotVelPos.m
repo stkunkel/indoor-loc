@@ -1,6 +1,6 @@
 % Parameters
-filt = 6; %0 = "raw", 1 = "static cal", 2 = "simple cal + mvavg", 3 = "simple cal + fir", 4 = "simple cal + kalman", 5 = "simple cal + no filter", 6 = FIR filter for Comp Filter
-imufusion = 1; % 0 = no data fusion, 1 = Comp filter,2 = Kalman filter
+filt = 5; %0 = "raw", 1 = "static cal", 2 = "simple cal + mvavg", 3 = "simple cal + fir", 4 = "simple cal + kalman", 5 = "simple cal + no filter", 6 = FIR filter for Comp Filter
+imufusion = 2; % 0 = no data fusion, 1 = Comp filter,2 = Kalman filter
 outfile = 'avs';
 wndw = 20; % Window for simple calibration
 cof = 0.01;
@@ -9,19 +9,14 @@ cof = 0.01;
 rawname = 'avs'; % .mat
 if (filt == 0)
 	name = rawname;
-	imufusion = 0;
 elseif (filt == 2)
 	name = strcat(rawname, '_mvavg');
-	imufusion = 0;
 elseif (filt == 3)
 	name = strcat(rawname, '_fir');
-	imufusion = 0;
 elseif (filt == 4)
 	name = strcat(rawname, '_kalman');
-	imufusion = 0;
 elseif (filt == 5)
 	name = strcat(rawname, '_simple_cal');
-	imufusion = 0;
 elseif (filt == 6)
 	name = strcat(rawname, '_simple_cal_fir_hl');
 	imufusion = 1;

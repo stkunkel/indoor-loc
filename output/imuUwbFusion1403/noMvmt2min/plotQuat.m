@@ -1,5 +1,5 @@
 % Parameters
-filt = 4; %0 = "raw", 1 = "static cal", 2 = "simple cal + mvavg", 3 = "simple cal + fir", 4 = "simple cal + kalman", 5 = "simple cal + no filter"
+filt = 6; %0 = "raw", 1 = "static cal", 2 = "simple cal + mvavg", 3 = "simple cal + fir", 4 = "simple cal + kalman", 5 = "simple cal + no filter", 6 = "simple_cal + fusion (Kalman)"
 outfile = 'quaternions';
 wndw = 20; % Window for simple calibration
 
@@ -38,7 +38,11 @@ elseif (filt == 5)
 	infile = strcat(name, '.mat');
 	load(infile, 'out');
 	q = out;
-		
+elseif (filt == 6)
+	name = strcat(rawname, 'Pos_simple_cal_kalman');
+	infile = strcat(name, '.mat');
+	load(infile, 'out');
+	q = out;
 endif;
 
 % Generate Out File Name
