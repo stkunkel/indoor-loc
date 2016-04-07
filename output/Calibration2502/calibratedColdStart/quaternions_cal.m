@@ -96,4 +96,4 @@ quat_cal = [ow ox oy oz];
 save('quat_cal.mat', 'quat_cal');
 
 # Print
-print("quaternions_cal.pdf");
+print("quaternions_cal.eps");

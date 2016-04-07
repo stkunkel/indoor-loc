@@ -1,14 +1,14 @@
-#!/bin/bash
+%!/bin/bash
 
 dir = `pwd`
 
-# Copy filtered.txt
+% Copy filtered.txt
 cp filtered.txt ../../imu_viewer_osg/
 
-# Make and Run Program
+% Make and Run Program
 cd ../../imu_viewer_osg/
 make
 ./imuviewer
 
-# Go back to output
+% Go back to output
 cd $(dir)

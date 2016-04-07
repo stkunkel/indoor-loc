@@ -1,4 +1,4 @@
-# Parameters
+% Parameters
 f_norm = [331; -263; 8082];
 gyr_sens = 32.8;
 acc_sens = 8192;
@@ -7,32 +7,32 @@ gravity = 9.80665;
 v = [0; 0; 0];
 s = [0; 0; 0];
 
-# Load Raw Data
+% Load Raw Data
 data = load ('data.txt');
 ax = data(:,4);
 ay = data(:,5);
 az = data(:,6);
 
-# Load Quaternions
+% Load Quaternions
 load('quat.mat', 'out');
 qw = out(:,1);
 qx = out(:,2);
 qy = out(:,3);
 qz = out(:,4);
 
-# Convert Normal Force to G
+% Convert Normal Force to G
 f_norm = f_norm / acc_sens;
 
-# Compute Velocity and Position
+% Compute Velocity and Position
 for i = 1:length(ax)
   
-  #Get data set
+  %Get data set
   acc_raw = [ax(i); ay(i); az(i)];
   
-  #Convert to G
+  %Convert to G
   acc = acc_raw / acc_sens;
   
-  #Helper Computations
+  %Helper Computations
   qw_qw = qw(i) * qw(i);
   qw_qx = qw(i) * qx(i);
   qw_qy = qw(i) * qy(i);
@@ -44,37 +44,37 @@ for i = 1:length(ax)
   qy_qz = qy(i) * qz(i);
   qz_qz = qz(i) * qz(i);
   
-  #Quaternion to Rotation Matrix
+  %Quaternion to Rotation Matrix
   rot = [(qw_qw + qx_qx - qy_qy - qz_qz) 	(2 * qx_qy + 2 * qw_qz) 	(2 * qx_qz - 2 * qw_qy); 
 	  (2 * qx_qy - 2 * qw_qz) 		(qw_qw - qx_qx + qy_qy - qz_qz) (2 * qy_qz + 2 * qw_qx)
 	  (2 * qx_qz + 2 * qw_qy) 		(2 * qy_qz - 2 * qw_qx) 	(qw_qw - qx_qx - qy_qy + qz_qz)];
   
-  #Get Transpose
+  %Get Transpose
   rot_t = transpose(rot);
   
-  #Rotate Normal force
+  %Rotate Normal force
   f_norm_rot = rot * f_norm;
   
-  #Remove Gravity
+  %Remove Gravity
   acc = acc - f_norm_rot;
   
-  #Compute Intertial Acceleration
+  %Compute Intertial Acceleration
   acc_i = rot_t * acc;
   
-  #Convert to m/s^2
+  %Convert to m/s^2
   acc_i_c = acc_i * gravity;
   
-  #Compute Velocity (first integration)
+  %Compute Velocity (first integration)
   v_curr = v + acc_i_c * delta_t;
   
-  #Compute Position (second integration)
+  %Compute Position (second integration)
   s_curr = s + v*delta_t + 0.5 * acc_i_c * delta_t^2;
   
-  #Replace old velocity and position by new ones
+  %Replace old velocity and position by new ones
   v = v_curr;
   s = s_curr;
   
-  # Keep track of velocity and position for plots
+  % Keep track of velocity and position for plots
   vx(i) = v(1,1);
   vy(i) = v(2,1);
   vz(i) = v(3,1);
@@ -84,7 +84,7 @@ for i = 1:length(ax)
   
 endfor
 
-# Plot Velocity
+% Plot Velocity
 plot(vx, "r");
 hold on;
 plot(vy, "g");
@@ -92,7 +92,7 @@ hold on;
 plot(vz, "b");
 hold on;
 
-# Set up Plot
+% Set up Plot
 grid on;
 title('Velocity');
 xlabel('Sample Number');
@@ -100,10 +100,10 @@ ylabel('Velocity (m/s)');
 legend('x', 'y', 'z');
 hold off;
 
-# Print Velocity
+% Print Velocity
 print("velPos.pdf");
 
-# Plot Position
+% Plot Position
 plot(sx, "r");
 hold on;
 plot(sy, "g");
@@ -111,7 +111,7 @@ hold on;
 plot(sz, "b");
 hold on;
 
-# Set up Plot
+% Set up Plot
 grid on;
 title('Position');
 xlabel('Sample Number');
@@ -119,5 +119,5 @@ ylabel('Position (m)');
 legend('x', 'y', 'z');
 hold off;
 
-# Print Position
+% Print Position
 print("-append", "velPos.pdf");

@@ -1,7 +1,7 @@
-# Load Quaternion pkg
+% Load Quaternion pkg
 pkg load quaternion;
 
-# Parameters
+% Parameters
 filter_in = 1; % 0 = "Complementary Filter", 1 = "Kalman Filter"
 filter_out = 0; % 0 = "Complementary Filter", 1 = "Kalman Filter"
 ign_samples = 0; % samples to ignore until Filter has converged
@@ -9,16 +9,16 @@ imu_weight = 0.98;
 delta_t = 1/500;
 n = 100;
 
-#Kalman Function
+%Kalman Function
 function pos = kalman_pos(a_imu, v_imu, s_uwb, delta_t)
   
-  # Standard Deviations
+  % Standard Deviations
   var_a = var(a_imu);
   var_v = var(v_imu);
   var_s = var(s_uwb);
 
 
-  # Initialize
+  % Initialize
   y_hat = [0; 0; 0];
   A = [1 (delta_t) 0; 0 0 0; 0 0 0]; 
   B = [0; delta_t; 1];
@@ -27,26 +27,26 @@ function pos = kalman_pos(a_imu, v_imu, s_uwb, delta_t)
   Q = [var_s 0 0; 0 var_v 0; 0 0 var_a];
   R = var_s;
 
-  # Go through samples
+  % Go through samples
   for i=1:length(a_imu)
   
-    # Set u and z
+    % Set u and z
     u = a_imu(i);
     z = s_uwb(i);
   
-    # Rememver previous error covariance
+    % Rememver previous error covariance
     P_prev = P;
 
-    # Prediction Update
+    % Prediction Update
     y_hat_neg = A*y_hat + B*u;
     P = A*P_prev*transpose(A) + Q;
 
-    # Measurement Update
+    % Measurement Update
     K = (P_prev*transpose(H))*inverse(H*P_prev*transpose(H) + R);
     y_hat = y_hat_neg + K*(z - H*y_hat_neg);
     P = (eye(3,3) - K*H)*P_prev;
     
-    # Store values
+    % Store values
     pos(i,1) = y_hat(1,1);
   end
   
@@ -54,7 +54,7 @@ function pos = kalman_pos(a_imu, v_imu, s_uwb, delta_t)
 
 endfunction
 
-# Determine where to get data from
+% Determine where to get data from
 if (filter_in == 1)
   avs_infile = "avs_simple_cal_kalman.mat";
   filter_in_str = "kalman";
@@ -63,7 +63,7 @@ else %Complementary Filter
   filter_in_str = "compl";
 endif;
 
-# Create output strings
+% Create output strings
 if (filter_out == 1)
   filter_out_str = "kalman";
   filter_out_outstr = "Kalman";
@@ -72,27 +72,27 @@ else
   filter_out_outstr = "Complementary";
 endif;
 
-# Load Data from IMU
+% Load Data from IMU
 load(avs_infile, 'avs');
 a_i = avs(:,1:3);
 v_i = avs(:,4:6);
 s_i = avs(:,7:9);
 
-# Load Data from UWB
+% Load Data from UWB
 data = load('data.txt');%zeros(length(a_i), 3); % TODO
 load('filteredUwb.mat', 'filtered_uwb');
 
-# Get distance btw UWB receiver and sender (robot)
+% Get distance btw UWB receiver and sender (robot)
 dist = mean(filtered_uwb(1:n));
 
-# Remove offset from distance and convert to meters
+% Remove offset from distance and convert to meters
 s_u = (dist - filtered_uwb) / 100;
 
-# Create Outfile Strings
+% Create Outfile Strings
 outfile = strcat("posVel_", filter_in_str, "_", filter_out_str, ".pdf");
 data_outfile = strcat("pos_", filter_in_str, "_", filter_out_str, ".mat");
 
-# Compute Standard deviations
+% Compute Standard deviations
 %stddev_imu = std([a_i(:,1); a_i(:,2); a_i(:,3)]);
 stddev_uwb = std(s_u);%.000001;
 
@@ -105,11 +105,11 @@ else % Complementary Filter
   pos_x = imu_weight* s_i(:,1) + (1 - imu_weight) * s_u;
 endif;
 
-# Export Data
+% Export Data
 out = [pos_x]; %pos_y pos_z
 save(data_outfile, 'out');
 
-# Plot x
+% Plot x
 plot(s_i(:,1), "g");
 hold on;
 plot(s_u(:,1), "r");
@@ -117,7 +117,7 @@ hold on;
 plot(pos_x, "b");
 hold on;
 
-# Set up Plot
+% Set up Plot
 grid on;
 title(cstrcat('Sensor Fusion (IMU + UWB) using ', filter_out_outstr, ' Filter'));
 xlabel('Sample Number');
@@ -125,11 +125,11 @@ ylabel('Position on x-axis (m)');
 legend('IMU only', 'UWB only', filter_out_outstr);
 ylim([-0.5 1]);
 
-# Print
+% Print
 print(outfile);
 hold off;
 
-%  # Plot y
+%  % Plot y
 %  plot(s_i(:,2), "g");
 %  hold on;
 %  plot(s_u(:,2), "r");
@@ -137,14 +137,14 @@ hold off;
 %  plot(pos_y, "b");
 %  hold on;
 %  
-%  # Set up Plot
+%  % Set up Plot
 %  grid on;
 %  title(cstrcat('Sensor Fusion (IMU + UWB) using ', filter_out_outstr, ' Filter'));
 %  xlabel('Sample Number');
 %  ylabel('Position on y-axis (m)');
 %  legend('IMU only', 'UWB only', filter_out_outstr);
 %  
-%  # Print
+%  % Print
 %  print("-append", outfile);
 %  hold off;
 %  
@@ -155,13 +155,13 @@ hold off;
 %  plot(pos_z, "b");
 %  hold on;
 %  
-%  # Set up Plot
+%  % Set up Plot
 %  grid on;
 %  title(cstrcat('Sensor Fusion (IMU + UWB) using ', filter_out_outstr, ' Filter'));
 %  xlabel('Sample Number');
 %  ylabel('Position on z-axis (m)');
 %  legend('IMU only', 'UWB only', filter_out_outstr);
 %  
-%  # Print
+%  % Print
 %  print("-append", outfile);
 %  hold off;

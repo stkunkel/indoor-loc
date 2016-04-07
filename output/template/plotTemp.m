@@ -1,17 +1,17 @@
-# Read in data
+% Read in data
 data = load ('data.txt');
 t = data(:,10);
 
-# Plot
+% Plot
 plot(t, "c");
 hold on;
 
-# Set up Plot
+% Set up Plot
 grid on;
 title('Temperature');
 xlabel('Sample Number');
 ylabel('Temperature (in Hardware Units)');
 legend('Temperature');
 
-# Print
+% Print
 print("temperature.pdf");
