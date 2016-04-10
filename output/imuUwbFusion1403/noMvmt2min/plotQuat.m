@@ -1,5 +1,5 @@
 % Parameters
-filt = 5; %0 = "raw", 1 = "static cal", 2 = "simple cal + mvavg", 3 = "simple cal + fir", 4 = "simple cal + kalman", 5 = "simple cal + no filter", 6 = "simple_cal + fusion (Kalman)"
+filt = 6; %0 = "raw", 1 = "static cal", 2 = "simple cal + mvavg", 3 = "simple cal + fir", 4 = "simple cal + kalman", 5 = "simple cal + no filter", 6 = "simple_cal + fusion (Kalman)"
 outfile = 'quaternions';
 wndw = 20; % Window for simple calibration
 

@@ -20,43 +20,48 @@ s = [0; 0; 0];
 function angle_out = kalman_angle(angle_in, rate, stddev_angle, stddev_rate, delta_t)
   
   % Compute Variances
-  var_angle = stddev_angle^2;
-  var_rate = stddev_rate^2;
+  var_angle = stddev_angle^2
+  var_rate = stddev_rate^2
 
   % Initialize
   y_hat = [0; 0];
   A = [1 (-delta_t); 0 1];
   B = [delta_t; 0];
-  H = eye(2,2);
-  P = [1000 0; 0 1000];
+  H = [1 0];
+  P = [100 0; 0 100];
   Q = [var_angle 0; 0 var_rate];
-  R = [stddev_angle 0; 0 stddev_rate];
+  R = stddev_angle;
 
   % Go through samples
   for i=1:length(angle_in)
   
+		%Set u and z
+		u = rate(i);
+		z = angle_in(i);
+		
     % Rememver previous error covariance
     P_prev = P;
 
     % Prediction Update
-    y_hat_neg = A*y_hat + B*rate(i);
+    y_hat_neg = A*y_hat + B*u;
     P = A*P_prev*transpose(A) + Q;
 
     % Measurement Update
     K = (P_prev*transpose(H))*inverse(H*P_prev*transpose(H) + R);
-    y_hat = y_hat_neg + K*([angle_in(i); rate(i)] - H*y_hat_neg);
+    y_hat = y_hat_neg + K*(z - H*y_hat_neg);
     P = (eye(2,2) - K*H)*P_prev;
     
     % Store values
     angle_out(i) = y_hat(1,1);
   end
   
+  % Print Values
   printf("P:");
   disp(P);
   printf("\r\nQ:");
-  disp(K);
-  printf("\r\nK:");
   disp(Q);
+  printf("\r\nK:");
+  disp(K);
   printf("\r\n\r\n");
 
 endfunction
@@ -179,12 +184,12 @@ else
 endif;
 
 % Plot Stddev
-printf("stddev_rate_x: %d\r\n", stddev_rate_x);
-printf("stddev_rate_y: %d\r\n", stddev_rate_y);
-printf("stddev_rate_z: %d\r\n", stddev_rate_z);
-printf("stddev_angle_x: %d\r\n", stddev_angle_x);
-printf("stddev_angle_y: %d\r\n", stddev_angle_y);
-printf("stddev_angle_z: %d\r\n", stddev_angle_z);
+%printf("stddev_rate_x: %d\r\n", stddev_rate_x);
+%printf("stddev_rate_y: %d\r\n", stddev_rate_y);
+%printf("stddev_rate_z: %d\r\n", stddev_rate_z);
+%printf("stddev_angle_x: %d\r\n", stddev_angle_x);
+%printf("stddev_angle_y: %d\r\n", stddev_angle_y);
+%printf("stddev_angle_z: %d\r\n", stddev_angle_z);
 
 % Apply Kalman Filter
 angle_x = kalman_angle(angle_acc_x, gx, stddev_angle_x, stddev_rate_x, delta_t);
