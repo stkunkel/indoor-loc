@@ -17,17 +17,19 @@ v = [0; 0; 0];
 s = [0; 0; 0];
 
 %Kalman Function
-function angle_out = kalman_angle(angle_in, rate, stddev_angle, stddev_rate, delta_t)
+function angle_out = kalman_angle(angle_in, rate, delta_t)
   
   % Compute Variances
-  var_angle = stddev_angle^2
-  var_rate = stddev_rate^2
+  var_angle = var(angle_in)
+  var_rate = var(rate)
+  stddev_angle = std(angle_in)
+  stddev_rate = std(rate)
 
   % Initialize
   y_hat = [0; 0];
   A = [1 (-delta_t); 0 1];
   B = [delta_t; 0];
-  H = [1 0];
+  H = [1 delta_t];
   P = [100 0; 0 100];
   Q = [var_angle 0; 0 var_rate];
   R = stddev_angle;
@@ -44,12 +46,12 @@ function angle_out = kalman_angle(angle_in, rate, stddev_angle, stddev_rate, del
 
     % Prediction Update
     y_hat_neg = A*y_hat + B*u;
-    P = A*P_prev*transpose(A) + Q;
+    P_neg = A*P_prev*transpose(A) + Q;
 
     % Measurement Update
-    K = (P_prev*transpose(H))*inverse(H*P_prev*transpose(H) + R);
+    K = (P_neg*transpose(H))*inverse(H*P_neg*transpose(H) + R);
     y_hat = y_hat_neg + K*(z - H*y_hat_neg);
-    P = (eye(2,2) - K*H)*P_prev;
+    P = (eye(2,2) - K*H)*P_neg;
     
     % Store values
     angle_out(i) = y_hat(1,1);
@@ -167,21 +169,21 @@ for i = 1:length(gx)
 endfor
 
 % Compute Standard deviations
-if (filter == 1 || filter == 2 || filter == 3 || filter == 4)
-  stddev_rate_x = 24.500152 / gyr_sens;
-  stddev_rate_y = 1.029194 / gyr_sens;
-  stddev_rate_z = 3.045021 / gyr_sens;
-  stddev_angle_x = 22.443588 / acc_sens;
-  stddev_angle_y = 72.858551 / acc_sens;
-  stddev_angle_z = 40.575413 / acc_sens;
-else
-  stddev_rate_x = std(gx(1:100));
-  stddev_rate_y = std(gy(1:100));
-  stddev_rate_z = std(gz(1:100));
-  stddev_angle_x = std(angle_acc_x(1:100));
-  stddev_angle_y = std(angle_acc_z(1:100));
-  stddev_angle_z = std(angle_acc_y(1:100));
-endif;
+%if (filter == 1 || filter == 2 || filter == 3 || filter == 4)
+%  stddev_rate_x = 24.500152 / gyr_sens;
+%  stddev_rate_y = 1.029194 / gyr_sens;
+%  stddev_rate_z = 3.045021 / gyr_sens;
+%  stddev_angle_x = 22.443588 / acc_sens;
+%  stddev_angle_y = 72.858551 / acc_sens;
+%  stddev_angle_z = 40.575413 / acc_sens;
+%else
+%  stddev_rate_x = std(gx(1:100));
+%  stddev_rate_y = std(gy(1:100));
+%  stddev_rate_z = std(gz(1:100));
+%  stddev_angle_x = std(angle_acc_x(1:100));
+%  stddev_angle_y = std(angle_acc_z(1:100));
+%  stddev_angle_z = std(angle_acc_y(1:100));
+%endif;
 
 % Plot Stddev
 %printf("stddev_rate_x: %d\r\n", stddev_rate_x);
@@ -192,9 +194,9 @@ endif;
 %printf("stddev_angle_z: %d\r\n", stddev_angle_z);
 
 % Apply Kalman Filter
-angle_x = kalman_angle(angle_acc_x, gx, stddev_angle_x, stddev_rate_x, delta_t);
-angle_y = kalman_angle(angle_acc_y, gy, stddev_angle_y, stddev_rate_y, delta_t);
-angle_z = kalman_angle(angle_acc_z, gz, stddev_angle_z, stddev_rate_z, delta_t);
+angle_x = kalman_angle(angle_acc_x, gx, delta_t);
+angle_y = kalman_angle(angle_acc_y, gy, delta_t);
+angle_z = kalman_angle(angle_acc_z, gz, delta_t);
 
 % Plot x
 plot(angle_acc_x(1:9750), "g");

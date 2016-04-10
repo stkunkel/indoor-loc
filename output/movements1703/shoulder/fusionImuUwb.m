@@ -25,8 +25,8 @@ function pos = kalman_pos(a_imu, v_imu, s_uwb, delta_t)
   % Initialize
   y_hat = [0; 0; 0];
   A = [1 delta_t 0; 0 1 0; 0 0 0]; 
-  B = [0; delta_t; 1];
-  H = [1 0 0];%[1 0 0];
+  B = [delta_t^2; delta_t; 1];
+  H = [1 0 0];
   P = [1000 0 0; 0 1000 0; 0 0 1000];
   Q = [var_s 0 0; 0 var_v 0; 0 0 var_a];
   R = std_s;
@@ -43,12 +43,12 @@ function pos = kalman_pos(a_imu, v_imu, s_uwb, delta_t)
 
     % Prediction Update
     y_hat_neg = A*y_hat + B*u;
-    P = A*P_prev*transpose(A) + Q;
+    P_neg = A*P_prev*transpose(A) + Q;
 
     % Measurement Update
-    K = (P_prev*transpose(H))*inverse(H*P_prev*transpose(H) + R);
+    K = (P_neg*transpose(H))*inverse(H*P_neg*transpose(H) + R);
     y_hat = y_hat_neg + K*(z - H*y_hat_neg);
-    P = (eye(3,3) - K*H)*P_prev;
+    P = (eye(3,3) - K*H)*P_neg;
     
     % Store values
     pos(i,1) = y_hat(1,1);
@@ -136,7 +136,7 @@ legend('IMU only', 'UWB only', filter_out_outstr);
 %ylim([-0.5 1]);
 
 % Print
-print("-color", strcat(outfile, ".eps"));
+print("-color", strcat(outfile, ".pdf"));
 hold off;
 
 %  % Plot y
