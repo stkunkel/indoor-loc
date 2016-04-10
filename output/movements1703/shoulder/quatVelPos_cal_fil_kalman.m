@@ -51,7 +51,13 @@ function angle_out = kalman_angle(angle_in, rate, stddev_angle, stddev_rate, del
     angle_out(i) = y_hat(1,1);
   end
   
+  printf("P:");
   disp(P);
+  printf("\r\nQ:");
+  disp(K);
+  printf("\r\nK:");
+  disp(Q);
+  printf("\r\n\r\n");
 
 endfunction
 
@@ -172,17 +178,25 @@ else
   stddev_angle_z = std(angle_acc_y(1:100));
 endif;
 
+% Plot Stddev
+printf("stddev_rate_x: %d\r\n", stddev_rate_x);
+printf("stddev_rate_y: %d\r\n", stddev_rate_y);
+printf("stddev_rate_z: %d\r\n", stddev_rate_z);
+printf("stddev_angle_x: %d\r\n", stddev_angle_x);
+printf("stddev_angle_y: %d\r\n", stddev_angle_y);
+printf("stddev_angle_z: %d\r\n", stddev_angle_z);
+
 % Apply Kalman Filter
 angle_x = kalman_angle(angle_acc_x, gx, stddev_angle_x, stddev_rate_x, delta_t);
 angle_y = kalman_angle(angle_acc_y, gy, stddev_angle_y, stddev_rate_y, delta_t);
 angle_z = kalman_angle(angle_acc_z, gz, stddev_angle_z, stddev_rate_z, delta_t);
 
 % Plot x
-plot(angle_acc_x, "g");
+plot(angle_acc_x(1:9750), "g");
 hold on;
-plot(angle_gyr_x, "r");
+plot(angle_gyr_x(1:9750), "r");
 hold on;
-plot(angle_x, "b");
+plot(angle_x(1:9750), "b");
 hold on;
 
 % Set up Plot
@@ -198,11 +212,11 @@ print(outfile);
 hold off;
 
 % Plot y
-plot(angle_acc_y, "g");
+plot(angle_acc_y(1:9750), "g");
 hold on;
-plot(angle_gyr_y, "r");
+plot(angle_gyr_y(1:9750), "r");
 hold on;
-plot(angle_y, "b");
+plot(angle_y(1:9750), "b");
 hold on;
 
 % Set up Plot
@@ -218,11 +232,11 @@ print("-append", outfile);
 hold off;
 
 % Plot z
-plot(angle_acc_z, "g");
+plot(angle_acc_z(1:9750), "g");
 hold on;
-plot(angle_gyr_z, "r");
+plot(angle_gyr_z(1:9750), "r");
 hold on;
-plot(angle_z, "b");
+plot(angle_z(1:9750), "b");
 hold on;
 
 % Set up Plot

@@ -1,5 +1,5 @@
 % Parameters
-filt = 4; %0 = "raw", 1 = "static cal", 2 = "simple cal + mvavg", 3 = "simple cal + fir", 4 = "simple cal + kalman", 5 = "simple cal + no filter"
+filt = 6; %0 = "raw", 1 = "static cal", 2 = "simple cal + mvavg", 3 = "simple cal + fir", 4 = "simple cal + kalman", 5 = "simple cal + no filter", 6 = "simple_cal + fusion (Kalman)"
 outfile = 'quaternions';
 wndw = 20; % Window for simple calibration
 
@@ -38,7 +38,11 @@ elseif (filt == 5)
 	infile = strcat(name, '.mat');
 	load(infile, 'out');
 	q = out;
-		
+elseif (filt == 6)
+	name = strcat(rawname, 'Pos_simple_cal_kalman');
+	infile = strcat(name, '.mat');
+	load(infile, 'out');
+	q = out;
 endif;
 
 % Generate Out File Name
@@ -46,10 +50,16 @@ outfile = strcat(name, '.eps');
 
 
 % Load quaternions
-ow = q(:,1);
-ox = q(:,2);
-oy = q(:,3);
-oz = q(:,4);
+ow = q(1:9750,1);
+ox = q(1:9750,2);
+oy = q(1:9750,3);
+oz = q(1:9750,4);
+
+% Print quaternion at 90dgr
+printf("Quaternion at 90dgr: %d, %d, %d, %d\r\n", ow(6000), ox(6000), oy(6000), oz(6000));
+
+% Print final quaternion
+printf("Final quaternion: %d, %d, %d, %d\r\n", ow(9750), ox(9750), oy(9750), oz(9750));
 
 % Plot Quaternion
 plot(ow, "c");

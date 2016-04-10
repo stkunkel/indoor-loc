@@ -1,5 +1,5 @@
 % Parameters
-gab = 2; %0 = fused data, 1=gyroscope only, 2=accelerometer only
+gab = 0; %0 = fused data, 1=gyroscope only, 2=accelerometer only
 rawname = 'quatPos';
 rawname_ga = 'q'; % .mat
 middlepart = '_simple_cal_fir_hl';
@@ -32,10 +32,16 @@ endif;
 outfile = strcat(name, '.eps');
 
 % Load quaternions
-ow = out(:,1);
-ox = out(:,2);
-oy = out(:,3);
-oz = out(:,4);
+ow = out(1:9750,1);
+ox = out(1:9750,2);
+oy = out(1:9750,3);
+oz = out(1:9750,4);
+
+% Print quaternion at 90dgr
+printf("Quaternion at 90dgr: %d, %d, %d, %d\r\n", ow(6000), ox(6000), oy(6000), oz(6000));
+
+% Print final quaternion
+printf("Final quaternion: %d, %d, %d, %d\r\n", ow(9750), ox(9750), oy(9750), oz(9750));
 
 % Plot Quaternion
 plot(ow, "c");

@@ -36,15 +36,15 @@ infile = strcat(fusedname, '.mat');
 load(infile, 'avs');
 
 % Get Data
-ax = avs(:,1);
-ay = avs(:,2);
-az = avs(:,3);
-vx = avs(:,4);
-vy = avs(:,5);
-vz = avs(:,6);
-sx = avs(:,7);
-sy = avs(:,8);
-sz = avs(:,9);
+ax = avs(1:9750,1);
+ay = avs(1:9750,2);
+az = avs(1:9750,3);
+vx = avs(1:9750,4);
+vy = avs(1:9750,5);
+vz = avs(1:9750,6);
+sx = avs(1:9750,7);
+sy = avs(1:9750,8);
+sz = avs(1:9750,9);
 
 
 % Load Signal Package
@@ -128,6 +128,7 @@ title('Position');
 xlabel('Sample Number');
 ylabel('Position (m)');
 legend('x', 'y', 'z');
+%ylim([-15 5]);
 hold off;
 
 % Print Position

@@ -51,7 +51,13 @@ function angle_out = kalman_angle(angle_in, rate, stddev_angle, stddev_rate, del
     angle_out(i) = y_hat(1,1);
   end
   
+  printf("P:");
   disp(P);
+  printf("\r\nQ:");
+  disp(K);
+  printf("\r\nK:");
+  disp(Q);
+  printf("\r\n\r\n");
 
 endfunction
 
@@ -171,6 +177,14 @@ else
   stddev_angle_y = std(angle_acc_z(1:100));
   stddev_angle_z = std(angle_acc_y(1:100));
 endif;
+
+% Plot Stddev
+printf("stddev_rate_x: %d\r\n", stddev_rate_x);
+printf("stddev_rate_y: %d\r\n", stddev_rate_y);
+printf("stddev_rate_z: %d\r\n", stddev_rate_z);
+printf("stddev_angle_x: %d\r\n", stddev_angle_x);
+printf("stddev_angle_y: %d\r\n", stddev_angle_y);
+printf("stddev_angle_z: %d\r\n", stddev_angle_z);
 
 % Apply Kalman Filter
 angle_x = kalman_angle(angle_acc_x, gx, stddev_angle_x, stddev_rate_x, delta_t);
