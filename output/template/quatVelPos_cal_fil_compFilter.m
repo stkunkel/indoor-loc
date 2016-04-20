@@ -61,12 +61,12 @@ q_mat_outfile = strcat("quatPos_", filter_str, "_compFilter.mat");
 avs_outfile = strcat("avs_", filter_str, "_compFilter.mat");
 
 % Extract Gyro and Accel Data and convert
-gx = data(1:10000,1) / gyr_sens;
-gy = data(1:10000,2) / gyr_sens;
-gz = data(1:10000,3) / gyr_sens;
-ax = data(1:10000,4) / acc_sens;
-ay = data(1:10000,5) / acc_sens;
-az = data(1:10000,6) / acc_sens;
+gx = data(:,1) / gyr_sens;
+gy = data(:,2) / gyr_sens;
+gz = data(:,3) / gyr_sens;
+ax = data(:,4) / acc_sens;
+ay = data(:,5) / acc_sens;
+az = data(:,6) / acc_sens;
 
 % Absolute Quaternion
 quat_abs = quaternion(1, 0, 0, 0);

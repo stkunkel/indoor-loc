@@ -1,6 +1,6 @@
 % Parameters
 filt = 5; %0 = "raw", 1 = "static cal", 2 = "simple cal + mvavg", 3 = "simple cal + fir", 4 = "simple cal + kalman", 5 = "simple cal + no filter", 6 = FIR filter for Comp Filter
-imufusion = 2; % 0 = no data fusion, 1 = Comp filter,2 = Kalman filter
+imufusion =1; % 0 = no data fusion, 1 = Comp filter,2 = Kalman filter
 outfile = 'avs';
 wndw = 20; % Window for simple calibration
 cof = 0.01;

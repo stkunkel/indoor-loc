@@ -5,8 +5,9 @@ pkg load signal
 gyr_sens = 32.8;
 acc_sens = 8192;
 wndw = 20;
-val = 0.2;
-outfile = "firFilter_hl_cal.pdf";
+lpf = 0.001;
+hpf = 0.01;
+outfile = strcat("firFilter_cal_h", num2str(hpf), "l", num2str(lpf));
 
 % Load Calibrated Data
 load ('simple_calibration.mat', 'cal');
@@ -18,8 +19,8 @@ ay = cal(:,5);
 az = cal(:,6);
 
 % FIR Filter Coefficients
-cg = fir1(wndw, val, 'high');
-ca = fir1(wndw, val, 'low');
+cg = fir1(wndw, hpf, 'high');
+ca = fir1(wndw, lpf, 'low');
 
 % Apply Filter
 gx_fir = filter(cg, 1, gx);
@@ -68,7 +69,25 @@ legend('Calibrated', 'High-pass FIR Filter');
 hold off;
 
 % Print Plot
-print(outfile);
+print(strcat(outfile,".pdf"));
+
+% Plot some gx
+filtered_gx2 = [zeros(wndw/2,1); filtered_gx; zeros(wndw/2,1)];
+plot(gx(wndw+1:wndw+100), "r");
+hold on;
+plot(filtered_gx2(wndw+1:wndw+100), "c");
+hold on;
+
+% Set up Plot
+grid on;
+title('Gyroscope (x)');
+xlabel('Sample Number');
+ylabel('Angular Velocity (Hardware Units)');
+legend('Calibrated', 'High-pass FIR Filter');
+hold off;
+
+% Print
+print("-color", strcat(outfile,"gx.eps"));
 
 % Plot gy
 plot(gy, "g");
@@ -85,7 +104,7 @@ legend('Calibrated', 'High-pass FIR Filter');
 hold off;
 
 % Print Plot
-print("-append", outfile);
+print("-append", strcat(outfile,".pdf"));
 
 % Plot gz
 plot(gz, "b");
@@ -102,7 +121,7 @@ legend('Calibrated', 'High-pass FIR Filter');
 hold off;
 
 % Print Plot
-print("-append", outfile);
+print("-append", strcat(outfile,".pdf"));
 
 % Accelerometer
 % Plot ax
@@ -120,7 +139,33 @@ legend('Calibrated', 'Low-pass FIR Filter');
 hold off;
 
 % Print Plot
-print("-append", outfile);
+print("-append", strcat(outfile,".pdf"));
+
+% Plot some ax
+filtered_ax2 = [zeros(wndw/2,1); filtered_ax; zeros(wndw/2,1)];
+plot(ax(wndw+1:wndw+100), "r");
+hold on;
+plot(filtered_ax2(wndw+1:wndw+100), "c");
+hold on;
+
+% Set up Plot
+grid on;
+title('Accelerometer (x)');
+xlabel('Sample Number');
+ylabel('Acceleration (Hardware Units)');
+legend('Calibrated', 'Low-pass FIR Filter');
+hold off;
+
+% Print
+print("-color", strcat(outfile,"ax.eps"));
+
+% Set up Plot
+grid on;
+title('Accelerometer (x)');
+xlabel('Sample Number');
+ylabel('Acceleration (Hardware Units)');
+legend('Calibrated', 'Low-pass FIR Filter');
+hold off;
 
 % Plot ay
 plot(ay, "g");
@@ -137,7 +182,7 @@ legend('Calibrated', 'Low-pass FIR Filter');
 hold off;
 
 % Print Plot
-print("-append", outfile);
+print("-append", strcat(outfile,".pdf"));
 
 % Plot az
 plot(az, "b");
@@ -154,4 +199,4 @@ legend('Calibrated', 'Low-pass FIR Filter');
 hold off;
 
 % Print Plot
-print("-append", outfile);
+print("-append", strcat(outfile,".pdf"));

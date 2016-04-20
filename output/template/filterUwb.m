@@ -10,6 +10,7 @@ name = "filteredUwb";
 
 % Generate Filenames
 outfile = strcat(name, ".pdf");
+outfile_eps = strcat(name, ".eps");
 outmat = strcat(name, ".mat");
 
 % Load UWB Data
@@ -34,11 +35,13 @@ filtered_uwb = uwb_temp(wndw/2+1:l-wndw/2);
 filtered_uwb(1:wndw/2+1) = uwb_temp(wndw+1);
 filtered_uwb(l-wndw:l) = uwb_temp(l-wndw);
 
+% Print final displacement
+printf("Final displacement: %d\r\n", mean(filtered_uwb(1:100)) - filtered_uwb(end));
 
 % Export Filtered
 save(outmat, 'filtered_uwb');
 
-% Plot uwb_raw
+% Plot pdf
 plot(uwb_raw, "r");
 hold on;
 plot(filtered_uwb, "c");
@@ -50,7 +53,25 @@ title('Distance to UWB Receiver');
 xlabel('Sample Number');
 ylabel('Distance (cm)');
 legend('raw', 'filtered');
-ylim([0 150]);
+%ylim([0 150]);
 
 % Print Plot
 print(outfile);
+hold off;
+
+% Plot (eps)
+plot(uwb_raw(1:end), "r");
+hold on;
+plot(filtered_uwb(1:end), "c");
+hold on;
+
+% Set up Plot
+grid on;
+title('Distance to UWB Receiver');
+xlabel('Sample Number');
+ylabel('Distance (cm)');
+legend('raw', 'filtered');
+ylim([80 110]);
+
+% Print Plot
+print("-color", outfile_eps);
