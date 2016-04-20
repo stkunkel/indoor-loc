@@ -5,7 +5,7 @@ pkg load quaternion;
 filter_in = 2; % 0 = "Complementary Filter", 1 = "Kalman Filter", 2 = simple cal
 filter_out = 1; % 0 = "Complementary Filter", 1 = "Kalman Filter"
 ign_samples = 0; % samples to ignore until Filter has converged
-imu_weight = 0.98;
+imu_weight = 0.2;
 delta_t = 1/500;
 n = 100;
 
@@ -25,7 +25,7 @@ function pos = kalman_pos(a_imu, v_imu, s_uwb, delta_t)
   % Initialize
   y_hat = [0; 0; 0];
   A = [1 delta_t 0; 0 1 0; 0 0 0]; 
-  B = [delta_t^2; delta_t; 1];
+  B = [delta_t^2/2; delta_t; 1];
   H = [1 0 0];
   P = [1000 0 0; 0 1000 0; 0 0 1000];
   Q = [var_s 0 0; 0 var_v 0; 0 0 var_a];
@@ -71,7 +71,7 @@ if (filter_in == 1) %Kalman Filter
   filter_in_str = "kalman";
   
 elseif (filter_in == 0) %Complementary Filter
-  avs_infile = "avs_simple_cal_compFilter.mat";
+  avs_infile = "avs_simple_cal_fir_hl_compFilter";
   filter_in_str = "compl";
   
 else %simple cal
@@ -136,7 +136,7 @@ legend('IMU only', 'UWB only', filter_out_outstr);
 %ylim([-0.5 1]);
 
 % Print
-print("-color", strcat(outfile, ".pdf"));
+print("-color", strcat(outfile, ".eps"));
 hold off;
 
 %  % Plot y

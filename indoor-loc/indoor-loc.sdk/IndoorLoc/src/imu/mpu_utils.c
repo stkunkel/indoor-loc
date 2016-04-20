@@ -26,7 +26,6 @@ static int setAddr(u8* addr, char* addr_c);
  * Functions
  */
 
-
 /*
  * Wrapper to Set DMP Interrupt Mode
  * Returns 0 if successful and 21 if IIC bus is busy
@@ -754,7 +753,12 @@ int imuI2cRead(unsigned char slave_addr, unsigned char reg_addr,
  * Delay
  */
 void imuDelay(unsigned long ms) {
-	usleep(ms * 1000);
+	//Make sure value is in range
+	if (ms > sizeof(u32)) {
+
+	} else {
+		usleep(ms * 1000);
+	}
 }
 
 /*

@@ -1,8 +1,8 @@
 % Parameters
+in = 0; % 0 = unfiltered input data, 1 = HPF/LPF input data
 gab = 0; %0 = fused data, 1=gyroscope only, 2=accelerometer only
 rawname = 'quatPos';
 rawname_ga = 'q'; % .mat
-middlepart = '_simple_cal_fir_hl';
 ending = '.mat';
 outfile = 'quaternions_compFil';
 wndw = 20; % Window for simple calibration
@@ -11,6 +11,11 @@ wndw = 20; % Window for simple calibration
 pkg load quaternion;
 
 % Generate File Name Template
+if (in == 1)
+	middlepart = '_simple_cal_fir_hl';
+else
+	middlepart = '_simple_cal';
+endif
 
 if (gab == 0)
 	name = strcat(rawname, middlepart, '_compFilter');

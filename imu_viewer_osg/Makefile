@@ -7,33 +7,24 @@ SOURCE = imuviewer.cpp
 EXECUTABLE = imuviewer
 DEPENDENCIES = $(LOCAL_FOLDER)program_parameters.h
 
-# compiler setup
+#compiler setup
 CC = g++
-FLAGS = -O0 -g -Wall
+FLAGS =  -O0 -g -Wall
 FLAGS_LOCAL = -O0 -g -c -Wall
 
-# libraries
-INCPATH = -I .
-LIBPATH = -L /usr/lib64
-# /usr/local/lib64 for bullet and osgworks (if needed). /usr/local/lib for osgaudio and openal
-# see below
-# as well
-#minimal libs, no shadow
-MLIBS = -losg -losgViewer -lOpenThreads -losgUtil -losgGA 
-#default libs
-
-
-# need to add 
-# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib64:/usr/local/lib
-# for executable as well
-
-#g++ -o t *.cpp -losg -losgViewer -losgGA -losgDB -losgUtil -lOpenThreads -losgText -losgWidget -losgAnimation -losgParticle -losgFX -losgManipulator -losgSim -lGL -losgTerrain
+#includes and libraries
+INCPATH = -I. -I/usr/include/ -I/usr/include/X11/ -I/usr/local/include/GL
+LIBPATH =  -L. -L/usr/lib -L/usr/X11R6/lib -L/usr/local/lib
+LIBS = -lm -ldl -lGL -lGLU -lpthread -lXext -lX11
+MINCPATH = -I/home/ruppi/OpenSceneGraph/openscenegraph-3.2.1/OpenSceneGraph/include
+MLIBPATH = -L/home/ruppi/OpenSceneGraph/openscenegraph-3.2.1/OpenSceneGraph/lib
+MLIBS = -losg -losgDB -losgFX -losgGA -losgParticle -losgSim -losgText -losgUtil -losgTerrain -losgManipulator -losgViewer -losgWidget -losgShadow -losgAnimation -losgVolume -lOpenThreads
 
 #make
 all: $(LOCAL_OBJECTS) $(EXECUTABLE)
 
 $(EXECUTABLE): $(SOURCE) $(DEPENDENCIES)
-	$(CC) $(FLAGS) -o $(EXECUTABLE) $(MLIBS) $(INCPATH) $(LIBPATH) $(SOURCE) $(LOCAL_SOURCES)
+	$(CC) $(FLAGS) -o $(EXECUTABLE) $(SOURCE) $(LOCAL_SOURCES) $(INCPATH) $(MINCPATH) $(LIBPATH) $(LIBS) $(MLIBPATH) $(MLIBS) 
 
 $(LOCAL_OBJECTS): $(LOCAL_SOURCES) $(LOCAL_DEPS)
 	$(CC) $(FLAGS_LOCAL) -o $@ $<

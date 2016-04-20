@@ -2,7 +2,7 @@
 pkg load quaternion;
 
 % Parameters
-filter = 6; % 0 = "raw", 1 = "static cal", 2 = "static cal + mvavg", 3 = "static cal + fir", 4 = "static cal + kalman", 5 = "simple cal + no filter", 6 = "simple cal + FIR (LH)"
+filter = 5; % 0 = "raw", 1 = "static cal", 2 = "static cal + mvavg", 3 = "static cal + fir", 4 = "static cal + kalman", 5 = "simple cal + no filter", 6 = "simple cal + FIR (LH)"
 gyro_weight = 0.98;
 acc_range = 0.01;
 gyr_sens = 32.8;
