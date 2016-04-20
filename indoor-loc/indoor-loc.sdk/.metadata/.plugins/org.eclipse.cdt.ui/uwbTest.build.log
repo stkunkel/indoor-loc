@@ -1,4 +1,4 @@
-12:23:23 **** Build of configuration Debug for project uwbTest ****
+10:54:47 **** Build of configuration Debug for project uwbTest ****
 make all 
 Building file: ../src/decadriver/deca_device.c
 Invoking: ARM gcc compiler
@@ -27,6 +27,16 @@ arm-xilinx-eabi-gcc -Wall -O0 -g3 -I../../IndoorLoc_pwm_gpio_timer_uwb_bsp/ps7_c
              printf("TX error, status 0x%x \r\n", checkTxOK);
              ^
 Finished building: ../src/decadriver/deca_device.c
+ 
+Building file: ../src/decadriver/deca_params_init.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -I../../IndoorLoc_pwm_gpio_timer_uwb_bsp/ps7_cortexa9_0/include -I"/home/ruppi/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/uwbTest/src/decadriver" -I"/home/ruppi/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/uwbTest/src/deca" -c -fmessage-length=0 -MT"src/decadriver/deca_params_init.o" -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/decadriver/deca_params_init.d" -MT"src/decadriver/deca_params_init.d" -o "src/decadriver/deca_params_init.o" "../src/decadriver/deca_params_init.c"
+Finished building: ../src/decadriver/deca_params_init.c
+ 
+Building file: ../src/decadriver/deca_range_tables.c
+Invoking: ARM gcc compiler
+arm-xilinx-eabi-gcc -Wall -O0 -g3 -I../../IndoorLoc_pwm_gpio_timer_uwb_bsp/ps7_cortexa9_0/include -I"/home/ruppi/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/uwbTest/src/decadriver" -I"/home/ruppi/Zynq/indoor-loc/indoor-loc/indoor-loc.sdk/uwbTest/src/deca" -c -fmessage-length=0 -MT"src/decadriver/deca_range_tables.o" -I../../IndoorLoc_gpio_timer_pwm_uwb_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/decadriver/deca_range_tables.d" -MT"src/decadriver/deca_range_tables.d" -o "src/decadriver/deca_range_tables.o" "../src/decadriver/deca_range_tables.c"
+Finished building: ../src/decadriver/deca_range_tables.c
  
 Building file: ../src/decaApp/rxWait.c
 Invoking: ARM gcc compiler
@@ -356,5 +366,5 @@ arm-xilinx-eabi-size uwbTest.elf  |tee "uwbTest.elf.size"
 Finished building: uwbTest.elf.size
  
 
-12:23:24 Build Finished (took 1s.566ms)
+10:54:48 Build Finished (took 1s.425ms)
 
