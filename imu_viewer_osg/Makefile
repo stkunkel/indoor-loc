@@ -1,11 +1,6 @@
 #files
-LOCAL_FOLDER = localProcessing/
-LOCAL_SOURCES = $(LOCAL_FOLDER)math_utils.c $(LOCAL_FOLDER)mpu.c $(LOCAL_FOLDER)print_utils.c
-LOCAL_DEPS = $(LOCAL_SOURCES:.c=.h)
-LOCAL_OBJECTS = $(LOCAL_SOURCES:.c=.o)
 SOURCE = imuviewer.cpp
 EXECUTABLE = imuviewer
-DEPENDENCIES = $(LOCAL_FOLDER)program_parameters.h
 
 #compiler setup
 CC = g++
@@ -21,13 +16,10 @@ MLIBPATH = -L/home/ruppi/OpenSceneGraph/openscenegraph-3.2.1/OpenSceneGraph/lib
 MLIBS = -losg -losgDB -losgFX -losgGA -losgParticle -losgSim -losgText -losgUtil -losgTerrain -losgManipulator -losgViewer -losgWidget -losgShadow -losgAnimation -losgVolume -lOpenThreads
 
 #make
-all: $(LOCAL_OBJECTS) $(EXECUTABLE)
+all:  $(EXECUTABLE)
 
 $(EXECUTABLE): $(SOURCE) $(DEPENDENCIES)
-	$(CC) $(FLAGS) -o $(EXECUTABLE) $(SOURCE) $(LOCAL_SOURCES) $(INCPATH) $(MINCPATH) $(LIBPATH) $(LIBS) $(MLIBPATH) $(MLIBS) 
-
-$(LOCAL_OBJECTS): $(LOCAL_SOURCES) $(LOCAL_DEPS)
-	$(CC) $(FLAGS_LOCAL) -o $@ $<
+	$(CC) $(FLAGS) -o $(EXECUTABLE) $(SOURCE) $(INCPATH) $(MINCPATH) $(LIBPATH) $(LIBS) $(MLIBPATH) $(MLIBS) 
 
 clean:
-	rm $(LOCAL_OBJECTS) $(EXECUTABLE)
+	rm $(EXECUTABLE)

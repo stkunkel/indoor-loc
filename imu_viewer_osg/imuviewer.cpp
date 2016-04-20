@@ -38,6 +38,7 @@
 #define FILENAME	"quatPos.mat"
 #define BAUDRATE 	B115200
 #define DELTA		0.01
+#define IMUVIEWER_FREQ			10 			//Hz
 
 /*
  * Function Prototypes
@@ -89,13 +90,6 @@ int main(){
 	viewer.setSceneData(rootnode); 
 	viewer.setCameraManipulator(new osgGA::TrackballManipulator());
 	
-		//Initialization for local processing
-#ifdef LOCAL
-	status = init();
-	if (status != XST_SUCCESS){
-	  return 0;
-	} 
-#else
 	//Open UART Connection
 	tty_fd = open(DEVICE0,  O_RDWR | O_NOCTTY | O_NDELAY);
 	if (tty_fd == -1){
@@ -122,7 +116,6 @@ int main(){
 	
 	//Configure UART
 	status = configureUart(tty_fd);
-#endif
 	
 	//Run
 	while(!viewer.done()){
@@ -136,13 +129,6 @@ int main(){
 
 	}
 	
-#ifdef LOCAL
-	//Finish MPU Stuff
-	finish();
-	if (status != XST_SUCCESS){
-	  return 0;
-	}
-#else
 	//Close UART Connection
 	if (tty_fd != -1){
 	  close(tty_fd);
@@ -152,7 +138,6 @@ int main(){
 	if (fp != NULL){
 	  fclose(fp);
 	}
-#endif
 	
 	//Return
 	return 0;
@@ -169,10 +154,8 @@ int updateScene(int tty_fd){
 	float quaternion[4];
 	float position[3];
 	int status;
-#ifndef LOCAL
 	char* line = (char*) malloc(500);
 	size_t len = 0;
-#endif
 	
 	//Initialize Quaternion
 	quat = transform->getAttitude();
@@ -187,16 +170,6 @@ int updateScene(int tty_fd){
 	position[1] = pos.y();
 	position[2] = pos.z();
 	
-#ifdef LOCAL
-	//Update Data
-	status = updateData();
-	if (status != XST_SUCCESS){
-	  return 1;
-	}
-	
-	//Get recent date
-	getRecent(0, 0, 0, 0, quaternion, 0, position, 0);
-#else
 	// UART
 	if (tty_fd != -1){
 	
@@ -227,7 +200,6 @@ int updateScene(int tty_fd){
 	  return 0;
 	}
 	  
-#endif	
 	//Invert y to fit IMUs coordinate system to OSG
 	quaternion[2] = -quaternion[2];
 	position[2] = -position[2];
@@ -244,10 +216,8 @@ int updateScene(int tty_fd){
 	transform->setAttitude(osg::Quat(quaternion[0], quaternion[1], quaternion[2], quaternion[3]));
 	//transform->setPosition(osg::Vec3(position[0], position[1], position[2]));
 
-#ifndef LOCAL
 	//Free memory
 	free(line);
-#endif
 	
 	//Return
 	return 0;

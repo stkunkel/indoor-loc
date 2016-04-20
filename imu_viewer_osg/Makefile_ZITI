@@ -1,11 +1,6 @@
 #files
-LOCAL_FOLDER = localProcessing/
-LOCAL_SOURCES = $(LOCAL_FOLDER)math_utils.c $(LOCAL_FOLDER)mpu.c $(LOCAL_FOLDER)print_utils.c
-LOCAL_DEPS = $(LOCAL_SOURCES:.c=.h)
-LOCAL_OBJECTS = $(LOCAL_SOURCES:.c=.o)
 SOURCE = imuviewer.cpp
 EXECUTABLE = imuviewer
-DEPENDENCIES = $(LOCAL_FOLDER)program_parameters.h
 
 # compiler setup
 CC = g++
@@ -30,13 +25,10 @@ MLIBS = -losg -losgViewer -lOpenThreads -losgUtil -losgGA
 #g++ -o t *.cpp -losg -losgViewer -losgGA -losgDB -losgUtil -lOpenThreads -losgText -losgWidget -losgAnimation -losgParticle -losgFX -losgManipulator -losgSim -lGL -losgTerrain
 
 #make
-all: $(LOCAL_OBJECTS) $(EXECUTABLE)
+all:$(EXECUTABLE)
 
-$(EXECUTABLE): $(SOURCE) $(DEPENDENCIES)
-	$(CC) $(FLAGS) -o $(EXECUTABLE) $(MLIBS) $(INCPATH) $(LIBPATH) $(SOURCE) $(LOCAL_SOURCES)
-
-$(LOCAL_OBJECTS): $(LOCAL_SOURCES) $(LOCAL_DEPS)
-	$(CC) $(FLAGS_LOCAL) -o $@ $<
+$(EXECUTABLE): $(SOURCE)
+	$(CC) $(FLAGS) -o $(EXECUTABLE) $(MLIBS) $(INCPATH) $(LIBPATH) $(SOURCE)
 
 clean:
-	rm $(LOCAL_OBJECTS) $(EXECUTABLE)
+	rm $(EXECUTABLE)
