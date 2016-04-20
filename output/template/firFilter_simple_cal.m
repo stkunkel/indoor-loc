@@ -1,14 +1,14 @@
-# Load Signal Package
+% Load Signal Package
 pkg load signal
 
-# Parameters
+% Parameters
 gyr_sens = 32.8;
 acc_sens = 8192;
 wndw = 20;
 val = 0.1;
 outfile = "firFilter_simple_cal.pdf";
 
-# Load Calibrated Data
+% Load Calibrated Data
 load ('simple_calibration.mat', 'cal');
 gx = cal(:,1);
 gy = cal(:,2);
@@ -17,10 +17,10 @@ ax = cal(:,4);
 ay = cal(:,5);
 az = cal(:,6);
 
-# FIR Filter Coefficients
+% FIR Filter Coefficients
 coeff = fir1(wndw, val, 'low');
 
-# Apply Filter
+% Apply Filter
 gx_fir = filter(coeff, 1, gx);
 gy_fir = filter(coeff, 1, gy);
 gz_fir = filter(coeff, 1, gz);
@@ -28,7 +28,7 @@ ax_fir = filter(coeff, 1, ax);
 ay_fir = filter(coeff, 1, ay);
 az_fir = filter(coeff, 1, az);
 
-# Discard first and last values
+% Discard first and last values
 l = length(gx);
 filtered_gx = gx_fir(wndw+1:l-wndw,:);
 filtered_gy = gy_fir(wndw+1:l-wndw,:);
@@ -37,11 +37,11 @@ filtered_ax = ax_fir(wndw+1:l-wndw,:);
 filtered_ay = ay_fir(wndw+1:l-wndw,:);
 filtered_az = az_fir(wndw+1:l-wndw,:);
 
-# Export Filtered
+% Export Filtered
 firfil = [filtered_gx filtered_gy filtered_gz filtered_ax filtered_ay filtered_az];
 save('fir_simple_cal.mat', 'firfil');
 
-# Print statistics
+% Print statistics
 printf("Gyroscope:\r\n");
 printf("x: Mean: %f, Median: %f, Min: %f, Max: %f, Range: %f, Stddev: %f\r\n", mean(filtered_gx), median(filtered_gx), min(filtered_gx), max(filtered_gx), range(filtered_gx), std(filtered_gx));
 printf("y: Mean: %f, Median: %f, Min: %f, Max: %f, Range: %f, Stddev: %f\r\n", mean(filtered_gy), median(filtered_gy), min(filtered_gy), max(filtered_gy), range(filtered_gy), std(filtered_gy));
@@ -51,14 +51,14 @@ printf("x: Mean: %f, Median: %f, Min: %f, Max: %f, Range: %f, Stddev: %f\r\n", m
 printf("y: Mean: %f, Median: %f, Min: %f, Max: %f, Range: %f, Stddev: %f\r\n", mean(filtered_ay), median(filtered_ay), min(filtered_ay), max(filtered_ay), range(filtered_ay), std(filtered_ay));
 printf("z: Mean: %f, Median: %f, Min: %f, Max: %f, Range: %f, Stddev: %f\r\n", mean(filtered_az), median(filtered_az), min(filtered_az), max(filtered_az), range(filtered_az), std(filtered_az));
 
-# Gyroscope
-# Plot gx
+% Gyroscope
+% Plot gx
 plot(gx, "r");
 hold on;
 plot(filtered_gx, "c");
 hold on;
 
-# Set up Plot
+% Set up Plot
 grid on;
 title('Gyroscope (x)');
 xlabel('Sample Number');
@@ -66,17 +66,17 @@ ylabel('Angular Velocity (Hardware Units)');
 legend('Calibrated', 'FIR Filter');
 hold off;
 
-# Print Plot
+% Print Plot
 print(outfile);
 
 
-# Plot gy
+% Plot gy
 plot(gy, "g");
 hold on;
 plot(filtered_gy, "c");
 hold on;
 
-# Set up Plot
+% Set up Plot
 grid on;
 title('Gyroscope (y)');
 xlabel('Sample Number');
@@ -84,16 +84,16 @@ ylabel('Angular Velocity (Hardware Units)');
 legend('Calibrated', 'FIR Filter');
 hold off;
 
-# Print Plot
+% Print Plot
 print("-append", outfile);
 
-# Plot gz
+% Plot gz
 plot(gz, "b");
 hold on;
 plot(filtered_gz, "c");
 hold on;
 
-# Set up Plot
+% Set up Plot
 grid on;
 title('Gyroscope (z)');
 xlabel('Sample Number');
@@ -101,17 +101,17 @@ ylabel('Angular Velocity (Hardware Units)');
 legend('Calibrated', 'FIR Filter');
 hold off;
 
-# Print Plot
+% Print Plot
 print("-append", outfile);
 
-# Accelerometer
-# Plot ax
+% Accelerometer
+% Plot ax
 plot(ax, "r");
 hold on;
 plot(filtered_ax, "c");
 hold on;
 
-# Set up Plot
+% Set up Plot
 grid on;
 title('Accelerometer (x)');
 xlabel('Sample Number');
@@ -119,17 +119,17 @@ ylabel('Acceleration (Hardware Units)');
 legend('Calibrated', 'FIR Filter');
 hold off;
 
-# Print Plot
+% Print Plot
 print("-append", outfile);
 
-# Plot some Accelerometer Data
+% Plot some Accelerometer Data
 filtered_ax2 = [zeros(wndw/2,1); filtered_ax; zeros(wndw/2,1)];
 plot(ax(wndw+1:wndw+100), "r");
 hold on;
 plot(filtered_ax2(wndw+1:wndw+100), "c");
 hold on;
 
-# Set up Plot
+% Set up Plot
 grid on;
 title('Accelerometer (x)');
 xlabel('Sample Number');
@@ -137,17 +137,17 @@ ylabel('Acceleration (Hardware Units)');
 legend('Calibrated', 'FIR Filter');
 hold off;
 
-# Print
+% Print
 print('-color', 'accel_fir.eps');
 hold off;
 
-# Plot ay
+% Plot ay
 plot(ay, "g");
 hold on;
 plot(filtered_ay, "c");
 hold on;
 
-# Set up Plot
+% Set up Plot
 grid on;
 title('Accelerometer (y)');
 xlabel('Sample Number');
@@ -155,16 +155,16 @@ ylabel('Acceleration (Hardware Units)');
 legend('Calibrated', 'FIR Filter');
 hold off;
 
-# Print Plot
+% Print Plot
 print("-append", outfile);
 
-# Plot az
+% Plot az
 plot(az, "b");
 hold on;
 plot(filtered_az, "c");
 hold on;
 
-# Set up Plot
+% Set up Plot
 grid on;
 title('Accelerometer (z)');
 xlabel('Sample Number');
@@ -172,5 +172,5 @@ ylabel('Acceleration (Hardware Units)');
 legend('Calibrated', 'FIR Filter');
 hold off;
 
-# Print Plot
+% Print Plot
 print("-append", outfile);

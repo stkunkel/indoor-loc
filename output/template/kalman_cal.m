@@ -1,11 +1,8 @@
 % Parameters
 outfile = "kalmanFilter_cal.pdf";
-incdir = "/home/rupprich/Masterarbeit/indoor-loc/output/template";
 q = 0.125; 	%the smaller the less noise
 r = 4.0;	%the higher the more stable, the lower the more filter relies on sensor data
 
-% Modify Load Path
-addpath(incdir);
 
 %Kalman Function
 function filtered = kalman1d(q, r, p, x ,k, data)
