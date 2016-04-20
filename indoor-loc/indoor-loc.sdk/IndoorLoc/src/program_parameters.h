@@ -7,14 +7,13 @@
 #define PROGRAM_PARAMETERS_H_
 
 //Defines
-//#define USE_DMP						//Uncomment to use DMP. Comment to use MPU Register Values only.
-//#define DEBUG 						//UNComment for DEBUG prints, COMMENT for print only for IMU viewer
-//#define DISABLE_POS_COMP				//UNcomment to disable quaternion and position computation (not required if just raw data is to be outputtet)
+//#define USE_DMP						//Comment OUT to use DMP. Comment to use MPU Register Values only.
+//#define DEBUG 						//Comment OUT for DEBUG prints, COMMENT for print only for IMU viewer
 
 //Parameters
-#define CAL_TIME				0 //s
+#define CAL_TIME				0 			//s
 #define CAL_SAMPLES				1000
-#define IMU_SAMPLE_FREQ			200			//Hz //For Online Computation, make sure FIFO Frequency is not higher than 200Hz
+#define IMU_SAMPLE_FREQ			200			//Hz //For real-time computation, make sure FIFO Frequency is not higher than 200Hz
 #define IMUVIEWER_FREQ			10 			//Hz
 #define FPGA_FREQ				100000000	//FCLK in Hz
 

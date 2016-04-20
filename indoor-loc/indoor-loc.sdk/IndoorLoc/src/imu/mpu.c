@@ -887,11 +887,7 @@ int updateData() {
 			compass_conv[NUMBER_OF_AXES], quat_conv[QUATERNION_AMOUNT],
 			temp_conv;
 	float time_diff = 1.0 / FIFO_RATE;
-
-//Variables for computing position only
-#ifndef DISABLE_POS_COMP
 	float quat_new[QUATERNION_AMOUNT];
-#endif
 
 //Variables for DMP only
 #ifdef USE_DMP
@@ -988,7 +984,6 @@ int updateData() {
 	if (status != XST_SUCCESS) {
 		return status;
 	}
-#ifndef DISABLE_POS_COMP
 #ifdef USE_DMP
 	//Convert Quaternion if using DMP
 	status = convertQuatenion(quat, quat_conv);
@@ -1006,8 +1001,6 @@ int updateData() {
 //Update Position and Velocity
 	updatePosition(accel_conv, quat_conv, &recentAccelInertial, &recentVelocity,
 			&recentPosition, &time_diff);
-
-#endif
 
 //Update Timestamp
 	recent_ts = timestamp;
