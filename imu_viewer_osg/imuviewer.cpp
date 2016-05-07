@@ -22,7 +22,6 @@
 #include <osgViewer/Viewer>
 #include <osg/PositionAttitudeTransform>
 #include <osgGA/TrackballManipulator>
-#include "localProcessing/mpu.h"
 
 //#include <osgViewer/ViewerEventHandlers>
 //#include <osgGA/StateSetManipulator>
@@ -38,6 +37,7 @@
 #define FILENAME	"quatPos.mat"
 #define BAUDRATE 	B115200
 #define DELTA		0.01
+#define FIFO_RATE						500//Hz //200
 #define IMUVIEWER_FREQ			10 			//Hz
 
 /*
