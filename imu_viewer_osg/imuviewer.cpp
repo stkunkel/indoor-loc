@@ -37,7 +37,7 @@
 #define FILENAME	"quatPos.mat"
 #define BAUDRATE 	B115200
 #define DELTA		0.01
-#define FIFO_RATE						500//Hz //200
+#define FIFO_RATE						200//(Hz) May be adjusted to increase or decrease speed of viewing local data
 #define IMUVIEWER_FREQ			10 			//Hz
 
 /*
